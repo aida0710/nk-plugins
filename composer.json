@@ -1,5 +1,5 @@
 {
-    "name": "nkserver/nkserver-plugins",
+    "name": "lazyperson0710/nk-plugins",
     "description": "NKServer plugins for pm4",
     "minimum-stability": "stable",
     "require": {
