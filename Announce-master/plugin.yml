@@ -1,0 +1,16 @@
+name: Announce
+description: Announcement plugin for NKS
+author: bbo51dog
+api:
+  - 4.0.0
+main: bbo51dog\announce\AnnouncePlugin
+version: 2.1.0
+depend:
+  - BboForm
+permissions:
+  announce.command.announce:
+    default: true
+  announce.command.announce_admin:
+    default: op
+  announce.command.pass:
+    default: true

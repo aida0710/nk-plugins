@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Countdown_v1.1.1" />
+      <excludeFolder url="file://$MODULE_DIR$/ecolshop2" />
+      <excludeFolder url="file://$MODULE_DIR$/ecolshop3" />
+      <excludeFolder url="file://$MODULE_DIR$/ResourceWorldProtect" />
+      <excludeFolder url="file://$MODULE_DIR$/NoBreak_Top" />
+      <excludeFolder url="file://$MODULE_DIR$/directInventory" />
+      <excludeFolder url="file://$MODULE_DIR$/BboFormExample-master" />
+      <excludeFolder url="file://$MODULE_DIR$/DiscordLog-master/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/LimitedWorld-master/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/ServerFunctionForms/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/log" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/binaryutils" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/log-pthreads" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/math" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/nbt" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/snooze" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/spl" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/callback-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/pocketmine-mp" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/classloader" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/adhocore/json-comment" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/raklib" />
+      <excludeFolder url="file://$MODULE_DIR$/Mineflow-3.0-pm4" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/path-util" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/adhocore/json-comment" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bbo51dog/bboform" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fgrosse/phpasn1" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/snooze" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/color" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-data" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/nbt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/log-pthreads" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/pocketmine-mp" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/locale-data" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/errorhandler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/callback-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/raklib-ipc" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/raklib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/binaryutils" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/math" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/classloader" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-protocol" />
+      <excludeFolder url="file://$MODULE_DIR$/Netherite" />
+      <excludeFolder url="file://$MODULE_DIR$/ScoreBoardInfo-master" />
+      <excludeFolder url="file://$MODULE_DIR$/INether-master" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
