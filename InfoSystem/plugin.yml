@@ -1,0 +1,15 @@
+name: InfoSystem
+main: InfoSystem\InfoSystem
+version: 1.0.0
+api: [ 4.0.0 ]
+author: このは24
+loadBefore: [ "EconomyAPI", "MiningLevelSystem" ]
+
+commands:
+  tag:
+    description: 称号を変更する
+    usage: /tag
+    permission: infosystem.command.tag
+permissions:
+  infosystem.command.tag:
+    default: true
