@@ -1,0 +1,17 @@
+name: Ranking
+version: 1.0.0
+main: nkserver\ranking\Main
+api: 4.0.0
+author: RarkHopper
+load: POSTWORLD
+depend:
+  - BankSystem
+  - MiningLevelSystem
+  - EconomyAPI
+permissions:
+  conquest.command.op:
+    description: "except for operator, can't use command"
+    default: op # can also be false, or op
+  conquest.command.public:
+    description: "can use all players"
+    default: true # can also be false, or op
