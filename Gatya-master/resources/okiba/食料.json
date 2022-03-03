@@ -1,0 +1,223 @@
+{
+    "id": 3,
+    "name": "食料ガチャ",
+    "cost": 500,
+    "items": [
+        {
+            "id": 412,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 5
+        },
+        {
+            "id": 297,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 463,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 462,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 363,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 319,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 423,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 411,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 349,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 350,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 461,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 357,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 365,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 282,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 459,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 413,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 393,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 400,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 344,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 354,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 366,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 460,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 320,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        },
+        {
+            "id": 364,
+            "meta": 0,
+            "count": 1,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 4
+        }
+    ]
+}

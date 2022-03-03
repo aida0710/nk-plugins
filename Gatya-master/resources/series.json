@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "チケットがちゃ",
+        "ticket": true,
+        "cost": 2,
+        "items": [
+            {
+                "id": 1,
+                "meta": 0,
+                "count": 1,
+                "name": "はずれのいし",
+                "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
+                "enchants": [],
+                "chance": 60
+            },
+            {
+                "id": 0,
+                "meta": 0,
+                "count": 1,
+                "name": "何も無い",
+                "description": null,
+                "chance": 0.1
+            },
+            {
+                "id": 278,
+                "meta": 0,
+                "count": 1,
+                "name": "伝説のピッケル",
+                "description": "0.1パーセントの確率で出るレアアイテム",
+                "enchants": [
+                    {
+                        "id": 17,
+                        "level": 3
+                    },
+                    {
+                        "id": 15,
+                        "level": 5
+                    }
+                ],
+                "chance": 0.1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "ストーンカッター100％",
+        "ticket": true,
+        "cost": 2,
+        "items": [
+            {
+                "id": 245,
+                "meta": 0,
+                "count": 1,
+                "name": null,
+                "description": null,
+                "enchants": [],
+                "chance": 100
+            }
+        ]
+    }
+]

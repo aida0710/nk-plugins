@@ -1,0 +1,97 @@
+{
+    "id": 2,
+    "name": "スペシャルガチャ",
+    "cost": 450000,
+    "items": [
+        {
+            "id": 403,
+            "meta": 50,
+            "count": 1,
+            "name": "§d天使の羽衣",
+            "description": "手に持つと持ってる時だけ二段ジャンプが可能になる",
+            "enchants": [],
+            "chance": 30
+        },
+        {
+            "id": 384,
+            "meta": 0,
+            "count": 320,
+            "name": null,
+            "description": null,
+            "enchants": [],
+            "chance": 30
+        },
+        {
+            "id": 369,
+            "meta": 1,
+            "count": 1,
+            "name": "マジカルステッキ",
+            "description": "マジカルパワーで相手を回復させることが出来ます",
+            "enchants": [],
+            "chance": 20
+        },
+        {
+            "id": 369,
+            "meta": 2,
+            "count": 1,
+            "name": "ラブステッキ",
+            "description": "ラブ注入！",
+            "enchants": [],
+            "chance": 20
+        },
+        {
+            "id": 278,
+            "meta": 0,
+            "count": 1,
+            "name": "最高級品質のピッケル",
+            "description": "このサーバーでもっとも強いツルハシです",
+            "enchants": [
+                {
+                    "id": 16,
+                    "level": 1
+                },
+                {
+                    "id": 15,
+                    "level": 10
+                }
+            ],
+            "chance": 0.1
+        },
+        {
+            "id": 279,
+            "meta": 0,
+            "count": 1,
+            "name": "最高級品質のアックス",
+            "description": "このサーバーでもっとも強いアックスです",
+            "enchants": [
+                {
+                    "id": 16,
+                    "level": 1
+                },
+                {
+                    "id": 15,
+                    "level": 10
+                }
+            ],
+            "chance": 0.1
+        },
+        {
+            "id": 277,
+            "meta": 0,
+            "count": 1,
+            "name": "最高級品質のシャベル",
+            "description": "このサーバーでもっとも強いシャベルです",
+            "enchants": [
+                {
+                    "id": 16,
+                    "level": 1
+                },
+                {
+                    "id": 15,
+                    "level": 10
+                }
+            ],
+            "chance": 0.1
+        }
+    ]
+}

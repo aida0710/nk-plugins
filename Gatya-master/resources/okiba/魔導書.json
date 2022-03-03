@@ -1,0 +1,205 @@
+{
+    "id": 4,
+    "name": "魔導書",
+    "cost": 50000,
+    "items": [
+        {
+            "id": 403,
+            "meta": 1,
+            "count": 1,
+            "name": "§d移動速度上昇の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 5.5
+        },
+        {
+            "id": 403,
+            "meta": 2,
+            "count": 1,
+            "name": "§d移動速度低下の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 3,
+            "count": 1,
+            "name": "§d採掘速度上昇の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 4,
+            "count": 1,
+            "name": "§d採掘速度低下の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 5,
+            "count": 1,
+            "name": "§d攻撃力上昇の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 6,
+            "count": 1,
+            "name": "§d弱体化の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 7,
+            "count": 1,
+            "name": "§d即時回復の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 8,
+            "count": 1,
+            "name": "§d即時ダメージの魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 9,
+            "count": 1,
+            "name": "§d跳躍力上昇の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 10,
+            "count": 1,
+            "name": "§d吐き気の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 11,
+            "count": 1,
+            "name": "§d再生能力の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 12,
+            "count": 1,
+            "name": "§d耐性の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 13,
+            "count": 1,
+            "name": "§d火炎耐性の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 14,
+            "count": 1,
+            "name": "§d水中呼吸の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 15,
+            "count": 1,
+            "name": "§d暗視の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 16,
+            "count": 1,
+            "name": "§d盲目の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 17,
+            "count": 1,
+            "name": "§d空腹の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 18,
+            "count": 1,
+            "name": "§d毒の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 19,
+            "count": 1,
+            "name": "§d衰弱の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 20,
+            "count": 1,
+            "name": "§d体力増強の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 21,
+            "count": 1,
+            "name": "§d衝撃吸収の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        },
+        {
+            "id": 403,
+            "meta": 22,
+            "count": 1,
+            "name": "§d満腹度回復の魔導書",
+            "description": "一度使用すると無くなります\n一度の使用で5分間エフェクトが付きます",
+            "enchants": [],
+            "chance": 4.5
+        }
+    ]
+}
