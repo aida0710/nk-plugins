@@ -1,0 +1,16 @@
+name: ScoreBoardInfo
+main: Deceitya\SBI\Main
+version: 1.0.0
+api: 4.0.0
+load: POSTWORLD
+author: deceitya
+commands:
+  stinfo:
+    usage: /stinfo
+    description: スコアボードのステータス表示を切り替えます。
+    permission: sbi.command.stinfo
+permissions:
+  sbi.command.stinfo:
+    default: true
+softdepend:
+  - BboForm
