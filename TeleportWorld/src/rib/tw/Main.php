@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+namespace rib\tw;
+
+use pocketmine\plugin\PluginBase;
+use pocketmine\Server;
+use rib\tw\command\TeleportCommand;
+
+class Main extends PluginBase {
+
+    public function onEnable(): void {
+        Server::getInstance()->getCommandMap()->register("pocketmine", new TeleportCommand);
+    }
+
+}
