@@ -1,0 +1,8 @@
+name: XP
+main: GodzHardYT\XP\Main
+api: [ "4.0.0" ]
+version: "1.2"
+author: GodzHard
+permissions:
+  xp.command.use:
+    default: op
