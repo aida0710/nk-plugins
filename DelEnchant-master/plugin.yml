@@ -1,0 +1,9 @@
+name: DelEnchant
+main: deceitya\delenchant\Main
+version: 1.0.0
+api: 4.0.0
+load: POSTWORLD
+author: deceitya
+description: エンチャントの削除、削減
+softdepend:
+  - BboForm
