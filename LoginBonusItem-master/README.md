@@ -1,0 +1,3 @@
+# LoginBonusItem
+
+ログインボーナスアイテム版

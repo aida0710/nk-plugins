@@ -1,0 +1,8 @@
+name: LuckyEnchant
+main: deceitya\luckyenchant\Main
+version: 1.0.0
+api: 4.0.0
+
+load: STARTUP
+author: deceitya
+description: 疑似幸運エンチャント
