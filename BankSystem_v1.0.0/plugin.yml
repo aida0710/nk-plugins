@@ -1,0 +1,14 @@
+name: BankSystem
+main: ree_jp\bank\BankPlugin
+version: 1.0.0
+api: [ 4.0.0 ]
+author: Ree-jp
+loadBefore: [ "EconomyAPI" ]
+
+permissions:
+  command.banksystem.true:
+    default: true
+    description: TrueBankSystemPermission
+  command.banksystem.op:
+    default: op
+    description: OpBankSystemPermission
