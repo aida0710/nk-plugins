@@ -1,0 +1,23 @@
+---
+name: PacketLogger
+version: 2.0.0
+main: mmm545\PacketLogger\PacketLogger
+api: 4.0.0
+author: mmm545
+src-namespace-prefix: mmm545\PacketLogger
+commands:
+  pkclear:
+    description: Clears the log file contents
+    permission: pklogger.clear
+  pkreload:
+    description: Reloads config
+    permission: pklogger.reload
+
+permissions:
+  pklogger.clear:
+    default: op
+    description: Gives permission to clear the log file
+  pklogger.reload:
+    default: op
+    description: Gives permission to reload the config
+...
