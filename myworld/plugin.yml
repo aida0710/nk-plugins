@@ -1,0 +1,6 @@
+name: myworld
+main: lazyperson0710\myworld\Main
+version: 1.0.1
+api:
+  - 4.0.0
+load: POSTWORLD
