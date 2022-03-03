@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eca48eff0bfaffc744ce5b338b28956c",
+    "content-hash": "8645e187cb949793a279e31392cb2419",
     "packages": [
         {
             "name": "adhocore/json-comment",
@@ -278,16 +278,16 @@
         },
         {
             "name": "pocketmine/bedrock-data",
-            "version": "1.5.0+bedrock-1.18.0",
+            "version": "1.6.0+bedrock-1.18.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pmmp/BedrockData.git",
-                "reference": "482c679aa5ed0b81c088c2b1ff0b8110a94c8a6c"
+                "reference": "e98c511584a7bd58a95986374d2df4b04c6a2ba0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pmmp/BedrockData/zipball/482c679aa5ed0b81c088c2b1ff0b8110a94c8a6c",
-                "reference": "482c679aa5ed0b81c088c2b1ff0b8110a94c8a6c",
+                "url": "https://api.github.com/repos/pmmp/BedrockData/zipball/e98c511584a7bd58a95986374d2df4b04c6a2ba0",
+                "reference": "e98c511584a7bd58a95986374d2df4b04c6a2ba0",
                 "shasum": ""
             },
             "type": "library",
@@ -298,22 +298,22 @@
             "description": "Blobs of data generated from Minecraft: Bedrock Edition, used by PocketMine-MP",
             "support": {
                 "issues": "https://github.com/pmmp/BedrockData/issues",
-                "source": "https://github.com/pmmp/BedrockData/tree/bedrock-1.18.0"
+                "source": "https://github.com/pmmp/BedrockData/tree/bedrock-1.18.10"
             },
-            "time": "2021-11-30T18:30:46+00:00"
+            "time": "2022-02-08T19:13:47+00:00"
         },
         {
             "name": "pocketmine/bedrock-protocol",
-            "version": "7.3.1+bedrock-1.18.0",
+            "version": "8.0.1+bedrock-1.18.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pmmp/BedrockProtocol.git",
-                "reference": "c2667453b03ca08a8c54cd89a1fd45cb29196aeb"
+                "reference": "a740f6095b35278c0e0dac6db84a5e4d2456b113"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pmmp/BedrockProtocol/zipball/c2667453b03ca08a8c54cd89a1fd45cb29196aeb",
-                "reference": "c2667453b03ca08a8c54cd89a1fd45cb29196aeb",
+                "url": "https://api.github.com/repos/pmmp/BedrockProtocol/zipball/a740f6095b35278c0e0dac6db84a5e4d2456b113",
+                "reference": "a740f6095b35278c0e0dac6db84a5e4d2456b113",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
                 "ramsey/uuid": "^4.1"
             },
             "require-dev": {
-                "phpstan/phpstan": "1.4.2",
+                "phpstan/phpstan": "1.4.5",
                 "phpstan/phpstan-phpunit": "^1.0.0",
                 "phpstan/phpstan-strict-rules": "^1.0.0",
                 "phpunit/phpunit": "^9.5"
@@ -345,9 +345,9 @@
             "description": "An implementation of the Minecraft: Bedrock Edition protocol in PHP",
             "support": {
                 "issues": "https://github.com/pmmp/BedrockProtocol/issues",
-                "source": "https://github.com/pmmp/BedrockProtocol/tree/7.3.1+bedrock-1.18.0"
+                "source": "https://github.com/pmmp/BedrockProtocol/tree/8.0.1+bedrock-1.18.10"
             },
-            "time": "2022-01-26T21:14:23+00:00"
+            "time": "2022-02-21T03:31:48+00:00"
         },
         {
             "name": "pocketmine/binaryutils",
@@ -756,16 +756,16 @@
         },
         {
             "name": "pocketmine/pocketmine-mp",
-            "version": "4.1.0",
+            "version": "4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pmmp/PocketMine-MP.git",
-                "reference": "1c60aa9769d67180eb1330642e9f97a824cddfc6"
+                "reference": "12946fbe466335ccf9d94f63a65400903c924fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pmmp/PocketMine-MP/zipball/1c60aa9769d67180eb1330642e9f97a824cddfc6",
-                "reference": "1c60aa9769d67180eb1330642e9f97a824cddfc6",
+                "url": "https://api.github.com/repos/pmmp/PocketMine-MP/zipball/12946fbe466335ccf9d94f63a65400903c924fca",
+                "reference": "12946fbe466335ccf9d94f63a65400903c924fca",
                 "shasum": ""
             },
             "require": {
@@ -798,8 +798,8 @@
                 "netresearch/jsonmapper": "^4.0",
                 "php": "^8.0",
                 "php-64bit": "*",
-                "pocketmine/bedrock-data": "~1.5.0+bedrock-1.18.0",
-                "pocketmine/bedrock-protocol": "~7.3.0+bedrock-1.18.0",
+                "pocketmine/bedrock-data": "~1.6.0+bedrock-1.18.10",
+                "pocketmine/bedrock-protocol": "~8.0.0+bedrock-1.18.10",
                 "pocketmine/binaryutils": "^0.2.1",
                 "pocketmine/callback-validator": "^1.0.2",
                 "pocketmine/classloader": "^0.2.0",
@@ -839,7 +839,7 @@
             "homepage": "https://pmmp.io",
             "support": {
                 "issues": "https://github.com/pmmp/PocketMine-MP/issues",
-                "source": "https://github.com/pmmp/PocketMine-MP/tree/4.1.0"
+                "source": "https://github.com/pmmp/PocketMine-MP/tree/4.2.2"
             },
             "funding": [
                 {
@@ -851,7 +851,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-02-07T19:22:53+00:00"
+            "time": "2022-03-02T23:00:29+00:00"
         },
         {
             "name": "pocketmine/raklib",
@@ -1121,12 +1121,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Ramsey\\Uuid\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Ramsey\\Uuid\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1188,12 +1188,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

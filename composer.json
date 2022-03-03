@@ -3,7 +3,7 @@
     "description": "NKServer plugins for pm4",
     "minimum-stability": "stable",
     "require": {
-        "pocketmine/pocketmine-mp": "4.1.*",
+        "pocketmine/pocketmine-mp": "4.*",
         "bbo51dog/bboform": "2.*"
     },
     "repositories": [
