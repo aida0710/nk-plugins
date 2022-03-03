@@ -1,0 +1,23 @@
+---
+# Allow sent packets to be logged
+# values: true/false
+log_sent_packets: true
+
+# Allow received packets to be logged
+# values: true/false
+log_received_packets: true
+
+# If true, only whitelisted_packets will be logged
+# values: true/false
+whitelist: false
+
+# List of blacklisted packets
+blacklisted_packets: []
+
+# List of whitelisted packets
+whitelisted_packets: []
+
+# Maximum log file size
+# In Megabytes
+max_size: 16
+...
