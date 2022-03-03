@@ -1,6 +1,6 @@
 {
     "name": "lazyperson0710/nk-plugins",
-    "description": "NKServer plugins for pm4",
+    "description": "nk-plugins for pm4",
     "minimum-stability": "stable",
     "require": {
         "pocketmine/pocketmine-mp": "4.*",
