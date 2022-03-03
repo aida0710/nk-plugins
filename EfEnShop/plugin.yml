@@ -1,0 +1,24 @@
+name: EfEnShop
+main: deceitya\efenshop\Main
+version: 1.0.0
+api: 4.0.0
+load: POSTWORLD
+author: deceitya
+description: エフェクト・エンチャントショップ
+
+commands:
+  ef:
+    usage: "/ef"
+    description: エフェクトショップを開く
+    permission: efen.cmd.ef
+  ven:
+    usage: "/ven"
+    description: エンチャントショップを開く
+    permission: efen.cmd.ven
+permissions:
+  efen.cmd.ef:
+    description: 許可
+    default: true
+  efen.cmd.ven:
+    description: 許可
+    default: true
