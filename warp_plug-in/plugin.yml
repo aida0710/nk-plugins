@@ -1,0 +1,29 @@
+﻿name: Really_simple_warp
+main: Yomogisystem\Really
+version: 1.0
+api: [ 4.0.0 ]
+load: POSTWORLD
+author: Yomogis
+description: warp
+commands:
+  warp:
+    description: "予め指定した地点にwarp"
+    usage: "/warp 地点"
+    permission: y.cmd.warp
+  warplist:
+    description: "/warpで指定できる地点を表示"
+    usage: "/warplist"
+    permission: y.cmd
+  warpset:
+    description: "地点追加"
+    usage: "/setwarp 地点"
+    permission: y.cmd
+  warpdel:
+    description: "地点消去"
+    usage: "/delwarp 地点"
+    permission: y.cmd
+permissions:
+  y.cmd:
+    default: op
+  y.cmd.warp:
+    default: true
