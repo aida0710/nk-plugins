@@ -1,0 +1,4 @@
+name: Repair
+main: deceitya\repair\Main
+version: 1.2.0
+api: 4.0.0
