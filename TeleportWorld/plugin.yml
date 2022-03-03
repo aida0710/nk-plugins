@@ -1,0 +1,8 @@
+name: TeleportWorld
+main: rib\tw\Main
+version: 1.0
+api: [ 4.0.0 ]
+author: ribnil
+permissions:
+  teleportworld.command.wtp:
+    default: op
