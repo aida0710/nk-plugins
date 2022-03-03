@@ -1,0 +1,10 @@
+name: ServerFunctionForms
+description: SFF
+main: lazyperson710\sff\Main
+author: lazyperson710
+api:
+  - 4.0.0
+version: 1.0.0
+permissions:
+  sff.command.wp:
+    default: true

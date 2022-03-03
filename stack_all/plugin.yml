@@ -1,0 +1,9 @@
+name: stackall
+main: stackall\Main
+api: 4.0.0
+load: POSTWORLD
+version: 1.0.1
+permissions:
+  stackall.command.stall:
+    default: true
+    description: For /stall command
