@@ -1,0 +1,8 @@
+---
+name: CustomFurnace
+author: HiroTeam
+version: 1.0.2
+api:
+  - 4.0.0
+main: HiroTeam\customfurnace\CustomFurnace
+...
