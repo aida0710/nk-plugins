@@ -1,0 +1,20 @@
+---
+name: FrameGuard
+main: Saisana299\frameguard\FrameGuard
+api:
+  - 4.0.0
+version: 1.2.0
+author: Saisana299
+commands:
+  lockfr:
+    description: 額縁を保護します
+    usage:
+    permission: lockfr.command
+  unlockfr:
+    description: 額縁の保護を解除します
+    usage:
+    permission: lockfr.command
+permissions:
+  lockfr.command:
+    default: true
+...

@@ -1,0 +1,6 @@
+name: Market
+main: space\yurisi\Market
+version: 2.0
+api: 4.0.0
+author: yurisi
+description: FreeMarket
