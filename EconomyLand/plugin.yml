@@ -1,0 +1,85 @@
+---
+name: EconomyLand
+main: onebone\economyland\EconomyLand
+api:
+  - 4.0.0
+version: 2.1.2 name fixed
+author: onebone
+depend:
+  - EconomyAPI
+load: POSTWORLD
+permissions:
+  economyland.land.modify.others:
+    description: Allows player to modify others' lands
+    default: op
+  economyland.land.modify.whiteland:
+    description: Allows player to modify white lands
+    default: op
+  economyland.land.give.others:
+    description: Allows player to give others' land to others'
+    default: op
+  economyland.land.move.others:
+    description: Allows player move to others' land
+    default: true
+  economyland.landsell.others:
+    description: Allows player to sell others' land
+    default: op
+  economyland.command.startp:
+    description: Allows player to set start position
+    default: true
+  economyland.command.endp:
+    description: Allows player to set end position
+    default: true
+  economyland.command.land:
+    default: true
+  economyland.command.land.buy:
+    description: Allows player to buy land
+    default: true
+  economyland.command.land.move:
+    description: Allows player to move to other land
+    default: true
+  economyland.command.land.list:
+    description: Allows player to see list of lands
+    default: true
+  economyland.command.land.whose:
+    description: Allows player to see list of lands with specified keyword
+    default: true
+  economyland.command.land.give:
+    description: Allows player give land to other
+    default: true
+  economyland.command.land.here:
+    description: Allows player to see what land player is standing on
+    default: true
+  economyland.command.land.invite:
+    description: Allows player to invite players
+    default: true
+  economyland.command.land.invite.remove:
+    default: true
+  economyland.command.land.invite.remove.others:
+    default: op
+  economyland.command.land.invitee:
+    description: Allows player to see invitee
+    default: true
+  economyland.command.landsell:
+    description: Allows player to sell land here
+    default: true
+  economyland.command.landsell.here:
+    description: Allows player to sell land here
+    default: true
+  economyland.command.landsell.number:
+    description: Allows player to sell land with numbers
+    default: true
+commands:
+  s:
+    description: 一つ目のポイントを設定する
+    permission: economyland.command.startp
+  e:
+    description: 二つ目のポイントを設定する
+    permission: economyland.command.endp
+  land:
+    description: 土地関係システム
+    permission: economyland.command.land;economyland.command.land.buy;economyland.command.land.move;economyland.command.land.list;economyland.command.land.whose;economyland.command.land.give;economyland.command.land.here;economyland.command.land.invite;economyland.command.land.invite.remove;economyland.command.land.invitee
+  landsell:
+    description: 土地を売却します
+    permission: economyland.command.landsell;economyland.command.landsell.here;economyland.command.landsell.number
+...
