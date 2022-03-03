@@ -1,0 +1,11 @@
+name: ChestLock
+main: Deceitya\ChestLock\Main
+version: 1.0.0
+api: 4.0.0
+load: POSTWORLD
+author: deceitya
+description: lock a chest
+permissions:
+  cl.command.lockc:
+    default: true
+    description: Allows the user to run the chest command
