@@ -1,0 +1,19 @@
+name: MiningLevelSystem
+main: Deceitya\MiningLevel\MiningLevelSystem
+version: 1.0.0
+api: 4.0.0
+
+load: POSTWORLD
+author: deceitya
+description: 採掘レベルシステム
+website: https://github.com/deceitya/MiningLevelSystem
+
+commands:
+  level:
+    description: LevelSystemコマンド
+    usage: "/level <status | ranking>"
+    permission: mining.command.level
+permissions:
+  mining.command.level:
+    description: "Allows the user to run the level command"
+    default: op

@@ -1,0 +1,16 @@
+name: MyWarp
+main: Deceitya\MyWarp\MyWarpPlugin
+version: 1.0.0
+api: 4.0.0
+load: POSTWORLD
+author: deceitya
+description: ワープ
+commands:
+  myw:
+    usage: "/myw"
+    description: "MyWarpを作成、編集、移動できます"
+    permission: mywarp.command.myw
+permissions:
+  mywarp.command.myw:
+    description: Allows the user to run the mywarp command
+    default: true
