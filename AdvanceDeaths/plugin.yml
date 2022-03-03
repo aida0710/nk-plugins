@@ -1,0 +1,12 @@
+name: AdvanceDeaths
+author: ErikPDev
+api: [4.0.0]
+version: 2.5
+main: ErikPDev\AdvanceDeaths\Main
+softdepend:
+  - EconomyAPI
+  - ScoreHud
+  - StackStorage
+virions:
+  - libasynql
+  - FormAPI 
