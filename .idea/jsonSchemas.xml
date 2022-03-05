@@ -16,6 +16,12 @@
                     <option name="path" value="*" />
                     <option name="mappingKind" value="Directory" />
                   </Item>
+                  <Item>
+                    <option name="path" value="myworld/plugin.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="CorePlugins/plugin.yml" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>

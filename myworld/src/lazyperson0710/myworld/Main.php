@@ -8,7 +8,10 @@ use pocketmine\Server;
 class Main extends PluginBase {
     public function onEnable(): void {
         foreach (Server::getInstance()->getWorldManager() as $world){
-            //todo このプラグインで生成されたワールドをわざわざ意味もなくlogに出力
+            if (){
+                //todo このプラグインで生成されたワールドをわざわざ意味もなくlogに出力
+                Server::getInstance()->getLogger()->info($CreateWorld);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace deceitya\miningtools;
 
+use AsyncMiningTask;
 use deceitya\miningtools\command\DiamondMiningToolCommand;
 use deceitya\miningtools\command\NetheriteMiningToolCommand;
 use pocketmine\event\block\BlockBreakEvent;
@@ -9,6 +10,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\item\ItemIds;
 use pocketmine\plugin\PluginBase;
+use pocketmine\Server;
 use ree_jp\stackStorage\api\StackStorageAPI;
 
 class Main extends PluginBase implements Listener {
@@ -73,6 +75,9 @@ class Main extends PluginBase implements Listener {
                     default:
                         return;
                 }
+                //$lump_id = $set['lump-id'];
+                //$asyncMiningTask = new AsyncMiningTask($lump_id, $block, $player);
+                //Server::getInstance()->getAsyncPool()->submitTask($asyncMiningTask);
                 if (in_array($block->getId(), $set['lump-id'])) {
                     $this->flag[$name] = true;
                     for ($y = -$item->getNamedTag()->getInt('4mining'); $y < 1; $y++) {
