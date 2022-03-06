@@ -18,7 +18,7 @@ class BreakListener implements Listener {
         $item = $event->getItem();
         $inhanditem = $event->getPlayer()->getInventory()->getItemInHand();
         if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
-            if (!empty($inhanditem->getNamedTag()->getTag('4mining'))) {
+            if (!empty($inhanditem->getNamedTag()->getTag('MiningTools_3'))) {
                 if ($item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) === 0) {
                     $event->cancel();
                     $event->getPlayer()->sendMessage('§bEnchant §7>> §cこのアイテムは使用不可です。なまけものに言って交換してもらうか買いなおしてください');

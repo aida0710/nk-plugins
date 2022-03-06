@@ -21,7 +21,7 @@ class DeleteCommand extends Command {
             return true;
         }
         $item = $sender->getInventory()->getItemInHand();
-        if ($item->getNamedTag()->getInt('4mining', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
+        if ($item->getNamedTag()->getInt('MiningTools_3', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
             $sender->sendMessage('§bDeleteEnchant §7>> §cこのアイテムはエンチャントを削除できません');
             return true;
         }
