@@ -2,16 +2,17 @@
 
 namespace deceitya\miningtools;
 
-use AsyncMiningTask;
 use deceitya\miningtools\command\DiamondMiningToolCommand;
 use deceitya\miningtools\command\NetheriteMiningToolCommand;
+use pocketmine\block\Block;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Server;
-use ree_jp\stackStorage\api\StackStorageAPI;
 
 class Main extends PluginBase implements Listener {
 
@@ -45,10 +46,12 @@ class Main extends PluginBase implements Listener {
      * @ignoreCancelled
      * @priority HIGH
      */
-    public function onBreak(BlockBreakEvent $event) {
-        $item = $event->getItem();
+    public function block(BlockBreakEvent $event): void {
+        $player = $event->getPlayer();
+        $vector3 = $event->getBlock()->getPosition()->asVector3();
+        $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
-        if (($id === ItemIds::DIAMOND_SHOVEL || $id === ItemIds::DIAMOND_PICKAXE || $id === ItemIds::DIAMOND_AXE || $id === 744 || $id === 745 || $id === 746) && $item->getNamedTag()->getTag('4mining') !== null) {
+        if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
             $player = $event->getPlayer();
             $name = $player->getName();
             if (!$this->flag[$name]) {
@@ -75,28 +78,45 @@ class Main extends PluginBase implements Listener {
                     default:
                         return;
                 }
-                //$lump_id = $set['lump-id'];
-                //$asyncMiningTask = new AsyncMiningTask($lump_id, $block, $player);
-                //Server::getInstance()->getAsyncPool()->submitTask($asyncMiningTask);
-                if (in_array($block->getId(), $set['lump-id'])) {
+            }
+            $level_name = $event->getPlayer()->getWorld()->getDisplayName();
+            $world = mb_substr($level_name, 0, null, 'utf-8');
+            if (str_contains($world, "nature") || str_contains($world, "nether") || str_contains($world, "end") || str_contains($world, "debug")) {
+                if (in_array($block->getId(), $set['lump-id'], true)) {
+                    $dropItems = null;
+                    $targetBlock = null;
+                    $name = $player->getName();
                     $this->flag[$name] = true;
-                    for ($y = -$item->getNamedTag()->getInt('4mining'); $y < 1; $y++) {
+                    for ($y = -1; $y < 2; $y++) {
                         for ($x = -1; $x < 2; $x++) {
                             for ($z = -1; $z < 2; $z++) {
                                 $pos = $block->getPosition()->add($x, $y, $z);
-                                if (!in_array($block->getPosition()->getWorld()->getBlock($pos)->getId(), $set['nobreak-id'])) {
-                                    $block->getPosition()->getWorld()->useBreakOn($pos, $item, $player);
+                                $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
+                                if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
+                                    $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
+                                    $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                                 }
                             }
                         }
                     }
+                    //アイテム追加処理
+                    $dropItems = $player->getInventory()->addItem(...$dropItems);
                     $this->flag[$name] = false;
-                    foreach ($event->getDrops() as $drop) {
-                        StackStorageAPI::$instance->add($player->getXuid(), $drop);
-                        $event->setDrops([]);
+                    if (count($dropItems) === 0) {
+                        $event->setDropsVariadic(VanillaBlocks::AIR()->asItem());
+                    } else {
+                        $event->setDrops($dropItems);
                     }
                 }
             }
         }
+    }
+
+    /**
+     * @return item[]
+     */
+    public function getDrop(Player $player, Block $block): array {//, &$dropItems
+        $item = $player->getInventory()->getItemInHand();
+        return $block->getDrops($item);
     }
 }

@@ -38,7 +38,7 @@ class DiamondToolForm implements Form {
         $item->setCustomName($set['name']);
         $item->setLore([$set['description']]);
         $nbt = $item->getNamedTag();
-        $nbt->setInt('4mining', $data[1]);
+        $nbt->setInt('MiningTools_3', 1);
         $item->setNamedTag($nbt);
         foreach ($set['enchant'] as $enchant) {
             $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId($enchant[0]), $enchant[1]));
@@ -53,34 +53,14 @@ class DiamondToolForm implements Form {
             'content' => [
                 [
                     'type' => 'dropdown',
-                    'text' => '§7このツールは修繕することが出来ません
-修繕ができるのは最上位のNetheriteMiningToolsのみになります
-
-エンチャント内容
-> シルクタッチ Lv.1
-> 衝撃 Lv.1§f
-> 耐久 Lv.5§f
-
-価格は全て15万円となっています
-購入したいツールを選択してください',
+                    'text' => "§7このツールは修繕することが出来ません\n修繕ができるのは最上位のNetheriteMiningToolsのみになります\n\nエンチャント内容\n> シルクタッチ Lv.1\n> 衝撃 Lv.1\n> 耐久 Lv.5§f\n\n価格は全て15万円となっています\n購入したいツールを選択してください",
                     'options' => [
                         'ツルハシ',
                         'シャベル',
-                        'アックス'
+                        'アックス',
                     ],
                     'default' => 0
                 ],
-                [
-                    'type' => 'dropdown',
-                    'text' => 'ランクを指定して下さい
-横に書いてあるのは採掘範囲になります',
-                    'options' => [
-                        'Rank1/3×3×1',
-                        'Rank2/3×3×2',
-                        'Rank3/3×3×3'
-                    ],
-                    'default' => 0
-                ]
             ]
         ];
     }
