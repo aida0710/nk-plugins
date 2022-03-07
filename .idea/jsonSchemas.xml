@@ -22,6 +22,9 @@
                   <Item>
                     <option name="path" value="CorePlugins/plugin.yml" />
                   </Item>
+                  <Item>
+                    <option name="path" value="miningtools-debug/plugin.yml" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>
