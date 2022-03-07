@@ -22,9 +22,9 @@ class NetheriteConfirmForm implements Form {
         if ($data) {
             if ($player->getInventory()->canAddItem($this->item)) {
                 if (EconomyAPI::getInstance()->myMoney($player) >= $this->price) {
-                    $player->getInventory()->addItem($this->item);
                     $user = $player->getName();
                     EconomyAPI::getInstance()->reduceMoney($player, $this->price);
+                    $player->getInventory()->addItem($this->item);
                     Server::getInstance()->broadcastMessage("§bMiningTool §7>> §e{$user}がNetheriteMiningToolsを購入しました");
                 } else {
                     $player->sendMessage('§bMiningTool §7>> §cお金が足りません');

@@ -32,7 +32,7 @@ class Main extends PluginBase implements Listener {
         $this->saveDefaultConfig();
         $this->config = $this->getConfig()->getAll();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getServer()->getCommandMap()->registerAll("miningtools", [
+        $this->getServer()->getCommandMap()->registerAll("debugMiningTools", [
             new DiamondMiningToolCommand(),
             new NetheriteMiningToolCommand(),
         ]);
@@ -81,8 +81,9 @@ class Main extends PluginBase implements Listener {
             }
             $level_name = $event->getPlayer()->getWorld()->getDisplayName();
             $world = mb_substr($level_name, 0, null, 'utf-8');
-            if (str_contains($world, "nature") || str_contains($world, "nether") || str_contains($world, "end") || str_contains($world, "debug")) {
+            if (str_contains($world, "nature") || str_contains($world, "nether") || str_contains($world, "end") || str_contains($world, "MiningWorld") || str_contains($world, "debug")) {
                 if (in_array($block->getId(), $set['lump-id'], true)) {
+                    $event->cancel();
                     $dropItems = null;
                     $targetBlock = null;
                     $name = $player->getName();
