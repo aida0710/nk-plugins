@@ -1,16 +1,17 @@
 <?php
 
-namespace deceitya\miningtools4;
+namespace deceitya\debugMiningTools;
 
-use deceitya\miningtools4\form4\ToolForm;
+use pocketmine\block\Block;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\item\Item;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use ree_jp\stackStorage\api\StackStorageAPI;
 
 class Main extends PluginBase implements Listener {
 
@@ -49,10 +50,12 @@ class Main extends PluginBase implements Listener {
      * @ignoreCancelled
      * @priority HIGH
      */
-    public function onBreak(BlockBreakEvent $event) {
-        $item = $event->getItem();
+    public function block(BlockBreakEvent $event): void {
+        $player = $event->getPlayer();
+        $vector3 = $event->getBlock()->getPosition()->asVector3();
+        $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
-        if (($id === 745) && $item->getNamedTag()->getTag('5mining') !== null) {
+        if ($item->getNamedTag()->getTag('MiningTools_Debug') !== null) {
             $player = $event->getPlayer();
             $name = $player->getName();
             if (!$this->flag[$name]) {
@@ -64,23 +67,42 @@ class Main extends PluginBase implements Listener {
                     default:
                         return;
                 }
+            }
+            if (in_array($block->getId(), $set['lump-id'], true)) {
+                $dropItems = null;
+                $targetBlock = null;
+                $name = $player->getName();
                 $this->flag[$name] = true;
-                for ($y = -$item->getNamedTag()->getInt('5mining'); $y < 1; $y++) {
+                for ($y = -1; $y < 2; $y++) {
                     for ($x = -1; $x < 2; $x++) {
                         for ($z = -1; $z < 2; $z++) {
                             $pos = $block->getPosition()->add($x, $y, $z);
-                            if (!in_array($block->getPosition()->getWorld()->getBlock($pos)->getId(), $set['nobreak-id'])) {
-                                $block->getPosition()->getWorld()->useBreakOn($pos, $item, $player);
+                            $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
+                            if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
+                                $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));//$this->getDrop($player, $block, $dropItems);
+                                //$block->getPosition()->getWorld()->useBreakOn($pos, $item, $player);
+                                $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                             }
                         }
                     }
                 }
+                //アイテム追加処理
+                $dropItems = $player->getInventory()->addItem(...$dropItems);
                 $this->flag[$name] = false;
-                foreach ($event->getDrops() as $drop) {
-                    StackStorageAPI::$instance->add($player->getXuid(), $drop);
-                    $event->setDrops([]);
+                if (count($dropItems) === 0) {
+                    $event->setDropsVariadic(VanillaBlocks::AIR()->asItem());
+                } else {
+                    $event->setDrops($dropItems);
                 }
             }
         }
+    }
+
+    /**
+     * @return item[]
+     */
+    public function getDrop(Player $player, Block $block): array {//, &$dropItems
+        $item = $player->getInventory()->getItemInHand();
+        return $block->getDrops($item);
     }
 }

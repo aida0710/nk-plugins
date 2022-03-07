@@ -1,13 +1,13 @@
 <?php
 
-namespace deceitya\miningtools4\form4;
+namespace deceitya\debugMiningTools;
 
-use deceitya\miningtools4\Main;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\form\Form;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class ToolForm implements Form {
 
@@ -29,12 +29,21 @@ class ToolForm implements Form {
         $item->setCustomName($set['name']);
         $item->setLore([$set['description']]);
         $nbt = $item->getNamedTag();
-        $nbt->setInt('5mining', $data[1]);
+        $nbt->setInt('MiningTools_Debug', $data[1]);
         $item->setNamedTag($nbt);
         foreach ($set['enchant'] as $enchant) {
             $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId($enchant[0]), $enchant[1]));
         }
-        $player->sendForm(new ConfirmForm($item, 0));
+        if ($player->getInventory()->canAddItem($item)) {
+            if (Server::getInstance()->isOp($player->getName())) {
+                $player->getInventory()->addItem($item);
+                $player->sendMessage('§bMiningTool §7>> §aインベントリにアイテムを付与しました');
+            } else {
+                $player->sendMessage('§bMiningTool §7>> §c権限は足りません');
+            }
+        } else {
+            $player->sendMessage('§bMiningTool §7>> §cインベントリに空きがありません');
+        }
     }
 
     public function jsonSerialize() {
@@ -84,13 +93,8 @@ class ToolForm implements Form {
                         '28',
                         '29',
                         '30',
-                        '31',
-                        '32',
-                        '33',
-                        '34',
-                        '35',
                     ],
-                    'default' => 7
+                    'default' => 2
                 ]
             ]
         ];
