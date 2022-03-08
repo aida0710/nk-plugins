@@ -48,7 +48,7 @@ class Main extends PluginBase implements Listener {
 
     /**
      * @ignoreCancelled
-     * @priority HIGH
+     * @priority LOW
      */
     public function block(BlockBreakEvent $event): void {
         $player = $event->getPlayer();
@@ -70,8 +70,8 @@ class Main extends PluginBase implements Listener {
             }
             if (in_array($block->getId(), $set['lump-id'], true)) {
                 $dropItems = null;
-                $targetBlock = null;
                 $name = $player->getName();
+                $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
                 $this->flag[$name] = true;
                 for ($y = -1; $y < 2; $y++) {
                     for ($x = -1; $x < 2; $x++) {
@@ -80,13 +80,14 @@ class Main extends PluginBase implements Listener {
                             $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
                             if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
                                 $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));//$this->getDrop($player, $block, $dropItems);
-                                //$block->getPosition()->getWorld()->useBreakOn($pos, $item, $player);
                                 $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                             }
                         }
                     }
                 }
                 //アイテム追加処理
+                $dropItems = array_diff($dropItems, array($startBlock));
+                $dropItems = array_values($dropItems);
                 $dropItems = $player->getInventory()->addItem(...$dropItems);
                 $this->flag[$name] = false;
                 if (count($dropItems) === 0) {
