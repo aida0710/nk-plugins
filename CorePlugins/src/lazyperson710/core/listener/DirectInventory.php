@@ -17,16 +17,16 @@ class DirectInventory implements Listener {
         $drops = $ev->getDrops();
         $p = $ev->getPlayer();
         $nbt = $ev->getItem()->getNamedTag();
-        if (!$nbt->getTag("mining")) {
-            $ev->setDrops([]);
-            foreach ($drops as $item) {
-                if ($p->getInventory()->canAddItem($item)) {
-                    $p->getInventory()->addItem($item);
-                } else {
-                    StackStorageAPI::$instance->add($p->getXuid(), $item);
-                    $p->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item . "が倉庫にしまわれました");
-                }
+        //if (!$nbt->getTag("mining")) {
+        $ev->setDrops([]);
+        foreach ($drops as $item) {
+            if ($p->getInventory()->canAddItem($item)) {
+                $p->getInventory()->addItem($item);
+            } else {
+                StackStorageAPI::$instance->add($p->getXuid(), $item);
+                $p->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item . "が倉庫にしまわれました");
             }
         }
+        //}
     }
 }
