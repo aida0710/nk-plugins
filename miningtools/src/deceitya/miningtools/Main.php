@@ -81,9 +81,9 @@ class Main extends PluginBase implements Listener {
             }
             $level_name = $event->getPlayer()->getWorld()->getDisplayName();
             $world = mb_substr($level_name, 0, null, 'utf-8');
+            $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
             if (str_contains($world, "nature") || str_contains($world, "nether") || str_contains($world, "end") || str_contains($world, "MiningWorld") || str_contains($world, "debug")) {
                 if (in_array($block->getId(), $set['lump-id'], true)) {
-                    $event->cancel();
                     $dropItems = null;
                     $targetBlock = null;
                     $name = $player->getName();
@@ -95,12 +95,15 @@ class Main extends PluginBase implements Listener {
                                 $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
                                 if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
                                     $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
+                                    //$player->getWorld()->addParticle($pos, new BlockBreakParticle($targetBlock));
                                     $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                                 }
                             }
                         }
                     }
                     //アイテム追加処理
+                    $dropItems = array_diff($dropItems, array($startBlock));
+                    $dropItems = array_values($dropItems);
                     $dropItems = $player->getInventory()->addItem(...$dropItems);
                     $this->flag[$name] = false;
                     if (count($dropItems) === 0) {
