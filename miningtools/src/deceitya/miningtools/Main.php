@@ -13,6 +13,7 @@ use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\world\particle\BlockBreakParticle;
 
 class Main extends PluginBase implements Listener {
 
