@@ -13,7 +13,6 @@ use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\world\particle\BlockBreakParticle;
 
 class Main extends PluginBase implements Listener {
 
@@ -86,7 +85,6 @@ class Main extends PluginBase implements Listener {
             if (str_contains($world, "nature") || str_contains($world, "nether") || str_contains($world, "end") || str_contains($world, "MiningWorld") || str_contains($world, "debug")) {
                 if (in_array($block->getId(), $set['lump-id'], true)) {
                     $dropItems = null;
-                    $targetBlock = null;
                     $name = $player->getName();
                     $this->flag[$name] = true;
                     for ($y = -1; $y < 2; $y++) {
