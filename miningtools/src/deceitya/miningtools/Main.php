@@ -44,7 +44,7 @@ class Main extends PluginBase implements Listener {
 
     /**
      * @ignoreCancelled
-     * @priority HIGH
+     * @priority LOW
      */
     public function block(BlockBreakEvent $event): void {
         $player = $event->getPlayer();
