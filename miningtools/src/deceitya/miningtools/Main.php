@@ -7,6 +7,7 @@ use deceitya\miningtools\command\NetheriteMiningToolCommand;
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\Event;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\item\Item;
@@ -100,16 +101,8 @@ class Main extends PluginBase implements Listener {
                             }
                         }
                     }
-                    //アイテム追加処理
-                    $dropItems = array_diff($dropItems, array($startBlock));
-                    $dropItems = array_values($dropItems);
-                    $dropItems = $player->getInventory()->addItem(...$dropItems);
                     $this->flag[$name] = false;
-                    if (count($dropItems) === 0) {
-                        $event->setDropsVariadic(VanillaBlocks::AIR()->asItem());
-                    } else {
-                        $event->setDrops($dropItems);
-                    }
+                    $this->DropItem($player, $event, $dropItems, $startBlock);
                 }
             }
         }
@@ -118,8 +111,19 @@ class Main extends PluginBase implements Listener {
     /**
      * @return item[]
      */
-    public function getDrop(Player $player, Block $block): array {//, &$dropItems
+    public function getDrop(Player $player, Block $block): array {
         $item = $player->getInventory()->getItemInHand();
         return $block->getDrops($item);
+    }
+
+    public function DropItem(Player $player, Event $event, $dropItems, $startBlock) {
+        $dropItems = array_diff($dropItems, array($startBlock));
+        $dropItems = array_values($dropItems);
+        $dropItems = $player->getInventory()->addItem(...$dropItems);
+        if (count($dropItems) === 0) {
+            $event->setDropsVariadic(VanillaBlocks::AIR()->asItem());
+        } else {
+            $event->setDrops($dropItems);
+        }
     }
 }
