@@ -49,14 +49,13 @@ class Main extends PluginBase implements Listener {
      */
     public function block(BlockBreakEvent $event): void {
         $player = $event->getPlayer();
-        $vector3 = $event->getBlock()->getPosition()->asVector3();
         $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
             $player = $event->getPlayer();
             $name = $player->getName();
+            $block = $event->getBlock();
             if (!$this->flag[$name]) {
-                $block = $event->getBlock();
                 switch ($id) {
                     case ItemIds::DIAMOND_SHOVEL:
                         $set = $this->config['diamond_shovel'];
@@ -80,6 +79,8 @@ class Main extends PluginBase implements Listener {
                         return;
                 }
             }
+            //todo 斧は隣接してるブロックを連続破壊できる
+            //todo シフトしてると自分より下のブロックが破壊されないように
             $level_name = $event->getPlayer()->getWorld()->getDisplayName();
             $world = mb_substr($level_name, 0, null, 'utf-8');
             $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
@@ -95,7 +96,6 @@ class Main extends PluginBase implements Listener {
                                 $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
                                 if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
                                     $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
-                                    //$player->getWorld()->addParticle($pos, new BlockBreakParticle($targetBlock));
                                     $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                                 }
                             }
