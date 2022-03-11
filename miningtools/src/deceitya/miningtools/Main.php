@@ -100,6 +100,14 @@ class Main extends PluginBase implements Listener {
                 if (in_array($block->getId(), $set['lump-id'], true)) {
                     $dropItems = null;
                     $name = $player->getName();
+                    //耐久値
+                    $handItem = $player->getInventory()->getItemInHand();
+                    $haveDurable = $handItem instanceof Durable;
+                    $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+                    //耐久値チェック
+                    if ($haveDurable && $handItem->getDamage() >= $maxDurability - 3) {
+                        return;
+                    }
                     $this->flag[$name] = true;
                     for ($y = -1; $y < 2; $y++) {
                         for ($x = -1; $x < 2; $x++) {
