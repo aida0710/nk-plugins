@@ -48,6 +48,9 @@ class Main extends PluginBase implements Listener {
      * @priority LOW
      */
     public function block(BlockBreakEvent $event): void {
+        if ($event->isCancelled()) {
+            return;
+        }
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
