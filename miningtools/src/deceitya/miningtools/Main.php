@@ -82,8 +82,6 @@ class Main extends PluginBase implements Listener {
                         return;
                 }
             }
-            //todo 斧は隣接してるブロックを連続破壊できる
-            //todo シフトしてると自分より下のブロックが破壊されないように
             //todo 古いマイニングツールを変換する機能を追加
             $world_name = $event->getPlayer()->getWorld()->getDisplayName();
             $world_search = mb_substr($world_name, 0, null, 'utf-8');
