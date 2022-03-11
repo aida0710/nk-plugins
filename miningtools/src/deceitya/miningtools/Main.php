@@ -161,6 +161,78 @@ class Main extends PluginBase implements Listener {
     }
 
     /**
+     * @param Block $block
+     * @param Player $player
+     * @param Event $event
+     * @param Block $startBlock
+     * @param Item[] $dropItems
+     * @return Item[]
+     */
+    public function breakTree(Block $block, $set, Player $player, Event $event, Block $startBlock, array &$dropItems): void {
+        //初期化
+        //初期設定
+        $now = null;
+        $world = $player->getWorld();
+        $startPos = $block->getPosition()->asVector3();
+        //耐久値
+        $handItem = $player->getInventory()->getItemInHand();
+        $haveDurable = $handItem instanceof Durable;
+        $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+        //一時保管向け配列等
+        $open = [World::blockHash($startPos->x, $startPos->y, $startPos->z) => $startPos];
+        $close = [];
+        $drops = [];
+        $blockIds = [];
+        //耐久値チェック
+        if ($haveDurable && $handItem->getDamage() >= $maxDurability - 3) {
+            return;
+        }
+        //350(回)*6(方向) = 2100(ブロック(概算))
+        //現在は350->50に変更
+        for ($i = 1; $i <= 350; $i++) {
+            //var_dump("i = " . $i);
+            if (count($open) === 0) {
+                //var_dump("exit!");
+                break;
+            }
+            $key = array_key_first($open);
+            $now = $open[$key];
+            $close[$key] = null;
+            unset($open[$key]);
+            foreach (Facing::ALL as $side) {
+                $pos = $now->getSide($side);
+                $hash = World::blockHash($pos->x, $pos->y, $pos->z);
+                if (isset($open[$hash]) || isset($close[$hash])) continue;
+                $targetblock = $world->getBlock($pos);
+                if ($targetblock->getId() !== BlockLegacyIds::LOG && $targetblock->getId() !== BlockLegacyIds::LOG2 && $targetblock->getId() !== BlockLegacyIds::LEAVES && $targetblock->getId() !== BlockLegacyIds::LEAVES2) {
+                    $close[$hash] = null;
+                    continue;
+                }
+                //耐久値 消耗処理
+                if ($haveDurable && ($targetblock->getId() === $set['lump-id'])) {
+                    /** @var Durable $handItem */
+                    $handItem->applyDamage(1);
+                    if ($handItem->getDamage() >= $maxDurability - 3) {
+                        break;
+                    }
+                }
+                $drops[] = $this->getDrop($player, $targetblock);
+                (new CountBlockEvent($player, $targetblock))->call();
+                $world->setBlock($pos, VanillaBlocks::AIR());
+                $open[$hash] = $pos;//検索候補追加による「$i」消費 = 1~6
+                $blockIds[] = $targetblock->getId();
+            }
+        }
+        if ($haveDurable) {
+            $player->getInventory()->setItemInHand($handItem);
+        }
+        //参考: https://stackoverflow.com/questions/64785938/how-to-avoid-array-merge-in-loops-when-dealing-with-array-of-objects
+        //var_dump(array_merge(...$drops));
+        $dropItems = array_merge($dropItems, array_merge(...$drops));
+        //var_dump($dropItems);
+    }
+
+    /**
      * @return item[]
      */
     public function getDrop(Player $player, Block $block): array {
