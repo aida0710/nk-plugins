@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace nkserver\ranking\event\handler;
 
+use deceitya\miningtools\event\CountBlockEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Event;
@@ -18,6 +19,7 @@ class EventListener implements Listener {
 
     public static function init(): void {
         self::registerHandler(new BlockBreakHandler);
+        self::registerHandler(new BlockBreakMiningToolsHandler);
         self::registerHandler(new BlockPlaceHandler);
         self::registerHandler(new PlayerChatHandler);
         self::registerHandler(new PlayerDeathHandler);
@@ -29,10 +31,12 @@ class EventListener implements Listener {
     }
 
     /**
-     * @ignoreCancelled
      * @priority HIGH
      */
     public function onBreakBlock(BlockBreakEvent $ev): void {
+        if ($ev->isCancelled()) {
+            return;
+        }
         self::onListen($ev);
     }
 
@@ -42,18 +46,32 @@ class EventListener implements Listener {
     }
 
     /**
-     * @ignoreCancelled
      * @priority HIGH
      */
-    public function onPlaceBlock(BlockPlaceEvent $ev): void {
+    public function onBlockBreakMiningToolsHandler(CountBlockEvent $ev): void {
+        if ($ev->isCancelled()) {
+            return;
+        }
         self::onListen($ev);
     }
 
     /**
-     * @ignoreCancelled
+     * @priority HIGH
+     */
+    public function onPlaceBlock(BlockPlaceEvent $ev): void {
+        if ($ev->isCancelled()) {
+            return;
+        }
+        self::onListen($ev);
+    }
+
+    /**
      * @priority HIGH
      */
     public function onChatPlayer(PlayerChatEvent $ev): void {
+        if ($ev->isCancelled()) {
+            return;
+        }
         self::onListen($ev);
     }
 
