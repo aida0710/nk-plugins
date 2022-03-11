@@ -241,6 +241,9 @@ class Main extends PluginBase implements Listener {
     }
 
     public function DropItem(Player $player, Event $event, $dropItems, $startBlock) {
+        if (is_null($dropItems)) {
+            return;
+        }
         $dropItems = array_diff($dropItems, array($startBlock));
         $dropItems = array_values($dropItems);
         $dropItems = $player->getInventory()->addItem(...$dropItems);
