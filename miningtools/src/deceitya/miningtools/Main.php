@@ -4,16 +4,21 @@ namespace deceitya\miningtools;
 
 use deceitya\miningtools\command\DiamondMiningToolCommand;
 use deceitya\miningtools\command\NetheriteMiningToolCommand;
+use deceitya\miningtools\event\CountBlockEvent;
 use pocketmine\block\Block;
+use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Event;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\item\Durable;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
+use pocketmine\math\Facing;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\world\World;
 
 class Main extends PluginBase implements Listener {
 
@@ -98,7 +103,7 @@ class Main extends PluginBase implements Listener {
                     return;
                 }
                 if (in_array($block->getId(), $set['lump-id'], true)) {
-                    $dropItems = null;
+                    $player_y = $event->getPlayer()->getPosition()->getFloorY() - 1;
                     $name = $player->getName();
                     //耐久値
                     $handItem = $player->getInventory()->getItemInHand();
