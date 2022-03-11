@@ -114,9 +114,36 @@ class Main extends PluginBase implements Listener {
                             for ($z = -1; $z < 2; $z++) {
                                 $pos = $block->getPosition()->add($x, $y, $z);
                                 $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
-                                if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
-                                    $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
-                                    $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
+                                if (!$player->isSneaking()) {
+                                    if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
+                                        $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
+                                        $blockIds[] = $targetBlock->getId();
+                                        //耐久値 消耗処理
+                                        if ($haveDurable && ($targetBlock->getId() === $set['lump-id'])) {
+                                            /** @var Durable $handItem */
+                                            $handItem->applyDamage(1);
+                                            if ($handItem->getDamage() >= $maxDurability - 3) {
+                                                break;
+                                            }
+                                        }
+                                        (new CountBlockEvent($player, $block))->call();
+                                        $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
+                                    }
+                                } elseif ($targetBlock->getPosition()->getFloorY() > $player_y) {
+                                    if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
+                                        $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
+                                        $blockIds[] = $targetBlock->getId();
+                                        //耐久値 消耗処理
+                                        if ($haveDurable) {
+                                            /** @var Durable $handItem */
+                                            $handItem->applyDamage(1);
+                                            if ($handItem->getDamage() >= $maxDurability - 3) {
+                                                break;
+                                            }
+                                        }
+                                        (new CountBlockEvent($player, $block))->call();
+                                        $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
+                                    }
                                 }
                             }
                         }
