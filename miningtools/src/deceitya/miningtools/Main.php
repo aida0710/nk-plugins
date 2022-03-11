@@ -85,10 +85,20 @@ class Main extends PluginBase implements Listener {
             //todo 斧は隣接してるブロックを連続破壊できる
             //todo シフトしてると自分より下のブロックが破壊されないように
             //todo 古いマイニングツールを変換する機能を追加
+            $world_name = $event->getPlayer()->getWorld()->getDisplayName();
+            $world_search = mb_substr($world_name, 0, null, 'utf-8');
             $level_name = $event->getPlayer()->getWorld()->getDisplayName();
             $world = mb_substr($level_name, 0, null, 'utf-8');
             $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
-            if (str_contains($world, "nature") || str_contains($world, "nether") || str_contains($world, "end") || str_contains($world, "MiningWorld") || str_contains($world, "debug")) {
+            $dropItems = null;
+            $blockIds = [];
+            if (str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug")) {
+                if ($item->getId() === 279 || $item->getId() === 746) {
+                    $dropItems = [];
+                    $this->breakTree($startBlock, $set, $player, $event, $startBlock, $dropItems);
+                    $this->DropItem($player, $event, $dropItems, $startBlock);
+                    return;
+                }
                 if (in_array($block->getId(), $set['lump-id'], true)) {
                     $dropItems = null;
                     $name = $player->getName();
