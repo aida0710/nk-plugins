@@ -31,7 +31,6 @@ class BankCommand extends Command {
     function execute(CommandSender $sender, string $commandLabel, array $args) {
         if ($sender instanceof Player) {
             if ($this->testPermission($sender)) {
-                // TODO
                 $sender->sendForm(new BankForm());
             }
         } else $sender->sendMessage(TextFormat::RED . "§bBank §7>> §cコマンドを実行出来ませんでした");

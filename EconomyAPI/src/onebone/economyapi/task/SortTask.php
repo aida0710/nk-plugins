@@ -79,7 +79,7 @@ class SortTask extends AsyncTask
     public function onCompletion(): void
     {
         $server = Server::getInstance();
-        if ($this->sender === "CONSOLE" or ($player = $server->getPlayerExact($this->sender)) instanceof Player) { // TODO: Rcon
+        if ($this->sender === "CONSOLE" or ($player = $server->getPlayerExact($this->sender)) instanceof Player) {
             $plugin = EconomyAPI::getInstance();
 
             $output = ($plugin->getMessage("topmoney-tag", [$this->page, $this->max], $this->sender) . "\n");
