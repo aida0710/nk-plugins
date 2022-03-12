@@ -128,7 +128,7 @@ class Main extends PluginBase implements Listener {
                                             /** @var Durable $handItem */
                                             $handItem->applyDamage(1);
                                             if ($handItem->getDamage() >= $maxDurability - 3) {
-                                                break;
+                                                break 3;
                                             }
                                         }
                                         (new CountBlockEvent($player, $block))->call();
@@ -143,7 +143,7 @@ class Main extends PluginBase implements Listener {
                                             /** @var Durable $handItem */
                                             $handItem->applyDamage(1);
                                             if ($handItem->getDamage() >= $maxDurability - 3) {
-                                                break;
+                                                break 3;
                                             }
                                         }
                                         (new CountBlockEvent($player, $block))->call();
@@ -188,7 +188,6 @@ class Main extends PluginBase implements Listener {
             return;
         }
         //350(回)*6(方向) = 2100(ブロック(概算))
-        //現在は350->50に変更
         for ($i = 1; $i <= 350; $i++) {
             //var_dump("i = " . $i);
             if (count($open) === 0) {
@@ -213,7 +212,7 @@ class Main extends PluginBase implements Listener {
                     /** @var Durable $handItem */
                     $handItem->applyDamage(1);
                     if ($handItem->getDamage() >= $maxDurability - 3) {
-                        break;
+                        break 2;
                     }
                 }
                 $drops[] = $this->getDrop($player, $targetblock);
