@@ -95,7 +95,7 @@ class Main extends PluginBase implements Listener {
             $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
             $dropItems = null;
             $blockIds = [];
-            if (str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug")) {
+            if (str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($player->getName())) {
                 if ($item->getId() === 279 || $item->getId() === 746) {
                     $dropItems = [];
                     $this->breakTree($startBlock, $set, $player, $event, $startBlock, $dropItems);
