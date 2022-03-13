@@ -16,6 +16,7 @@ use pocketmine\item\Durable;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\math\Facing;
+use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
@@ -100,9 +101,7 @@ class Main extends PluginBase implements Listener {
                 if ($item->getId() === 279 || $item->getId() === 746) {
                     $dropItems = [];
                     $this->breakTree($startBlock, $set, $player, $event, $startBlock, $dropItems);
-                    if (!$player->getGamemode() == "CREATIVE") {
-                        $this->DropItem($player, $event, $dropItems, $startBlock);
-                    }
+                    $this->DropItem($player, $event, $dropItems, $startBlock);
                     return;
                 }
                 if (in_array($block->getId(), $set['lump-id'], true)) {
@@ -157,9 +156,7 @@ class Main extends PluginBase implements Listener {
                         }
                     }
                     $this->flag[$name] = false;
-                    if (!$player->getGamemode() == "CREATIVE") {
-                        $this->DropItem($player, $event, $dropItems, $startBlock);
-                    }
+                    $this->DropItem($player, $event, $dropItems, $startBlock);
                 }
             }
         }
@@ -246,6 +243,9 @@ class Main extends PluginBase implements Listener {
 
     public function DropItem(Player $player, Event $event, $dropItems, $startBlock) {
         if (is_null($dropItems)) {
+            return;
+        }
+        if ($player->getGamemode() === GameMode::CREATIVE()) {
             return;
         }
         $dropItems = array_diff($dropItems, array($startBlock));
