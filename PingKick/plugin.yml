@@ -1,8 +1,0 @@
----
-name: PingKick
-main: GodzHardYT\PingKick\Main
-api:
-  - 4.0.0
-version: "1.2"
-author: GodzHardYT
-...
