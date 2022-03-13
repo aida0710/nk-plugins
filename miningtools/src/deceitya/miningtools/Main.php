@@ -99,7 +99,9 @@ class Main extends PluginBase implements Listener {
                 if ($item->getId() === 279 || $item->getId() === 746) {
                     $dropItems = [];
                     $this->breakTree($startBlock, $set, $player, $event, $startBlock, $dropItems);
-                    $this->DropItem($player, $event, $dropItems, $startBlock);
+                    if (!$player->getGamemode() == "CREATIVE") {
+                        $this->DropItem($player, $event, $dropItems, $startBlock);
+                    }
                     return;
                 }
                 if (in_array($block->getId(), $set['lump-id'], true)) {
@@ -154,7 +156,9 @@ class Main extends PluginBase implements Listener {
                         }
                     }
                     $this->flag[$name] = false;
-                    $this->DropItem($player, $event, $dropItems, $startBlock);
+                    if (!$player->getGamemode() == "CREATIVE") {
+                        $this->DropItem($player, $event, $dropItems, $startBlock);
+                    }
                 }
             }
         }
