@@ -18,6 +18,7 @@ use pocketmine\item\ItemIds;
 use pocketmine\math\Facing;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\Server;
 use pocketmine\world\World;
 
 class Main extends PluginBase implements Listener {
