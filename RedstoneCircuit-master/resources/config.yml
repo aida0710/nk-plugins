@@ -1,25 +1,25 @@
 ---
 blocks:
   # mechanism
-  command_block: true
-  dispenser: true
+  command_block: false
+  dispenser: false
   door: true
-  dropper: true
+  dropper: false
   fence_gate: true
   hopper: true
   note_block: true
-  rail: true
+  rail: false
   redstone_lamp: true
-  skull: true
+  skull: false
   tnt: true
   trapdoor: true
 
   # power
   button: true
-  daylight_sensor: true
-  jukebox: true
+  daylight_sensor: false
+  jukebox: false
   lever: true
-  observer: true
+  observer: false
   redstone_block: true
   redstone_torch: true
   pressure_plate: true
