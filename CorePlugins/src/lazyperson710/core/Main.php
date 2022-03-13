@@ -3,6 +3,7 @@
 namespace lazyperson710\core;
 
 use lazyperson710\core\command\DiceCommand;
+use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\CreativeInventory;
@@ -47,6 +48,7 @@ class Main extends PluginBase {
         $this->getServer()->getCommandMap()->registerAll("core", [
             new MajorCommand(),
             new DiceCommand(),
+            new InvCommand(),
         ]);
         $this->getScheduler()->scheduleDelayedTask(new TaskScheduler, 60);
         $this->getScheduler()->scheduleRepeatingTask(new TimeScheduler, 20);
