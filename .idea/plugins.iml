@@ -62,6 +62,7 @@
       <excludeFolder url="file://$MODULE_DIR$/INether-master" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/myworld" />
+      <excludeFolder url="file://$MODULE_DIR$/miningtools-debug" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
