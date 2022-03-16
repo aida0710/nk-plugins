@@ -40,7 +40,7 @@ class Main extends PluginBase implements Listener {
         $this->saveDefaultConfig();
         $this->config = $this->getConfig()->getAll();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getServer()->getCommandMap()->registerAll("debugMiningTools", [
+        $this->getServer()->getCommandMap()->registerAll("MiningTools", [
             new DiamondMiningToolCommand(),
             new NetheriteMiningToolCommand(),
         ]);
@@ -61,8 +61,11 @@ class Main extends PluginBase implements Listener {
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
+        $player_y = $event->getPlayer()->getPosition()->getFloorY();
         if ($item->getNamedTag()->getTag('4mining') !== null) {
             $nbt = $item->getNamedTag();
+            $tags = "4mining";
+            $nbt->removeTag($tags);
             $nbt->setInt('MiningTools_3', 1);
             $item->setNamedTag($nbt);
         }
@@ -110,13 +113,10 @@ class Main extends PluginBase implements Listener {
                     return;
                 }
                 if (in_array($block->getId(), $set['lump-id'], true)) {
-                    $player_y = $event->getPlayer()->getPosition()->getFloorY() - 1;
                     $name = $player->getName();
-                    //耐久値
                     $handItem = $player->getInventory()->getItemInHand();
                     $haveDurable = $handItem instanceof Durable;
                     $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
-                    //耐久値チェック
                     if ($haveDurable && $handItem->getDamage() >= $maxDurability - 3) {
                         return;
                     }
@@ -130,7 +130,6 @@ class Main extends PluginBase implements Listener {
                                     if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
                                         $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
                                         $blockIds[] = $targetBlock->getId();
-                                        //耐久値 消耗処理
                                         if ($haveDurable && ($targetBlock->getId() === $set['lump-id'])) {
                                             /** @var Durable $handItem */
                                             $handItem->applyDamage(1);
@@ -141,11 +140,10 @@ class Main extends PluginBase implements Listener {
                                         (new CountBlockEvent($player, $block))->call();
                                         $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                                     }
-                                } elseif ($targetBlock->getPosition()->getFloorY() > $player_y) {
+                                } elseif ($pos->getFloorY() > $player_y - 1) {
                                     if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
                                         $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
                                         $blockIds[] = $targetBlock->getId();
-                                        //耐久値 消耗処理
                                         if ($haveDurable) {
                                             /** @var Durable $handItem */
                                             $handItem->applyDamage(1);
@@ -225,7 +223,7 @@ class Main extends PluginBase implements Listener {
                 $drops[] = $this->getDrop($player, $targetblock);
                 (new CountBlockEvent($player, $targetblock))->call();
                 $world->setBlock($pos, VanillaBlocks::AIR());
-                $open[$hash] = $pos;//検索候補追加による「$i」消費 = 1~6
+                $open[$hash] = $pos; //検索候補追加による「$i」消費 = 1~6
                 $blockIds[] = $targetblock->getId();
             }
         }
