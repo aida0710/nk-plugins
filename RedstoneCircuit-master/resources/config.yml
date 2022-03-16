@@ -7,11 +7,11 @@ blocks:
   dropper: false
   fence_gate: true
   hopper: true
-  note_block: true
+  note_block: false
   rail: false
   redstone_lamp: true
   skull: false
-  tnt: true
+  tnt: false
   trapdoor: true
 
   # power
@@ -21,14 +21,14 @@ blocks:
   lever: true
   observer: false
   redstone_block: true
-  redstone_torch: true
+  redstone_torch: false
   pressure_plate: true
   trapped_chest: true
-  tripwire: true
+  tripwire: false
   weighted_pressure_plate: true
 
   # transmission
-  comparator: true
-  redstone_wire: true
-  repeater: true
+  comparator: false
+  redstone_wire: false
+  repeater: false
 ...
