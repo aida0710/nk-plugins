@@ -61,6 +61,11 @@ class Main extends PluginBase implements Listener {
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
+        if ($item->getNamedTag()->getTag('4mining') !== null) {
+            $nbt = $item->getNamedTag();
+            $nbt->setInt('MiningTools_3', 1);
+            $item->setNamedTag($nbt);
+        }
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
             $player = $event->getPlayer();
             $name = $player->getName();
