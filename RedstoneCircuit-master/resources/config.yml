@@ -16,19 +16,19 @@ blocks:
 
   # power
   button: true
-  daylight_sensor: false
+  daylight_sensor: true
   jukebox: false
   lever: true
   observer: false
   redstone_block: true
-  redstone_torch: false
+  redstone_torch: true
   pressure_plate: true
   trapped_chest: true
   tripwire: false
   weighted_pressure_plate: true
 
   # transmission
-  comparator: false
-  redstone_wire: false
-  repeater: false
+  comparator: true
+  redstone_wire: true
+  repeater: true
 ...
