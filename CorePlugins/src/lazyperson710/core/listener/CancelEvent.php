@@ -250,7 +250,7 @@ class CancelEvent implements Listener {
     public function onInventoryOpen(InventoryOpenEvent $event) {
         $inventory = $event->getInventory();
         $player = $event->getPlayer();
-        if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory || $inventory instanceof HopperInventory) {
+        if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory) {
             $player->sendTip("§bInventory §7>> §cこのブロックのインベントリは開くことが出来ません");
             $event->cancel();
         }
