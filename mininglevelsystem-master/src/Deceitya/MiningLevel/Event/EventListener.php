@@ -5,7 +5,7 @@ namespace Deceitya\MiningLevel\Event;
 use bbo51dog\pmdiscord\connection\Webhook;
 use bbo51dog\pmdiscord\element\Embed;
 use bbo51dog\pmdiscord\element\Embeds;
-use deceitya\miningtools\event\CountBlockEvent;
+use deceitya\miningTools\event\CountBlockEvent;
 use pocketmine\event\Event;
 use DateTime;
 use DateTimeInterface;

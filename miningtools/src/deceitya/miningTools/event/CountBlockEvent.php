@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningtools\event;
+namespace deceitya\miningTools\event;
 
 use pocketmine\block\Block;
 use pocketmine\event\block\BlockEvent;

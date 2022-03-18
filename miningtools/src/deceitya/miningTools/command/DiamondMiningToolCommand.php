@@ -1,9 +1,9 @@
 <?php
 
-namespace deceitya\miningtools\command;
+namespace deceitya\miningTools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\diamond\DiamondToolForm;
+use deceitya\miningTools\diamond\DiamondToolForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

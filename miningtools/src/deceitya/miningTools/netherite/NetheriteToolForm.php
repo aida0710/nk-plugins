@@ -1,8 +1,8 @@
 <?php
 
-namespace deceitya\miningtools\netherite;
+namespace deceitya\miningTools\netherite;
 
-use deceitya\miningtools\Main;
+use deceitya\miningTools\Main;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\form\Form;
 use pocketmine\item\enchantment\EnchantmentInstance;

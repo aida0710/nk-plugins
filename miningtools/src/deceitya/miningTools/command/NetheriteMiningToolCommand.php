@@ -1,9 +1,9 @@
 <?php
 
-namespace deceitya\miningtools\command;
+namespace deceitya\miningTools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\netherite\NetheriteToolForm;
+use deceitya\miningTools\netherite\NetheriteToolForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

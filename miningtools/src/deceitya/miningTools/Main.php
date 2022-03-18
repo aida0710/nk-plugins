@@ -1,10 +1,10 @@
 <?php
 
-namespace deceitya\miningtools;
+namespace deceitya\miningTools;
 
-use deceitya\miningtools\command\DiamondMiningToolCommand;
-use deceitya\miningtools\command\NetheriteMiningToolCommand;
-use deceitya\miningtools\event\CountBlockEvent;
+use deceitya\miningTools\command\DiamondMiningToolCommand;
+use deceitya\miningTools\command\NetheriteMiningToolCommand;
+use deceitya\miningTools\event\CountBlockEvent;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
