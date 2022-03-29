@@ -97,11 +97,8 @@ class Main extends PluginBase implements Listener {
                         return;
                 }
             }
-            //todo 古いマイニングツールを変換する機能を追加
             $world_name = $event->getPlayer()->getWorld()->getDisplayName();
             $world_search = mb_substr($world_name, 0, null, 'utf-8');
-            $level_name = $event->getPlayer()->getWorld()->getDisplayName();
-            $world = mb_substr($level_name, 0, null, 'utf-8');
             $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
             $dropItems = null;
             $blockIds = [];
