@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core;
 
+use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
@@ -49,6 +50,7 @@ class Main extends PluginBase {
             new MajorCommand(),
             new DiceCommand(),
             new InvCommand(),
+            new BookCommand(),
         ]);
         $this->getScheduler()->scheduleDelayedTask(new TaskScheduler, 60);
         $this->getScheduler()->scheduleRepeatingTask(new TimeScheduler, 20);
