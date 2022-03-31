@@ -75,10 +75,11 @@ class Main extends PluginBase implements Listener {
         $player_y = $event->getPlayer()->getPosition()->getFloorY();
         if ($item->getNamedTag()->getTag('4mining') !== null) {
             $nbt = $item->getNamedTag();
-            $tags = "4mining";
-            $nbt->removeTag($tags);
+            $tag = "4mining";
+            $nbt->removeTag($tag);
             $nbt->setInt('MiningTools_3', 1);
             $item->setNamedTag($nbt);
+            $player->getInventory()->setItemInHand($item);
         }
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
             $player = $event->getPlayer();
