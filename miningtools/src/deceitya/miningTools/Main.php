@@ -69,7 +69,7 @@ class Main extends PluginBase implements Listener {
             $nbt->setInt('MiningTools_3', 1);
             $item->setNamedTag($nbt);
         }
-        if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+        if ($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
             $player = $event->getPlayer();
             $name = $player->getName();
             $block = $event->getBlock();
@@ -117,10 +117,16 @@ class Main extends PluginBase implements Listener {
                     if ($haveDurable && $handItem->getDamage() >= $maxDurability - 3) {
                         return;
                     }
+                    $radius = 0;
+                    if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
+                        $nbt = $item->getNamedTag();
+                        $int = $nbt->getInt("MiningTools_Expansion");
+                        $radius = floor($int / 2);
+                    }
                     $this->flag[$name] = true;
-                    for ($y = -1; $y < 2; $y++) {
-                        for ($x = -1; $x < 2; $x++) {
-                            for ($z = -1; $z < 2; $z++) {
+                    for ($y = -1 - $radius; $y < 2 + $radius; $y++) {
+                        for ($x = -1 - $radius; $x < 2 + $radius; $x++) {
+                            for ($z = -1 - $radius; $z < 2 + $radius; $z++) {
                                 $pos = $block->getPosition()->add($x, $y, $z);
                                 $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
                                 if (!$player->isSneaking()) {
@@ -171,29 +177,20 @@ class Main extends PluginBase implements Listener {
      * @return Item[]
      */
     public function breakTree(Block $block, $set, Player $player, Event $event, Block $startBlock, array &$dropItems): void {
-        //初期化
-        //初期設定
-        $now = null;
         $world = $player->getWorld();
         $startPos = $block->getPosition()->asVector3();
-        //耐久値
         $handItem = $player->getInventory()->getItemInHand();
         $haveDurable = $handItem instanceof Durable;
         $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
-        //一時保管向け配列等
         $open = [World::blockHash($startPos->x, $startPos->y, $startPos->z) => $startPos];
         $close = [];
         $drops = [];
-        $blockIds = [];
-        //耐久値チェック
         if ($haveDurable && $handItem->getDamage() >= $maxDurability - 3) {
             return;
         }
         //350(回)*6(方向) = 2100(ブロック(概算))
         for ($i = 1; $i <= 350; $i++) {
-            //var_dump("i = " . $i);
             if (count($open) === 0) {
-                //var_dump("exit!");
                 break;
             }
             $key = array_key_first($open);
@@ -209,7 +206,6 @@ class Main extends PluginBase implements Listener {
                     $close[$hash] = null;
                     continue;
                 }
-                //耐久値 消耗処理
                 if ($haveDurable && ($targetblock->getId() === $set['lump-id'])) {
                     /** @var Durable $handItem */
                     $handItem->applyDamage(1);
@@ -220,17 +216,13 @@ class Main extends PluginBase implements Listener {
                 $drops[] = $this->getDrop($player, $targetblock);
                 (new CountBlockEvent($player, $targetblock))->call();
                 $world->setBlock($pos, VanillaBlocks::AIR());
-                $open[$hash] = $pos; //検索候補追加による「$i」消費 = 1~6
-                $blockIds[] = $targetblock->getId();
+                $open[$hash] = $pos;
             }
         }
         if ($haveDurable) {
             $player->getInventory()->setItemInHand($handItem);
         }
-        //参考: https://stackoverflow.com/questions/64785938/how-to-avoid-array-merge-in-loops-when-dealing-with-array-of-objects
-        //var_dump(array_merge(...$drops));
         $dropItems = array_merge($dropItems, array_merge(...$drops));
-        //var_dump($dropItems);
     }
 
     /**
