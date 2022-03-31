@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningTools\diamond;
+namespace deceitya\miningTools\tools\diamond;
 
 use deceitya\miningTools\Main;
 use pocketmine\data\bedrock\EnchantmentIdMap;

@@ -1,16 +1,17 @@
 <?php
 
-namespace deceitya\miningTools\diamond;
+namespace deceitya\miningTools\tools\netherite;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
-class DiamondConfirmForm implements Form {
+class NetheriteConfirmForm implements Form {
 
-    private Item $item;
-    private int $price;
+    private $item;
+    private $price;
 
     public function __construct(Item $item, int $price) {
         $this->item = $item;
@@ -21,25 +22,26 @@ class DiamondConfirmForm implements Form {
         if ($data) {
             if ($player->getInventory()->canAddItem($this->item)) {
                 if (EconomyAPI::getInstance()->myMoney($player) >= $this->price) {
-                    $player->getInventory()->addItem($this->item);
+                    $user = $player->getName();
                     EconomyAPI::getInstance()->reduceMoney($player, $this->price);
-                    $player->sendMessage('§bMiningTool §7>> §aDiamondMiningToolsを購入しました。');
+                    $player->getInventory()->addItem($this->item);
+                    Server::getInstance()->broadcastMessage("§bMiningTool §7>> §e{$user}がNetheriteMiningToolsを購入しました");
                 } else {
-                    $player->sendMessage('§bMiningTool §7>> §cお金が足りません。');
+                    $player->sendMessage('§bMiningTool §7>> §cお金が足りません');
                 }
             } else {
-                $player->sendMessage('§bMiningTool §7>> §cインベントリに空きがありません。');
+                $player->sendMessage('§bMiningTool §7>> §cインベントリに空きがありません');
             }
         } else {
-            $player->sendMessage('§bMiningTool §7>> §a購入をキャンセルしました。');
+            $player->sendMessage('§bMiningTool §7>> §a購入をキャンセルしました');
         }
     }
 
     public function jsonSerialize() {
         return [
             'type' => 'modal',
-            'title' => 'DiamondMiningTools',
-            'content' => "{$this->price}円です。\n本当に購入しますか。",
+            'title' => 'NetheriteMiningTools',
+            'content' => "{$this->price}円です\n本当に購入しますか",
             'button1' => 'はい',
             'button2' => 'いいえ'
         ];
