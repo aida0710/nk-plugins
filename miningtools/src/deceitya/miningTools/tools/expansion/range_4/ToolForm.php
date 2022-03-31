@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningTools\expansion\debug;
+namespace deceitya\miningTools\tools\expansion\range_4;
 
 use deceitya\miningTools\Main;
 use pocketmine\data\bedrock\EnchantmentIdMap;
