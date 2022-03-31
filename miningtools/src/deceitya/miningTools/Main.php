@@ -50,6 +50,17 @@ class Main extends PluginBase implements Listener {
         $this->flag[$event->getPlayer()->getName()] = false;
     }
 
+    /*public function onClick(PlayerInteractEvent $event){
+        if ($event->getPlayer()->isSneaking()){
+            $player = $event->getPlayer();
+            $item = $player->getInventory()->getItemInHand();
+            $nbt = $item->getNamedTag();
+            $nbt->setInt('4mining', 1);
+            $item->setNamedTag($nbt);
+            $player->getInventory()->setItemInHand($item);
+            var_dump("ふよした！！！！！！！！！！！！！");
+        }
+    }*/
     /**
      * @ignoreCancelled
      * @priority LOW
