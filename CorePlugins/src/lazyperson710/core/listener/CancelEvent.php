@@ -26,8 +26,55 @@ use pocketmine\Server;
 class CancelEvent implements Listener {
 
     public function onInteract(PlayerInteractEvent $event) {
-        $level_name = $event->getPlayer()->getWorld()->getDisplayName();
-        $faming = mb_substr($level_name, -2, 2, 'utf-8');
+        switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
+            case BlockLegacyIds::INFO_UPDATE;
+            case BlockLegacyIds::INFO_UPDATE2;
+            case BlockLegacyIds::RESERVED6;
+            case BlockLegacyIds::ICE:
+                //BanItems
+            case ItemIds::BUCKET:
+            case ItemIds::BANNER:
+            case ItemIds::BANNER_PATTERN:
+            case ItemIds::STANDING_BANNER:
+            case ItemIds::WALL_BANNER:
+            case ItemIds::FIRE_CHARGE:
+            case ItemIds::FIRE:
+            case ItemIds::FIREBALL:
+            case ItemIds::LAVA:
+            case ItemIds::FLOWING_LAVA:
+            case ItemIds::STILL_LAVA:
+            case ItemIds::MINECART:
+            case ItemIds::MINECART_WITH_CHEST:
+            case ItemIds::MINECART_WITH_COMMAND_BLOCK:
+            case ItemIds::MINECART_WITH_HOPPER:
+            case ItemIds::MINECART_WITH_TNT:
+            case ItemIds::ENCHANTED_BOOK:
+            case ItemIds::ENDER_CHEST:
+            case ItemIds::ENDER_EYE:
+            case ItemIds::ENDER_PEARL:
+            case ItemIds::LEAD:
+            case ItemIds::ARMOR_STAND:
+            case ItemIds::CHORUS_FLOWER:
+            case ItemIds::CHORUS_FRUIT:
+            case ItemIds::CHORUS_FRUIT_POPPED:
+            case ItemIds::CHORUS_PLANT:
+            case ItemIds::BOAT:
+            case ItemIds::FIREWORKS:
+            case ItemIds::FIREWORKS_CHARGE:
+            case ItemIds::CARROT_ON_A_STICK:
+            case ItemIds::LINGERING_POTION:
+            case ItemIds::SPLASH_POTION:
+            case ItemIds::POTION:
+            case ItemIds::PAINTING:
+            case ItemIds::FLINT_AND_STEEL:
+                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    $event->cancel();
+                }
+                $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
+                break;
+        }
+        $world_name = $event->getPlayer()->getWorld()->getDisplayName();
+        $faming = mb_substr($world_name, -2, 2, 'utf-8');
         if ($faming !== "-f") {
             switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
                 //クワ
@@ -46,75 +93,28 @@ class CancelEvent implements Listener {
                 case ItemIds::POTATO:
                 case ItemIds::SUGARCANE:
                 case ItemIds::SUGARCANE_BLOCK:
+                case ItemIds::BAMBOO:
+                case ItemIds::BAMBOO_SAPLING:
                     if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                         $event->cancel();
                     }
                     $event->getPlayer()->sendTip("§bFarming §7>> §c農業ワールドでのみ使用可能です");
                     break;
             }
-            $world = mb_substr($level_name, -2, 2, 'utf-8');
-            if ($world === "-f" || $world === "-c") {
-                return;
-            } else {
-                switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
-                    //水関係
-                    case BlockLegacyIds::WATER:
-                    case BlockLegacyIds::WATER_LILY:
-                    case BlockLegacyIds::WATERLILY:
-                    case BlockLegacyIds::FLOWING_WATER:
-                    case BlockLegacyIds::STILL_WATER:
-                        if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
-                            $event->cancel();
-                        }
-                        $event->getPlayer()->sendTip("§bWater §7>> §c水は生活ワールドと農業ワールドでのみ使用可能です");
-                        break;
-                }
-            }
+        }
+        if ($faming === "-f" || $faming === "-c") {
+        } else {
             switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
-                case BlockLegacyIds::INFO_UPDATE;
-                case BlockLegacyIds::INFO_UPDATE2;
-                case BlockLegacyIds::RESERVED6;
-                case BlockLegacyIds::ICE:
-                    //BanItems
-                case ItemIds::BUCKET:
-                case ItemIds::BANNER:
-                case ItemIds::BANNER_PATTERN:
-                case ItemIds::STANDING_BANNER:
-                case ItemIds::WALL_BANNER:
-                case ItemIds::FIRE_CHARGE:
-                case ItemIds::FIRE:
-                case ItemIds::FIREBALL:
-                case ItemIds::LAVA:
-                case ItemIds::FLOWING_LAVA:
-                case ItemIds::STILL_LAVA:
-                case ItemIds::MINECART:
-                case ItemIds::MINECART_WITH_CHEST:
-                case ItemIds::MINECART_WITH_COMMAND_BLOCK:
-                case ItemIds::MINECART_WITH_HOPPER:
-                case ItemIds::MINECART_WITH_TNT:
-                case ItemIds::ENCHANTED_BOOK:
-                case ItemIds::ENDER_CHEST:
-                case ItemIds::ENDER_EYE:
-                case ItemIds::ENDER_PEARL:
-                case ItemIds::LEAD:
-                case ItemIds::ARMOR_STAND:
-                case ItemIds::CHORUS_FLOWER:
-                case ItemIds::CHORUS_FRUIT:
-                case ItemIds::CHORUS_FRUIT_POPPED:
-                case ItemIds::CHORUS_PLANT:
-                case ItemIds::BOAT:
-                case ItemIds::FIREWORKS:
-                case ItemIds::FIREWORKS_CHARGE:
-                case ItemIds::CARROT_ON_A_STICK:
-                case ItemIds::LINGERING_POTION:
-                case ItemIds::SPLASH_POTION:
-                case ItemIds::POTION:
-                case ItemIds::PAINTING:
-                case ItemIds::FLINT_AND_STEEL:
+                //水関係
+                case BlockLegacyIds::WATER:
+                case BlockLegacyIds::WATER_LILY:
+                case BlockLegacyIds::WATERLILY:
+                case BlockLegacyIds::FLOWING_WATER:
+                case BlockLegacyIds::STILL_WATER:
                     if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                         $event->cancel();
                     }
-                    $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
+                    $event->getPlayer()->sendTip("§bWater §7>> §c水は生活ワールドと農業ワールドでのみ使用可能です");
                     break;
             }
         }
