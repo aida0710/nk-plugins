@@ -36,7 +36,6 @@ class CmdListener implements Listener {
                 $sender->sendForm($form);
             }
         }
-
         if ($event->getCommand() === "s" || $event->getCommand() === "e") {
             if ($worldSuffix === "-f" || $worldSuffix === "-c") {
                 /*nnn...*/
