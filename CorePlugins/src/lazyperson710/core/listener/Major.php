@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 
@@ -14,6 +15,7 @@ class Major implements Listener {
         if ($player->getInventory()->getItemInHand()->getId() == 318) {
             $name = $player->getName();
             if ($player->getInventory()->getItemInHand()->getName() === "Major") {
+                $event->cancel();
                 if (!$player->isSneaking()) {
                     $block = $event->getblock();
                     if (isset($this->data[$name])) {
@@ -27,6 +29,15 @@ class Major implements Listener {
                     unset($this->data[$name]);
                     $player->sendMessage("§bMajor §7>> §a記録した座標のデータを削除しました");
                 }
+            }
+        }
+    }
+
+    public function onBreak(BlockBreakEvent $event) {
+        $player = $event->getPlayer();
+        if ($player->getInventory()->getItemInHand()->getId() == 318) {
+            if ($player->getInventory()->getItemInHand()->getName() === "Major") {
+                $event->cancel();
             }
         }
     }
