@@ -21,13 +21,12 @@ class BookCommand extends Command {
         $player = $sender;
         $item = $player->getInventory()->getItemInHand();
         $ids = $item->getID();
-        $id = "387";
-        if ($id !== $ids) {
-            $sender->sendMessage("§bBook §7>> §c手に持っているアイテムは本ではありません");
+        if (387 !== $ids) {
+            $sender->sendMessage("§bBook §7>> §c手に持っているアイテムは署名済みの本ではありません");
             return;
         }
         $cname = $item->getTitle();
-        if ($item->getNamedTag()->getTag('duplicate ') !== null) {
+        if ($item->getNamedTag()->getTag('duplicate') !== null) {
             $sender->sendMessage("§bBook §7>> §c複製された本を更に複製することはできません");
             return;
         } else {
