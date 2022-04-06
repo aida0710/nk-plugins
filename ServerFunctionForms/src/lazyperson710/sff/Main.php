@@ -6,6 +6,7 @@ use lazyperson710\sff\command\BonusCommand;
 use lazyperson710\sff\command\EnchantCommand;
 use lazyperson710\sff\command\LockCommand;
 use lazyperson710\sff\command\MiningToolsCommand;
+use lazyperson710\sff\command\PlayerCommand;
 use lazyperson710\sff\command\RecipeCommand;
 use lazyperson710\sff\command\ShopCommand;
 use lazyperson710\sff\command\TosCommand;
@@ -40,6 +41,7 @@ class Main extends PluginBase {
             //new ClearInvCommand(),
             new MiningToolsCommand(),
             new ShopCommand(),
+            new PlayerCommand(),
         ]);
     }
 
