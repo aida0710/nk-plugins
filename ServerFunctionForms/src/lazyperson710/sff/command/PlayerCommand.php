@@ -18,6 +18,6 @@ class PlayerCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new PlayerInfoForm());
+        $sender->sendForm(new PlayerInfoForm($sender));
     }
 }
