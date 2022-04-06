@@ -25,6 +25,10 @@ class DeleteCommand extends Command {
             $sender->sendMessage('§bDeleteEnchant §7>> §cこのアイテムはエンチャントを削除できません');
             return true;
         }
+        if ($item->getNamedTag()->getInt('4mining', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
+            $sender->sendMessage('§bReduceEnchant §7>> §cこのアイテムはエンチャントを削減できません');
+            return true;
+        }
         /** @var ?ListTag $enchListTag */
         $enchListTag = $item->getNamedTag()->getListTag(Item::TAG_ENCH);
         if ($enchListTag === null || $enchListTag->count() === 0) {
