@@ -3,9 +3,7 @@
 namespace deceitya\delenchant;
 
 use onebone\economyapi\EconomyAPI;
-use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\form\Form;
-use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\player\Player;
 

@@ -2,7 +2,6 @@
 
 namespace deceitya\delenchant;
 
-
 use deceitya\delenchant\command\DeleteCommand;
 use deceitya\delenchant\command\ReductionCommand;
 use pocketmine\plugin\PluginBase;

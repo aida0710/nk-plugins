@@ -25,7 +25,7 @@ class ItemMode implements Mode {
         return [
             "所持金 - " . $this->EconomyAPI->myMoney($player),
             "ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
-            "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" .Server::getInstance()->getMaxPlayers(),
+            "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
             "  ",
             "アイテムID - {$item->getId()}:{$item->getMeta()}/{$item->getCount()}",
             "ItemName - {$item->getName()}",

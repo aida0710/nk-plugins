@@ -6,7 +6,6 @@ use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\inventory\AnvilInventory;
 use pocketmine\block\inventory\BrewingStandInventory;
 use pocketmine\block\inventory\EnchantInventory;
-use pocketmine\block\inventory\HopperInventory;
 use pocketmine\block\inventory\LoomInventory;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockFormEvent;
@@ -103,6 +102,7 @@ class CancelEvent implements Listener {
             }
         }
         if ($faming === "-f" || $faming === "-c") {
+            /*分からない。。。*/
         } else {
             switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
                 //水関係

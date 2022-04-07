@@ -27,7 +27,7 @@ class TimeMode implements Mode {
         return [
             "所持金 - " . $this->EconomyAPI->myMoney($player),
             "ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
-            "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" .Server::getInstance()->getMaxPlayers(),
+            "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
             "  ",
             "アイテムID - {$item->getId()}:{$item->getMeta()}/{$item->getCount()}",
             "現在日付 - {$date}",
