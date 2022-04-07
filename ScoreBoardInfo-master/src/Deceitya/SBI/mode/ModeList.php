@@ -12,10 +12,11 @@ class ModeList {
 
     public function __construct() {
         $this->registerAll(
-            new NoMode(),
             new NormalMode(),
             new SimpleMode(),
-            new ItemNameMode(),
+            new ItemMode(),
+            new TimeMode(),
+            new NoMode(),
         );
     }
 

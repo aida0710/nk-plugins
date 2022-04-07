@@ -9,7 +9,8 @@ interface Mode {
     public const NORMAL = 0;
     public const SIMPLE = 1;
     public const ITEM = 2;
-    public const NO = 3;
+    public const TIME = 3;
+    public const NO = 4;
 
     public function getId(): int;
 

@@ -7,7 +7,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 
-class NormalMode implements Mode {
+class TimeMode implements Mode {
 
     private ?Plugin $EconomyAPI;
     private ?Plugin $EntityRemover;
@@ -22,12 +22,16 @@ class NormalMode implements Mode {
 
     public function getLines(Player $player): ?array {
         $item = $player->getInventory()->getItemInHand();
+        $date = date("Y年m月d日");
+        $time = date("H時i分s秒");
         return [
             "所持金 - " . $this->EconomyAPI->myMoney($player),
             "ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
             "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" .Server::getInstance()->getMaxPlayers(),
             "  ",
             "アイテムID - {$item->getId()}:{$item->getMeta()}/{$item->getCount()}",
+            "現在日付 - {$date}",
+            "現在時刻 - {$time}",
             "応答速度 - {$player->getNetworkSession()->getPing()}ms",
             " ",
             "サーバー再起動 - " . (int)($this->ServerStopper->getCurrent() / 60) . "分" . ($this->ServerStopper->getCurrent() % 60) . "秒",
@@ -38,10 +42,10 @@ class NormalMode implements Mode {
     }
 
     public function getId(): int {
-        return self::NORMAL;
+        return self::TIME;
     }
 
     public function getName(): string {
-        return "ノーマル";
+        return "ノーマル+時間表記あり";
     }
 }

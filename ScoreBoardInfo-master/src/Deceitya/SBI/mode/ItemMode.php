@@ -3,22 +3,27 @@
 namespace Deceitya\SBI\mode;
 
 use pocketmine\player\Player;
+use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 
-class ItemNameMode implements Mode {
+class ItemMode implements Mode {
+
+    private ?Plugin $EconomyAPI;
+    private ?Plugin $EntityRemover;
+    private ?Plugin $ServerStopper;
 
     public function __construct() {
         $manager = Server::getInstance()->getPluginManager();
-        $this->eco = $manager->getPlugin('EconomyAPI');
-        $this->rem = $manager->getPlugin('EntityRemover');
-        $this->stp = $manager->getPlugin('ServerStopper');
+        $this->EconomyAPI = $manager->getPlugin('EconomyAPI');
+        $this->EntityRemover = $manager->getPlugin('EntityRemover');
+        $this->ServerStopper = $manager->getPlugin('ServerStopper');
     }
 
     public function getLines(Player $player): ?array {
         $item = $player->getInventory()->getItemInHand();
         return [
-            "所持金 - " . $this->eco->myMoney($player),
+            "所持金 - " . $this->EconomyAPI->myMoney($player),
             "ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
             "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" .Server::getInstance()->getMaxPlayers(),
             "  ",
@@ -28,8 +33,8 @@ class ItemNameMode implements Mode {
             "CustomName - {$item->getCustomName()}",
             "応答速度 - {$player->getNetworkSession()->getPing()}ms",
             " ",
-            "サーバー再起動 - " . (int)($this->stp->getCurrent() / 60) . "分" . ($this->stp->getCurrent() % 60) . "秒",
-            "エンティティ削除 - " . (int)($this->rem->getCurrent() / 60) . "分" . ($this->rem->getCurrent() % 60) . "秒",
+            "サーバー再起動 - " . (int)($this->ServerStopper->getCurrent() / 60) . "分" . ($this->ServerStopper->getCurrent() % 60) . "秒",
+            "エンティティ削除 - " . (int)($this->EntityRemover->getCurrent() / 60) . "分" . ($this->EntityRemover->getCurrent() % 60) . "秒",
             "",
             TextFormat::YELLOW . "nkserver.net",
         ];
@@ -40,6 +45,6 @@ class ItemNameMode implements Mode {
     }
 
     public function getName(): string {
-        return "アイテム名表記有り";
+        return "ノーマル+アイテム名表記有り";
     }
 }
