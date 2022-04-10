@@ -200,16 +200,16 @@ class Main extends PluginBase implements Listener {
                                                 $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                                 break 3;
                                             }
+                                            (new CountBlockEvent($player, $block))->call();
+                                            $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
                                         }
-                                        (new CountBlockEvent($player, $block))->call();
-                                        $block->getPosition()->getWorld()->setBlock($pos, VanillaBlocks::AIR());
                                     }
                                 }
                             }
                         }
+                        $this->flag[$name] = false;
+                        $this->DropItem($player, $event, $dropItems, $startBlock);
                     }
-                    $this->flag[$name] = false;
-                    $this->DropItem($player, $event, $dropItems, $startBlock);
                 }
             }
         }
