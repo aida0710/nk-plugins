@@ -41,7 +41,7 @@ class NetheriteToolForm implements Form {
         $item->setCustomName($set['name']);
         $item->setLore([$set['description']]);
         $nbt = $item->getNamedTag();
-        $nbt->setInt('MiningTools_3', 2);
+        $nbt->setInt('MiningTools_3', 1);
         $item->setNamedTag($nbt);
         foreach ($set['enchant'] as $enchant) {
             $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId($enchant[0]), $enchant[1]));
