@@ -20,11 +20,11 @@ class DiamondMiningToolCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($sender) >= 25) {
+        if (MiningLevelAPI::getInstance()->getLevel($sender) >= 15) {
             $sender->sendForm(new DiamondToolForm());
         } else {
-            $sender->sendMessage("§bMiningToolShop §7>> §cレベル25以上でないと開けません。");
-            Server::getInstance()->dispatchCommand($sender, "mt1");
+            $sender->sendMessage("§bMiningToolShop §7>> §cレベル15以上でないと開けません。");
+            Server::getInstance()->dispatchCommand($sender, "mt");
         }
     }
 
