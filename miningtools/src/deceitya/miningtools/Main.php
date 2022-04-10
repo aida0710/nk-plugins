@@ -217,11 +217,12 @@ class Main extends PluginBase implements Listener {
 
     /**
      * @param Block $block
+     * @param $set
      * @param Player $player
      * @param Event $event
      * @param Block $startBlock
      * @param Item[] $dropItems
-     * @return Item[]
+     * @return void
      */
     public function breakTree(Block $block, $set, Player $player, Event $event, Block $startBlock, array &$dropItems): void {
         $world = $player->getWorld();
