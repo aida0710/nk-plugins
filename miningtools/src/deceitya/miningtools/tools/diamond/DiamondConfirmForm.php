@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningTools\tools\diamond;
+namespace deceitya\miningtools\tools\diamond;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace nkserver\ranking\event\handler;
 
-use deceitya\miningTools\event\CountBlockEvent;
+use deceitya\miningtools\event\CountBlockEvent;
 use nkserver\ranking\object\PlayerDataPool;
 use pocketmine\event\Event;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningTools\event;
+namespace deceitya\miningtools\event;
 
 use pocketmine\block\Block;
 use pocketmine\event\block\BlockEvent;
@@ -8,7 +8,7 @@ use pocketmine\event\Cancellable;
 use pocketmine\event\CancellableTrait;
 use pocketmine\player\Player;
 
-class CountBlockEvent extends BlockEvent implements Cancellable{
+class CountBlockEvent extends BlockEvent implements Cancellable {
     use CancellableTrait;
 
     /** @var int[] intの配列 array(1, 1, 5, 6); */

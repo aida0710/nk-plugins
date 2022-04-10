@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningTools\tools\netherite;
+namespace deceitya\miningtools\tools\netherite;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
