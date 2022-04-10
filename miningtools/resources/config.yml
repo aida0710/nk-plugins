@@ -22,21 +22,65 @@ diamond_axe:
 netherite_shovel:
   name: "§aNetheriteMiningShovel"
   description: "このMiningToolは最上位ツールの為修繕が可能です"
-  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-java", "nether-1" ]
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
   lump-id: [ 12, 3, 2, 13, 80, 78, 88 ]
   nobreak-id: [ 0, 24, 8, 9, 16, 10, 11, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 174, 7, 49, 87, 213, 19, 17, 162, 52, 18, 79, 161, 81, 5, 139, 67, 20, 101, 96, 324, 107, 85, 203, 330, 113, 65, 44, 42, 133, 57, 22, 152, 410, 146, 46, 120, 138, 205, 218, 130, 116, 145, 335, 379, 61, 58, 47, 380, 389, 122, 172, 237, 236, 220, 201, 171, 35, 165, 170, 216, 215, 247, 246, 137, 188, 189, 397, 25, 84, 50, 63, 169, 89, 123, 99, 98, 100, 103 ]
   enchant: [ [ 16, 1 ], [ 17, 10 ] ]
 netherite_pickaxe:
   name: "§aNetheriteMiningPickaxe"
   description: "このMiningToolは最上位ツールの為修繕が可能です"
-  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-java", "nether-1" ]
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
   lump-id: [ 24, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 153, 89, 87 ]
   nobreak-id: [ 0, 8, 9, 10, 11, 12, 3, 2, 13, 80, 78, 174, 7, 49, 88, 213, 19, 17, 162, 52, 18, 79, 161, 81, 5, 139, 67, 20, 101, 96, 324, 107, 85, 203, 330, 113, 65, 44, 42, 133, 57, 22, 152, 410, 146, 46, 120, 138, 205, 218, 130, 116, 145, 335, 379, 61, 58, 47, 380, 389, 122, 172, 237, 236, 220, 201, 171, 35, 165, 170, 216, 215, 247, 246, 137, 188, 189, 397, 25, 84, 50, 63, 169, 123, 99, 100, 98, 103 ]
   enchant: [ [ 16, 1 ], [ 17, 10 ] ]
 netherite_axe:
   name: "§aNetheriteMiningAxe"
   description: "このMiningToolは最上位ツールの為修繕が可能です"
-  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-java", "nether-1" ]
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
   lump-id: [ 17, 162, 18, 161 ]
   nobreak-id: [ 0, 8, 9, 10, 11, 12, 3, 2, 13, 80, 78, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 12, 3, 2, 13, 80, 78, 174, 7, 49, 88, 87, 213, 19, 162, 52, 79, 161, 81, 5, 139, 67, 20, 101, 96, 324, 107, 85, 203, 330, 113, 65, 44, 42, 133, 57, 22, 152, 410, 146, 46, 120, 138, 205, 218, 130, 116, 145, 335, 379, 61, 58, 47, 380, 389, 122, 172, 237, 236, 220, 201, 171, 35, 165, 170, 216, 215, 247, 246, 137, 188, 189, 397, 25, 84, 50, 63, 169, 89, 123, 99, 100, 98, 103 ]
   enchant: [ [ 16, 1 ], [ 17, 10 ] ]
+##Expansion_Tools
+expansion_shovel:
+  name: ""
+  description: ""
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
+  lump-id: [ 12, 3, 2, 13, 80, 78, 88 ]
+  nobreak-id: [ 0, 8, 9, 10, 11, 12, 3, 2, 13, 80, 78, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 12, 3, 2, 13, 80, 78, 174, 7, 49, 88, 87, 213, 19, 162, 52, 79, 161, 81, 5, 139, 67, 20, 101, 96, 324, 107, 85, 203, 330, 113, 65, 44, 42, 133, 57, 22, 152, 410, 146, 46, 120, 138, 205, 218, 130, 116, 145, 335, 379, 61, 58, 47, 380, 389, 122, 172, 237, 236, 220, 201, 171, 35, 165, 170, 216, 215, 247, 246, 137, 188, 189, 397, 25, 84, 50, 63, 169, 89, 123, 99, 100, 98, 103 ]
+  enchant: []
+expansion_pickaxe:
+  name: ""
+  description: ""
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
+  lump-id: [ 24, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 153, 89, 87 ]
+  nobreak-id: [ 0, 8, 9, 10, 11, 12, 3, 2, 13, 80, 78, 174, 7, 49, 88, 213, 19, 17, 162, 52, 18, 79, 161, 81, 5, 139, 67, 20, 101, 96, 324, 107, 85, 203, 330, 113, 65, 44, 42, 133, 57, 22, 152, 410, 146, 46, 120, 138, 205, 218, 130, 116, 145, 335, 379, 61, 58, 47, 380, 389, 122, 172, 237, 236, 220, 201, 171, 35, 165, 170, 216, 215, 247, 246, 137, 188, 189, 397, 25, 84, 50, 63, 169, 123, 99, 100, 98, 103 ]
+  enchant: []
+expansion_axe:
+  name: ""
+  description: ""
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
+  lump-id: [ 17, 162, 18, 161 ]
+  nobreak-id: [ 0, 8, 9, 10, 11, 12, 3, 2, 13, 80, 78, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 12, 3, 2, 13, 80, 78, 174, 7, 49, 88, 87, 213, 19, 162, 52, 79, 161, 81, 5, 139, 67, 20, 101, 96, 324, 107, 85, 203, 330, 113, 65, 44, 42, 133, 57, 22, 152, 410, 146, 46, 120, 138, 205, 218, 130, 116, 145, 335, 379, 61, 58, 47, 380, 389, 122, 172, 237, 236, 220, 201, 171, 35, 165, 170, 216, 215, 247, 246, 137, 188, 189, 397, 25, 84, 50, 63, 169, 89, 123, 99, 100, 98, 103 ]
+  enchant: []
+##EX_Expansion_Tools
+ex_expansion_shovel:
+  name: ""
+  description: ""
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
+  lump-id: [ 12, 3, 2, 13, 80, 78, 88 ]
+  nobreak-id: []
+  enchant: []
+ex_expansion_pickaxe:
+  name: ""
+  description: ""
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
+  lump-id: [ 24, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 153, 89, 87 ]
+  nobreak-id: []
+  enchant: []
+ex_expansion_axe:
+  name: ""
+  description: ""
+  world: [ "MiningWorld", "debug", "resource", "nature-1", "nature-2", "nature-3", "nature-4", "nature-5", "nature-1-a", "nature-2-a", "nature-3-a", "nature-4-a", "nature-5-a", "nature-java", "nether-1", "nether-2", "nether-3" ]
+  lump-id: [ 17, 162, 18, 161 ]
+  nobreak-id: []
+  enchant: []
