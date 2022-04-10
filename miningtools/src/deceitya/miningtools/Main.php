@@ -250,9 +250,6 @@ class Main extends PluginBase implements Listener {
         if (is_null($dropItems)) {
             return;
         }
-        if ($player->getGamemode() === GameMode::CREATIVE()) {
-            return;
-        }
         $dropItems = array_diff($dropItems, array($startBlock));
         $dropItems = array_values($dropItems);
         $dropItems = $player->getInventory()->addItem(...$dropItems);
