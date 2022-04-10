@@ -10,8 +10,8 @@ use pocketmine\Server;
 
 class NetheriteConfirmForm implements Form {
 
-    private $item;
-    private $price;
+    private Item $item;
+    private int $price;
 
     public function __construct(Item $item, int $price) {
         $this->item = $item;
