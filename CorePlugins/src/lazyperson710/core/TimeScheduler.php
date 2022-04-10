@@ -11,6 +11,8 @@ use pocketmine\Server;
 class TimeScheduler extends Task {
 
     public function onRun(): void {
+        //$dtStr = date("H:i:s") . "." . substr(explode(".", (microtime(true) . ""))[1], 0, 3);
+        //var_dump("{$dtStr} - 1秒");
         $count = count(Server::getInstance()->getOnlinePlayers());
         $color = rand(1, 2);
         switch ($color) {
