@@ -9,6 +9,7 @@ use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\ListTag;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class ReductionCommand extends Command {
 
@@ -21,9 +22,11 @@ class ReductionCommand extends Command {
             return true;
         }
         $item = $sender->getInventory()->getItemInHand();
-        if ($item->getNamedTag()->getInt('MiningTools_3', -1) !== -1 || $item->getNamedTag()->getInt('4mining', -1) !== -1 || $item->getNamedTag()->getInt('MiningTools_Expansion', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
-            $sender->sendMessage('§bReduceEnchant §7>> §cこのアイテムはエンチャントを削減できません');
-            return true;
+        if (!Server::getInstance()->isOp($sender->getName())){
+            if ($item->getNamedTag()->getInt('MiningTools_3', -1) !== -1 || $item->getNamedTag()->getInt('4mining', -1) !== -1 || $item->getNamedTag()->getInt('MiningTools_Expansion', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
+                $sender->sendMessage('§bReduceEnchant §7>> §cこのアイテムはエンチャントを削減できません');
+                return true;
+            }
         }
         /** @var ?ListTag $enchListTag */
         $enchListTag = $item->getNamedTag()->getListTag(Item::TAG_ENCH);
