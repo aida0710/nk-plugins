@@ -232,9 +232,6 @@ class Main extends PluginBase implements Listener {
         $open = [World::blockHash($startPos->x, $startPos->y, $startPos->z) => $startPos];
         $close = [];
         $drops = [];
-        if ($haveDurable && $handItem->getDamage() >= $maxDurability - 3) {
-            return;
-        }
         //350(回)*6(方向) = 2100(ブロック(概算))
         for ($i = 1; $i <= 350; $i++) {
             if (count($open) === 0) {
