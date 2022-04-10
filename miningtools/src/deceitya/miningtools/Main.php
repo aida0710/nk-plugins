@@ -43,6 +43,7 @@ class Main extends PluginBase implements Listener {
         $this->getServer()->getCommandMap()->registerAll("MiningTools", [
             new DiamondMiningToolCommand(),
             new NetheriteMiningToolCommand(),
+            new ExpansionMiningToolCommand(),
         ]);
     }
 
