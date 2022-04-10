@@ -195,7 +195,9 @@ class Main extends PluginBase implements Listener {
                                         if ($haveDurable) {
                                             /** @var Durable $handItem */
                                             $handItem->applyDamage(1);
-                                            if ($handItem->getDamage() >= $maxDurability - 3) {
+                                            $player->getInventory()->setItemInHand($handItem);
+                                            if ($handItem->getDamage() >= $maxDurability - 15) {
+                                                $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                                 break 3;
                                             }
                                         }
@@ -251,10 +253,12 @@ class Main extends PluginBase implements Listener {
                     $close[$hash] = null;
                     continue;
                 }
-                if ($haveDurable && ($targetblock->getId() === $set['lump-id'])) {
+                if ($haveDurable) {
                     /** @var Durable $handItem */
                     $handItem->applyDamage(1);
-                    if ($handItem->getDamage() >= $maxDurability - 3) {
+                    $player->getInventory()->setItemInHand($handItem);
+                    if ($handItem->getDamage() >= $maxDurability - 15) {
+                        $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                         break 2;
                     }
                 }
@@ -263,9 +267,6 @@ class Main extends PluginBase implements Listener {
                 $world->setBlock($pos, VanillaBlocks::AIR());
                 $open[$hash] = $pos;
             }
-        }
-        if ($haveDurable) {
-            $player->getInventory()->setItemInHand($handItem);
         }
         $dropItems = array_merge($dropItems, array_merge(...$drops));
     }
