@@ -70,6 +70,7 @@ class Main extends PluginBase implements Listener {
             $nbt->setInt('MiningTools_3', 1);
             $item->setNamedTag($nbt);
             $player->getInventory()->setItemInHand($item);
+            $player->sendMessage("§bMiningTool §7>> §a所持しているマイニングツールの変換に成功しました");
         }
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
             $player = $event->getPlayer();
