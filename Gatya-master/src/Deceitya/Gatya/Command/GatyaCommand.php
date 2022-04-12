@@ -34,10 +34,16 @@ class GatyaCommand extends Command {
             $count = array_shift($args) ?? 1;
             $api = EconomyAPI::getInstance();
             for ($i = 0; $i < $count; $i++) {
-                $ticket = ItemFactory::getInstance()->get(339, 5, $series->getCost());
+                $ticket = ItemFactory::getInstance()->get(2, 0, $series->getCost());
+                $eventTicket = ItemFactory::getInstance()->get(1, 0, $series->getCost());
                 if ($series->isTicket()) {
                     if (!$sender->getInventory()->contains($ticket)) {
                         $sender->sendMessage(MessageContainer::get('command.gatya.no_ticket'));
+                        return;
+                    }
+                } elseif ($series->isEventTicket()) {
+                    if (!$sender->getInventory()->contains($eventTicket)) {
+                        $sender->sendMessage(MessageContainer::get('command.gatya.no_eventTicket'));
                         return;
                     }
                 } else {
@@ -51,6 +57,8 @@ class GatyaCommand extends Command {
                     $sender->sendMessage(MessageContainer::get('command.gatya.result', $item->getCustomName() ?: $item->getName()));
                     if ($series->isTicket()) {
                         $sender->getInventory()->removeItem($ticket);
+                    } elseif ($series->isEventTicket()) {
+                        $sender->getInventory()->removeItem($eventTicket);
                     } else {
                         $api->reduceMoney($sender, $series->getCost());
                     }

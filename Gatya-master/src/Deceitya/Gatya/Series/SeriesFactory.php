@@ -31,9 +31,15 @@ class SeriesFactory {
                         )
                     );
                 }
+                if ($data['nbt'] !== null) {
+                    foreach ($data['nbt'] as $setNbt) {
+                        $nbt = $item->getNamedTag();
+                        $nbt->setInt($setNbt, 1);
+                    }
+                }
                 $items[] = [$data['chance'], $item];
             }
-            self::registerSeries(new Series($series['id'], $series['name'], $series['cost'], $items, $series['ticket']));
+            self::registerSeries(new Series($series['id'], $series['name'], $series['cost'], $items, $series['ticket'], $series['eventTicket']));
         }
     }
 

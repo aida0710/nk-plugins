@@ -2,8 +2,9 @@
     {
         "id": 1,
         "name": "チケットがちゃ",
-        "ticket": true,
-        "cost": 2,
+        "ticket": false,
+        "eventTicket": false,
+        "cost": 300,
         "items": [
             {
                 "id": 1,
@@ -12,15 +13,10 @@
                 "name": "はずれのいし",
                 "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
                 "enchants": [],
-                "chance": 60
-            },
-            {
-                "id": 0,
-                "meta": 0,
-                "count": 1,
-                "name": "何も無い",
-                "description": null,
-                "chance": 0.1
+                "nbt": [
+                    "MiningTools_3"
+                ],
+                "chance": 10
             },
             {
                 "id": 278,
@@ -38,15 +34,19 @@
                         "level": 5
                     }
                 ],
-                "chance": 0.1
+                "nbt": [
+                    "MiningTools_3"
+                ],
+                "chance": 90
             }
         ]
     },
     {
         "id": 2,
-        "name": "ストーンカッター100％",
+        "name": "ちけっと",
         "ticket": true,
-        "cost": 2,
+        "eventTicket": false,
+        "cost": 1,
         "items": [
             {
                 "id": 245,
@@ -55,6 +55,30 @@
                 "name": null,
                 "description": null,
                 "enchants": [],
+                "nbt": [
+                    "MiningTools_3"
+                ],
+                "chance": 100
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "eventチケット",
+        "ticket": false,
+        "eventTicket": true,
+        "cost": 1,
+        "items": [
+            {
+                "id": 245,
+                "meta": 0,
+                "count": 1,
+                "name": null,
+                "description": null,
+                "enchants": [],
+                "nbt": [
+                    "MiningTools_3"
+                ],
                 "chance": 100
             }
         ]

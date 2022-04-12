@@ -12,6 +12,7 @@ class Series {
     /** @var array[float,Item] */
     private array $items;
     private bool $ticket;
+    private bool $eventTicket;
 
     /**
      * @param integer $id
@@ -20,12 +21,13 @@ class Series {
      * @param array[float,Item] $items
      * @param bool $ticket
      */
-    public function __construct(int $id, string $name, int $cost, array $items, bool $ticket) {
+    public function __construct(int $id, string $name, int $cost, array $items, bool $ticket, bool $eventTicket) {
         $this->id = $id;
         $this->name = $name;
         $this->cost = $cost;
         $this->items = $items;
         $this->ticket = $ticket;
+        $this->eventTicket = $eventTicket;
     }
 
     public function getId(): int {
@@ -42,6 +44,10 @@ class Series {
 
     public function isTicket(): bool {
         return $this->ticket;
+    }
+
+    public function isEventTicket(): bool {
+        return $this->eventTicket;
     }
 
     public function getChanceSum(): float {
