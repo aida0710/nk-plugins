@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningtools\tools\netherite\expansion;
+namespace deceitya\miningtools\tools\upgrade\expansion;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
@@ -46,17 +46,11 @@ class ExpansionConfirmForm extends SimpleForm {
                         $price = 6000000;
                         $radius = 2;
                         $this->onReduceMoney($player, $price);
-                        var_dump("Secondary");
-                        $item->setCustomName("");
-                        $player->getInventory()->setItemInHand($item);
                         break;
                     case 2:
                         $price = 15000000;
                         $radius = 3;
                         $this->onReduceMoney($player, $price);
-                        var_dump("Tertiary");
-
-                        $player->getInventory()->setItemInHand($item);
                         break;
                     default:
                         $player->sendMessage("§bMiningTool §7>> §cエラーが発生しました。\nツールを交換してください");
@@ -92,7 +86,7 @@ class ExpansionConfirmForm extends SimpleForm {
         }
     }
 
-    public function onReduceMoney(Player $player, $price){
+    public function onReduceMoney(Player $player, $price) {
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
             $player->sendMessage('§bMiningTool §7>> §cお金が足りません');
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningtools\tools\netherite\expansion;
+namespace deceitya\miningtools\tools\upgrade\expansion;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
@@ -30,8 +30,8 @@ class ExpansionToolForm extends SimpleForm {
             ->setText($upgrade)
             ->addElements(new Button("アップデートする", null));
     }
+
     public function handleSubmit(Player $player): void {
         $player->sendForm(new ExpansionConfirmForm($player));
-
     }
 }
