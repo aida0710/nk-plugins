@@ -59,6 +59,7 @@ class Main extends PluginBase implements Listener {
         if ($event->isCancelled()) {
             return;
         }
+
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
@@ -133,7 +134,7 @@ class Main extends PluginBase implements Listener {
                     }
                 }
                 if (!isset($set)) {
-                    $player->sendMessage("例外が発生しました。code:main.149");
+                    $player->sendMessage("例外が発生しました。code:main.131");
                     return;
                 }
                 $world_name = $event->getPlayer()->getWorld()->getDisplayName();
