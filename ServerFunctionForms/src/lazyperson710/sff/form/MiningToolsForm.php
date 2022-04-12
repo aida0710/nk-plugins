@@ -34,8 +34,8 @@ class MiningToolsForm extends SimpleForm {
                 new CommandDispatchButton("Netherite Tools - 範囲採掘ツール\n{$level30}", "mt2", null),
                 new CommandDispatchButton("アップグレード - Ex範囲採掘ツール\n{$level120}", "mt3", null),
             );
-        if (Server::getInstance()->isOp($player->getName())) {
+        /*if (Server::getInstance()->isOp($player->getName())) {
             $this->addElement(new CommandDispatchButton("Debug_Tools", "mt4", null));
-        }
+        }*/
     }
 }
