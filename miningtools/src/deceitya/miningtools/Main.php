@@ -59,7 +59,6 @@ class Main extends PluginBase implements Listener {
         if ($event->isCancelled()) {
             return;
         }
-
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $id = $item->getId();
@@ -73,146 +72,151 @@ class Main extends PluginBase implements Listener {
             $player->getInventory()->setItemInHand($item);
             $player->sendMessage("§bMiningTool §7>> §a所持しているマイニングツールの変換に成功しました");
         }
-        if ($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
-            $player = $event->getPlayer();
-            $name = $player->getName();
-            $block = $event->getBlock();
-            if (!$this->flag[$name]) {
-                if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
-                    switch ($id) {
-                        case ItemIds::DIAMOND_SHOVEL:
-                            $set = $this->config['diamond_shovel'];
-                            break;
-                        case ItemIds::DIAMOND_PICKAXE:
-                            $set = $this->config['diamond_pickaxe'];
-                            break;
-                        case ItemIds::DIAMOND_AXE:
-                            $set = $this->config['diamond_axe'];
-                            break;
-                        case 744:
-                            $set = $this->config['netherite_shovel'];
-                            break;
-                        case 745:
-                            $set = $this->config['netherite_pickaxe'];
-                            break;
-                        case 746:
-                            $set = $this->config['netherite_axe'];
-                            break;
-                    }
+        if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion') !== null)) return;
+        $player = $event->getPlayer();
+        $name = $player->getName();
+        $block = $event->getBlock();
+        if (!$this->flag[$name]) {
+            if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+                switch ($id) {
+                    case ItemIds::DIAMOND_SHOVEL:
+                        $set = $this->config['diamond_shovel'];
+                        break;
+                    case ItemIds::DIAMOND_PICKAXE:
+                        $set = $this->config['diamond_pickaxe'];
+                        break;
+                    case ItemIds::DIAMOND_AXE:
+                        $set = $this->config['diamond_axe'];
+                        break;
+                    case 744:
+                        $set = $this->config['netherite_shovel'];
+                        break;
+                    case 745:
+                        $set = $this->config['netherite_pickaxe'];
+                        break;
+                    case 746:
+                        $set = $this->config['netherite_axe'];
+                        break;
                 }
-                if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
-                    switch ($item->getNamedTag()->getInt("MiningTools_Expansion")) {
-                        case 1://
-                            switch ($id) {
-                                case 744:
-                                    $set = $this->config['expansion_shovel'];
-                                    break 2;
-                                case 745:
-                                    $set = $this->config['expansion_pickaxe'];
-                                    break 2;
-                                case 746:
-                                    $set = $this->config['expansion_axe'];
-                                    break 2;
-                            }
-                            break;
-                        case 2:
-                        case 3:
-                            switch ($id) {
-                                case 744:
-                                    $set = $this->config['ex_expansion_shovel'];
-                                    break 2;
-                                case 745:
-                                    $set = $this->config['ex_expansion_pickaxe'];
-                                    break 2;
-                                case 746:
-                                    $set = $this->config['ex_expansion_axe'];
-                                    break 2;
-                            }
-                            break;
-                        default:
-                            return;
-                    }
-                }
-                if (!isset($set)) {
-                    $player->sendMessage("例外が発生しました。code:main.131");
-                    return;
-                }
-                $world_name = $event->getPlayer()->getWorld()->getDisplayName();
-                $world_search = mb_substr($world_name, 0, null, 'utf-8');
-                $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
-                $dropItems = null;
-                $blockIds = [];
-                if (str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($name)) {
-                    $handItem = $player->getInventory()->getItemInHand();
-                    $haveDurable = $handItem instanceof Durable;
-                    $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
-                    if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-                        $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-                        return;
-                    }
-                    if ($item->getId() === 279 || $item->getId() === 746) {
-                        $dropItems = [];
-                        $this->breakTree($startBlock, $set, $player, $event, $startBlock, $dropItems);
-                        $this->DropItem($player, $event, $dropItems, $startBlock);
-                        return;
-                    }
-                    if (in_array($block->getId(), $set['lump-id'], true)) {
-                        $name = $player->getName();
-                        $radius = 0;
-                        if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
-                            $nbt = $item->getNamedTag();
-                            $radius = $nbt->getInt("MiningTools_Expansion");
+            }
+            if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
+                switch ($item->getNamedTag()->getInt("MiningTools_Expansion")) {
+                    case 1:
+                        switch ($id) {
+                            case 744:
+                                $set = $this->config['expansion_shovel'];
+                                break 2;
+                            case 745:
+                                $set = $this->config['expansion_pickaxe'];
+                                break 2;
+                            case 746:
+                                $set = $this->config['expansion_axe'];
+                                break 2;
                         }
-                        $this->flag[$name] = true;
-                        for ($y = -1 - $radius; $y < 2 + $radius; $y++) {
-                            for ($x = -1 - $radius; $x < 2 + $radius; $x++) {
-                                for ($z = -1 - $radius; $z < 2 + $radius; $z++) {
-                                    $pos = $block->getPosition()->add($x, $y, $z);
-                                    $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
-                                    if ($targetBlock->getPosition()->getFloorY() <= 0) {
-                                        continue;
-                                    }
-                                    if (!$player->isSneaking()) {
-                                        if (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
-                                            $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
-                                            $blockIds[] = $targetBlock->getId();
-                                            if ($haveDurable) {
-                                                /** @var Durable $handItem */
-                                                $handItem->applyDamage(1);
-                                                $player->getInventory()->setItemInHand($handItem);
-                                                if ($handItem->getDamage() >= $maxDurability - 15) {
-                                                    $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-                                                    break 3;
-                                                }
-                                            }
-                                            (new CountBlockEvent($player, $block))->call();
-                                            $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
-                                        }
-                                    } elseif ($pos->getFloorY() <= $player_y - 1) {
-                                        continue;
-                                    } elseif (!in_array($targetBlock->getId(), $set['nobreak-id'], true)) {
-                                        $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
-                                        $blockIds[] = $targetBlock->getId();
-                                        if ($haveDurable) {
-                                            /** @var Durable $handItem */
-                                            $handItem->applyDamage(1);
-                                            $player->getInventory()->setItemInHand($handItem);
-                                            if ($handItem->getDamage() >= $maxDurability - 15) {
-                                                $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-                                                break 3;
-                                            }
-                                            (new CountBlockEvent($player, $block))->call();
-                                            $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
-                                        }
-                                    }
+                        break;
+                    case 2:
+                    case 3:
+                        switch ($id) {
+                            case 744:
+                                $set = $this->config['ex_expansion_shovel'];
+                                break 2;
+                            case 745:
+                                $set = $this->config['ex_expansion_pickaxe'];
+                                break 2;
+                            case 746:
+                                $set = $this->config['ex_expansion_axe'];
+                                break 2;
+                        }
+                        break;
+                    default:
+                        return;
+                }
+            }
+
+            if (!isset($set)) {
+                $player->sendMessage("例外が発生しました。code:main.131");
+                return;
+            }
+            $world_name = $event->getPlayer()->getWorld()->getDisplayName();
+            $world_search = mb_substr($world_name, 0, null, 'utf-8');
+            $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
+            $dropItems = null;
+            $blockIds = [];
+            if (!(str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($name))) return;
+            $handItem = $player->getInventory()->getItemInHand();
+            $haveDurable = $handItem instanceof Durable;
+            $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+            if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
+                $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
+                return;
+            }
+            if ($item->getId() === 279 || $item->getId() === 746) {
+                $dropItems = [];
+                $this->breakTree($startBlock, $set, $player, $event, $startBlock, $dropItems);
+                $this->DropItem($player, $event, $dropItems, $startBlock);
+                return;
+            }
+            if (!in_array($block->getId(), $set['lump-id'], true)) return;
+            $name = $player->getName();
+            $radius = 0;
+            if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
+                $nbt = $item->getNamedTag();
+                $radius = $nbt->getInt("MiningTools_Expansion");
+            }
+            $this->flag[$name] = true;
+            for ($y = -1 - $radius; $y < 2 + $radius; $y++) {
+                for ($x = -1 - $radius; $x < 2 + $radius; $x++) {
+                    for ($z = -1 - $radius; $z < 2 + $radius; $z++) {
+                        $pos = $block->getPosition()->add($x, $y, $z);
+                        $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
+                        if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
+                        if (in_array($targetBlock->getId(), $set['nobreak-id'], true)) continue;
+                        switch ($targetBlock->getId()){
+                            case ItemIds::AIR:
+                            case ItemIds::BEDROCK:
+                            case ItemIds::BARRIER:
+                            case ItemIds::WATER:
+                            case ItemIds::FLOWING_WATER:
+                            case ItemIds::WATER_LILY:
+                            case ItemIds::MAGMA:
+                                break;
+                        }
+                        if (!$player->isSneaking()) {
+                            $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
+                            $blockIds[] = $targetBlock->getId();
+                            if ($haveDurable) {
+                                /** @var Durable $handItem */
+                                $handItem->applyDamage(1);
+                                $player->getInventory()->setItemInHand($handItem);
+                                if ($handItem->getDamage() >= $maxDurability - 15) {
+                                    $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
+                                    break 3;
                                 }
                             }
+                            (new CountBlockEvent($player, $block))->call();
+                            $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
+                        } elseif ($pos->getFloorY() <= $player_y - 1) {
+                            continue;
+                        } else {
+                            $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
+                            $blockIds[] = $targetBlock->getId();
+                            if ($haveDurable) {
+                                /** @var Durable $handItem */
+                                $handItem->applyDamage(1);
+                                $player->getInventory()->setItemInHand($handItem);
+                                if ($handItem->getDamage() >= $maxDurability - 15) {
+                                    $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
+                                    break 3;
+                                }
+                                (new CountBlockEvent($player, $block))->call();
+                                $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
+                            }
                         }
-                        $this->flag[$name] = false;
-                        $this->DropItem($player, $event, $dropItems, $startBlock);
                     }
                 }
             }
+            $this->flag[$name] = false;
+            $this->DropItem($player, $event, $dropItems, $startBlock);
         }
     }
 
