@@ -9,8 +9,6 @@ use pocketmine\scheduler\Task;
 
 class main extends PluginBase implements Listener {
 
-    const addxp = 0;
-
     public function onEnable(): void {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
