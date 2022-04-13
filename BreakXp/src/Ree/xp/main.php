@@ -15,8 +15,8 @@ class main extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
-    public function onBreak(BlockBreakEvent $ev) {
-        $this->getScheduler()->scheduleDelayedTask(new CheckTask($ev, $ev->getXpDropAmount()), 3);
+    public function onBreak(BlockBreakEvent $event) {
+        $this->getScheduler()->scheduleDelayedTask(new CheckTask($event, $event->getXpDropAmount()), 3);
     }
 }
 
@@ -25,21 +25,19 @@ class CheckTask extends Task {
     /**
      * @var BlockBreakEvent
      */
-    private $ev;
+    private $event;
+    private $experience;
 
-    public function __construct($ev, $xp) {
-        $this->ev = $ev;
-        $this->xp = $xp;
+    public function __construct($event, $experience) {
+        $this->event = $event;
+        $this->experience = $experience;
     }
 
     public function onRun(): void {
-        if (!$this->ev->isCancelled()) {
-            switch ($this->ev->getBlock()->getId()) {
-                case 52:
-                    $setxp = 5000;
-                    $this->ev->getPlayer()->getXpManager()->addXp($setxp);
-                    break;
-            }
+        if ($this->event->isCancelled()) return;
+        if ($this->event->getBlock()->getId() == 52) {
+            $setxp = 5000;
+            $this->event->getPlayer()->getXpManager()->addXp($setxp);
         }
     }
 }
