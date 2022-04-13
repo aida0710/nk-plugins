@@ -9,6 +9,7 @@ use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class DiamondToolForm implements Form {
 
@@ -33,6 +34,7 @@ class DiamondToolForm implements Form {
                 $set = $config['diamond_axe'];
                 break;
             default:
+                Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
         }
         $item->setCustomName($set['name']);

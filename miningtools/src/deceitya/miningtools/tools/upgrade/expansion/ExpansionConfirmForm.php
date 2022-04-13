@@ -18,7 +18,7 @@ class ExpansionConfirmForm extends SimpleForm {
                 1 => "上位ツールにアップグレードしますか？\n\n費用は600万円\n範囲は7x7になります",
                 2 => "最上位ツールにアップグレードしますか？\n\n費用は1500万円\n範囲は9x9になります",
                 3 => "最上位ツールの為アップグレードできません",
-                default => "エラーが発生しました。\nツールを交換してください",
+                default => Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました"),
             };
         } elseif ($namedTag->getTag('MiningTools_3') !== null) { //MiningTools_3があるかどうか
             $upgrade = "上位ツールにアップグレードしますか？\n\n費用は350万円\n範囲は5x5になります";
@@ -53,7 +53,7 @@ class ExpansionConfirmForm extends SimpleForm {
                         $this->onReduceMoney($player, $price);
                         break;
                     default:
-                        $player->sendMessage("§bMiningTool §7>> §cエラーが発生しました。\nツールを交換してください");
+                        Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                         return;
                 }
                 $tag = "MiningTools_Expansion";
@@ -63,7 +63,7 @@ class ExpansionConfirmForm extends SimpleForm {
                 $itemName = match ($namedTag->getInt("MiningTools_Expansion")) {
                     1 => "§aNetheriteMiningPickaxe Ex.Secondary",
                     2 => "§aNetheriteMiningPickaxe Ex.Tertiary",
-                    default => "Error ,ExpansionConfirmForm/72"
+                    default => Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました"),
                 };
                 $item->setCustomName($itemName);
                 $player->getInventory()->setItemInHand($item);

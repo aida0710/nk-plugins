@@ -97,6 +97,9 @@ class Main extends PluginBase implements Listener {
                     case 746:
                         $set = $this->config['netherite_axe'];
                         break;
+                    default:
+                        Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                        return;
                 }
             }
             if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
@@ -129,12 +132,13 @@ class Main extends PluginBase implements Listener {
                         }
                         break;
                     default:
+                        Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                         return;
                 }
             }
 
             if (!isset($set)) {
-                $player->sendMessage("例外が発生しました。code:main.131");
+                Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
             }
             $world_name = $event->getPlayer()->getWorld()->getDisplayName();
