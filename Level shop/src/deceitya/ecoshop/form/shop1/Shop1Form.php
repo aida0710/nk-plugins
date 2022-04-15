@@ -21,7 +21,7 @@ class Shop1Form implements Form {
             '通貨アイテム'
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop1\\" . $forms[$data];
-        $player->sendForm(new $class());
+        $player->sendForm(new $class($player));
     }
 
     public function jsonSerialize() {

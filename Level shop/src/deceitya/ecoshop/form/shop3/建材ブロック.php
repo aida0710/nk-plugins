@@ -2,6 +2,7 @@
 
 namespace deceitya\ecoshop\form\shop3;
 
+use deceitya\ecoshop\database\LevelShopAPI;
 use deceitya\ecoshop\form\SellBuyForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -38,6 +39,7 @@ class 建材ブロック implements Form {
     }
 
     public function jsonSerialize() {
+        $shop = LevelShopAPI::getInstance();
         return [
             'type' => 'form',
             'title' => 'LevelShop',

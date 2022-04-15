@@ -2,6 +2,7 @@
 
 namespace deceitya\ecoshop\form\shop4;
 
+use deceitya\ecoshop\database\LevelShopAPI;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -21,6 +22,7 @@ class Shop4Form implements Form {
     }
 
     public function jsonSerialize() {
+        $shop = LevelShopAPI::getInstance();
         return [
             'type' => 'form',
             'title' => 'LevelShop',

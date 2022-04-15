@@ -2,6 +2,7 @@
 
 namespace deceitya\ecoshop\form\shop5;
 
+use deceitya\ecoshop\database\LevelShopAPI;
 use deceitya\ecoshop\form\SellBuyForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -31,6 +32,7 @@ class 土や光源など implements Form {
     }
 
     public function jsonSerialize() {
+        $shop = LevelShopAPI::getInstance();
         return [
             'type' => 'form',
             'title' => 'LevelShop',

@@ -2,6 +2,7 @@
 
 namespace deceitya\ecoshop\form\shop4;
 
+use deceitya\ecoshop\database\LevelShopAPI;
 use deceitya\ecoshop\form\SellBuyForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -29,6 +30,7 @@ class 武器関係 implements Form {
     }
 
     public function jsonSerialize() {
+        $shop = LevelShopAPI::getInstance();
         return [
             'type' => 'form',
             'title' => 'LevelShop',
