@@ -11,17 +11,26 @@ use ree_jp\stackStorage\api\StackStorageAPI;
 
 class SellBuyForm implements Form {
 
-    private $content;
+    private int $itemId;
+    private int $buy;
+    private int $sell;
 
-    public function __construct(array $content) {
-        $this->content = $content;
+    //content[0] -> id
+    //content[1] -> meta
+    //content[2] -> 購入値
+    //content[3] -> 売却値
+
+    public function __construct(int $itemId, int $buy, int $sell) {
+        $this->itemId = $itemId;
+        $this->buy = $buy;
+        $this->sell = $sell;
     }
 
     public function handleResponse(Player $player, $data): void {
         if ($data === null) {
             return;
         }
-        $item = ItemFactory::getInstance()->get($this->content[0], $this->content[1], 1);
+        $item = ItemFactory::getInstance()->get($this->itemId);
         StackStorageAPI::$instance->getCount($player->getXuid(), $item, function ($count) use ($player, $item, $data) {
             $this->callback($player, $item, $data, $count);
         }, function () use ($player, $item, $data) {
@@ -38,10 +47,10 @@ class SellBuyForm implements Form {
             }
         }
         if ($data) {
-            $player->sendForm(new PurchaseForm($item, $this->content[2], $count, $mymoney, $strage));
+            $player->sendForm(new PurchaseForm($item, $this->buy, $count, $mymoney, $strage));
             return;
         }
-        $player->sendForm(new SaleForm($item, $this->content[3], $count, $mymoney, $strage));
+        $player->sendForm(new SaleForm($item, $this->sell, $count, $mymoney, $strage));
     }
 
     public function jsonSerialize() {
