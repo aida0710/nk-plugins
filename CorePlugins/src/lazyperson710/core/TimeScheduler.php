@@ -24,6 +24,19 @@ class TimeScheduler extends Task {
                 break;
         }
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+            if (!Server::getInstance()->isOp($player->getName())){
+                if ($player->getHungerManager()->getFood() <= 6){
+                    $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 40, 0, false);
+                    $player->getEffects()->add($effect);
+                }
+                if ($player->getHungerManager()->getFood() <= 3){
+                    $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 40, 0, false);
+                    $player->getEffects()->add($effect);
+                    $effect = new EffectInstance(VanillaEffects::MINING_FATIGUE(), 40, 0, false);
+                    $player->getEffects()->add($effect);
+                }
+            }
+
             $checkHASTE = $player->getEffects()->get(VanillaEffects::HASTE());
             $checkNIGHT_VISION = $player->getEffects()->get(VanillaEffects::NIGHT_VISION());
             $checkSATURATION = $player->getEffects()->get(VanillaEffects::SATURATION());
