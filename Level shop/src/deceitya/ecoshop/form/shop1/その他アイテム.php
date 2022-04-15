@@ -2,33 +2,30 @@
 
 namespace deceitya\ecoshop\form\shop1;
 
-use deceitya\ecoshop\form\SellBuyForm;
-use pocketmine\form\Form;
-use pocketmine\player\Player;
+use bbo51dog\bboform\element\Button;
+use bbo51dog\bboform\form\SimpleForm;
+use deceitya\ecoshop\database\LevelShopAPI;
+use deceitya\ecoshop\form\element\SellBuyItemFormButton;
+use lazyperson710\sff\form\element\SendFormButton;
+use pocketmine\block\VanillaBlocks;
+use pocketmine\item\VanillaItems;
 
-class その他アイテム implements Form {
+class その他アイテム extends SimpleForm {
 
-    // [ID, Damage, 1個あたりの購入値段, 1個当たりの売却値段]
-    const CONTENTS = [
-        [386, 0, 50, 3],##Book & Quill
-    ];
-
-    public function handleResponse(Player $player, $data): void {
-        if ($data === null) {
-            $player->sendForm(new Shop1Form);
-            return;
-        }
-        $player->sendForm(new SellBuyForm(self::CONTENTS[$data]));
-    }
-
-    public function jsonSerialize() {
-        return [
-            'type' => 'form',
-            'title' => 'LevelShop',
-            'content' => "§7選択してください",
-            'buttons' => [
-                ['text' => "本と羽ペン\n§7購入:50 / 売却:3"]
-            ]
+    public function __construct() {
+        $shop = LevelShopAPI::getInstance();
+        $contents = [
+            VanillaItems::WRITABLE_BOOK(),
+            VanillaBlocks::STONE(),
         ];
+
+        $this
+            ->setTitle("Expansion Mining Tools")
+            ->setText("§7選択してください")
+            ->addElements();
+        foreach ($contents as $content) {
+            //new SendFormButton(new 石材系(), $content->getName());
+            new SellBuyItemFormButton("{$content->getName()}\n購入:{$shop->getBuy($content->getId())} / 売却:{$shop->getSell($content->getId())}", $content->getId());
+        };
     }
 }
