@@ -83,8 +83,8 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::OBSIDIAN()->asItem(), 50, 5);##Obsidian
         $this->register(VanillaBlocks::END_ROD()->asItem(), 50, 0);##End Rod
         $this->register(VanillaBlocks::ANVIL()->asItem(), 150, 0);##Anvil
-        $this->register(VanillaBlocks::ANVIL()->asItem(), 150, 0);##Anvil
-        $this->register(VanillaBlocks::ANVIL()->asItem(), 150, 0);##Anvil
+        //$this->register(VanillaBlocks::ANVIL()->setDamage(4)->asItem(), 150, 0);##Anvil
+        //$this->register(VanillaBlocks::ANVIL()->setDamage(8)->asItem(), 150, 0);##Anvil
         $this->register(VanillaBlocks::SHULKER_BOX()->asItem(), 3000, 0);##Shulker Box
         $this->register(VanillaBlocks::SLIME()->asItem(), 50, 0);##Slime Block
         $this->register(VanillaBlocks::BOOKSHELF()->asItem(), 50, 0);##Bookshelf
@@ -178,6 +178,7 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::HOPPER()->asItem(), 25000, 0);##Hopper
         $this->register(VanillaBlocks::TNT()->asItem(), 25000, 0);##TNT
         //$this->register(VanillaBlocks::TARGET()->asItem(), 25000, 0);##Target
+        $this->registerFromId(111, 0, 10, 1);
         $this->register(VanillaBlocks::TRIPWIRE_HOOK()->asItem(), 25000, 0);##Tripwire Hook
         $this->register(VanillaBlocks::TRAPPED_CHEST()->asItem(), 2500, 0);##trap chest
         $this->register(VanillaBlocks::REDSTONE_TORCH()->asItem(), 2500, 0);##Redstone torch
@@ -188,6 +189,11 @@ class LevelShopAPI {
     public function register(Item $item, int $buy, int $sell): void {
         $this->buy[$item->getId()][$item->getMeta()] = $buy;
         $this->sell[$item->getId()][$item->getMeta()] = $sell;
+    }
+
+    protected function registerFromId(int $itemId, int $itemMeta, int $buy, int $sell): void {
+        $this->buy[$itemId][$itemMeta] = $buy;
+        $this->sell[$itemId][$itemMeta] = $sell;
     }
 
     public function getBuy(int $id, ?int $meta = null): ?int {
