@@ -6,7 +6,6 @@ use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use deceitya\ecoshop\database\LevelShopAPI;
 use deceitya\ecoshop\form\SellBuyForm;
-use pocketmine\form\Form;
 use pocketmine\player\Player;
 
 class SellBuyItemFormButton extends Button {
@@ -17,8 +16,7 @@ class SellBuyItemFormButton extends Button {
      * @param string $text
      * @param ButtonImage|null $image
      */
-
-    public function __construct(string $text,int $itemId, ?ButtonImage $image = null) {
+    public function __construct(string $text, int $itemId, ?ButtonImage $image = null) {
         parent::__construct($text, $image);
         $this->itemId = $itemId;
     }

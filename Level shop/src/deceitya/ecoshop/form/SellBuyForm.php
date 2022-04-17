@@ -15,11 +15,6 @@ class SellBuyForm implements Form {
     private int $buy;
     private int $sell;
 
-    //content[0] -> id
-    //content[1] -> meta
-    //content[2] -> 購入値
-    //content[3] -> 売却値
-
     public function __construct(int $itemId, int $buy, int $sell) {
         $this->itemId = $itemId;
         $this->buy = $buy;

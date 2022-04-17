@@ -2,14 +2,26 @@
 
 namespace deceitya\ecoshop\form\shop2;
 
+use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ecoshop\database\LevelShopAPI;
-use deceitya\ecoshop\form\SellBuyForm;
-use pocketmine\form\Form;
-use pocketmine\player\Player;
+use deceitya\ecoshop\form\element\SellBuyItemFormButton;
+use pocketmine\item\VanillaItems;
 
-class 作物系 implements Form {
+class 作物系 extends SimpleForm {
 
-    // [ID, Damage, 1個あたりの購入値段, 1個当たりの売却値段]
+    public function __construct() {
+        $shop = LevelShopAPI::getInstance();
+        $contents = [
+            VanillaItems::WRITABLE_BOOK(),
+        ];
+        $this
+            ->setTitle("Level Shop")
+            ->setText("§7選択してください");
+        foreach ($contents as $content) {
+            $this->addElements(new SellBuyItemFormButton("{$content->getName()}\n購入:{$shop->getBuy($content->getId())} / 売却:{$shop->getSell($content->getId())}", $content->getId()));
+        }
+    }
+    /*// [ID, Damage, 1個あたりの購入値段, 1個当たりの売却値段]
     const CONTENTS = [
         [296, 0, 250, 8],##Wheat
         [392, 0, 250, 8],##Potato
@@ -50,5 +62,5 @@ class 作物系 implements Form {
                 ['text' => "かぼちゃブロック\n§7購入:500 / 売却:6"],
             ]
         ];
-    }
+    }*/
 }
