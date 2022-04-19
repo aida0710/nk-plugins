@@ -114,6 +114,7 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::DIAMOND_ORE()->asItem(), 50000, 800);##Diamond Ore
         $this->register(VanillaBlocks::EMERALD_ORE()->asItem(), 50000, 3000);##Emerald Ore
         //$this->register(VanillaItems::ELYTRA(), 3500000, 0);##Elytra
+        $this->registerFromId(444, 0, 3500000,0);##Elytra
         $this->register(VanillaBlocks::GRASS()->asItem(), 10, 1);##Grass
         $this->register(VanillaBlocks::PODZOL()->asItem(), 10, 0);##Podzol
         $this->register(VanillaBlocks::MYCELIUM()->asItem(), 10, 0);##Mycelium
@@ -128,32 +129,86 @@ class LevelShopAPI {
         $this->register(VanillaItems::SNOWBALL(), 15, 1);##Snowball
         $this->register(VanillaItems::EGG(), 10, 0);##Egg
         //$this->register(VanillaItems::SHIELD(), 500, 0);##Shield
+        $this->registerFromId(513, 0, 500,0);##Shield
+
         //$this->register(VanillaItems::SPYGLASS(), 300000, 0);##Spyglass
+        $this->registerFromId(772, 0, 300000,0);##Spyglass
+
         //$this->register(VanillaBlocks::CRIMSON_FUNGUS()->asItem(), 50, 0);##Crimson Fungus
+        $this->registerFromId(-228, 0, 50,0);##Crimson Fungus
+
         //$this->register(VanillaBlocks::WARPED_FUNGUS()->asItem(), 50, 0);##Warped Fungus
+        $this->registerFromId(-229, 0, 50,0);##Warped Fungus
+
         //$this->register(VanillaBlocks::WEEPING_VINES()->asItem(), 50, 0);##Weeping Vines
+        $this->registerFromId(-231, 0, 50,0);##Weeping Vines
+
         //$this->register(VanillaBlocks::TWISTING_VINES()->asItem(), 50, 0);##Twisting Vines
+        $this->registerFromId(-287, 0, 50,0);##Twisting Vines
+
         //$this->register(VanillaBlocks::CRIMSON_ROOTS()->asItem(), 50, 0);##Crimson Roots
+        $this->registerFromId(-223, 0, 50,0);##Crimson Roots
+
         //$this->register(VanillaBlocks::WARPED_ROOTS()->asItem(), 50, 0);##Warped Roots
+        $this->registerFromId(-224, 0, 50,0);##Warped Roots
+
         //$this->register(VanillaBlocks::BLACKSTONE()->asItem(), 50, 0);##Blackstone
+        $this->registerFromId(-273, 0, 50,0);##Blackstone
+
         //$this->register(VanillaBlocks::BASALT()->asItem(), 50, 0);##Basalt
+        $this->registerFromId(-234,0, 50,0);##Basalt
+
         //$this->register(VanillaBlocks::CRIMSON_STEM()->asItem(), 50, 0);##Crimson Stem
+        $this->registerFromId(-225, 0, 50,0);##Crimson Stem
+
         //$this->register(VanillaBlocks::WARPED_STEM()->asItem(), 50, 0);##Warped Stem
+        $this->registerFromId(-226, 0, 50,0);##Warped Stem
+
         $this->register(VanillaBlocks::SOUL_SAND()->asItem(), 250, 3);##Soul Sand
+
         //$this->register(VanillaBlocks::SOUL_SOIL()->asItem(), 50, 0);##Soul Soil
+        $this->registerFromId(-236, 0, 50,0);##Soul Soil
+
         //$this->register(VanillaBlocks::CRIMSON_NYLIUM()->asItem(), 50, 0);##Crimson Nylium
+        $this->registerFromId(-232, 0, 50,0);##Crimson Nylium
+
         //$this->register(VanillaBlocks::WARPED_NYLIUM()->asItem(), 50, 0);##Warped Nylium
+        $this->registerFromId(-233, 0, 50,0);##Warped Nylium
+
         $this->register(VanillaBlocks::MAGMA()->asItem(), 50, 0);##Magma Block
+
         //$this->register(VanillaBlocks::SHROOMLIGHT()->asItem(), 50, 0);##Shroomlight
+        $this->registerFromId(-230, 0, 50,0);##Shroomlight
+
+        $this->register(VanillaBlocks::NETHER_WART_BLOCK()->asItem(), 50, 0);##Nether Wart Block
+
+        //$this->register(VanillaBlocks::WARPED_WART_BLOCK()->asItem(), 50, 0);##Warped Wart Block
+        $this->registerFromId(-227, 0, 50,0);##Warped Wart Block
+
         //$this->register(VanillaBlocks::CRYING_OBSIDIAN()->asItem(), 50, 0);##Crying Obsidian
+        $this->registerFromId(-289, 0, 50,0);##Crying Obsidian
+
         //$this->register(VanillaBlocks::RESPAWN_ANCHOR()->asItem(), 50, 0);##Respawn Anchor
+        $this->registerFromId(-272, 0, 50,0);##Respawn Anchor
+
         //$this->register(VanillaBlocks::CAMPFIRE()->asItem(), 80000, 0);##Campfire
+        $this->registerFromId(720, 0, 80000,1);##Campfire
+
         //$this->register(VanillaBlocks::SOUL_CAMPFIRE()->asItem(), 80000, 0);##Soul Campfire
+        $this->registerFromId(801, 0, 80000,0);##Soul Campfire
+
         //$this->register(VanillaBlocks::SOUL_TORCH()->asItem(), 50, 0);##Soul Torch
+        $this->registerFromId(-268, 0, 50,0);##Soul Torch
+
         $this->register(VanillaBlocks::LANTERN()->asItem(), 50, 0);##Lantern
         //$this->register(VanillaBlocks::SOUL_LANTERN()->asItem(), 50, 0);##Soul Lantern
+        $this->registerFromId(-269, 0, 50,0);##Soul Lantern
+
         $this->register(VanillaBlocks::SEA_PICKLE()->asItem(), 50, 0);##Sea Pickle
+
         //$this->register(VanillaBlocks::CHAIN()->asItem(), 50, 0);##Chain
+        $this->registerFromId(758, 0, 50,0);##Chain
+
         $this->register(VanillaBlocks::BELL()->asItem(), 150000, 0);##Bell
         $this->register(VanillaBlocks::BEACON()->asItem(), 300000, 0);##Beacon
         $this->register(VanillaItems::PLAYER_HEAD(), 800000, 0);##Player Head
@@ -165,7 +220,7 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::FLETCHING_TABLE()->asItem(), 25000, 0);##Fletching Table
         $this->register(VanillaBlocks::COMPOUND_CREATOR()->asItem(), 25000, 0);##Compound Creator
         $this->register(VanillaBlocks::LOOM()->asItem(), 25000, 0);##Loom
-        //$this->register(VanillaBlocks::CONSTRUCTOR()->asItem(), 25000, 0);## Constructor
+        $this->register(VanillaBlocks::ELEMENT_CONSTRUCTOR()->asItem(), 25000, 0);##Constructor
         $this->register(VanillaBlocks::LAB_TABLE()->asItem(), 125000, 0);##Lab Table
         $this->register(VanillaBlocks::MATERIAL_REDUCER()->asItem(), 25000, 0);##Material Reducer
         $this->register(VanillaBlocks::BREWING_STAND()->asItem(), 25000, 0);##Brewing Stand
@@ -178,12 +233,13 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::HOPPER()->asItem(), 25000, 0);##Hopper
         $this->register(VanillaBlocks::TNT()->asItem(), 25000, 0);##TNT
         //$this->register(VanillaBlocks::TARGET()->asItem(), 25000, 0);##Target
-        $this->registerFromId(111, 0, 10, 1);
+        $this->registerFromId(-239, 0, 10, 1);##Target
         $this->register(VanillaBlocks::TRIPWIRE_HOOK()->asItem(), 25000, 0);##Tripwire Hook
         $this->register(VanillaBlocks::TRAPPED_CHEST()->asItem(), 2500, 0);##trap chest
         $this->register(VanillaBlocks::REDSTONE_TORCH()->asItem(), 2500, 0);##Redstone torch
         $this->register(VanillaBlocks::REDSTONE_REPEATER()->asItem(), 2500, 0);##Redstone Repeater
         $this->register(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 0);##Redstone Comparator
+        ##お花関係を追加
     }
 
     public function register(Item $item, int $buy, int $sell): void {

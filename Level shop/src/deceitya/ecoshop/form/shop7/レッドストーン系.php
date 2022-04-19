@@ -2,14 +2,47 @@
 
 namespace deceitya\ecoshop\form\shop7;
 
+use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ecoshop\database\LevelShopAPI;
+use deceitya\ecoshop\form\element\SellBuyItemFormButton;
 use deceitya\ecoshop\form\SellBuyForm;
+use ipad54\netherblocks\blocks\Target;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\form\Form;
+use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
-class レッドストーン系 implements Form {
+class レッドストーン系 extends SimpleForm {
 
-    // [ID, Damage, 1個あたりの購入値段, 1個当たりの売却値段]
+    public function __construct() {
+        $shop = LevelShopAPI::getInstance();
+        $contents = [
+            VanillaBlocks::DAYLIGHT_SENSOR()->asItem(),
+            VanillaBlocks::HOPPER()->asItem(),
+            VanillaBlocks::TNT()->asItem(),
+            -239,
+            VanillaBlocks::TRIPWIRE_HOOK()->asItem(),
+            VanillaBlocks::TRAPPED_CHEST()->asItem(),
+            VanillaBlocks::REDSTONE_TORCH()->asItem(),
+        ];
+        $this
+            ->setTitle("Level Shop")
+            ->setText("§7選択してください");
+        foreach ($contents as $content) {
+            if (is_int($content)){
+                $item = match ($content) {
+                    -239 => "target",
+                    //356 => "RedstoneRepeater",
+                    default => "Undefined Error",
+                };
+                $this->addElements(new SellBuyItemFormButton("{$item}\n購入:{$shop->getBuy($content)} / 売却:{$shop->getSell($content)}", $content));
+                continue;
+            }
+            $this->addElements(new SellBuyItemFormButton("{$content->getName()}\n購入:{$shop->getBuy($content->getId())} / 売却:{$shop->getSell($content->getId())}", $content->getId()));
+        }
+    }
+
+    /*// [ID, Damage, 1個あたりの購入値段, 1個当たりの売却値段]
     const CONTENTS = [
         [151, 0, 25000, 0],##Daylight Sensor
         [410, 0, 25000, 0],##Hopper
@@ -48,5 +81,5 @@ class レッドストーン系 implements Form {
                 ['text' => "レッドストーンコンパレーター\n§7購入:2500 / 売却:0"],
             ]
         ];
-    }
+    }*/
 }
