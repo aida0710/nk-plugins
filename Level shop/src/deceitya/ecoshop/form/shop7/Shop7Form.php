@@ -13,8 +13,8 @@ class Shop7Form implements Form {
             return;
         }
         $forms = [
-            'レッドストーン系',
-            'その他ブロック',
+            'RedStone',
+            'OtherBlocks',
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop7\\" . $forms[$data];
         $player->sendForm(new $class());
@@ -27,8 +27,8 @@ class Shop7Form implements Form {
             'title' => 'LevelShop',
             'content' => "§7選択してください",
             'buttons' => [
-                ['text' => 'レッドストーン系'],
-                ['text' => 'その他ブロック'],
+                ['text' => 'RedStone'],
+                ['text' => 'OtherBlocks'],
             ]
         ];
     }

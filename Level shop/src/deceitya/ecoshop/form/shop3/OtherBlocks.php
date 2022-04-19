@@ -7,7 +7,7 @@ use deceitya\ecoshop\database\LevelShopAPI;
 use deceitya\ecoshop\form\element\SellBuyItemFormButton;
 use pocketmine\block\VanillaBlocks;
 
-class その他ブロック extends SimpleForm {
+class OtherBlocks extends SimpleForm {
 
     public function __construct() {
         $shop = LevelShopAPI::getInstance();

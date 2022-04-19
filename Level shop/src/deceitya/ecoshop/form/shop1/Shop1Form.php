@@ -12,13 +12,13 @@ class Shop1Form implements Form {
             return;
         }
         $forms = [
-            '石材系',
-            '原木系',
-            '鉱石',
-            '道具',
-            '食べ物',
-            'その他アイテム',
-            '通貨アイテム'
+            'Stones',
+            'Logs',
+            'Ores',
+            'Tools',
+            'Foods',
+            'Others',
+            'Currency'
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop1\\" . $forms[$data];
         $player->sendForm(new $class($player));
@@ -30,13 +30,13 @@ class Shop1Form implements Form {
             'title' => 'LevelShop',
             'content' => "§7選択してください",
             'buttons' => [
-                ['text' => '石材系'],
-                ['text' => '原木系'],
-                ['text' => '鉱石'],
-                ['text' => '道具'],
-                ['text' => '食べ物'],
-                ['text' => 'その他アイテム'],
-                ['text' => '通貨アイテム'],
+                ['text' => 'Stones'],
+                ['text' => 'Logs'],
+                ['text' => 'Ores'],
+                ['text' => 'Tools'],
+                ['text' => 'Foods'],
+                ['text' => 'Others'],
+                ['text' => 'Currency'],
             ]
         ];
     }

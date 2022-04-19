@@ -13,9 +13,9 @@ class Shop6Form implements Form {
             return;
         }
         $forms = [
-            '装飾ブロック',
-            '頭ブロック',
-            '植物関係',
+            'DecorativeBlock',
+            'Heads',
+            'Vegetation',
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop6\\" . $forms[$data];
         $player->sendForm(new $class());
@@ -28,9 +28,9 @@ class Shop6Form implements Form {
             'title' => 'LevelShop',
             'content' => "§7選択してください",
             'buttons' => [
-                ['text' => '装飾ブロック'],
-                ['text' => '頭ブロック'],
-                ['text' => '植物関係'],
+                ['text' => 'DecorativeBlock'],
+                ['text' => 'Heads'],
+                ['text' => 'Vegetation'],
             ]
         ];
     }

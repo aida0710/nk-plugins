@@ -13,10 +13,10 @@ class Shop3Form implements Form {
             return;
         }
         $forms = [
-            '建材ブロック',
-            'その他ブロック',
-            '原石ブロック',
-            '染料アイテム',
+            'BuildingMaterials',
+            'OtherBlocks',
+            'Ores',
+            'Dyes',
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop3\\" . $forms[$data];
         $player->sendForm(new $class());
@@ -29,10 +29,10 @@ class Shop3Form implements Form {
             'title' => 'LevelShop',
             'content' => "§7選択してください",
             'buttons' => [
-                ['text' => '建材ブロック'],
-                ['text' => 'その他ブロック'],
-                ['text' => '原石ブロック'],
-                ['text' => '染料アイテム'],
+                ['text' => 'BuildingMaterials'],
+                ['text' => 'OtherBlocks'],
+                ['text' => 'Ores'],
+                ['text' => 'Dyes'],
             ]
         ];
     }

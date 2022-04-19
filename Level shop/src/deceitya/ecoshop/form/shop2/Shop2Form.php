@@ -13,8 +13,9 @@ class Shop2Form implements Form {
             return;
         }
         $forms = [
-            '作物系',
-            '種と農工具系',
+            'Crop',
+            'Seeds',
+            'FarmingTools',
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop2\\" . $forms[$data];
         $player->sendForm(new $class());
@@ -27,8 +28,9 @@ class Shop2Form implements Form {
             'title' => 'LevelShop',
             'content' => "§7選択してください",
             'buttons' => [
-                ['text' => '作物系'],
-                ['text' => '種と農工具系'],
+                ['text' => 'Crop'],
+                ['text' => 'Seeds'],
+                ['text' => 'FarmingTools'],
             ]
         ];
     }

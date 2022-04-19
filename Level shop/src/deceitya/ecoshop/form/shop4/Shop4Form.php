@@ -13,9 +13,9 @@ class Shop4Form implements Form {
             return;
         }
         $forms = [
-            'エリトラ',
-            'その他ブロック',
-            '武器関係',
+            'Elytra',
+            'OtherBlocks',
+            'Weapon',
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop4\\" . $forms[$data];
         $player->sendForm(new $class());
@@ -28,9 +28,9 @@ class Shop4Form implements Form {
             'title' => 'LevelShop',
             'content' => "§7選択してください",
             'buttons' => [
-                ['text' => 'エリトラ'],
-                ['text' => 'その他ブロック'],
-                ['text' => '武器関係'],
+                ['text' => 'Elytra'],
+                ['text' => 'OtherBlocks'],
+                ['text' => 'Weapon'],
             ]
         ];
     }
