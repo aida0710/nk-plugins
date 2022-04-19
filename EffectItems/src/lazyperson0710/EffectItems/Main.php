@@ -2,12 +2,6 @@
 
 namespace lazyperson0710\EffectItems;
 
-use pocketmine\inventory\CreativeInventory;
-use pocketmine\item\ItemIdentifier;
-use pocketmine\item\ItemIds;
-use pocketmine\item\Pickaxe;
-use pocketmine\item\ToolTier;
-use pocketmine\item\VanillaItems;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
@@ -16,32 +10,18 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new DamageEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new InteractEventListener(), $this);
         $this->getScheduler()->scheduleRepeatingTask(new ItemsScheduler, 20);
-        //$tools = VanillaItems::DIAMOND_PICKAXE();
         //$tools->setCustomName("古びたつるはし");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("溶鉱炉");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("アルケミピッケル");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("鉱石より愛を込めて");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("ハイドロゲル");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("疾風のつるはし");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("溶岩泳者の友");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("暗夜行山");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("満福つるはし");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("重いつるはし");
-        //CreativeInventory::getInstance()->add($tools);
         //$tools->setCustomName("窓一郎の炯眼");
-        //CreativeInventory::getInstance()->add($tools);
-        //$tools = VanillaItems::WOODEN_PICKAXE();
         //$tools->setCustomName("おもちゃのつるはし");
-        //CreativeInventory::getInstance()->add($tools);//こいつらをオリジナルアイテムにする
         //todo {クアドラックス}一回の使用で手に入る原木が4つになる
         //todo {あっくす}斧...のおもちゃ。使っても木は壊せない
         //todo {火打石の斧}鉱石が焼かれた状態で採れるが、確率で火炎ダメージを受ける
@@ -54,6 +34,45 @@ class Main extends PluginBase {
         //todo {凶歉のクワ}これで収穫しても何も手に入らない
         //todo {ブレイズのクワ}これで収穫するとかまどで調理された状態で収穫できる
         //todo {いちごの愛}これで作物をタップすると成長させることができる
-
+        //[つるはし]
+        //●{tntのつるはし}採掘したときに爆発する
+        //●{窓一郎の炯眼}持っていると暗視がつく
+        //●{アルケミピッケル}丸石または焼き石を掘っていても確率で鉱石が手に入る
+        //●{鉱石より愛を込めて}鉱石を掘るとよい特殊効果がつく
+        //●{満福つるはし}持っていると空腹度が回復する+幸運付き
+        //●{呪われたつるはし}中確率で鉱石が手に入らない
+        //●{暗夜行山}持っていると暗闇がつく
+        //●{かぐやの愛}採掘すると確率で1000円手に入る
+        //●{古びたつるはし}確率で壊れる
+        //●{疾風のつるはし}持っているとスピードがつく
+        //●{溶岩泳者の友}持っていると耐火がつく、アイテム化しても燃えない
+        //●{雷鳴のつるはし}使うと雷が落ちる
+        //[斧]
+        //●{Here's johnny!}ドア系を一撃で壊せる
+        //●{tntの斧}使うと爆発する
+        //●{きこりの斧}隣接する原木を全て壊せる、つまりマインオール
+        //●{ふるびた斧}確率で壊れる
+        //●{クアドラックス}一回の使用で手に入る原木が4つになる
+        //●{重い斧}採掘速度が落ちる
+        //●{アルケミアックス}使うと確率でランダムな効果がつく
+        //●{あっくす}斧...のおもちゃ。使っても木は壊せない
+        //●{火打石の斧}鉱石が焼かれた状態で採れるが、確率で火炎ダメージを受ける
+        //●{満福の斧}持っていると空腹度が回復する
+        //{シャベル}
+        //●{ふるびたシャベル}確率で壊れる
+        //●{tntのシャベル}使うと爆発する
+        //●{地球より愛を込めて}掘っていると確率で鉱石がもらえる
+        //●{この下に稲妻起こる宵あらん}使うと確率で雷が落ちる
+        //●{財宝発見!}確率でお金が手に入る 金額はランダム
+        //●{ポイズンシャベル}使うと確率で毒と空腹になる
+        //●{豊作シャベル}これで収穫するととれる作物が倍に増える
+        //[クワ]
+        //{豊作のクワ}これで収穫すると作物が通常の2倍手に入る
+        //{凶歉のクワ}これで収穫しても何も手に入らない
+        //{ブレイズのクワ}これで収穫するとかまどで調理された状態で収穫できる
+        //{tntのクワ}使うと爆発する
+        //{いちごの愛}これで作物をタップすると成長させることができる
+        //{スーパーホー}3x3のマスを耕すことができる
+        //{招雷のクワ}使うと雷が落ちる
     }
 }
