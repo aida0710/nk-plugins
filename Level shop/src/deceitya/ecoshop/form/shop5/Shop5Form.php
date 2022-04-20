@@ -13,7 +13,7 @@ class Shop5Form implements Form {
             return;
         }
         $forms = [
-            'OtherBlocks',
+            'OtherBlocks5',
             'NetherStones',
             'Others',
         ];

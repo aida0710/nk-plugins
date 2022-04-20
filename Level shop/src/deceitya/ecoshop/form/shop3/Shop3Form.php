@@ -14,7 +14,7 @@ class Shop3Form implements Form {
         }
         $forms = [
             'BuildingMaterials',
-            'OtherBlocks',
+            'OtherBlocks3',
             'Ores',
             'Dyes',
         ];

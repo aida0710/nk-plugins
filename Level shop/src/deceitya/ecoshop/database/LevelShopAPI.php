@@ -8,8 +8,7 @@ use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
 
 class LevelShopAPI {
-
-    const FREE = 0;
+    
     protected array $buy = [];
     protected array $sell = [];
     protected array $list = [];
@@ -90,7 +89,7 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::WATER()->asItem(), 800, 150);##Water
         $this->register(VanillaBlocks::FARMLAND()->asItem(), 50, 0);##Farmland
         $this->register(VanillaItems::DIAMOND_HOE(), 15000, 0);##Diamond Hoe
-        #OtherBlocks
+        #OtherBlocks3
         $this->register(VanillaBlocks::PACKED_ICE()->asItem(), 50, 0);##Packed Ice
         $this->register(VanillaBlocks::OBSIDIAN()->asItem(), 50, 5);##Obsidian
         $this->register(VanillaBlocks::END_ROD()->asItem(), 50, 0);##End Rod
@@ -144,7 +143,7 @@ class LevelShopAPI {
         $this->register(VanillaItems::PURPLE_DYE(), 5, 0);##Purple Dye
         $this->register(VanillaItems::MAGENTA_DYE(), 5, 0);##Magenta Dye
         $this->register(VanillaItems::PINK_DYE(), 5, 0);##Pink Dye
-        #OtherBlocks
+        #OtherBlocks4
         $this->register(VanillaBlocks::GRASS()->asItem(), 10, 1);##Grass
         $this->register(VanillaBlocks::PODZOL()->asItem(), 10, 0);##Podzol
         $this->register(VanillaBlocks::MYCELIUM()->asItem(), 10, 0);##Mycelium
@@ -176,7 +175,7 @@ class LevelShopAPI {
         $this->registerFromId(-234, 0, 50, 0);##Basalt
         $this->registerFromId(-225, 0, 50, 0);##Crimson Stem
         $this->registerFromId(-226, 0, 50, 0);##Warped Stem
-        #OtherBlocks
+        #OtherBlocks5
         $this->register(VanillaBlocks::SOUL_SAND()->asItem(), 250, 3);##Soul Sand
         $this->registerFromId(-236, 0, 50, 0);##Soul Soil
         $this->registerFromId(-232, 0, 50, 0);##Crimson Nylium
@@ -229,7 +228,7 @@ class LevelShopAPI {
         $this->register(VanillaItems::CREEPER_HEAD(), 800000, 0);##Creeper Head
         $this->register(VanillaItems::WITHER_SKELETON_SKULL(), 800000, 0);##Creeper Head
         $this->register(VanillaItems::DRAGON_HEAD(), 800000, 0);##Dragon Head
-        #OtherBlocks
+        #OtherBlocks7
         $this->register(VanillaBlocks::ITEM_FRAME()->asItem(), 25000, 0);##Item Frame
         $this->register(VanillaBlocks::FLETCHING_TABLE()->asItem(), 25000, 0);##Fletching Table
         $this->register(VanillaBlocks::COMPOUND_CREATOR()->asItem(), 25000, 0);##Compound Creator

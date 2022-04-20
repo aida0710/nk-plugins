@@ -14,7 +14,7 @@ class Shop4Form implements Form {
         }
         $forms = [
             'Elytra',
-            'OtherBlocks',
+            'OtherBlocks4',
             'Weapon',
         ];
         $class = "\\deceitya\\ecoshop\\form\\shop4\\" . $forms[$data];
