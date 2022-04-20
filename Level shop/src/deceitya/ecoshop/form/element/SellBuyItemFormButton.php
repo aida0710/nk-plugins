@@ -34,6 +34,7 @@ class SellBuyItemFormButton extends Button {
             }, function () use ($player, $item) {
                 $this->callback($player, $item, 0);
             });
+            return;
         }
         $player->sendForm(new SellBuyForm($this->itemId, LevelShopAPI::getInstance()->getBuy($this->itemId), LevelShopAPI::getInstance()->getSell($this->itemId)));
     }
