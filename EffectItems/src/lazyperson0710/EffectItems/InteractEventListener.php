@@ -2,17 +2,33 @@
 
 namespace lazyperson0710\EffectItems;
 
+use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\item\ItemIds;
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 
 class InteractEventListener implements Listener {
+
+    /*public function onInter(PlayerMoveEvent $event){
+        if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag("airBlock") !== null){
+            var_dump(5);
+            $position = $event->getPlayer()->getPosition();
+            $player = $event->getPlayer();
+            $pos = $event->getPlayer()->getPosition()->add($position->getFloorX(), $position->getFloorY(), $position->getFloorZ());
+            if ($position->getWorld()->getBlock($pos) === VanillaBlocks::AIR()){
+                var_dump(7);
+                $position->getWorld()->setBlock($pos, $player->getInventory()->getItemInHand()->getBlock());
+            }
+        }
+    }*/
 
     /**
      * @param BlockBreakEvent $event
@@ -23,6 +39,8 @@ class InteractEventListener implements Listener {
         if ($event->isCancelled()) {
             return;
         }
+        /*var_dump(6);
+        $event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->setInt('airBlock', 1);*/
         $player = $event->getPlayer();
         $itemName = $player->getInventory()->getItemInHand()->getCustomName();
         $inHnad = $player->getInventory()->getItemInHand();
