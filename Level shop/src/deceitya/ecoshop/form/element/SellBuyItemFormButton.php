@@ -27,7 +27,7 @@ class SellBuyItemFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        if (LevelShopAPI::getInstance()->getSell($this->itemId) === 0) {//売却値が0だった時選択がそもそもスキップされるように
+        if (LevelShopAPI::getInstance()->getSell($this->itemId) == 0) {//売却値が0だった時選択がそもそもスキップされるように
             $item = ItemFactory::getInstance()->get($this->itemId);
             StackStorageAPI::$instance->getCount($player->getXuid(), $item, function ($count) use ($player, $item) {
                 $this->callback($player, $item, $count);
