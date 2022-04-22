@@ -45,6 +45,7 @@ class ShopForm extends SimpleForm {
             ->setText("見たいコンテンツを選択してください")
             ->addElements(
                 new CommandDispatchButton("Level Shop - 1", "shop1", null),
+                new CommandDispatchButton("Inventoryのアイテムを一括売却\n{$level25}", "invsell", null),
                 new CommandDispatchButton("Level Shop - 2\n{$level25}", "shop2", null),
                 new CommandDispatchButton("Level Shop - 3\n{$level50}", "shop3", null),
                 new CommandDispatchButton("Level Shop - 4\n{$level80}", "shop4", null),
