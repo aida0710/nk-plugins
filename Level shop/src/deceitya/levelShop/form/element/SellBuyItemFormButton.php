@@ -24,7 +24,7 @@ class SellBuyItemFormButton extends Button {
      * @param int $itemMeta
      * @param ButtonImage|null $image
      */
-    public function __construct(string $text, int $itemId, int $itemMeta ,?ButtonImage $image = null) {
+    public function __construct(string $text, int $itemId, int $itemMeta, ?ButtonImage $image = null) {
         parent::__construct($text, $image);
         $this->itemId = $itemId;
         $this->itemMeta = $itemMeta;

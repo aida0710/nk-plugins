@@ -2,38 +2,26 @@
 
 namespace deceitya\levelShop\form\shop3;
 
-use deceitya\levelShop\database\LevelShopAPI;
-use pocketmine\form\Form;
-use pocketmine\player\Player;
+use bbo51dog\bboform\form\SimpleForm;
+use deceitya\levelShop\form\element\FirstBackFormButton;
+use deceitya\levelShop\form\element\ShopItemFormButton;
 
-class Shop3Form implements Form {
+class Shop3Form extends SimpleForm {
 
-    public function handleResponse(Player $player, $data): void {
-        if ($data === null) {
-            return;
+    public function __construct() {
+        $contents = [
+            "建材ブロック類" => "BuildingMaterials",
+            "その他ブロック" => "OtherBlocks3",
+            "原石ブロック類" => "Ores",
+            "染料アイテム" => "Dyes",
+        ];
+        $this
+            ->setTitle("Level Shop")
+            ->setText("§7選択してください");
+        foreach ($contents as $key => $value) {
+            $class = __NAMESPACE__ . "\\" . $value;
+            $this->addElements(new ShopItemFormButton($key, $class));
         }
-        $forms = [
-            'BuildingMaterials',
-            'OtherBlocks3',
-            'Ores',
-            'Dyes',
-        ];
-        $class = "\\deceitya\\levelShop\\form\\shop3\\" . $forms[$data];
-        $player->sendForm(new $class());
-    }
-
-    public function jsonSerialize() {
-        $shop = LevelShopAPI::getInstance();
-        return [
-            'type' => 'form',
-            'title' => 'LevelShop',
-            'content' => "§7選択してください",
-            'buttons' => [
-                ['text' => 'BuildingMaterials'],
-                ['text' => 'OtherBlocks'],
-                ['text' => 'Ores'],
-                ['text' => 'Dyes'],
-            ]
-        ];
+        $this->addElements(new FirstBackFormButton("ホームに戻る"));
     }
 }
