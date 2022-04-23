@@ -4,23 +4,20 @@ namespace deceitya\levelShop\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
+use lazyperson710\sff\form\ShopForm;
 use pocketmine\player\Player;
 
-class ShopItemFormButton extends Button {
-
-    private string $class;
+class FirstBackFormButton extends Button {
 
     /**
      * @param string $text
-     * @param string $class
      * @param ButtonImage|null $image
      */
-    public function __construct(string $text, string $class, ?ButtonImage $image = null) {
+    public function __construct(string $text, ?ButtonImage $image = null) {
         parent::__construct($text, $image);
-        $this->class = $class;
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new $this->class);
+        $player->sendForm(new ShopForm($player));
     }
 }

@@ -2,36 +2,36 @@
 
 namespace deceitya\levelShop\form\shop4;
 
+use bbo51dog\bboform\form\SimpleForm;
 use deceitya\levelShop\database\LevelShopAPI;
-use pocketmine\form\Form;
-use pocketmine\player\Player;
+use deceitya\levelShop\form\element\FirstBackFormButton;
+use deceitya\levelShop\form\element\SellBuyItemFormButton;
+use deceitya\levelShop\form\element\ShopItemFormButton;
 
-class Shop4Form implements Form {
+class Shop4Form extends SimpleForm {
 
-    public function handleResponse(Player $player, $data): void {
-        if ($data === null) {
-            return;
+    public function __construct() {
+        $contents = [
+            "Elytra" => 444,
+            "その他ブロック" => "OtherBlocks4",
+            "武器類" => "Weapon",
+        ];
+        $this
+            ->setTitle("Level Shop")
+            ->setText("§7選択してください");
+        foreach ($contents as $key => $value) {
+            $class = __NAMESPACE__ . "\\" . $value;
+            if (is_int($value)) {
+                $shop = LevelShopAPI::getInstance();
+                $item = match ($value) {
+                    444 => "Elytra",
+                    default => "Undefined Error",
+                };
+                $this->addElements(new SellBuyItemFormButton("{$item}\n購入:{$shop->getBuy($value)} / 売却:{$shop->getSell($value)}", $value, 0));
+                continue;
+            }
+            $this->addElements(new ShopItemFormButton($key, $class));
         }
-        $forms = [
-            'Elytra',
-            'OtherBlocks4',
-            'Weapon',
-        ];
-        $class = "\\deceitya\\levelShop\\form\\shop4\\" . $forms[$data];
-        $player->sendForm(new $class());
-    }
-
-    public function jsonSerialize() {
-        $shop = LevelShopAPI::getInstance();
-        return [
-            'type' => 'form',
-            'title' => 'LevelShop',
-            'content' => "§7選択してください",
-            'buttons' => [
-                ['text' => 'Elytra'],
-                ['text' => 'OtherBlocks'],
-                ['text' => 'Weapon'],
-            ]
-        ];
+        $this->addElements(new FirstBackFormButton("ホームに戻る"));
     }
 }

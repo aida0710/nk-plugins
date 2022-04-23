@@ -2,37 +2,25 @@
 
 namespace deceitya\levelShop\form\shop5;
 
-use deceitya\levelShop\database\LevelShopAPI;
-use pocketmine\form\Form;
-use pocketmine\player\Player;
+use bbo51dog\bboform\form\SimpleForm;
+use deceitya\levelShop\form\element\FirstBackFormButton;
+use deceitya\levelShop\form\element\ShopItemFormButton;
 
-class Shop5Form implements Form {
+class Shop5Form extends SimpleForm {
 
-    public function handleResponse(Player $player, $data): void {
-        if ($data === null) {
-            return;
+    public function __construct() {
+        $contents = [
+            "ネザーストーン類" => "NetherStones",
+            "その他ブロック" => "OtherBlocks5",
+            "その他アイテム" => "OtherItems",
+        ];
+        $this
+            ->setTitle("Level Shop")
+            ->setText("§7選択してください");
+        foreach ($contents as $key => $value) {
+            $class = __NAMESPACE__ . "\\" . $value;
+            $this->addElements(new ShopItemFormButton($key, $class));
         }
-        $forms = [
-            'OtherBlocks5',
-            'NetherStones',
-            'Others',
-        ];
-        $class = "\\deceitya\\levelShop\\form\\shop5\\" . $forms[$data];
-        $player->sendForm(new $class());
-    }
-
-    public function jsonSerialize() {
-        $shop = LevelShopAPI::getInstance();
-        return [
-            'type' => 'form',
-            'title' => 'LevelShop',
-            'content' => '§7選択してください
-LevelShop5ではネザー関係のものを販売しています',
-            'buttons' => [
-                ['text' => 'OtherBlocks'],
-                ['text' => 'NetherStones'],
-                ['text' => 'Others'],
-            ]
-        ];
+        $this->addElements(new FirstBackFormButton("ホームに戻る"));
     }
 }
