@@ -17,7 +17,6 @@ class Shop1Form extends SimpleForm {
             "食料アイテム" => "Foods",
             "その他アイテム" => "Others",
             "通貨アイテム" => "Currency",
-
         ];
         $this
             ->setTitle("Level Shop")
