@@ -317,6 +317,15 @@ class LevelShopAPI {
         }
     }
 
+    public function checkType(int $id, ?int $meta = null): ?string {
+        try {
+            return $this->type[$id][$meta ?? 0] ?? null;
+        } catch (\Exception $e) {
+            $this->varDump($e);
+            return null;
+        }
+    }
+
     private function varDump($e): void {
         var_dump("-----getFile-----");
         var_dump($e->getFile());
