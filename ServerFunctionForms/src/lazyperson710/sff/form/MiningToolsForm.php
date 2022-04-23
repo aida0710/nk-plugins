@@ -6,7 +6,6 @@ use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson710\sff\form\element\CommandDispatchButton;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class MiningToolsForm extends SimpleForm {
 
@@ -34,8 +33,5 @@ class MiningToolsForm extends SimpleForm {
                 new CommandDispatchButton("Netherite Tools - 範囲採掘ツール\n{$level30}", "mt2", null),
                 new CommandDispatchButton("アップグレード - Ex範囲採掘ツール\n{$level120}", "mt3", null),
             );
-        /*if (Server::getInstance()->isOp($player->getName())) {
-            $this->addElement(new CommandDispatchButton("Debug_Tools", "mt4", null));
-        }*/
     }
 }
