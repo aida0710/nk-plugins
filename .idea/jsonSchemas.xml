@@ -12,21 +12,32 @@
               <option name="patterns">
                 <list>
                   <Item>
+                    <option name="pattern" value="true" />
+                    <option name="path" value="plugin.yml" />
+                    <option name="mappingKind" value="Pattern" />
+                  </Item>
+                  <Item>
                     <option name="directory" value="true" />
-                    <option name="path" value="*" />
+                    <option name="path" value="*/plugin.yml" />
                     <option name="mappingKind" value="Directory" />
                   </Item>
                   <Item>
-                    <option name="path" value="myworld/plugin.yml" />
+                    <option name="path" value="*/plugin.yml" />
                   </Item>
                   <Item>
                     <option name="path" value="CorePlugins/plugin.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="Level shop/plugin.yml" />
                   </Item>
                   <Item>
                     <option name="path" value="miningtools-debug/plugin.yml" />
                   </Item>
                   <Item>
                     <option name="path" value="miningtools/plugin.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="myworld/plugin.yml" />
                   </Item>
                 </list>
               </option>
