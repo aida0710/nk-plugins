@@ -305,15 +305,15 @@ class LevelShopAPI {
         }
     }
 
-    public function checkLevel(Player $player, int $id, ?int $meta = null): bool {
+    public function checkLevel(Player $player, int $id, ?int $meta = null): string {
         $miningLevel = MiningLevelAPI::getInstance();
         try {
-            if (!($this->getLevel($id ,$meta) < $miningLevel->getLevel($player->getName()))) {
-                return false;
+            if (!($this->getLevel($id, $meta) < $miningLevel->getLevel($player->getName()))) {
+                return "failure";
             }
-            return true;
+            return "success";
         } catch (\Exception $e) {
-            return false;
+            return "exception";
         }
     }
 
