@@ -268,13 +268,14 @@ class LevelShopAPI {
     public function register(Item $item, int $buy, int $sell, int $level, string $type): void {
         $this->buy[$item->getId()][$item->getMeta()] = $buy;
         $this->sell[$item->getId()][$item->getMeta()] = $sell;
-        $this->level[$level] = $level;
+        $this->level[$item->getId()][$item->getMeta()] = $level;
+        $this->type[$item->getId()][$item->getMeta()] = $type;
     }
 
     protected function registerFromId(int $itemId, int $itemMeta, int $buy, int $sell, $level): void {
         $this->buy[$itemId][$itemMeta] = $buy;
         $this->sell[$itemId][$itemMeta] = $sell;
-        $this->level[$level] = $level;
+        $this->level[$itemId][$itemMeta] = $level;
     }
 
     public function getBuy(int $id, ?int $meta = null): ?int {
