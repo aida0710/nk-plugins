@@ -2,6 +2,7 @@
 
 namespace deceitya\levelShop;
 
+use deceitya\levelShop\command\InvSellCommand;
 use deceitya\levelShop\command\Shop1Command;
 use deceitya\levelShop\command\Shop2Command;
 use deceitya\levelShop\command\Shop3Command;
@@ -9,7 +10,6 @@ use deceitya\levelShop\command\Shop4Command;
 use deceitya\levelShop\command\Shop5Command;
 use deceitya\levelShop\command\Shop6Command;
 use deceitya\levelShop\command\Shop7Command;
-use deceitya\levelShop\form\element\SecondBackFormButton;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
@@ -23,7 +23,7 @@ class Main extends PluginBase {
             new Shop5Command(),
             new Shop6Command(),
             new Shop7Command(),
-            //new InvSellCommand(),
+            new InvSellCommand(),
         ]);
     }
 }
