@@ -16,7 +16,7 @@ class SellBuyForm implements Form {
     private int $buy;
     private int $sell;
 
-    public function __construct(int $itemId ,int $itemMeta, int $buy, int $sell) {
+    public function __construct(int $itemId, int $itemMeta, int $buy, int $sell) {
         $this->itemId = $itemId;
         $this->itemMeta = $itemMeta;
         $this->buy = $buy;
