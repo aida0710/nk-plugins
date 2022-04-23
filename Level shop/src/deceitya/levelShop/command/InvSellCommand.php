@@ -2,7 +2,7 @@
 
 namespace deceitya\levelShop\command;
 
-use deceitya\levelShop\form\shop2\Shop2Form;
+use deceitya\levelShop\form\InvSell\Confirmation;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -21,7 +21,7 @@ class InvSellCommand extends Command {
             return;
         }
         if (MiningLevelAPI::getInstance()->getLevel($sender) >= 25) {
-            $sender->sendForm(new Shop2Form());
+            $sender->sendForm(new Confirmation());
         } else {
             $sender->sendMessage("§bLevelShop §7>> §cレベル25以上でないと実行できません");
             Server::getInstance()->dispatchCommand($sender, "shop");
