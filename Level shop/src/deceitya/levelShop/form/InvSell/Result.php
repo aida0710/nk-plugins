@@ -24,21 +24,12 @@ class Result extends SimpleForm {
         $allSellMoney = 0;
         for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
             $item = clone $inventory->getItem($i);
-            switch ($item->getId()) {
-                case ItemIds::AIR:
-                    break;
-            }
-            if ($i >= 0 && $i <= $inventory->getHotbarSize() - 1) {
-                continue;
-            }
-            if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) {
-                continue;
-            }
+            if ($item->getId() == ItemIds::AIR) continue;
+            if ($i >= 0 && $i <= $inventory->getHotbarSize() - 1) continue;
+            if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
             if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "failure") {
                 continue;
-            } elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "exception") {
-                continue;
-            }
+            } elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "exception") continue;
             $sellMoney = LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta());
             $count = $item->getCount();
             $sellMoney = $sellMoney * $count;
