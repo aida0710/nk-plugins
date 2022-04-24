@@ -16,6 +16,7 @@ class OldPickaxe implements Listener {
         if ($namedTag->getTag('OldPickaxe') !== null) {//OldPickaxe
             if (rand(1, 50) === 50) {
                 $player->getInventory()->removeItem($inHand);
+                $player->sendTip("つーるがこわれてしまった！！！！");
                 $sound = new PlaySoundPacket();
                 $sound->soundName = "random.break";
                 $sound->x = $player->getPosition()->getX();
