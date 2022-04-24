@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
@@ -17,6 +18,10 @@ class BreakListener implements Listener {
         $player = $event->getPlayer();
         $item = $event->getItem();
         $inhanditem = $event->getPlayer()->getInventory()->getItemInHand();
+        if ($event->getBlock()->getId() == BlockLegacyIds::MONSTER_SPAWNER) {
+            $setExp = 5000;
+            $event->getPlayer()->getXpManager()->addXp($setExp);
+        }
         if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
             if (!empty($inhanditem->getNamedTag()->getTag('MiningTools_3'))) {
                 if ($item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) === 0) {
