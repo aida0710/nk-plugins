@@ -23,6 +23,7 @@ class nbtEditCommand extends Command {
         }
         foreach ($args as $sub) {
             $nbt->setInt($sub, 1);
+            $sender->getInventory()->setItemInHand($item);
             $sender->sendMessage("nbtタグ {$sub} を付与しました");
         }
     }
