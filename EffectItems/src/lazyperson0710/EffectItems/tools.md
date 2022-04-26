@@ -1,35 +1,35 @@
 # つるはし
 
-1. [ ] 窓一郎の炯眼 NightVisionPickaxe<br>
+1. [x] 窓一郎の炯眼 NightVisionPickaxe<br>
 持っていると暗視がつくだけ
-2. [ ] アルケミピッケル AlchemyPickaxe<br>
+2. [x] アルケミピッケル AlchemyPickaxe<br>
 丸石または焼き石を掘っていても確率で鉱石が手に入る
 3. [ ] 鉱石より愛を込めて RandomEffectPickaxe || **MultiType** つるはし、おの<br>
 ランダムエフェクト。
-4. [ ] 呪われたつるはし CursedPickaxe<br>
+4. [x] 呪われたつるはし CursedPickaxe<br>
 中確率で鉱石が手に入らない
-5. [ ] 暗夜行山 AbyssPickaxe<br>
+5. [x] 暗夜行山 AbyssPickaxe<br>
 持っていると暗闇がつく
 6. [ ] 財宝発見! TreasureDiscovery || **MultiType** つるはし、しゃべる、おの<br>
 確率でお金が手に入る。金額はランダム。<br>
 `switch(rand(1, 10)){`10段階150,300,1500,5000,2.5万,5万,10万,15万,25万,50万<br>
 どれか一つでもあたるとツールは壊れる
-7. [ ] 古びたつるはし OldPickaxe<br>
+7. [x] 古びたつるはし OldPickaxe<br>
 50/1の確率で壊れる
-8. [ ] 疾風のつるはし GalePickaxe<br>
+8. [x] 疾風のつるはし GalePickaxe<br>
 持っているとスピードがつく
 9. [ ] 溶岩泳者の友 LavaSwimmer'sFriend<br>
 持っていると耐火がつく、アイテム化しても燃えない
 10. [ ] 雷鳴のつるはし ThunderPickaxe<br>
 使うと雷が落ちる
-11. [ ] 溶鉱炉 BlastFurnace<br>
+11. [x] 溶鉱炉 BlastFurnace<br>
 鉱石が焼かれた状態で採れるが、確率(1/15)で火炎ダメージを受ける
 12. [ ] ハイドロゲル Hydrogel<br>
 使えば使うほどレベルアップしていく
-13. [ ] 重いつるはし HeavyPickaxe<br>
+13. [x] 重いつるはし HeavyPickaxe<br>
 ただ鈍足と採掘低下エフェクトがつくだけ
-14. [ ] おもちゃのつるはし ToyPickaxe<br>
-1/50で壊れる
+14. [x] おもちゃのつるはし ToyPickaxe<br>
+ヘイストが付与するだけ
 # 斧
 1. [ ] Here's johnny! Here'sJohnny!<br>
 ドア系を一撃で壊せる。インタラクトイベントでonbreakさせたい
