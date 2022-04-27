@@ -5,7 +5,6 @@ namespace lazyperson0710\EffectItems;
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
-use pocketmine\player\Player;
 use pocketmine\Server;
 
 class DamageEventListener implements Listener {
@@ -22,14 +21,15 @@ class DamageEventListener implements Listener {
                 $event->cancel();
             }
         }
-        if (($event->getCause() === EntityDamageEvent::CAUSE_FALL)){
+        if (($event->getCause() === EntityDamageEvent::CAUSE_FALL)) {
+            $player = Server::getInstance()->getPlayerExact($event->getEntity()->getTargetEntity()->getNameTag());
+            if (!Server::getInstance()->getPlayerExact($event->getEntity()->getTargetEntity()->getNameTag()) === null) {
+                var_dump(1);
+                return;
+            }
             /** @var ItemEntity $item */
-            if ($item->getItem()->getNamedTag()->getTag('DefensiveStone') !== null) {//DefensiveStone
+            if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('DefensiveStone') !== null) {//DefensiveStone
                 var_dump(0);
-                if (!Server::getInstance()->getPlayerExact($event->getEntity()->getTargetEntity()->getNameTag()) == Player::class){
-                    var_dump(1);
-                    return;
-                }
                 $event->cancel();
             }
         }
