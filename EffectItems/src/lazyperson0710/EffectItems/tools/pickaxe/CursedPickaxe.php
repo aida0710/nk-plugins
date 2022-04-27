@@ -2,12 +2,9 @@
 
 namespace lazyperson0710\EffectItems\tools\pickaxe;
 
-use pocketmine\block\Air;
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\item\VanillaItems;
 
@@ -37,7 +34,7 @@ class CursedPickaxe implements Listener {
                     case ItemIds::EMERALD_ORE:
                     case ItemIds::QUARTZ:
                     case ItemIds::QUARTZ_ORE:
-                        $event->setDrops([VanillaItems::AIR()]);
+                        $event->setDrops([VanillaBlocks::STONE()->asItem()->setCustomName("呪いの石(笑)")]);
                         $event->getPlayer()->sendMessage("呪いによって鉱石がなくなってしまった");
                         return;
                 }
