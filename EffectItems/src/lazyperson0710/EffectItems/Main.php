@@ -10,8 +10,6 @@ use pocketmine\plugin\PluginBase;
 class Main extends PluginBase {
 
     public function onEnable(): void {
-        //$this->getServer()->getPluginManager()->registerEvents(new DamageEventListener(), $this);
-        //$this->getServer()->getPluginManager()->registerEvents(new InteractEventListener(), $this);
         $manager = $this->getServer()->getPluginManager();
         $manager->registerEvents(new GlowstoneBreaker(), $this);
         $manager->registerEvents(new ObsidianBreaker(), $this);
