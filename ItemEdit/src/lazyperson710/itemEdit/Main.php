@@ -2,8 +2,7 @@
 
 namespace lazyperson710\itemEdit;
 
-use lazyperson710\itemEdit\command\nbtEditCommand;
-use lazyperson710\itemEdit\command\UnbreakableCommand;
+use lazyperson710\itemEdit\command\ItemEditCommand;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 
@@ -13,8 +12,7 @@ class Main extends PluginBase implements Listener {
         $this->saveDefaultConfig();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getServer()->getCommandMap()->registerAll("ItemEdit", [
-            new nbtEditCommand(),
-            new UnbreakableCommand(),
+            new ItemEditCommand(),
         ]);
     }
 }
