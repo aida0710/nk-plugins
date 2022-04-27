@@ -18,6 +18,7 @@ class ObsidianBreaker implements Listener {
         if ($inHand->getNamedTag()->getTag('ObsidianBreaker') !== null) {//ObsidianBreaker
             $pos = $block->getPosition()->add($position->getFloorX(), $position->getFloorY(), $position->getFloorZ());
             if ($event->getBlock()->getId() === BlockLegacyIds::OBSIDIAN) {
+                //todo 土地保護などの条件追加
                 $block->getPosition()->getWorld()->useBreakOn($pos, $inHand, $player);
             }
         }

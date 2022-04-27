@@ -18,6 +18,7 @@ class GlowstoneBreaker implements Listener {
         if ($inHand->getNamedTag()->getTag('GlowstoneBreaker') !== null) {//GlowstoneBreaker
             $pos = $block->getPosition()->add($position->getFloorX(), $position->getFloorY(), $position->getFloorZ());
             if ($event->getBlock()->getId() === BlockLegacyIds::GLOWSTONE) {
+                //todo 土地保護などの条件追加
                 $block->getPosition()->getWorld()->useBreakOn($pos, $inHand, $player);
             }
         }
