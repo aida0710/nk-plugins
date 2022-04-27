@@ -1,13 +1,13 @@
 <?php
 
-namespace lazyperson0710\EffectItems\tools\pickaxe;
+namespace lazyperson0710\EffectItems\tools;
 
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 
-class Pickaxe implements Listener {
+class Sample implements Listener {
 
     public function onInteract(PlayerInteractEvent $event): void {
         if ($event->isCancelled()) return;

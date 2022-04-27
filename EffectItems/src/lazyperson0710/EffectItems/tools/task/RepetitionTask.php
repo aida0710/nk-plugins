@@ -1,39 +1,36 @@
 <?php
 
-namespace lazyperson0710\EffectItems\tools\pickaxe\task;
+namespace lazyperson0710\EffectItems\tools\task;
 
-use pocketmine\block\BlockLegacyIds;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
-use pocketmine\event\block\BlockBreakEvent;
-use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
 
-class PickaxeTask extends Task {
+class RepetitionTask extends Task {
 
     public function onRun(): void {
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
             $getNameTag = $player->getInventory()->getItemInHand()->getNamedTag();
-            if ($getNameTag->getTag('AbyssPickaxe') !== null) {//AbyssPickaxe
-                $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 500, 0, false);
-                $vanillaEffect = VanillaEffects::NIGHT_VISION();
+            ##AllTools
+            if ($getNameTag->getTag('AbyssTools') !== null) {//AbyssTools
+                $effect = new EffectInstance(VanillaEffects::BLINDNESS(), 500, 0, false);
+                $vanillaEffect = VanillaEffects::BLINDNESS();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
-            if ($getNameTag->getTag('AlchemyPickaxe') !== null) {//GalePickaxe
+            if ($getNameTag->getTag('AlchemyTools') !== null) {//GaleTools
                 $effect = new EffectInstance(VanillaEffects::SPEED(), 500, 0, false);
                 $vanillaEffect = VanillaEffects::SPEED();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
-            if ($getNameTag->getTag('ToyPickaxe') !== null) {//ToyPickaxe
+            if ($getNameTag->getTag('ToyTools') !== null) {//ToyTools
                 $effect = new EffectInstance(VanillaEffects::HASTE(), 500, 0, false);
                 $vanillaEffect = VanillaEffects::HASTE();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
-            if ($getNameTag->getTag('HeavyPickaxe') !== null) {//HeavyPickaxe
+            if ($getNameTag->getTag('HeavyTools') !== null) {//HeavyTools
                 $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 60, 0, false);
                 $vanillaEffect = VanillaEffects::SLOWNESS();
                 $this->addEffect($player, $effect, $vanillaEffect);
@@ -41,13 +38,13 @@ class PickaxeTask extends Task {
                 $vanillaEffect = VanillaEffects::MINING_FATIGUE();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
-            if ($getNameTag->getTag('BlindnessPickaxe') !== null) {//BlindnessPickaxe
-                $effect = new EffectInstance(VanillaEffects::BLINDNESS(), 60, 0, false);
-                $vanillaEffect = VanillaEffects::BLINDNESS();
+            if ($getNameTag->getTag('NightVisionTools') !== null) {//BlindnessTools
+                $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 60, 0, false);
+                $vanillaEffect = VanillaEffects::NIGHT_VISION();
                 $this->addEffect($player, $effect, $vanillaEffect);
                 return;
             }
-            if ($getNameTag->getTag('FireResistancePickaxe') !== null) {//FireResistancePickaxe
+            if ($getNameTag->getTag('FireResistanceTools') !== null) {//FireResistanceTools
                 $effect = new EffectInstance(VanillaEffects::FIRE_RESISTANCE(), 60, 0, false);
                 $vanillaEffect = VanillaEffects::FIRE_RESISTANCE();
                 $this->addEffect($player, $effect, $vanillaEffect);
@@ -56,7 +53,7 @@ class PickaxeTask extends Task {
         }
     }
 
-    public function addEffect(Player $player, EffectInstance $effect, Effect $vanillaEffects){
+    public function addEffect(Player $player, EffectInstance $effect, Effect $vanillaEffects) {
         $effectInstance = $player->getEffects()->get($vanillaEffects);
         if ($effectInstance === null) {
             $player->getEffects()->add($effect);
