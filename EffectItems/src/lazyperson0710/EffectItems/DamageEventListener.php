@@ -12,22 +12,20 @@ use pocketmine\Server;
 class DamageEventListener implements Listener {
 
     public function onDamage(EntityDamageEvent $event) {
-        $item = $event->getEntity();
-        //todo 落下ダメージ無効化ブーツ
-        //todo 守りの石的な感じで何度かダメージを完全に無効化
-        if (!$event->isCancelled()) return;
-        if (!$event->getEntity() instanceof ItemEntity) return;
+        if ($event->isCancelled()) return;
         if (($event->getCause() === EntityDamageEvent::CAUSE_FIRE || $event->getCause() === EntityDamageEvent::CAUSE_LAVA)) {
+            $item = $event->getEntity();
+            if (!$event->getEntity() instanceof ItemEntity) return;
             /** @var ItemEntity $item */
             if ($item->getItem()->getNamedTag()->getTag('FireResistancePickaxe') !== null) {//FireResistancePickaxe
                 $event->cancel();
             }
         }
-        if (($event->getCause() === EntityDamageEvent::CAUSE_FALL)) {
-            if (!$event->getEntity() instanceof Player) return;
+        if (!$event->getEntity() instanceof Player) return;
+        try {
             $playerName = $event->getEntity()->getName();
-            try {
-                if ($player = Server::getInstance()->getPlayerExact($playerName)) {
+            if ($player = Server::getInstance()->getPlayerExact($playerName)) {
+                if (($event->getCause() === EntityDamageEvent::CAUSE_FALL)) {
                     $armorInventory = $player->getArmorInventory();
                     for ($i = 0, $size = $armorInventory->getSize(); $i < $size; ++$i) {
                         $item = clone $armorInventory->getItem($i);
@@ -39,13 +37,13 @@ class DamageEventListener implements Listener {
                                 $player->sendTip("§bDurable §7>> §a落下ダメージが無効化されました！耐久 -{$damage}");
                                 $event->cancel();
                             }
+                            return;
                         }
                     }
                 }
-            } catch (\Exception $exception) {
-                var_dump($exception);
-                return;
             }
+        } catch (\Exception $exception) {
+            var_dump($exception);
             return;
         }
     }
