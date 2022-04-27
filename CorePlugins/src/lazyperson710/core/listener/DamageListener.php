@@ -14,7 +14,7 @@ class DamageListener implements Listener {
             return;
         }
         switch ($event->getCause()) {
-            case EntityDamageEvent::CAUSE_FALL:
+            //case EntityDamageEvent::CAUSE_FALL:
             case EntityDamageEvent::CAUSE_SUFFOCATION:
                 $event->cancel();
                 break;
