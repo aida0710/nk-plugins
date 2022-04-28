@@ -150,6 +150,7 @@ class EventListener implements Listener {
                         break;
                     case 25:
                         $player->sendMessage("§bTutorial §7>> §gLevelShop2が解放されました！浜松市に行って農業をやってみよう！/shop");
+                        $player->sendMessage("§bTutorial §7>> §gインベントリからアイテムを一括売却できる機能が解放されました！");
                         $player->sendMessage("§bTutorial §7>> §gDiamondMiningToolsが解放されました！範囲破壊が可能ですがDiamondグレードでは修繕ができないためご注意ください。。。");
                         break;
                     case 30:
