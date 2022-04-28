@@ -23,7 +23,9 @@ class DamageEventListener implements Listener {
         }
         if (!$event->getEntity() instanceof Player) return;
         try {
-            $playerName = $event->getEntity()->getName();
+            $getEntity = $event->getEntity();
+            /** @var $getEntity Player */
+            $playerName = $getEntity->getName();
             if ($player = Server::getInstance()->getPlayerExact($playerName)) {
                 if (($event->getCause() === EntityDamageEvent::CAUSE_FALL)) {
                     $armorInventory = $player->getArmorInventory();
