@@ -23,7 +23,7 @@ class Sample implements Listener {
         }
     }
 
-    public function onBreak(BlockBreakEvent $event){
+    public function onBreak(BlockBreakEvent $event) {
         if ($event->isCancelled()) return;
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
