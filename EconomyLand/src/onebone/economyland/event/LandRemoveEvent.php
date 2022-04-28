@@ -24,6 +24,7 @@ use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
 
 class LandRemoveEvent extends Event implements Cancellable {
+
     use CancellableTrait;
 
     public static $handlerList = null;

@@ -5,14 +5,14 @@ namespace Deceitya\MiningLevel\Event;
 use bbo51dog\pmdiscord\connection\Webhook;
 use bbo51dog\pmdiscord\element\Embed;
 use bbo51dog\pmdiscord\element\Embeds;
-use deceitya\miningtools\event\CountBlockEvent;
-use pocketmine\event\Event;
 use DateTime;
 use DateTimeInterface;
 use Deceitya\MiningLevel\MiningLevelAPI;
+use deceitya\miningtools\event\CountBlockEvent;
 use InfoSystem\InfoSystem;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\Event;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\item\ItemFactory;
@@ -54,12 +54,12 @@ class EventListener implements Listener {
     /**
      * @priority HIGHEST
      */
-    public function CountBlock(CountBlockEvent $event): void{
+    public function CountBlock(CountBlockEvent $event): void {
         $player = $event->getPlayer();
         $this->getBreakEvent($event, $player);
     }
 
-    public function getBreakEvent(Event $event, Player $player){
+    public function getBreakEvent(Event $event, Player $player) {
         $player = $event->getPlayer();
         if ($event->isCancelled()) {
             return;

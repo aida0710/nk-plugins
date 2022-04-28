@@ -137,7 +137,6 @@ class Main extends PluginBase implements Listener {
                         return;
                 }
             }
-
             if (!isset($set)) {
                 Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
@@ -147,7 +146,7 @@ class Main extends PluginBase implements Listener {
             $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
             $dropItems = null;
             $blockIds = [];
-            if (!(str_contains($world_search, "-c") ||str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($name))) return;
+            if (!(str_contains($world_search, "-c") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($name))) return;
             $handItem = $player->getInventory()->getItemInHand();
             $haveDurable = $handItem instanceof Durable;
             $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
@@ -177,7 +176,7 @@ class Main extends PluginBase implements Listener {
                         if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
                         if (in_array($targetBlock->getId(), $set['nobreak-id'], true)) continue;
                         if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
-                        switch ($targetBlock->getId()){
+                        switch ($targetBlock->getId()) {
                             case ItemIds::AIR:
                             case ItemIds::BEDROCK:
                             case ItemIds::BARRIER:

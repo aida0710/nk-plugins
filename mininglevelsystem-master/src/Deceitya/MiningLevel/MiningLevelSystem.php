@@ -66,12 +66,11 @@ class MiningLevelSystem extends PluginBase {
                 if (isset($args[1]) && isset($args[2])) {
                     $player = $args[1];
                     $level = $args[2];
-                    if (Server::getInstance()->getPlayerByPrefix($player)){
+                    if (Server::getInstance()->getPlayerByPrefix($player)) {
                         if (!is_int($level)) {
-
-                        MiningLevelAPI::getInstance()->setLevel($player, $level);
-                        $sender->sendMessage("§bLevel §7>> §c{$player}のレベルを{$level}にしました。");
-                        return true;
+                            MiningLevelAPI::getInstance()->setLevel($player, $level);
+                            $sender->sendMessage("§bLevel §7>> §c{$player}のレベルを{$level}にしました。");
+                            return true;
                         } else {
                             $sender->sendMessage("intじゃないんですけど");
                         }

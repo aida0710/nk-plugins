@@ -62,19 +62,19 @@ class CompoundTagForm extends CustomForm {
                 }
                 break;
             case 'Float':
-                    if (is_numeric($value) && mb_strpos($value, '.')) {
-                        if (mb_substr($value, -1) === '.' && mb_substr($value, 0, 1) === '.'){
-                            $player->sendMessage("typeに対して型が違います。type -> {$type}/入力値 -> {$value}");
-                            return;
-                        }
-                        foreach ($setTags as $setTag) {
-                            $nbt->setFloat($setTag, $value);
-                            $player->sendMessage("{$setTag}を{$type}/{$value}で付与しました");
-                        }
-                    } else {
+                if (is_numeric($value) && mb_strpos($value, '.')) {
+                    if (mb_substr($value, -1) === '.' && mb_substr($value, 0, 1) === '.') {
                         $player->sendMessage("typeに対して型が違います。type -> {$type}/入力値 -> {$value}");
                         return;
                     }
+                    foreach ($setTags as $setTag) {
+                        $nbt->setFloat($setTag, $value);
+                        $player->sendMessage("{$setTag}を{$type}/{$value}で付与しました");
+                    }
+                } else {
+                    $player->sendMessage("typeに対して型が違います。type -> {$type}/入力値 -> {$value}");
+                    return;
+                }
                 break;
             case 'String':
                 foreach ($setTags as $setTag) {

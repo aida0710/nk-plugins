@@ -24,7 +24,7 @@
 2. [x] 呪われたつるはし CursedPickaxe<br>
    中確率で鉱石が手に入らない
 3. [ ] 鉱石より愛を込めて RandomEffectPickaxe<br>
-      ランダムエフェクト。
+   ランダムエフェクト。
 4. [x] 溶鉱炉 BlastFurnace<br>
    鉱石が焼かれた状態で採れるが、確率(1/15)で火炎ダメージを受ける
 5. [ ] ハイドロゲル Hydrogel<br>

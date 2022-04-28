@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace deceitya\levelShop\database;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
+use Exception;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
@@ -281,7 +282,7 @@ class LevelShopAPI {
     public function getBuy(int $id, ?int $meta = null): ?int {
         try {
             return $this->buy[$id][$meta ?? 0] ?? null;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->varDump($e);
             return null;
         }
@@ -290,7 +291,7 @@ class LevelShopAPI {
     public function getSell(int $id, ?int $meta = null): ?int {
         try {
             return $this->sell[$id][$meta ?? 0] ?? null;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->varDump($e);
             return null;
         }
@@ -299,7 +300,7 @@ class LevelShopAPI {
     public function getLevel(int $id, ?int $meta = null): ?int {
         try {
             return $this->level[$id][$meta ?? 0] ?? null;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->varDump($e);
             return null;
         }
@@ -312,7 +313,7 @@ class LevelShopAPI {
                 return "failure";
             }
             return "success";
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return "exception";
         }
     }
@@ -320,7 +321,7 @@ class LevelShopAPI {
     public function checkType(int $id, ?int $meta = null): ?string {
         try {
             return $this->type[$id][$meta ?? 0] ?? null;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->varDump($e);
             return null;
         }

@@ -172,9 +172,8 @@ class Main extends PluginBase implements Listener {
                     $player->sendMessage("§bEnEfShop §7>> §c値は5以下にして下さい。");
                     return;
                 }
-                
                 switch ($data[1]) {
-                    case 0: 
+                    case 0:
                         $need = 9999999999999999999999999999999999999999999999999 * $data[0];
                         if (EconomyAPI::getInstance()->myMoney($player) < $need) {
                             $player->sendMessage("§bEnEfShop §7>> §c付与したいエンチャントを選択してください");
@@ -188,7 +187,7 @@ class Main extends PluginBase implements Listener {
                         $player->getInventory()->setItemInHand($item);
                         $player->sendMessage("§bEnEfShop §7>> §aダメージ増加を{$data[0]}レベル、{$need}円で付与しました");
                         break;
-                    case 1: 
+                    case 1:
                         $need = 3000 * $data[0];
                         $this->isMoney($player, $need);
                         $item = $player->getInventory()->getItemInHand();
@@ -199,7 +198,7 @@ class Main extends PluginBase implements Listener {
                         $player->getInventory()->setItemInHand($item);
                         $player->sendMessage("§bEnEfShop §7>> §aダメージ増加を{$data[0]}レベル、{$need}円で付与しました");
                         break;
-                    case 2: 
+                    case 2:
                         $need = 5000 * $data[0];
                         $this->isMoney($player, $need);
                         $item = $player->getInventory()->getItemInHand();
@@ -210,7 +209,7 @@ class Main extends PluginBase implements Listener {
                         $player->getInventory()->setItemInHand($item);
                         $player->sendMessage("§bEnEfShop §7>> §a効率強化を{$data[0]}レベル、{$need}円で付与しました");
                         break;
-                    case 3: 
+                    case 3:
                         $need = 15000 * $data[0];
                         $this->isMoney($player, $need);
                         $item = $player->getInventory()->getItemInHand();
@@ -225,7 +224,7 @@ class Main extends PluginBase implements Listener {
                         $player->getInventory()->setItemInHand($item);
                         $player->sendMessage("§bEnEfShop §7>> §aシルクタッチを{$data[0]}レベル、{$need}円で付与しました");
                         break;
-                    case 4: 
+                    case 4:
                         $need = 30000 * $data[0];
                         $this->isMoney($player, $need);
                         $item = $player->getInventory()->getItemInHand();
@@ -244,7 +243,7 @@ class Main extends PluginBase implements Listener {
                         $player->getInventory()->setItemInHand($item);
                         $player->sendMessage("§bEnEfShop §7>> §a幸運を{$data[0]}レベル、{$need}円で付与しました");
                         break;
-                    case 5: 
+                    case 5:
                         $need = 10000 * $data[0];
                         $this->isMoney($player, $need);
                         $item = $player->getInventory()->getItemInHand();
@@ -259,7 +258,7 @@ class Main extends PluginBase implements Listener {
                         $player->getInventory()->setItemInHand($item);
                         $player->sendMessage("§bEnEfShop §7>> §a耐久力を{$data[0]}レベル、{$need}円で付与しました");
                         break;
-                    case 6: 
+                    case 6:
                         $need = 30000 * $data[0];
                         $item = $player->getInventory()->getItemInHand();
                         $this->isMoney($player, $need);

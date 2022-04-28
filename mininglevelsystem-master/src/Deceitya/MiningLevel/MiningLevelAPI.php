@@ -5,7 +5,6 @@ namespace Deceitya\MiningLevel;
 use Deceitya\MiningLevel\Database\SQLiteDatabase;
 use Deceitya\MiningLevel\Task\AsyncDataWriteTask;
 use pocketmine\player\Player;
-use bbo51dog\pmdiscord\connection\Webhook;
 use pocketmine\Server;
 
 class MiningLevelAPI {
