@@ -6,6 +6,7 @@ use deceitya\miningtools\command\DiamondMiningToolCommand;
 use deceitya\miningtools\command\ExpansionMiningToolCommand;
 use deceitya\miningtools\command\NetheriteMiningToolCommand;
 use deceitya\miningtools\event\CountBlockEvent;
+use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
@@ -146,7 +147,7 @@ class Main extends PluginBase implements Listener {
             $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
             $dropItems = null;
             $blockIds = [];
-            if (!(str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($name))) return;
+            if (!(str_contains($world_search, "-c") ||str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($name))) return;
             $handItem = $player->getInventory()->getItemInHand();
             $haveDurable = $handItem instanceof Durable;
             $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
@@ -175,6 +176,7 @@ class Main extends PluginBase implements Listener {
                         $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
                         if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
                         if (in_array($targetBlock->getId(), $set['nobreak-id'], true)) continue;
+                        if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
                         switch ($targetBlock->getId()){
                             case ItemIds::AIR:
                             case ItemIds::BEDROCK:
