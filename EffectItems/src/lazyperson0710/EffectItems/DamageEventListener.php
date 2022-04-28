@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems;
 
+use Exception;
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
@@ -44,7 +45,7 @@ class DamageEventListener implements Listener {
                     }
                 }
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             var_dump($exception);
             return;
         }
