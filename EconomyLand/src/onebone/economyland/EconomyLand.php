@@ -650,6 +650,26 @@ class EconomyLand extends PluginBase implements Listener {
         return true;
     }
 
+    public function posCheck(Vector3 $pos, Player $player): bool {
+        $x = $pos->getFloorX();
+        $z = $pos->getFloorZ();
+        $level = $player->getWorld()->getFolderName();
+        if (in_array($level, $this->getConfig()->get("non-check-worlds", []))) {
+            return false;
+        }
+        $info = $this->db->canTouch($x, $z, $level, $player);
+        if ($info === -1) {
+            if ($this->getConfig()->get("white-world-protection", [])) {
+                if (in_array($level, $this->getConfig()->get("white-world-protection", [])) and !$player->hasPermission("economyland.land.modify.whiteland")) {
+                    return false;
+                }
+            }
+        } elseif ($info !== true) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param BlockPlaceEvent $event
      * @return void
