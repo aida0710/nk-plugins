@@ -6,13 +6,12 @@ use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
 class BlastFurnacePickaxe implements Listener {
 
-    public function onBreak(BlockBreakEvent $event){
+    public function onBreak(BlockBreakEvent $event) {
         if ($event->isCancelled()) return;
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
@@ -53,11 +52,11 @@ class BlastFurnacePickaxe implements Listener {
         }
     }
 
-    public function addFire(Player $player){
-        if ($player->isOnFire()){
+    public function addFire(Player $player) {
+        if ($player->isOnFire()) {
             return;
         }
-        if (mt_rand(1, 350) === 350){
+        if (mt_rand(1, 350) === 350) {
             $player->setOnFire(5);
             $player->sendMessage("自分も燃えてしまった");
         }
