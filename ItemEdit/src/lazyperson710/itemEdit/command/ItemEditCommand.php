@@ -17,6 +17,6 @@ class ItemEditCommand extends Command {
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if (!($sender instanceof Player)) return;
         if (!Server::getInstance()->isOp($sender->getName())) return;
-        $sender->sendForm(new NbtEditForm());
+        $sender->sendForm(new NbtEditForm($sender));
     }
 }

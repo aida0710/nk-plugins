@@ -8,7 +8,7 @@ use pocketmine\player\Player;
 
 class NbtEditForm extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $this
             ->setTitle("Item Edit")
             ->setText("選択してください")
@@ -16,6 +16,7 @@ class NbtEditForm extends SimpleForm {
                 new SendFormButton(new ItemEditForm(), "Itemの表示される情報を操作"),
                 new SendFormButton(new CompoundTagForm(), "CompoundTagを編集する"),
                 new SendFormButton(new UnbreakableForm(), "耐久力の有限/無限を設定"),
+                new SendFormButton(new ItemInformationForm($player), "アイテムの詳細情報を表示"),
             );
     }
 
