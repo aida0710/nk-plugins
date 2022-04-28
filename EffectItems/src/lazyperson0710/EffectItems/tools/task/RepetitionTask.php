@@ -50,6 +50,19 @@ class RepetitionTask extends Task {
                 $this->addEffect($player, $effect, $vanillaEffect);
                 return;
             }
+            ##pickaxe
+            if ($getNameTag->getTag('ObsidianBreaker') !== null) {//ObsidianBreaker
+                $effect = new EffectInstance(VanillaEffects::HASTE(), 25, 255, false);
+                $vanillaEffect = VanillaEffects::HASTE();
+                $this->addEffect($player, $effect, $vanillaEffect);
+                return;
+            }
+            if ($getNameTag->getTag('GlowstoneBreaker') !== null) {//GlowstoneBreaker
+                $effect = new EffectInstance(VanillaEffects::HASTE(), 25, 255, false);
+                $vanillaEffect = VanillaEffects::HASTE();
+                $this->addEffect($player, $effect, $vanillaEffect);
+                return;
+            }
         }
     }
 
