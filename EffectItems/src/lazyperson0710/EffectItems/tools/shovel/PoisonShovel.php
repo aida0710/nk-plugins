@@ -2,23 +2,21 @@
 
 namespace lazyperson0710\EffectItems\tools\shovel;
 
-use pocketmine\block\BlockLegacyIds;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\player\Player;
 
 class PoisonShovel implements Listener {
 
-    public function onBreak(BlockBreakEvent $event){
+    public function onBreak(BlockBreakEvent $event) {
         if ($event->isCancelled()) return;
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
         if ($inHand->getNamedTag()->getTag('PoisonShovel') !== null) {//PoisonShovel
-            if (mt_rand(1, 150) === 150){
+            if (mt_rand(1, 150) === 150) {
                 $effect = new EffectInstance(VanillaEffects::POISON(), 60, 0, false);
                 $vanillaEffect = VanillaEffects::POISON();
                 $this->addEffect($player, $effect, $vanillaEffect);

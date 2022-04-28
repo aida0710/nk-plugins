@@ -2,16 +2,14 @@
 
 namespace lazyperson0710\EffectItems\tools\shovel;
 
-use pocketmine\block\BlockLegacyIds;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
 
 class WitherShovel implements Listener {
 
-    public function onBreak(BlockBreakEvent $event){
+    public function onBreak(BlockBreakEvent $event) {
         if ($event->isCancelled()) return;
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
