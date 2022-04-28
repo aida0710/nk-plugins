@@ -21,12 +21,12 @@ class RepetitionTask extends Task {
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
             if ($getNameTag->getTag('AlchemyTools') !== null) {//GaleTools
-                $effect = new EffectInstance(VanillaEffects::SPEED(), 500, 0, false);
+                $effect = new EffectInstance(VanillaEffects::SPEED(), 60, 0, false);
                 $vanillaEffect = VanillaEffects::SPEED();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
             if ($getNameTag->getTag('ToyTools') !== null) {//ToyTools
-                $effect = new EffectInstance(VanillaEffects::HASTE(), 500, 0, false);
+                $effect = new EffectInstance(VanillaEffects::HASTE(), 60, 0, false);
                 $vanillaEffect = VanillaEffects::HASTE();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
@@ -38,8 +38,8 @@ class RepetitionTask extends Task {
                 $vanillaEffect = VanillaEffects::MINING_FATIGUE();
                 $this->addEffect($player, $effect, $vanillaEffect);
             }
-            if ($getNameTag->getTag('NightVisionTools') !== null) {//BlindnessTools
-                $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 60, 0, false);
+            if ($getNameTag->getTag('NightVisionTools') !== null) {//NightVisionTools
+                $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 500, 0, false);
                 $vanillaEffect = VanillaEffects::NIGHT_VISION();
                 $this->addEffect($player, $effect, $vanillaEffect);
                 return;
