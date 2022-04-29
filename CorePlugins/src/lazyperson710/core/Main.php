@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core;
 
+use Deceitya\ChestLock\Database\SQLDatabase;
 use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\InvCommand;
@@ -22,8 +23,11 @@ class Main extends PluginBase {
 
     const ITEM_TURTLE_HELMET = 469;
     const ITEM_GRIND_STONE = -195;
+    private SQLDatabase $db;
 
     public function onEnable(): void {
+        $this->reloadConfig();
+        $this->db = new SQLDatabase($this->getDataFolder());
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 20);
         foreach (scandir("worlds/") as $value) {
             if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
