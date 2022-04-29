@@ -2,7 +2,6 @@
 
 namespace lazyperson710\core;
 
-use Deceitya\ChestLock\Database\SQLDatabase;
 use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\InvCommand;
@@ -16,18 +15,14 @@ use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
 use pocketmine\plugin\PluginBase;
-use pocketmine\scheduler\Task;
 use pocketmine\Server;
 
 class Main extends PluginBase {
 
     const ITEM_TURTLE_HELMET = 469;
     const ITEM_GRIND_STONE = -195;
-    private SQLDatabase $db;
 
     public function onEnable(): void {
-        $this->reloadConfig();
-        $this->db = new SQLDatabase($this->getDataFolder());
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 20);
         foreach (scandir("worlds/") as $value) {
             if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
@@ -65,22 +60,5 @@ class Main extends PluginBase {
         StringToItemParser::getInstance()->register('turtle_helmet', fn(string $input) => new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
         CreativeInventory::getInstance()->add(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
     }
-}
 
-class MotdTask extends Task {
-
-    private $original;
-    private $change;
-    private $flag = true;
-
-    public function __construct($original, $change) {
-        $this->original = $original;
-        $this->change = $change;
-    }
-
-    public function onRun(): void {
-        $motd = $this->flag ? $this->original : $this->change;
-        Server::getInstance()->getNetwork()->setName($motd);
-        $this->flag = !$this->flag;
-    }
 }
