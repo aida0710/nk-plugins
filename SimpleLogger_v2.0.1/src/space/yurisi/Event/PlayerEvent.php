@@ -1,12 +1,11 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace space\yurisi\Event;
 
-use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
-
+use pocketmine\event\Listener;
 use space\yurisi\SimpleLogger;
 
 class PlayerEvent implements Listener {

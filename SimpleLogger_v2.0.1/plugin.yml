@@ -6,6 +6,6 @@ author: yurisi
 website: homepage.yurisi.space
 
 permissions:
-    space.yurisi.log:
-        default: op
-        description: 指定した場所のログを確認
+  space.yurisi.log:
+    default: op
+    description: 指定した場所のログを確認

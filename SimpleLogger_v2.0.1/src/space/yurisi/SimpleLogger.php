@@ -1,11 +1,11 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace space\yurisi;
 
+use JsonException;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-
 use pocketmine\utils\Config;
 use space\yurisi\Command\LogCommand;
 use space\yurisi\DB\DataBase;
@@ -51,7 +51,7 @@ class SimpleLogger extends PluginBase {
         $this->config->setAll($this->data);
         try {
             $this->config->save();
-        } catch (\JsonException $e) {
+        } catch (JsonException $e) {
         }
         $this->log->close();
     }

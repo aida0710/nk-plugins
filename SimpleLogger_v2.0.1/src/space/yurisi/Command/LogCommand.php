@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace space\yurisi\Command;
 
-use pocketmine\player\Player;
-
-use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
-
+use pocketmine\command\CommandSender;
+use pocketmine\player\Player;
 use space\yurisi\SimpleLogger;
 
 class LogCommand extends Command {
@@ -30,7 +28,6 @@ class LogCommand extends Command {
             $sender->sendMessage("[SimpleLogger]§a{$msg[$flag]}にしました。");
             return true;
         }
-
         if (isset($args[1]) && isset($args[2]) && isset($args[3])) {
             if (is_numeric($args[0]) && is_numeric($args[1]) && is_numeric($args[2])) {
                 $cls = $this->main->getDB();
