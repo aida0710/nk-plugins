@@ -185,6 +185,9 @@ class MiningLevelAPI {
             }
             $list[$i] = $r;
             $i++;
+            if ($i = 50){
+                break;
+            }
         }
         return $list;
     }
