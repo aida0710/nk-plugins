@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/BankSystem_v1.0.0/src/ree_jp/bank/sqlite/BankHelper.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/SimpleLogger_v2.0.1/src/space/yurisi/DB/DataBase.php" dialect="GenericSQL" />
   </component>
 </project>
