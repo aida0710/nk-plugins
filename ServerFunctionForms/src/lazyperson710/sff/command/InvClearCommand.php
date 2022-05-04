@@ -11,7 +11,6 @@ class InvClearCommand extends Command {
 
     public function __construct() {
         parent::__construct("invclear", "インベントリからアイテムを削除します");
-        $this->setPermission("sff.command.invclear");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {

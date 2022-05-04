@@ -13,7 +13,6 @@ class TicketCommand extends Command {
 
     public function __construct() {
         parent::__construct("ticket", "ticket関係");
-        $this->setPermission("ticketApi.command.ticket");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
