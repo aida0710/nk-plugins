@@ -4,7 +4,8 @@
     "minimum-stability": "stable",
     "require": {
         "pocketmine/pocketmine-mp": "4.*",
-        "bbo51dog/bboform": "2.*"
+        "bbo51dog/bboform": "2.*",
+        "ext-sqlite3": "*"
     },
     "repositories": [
         {
