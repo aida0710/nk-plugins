@@ -55,9 +55,7 @@ class TicketAPI {
         if ($this->exists($player) === false) {
             $this->cache += array($player->getName() => 0);
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     public function checkData(Player $player): int {
@@ -69,13 +67,19 @@ class TicketAPI {
         }
     }
 
+    public function containsTicket(Player $player, int $amount): bool {
+        if ($this->exists($player) === true) {
+            if ($this->checkData($player) <= $amount) {
+                return true;
+            } else return false;
+        } else return false;
+    }
+
     public function setTicket(Player $player, int $setInt): bool|int {
         if ($this->exists($player) === true) {
             $this->cache[$player->getName()] = $setInt;
             return $setInt;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     public function addTicket(Player $player, int $increase): bool|int {
@@ -84,9 +88,7 @@ class TicketAPI {
             $increase += $int;
             $this->cache[$player->getName()] = $increase;
             return $increase;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     public function reduceTicket(Player $player, int $reduce): bool|int {
@@ -98,9 +100,7 @@ class TicketAPI {
             }
             $this->cache[$player->getName()] = $reduce;
             return $reduce;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     public function replaceTicket(Player $player): bool|int {
@@ -120,9 +120,7 @@ class TicketAPI {
         });
         StackStorageAPI::$instance->remove($player->getXuid(), $itemIds);
         $count += $this->stCount;
-        if ($count === 0) {
-            return false;
-        }
+        if ($count === 0) return false;
         $this->addTicket($player, $count);
         return $count;
     }
