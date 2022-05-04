@@ -1,5 +1,5 @@
 name: Ticket
-main: lazyperson710\ticket\Main
+main: lazyperson0710\ticket\Main
 api: [ "4.0.0" ]
-version: "1.2"
-author: lazyperson710
+version: "1.0"
+author: lazyperson0710
