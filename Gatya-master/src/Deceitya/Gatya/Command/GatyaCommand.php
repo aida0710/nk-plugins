@@ -6,6 +6,7 @@ use Deceitya\Gatya\Form\SeriesForm;
 use Deceitya\Gatya\Series\SeriesFactory;
 use Deceitya\Gatya\Utils\MessageContainer;
 use Exception;
+use lazyperson0710\ticket\TicketAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -34,10 +35,9 @@ class GatyaCommand extends Command {
             $count = array_shift($args) ?? 1;
             $api = EconomyAPI::getInstance();
             for ($i = 0; $i < $count; $i++) {
-                $ticket = ItemFactory::getInstance()->get(2, 0, $series->getCost());
                 $eventTicket = ItemFactory::getInstance()->get(1, 0, $series->getCost());
                 if ($series->isTicket()) {
-                    if (!$sender->getInventory()->contains($ticket)) {
+                    if (!TicketAPI::getInstance()->containsTicket($sender, $series->getCost())) {
                         $sender->sendMessage(MessageContainer::get('command.gatya.no_ticket'));
                         return;
                     }
@@ -56,7 +56,7 @@ class GatyaCommand extends Command {
                 if (empty($sender->getInventory()->addItem($item))) {
                     $sender->sendMessage(MessageContainer::get('command.gatya.result', $item->getCustomName() ?: $item->getName()));
                     if ($series->isTicket()) {
-                        $sender->getInventory()->removeItem($ticket);
+                        TicketAPI::getInstance()->reduceTicket($sender, $series->getCost());
                     } elseif ($series->isEventTicket()) {
                         $sender->getInventory()->removeItem($eventTicket);
                     } else {
