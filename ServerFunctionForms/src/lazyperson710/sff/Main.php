@@ -4,6 +4,7 @@ namespace lazyperson710\sff;
 
 use lazyperson710\sff\command\BonusCommand;
 use lazyperson710\sff\command\EnchantCommand;
+use lazyperson710\sff\command\InvClearCommand;
 use lazyperson710\sff\command\LockCommand;
 use lazyperson710\sff\command\MiningToolsCommand;
 use lazyperson710\sff\command\PlayerCommand;
@@ -38,7 +39,7 @@ class Main extends PluginBase {
             new EnchantCommand(),
             new BonusCommand(),
             new RecipeCommand(),
-            //new ClearInvCommand(),
+            new InvClearCommand(),
             new MiningToolsCommand(),
             new ShopCommand(),
             new PlayerCommand(),

@@ -2,7 +2,7 @@
 
 namespace lazyperson710\sff\command;
 
-use lazyperson710\sff\form\WarpForm;
+use lazyperson710\sff\form\InvClearForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -10,8 +10,8 @@ use pocketmine\player\Player;
 class InvClearCommand extends Command {
 
     public function __construct() {
-        parent::__construct("wp", "Warp form");
-        $this->setPermission("sff.command.wp");
+        parent::__construct("invclear", "インベントリからアイテムを削除します");
+        $this->setPermission("sff.command.invclear");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -19,6 +19,6 @@ class InvClearCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new WarpForm($sender));
+        $sender->sendForm(new InvClearForm($sender));
     }
 }
