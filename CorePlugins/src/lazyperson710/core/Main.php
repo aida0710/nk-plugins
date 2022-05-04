@@ -43,7 +43,6 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new listener\WorldChange(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BlockInteractEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\WorldProtect(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\Ticket(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakSoundPacket(), $this);
         $this->getServer()->getCommandMap()->registerAll("core", [
             new MajorCommand(),
