@@ -19,6 +19,9 @@ class RepairCommand extends Command {
         parent::__construct("repair", "どこでも修繕formを開く(80レベル以上)");
     }
 
+    /**
+     * @throws Exception
+     */
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if (!($sender instanceof Player)) {
             $sender->sendMessage("Please use in server");
