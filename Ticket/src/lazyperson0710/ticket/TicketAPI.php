@@ -103,26 +103,39 @@ class TicketAPI {
         } else return false;
     }
 
-    public function replaceTicket(Player $player): bool|int {
+    /*
+     * 判定方式
+     * 0は何もなし
+     * 1以上は成功
+     *
+     * boolは使用すると判定処理がだるくなるのでこれでゆるちて、、
+     * */
+    public function replaceInventoryTicket(Player $player): int {
         $inventory = $player->getInventory();
         $count = 0;
         for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
             $item = clone $inventory->getItem($i);
-            if ($item->getId() !== 465) continue;
+            if ($item->getId() !== VanillaItems::NAUTILUS_SHELL()->getId()) continue;
             $count += $item->getCount();
-            $inventory->remove($item);
+            $inventory->clear($i);
         }
-        $itemIds = ItemFactory::getInstance()->get(465);
-        StackStorageAPI::$instance->getCount($player->getXuid(), $itemIds, function (int $stCount) {
-            $this->stCount = $stCount;
-        }, function (SqlError $error) {
-            var_dump('error ' . $error->getMessage());
-        });
-        StackStorageAPI::$instance->remove($player->getXuid(), $itemIds);
-        $count += $this->stCount;
-        if ($count === 0) return false;
+        if ($count === 0) return 0;
         $this->addTicket($player, $count);
         return $count;
+    }
+
+    public function replaceStackStorageTicket(Player $player): int {
+        StackStorageAPI::$instance->getCount($player->getXuid(), clone VanillaItems::NAUTILUS_SHELL(), function (int $stCount) use ($player) {
+            if ($stCount <= 0) return 0;
+            $item = clone VanillaItems::NAUTILUS_SHELL();
+            $item->setCount($stCount);
+            StackStorageAPI::$instance->remove($player->getXuid(), $item);
+            $this->addTicket($player, $stCount);
+            return $stCount;
+        }, function () use ($player) {
+            return 0;
+        });
+        return 0;
     }
 
 }
