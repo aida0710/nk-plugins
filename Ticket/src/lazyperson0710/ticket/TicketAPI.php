@@ -38,7 +38,7 @@ class TicketAPI {
         $this->cache = $this->config->getAll();
     }
 
-    public function save(): void {
+    public function save(): bool {
         try {
             $this->config->setAll($this->cache);
             $this->config->save();
