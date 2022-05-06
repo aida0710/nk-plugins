@@ -22,6 +22,7 @@ class TicketCommand extends Command {
         }
         if (Server::getInstance()->isOp($sender->getName())) {
             $sender->sendForm(new MainTicketForm($sender));
+            return;
         }
         $sender->sendForm(new ReplaceTicketForm($sender));
     }
