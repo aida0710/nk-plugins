@@ -39,7 +39,6 @@ class ReduceTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
-
         $int = TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
         $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚減らしました");
     }

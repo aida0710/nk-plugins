@@ -13,6 +13,7 @@ use aieuo\replenish\ReplenishResourcesAPI;
 use Generator;
 
 class ReplenishResource extends FlowItem implements PositionFlowItem {
+
     use PositionFlowItemTrait;
 
     protected string $id = "replenishResource";
@@ -38,9 +39,7 @@ class ReplenishResource extends FlowItem implements PositionFlowItem {
 
     public function execute(FlowItemExecutor $source): Generator {
         $this->throwIfCannotExecute();
-
         $position = $this->getPosition($source);
-
         $api = ReplenishResourcesAPI::getInstance();
         $api->replenish($position);
         yield true;

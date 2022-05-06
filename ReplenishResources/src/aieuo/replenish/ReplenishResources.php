@@ -10,13 +10,13 @@ use pocketmine\command\CommandSender;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\world\Position;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\TaskHandler;
 use pocketmine\Server;
 use pocketmine\utils\Config;
+use pocketmine\world\Position;
 
 class ReplenishResources extends PluginBase implements Listener {
 
@@ -48,7 +48,7 @@ class ReplenishResources extends PluginBase implements Listener {
     public function onEnable(): void {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         if (!file_exists($this->getDataFolder())) @mkdir($this->getDataFolder(), 0721, true);
-        $this->setting = new Config($this->getDataFolder()."setting.yml", Config::YAML, [
+        $this->setting = new Config($this->getDataFolder() . "setting.yml", Config::YAML, [
             "enable-wait" => true,
             "wait" => 60,
             "sneak" => true,
@@ -63,16 +63,12 @@ class ReplenishResources extends PluginBase implements Listener {
             "auto-replenish-resources" => [],
         ]);
         $this->setting->save();
-
         $this->checkConfig();
-
         $this->api = new ReplenishResourcesAPI($this, $this->getConfig(), $this->setting);
-
         if ($this->setting->get("enable-auto-replenish")) {
             $time = (float)$this->setting->get("auto-replenish-time", 60) * 20;
             $this->startAutoReplenishTask($time);
         }
-
         if (Server::getInstance()->getPluginManager()->getPlugin("Mineflow") !== null) {
             $this->registerMineflowLanguage();
         }
@@ -132,23 +128,19 @@ class ReplenishResources extends PluginBase implements Listener {
             $this->taskHandler = null;
             return;
         }
-
         if ($this->taskHandler instanceof TaskHandler and !$this->taskHandler->isCancelled()) {
             if ($time === $this->taskHandler->getPeriod()) return;
             $this->taskHandler->cancel();
         }
-
         $this->taskHandler = $this->getScheduler()->scheduleRepeatingTask(new AutoReplenishTask(), $time);
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if (!$command->testPermission($sender)) return false;
-
         if (!isset($args[0])) {
             $sender->sendMessage("Usage: /reso <pos1 | pos2 | add | del | change | cancel | auto | setting>");
             return true;
         }
-
         $name = $sender->getName();
         switch ($args[0]) {
             case 'pos1':
@@ -238,7 +230,6 @@ class ReplenishResources extends PluginBase implements Listener {
                         $sender->sendMessage("Usage: /reso setting <sneak | announce | checkplayer | reload>");
                         return true;
                     }
-
                     if (!($sender instanceof Player)) {
                         $sender->sendMessage("コンソールからは使用できません");
                         return true;
@@ -246,7 +237,6 @@ class ReplenishResources extends PluginBase implements Listener {
                     (new SettingForm($this))->sendSettingForm($sender);
                     return true;
                 }
-
                 switch ($args[1]) {
                     case "sneak":
                         $sneak = $this->getSetting()->get("sneak");
@@ -254,15 +244,13 @@ class ReplenishResources extends PluginBase implements Listener {
                             $sender->sendMessage($sneak ? "スニークしないと反応しません" : "スニークしなくても反応します");
                             break;
                         }
-
                         if ($args[2] !== "on" and $args[2] !== "off") {
                             $sender->sendMessage("Usage: /reso setting sneak <on | off>");
                             break;
                         }
-
                         $this->getSetting()->set("sneak", $args[2] === "on");
                         $this->getSetting()->save();
-                        $sender->sendMessage(($args[2] === "on" ? "スニークしないと反応しない" : "スニークしなくても反応する")."ようにしました");
+                        $sender->sendMessage(($args[2] === "on" ? "スニークしないと反応しない" : "スニークしなくても反応する") . "ようにしました");
                         break;
                     case "announce":
                         $announce = $this->getSetting()->get("announce");
@@ -270,15 +258,13 @@ class ReplenishResources extends PluginBase implements Listener {
                             $sender->sendMessage($announce ? "補充時に全員に知らせます" : "補充時に全員に知らせません");
                             break;
                         }
-
                         if ($args[2] !== "on" and $args[2] !== "off") {
                             $sender->sendMessage("Usage: /reso setting announce <on | off>");
                             break;
                         }
-
                         $this->getSetting()->set("announce", $args[2] === "on");
                         $this->getSetting()->save();
-                        $sender->sendMessage(($args[2] === "on" ? "補充時に全員に知る" : "補充時に全員に知らせない")."ようにしました");
+                        $sender->sendMessage(($args[2] === "on" ? "補充時に全員に知る" : "補充時に全員に知らせない") . "ようにしました");
                         break;
                     case "checkplayer":
                         $check = $this->getSetting()->get("check-inside");
@@ -286,15 +272,13 @@ class ReplenishResources extends PluginBase implements Listener {
                             $sender->sendMessage($check ? "資源内にプレイヤーがいても補充します" : "資源内にプレイヤーがいると補充しません");
                             break;
                         }
-
                         if ($args[2] !== "on" and $args[2] !== "off") {
                             $sender->sendMessage("Usage: /reso setting checkplayer <on | off>");
                             break;
                         }
-
                         $this->getSetting()->set("check-inside", $args[2] === "on");
                         $this->getSetting()->save();
-                        $sender->sendMessage(($args[2] === "on" ? "資源内にプレイヤーがいても補充する" : "資源内にプレイヤーがいると補充しない")."ようにしました");
+                        $sender->sendMessage(($args[2] === "on" ? "資源内にプレイヤーがいても補充する" : "資源内にプレイヤーがいると補充しない") . "ようにしました");
                         break;
                     case "reload":
                         $sender->sendMessage("設定ファイルを再読み込みしました");
@@ -324,13 +308,12 @@ class ReplenishResources extends PluginBase implements Listener {
                 case 'pos1':
                 case 'pos2':
                     $this->{$type}[$name] = $block;
-                    $player->sendMessage($type."を設定しました (".$pos->x.",".$pos->y.",".$pos->z.",".$pos->world->getFolderName().")");
+                    $player->sendMessage($type . "を設定しました (" . $pos->x . "," . $pos->y . "," . $pos->z . "," . $pos->world->getFolderName() . ")");
                     break;
             }
             unset($this->break[$name]);
             return;
         }
-
         if ((($block->getId() === 63 or $block->getId() === 68) and !$event->isCancelled()) and $this->api->existsResource($block->getPosition())) {
             if (!Server::getInstance()->isOp($player->getName())) {
                 $player->sendMessage("§cこの看板は壊せません");
@@ -347,9 +330,7 @@ class ReplenishResources extends PluginBase implements Listener {
         $block = $event->getBlock();
         $pos = $block->getPosition();
         $name = $player->getName();
-
         if ($block->getId() !== 63 and $block->getId() !== 68) return;
-
         if (isset($this->tap[$name])) {
             $event->cancel();
             switch ($this->tap[$name]["type"]) {
@@ -411,11 +392,8 @@ class ReplenishResources extends PluginBase implements Listener {
             unset($this->tap[$name]);
             return;
         }
-
         if (!$this->api->existsResource($pos)) return;
-
-        $place = $pos->x.",".$pos->y.",".$pos->z.",".$pos->world->getFolderName();
-
+        $place = $pos->x . "," . $pos->y . "," . $pos->z . "," . $pos->world->getFolderName();
         if ($this->setting->get("sneak", false) and !$player->isSneaking()) {
             $player->sendMessage("スニークしながらタップすると補充します");
             return;
@@ -423,7 +401,7 @@ class ReplenishResources extends PluginBase implements Listener {
         if ($this->setting->get("enable-wait", false) and (float)$this->setting->get("wait") > 0) {
             $time = $this->checkTime($player->getName(), $place);
             if ($time !== true) {
-                $player->sendMessage($this->setting->get("wait")."秒以内に使用しています\nあと".round($time, 1)."秒お待ちください");
+                $player->sendMessage($this->setting->get("wait") . "秒以内に使用しています\nあと" . round($time, 1) . "秒お待ちください");
                 return;
             }
         }
@@ -434,7 +412,7 @@ class ReplenishResources extends PluginBase implements Listener {
             foreach ($players as $p) {
                 $pp = $p->getPosition();
                 if ($resource["level"] === $p->getWorld()->getFolderName() and $resource["startx"] <= floor($pp->x) and floor($pp->x) <= $resource["endx"] and $resource["starty"] <= floor($pp->y) and floor($pp->y) <= $resource["endy"] and $resource["startz"] <= floor($pp->z) and floor($pp->z) <= $resource["endz"]) {
-                    $p->sendTip("§e".$name."があなたのいる資源を補充しようとしています");
+                    $p->sendTip("§e" . $name . "があなたのいる資源を補充しようとしています");
                     $inside = true;
                 }
             }
@@ -447,11 +425,11 @@ class ReplenishResources extends PluginBase implements Listener {
         if ($this->setting->get("enable-count", false) and $allow >= 0) {
             $count = $this->countBlocks($resource);
             if ($count > $allow) {
-                $player->sendMessage("まだブロックが残っています (".($count - $allow).")");
+                $player->sendMessage("まだブロックが残っています (" . ($count - $allow) . ")");
                 return;
             }
         }
-        if ($this->setting->get("announcement")) $this->getServer()->broadcastMessage($name."さんが資源(".$place.")の補充を行います");
+        if ($this->setting->get("announcement")) $this->getServer()->broadcastMessage($name . "さんが資源(" . $place . ")の補充を行います");
         $this->api->replenish($pos);
     }
 
@@ -477,7 +455,6 @@ class ReplenishResources extends PluginBase implements Listener {
         $ez = $data["endz"];
         $level = $this->getServer()->getWorldManager()->getWorldByName($data["level"]);
         if ($level === null) return 0;
-
         $count = 0;
         for ($x = $sx; $x <= $ex; $x++) {
             for ($y = $sy; $y <= $ey; $y++) {

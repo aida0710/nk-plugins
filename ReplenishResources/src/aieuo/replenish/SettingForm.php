@@ -31,12 +31,12 @@ class SettingForm {
         if (($time = (float)$this->owner->getSetting()->get("wait")) <= 0 or !$this->owner->getSetting()->get("enable-wait")) {
             $wait = "[連続補充の制限] 今は§cOFF§r (連続補充を制限しません)";
         } else {
-            $wait = "[連続補充の制限] 今は§bON§r (同じ看板のタップを".$time."秒間制限します)";
+            $wait = "[連続補充の制限] 今は§bON§r (同じ看板のタップを" . $time . "秒間制限します)";
         }
         if (($check = (int)$this->owner->getSetting()->get("count")) === -1 or !$this->owner->getSetting()->get("enable-count")) {
             $count = "[残さずに掘る] 今は§cOFF§r (ブロックが残っていても補充します)";
         } else {
-            $count = "[残さずに掘る] 今は§bON§r (残っているブロックが".$check."個以下の時だけ補充します)";
+            $count = "[残さずに掘る] 今は§bON§r (残っているブロックが" . $check . "個以下の時だけ補充します)";
         }
         if (!$this->owner->getSetting()->get("check-inside")) {
             $inside = "[資源内のプレイヤー確認] 今は§cOFF§r (資源内にプレイヤーがいても補充します)";
@@ -46,10 +46,9 @@ class SettingForm {
         if (!$this->owner->getSetting()->get("enable-auto-replenish")) {
             $autoReplenish = "[自動補充] 今は§cOFF§r (設定した資源を定期的に補充しません)";
         } else {
-            $autoReplenish = "[自動補充] 今は§bON§r (設定した資源を".$this->owner->getSetting()->get("auto-replenish-time")."に1回補充します)";
+            $autoReplenish = "[自動補充] 今は§bON§r (設定した資源を" . $this->owner->getSetting()->get("auto-replenish-time") . "に1回補充します)";
         }
-        $place = "[補充] ".$this->owner->getSetting()->get("tick-place", 100)."ブロック置いて".$this->owner->getSetting()->get("period")."tick待つ";
-
+        $place = "[補充] " . $this->owner->getSetting()->get("tick-place", 100) . "ブロック置いて" . $this->owner->getSetting()->get("period") . "tick待つ";
         (new ListForm("設定"))->setContent("§7ボタンを押してください")->setButtons([
             new Button($sneak),
             new Button($announcement),
@@ -84,7 +83,6 @@ class SettingForm {
                         $this->sendWaitSettingForm($player);
                         return;
                     }
-
                     $this->owner->getSetting()->set("enable-wait", false);
                     $message = "連続補充の制限をオフにしました";
                     break;
@@ -93,7 +91,6 @@ class SettingForm {
                         $this->sendCountSettingForm($player);
                         return;
                     }
-
                     $this->owner->getSetting()->set("enable-count", false);
                     $message = "ブロックが残っていても補充するようにしました";
                     break;
@@ -114,7 +111,6 @@ class SettingForm {
                         $this->sendAutoReplenishSettingForm($player);
                         return;
                     }
-
                     $this->owner->getSetting()->set("enable-auto-replenish", false);
                     $this->owner->startAutoReplenishTask(0);
                     $message = "自動補充をしないようにしました";
@@ -134,13 +130,11 @@ class SettingForm {
             new Toggle("初期値に戻す (60秒)", $default[1] ?? false),
         ])->onReceive(function (Player $player, array $data) {
             if ($data[1]) $data[0] = 60;
-
             $this->owner->getSetting()->set("enable-wait", true);
             $this->owner->getSetting()->set("wait", (float)$data[0]);
             $this->owner->getSetting()->save();
-
-            $player->sendMessage("連続補充の制限を".(float)$data[0]."秒に設定しました");
-            $this->sendSettingForm($player, ["連続補充の制限を".(float)$data[0]."秒に設定しました"]);
+            $player->sendMessage("連続補充の制限を" . (float)$data[0] . "秒に設定しました");
+            $this->sendSettingForm($player, ["連続補充の制限を" . (float)$data[0] . "秒に設定しました"]);
         })->addErrors($errors)->show($player);
     }
 
@@ -150,13 +144,11 @@ class SettingForm {
             new Toggle("初期値に戻す (0個)", $default[1] ?? false),
         ])->onReceive(function (Player $player, array $data) {
             if ($data[1]) $data[0] = 0;
-
             $this->owner->getSetting()->set("enable-count", true);
             $this->owner->getSetting()->set("count", (int)$data[0]);
             $this->owner->getSetting()->save();
-
-            $player->sendMessage("残っているブロックの数が".(int)$data[0]."個以下の時だけ補充するようにしました");
-            $this->sendSettingForm($player, ["残っているブロックの数が".(int)$data[0]."個以下の時だけ補充するようにしました"]);
+            $player->sendMessage("残っているブロックの数が" . (int)$data[0] . "個以下の時だけ補充するようにしました");
+            $this->sendSettingForm($player, ["残っているブロックの数が" . (int)$data[0] . "個以下の時だけ補充するようにしました"]);
         })->addErrors($errors)->show($player);
     }
 
@@ -170,16 +162,14 @@ class SettingForm {
                 $data[0] = 100;
                 $data[1] = 1;
             }
-
             $this->owner->getSetting()->set("tick-place", (int)$data[0]);
             $this->owner->getSetting()->set("period", (int)$data[1]);
             $this->owner->getSetting()->save();
-
-            $player->sendMessage("一度に置くブロックに数を".(int)$data[0]."個にしました");
-            $player->sendMessage("ブロックを置いてから待機する".(int)$data[1]."数を1にしました");
+            $player->sendMessage("一度に置くブロックに数を" . (int)$data[0] . "個にしました");
+            $player->sendMessage("ブロックを置いてから待機する" . (int)$data[1] . "数を1にしました");
             $this->sendSettingForm($player, [
-                "一度に置くブロックに数を".(int)$data[0]."個にしました",
-                "ブロックを置いてから待機する".(int)$data[1]."数を1にしました"
+                "一度に置くブロックに数を" . (int)$data[0] . "個にしました",
+                "ブロックを置いてから待機する" . (int)$data[1] . "数を1にしました"
             ]);
         })->addErrors($errors)->show($player);
     }
@@ -190,14 +180,12 @@ class SettingForm {
             new Toggle("初期値に戻す (3600秒)"),
         ])->onReceive(function (Player $player, array $data) {
             if ($data[1]) $data[0] = 3600;
-
             $this->owner->getSetting()->set("enable-auto-replenish", true);
             $this->owner->getSetting()->set("auto-replenish-time", (float)$data[0]);
             $this->owner->getSetting()->save();
-
             $this->owner->startAutoReplenishTask((float)$data[0] * 20);
-            $player->sendMessage("自動補充の間隔を".(float)$data[0]."秒に設定しました");
-            $this->sendSettingForm($player, ["自動補充の間隔を".(float)$data[0]."秒に設定しました"]);
+            $player->sendMessage("自動補充の間隔を" . (float)$data[0] . "秒に設定しました");
+            $this->sendSettingForm($player, ["自動補充の間隔を" . (float)$data[0] . "秒に設定しました"]);
         })->addErrors($errors)->show($player);
     }
 }

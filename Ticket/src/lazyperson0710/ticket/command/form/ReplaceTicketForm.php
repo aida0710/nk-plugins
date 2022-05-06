@@ -3,7 +3,6 @@
 namespace lazyperson0710\ticket\command\form;
 
 use bbo51dog\bboform\element\Dropdown;
-use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
@@ -28,16 +27,15 @@ class ReplaceTicketForm extends CustomForm {
         $this->label = new Label("古いTicketを変換してもよろしいでしょうか");
         $this
             ->setTitle("Ticket");
-        if(Server::getInstance()->isOp($player->getName())){
+        if (Server::getInstance()->isOp($player->getName())) {
             $this->addElement($this->playerList);
         } else {
             $this->addElement($this->label);
         }
-
     }
 
     public function handleSubmit(Player $player): void {
-        if(Server::getInstance()->isOp($player->getName())){
+        if (Server::getInstance()->isOp($player->getName())) {
             $playerName = $this->playerList->getSelectedOption();
             if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
                 $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");

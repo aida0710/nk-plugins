@@ -3,7 +3,6 @@
 namespace lazyperson0710\ticket\command\form;
 
 use bbo51dog\bboform\element\Dropdown;
-use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
 use pocketmine\player\Player;
@@ -36,7 +35,7 @@ class CheckTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
-        if (TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName)) !== false){
+        if (TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName)) !== false) {
             $int = TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName));
             $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketの所持数は{$int}です");
         } else {
