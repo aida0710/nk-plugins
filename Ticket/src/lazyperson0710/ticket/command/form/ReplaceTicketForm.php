@@ -43,18 +43,14 @@ class ReplaceTicketForm extends CustomForm {
                 $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
                 return;
             }
-            $result = TicketAPI::getInstance()->replaceTicket(Server::getInstance()->getPlayerByPrefix($playerName));
-            if ($result === false){
-                $player->sendMessage("§bTicket §7>> §c交換可能なTicketはありませんでした");
-            }
-            Server::getInstance()->getPlayerByPrefix($playerName)->sendMessage("§bTicket §7>> §a{$result}個のTicketを交換しました");
-            $player->sendMessage("§bTicket §7>> §a{$result}個のTicketを交換しました");
+            TicketAPI::getInstance()->replaceInventoryTicket(Server::getInstance()->getPlayerByPrefix($playerName));
+            TicketAPI::getInstance()->replaceStackStorageTicket(Server::getInstance()->getPlayerByPrefix($playerName));
+            Server::getInstance()->getPlayerByPrefix($playerName)->sendMessage("§bTicket §7>> §aチケットの変換処理を実行しました");
+            if ($player->getName() === $playerName) return;
         } else {
-            $result = TicketAPI::getInstance()->replaceTicket($player);
-            if ($result === false){
-                $player->sendMessage("§bTicket §7>> §c交換可能なTicketはありませんでした");
-            }
-            $player->sendMessage("§bTicket §7>> §a{$result}個のTicketを交換しました");
+            TicketAPI::getInstance()->replaceInventoryTicket($player);
+            TicketAPI::getInstance()->replaceStackStorageTicket($player);
         }
+        $player->sendMessage("§bTicket §7>> §aチケットの変換処理を実行しました");
     }
 }
