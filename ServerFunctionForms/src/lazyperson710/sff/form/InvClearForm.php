@@ -18,8 +18,10 @@ class InvClearForm extends CustomForm {
         $this->Hotbar = new Toggle("ホットバーアイテムの削除(default/off)", false);
         $this
             ->setTitle("Land Command")
-            ->addElement(
+            ->addElements(
                 new label("インベントリ内のアイテムを削除します"),
+                $this->Armor,
+                $this->Hotbar,
             );
     }
 
@@ -30,12 +32,13 @@ class InvClearForm extends CustomForm {
         for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
             $item = clone $inventory->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
-            if ($this->Hotbar->getValue() === false) {
+            if ($this->Hotbar->getValue() !== true) {
                 if ($i >= 0 && $i <= $inventory->getHotbarSize() - 1) continue;
             }
+            $inventory->clear($i);
             $count += $item->getCount();
         }
-        if ($this->Armor->getValue() === false) {
+        if ($this->Armor->getValue() === true) {
             $armorInventory = $player->getArmorInventory();
             for ($i = 0, $size = $armorInventory->getSize(); $i < $size; ++$i) {
                 $item = clone $armorInventory->getItem($i);
@@ -45,7 +48,7 @@ class InvClearForm extends CustomForm {
             }
             $armorInventory->getContents();
         }
-        if (($count && $armorCount) == 0) {
+        if (($count + $armorCount) == 0) {
             $player->sendMessage("§bTicket §7>> §cインベントリからは何も消去されませんでした");
             return;
         }
