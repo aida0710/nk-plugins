@@ -26,7 +26,7 @@ class addTicketForm extends CustomForm {
         $this->playerList = new Dropdown("情報を操作したいプレイヤーを選択してください", $names);
         $this->int = new Input("Ticketを追加したい数を入力", "int");
         $this
-            ->setTitle("Player Info")
+            ->setTitle("Ticket")
             ->addElements(
                 $this->playerList,
                 $this->int,
@@ -41,6 +41,6 @@ class addTicketForm extends CustomForm {
         }
 
         $int = TicketAPI::getInstance()->addTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
-        $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚増やしました");
+        $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚に増やしました");
     }
 }

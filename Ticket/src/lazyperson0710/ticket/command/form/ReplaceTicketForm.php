@@ -24,10 +24,10 @@ class ReplaceTicketForm extends CustomForm {
         if (is_null($names)) {
             $names[] .= "表示可能なプレイヤーが存在しません";
         }
-        $this->playerList = new Dropdown("情報を取得したいプレイヤーを選択してください", $names);
-        $this->label = new Label("古いTicketを交換してもよろしいでしょうか");
+        $this->playerList = new Dropdown("情報を操作したいプレイヤーを選択してください", $names);
+        $this->label = new Label("古いTicketを変換してもよろしいでしょうか");
         $this
-            ->setTitle("Player Info");
+            ->setTitle("Ticket");
         if(Server::getInstance()->isOp($player->getName())){
             $this->addElement($this->playerList);
         } else {

@@ -26,7 +26,7 @@ class ReduceTicketForm extends CustomForm {
         $this->playerList = new Dropdown("情報を操作したいプレイヤーを選択してください", $names);
         $this->int = new Input("Ticketを減らす数を入力", "int");
         $this
-            ->setTitle("Player Info")
+            ->setTitle("Ticket")
             ->addElements(
                 $this->playerList,
                 $this->int,

@@ -22,9 +22,9 @@ class CheckTicketForm extends CustomForm {
         if (is_null($names)) {
             $names[] .= "表示可能なプレイヤーが存在しません";
         }
-        $this->playerList = new Dropdown("Ticket数を取得したいプレイヤー", $names);
+        $this->playerList = new Dropdown("Ticket数を取得したいプレイヤーを選択してください", $names);
         $this
-            ->setTitle("Player Info")
+            ->setTitle("Ticket")
             ->addElements(
                 $this->playerList,
             );
