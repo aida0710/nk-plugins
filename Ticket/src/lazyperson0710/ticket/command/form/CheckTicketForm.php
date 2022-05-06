@@ -36,7 +36,11 @@ class CheckTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
-        $int = TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName));
-        $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketの所持数は{$int}です");
+        if (TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName)) !== false){
+            $int = TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName));
+            $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketの所持数は{$int}です");
+        } else {
+            $player->sendMessage("§bTicket §7>> §c{$playerName}のTicketデータは存在しません");
+        }
     }
 }
