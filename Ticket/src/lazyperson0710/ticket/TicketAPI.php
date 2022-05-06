@@ -2,17 +2,16 @@
 
 namespace lazyperson0710\ticket;
 
-use Exception;
-use pocketmine\item\ItemFactory;
+use JsonException;
+use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
+use pocketmine\Server;
 use pocketmine\utils\Config;
 use ree_jp\stackstorage\api\StackStorageAPI;
-use ree_jp\stackstorage\libs\poggit\libasynql\SqlError;
 
 class TicketAPI {
 
     private static TicketAPI $instance;
-    private int $stCount;
     /**
      * @var array|string[]
      */
@@ -42,8 +41,10 @@ class TicketAPI {
         try {
             $this->config->setAll($this->cache);
             $this->config->save();
-        } catch (Exception $e) {
-            return;
+            return true;
+        } catch (JsonException $e) {
+            Server::getInstance()->getLogger()->warning($e->getMessage());
+            return false;
         }
     }
 
@@ -58,13 +59,10 @@ class TicketAPI {
         } else return false;
     }
 
-    public function checkData(Player $player): int {
+    public function checkData(Player $player): int|bool {
         if ($this->exists($player) === true) {
-            return var_export($this->cache[$player->getName()]);
-        } else {
-            $this->createData($player);
-            return 0;
-        }
+            return (int)$this->cache[$player->getName()];
+        } else return false;
     }
 
     public function containsTicket(Player $player, int $amount): bool {
@@ -84,7 +82,7 @@ class TicketAPI {
 
     public function addTicket(Player $player, int $increase): bool|int {
         if ($this->exists($player) === true) {
-            $int = var_export($this->cache[$player->getName()]);
+            $int = $this->cache[$player->getName()];
             $increase += $int;
             $this->cache[$player->getName()] = $increase;
             return $increase;
@@ -93,7 +91,7 @@ class TicketAPI {
 
     public function reduceTicket(Player $player, int $reduce): bool|int {
         if ($this->exists($player) === true) {
-            $int = var_export($this->cache[$player->getName()]);
+            $int = $this->cache[$player->getName()];
             $reduce -= $int;
             if ($reduce <= 0) {
                 $reduce = 0;
@@ -137,5 +135,4 @@ class TicketAPI {
         });
         return 0;
     }
-
 }
