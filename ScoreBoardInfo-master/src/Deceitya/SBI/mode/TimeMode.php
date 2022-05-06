@@ -2,6 +2,7 @@
 
 namespace Deceitya\SBI\mode;
 
+use lazyperson0710\ticket\TicketAPI;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
@@ -26,6 +27,7 @@ class TimeMode implements Mode {
         $time = date("H時i分s秒");
         return [
             "所持金 - " . $this->EconomyAPI->myMoney($player),
+            "チケット - " . TicketAPI::getInstance()->checkData($player) . "枚",
             "ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
             "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
             "  ",

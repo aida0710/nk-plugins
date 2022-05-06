@@ -2,6 +2,7 @@
 
 namespace Deceitya\SBI\mode;
 
+use lazyperson0710\ticket\TicketAPI;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
@@ -23,6 +24,7 @@ class SimpleMode implements Mode {
     public function getLines(Player $player): ?array {
         return [
             "所持金 - " . $this->EconomyAPI->myMoney($player),
+            "チケット - " . TicketAPI::getInstance()->checkData($player) . "枚",
             "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
             "応答速度 - {$player->getNetworkSession()->getPing()}ms",
             "",
