@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\util\LanguageManager;
@@ -33,15 +31,14 @@ use function implode;
 
 class ListSubCommand implements SubCommand {
 
-	public function execute(CommandSender $sender, array $args, string $name): void {
-		$worlds = array_values(array_map(static function(string $file): string {
-			if(Server::getInstance()->getWorldManager()->isWorldLoaded($file)) {
-				return "§7$file > §aLoaded§7, " . count(WorldUtils::getWorldByNameNonNull($file)->getPlayers()) . " Players";
-			} else {
-				return "§7$file > §cUnloaded";
-			}
-		}, WorldUtils::getAllWorlds()));
-
-		$sender->sendMessage(LanguageManager::translateMessage($sender, "list-done", [(string)count($worlds)]) . "\n" . implode("\n", $worlds));
-	}
+    public function execute(CommandSender $sender, array $args, string $name): void {
+        $worlds = array_values(array_map(static function (string $file): string {
+            if (Server::getInstance()->getWorldManager()->isWorldLoaded($file)) {
+                return "§7$file > §aLoaded§7, " . count(WorldUtils::getWorldByNameNonNull($file)->getPlayers()) . " Players";
+            } else {
+                return "§7$file > §cUnloaded";
+            }
+        }, WorldUtils::getAllWorlds()));
+        $sender->sendMessage(LanguageManager::translateMessage($sender, "list-done", [(string)count($worlds)]) . "\n" . implode("\n", $worlds));
+    }
 }

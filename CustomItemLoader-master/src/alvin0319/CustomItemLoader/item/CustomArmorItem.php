@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,7 +14,6 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use alvin0319\CustomItemLoader\item\properties\CustomItemProperties;
@@ -23,15 +21,16 @@ use pocketmine\item\Armor;
 use pocketmine\item\ArmorTypeInfo;
 use pocketmine\item\ItemIdentifier;
 
-class CustomArmorItem extends Armor{
-	use CustomItemTrait;
+class CustomArmorItem extends Armor {
 
-	public function __construct(string $name, array $data){
-		$this->properties = new CustomItemProperties($name, $data);
-		parent::__construct(new ItemIdentifier($this->properties->getId(), $this->properties->getMeta()), $this->properties->getName(), new ArmorTypeInfo(
-			$this->properties->getDefencePoints(),
-			$this->properties->getMaxDurability(),
-			$this->properties->getArmorSlot()
-		));
-	}
+    use CustomItemTrait;
+
+    public function __construct(string $name, array $data) {
+        $this->properties = new CustomItemProperties($name, $data);
+        parent::__construct(new ItemIdentifier($this->properties->getId(), $this->properties->getMeta()), $this->properties->getName(), new ArmorTypeInfo(
+            $this->properties->getDefencePoints(),
+            $this->properties->getMaxDurability(),
+            $this->properties->getArmorSlot()
+        ));
+    }
 }

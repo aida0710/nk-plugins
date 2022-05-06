@@ -5,10 +5,7 @@ namespace deceitya\bbi;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\player\PlayerQuitEvent;
-use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\scheduler\Task;
 use xenialdan\apibossbar\BossBar;
 
 class Main extends PluginBase implements Listener {

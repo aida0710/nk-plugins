@@ -25,7 +25,6 @@ class MakingForm implements Form {
         $climit = MyWarpPlugin::$count->get($player->getName(), null);
         if ($climit === null) {
             $level = MiningLevelAPI::getInstance()->getLevel($player);
-
             if ($level >= 25 && $level < 50) {
                 $climit = 10;
             } elseif ($level >= 50) {

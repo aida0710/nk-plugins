@@ -6,7 +6,6 @@ namespace JavierLeon9966\VanillaElytra;
 use BlockHorizons\Fireworks\Loader as Fireworks;
 use JavierLeon9966\VanillaElytra\item\{Elytra, FireworkRocket};
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\{ItemFactory, ItemIdentifier, ItemIds};

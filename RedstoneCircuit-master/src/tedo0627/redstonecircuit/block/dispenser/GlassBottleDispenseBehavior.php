@@ -18,7 +18,6 @@ class GlassBottleDispenseBehavior implements DispenseItemBehavior {
     public function dispense(BlockDispenser $block, Item $item): ?Item {
         $side = $block->getSide($block->getFacing());
         if (!$side instanceof Water) return $this->default->dispense($block, $item);
-
         $item->pop();
         return VanillaItems::WATER_POTION();
     }

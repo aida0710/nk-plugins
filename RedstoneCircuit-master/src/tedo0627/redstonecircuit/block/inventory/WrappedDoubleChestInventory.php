@@ -17,7 +17,6 @@ class WrappedDoubleChestInventory extends DoubleChestInventory {
 
     public function onClose(Player $who): void {
         parent::onClose($who);
-
         $pos = $this->getLeftSide()->getHolder();
         $pos->getWorld()->scheduleDelayedBlockUpdate($pos, 1);
         $pos = $this->getRightSide()->getHolder();

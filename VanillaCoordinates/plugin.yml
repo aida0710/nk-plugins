@@ -5,5 +5,5 @@ author: Shelly7w7
 main: shelly7w7\VanillaCoordinates\Loader
 description: Show Coordinates
 api:
-- 4.0.0
+  - 4.0.0
 ...

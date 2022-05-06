@@ -8,7 +8,7 @@ use BlockHorizons\Fireworks\item\Fireworks;
 use pocketmine\item\ItemUseResult;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\SetActorLinkPacket;
-use pocketmine\network\mcpe\protocol\types\entity\{EntityLink, EntityMetadataFlags, EntityMetadataProperties};
+use pocketmine\network\mcpe\protocol\types\entity\{EntityLink, EntityMetadataProperties};
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 

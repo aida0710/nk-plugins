@@ -11,7 +11,6 @@ class BlockEntityLoader extends Loader {
 
     public function __construct(string $name, string $className, array $saveNames) {
         parent::__construct($name);
-
         $this->className = $className;
         $this->saveNames = $saveNames;
     }

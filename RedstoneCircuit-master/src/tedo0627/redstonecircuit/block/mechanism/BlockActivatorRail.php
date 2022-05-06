@@ -12,6 +12,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
+
     use RedstoneComponentTrait;
 
     public function onPostPlace(): void {
@@ -40,7 +41,6 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
                 $face = $face ^ RailConnectionInfo::FLAG_ASCEND;
                 $up = true;
             }
-
             $side = $this;
             for ($j = 0; $j < 8; $j++) {
                 $side = $side->getSide($face);
@@ -49,14 +49,12 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
                     $side = $side->getSide(Facing::DOWN);
                     if (!$side instanceof ActivatorRail) break;
                 }
-
                 $faces = $side->getCurrentShapeConnections();
                 if (in_array($face, $faces, true)) {
                     $this->updatePower($side);
                     $up = false;
                     continue;
                 }
-
                 if (in_array($face | RailConnectionInfo::FLAG_ASCEND, $faces, true)) {
                     $this->updatePower($side);
                     $up = true;
@@ -73,7 +71,6 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
             $block->getPosition()->getWorld()->setBlock($block->getPosition(), $block);
             return;
         }
-
         $connections = $block->getCurrentShapeConnections();
         for ($i = 0; $i < count($connections); $i++) {
             $face = $connections[$i];
@@ -82,7 +79,6 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
                 $face = $face ^ RailConnectionInfo::FLAG_ASCEND;
                 $up = true;
             }
-
             $side = $block;
             for ($j = 0; $j < 8; $j++) {
                 $side = $side->getSide($face);
@@ -91,7 +87,6 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
                     $side = $side->getSide(Facing::DOWN);
                     if (!$side instanceof ActivatorRail) break;
                 }
-
                 $faces = $side->getCurrentShapeConnections();
                 if (in_array($face, $faces, true)) {
                     if (BlockPowerHelper::isPowered($side)) {
@@ -102,7 +97,6 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
                     $up = false;
                     continue;
                 }
-
                 if (in_array($face | RailConnectionInfo::FLAG_ASCEND, $faces, true)) {
                     if (BlockPowerHelper::isPowered($side)) {
                         $block->setPowered(true);
@@ -115,7 +109,6 @@ class BlockActivatorRail extends ActivatorRail implements IRedstoneComponent {
                 break;
             }
         }
-
         $block->setPowered(false);
         $block->getPosition()->getWorld()->setBlock($block->getPosition(), $block);
     }

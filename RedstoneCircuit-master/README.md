@@ -5,6 +5,7 @@
 This is the PocketMine plugin that implements the Redstone circuit.
 
 ### Implemented Blocks
+
 <details>
   <summary>
     transmission
@@ -55,7 +56,9 @@ This is the PocketMine plugin that implements the Redstone circuit.
 </details>
 
 ## License
+
 "Redstone Circuit" is under [GPL-3.0 License](https://github.com/tedo0627/RedstoneCircuit/blob/master/LICENSE)
 
 ## Special Thanks
+
 Write Icon [@num4nua](https://twitter.com/num4nua)

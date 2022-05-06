@@ -26,23 +26,21 @@
  *
  */
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando\args;
-
 
 use pocketmine\command\CommandSender;
 use pocketmine\math\Vector3;
 use function preg_match;
 
 class BlockPositionArgument extends Vector3Argument {
-	public function isValidCoordinate(string $coordinate, bool $locatable): bool {
-		return (bool)preg_match("/^(?:" . ($locatable ? "(?:~-|~\+)?" : "") . "-?\d+)" . ($locatable ? "|~" : "") . "$/", $coordinate);
-	}
 
-	public function parse(string $argument, CommandSender $sender) {
-		/** @var Vector3 $v */
-		$v = parent::parse($argument, $sender);
+    public function isValidCoordinate(string $coordinate, bool $locatable): bool {
+        return (bool)preg_match("/^(?:" . ($locatable ? "(?:~-|~\+)?" : "") . "-?\d+)" . ($locatable ? "|~" : "") . "$/", $coordinate);
+    }
 
-		return $v->floor();
-	}
+    public function parse(string $argument, CommandSender $sender) {
+        /** @var Vector3 $v */
+        $v = parent::parse($argument, $sender);
+        return $v->floor();
+    }
 }

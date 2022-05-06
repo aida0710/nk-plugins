@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\populator\impl;
 
 use czechpmdevs\multiworld\generator\normal\populator\AmountPopulator;
@@ -30,21 +28,20 @@ use function count;
 
 class PlantPopulator extends AmountPopulator {
 
-	/** @var Plant[] */
-	private array $plants = [];
+    /** @var Plant[] */
+    private array $plants = [];
 
-	public function addPlant(Plant $plant): void {
-		$this->plants[] = $plant;
-	}
+    public function addPlant(Plant $plant): void {
+        $this->plants[] = $plant;
+    }
 
-	public function populateObject(ChunkManager $world, int $chunkX, int $chunkZ, Random $random): void {
-		if(count($this->plants) === 0) {
-			return;
-		}
-
-		$plant = $this->plants[$random->nextBoundedInt(count($this->plants))];
-		if($this->getSpawnPositionOn($world->getChunk($chunkX, $chunkZ), $random, $plant->getAllowedUnderground(), $x, $y, $z)) {
-			$world->setBlockAt($chunkX * 16 + $x, $y, $chunkZ * 16 + $z, $plant->getBlock());
-		}
-	}
+    public function populateObject(ChunkManager $world, int $chunkX, int $chunkZ, Random $random): void {
+        if (count($this->plants) === 0) {
+            return;
+        }
+        $plant = $this->plants[$random->nextBoundedInt(count($this->plants))];
+        if ($this->getSpawnPositionOn($world->getChunk($chunkX, $chunkZ), $random, $plant->getAllowedUnderground(), $x, $y, $z)) {
+            $world->setBlockAt($chunkX * 16 + $x, $y, $chunkZ * 16 + $z, $plant->getBlock());
+        }
+    }
 }

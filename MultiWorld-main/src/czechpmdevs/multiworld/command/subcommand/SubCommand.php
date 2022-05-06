@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,15 +18,14 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use pocketmine\command\CommandSender;
 
 interface SubCommand {
 
-	/**
-	 * @param string[] $args
-	 */
-	public function execute(CommandSender $sender, array $args, string $name): void;
+    /**
+     * @param string[] $args
+     */
+    public function execute(CommandSender $sender, array $args, string $name): void;
 }

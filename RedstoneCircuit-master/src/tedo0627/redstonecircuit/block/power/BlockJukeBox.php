@@ -13,6 +13,7 @@ use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockJukeBox extends Jukebox implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 

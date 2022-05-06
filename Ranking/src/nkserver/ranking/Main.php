@@ -31,7 +31,5 @@ class Main extends PluginBase {
     public function onDisable(): void {
         PlayerDataPool::finalize();
         $this->getServer()->getCommandMap()->unregister(self::$ranking_comand);
-
-
     }
 }

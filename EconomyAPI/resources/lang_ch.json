@@ -1,43 +1,43 @@
 {
     "language": "ch",
-	"commands": {
-		"mymoney": {
-			"usage": "/mymoney",
-			"description": "查看您的金钱"
-		},
-		"topmoney": {
-			"usage": "/topmoney [页数]",
-			"description": "查看此服务器的金钱排行"
-		},
-		"setmoney": {
-			"usage": "/setmoney <玩家名称> <数值>",
-			"description": "设置玩家的金钱"
-		},
-		"seemoney": {
-			"usage": "/seemoney <玩家名称>",
-			"description": "查看玩家的金钱"
-		},
-		"givemoney": {
-			"usage": "/givemoney <玩家名称> <数值>",
-			"description": "给玩家金钱"
-		},
-		"takemoney": {
-			"usage": "/takemoney <玩家名称> <数值>",
-			"description": "拿走玩家的金钱"
-		},
-		"pay": {
-			"usage": "/pay <玩家名称> <数值>",
-			"description": "付款给玩家"
-		},
-		"setlang": {
-			"usage": "/setlang <语言>",
-			"description": "设置您的语言"
-		},
-		"mystatus": {
-			"usage": "/mystatus",
-			"description": "查看您的金钱状态"
-		}
-	},
+    "commands": {
+        "mymoney": {
+            "usage": "/mymoney",
+            "description": "查看您的金钱"
+        },
+        "topmoney": {
+            "usage": "/topmoney [页数]",
+            "description": "查看此服务器的金钱排行"
+        },
+        "setmoney": {
+            "usage": "/setmoney <玩家名称> <数值>",
+            "description": "设置玩家的金钱"
+        },
+        "seemoney": {
+            "usage": "/seemoney <玩家名称>",
+            "description": "查看玩家的金钱"
+        },
+        "givemoney": {
+            "usage": "/givemoney <玩家名称> <数值>",
+            "description": "给玩家金钱"
+        },
+        "takemoney": {
+            "usage": "/takemoney <玩家名称> <数值>",
+            "description": "拿走玩家的金钱"
+        },
+        "pay": {
+            "usage": "/pay <玩家名称> <数值>",
+            "description": "付款给玩家"
+        },
+        "setlang": {
+            "usage": "/setlang <语言>",
+            "description": "设置您的语言"
+        },
+        "mystatus": {
+            "usage": "/mystatus",
+            "description": "查看您的金钱状态"
+        }
+    },
     "language-set": "语言被设置为 %1",
     "request-cancelled": "你的请求已被取消",
     "player-not-connected": "玩家 %1 当前不在服务器上",

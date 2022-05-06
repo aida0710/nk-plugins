@@ -9,6 +9,7 @@ use pocketmine\network\mcpe\protocol\types\inventory\WindowTypes;
 use pocketmine\world\Position;
 
 class DispenserInventory extends SimpleInventory implements BlockInventory, IWindowType {
+
     use BlockInventoryTrait;
 
     public function __construct(Position $holder) {
@@ -25,7 +26,6 @@ class DispenserInventory extends SimpleInventory implements BlockInventory, IWin
         for ($slot = 0; $slot < $this->getSize(); $slot++) {
             if (!$this->getItem($slot)->isNull()) $slots[] = $slot;
         }
-
         return count($slots) === 0 ? -1 : $slots[array_rand($slots)];
     }
 }

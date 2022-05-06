@@ -22,10 +22,8 @@ class FlowablePlaceHelper {
         if ($sideBlock instanceof Stair) {
             if ($sideBlock->isUpsideDown() && $side === Facing::DOWN) return true;
             if (!$sideBlock->isUpsideDown() && $side === Facing::UP) return true;
-
             return $side === Facing::opposite($sideBlock->getFacing());
         }
-
         if ($sideBlock instanceof Slab) {
             return match ($sideBlock->getSlabType()) {
                 SlabType::BOTTOM() => $side == Facing::UP,

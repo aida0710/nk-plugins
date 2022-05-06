@@ -9,7 +9,7 @@ use pocketmine\world\sound\Sound;
 
 class AttachSound implements Sound {
 
-    public function encode(Vector3 $pos) : array{
+    public function encode(Vector3 $pos): array {
         return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::ATTACH, $pos, false)];
     }
 }

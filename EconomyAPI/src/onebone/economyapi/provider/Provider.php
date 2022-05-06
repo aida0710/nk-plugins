@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -23,67 +22,69 @@ namespace onebone\economyapi\provider;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 
-interface Provider{
-	public function __construct(EconomyAPI $plugin);
+interface Provider {
 
-	public function open();
+    public function __construct(EconomyAPI $plugin);
 
-	/**
-	 * @param Player|string $player
-	 * @return bool
-	 */
-	public function accountExists($player);
+    public function open();
 
-	/**
-	 * @param Player|string $player
-	 * @param float $defaultMoney
-	 * @return bool
-	 */
-	public function createAccount($player, $defaultMoney = 1000);
+    /**
+     * @param Player|string $player
+     * @return bool
+     */
+    public function accountExists($player);
 
-	/**
-	 * @param Player|string $player
-	 * @return bool
-	 */
-	public function removeAccount($player);
+    /**
+     * @param Player|string $player
+     * @param float $defaultMoney
+     * @return bool
+     */
+    public function createAccount($player, $defaultMoney = 1000);
 
-	/**
-	 * @param string $player
-	 * @return float|bool
-	 */
-	public function getMoney($player);
+    /**
+     * @param Player|string $player
+     * @return bool
+     */
+    public function removeAccount($player);
 
-	/**
-	 * @param Player|string $player
-	 * @param float $amount
-	 * @return bool
-	 */
-	public function setMoney($player, $amount);
+    /**
+     * @param string $player
+     * @return float|bool
+     */
+    public function getMoney($player);
 
-	/**
-	 * @param Player|string $player
-	 * @param float $amount
-	 * @return bool
-	 */
-	public function addMoney($player, $amount);
+    /**
+     * @param Player|string $player
+     * @param float $amount
+     * @return bool
+     */
+    public function setMoney($player, $amount);
 
-	/**
-	 * @param Player|string $player
-	 * @param float $amount
-	 * @return bool
-	 */
-	public function reduceMoney($player, $amount);
+    /**
+     * @param Player|string $player
+     * @param float $amount
+     * @return bool
+     */
+    public function addMoney($player, $amount);
 
-	/**
-	 * @return array
-	 */
-	public function getAll();
+    /**
+     * @param Player|string $player
+     * @param float $amount
+     * @return bool
+     */
+    public function reduceMoney($player, $amount);
 
-	/**
-	 * @return string
-	 */
-	public function getName();
+    /**
+     * @return array
+     */
+    public function getAll();
 
-	public function save();
-	public function close();
+    /**
+     * @return string
+     */
+    public function getName();
+
+    public function save();
+
+    public function close();
 }

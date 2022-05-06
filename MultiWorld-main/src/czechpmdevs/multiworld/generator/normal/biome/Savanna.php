@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\GrassyBiome;
@@ -33,22 +31,18 @@ use pocketmine\block\VanillaBlocks;
 
 class Savanna extends GrassyBiome {
 
-	public function __construct() {
-		parent::__construct(1.2, 0);
+    public function __construct() {
+        parent::__construct(1.2, 0);
+        $flowers = new PlantPopulator(6, 7, 80);
+        $flowers->addPlant(new Plant(VanillaBlocks::DANDELION()));
+        $flowers->addPlant(new Plant(VanillaBlocks::POPPY()));
+        $acacia = new TreePopulator(1, 1, 100, TreeType::ACACIA());
+        $tallGrass = new TallGrassPopulator(56, 12);
+        $this->addPopulators([new LakePopulator(), $flowers, $acacia, $tallGrass]);
+        $this->setElevation(67, 70);
+    }
 
-		$flowers = new PlantPopulator(6, 7, 80);
-		$flowers->addPlant(new Plant(VanillaBlocks::DANDELION()));
-		$flowers->addPlant(new Plant(VanillaBlocks::POPPY()));
-
-		$acacia = new TreePopulator(1, 1, 100, TreeType::ACACIA());
-		$tallGrass = new TallGrassPopulator(56, 12);
-
-		$this->addPopulators([new LakePopulator(), $flowers, $acacia, $tallGrass]);
-
-		$this->setElevation(67, 70);
-	}
-
-	public function getName(): string {
-		return "Savanna";
-	}
+    public function getName(): string {
+        return "Savanna";
+    }
 }

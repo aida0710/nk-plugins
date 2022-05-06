@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,23 +14,23 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use pocketmine\item\Tool;
 
-final class CustomToolItem extends Tool{
-	use CustomItemTrait;
+final class CustomToolItem extends Tool {
 
-	public function getMaxDurability() : int{
-		return $this->getProperties()->getMaxDurability();
-	}
+    use CustomItemTrait;
 
-	public function getBlockToolHarvestLevel() : int{
-		return $this->getProperties()->getBlockToolHarvestLevel();
-	}
+    public function getMaxDurability(): int {
+        return $this->getProperties()->getMaxDurability();
+    }
 
-	public function getBlockToolType() : int{
-		return $this->getProperties()->getBlockToolType();
-	}
+    public function getBlockToolHarvestLevel(): int {
+        return $this->getProperties()->getBlockToolHarvestLevel();
+    }
+
+    public function getBlockToolType(): int {
+        return $this->getProperties()->getBlockToolType();
+    }
 }

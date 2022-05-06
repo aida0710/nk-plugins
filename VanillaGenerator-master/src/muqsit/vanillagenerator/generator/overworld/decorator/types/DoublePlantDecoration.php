@@ -1,26 +1,25 @@
 <?php
 
 declare(strict_types=1);
-
 namespace muqsit\vanillagenerator\generator\overworld\decorator\types;
 
 use pocketmine\block\DoublePlant;
 
-final class DoublePlantDecoration{
+final class DoublePlantDecoration {
 
 	private DoublePlant $block;
 	private int $weight;
 
-	public function __construct(DoublePlant $block, int $weight){
+	public function __construct(DoublePlant $block, int $weight) {
 		$this->block = $block;
 		$this->weight = $weight;
 	}
 
-	public function getBlock() : DoublePlant{
+	public function getBlock(): DoublePlant {
 		return $this->block;
 	}
 
-	public function getWeight() : int{
+	public function getWeight(): int {
 		return $this->weight;
 	}
 }

@@ -21,6 +21,7 @@ use tedo0627\redstonecircuit\sound\AttachSound;
 use tedo0627\redstonecircuit\sound\DetachSound;
 
 class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 
@@ -52,7 +53,6 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
                 if ($block->isTriggered()) $triggered = true;
                 continue;
             }
-
             $world = $this->getPosition()->getWorld();
             if (!$block instanceof BlockTripwireHook || $block->getFacing() !== Facing::opposite($this->getFacing())) {
                 $sound = $this->isPowered() ? new RedstonePowerOffSound() : new DetachSound();
@@ -63,7 +63,6 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
                 BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
                 break;
             }
-
             if (!$triggered) {
                 $this->setPowered(false);
                 $world->setBlock($this->getPosition(), $this);
@@ -71,7 +70,6 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
                 BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
                 break;
             }
-
             $world->scheduleDelayedBlockUpdate($this->getPosition(), 1);
             break;
         }
@@ -94,19 +92,15 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
                 $blocks[] = $block;
                 continue;
             }
-
             if (!$block instanceof BlockTripwireHook) break;
             if ($block->getFacing() !== Facing::opposite($this->getFacing())) break;
-
             $this->setConnected(true);
             $world = $this->getPosition()->getWorld();
             $world->setBlock($this->getPosition(), $this);
             $world->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new AttachSound());
-
             $block->setConnected(true);
             $world->setBlock($block->getPosition(), $block);
             $world->addSound($block->getPosition()->add(0.5, 0.5, 0.5), new AttachSound());
-
             for ($j = 0; $j < count($blocks); $j++) {
                 $tripwire = $blocks[$j];
                 $tripwire->setConnected(true);
@@ -121,25 +115,20 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
         $blocks = [];
         for ($i = 1; $i < 42; $i++) {
             if ($step === $i) continue;
-
             $block = $this->getSide($this->getFacing(), $i);
             if ($block instanceof BlockTripwire) {
                 $blocks[] = $block;
                 continue;
             }
-
             if (!$block instanceof BlockTripwireHook) break;
             if ($block->getFacing() !== Facing::opposite($this->getFacing())) break;
-
             $world = $this->getPosition()->getWorld();
             $block->setConnected(false);
             if ($step === 0) {
                 $block->setPowered(false);
                 $world->setBlock($block->getPosition(), $block);
-
                 $world->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new DetachSound());
                 $world->addSound($block->getPosition()->add(0.5, 0.5, 0.5), new DetachSound());
-
                 for ($j = 0; $j < count($blocks); $j++) {
                     $tripwire = $blocks[$j];
                     $tripwire->setConnected(false);
@@ -148,13 +137,11 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
                 }
                 return;
             }
-
             if ($powered) {
                 $this->setPowered(true);
                 $world->setBlock($this->getPosition(), $this);
                 BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
                 $world->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOnSound());
-
                 $block->setPowered(true);
                 $world->setBlock($block->getPosition(), $block);
                 BlockUpdateHelper::updateAroundDirectionRedstone($block, Facing::opposite($block->getFacing()));
@@ -162,7 +149,6 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
             }
             $world->scheduleDelayedBlockUpdate($this->getPosition(), 10);
             $world->scheduleDelayedBlockUpdate($block->getPosition(), 10);
-
             for ($j = 0; $j < count($blocks); $j++) {
                 $tripwire = $blocks[$j];
                 $world->scheduleDelayedBlockUpdate($tripwire->getPosition(), 10);
@@ -173,7 +159,6 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
 
     public function trigger(): void {
         if ($this->isPowered()) return;
-
         $triggered = false;
         for ($i = 1; $i < 42; $i++) {
             $block = $this->getSide($this->getFacing(), $i);
@@ -181,18 +166,15 @@ class BlockTripwireHook extends TripwireHook implements IRedstoneComponent, ILin
                 if ($block->isTriggered()) $triggered = true;
                 continue;
             }
-
             if (!$block instanceof BlockTripwireHook) break;
             if ($block->getFacing() !== Facing::opposite($this->getFacing())) break;
             if (!$triggered) break;
-
             $this->setPowered(true);
             $world = $this->getPosition()->getWorld();
             $world->setBlock($this->getPosition(), $this);
             BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
             $world->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOnSound());
             $world->scheduleDelayedBlockUpdate($this->getPosition(), 1);
-
             $block->setPowered(true);
             $world->setBlock($block->getPosition(), $block);
             BlockUpdateHelper::updateAroundDirectionRedstone($block, Facing::opposite($block->getFacing()));

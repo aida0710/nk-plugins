@@ -26,52 +26,47 @@
  *
  */
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando;
 
 use pocketmine\plugin\Plugin;
 use function trim;
 
-abstract class BaseSubCommand extends BaseCommand{
-	/** @var BaseCommand */
-	protected $parent;
+abstract class BaseSubCommand extends BaseCommand {
 
-	public function __construct(Plugin $plugin, string $name, string $description = "", array $aliases = []){
-		parent::__construct($plugin, $name, $description, $aliases);
+    /** @var BaseCommand */
+    protected $parent;
 
-		$this->usageMessage = "";
-	}
+    public function __construct(Plugin $plugin, string $name, string $description = "", array $aliases = []) {
+        parent::__construct($plugin, $name, $description, $aliases);
+        $this->usageMessage = "";
+    }
 
-	public function getParent(): ?BaseCommand {
-		return $this->parent;
-	}
+    public function getParent(): ?BaseCommand {
+        return $this->parent;
+    }
 
-	/**
-	 * @param BaseCommand $parent
-	 *
-	 * @internal Used to pass the parent context from the parent command
-	 */
-	public function setParent(BaseCommand $parent): void {
-		$this->parent = $parent;
-	}
+    /**
+     * @param BaseCommand $parent
+     *
+     * @internal Used to pass the parent context from the parent command
+     */
+    public function setParent(BaseCommand $parent): void {
+        $this->parent = $parent;
+    }
 
-	public function getUsage(): string{
-		if(empty($this->usageMessage)){
-			$parent = $this->parent;
-			$parentNames = "";
-
-			while($parent instanceof BaseSubCommand) {
-				$parentNames = $parent->getName() . $parentNames;
-				$parent = $parent->getParent();
-			}
-
-			if($parent instanceof BaseCommand){
-				$parentNames = $parent->getName() . " " . $parentNames;
-			}
-
-			$this->usageMessage = $this->generateUsageMessage(trim($parentNames));
-		}
-
-		return $this->usageMessage;
-	}
+    public function getUsage(): string {
+        if (empty($this->usageMessage)) {
+            $parent = $this->parent;
+            $parentNames = "";
+            while ($parent instanceof BaseSubCommand) {
+                $parentNames = $parent->getName() . $parentNames;
+                $parent = $parent->getParent();
+            }
+            if ($parent instanceof BaseCommand) {
+                $parentNames = $parent->getName() . " " . $parentNames;
+            }
+            $this->usageMessage = $this->generateUsageMessage(trim($parentNames));
+        }
+        return $this->usageMessage;
+    }
 }

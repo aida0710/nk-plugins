@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld;
 
 use czechpmdevs\multiworld\session\PlayerInventorySession;
@@ -49,135 +47,125 @@ use function substr;
 
 class EventListener implements Listener {
 
-	public MultiWorld $plugin;
+    public MultiWorld $plugin;
 
-	/** @var PlayerInventorySession[] $deathSessions */
-	protected array $deathSessions = [];
-	/** @var int[] */
-	protected array $dimensionData = [];
+    /** @var PlayerInventorySession[] $deathSessions */
+    protected array $deathSessions = [];
+    /** @var int[] */
+    protected array $dimensionData = [];
 
-	public function __construct(MultiWorld $plugin) {
-		$this->plugin = $plugin;
-	}
+    public function __construct(MultiWorld $plugin) {
+        $this->plugin = $plugin;
+    }
 
-	/** @noinspection PhpUnused */
-	public function onJoin(PlayerJoinEvent $event): void {
-		MultiWorld::getGameRules($event->getPlayer()->getWorld())->applyToPlayer($event->getPlayer());
-	}
+    /** @noinspection PhpUnused */
+    public function onJoin(PlayerJoinEvent $event): void {
+        MultiWorld::getGameRules($event->getPlayer()->getWorld())->applyToPlayer($event->getPlayer());
+    }
 
-	/** @noinspection PhpUnused */
-	public function onQuit(PlayerQuitEvent $event): void {
-		unset($this->deathSessions[$event->getPlayer()->getName()]);
-		unset($this->dimensionData[$event->getPlayer()->getName()]);
-	}
+    /** @noinspection PhpUnused */
+    public function onQuit(PlayerQuitEvent $event): void {
+        unset($this->deathSessions[$event->getPlayer()->getName()]);
+        unset($this->dimensionData[$event->getPlayer()->getName()]);
+    }
 
-	/** @noinspection PhpUnused */
-	public function onWorldLoad(WorldLoadEvent $event): void {
-		MultiWorld::getGameRules($event->getWorld());
-	}
+    /** @noinspection PhpUnused */
+    public function onWorldLoad(WorldLoadEvent $event): void {
+        MultiWorld::getGameRules($event->getWorld());
+    }
 
-	/** @noinspection PhpUnused */
-	public function onWorldUnload(WorldUnloadEvent $event): void {
-		MultiWorld::unloadWorld($event->getWorld());
-	}
+    /** @noinspection PhpUnused */
+    public function onWorldUnload(WorldUnloadEvent $event): void {
+        MultiWorld::unloadWorld($event->getWorld());
+    }
 
-	/** @noinspection PhpUnused */
-	public function onWorldChange(EntityTeleportEvent $event): void {
-		$player = $event->getEntity();
-		if(!$player instanceof Player) {
-			return;
-		}
-		if($event->getFrom()->getWorld()->getId() == $event->getTo()->getWorld()->getId()) {
-			return;
-		}
+    /** @noinspection PhpUnused */
+    public function onWorldChange(EntityTeleportEvent $event): void {
+        $player = $event->getEntity();
+        if (!$player instanceof Player) {
+            return;
+        }
+        if ($event->getFrom()->getWorld()->getId() == $event->getTo()->getWorld()->getId()) {
+            return;
+        }
+        MultiWorld::getGameRules($event->getTo()->getWorld())->applyToPlayer($player);
+        if (Dimension::getDimensionByWorld($event->getFrom()->getWorld()) != ($targetDimension = Dimension::getDimensionByWorld($event->getTo()->getWorld())) && $this->plugin->getConfig()->get("handle-dimensions")) {
+            Dimension::sendDimensionToPlayer($player, $targetDimension);
+        }
+    }
 
-		MultiWorld::getGameRules($event->getTo()->getWorld())->applyToPlayer($player);
+    /** @noinspection PhpUnused */
+    public function onPlayerDeath(PlayerDeathEvent $event): void {
+        $player = $event->getPlayer();
+        if (MultiWorld::getGameRules($player->getWorld())->getRule(GameRule::KEEP_INVENTORY())->getValue()) {
+            $this->deathSessions[$player->getId()] = new PlayerInventorySession($player);
+            $event->setDrops([]);
+        }
+        if ($this->plugin->getConfig()->get("handle-dimensions")) {
+            $this->dimensionData[$player->getId()] = Dimension::getDimensionByWorld($player->getWorld());
+        }
+    }
 
-		if(Dimension::getDimensionByWorld($event->getFrom()->getWorld()) != ($targetDimension = Dimension::getDimensionByWorld($event->getTo()->getWorld())) && $this->plugin->getConfig()->get("handle-dimensions")) {
-			Dimension::sendDimensionToPlayer($player, $targetDimension);
-		}
-	}
+    /** @noinspection PhpUnused */
+    public function onPlayerRespawn(PlayerRespawnEvent $event): void {
+        $player = $event->getPlayer();
+        if (array_key_exists($player->getId(), $this->dimensionData) && $this->dimensionData[$player->getId()] != ($currentDimension = Dimension::getDimensionByWorld($player->getWorld()))) {
+            Dimension::sendDimensionToPlayer($player, $currentDimension, true);
+        }
+        unset($this->dimensionData[$player->getId()]);
+        if (array_key_exists($player->getId(), $this->deathSessions)) {
+            $this->deathSessions[$player->getId()]->close();
+            unset($this->deathSessions[$player->getId()]);
+        }
+    }
 
-	/** @noinspection PhpUnused */
-	public function onPlayerDeath(PlayerDeathEvent $event): void {
-		$player = $event->getPlayer();
+    /** @noinspection PhpUnused */
+    public function onBreak(BlockBreakEvent $event): void {
+        if (!MultiWorld::getGameRules($event->getPlayer()->getWorld())->getRule(GameRule::DO_TILE_DROPS())->getValue()) {
+            $event->setDrops([]);
+        }
+    }
 
-		if(MultiWorld::getGameRules($player->getWorld())->getRule(GameRule::KEEP_INVENTORY())->getValue()) {
-			$this->deathSessions[$player->getId()] = new PlayerInventorySession($player);
-			$event->setDrops([]);
-		}
+    /** @noinspection PhpUnused */
+    public function onRegenerate(EntityRegainHealthEvent $event): void {
+        $entity = $event->getEntity();
+        if (!$entity instanceof Living) return;
+        if ($entity->getEffects()->has(VanillaEffects::REGENERATION())) return;
+        if (!MultiWorld::getGameRules($entity->getWorld())->getRule(GameRule::NATURAL_REGENERATION())->getValue()) {
+            $event->cancel();
+        }
+    }
 
-		if($this->plugin->getConfig()->get("handle-dimensions")) {
-			$this->dimensionData[$player->getId()] = Dimension::getDimensionByWorld($player->getWorld());
-		}
-	}
+    /** @noinspection PhpUnused */
+    public function onDamage(EntityDamageEvent $event): void {
+        $entity = $event->getEntity();
+        if (
+            $entity instanceof Player &&
+            $event instanceof EntityDamageByEntityEvent &&
+            $event->getDamager() instanceof Player &&
+            !MultiWorld::getGameRules($event->getEntity()->getWorld())->getRule(GameRule::PVP())->getValue()
+        ) {
+            $event->cancel();
+        }
+    }
 
-	/** @noinspection PhpUnused */
-	public function onPlayerRespawn(PlayerRespawnEvent $event): void {
-		$player = $event->getPlayer();
+    /** @noinspection PhpUnused */
+    public function onExplode(EntityExplodeEvent $event): void {
+        if (!MultiWorld::getGameRules($event->getEntity()->getWorld())->getRule(GameRule::TNT_EXPLODES())->getValue()) {
+            $event->cancel();
+        }
+    }
 
-		if(array_key_exists($player->getId(), $this->dimensionData) && $this->dimensionData[$player->getId()] != ($currentDimension = Dimension::getDimensionByWorld($player->getWorld()))) {
-			Dimension::sendDimensionToPlayer($player, $currentDimension, true);
-		}
-		unset($this->dimensionData[$player->getId()]);
-
-		if(array_key_exists($player->getId(), $this->deathSessions)) {
-			$this->deathSessions[$player->getId()]->close();
-			unset($this->deathSessions[$player->getId()]);
-		}
-	}
-
-	/** @noinspection PhpUnused */
-	public function onBreak(BlockBreakEvent $event): void {
-		if(!MultiWorld::getGameRules($event->getPlayer()->getWorld())->getRule(GameRule::DO_TILE_DROPS())->getValue()) {
-			$event->setDrops([]);
-		}
-	}
-
-	/** @noinspection PhpUnused */
-	public function onRegenerate(EntityRegainHealthEvent $event): void {
-		$entity = $event->getEntity();
-		if(!$entity instanceof Living) return;
-		if($entity->getEffects()->has(VanillaEffects::REGENERATION())) return;
-
-		if(!MultiWorld::getGameRules($entity->getWorld())->getRule(GameRule::NATURAL_REGENERATION())->getValue()) {
-			$event->cancel();
-		}
-	}
-
-	/** @noinspection PhpUnused */
-	public function onDamage(EntityDamageEvent $event): void {
-		$entity = $event->getEntity();
-
-		if(
-			$entity instanceof Player &&
-			$event instanceof EntityDamageByEntityEvent &&
-			$event->getDamager() instanceof Player &&
-			!MultiWorld::getGameRules($event->getEntity()->getWorld())->getRule(GameRule::PVP())->getValue()
-		) {
-			$event->cancel();
-		}
-	}
-
-	/** @noinspection PhpUnused */
-	public function onExplode(EntityExplodeEvent $event): void {
-		if(!MultiWorld::getGameRules($event->getEntity()->getWorld())->getRule(GameRule::TNT_EXPLODES())->getValue()) {
-			$event->cancel();
-		}
-	}
-
-	/** @noinspection PhpUnused */
-	public function onDataPacketReceive(DataPacketReceiveEvent $event): void {
-		$packet = $event->getPacket();
-
-		// Changing game rules from the menu
-		if($packet instanceof SettingsCommandPacket) {
-			$player = $event->getOrigin()->getPlayer();
-			if($player === null) {
-				return;
-			}
-
-			Server::getInstance()->dispatchCommand($player, substr($packet->getCommand(), 1));
-		}
-	}
+    /** @noinspection PhpUnused */
+    public function onDataPacketReceive(DataPacketReceiveEvent $event): void {
+        $packet = $event->getPacket();
+        // Changing game rules from the menu
+        if ($packet instanceof SettingsCommandPacket) {
+            $player = $event->getOrigin()->getPlayer();
+            if ($player === null) {
+                return;
+            }
+            Server::getInstance()->dispatchCommand($player, substr($packet->getCommand(), 1));
+        }
+    }
 }

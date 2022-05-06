@@ -37,7 +37,7 @@ class WorldProperty {
             $this->minZ = $maxZ;
         }
     }
-    
+
     public function inSafeArea(Position $pos): bool {
         return $this->minX < $pos->x && $pos->x < $this->maxX && $this->minZ < $pos->z && $pos->z < $this->maxZ;
     }

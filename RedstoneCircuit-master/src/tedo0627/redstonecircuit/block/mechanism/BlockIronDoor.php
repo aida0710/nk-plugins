@@ -15,6 +15,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockIronDoor extends Door implements IRedstoneComponent {
+
     use RedstoneComponentTrait;
 
     public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null): bool {
@@ -38,7 +39,6 @@ class BlockIronDoor extends Door implements IRedstoneComponent {
                 $this->setOpen(true);
                 $world->addSound($this->getPosition(), new DoorSound());
             }
-
             if ($other instanceof Door && $this->isSameType($other)) {
                 $other->setPowered(true);
                 $other->setOpen(true);
@@ -47,14 +47,12 @@ class BlockIronDoor extends Door implements IRedstoneComponent {
             $world->setBlock($this->getPosition(), $this);
             return;
         }
-
         if (!$powered && $this->isPowered()) {
             $this->setPowered(false);
             if ($this->isOpen()) {
                 $this->setOpen(false);
                 $world->addSound($this->getPosition(), new DoorSound());
             }
-
             if ($other instanceof Door && $this->isSameType($other)) {
                 $other->setPowered(false);
                 $other->setOpen(false);

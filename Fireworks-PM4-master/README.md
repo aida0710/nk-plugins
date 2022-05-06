@@ -1,18 +1,26 @@
 # Fireworks-PM4
+
 A plugin by BlockHozirons and updated to API 4 by<br>
 Fixed some and support latest Pocketmine-MP verion<br>
 This plugin will add Fireworks to your Pocketmine Server
+
 ## API
+
 ### Adding firework items to a player's inventory
+
 Giving players fireworks is easy as pie. Here are some examples (where `$player` is a `\pocketmine\player\Player`
 object):
+
 - **Base firework**
+
 ```php
 /** @var Fireworks $fw */
 $fw = ItemFactory::get(Item::FIREWORKS);
 $player->getInventory()->addItem($fw);
 ```
+
 - **Sphere firework with color fade from blue to cyan**
+
 ```php
 /** @var Fireworks $fw */
 $fw = ItemFactory::get(Item::FIREWORKS);
@@ -27,7 +35,9 @@ $fw->addExplosion(Fireworks::TYPE_SMALL_SPHERE, Fireworks::COLOR_BLUE, Fireworks
 
 $player->getInventory()->addItem($fw);
 ```
+
 - **Green creeper firework, flying higher**
+
 ```php
 /** @var Fireworks $fw */
 $fw = ItemFactory::get(Item::FIREWORKS);
@@ -35,7 +45,9 @@ $fw->addExplosion(Fireworks::TYPE_CREEPER_HEAD, Fireworks::COLOR_GREEN, "", fals
 $fw->setFlightDuration(2);
 $player->getInventory()->addItem($fw);
 ```
+
 - **High flying flashing star firework with trail**
+
 ```php
 /** @var Fireworks $fw */
 $fw = ItemFactory::get(Item::FIREWORKS);
@@ -43,7 +55,9 @@ $fw->addExplosion(Fireworks::TYPE_STAR, Fireworks::COLOR_YELLOW, "", true, true)
 $fw->setFlightDuration(3);
 $player->getInventory()->addItem($fw);
 ```
+
 - **All-colored sphere firework with trail**
+
 ```php
 /** @var Fireworks $fw */
 $fw = ItemFactory::get(Item::FIREWORKS);
@@ -65,9 +79,12 @@ $fw->addExplosion(Fireworks::TYPE_SMALL_SPHERE, Fireworks::COLOR_GOLD, "", false
 $fw->addExplosion(Fireworks::TYPE_SMALL_SPHERE, Fireworks::COLOR_WHITE, "", false, true);
 $player->getInventory()->addItem($fw);
 ```
+
 ### Launching fireworks
+
 Fireworks can be launched after you created the firework item.
 This example spawns a green creeper firework at the default world's spawn
+
 ```php
 // Create the type of firework item to be launched
 /** @var Fireworks $fw */

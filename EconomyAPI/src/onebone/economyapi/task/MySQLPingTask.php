@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -20,26 +19,22 @@
 
 namespace onebone\economyapi\task;
 
-
 use mysqli;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\scheduler\Task;
 
-class MySQLPingTask extends Task
-{
+class MySQLPingTask extends Task {
+
     private $mysql;
 
     private $plugin;
 
-    public function __construct(EconomyAPI $plugin, mysqli $mysql)
-    {
+    public function __construct(EconomyAPI $plugin, mysqli $mysql) {
         $this->plugin = $plugin;
-
         $this->mysql = $mysql;
     }
 
-    public function onRun(): void
-    {
+    public function onRun(): void {
         if (!$this->mysql->ping()) {
             $this->plugin->openProvider();
         }

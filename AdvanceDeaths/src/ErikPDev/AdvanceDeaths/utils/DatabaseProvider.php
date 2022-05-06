@@ -1,11 +1,12 @@
 <?php
+
 namespace ErikPDev\AdvanceDeaths\utils;
 
 use ErikPDev\AdvanceDeaths\Main;
 use ree_jp\stackstorage\libs\poggit\libasynql\libasynql;
 
-class DatabaseProvider{
-    
+class DatabaseProvider {
+
     public $database;
     public const PREPARE_DATABASE = "advancedeaths.init";
     public const INCREASEMENT_KILL = "advancedeaths.addKill";
@@ -22,37 +23,37 @@ class DatabaseProvider{
         $this->plugin = $plugin;
     }
 
-    public function prepare(): void{
+    public function prepare(): void {
         $this->database = libasynql::create($this->plugin, $this->plugin->getConfig()->get("database"), [
             "sqlite" => "sqlite.sql",
             "mysql" => "mysql.sql"
         ]);
         $this->database->executeGeneric(DatabaseProvider::PREPARE_DATABASE, []);
-	}
+    }
 
-    public function IncrecementKill(string $UUID, string $PlayerName): void{
+    public function IncrecementKill(string $UUID, string $PlayerName): void {
         $this->database->executeInsert(DatabaseProvider::INCREASEMENT_KILL, ["UUID" => $UUID, "PlayerName" => $PlayerName]);
     }
 
-    public function IncrecementDeath(string $UUID, string $PlayerName): void{
+    public function IncrecementDeath(string $UUID, string $PlayerName): void {
         $this->database->executeInsert(DatabaseProvider::INCREASEMENT_DEATH, ["UUID" => $UUID, "PlayerName" => $PlayerName]);
     }
 
-    public function getDatabase(){
+    public function getDatabase() {
         return $this->database;
     }
 
-    public static function getKillToDeathRatio($kills, $deaths): string{
-		if($deaths !== 0){
-			$ratio = $kills / $deaths;
-			if($ratio !== 0){
-				return number_format($ratio, 1);
-			}
-		}
-		return "0.0";
-	}
+    public static function getKillToDeathRatio($kills, $deaths): string {
+        if ($deaths !== 0) {
+            $ratio = $kills / $deaths;
+            if ($ratio !== 0) {
+                return number_format($ratio, 1);
+            }
+        }
+        return "0.0";
+    }
 
-    public function close(): void{
-        if(isset($this->database)) $this->database->close();
+    public function close(): void {
+        if (isset($this->database)) $this->database->close();
     }
 }

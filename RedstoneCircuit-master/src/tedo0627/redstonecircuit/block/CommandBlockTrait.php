@@ -5,6 +5,7 @@ namespace tedo0627\redstonecircuit\block;
 use pocketmine\block\utils\PoweredByRedstoneTrait;
 
 trait CommandBlockTrait {
+
     use PoweredByRedstoneTrait;
 
     protected int $commandBlockMode = 0;

@@ -27,6 +27,7 @@ use tedo0627\redstonecircuit\block\IRedstoneDiode;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneComponent, ILinkRedstoneWire {
+
     use RedstoneComponentTrait;
 
     private ?CallbackInventoryListener $callBack = null;
@@ -57,7 +58,6 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
                 $inventory = $tile->getInventory();
                 $inventory->getListeners()->remove($this->callBack);
             }
-
             if (BlockPowerHelper::isNormalBlock($block)) {
                 $block = $this->getSide($this->getFacing(), 2);
                 $tile = $this->getPosition()->getWorld()->getTile($block->getPosition());
@@ -67,7 +67,6 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
                 }
             }
         }
-
         parent::onBreak($item, $player);
         BlockUpdateHelper::updateDiodeRedstone($this, Facing::opposite($this->getFacing()));
         return true;
@@ -84,25 +83,20 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
 
     public function onScheduledUpdate(): void {
         $power = $this->recalculateUtilityPower();
-
         if ($power === 0) $power = BlockPowerHelper::getPower($this->getSide($this->getFacing()), $this->getFacing());
-
         $sidePower = 0;
         $face = Facing::rotateY($this->getFacing(), true);
         $side = $this->getSide($face);
         if ($side instanceof IRedstoneDiode || $side instanceof BlockRedstoneWire) {
             $sidePower = $side->getWeakPower($face);
         }
-
         $face = Facing::opposite($face);
         $side = $this->getSide($face);
         if ($side instanceof IRedstoneDiode || $side instanceof BlockRedstoneWire) {
             $sidePower = max($sidePower, $side->getWeakPower($face));
         }
-
         $power = $this->isSubtractMode() ? max(0, $power - $sidePower) : ($power >= $sidePower ? $power : 0);
         if ($this->getOutputSignalStrength() === $power) return;
-
         if ($this->getOutputSignalStrength() === 0 && $power > 0) $this->setPowered(true);
         if ($this->getOutputSignalStrength() > 0 && $power === 0) $this->setPowered(false);
         $this->setOutputSignalStrength($power);
@@ -117,7 +111,6 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
         if ($tile instanceof Container) {
             $inventory = $tile->getInventory();
             $this->createCallBack($inventory);
-
             if (count($inventory->getContents()) != 0) {
                 $stack = 0;
                 for ($slot = 0; $slot < $inventory->getSize(); $slot++) {
@@ -130,16 +123,13 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
             return $power;
         }
         $this->callBack = null;
-
         if ($step === 2) $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 1);
-
         if ($block instanceof Cake) return (7 - $block->getBites()) * 2;
         if ($block instanceof EndPortalFrame) return $block->hasEye() ? 15 : 0;
         if ($block instanceof Jukebox) {
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 1);
             $record = $block->getRecord();
             if ($record === null) return 0;
-
             return match ($record->getRecordType()) {
                 RecordType::DISK_13() => 1,
                 RecordType::DISK_CAT() => 2,
@@ -161,7 +151,6 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
             if ($block->getFramedItem() === null) return 0;
             return $block->getItemRotation() + 1;
         }
-
         if ($step === 1 && BlockPowerHelper::isNormalBlock($block)) return $this->recalculateUtilityPower(2);
         return 0;
     }
@@ -173,10 +162,8 @@ class BlockRedstoneComparator extends RedstoneComparator implements IRedstoneCom
                 fn(Inventory $inventory) => $block->getPosition()->getWorld()->scheduleDelayedBlockUpdate($block->getPosition(), 1)
             );
         }
-
         $listeners = $inventory->getListeners();
         if ($listeners->contains($this->callBack)) return;
-
         $listeners->add($this->callBack);
     }
 

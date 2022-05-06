@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,8 +18,8 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome\types;
 
 abstract class CoveredBiome extends Biome {
+
 }

@@ -13,7 +13,7 @@ class BreakSoundPacket implements Listener {
      * @return void
      * @priority LOWEST
      */
-    public function onBreak(BlockBreakEvent $event) {
+    public function onBreak(BlockBreakEvent $event): void {
         $player = $event->getPlayer();
         $pk = new PlaySoundPacket();
         $pk->x = $player->getPosition()->getX();

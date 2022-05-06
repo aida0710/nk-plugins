@@ -11,15 +11,15 @@ class ClickFailSound implements Sound {
 
     private float $pitch;
 
-    public function __construct(float $pitch = 0){
+    public function __construct(float $pitch = 0) {
         $this->pitch = $pitch;
     }
 
-    public function getPitch() : float{
+    public function getPitch(): float {
         return $this->pitch;
     }
 
-    public function encode(Vector3 $pos) : array{
-        return [LevelEventPacket::create(LevelEvent::SOUND_CLICK_FAIL, (int) ($this->pitch * 1000), $pos)];
+    public function encode(Vector3 $pos): array {
+        return [LevelEventPacket::create(LevelEvent::SOUND_CLICK_FAIL, (int)($this->pitch * 1000), $pos)];
     }
 }

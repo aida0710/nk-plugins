@@ -21,6 +21,7 @@ use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockWoodenPressurePlate extends WoodenPressurePlate implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 
@@ -42,13 +43,11 @@ class BlockWoodenPressurePlate extends WoodenPressurePlate implements IRedstoneC
 
     public function onScheduledUpdate(): void {
         if (!$this->isPressed()) return;
-
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         if (count($entities) !== 0) {
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 20);
             return;
         }
-
         $this->setPressed(false);
         $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
         $this->getPosition()->getWorld()->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOffSound());
@@ -58,7 +57,6 @@ class BlockWoodenPressurePlate extends WoodenPressurePlate implements IRedstoneC
     public function onEntityInside(Entity $entity): bool {
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         if (count($entities) <= 0) return true;
-
         if (!$this->isPressed()) {
             $this->setPressed(true);
             $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);

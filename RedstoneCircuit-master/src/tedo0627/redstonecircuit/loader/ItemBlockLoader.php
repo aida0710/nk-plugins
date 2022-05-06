@@ -14,7 +14,6 @@ class ItemBlockLoader extends Loader {
 
     public function __construct(string $name, int $blockId, ItemIdentifier $identifier) {
         parent::__construct($name);
-
         $this->blockId = $blockId;
         $this->identifier = $identifier;
     }

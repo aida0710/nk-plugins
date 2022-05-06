@@ -42,16 +42,16 @@ HealMessage: "You have been healed!" # Message to send to the Player when it's h
 
 instant-respawn: true # Set this to true if you want the player to instantly respawn.
 
-# Start of Death/Kill Money Config, NOTICE: EconomyAPI needs to be installed!
+  # Start of Death/Kill Money Config, NOTICE: EconomyAPI needs to be installed!
 
-# Possible Type:
+  # Possible Type:
   # all - Takes all of the Player Money when it dies.
   # percent - Removes a percentage of the player money.
   # amount - Removed the amount of money.
 
-# Possible ValueType:
-  # gain = The player will gain x amount of money.
-  # lose = The player will lose x amount of money.
+  # Possible ValueType:
+# gain = The player will gain x amount of money.
+# lose = The player will lose x amount of money.
 DeathMoneyConfig: {
   isEnabled: true,
   disabledOnWorlds: [

@@ -1,18 +1,18 @@
 setmoney:
-- setmoney
+  - setmoney
 seemoney:
-- seemoney
+  - seemoney
 mymoney:
-- mymoney
+  - mymoney
 pay:
-- pay
+  - pay
 givemoney:
-- givemoney
+  - givemoney
 topmoney:
-- topmoney
+  - topmoney
 setlang:
-- setlang
+  - setlang
 takemoney:
-- takemoney
+  - takemoney
 mystatus:
-- mystatus
+  - mystatus

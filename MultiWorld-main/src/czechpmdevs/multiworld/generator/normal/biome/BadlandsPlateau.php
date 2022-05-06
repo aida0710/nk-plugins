@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\populator\impl\plant\Plant;
@@ -28,19 +26,16 @@ use pocketmine\block\VanillaBlocks;
 
 class BadlandsPlateau extends Badlands {
 
-	public function __construct() {
-		parent::__construct();
+    public function __construct() {
+        parent::__construct();
+        $deadBush = new PlantPopulator(4, 3);
+        $deadBush->addPlant(new Plant(VanillaBlocks::DEAD_BUSH(), [VanillaBlocks::HARDENED_CLAY()]));
+        $this->clearPopulators();
+        $this->addPopulators([$deadBush]);
+        $this->setElevation(84, 87);
+    }
 
-		$deadBush = new PlantPopulator(4, 3);
-		$deadBush->addPlant(new Plant(VanillaBlocks::DEAD_BUSH(), [VanillaBlocks::HARDENED_CLAY()]));
-
-		$this->clearPopulators();
-		$this->addPopulators([$deadBush]);
-
-		$this->setElevation(84, 87);
-	}
-
-	public function getName(): string {
-		return "Mesa Plateau";
-	}
+    public function getName(): string {
+        return "Mesa Plateau";
+    }
 }

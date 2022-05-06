@@ -13,7 +13,6 @@ class MainForm implements Form {
             return;
         }
         $convert = BonusConvertPlugin::getConverts()[$data];
-
         $player->sendForm(new SubForm($convert));
     }
 

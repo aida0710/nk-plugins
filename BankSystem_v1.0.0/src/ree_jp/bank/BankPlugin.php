@@ -3,7 +3,6 @@
 namespace ree_jp\bank;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 use ree_jp\bank\command\BankCommand;
 use ree_jp\bank\event\EventListener;
 

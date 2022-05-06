@@ -2,7 +2,6 @@
 
 namespace Deceitya\BonusConvert\Form;
 
-use Deceitya\BonusConvert\BonusConvertPlugin;
 use Deceitya\BonusConvert\Convert;
 use pocketmine\form\Form;
 use pocketmine\player\Player;

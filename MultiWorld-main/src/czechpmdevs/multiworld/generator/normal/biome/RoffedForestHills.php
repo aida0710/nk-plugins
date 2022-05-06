@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,17 +18,16 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 class RoffedForestHills extends RoofedForest {
 
-	public function __construct() {
-		parent::__construct();
-		$this->setElevation(64, 84);
-	}
+    public function __construct() {
+        parent::__construct();
+        $this->setElevation(64, 84);
+    }
 
-	public function getName(): string {
-		return "Dark Forest Hills";
-	}
+    public function getName(): string {
+        return "Dark Forest Hills";
+    }
 }

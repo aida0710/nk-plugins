@@ -1,32 +1,29 @@
 <?php
 
 declare(strict_types=1);
-
 namespace muqsit\vanillagenerator\generator\noise\glowstone;
 
 use muqsit\vanillagenerator\generator\noise\bukkit\NoiseGenerator;
 use muqsit\vanillagenerator\generator\noise\bukkit\OctaveGenerator;
 use pocketmine\utils\Random;
 
-class PerlinOctaveGenerator extends OctaveGenerator{
+class PerlinOctaveGenerator extends OctaveGenerator {
 
 	/**
 	 * @param Random $rand
 	 * @param int $octaves
 	 * @return PerlinNoise[]
 	 */
-	protected static function createOctaves(Random $rand, int $octaves) : array{
+	protected static function createOctaves(Random $rand, int $octaves): array {
 		$result = [];
-
-		for($i = 0; $i < $octaves; ++$i){
+		for ($i = 0; $i < $octaves; ++$i) {
 			$result[$i] = new PerlinNoise($rand);
 		}
-
 		return $result;
 	}
 
-	protected static function floor(float $x) : int{
-		return $x >= 0 ? (int) $x : (int) $x - 1;
+	protected static function floor(float $x): int {
+		return $x >= 0 ? (int)$x : (int)$x - 1;
 	}
 
 	/**
@@ -37,7 +34,7 @@ class PerlinOctaveGenerator extends OctaveGenerator{
 	 * @param int $size_z
 	 * @return PerlinOctaveGenerator
 	 */
-	public static function fromRandomAndOctaves(Random $random, int $octaves, int $size_x, int $size_y, int $size_z) : self{
+	public static function fromRandomAndOctaves(Random $random, int $octaves, int $size_x, int $size_y, int $size_z): self {
 		return new PerlinOctaveGenerator(self::createOctaves($random, $octaves), $size_x, $size_y, $size_z);
 	}
 
@@ -56,7 +53,7 @@ class PerlinOctaveGenerator extends OctaveGenerator{
 	 * @param int $size_y the size on the Y axis
 	 * @param int $size_z the size on the Z axis
 	 */
-	public function __construct(array $octaves, int $size_x, int $size_y, int $size_z){
+	public function __construct(array $octaves, int $size_x, int $size_y, int $size_z) {
 		parent::__construct($octaves);
 		$this->size_x = $size_x;
 		$this->size_y = $size_y;
@@ -64,27 +61,27 @@ class PerlinOctaveGenerator extends OctaveGenerator{
 		$this->noise = array_fill(0, $size_x * $size_y * $size_z, 0.0);
 	}
 
-	public function getSizeX() : int{
+	public function getSizeX(): int {
 		return $this->size_x;
 	}
 
-	public function getSizeY() : int{
+	public function getSizeY(): int {
 		return $this->size_y;
 	}
 
-	public function getSizeZ() : int{
+	public function getSizeZ(): int {
 		return $this->size_z;
 	}
 
-	public function setSizeX(int $size_x) : void{
+	public function setSizeX(int $size_x): void {
 		$this->size_x = $size_x;
 	}
 
-	public function setSizeY(int $size_y) : void{
+	public function setSizeY(int $size_y): void {
 		$this->size_y = $size_y;
 	}
 
-	public function setSizeZ(int $size_z) : void{
+	public function setSizeZ(int $size_z): void {
 		$this->size_z = $size_z;
 	}
 
@@ -98,22 +95,19 @@ class PerlinOctaveGenerator extends OctaveGenerator{
 	 * @param float $persistence layer n's amplitude as a multiple of layer {@code n - 1}'s amplitude
 	 * @return float[] the noise array
 	 */
-	public function getFractalBrownianMotion(float $x, float $y, float $z, float $lacunarity, float $persistence) : array{
+	public function getFractalBrownianMotion(float $x, float $y, float $z, float $lacunarity, float $persistence): array {
 		$this->noise = array_fill(0, $this->size_x * $this->size_y * $this->size_z, 0.0);
-
 		$freq = 1;
 		$amp = 1;
-
 		$x *= $this->x_scale;
 		$y *= $this->y_scale;
 		$z *= $this->z_scale;
-
 		// fBm
 		// the noise have to be periodic over x and z axis: otherwise it can go crazy with high
 		// input, leading to strange oddities in terrain generation like the old minecraft farland
 		// symptoms.
 		/** @var PerlinNoise $octave */
-		foreach($this->octaves as $octave){
+		foreach ($this->octaves as $octave) {
 			$dx = $x * $freq;
 			$dz = $z * $freq;
 			// compute integer part
@@ -128,13 +122,11 @@ class PerlinOctaveGenerator extends OctaveGenerator{
 			// add to fractional part
 			$dx += $lx;
 			$dz += $lz;
-
 			$dy = $y * $freq;
 			$this->noise = $octave->getNoise($this->noise, $dx, $dy, $dz, $this->size_x, $this->size_y, $this->size_z, $this->x_scale * $freq, $this->y_scale * $freq, $this->z_scale * $freq, $amp);
 			$freq *= $lacunarity;
 			$amp *= $persistence;
 		}
-
 		return $this->noise;
 	}
 }

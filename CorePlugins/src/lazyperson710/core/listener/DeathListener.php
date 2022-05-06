@@ -25,9 +25,9 @@ class DeathListener implements Listener {
             EconomyAPI::getInstance()->reduceMoney($player, $floor_money);
             $myMoney = EconomyAPI::getInstance()->myMoney($player);
             $result = 2000 - $myMoney;
-            $result = - $result;
-            if ($myMoney <= 1999){
-               EconomyAPI::getInstance()->setMoney($player, 2000);
+            $result = -$result;
+            if ($myMoney <= 1999) {
+                EconomyAPI::getInstance()->setMoney($player, 2000);
                 $player->sendMessage("§bDeathMessage §7>> §a死亡ペナルティーが適用されたため、所持金が{$see}円から5割徴収される予定でしたが2000円以下になってしまう為{$result}円だけ徴収されました");
             } else {
                 $player->sendMessage("§bDeathMessage §7>> §a死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money}円が徴収されました");

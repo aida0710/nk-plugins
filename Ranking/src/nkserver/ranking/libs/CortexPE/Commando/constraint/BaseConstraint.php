@@ -26,15 +26,13 @@
  *
  */
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando\constraint;
-
-
 
 use nkserver\ranking\libs\CortexPE\Commando\IRunnable;
 use pocketmine\command\CommandSender;
 
 abstract class BaseConstraint {
+
     /** @var IRunnable */
     protected $context;
 

@@ -2,8 +2,8 @@
 
 namespace bbo51dog\pmdiscord\task;
 
-use bbo51dog\pmdiscord\Sender;
 use bbo51dog\pmdiscord\connection\Webhook;
+use bbo51dog\pmdiscord\Sender;
 use pocketmine\scheduler\AsyncTask;
 
 class SendAsyncTask extends AsyncTask {

@@ -33,7 +33,6 @@ class unphar extends PluginBase implements Listener {
                 }
                 if ($this->isOP($sender)) {
                     $sender->sendMessage("Please use from the console.");
-
                 }
                 return true;
         }

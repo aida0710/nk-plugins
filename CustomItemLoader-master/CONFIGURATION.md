@@ -1,5 +1,7 @@
 # Basic config format
+
 The following format should be provided to create Custom item
+
 ```yaml
 items:
   <item_name>:
@@ -20,9 +22,11 @@ items:
 # Additional Properties
 
 ## Major Properties
+
 To set item's max stack size, you have to use `max_stack_size` to set item's max stack size
 
 You can set it by adding
+
 ```yaml
 max_stack_size: 64
 ```
@@ -30,12 +34,14 @@ max_stack_size: 64
 If you want item that player can equip on offhand, you have to enable `allow_off_hand` to enable offhand support
 
 You can set it by adding
+
 ```yaml
 allow_off_hand: true
 ```
 
 When you want to add your custom item to creative inventory, you have to enable `add_creative_inventory`
 You can set it by adding
+
 ```yaml
 add_creative_inventory: true
 ```
@@ -45,6 +51,7 @@ I suggest to use my [Offhand](https://poggit.pmmp.io/p/OffHand) to enable Offhan
 To make an item usable for breaking blocks even in creative mode, you have to enable `can_destroy_in_creative`
 
 You can enable it by adding
+
 ```yaml
 can_destroy_in_creative: true
 ```
@@ -56,41 +63,52 @@ hand_equipped: true
 ```
 
 ## Durable item
+
 To make durable item, you have to enable `durable` to make item as durable.
 
-You can enable it by adding 
+You can enable it by adding
+
 ```yaml
 durable: true
 ```
+
 on item properties
 
 If you want to set its durability, you can use `max_durability` to set item's durable.
 
 You can set it by adding
+
 ```yaml
 max_durability: 64
 ```
 
 ## Placeable item
+
 To make placeable item, you have to enable `isBlock` to make item as placeable.
 
 You can enable it by adding
+
 ```yaml
 isBlock: true
 ```
 
-Also you have to declare block id to make item as placeable. Otherwise, Item will not be placed because PMMP suppose it as air.
+Also you have to declare block id to make item as placeable. Otherwise, Item will not be placed because PMMP suppose it
+as air.
 
 You can declare block id by adding
+
 ```yaml
 blockId: <blockId>
 ```
+
 `<blockId>` must be positive integer
 
 ## Food item
+
 To make food item, you have to enable `food` to make item as food.
 
 You can enable it by adding
+
 ```yaml
 food: true
 ```
@@ -115,6 +133,7 @@ residue:
 `residue` will give item when player eats food like beetroot soup
 
 ## Tool item
+
 To make item as tool, You have to enable `tool`
 
 ```yaml
@@ -150,12 +169,14 @@ Types:
 `4`: Iron
 `5`: Diamond
 
-
 ## Armor item
+
 To make item as armor, you have to enable `armor`
+
 ```yaml
 armor: true
 ```
+
 Armor also can have durability, as I mentioned on [Tool](#Tool item) and [Durable](#Durable item)
 
 On armor, you have to define these properties.
@@ -165,7 +186,8 @@ armor_slot: chest
 armor_class: diamond
 ```
 
-Currently, I don't know what `armor_class` does. According to [bedrock.dev](https://bedrock.dev) document, It says it decides the texture type of armor.
+Currently, I don't know what `armor_class` does. According to [bedrock.dev](https://bedrock.dev) document, It says it
+decides the texture type of armor.
 > Texture Type to apply for the armor
 
 But I can't see what's difference.
@@ -187,12 +209,14 @@ The default value is `diamond`.
 `armor_slot` is the slot of armor, which is applied where armor can be equipped.
 
 Allowed values for `armor_slot`:
+
 - helmet
 - chest
 - leggings
 - boots
 
 # Templates
+
 You can use this template to make your custom item
 
 Replace `<something>` to your own value
@@ -230,6 +254,7 @@ items:
 ```
 
 ## Placeable item
+
 ```yaml
 items:
   <your_item_name>:
@@ -242,6 +267,7 @@ items:
 ```
 
 ## Tool
+
 ```yaml
 items:
   <your_item_name>:
@@ -255,6 +281,7 @@ items:
 ```
 
 ## Armor
+
 ```yaml
 items:
   <your_item_name>:

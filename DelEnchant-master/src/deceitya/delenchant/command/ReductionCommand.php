@@ -22,7 +22,7 @@ class ReductionCommand extends Command {
             return true;
         }
         $item = $sender->getInventory()->getItemInHand();
-        if (!Server::getInstance()->isOp($sender->getName())){
+        if (!Server::getInstance()->isOp($sender->getName())) {
             if ($item->getNamedTag()->getInt('MiningTools_3', -1) !== -1 || $item->getNamedTag()->getInt('4mining', -1) !== -1 || $item->getNamedTag()->getInt('MiningTools_Expansion', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
                 $sender->sendMessage('§bReduceEnchant §7>> §cこのアイテムはエンチャントを削減できません');
                 return true;

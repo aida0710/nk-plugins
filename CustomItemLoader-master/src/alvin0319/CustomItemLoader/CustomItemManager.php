@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,7 +14,6 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader;
 
 use alvin0319\CustomItemLoader\item\CustomArmorItem;
@@ -41,137 +39,126 @@ use ReflectionClass;
 use ReflectionProperty;
 use Throwable;
 
-final class CustomItemManager{
-	use SingletonTrait {
-		getInstance as getInstance_; // FIXME: This will valid when IntelliJ fixes singleton bug
-	}
+final class CustomItemManager {
 
-	public static function getInstance() : CustomItemManager{
-		return self::getInstance_();
-	}
+    use SingletonTrait {
+        getInstance as getInstance_; // FIXME: This will valid when IntelliJ fixes singleton bug
+    }
 
-	/** @var Item[] */
-	protected array $registered = [];
+    public static function getInstance(): CustomItemManager {
+        return self::getInstance_();
+    }
 
-	protected ItemComponentPacket $packet;
+    /** @var Item[] */
+    protected array $registered = [];
 
-	protected ReflectionProperty $coreToNetMap;
+    protected ItemComponentPacket $packet;
 
-	protected ReflectionProperty $netToCoreMap;
+    protected ReflectionProperty $coreToNetMap;
 
-	protected array $coreToNetValues = [];
+    protected ReflectionProperty $netToCoreMap;
 
-	protected array $netToCoreValues = [];
+    protected array $coreToNetValues = [];
 
-	protected ReflectionProperty $itemTypeMap;
+    protected array $netToCoreValues = [];
 
-	/** @var ItemComponentPacketEntry[] */
-	protected array $packetEntries = [];
-	/** @var ItemTypeEntry[] */
-	protected array $itemTypeEntries = [];
+    protected ReflectionProperty $itemTypeMap;
 
-	public function __construct(){
-		$ref = new ReflectionClass(ItemTranslator::class);
-		$this->coreToNetMap = $ref->getProperty("simpleCoreToNetMapping");
-		$this->netToCoreMap = $ref->getProperty("simpleNetToCoreMapping");
-		$this->coreToNetMap->setAccessible(true);
-		$this->netToCoreMap->setAccessible(true);
+    /** @var ItemComponentPacketEntry[] */
+    protected array $packetEntries = [];
+    /** @var ItemTypeEntry[] */
+    protected array $itemTypeEntries = [];
 
-		$this->coreToNetValues = $this->coreToNetMap->getValue(ItemTranslator::getInstance());
-		$this->netToCoreValues = $this->netToCoreMap->getValue(ItemTranslator::getInstance());
+    public function __construct() {
+        $ref = new ReflectionClass(ItemTranslator::class);
+        $this->coreToNetMap = $ref->getProperty("simpleCoreToNetMapping");
+        $this->netToCoreMap = $ref->getProperty("simpleNetToCoreMapping");
+        $this->coreToNetMap->setAccessible(true);
+        $this->netToCoreMap->setAccessible(true);
+        $this->coreToNetValues = $this->coreToNetMap->getValue(ItemTranslator::getInstance());
+        $this->netToCoreValues = $this->netToCoreMap->getValue(ItemTranslator::getInstance());
+        $ref_1 = new ReflectionClass(ItemTypeDictionary::class);
+        $this->itemTypeMap = $ref_1->getProperty("itemTypes");
+        $this->itemTypeMap->setAccessible(true);
+        $this->itemTypeEntries = $this->itemTypeMap->getValue(GlobalItemTypeDictionary::getInstance()->getDictionary());
+        $this->packetEntries = [];
+        $this->packet = ItemComponentPacket::create($this->packetEntries);
+    }
 
-		$ref_1 = new ReflectionClass(ItemTypeDictionary::class);
-		$this->itemTypeMap = $ref_1->getProperty("itemTypes");
-		$this->itemTypeMap->setAccessible(true);
+    public function getItems(): array {
+        return $this->registered;
+    }
 
-		$this->itemTypeEntries = $this->itemTypeMap->getValue(GlobalItemTypeDictionary::getInstance()->getDictionary());
+    public function isCustomItem(Item $item): bool {
+        foreach ($this->registered as $other) {
+            if ($item->equals($other, false, $item->hasNamedTag())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-		$this->packetEntries = [];
+    /**
+     * @param CustomItemTrait|Item $item
+     */
+    public function registerItem($item): void {
+        try {
+            $id = $item->getProperties()->getId();
+            $runtimeId = $item->getProperties()->getRuntimeId();
+            $this->coreToNetValues[$id] = $runtimeId;
+            $this->netToCoreValues[$runtimeId] = $id;
+            $this->itemTypeEntries[] = new ItemTypeEntry($item->getProperties()->getNamespace(), $runtimeId, true);
+            $this->packetEntries[] = new ItemComponentPacketEntry($item->getProperties()->getNamespace(), new CacheableNbt($item->getProperties()->getNbt()));
+            $this->registered[] = $item;
+            $new = clone $item;
+            if (StringToItemParser::getInstance()->parse($item->getProperties()->getName()) === null) {
+                StringToItemParser::getInstance()->register($item->getProperties()->getName(), fn() => $new);
+            }
+            ItemFactory::getInstance()->register($item, true);
+        } catch (Throwable $e) {
+            throw new \InvalidArgumentException("Failed to register item: " . $e->getMessage(), $e->getLine(), $e);
+        }
+        $this->refresh();
+    }
 
-		$this->packet = ItemComponentPacket::create($this->packetEntries);
-	}
+    private function refresh(): void {
+        $this->netToCoreMap->setValue(ItemTranslator::getInstance(), $this->netToCoreValues);
+        $this->coreToNetMap->setValue(ItemTranslator::getInstance(), $this->coreToNetValues);
+        $this->itemTypeMap->setValue(GlobalItemTypeDictionary::getInstance()->getDictionary(), $this->itemTypeEntries);
+        $this->packet = ItemComponentPacket::create($this->packetEntries);
+    }
 
-	public function getItems() : array{
-		return $this->registered;
-	}
+    public function getPacket(): ItemComponentPacket {
+        return clone $this->packet;
+    }
 
-	public function isCustomItem(Item $item) : bool{
-		foreach($this->registered as $other){
-			if($item->equals($other, false, $item->hasNamedTag())){
-				return true;
-			}
-		}
-		return false;
-	}
+    public function registerDefaultItems(array $data, bool $reload = false): void {
+        if ($reload) {
+            ItemTranslator::reset();
+            GlobalItemTypeDictionary::reset();
+        }
+        foreach ($data as $name => $itemData) {
+            $this->registerItem(self::getItem($name, $itemData));
+        }
+    }
 
-	/**
-	 * @param CustomItemTrait|Item $item
-	 */
-	public function registerItem($item) : void{
-		try{
-			$id = $item->getProperties()->getId();
-			$runtimeId = $item->getProperties()->getRuntimeId();
-
-			$this->coreToNetValues[$id] = $runtimeId;
-			$this->netToCoreValues[$runtimeId] = $id;
-
-			$this->itemTypeEntries[] = new ItemTypeEntry($item->getProperties()->getNamespace(), $runtimeId, true);
-
-			$this->packetEntries[] = new ItemComponentPacketEntry($item->getProperties()->getNamespace(), new CacheableNbt($item->getProperties()->getNbt()));
-
-			$this->registered[] = $item;
-
-			$new = clone $item;
-
-			if(StringToItemParser::getInstance()->parse($item->getProperties()->getName()) === null){
-				StringToItemParser::getInstance()->register($item->getProperties()->getName(), fn() => $new);
-			}
-
-			ItemFactory::getInstance()->register($item, true);
-		}catch(Throwable $e){
-			throw new \InvalidArgumentException("Failed to register item: " . $e->getMessage(), $e->getLine(), $e);
-		}
-		$this->refresh();
-	}
-
-	private function refresh() : void{
-		$this->netToCoreMap->setValue(ItemTranslator::getInstance(), $this->netToCoreValues);
-		$this->coreToNetMap->setValue(ItemTranslator::getInstance(), $this->coreToNetValues);
-		$this->itemTypeMap->setValue(GlobalItemTypeDictionary::getInstance()->getDictionary(), $this->itemTypeEntries);
-		$this->packet = ItemComponentPacket::create($this->packetEntries);
-	}
-
-	public function getPacket() : ItemComponentPacket{
-		return clone $this->packet;
-	}
-
-	public function registerDefaultItems(array $data, bool $reload = false) : void{
-		if($reload){
-			ItemTranslator::reset();
-			GlobalItemTypeDictionary::reset();
-		}
-		foreach($data as $name => $itemData){
-			$this->registerItem(self::getItem($name, $itemData));
-		}
-	}
-
-	public static function getItem(string $name, array $data) : Item{
-		$prop = new CustomItemProperties($name, $data);
-		if($prop->isDurable()){
-			return new CustomDurableItem($name, $data);
-		}
-		if($prop->isFood()){
-			return new CustomFoodItem($name, $data);
-		}
-		if($prop->isArmor()){
-			return new CustomArmorItem($name, $data);
-		}
-		if($prop->isBlock()){
-			return new CustomItemBlock($name, $data);
-		}
-		if($prop->isTool()){
-			return new CustomToolItem($name, $data);
-		}
-		return new CustomItem($name, $data);
-	}
+    public static function getItem(string $name, array $data): Item {
+        $prop = new CustomItemProperties($name, $data);
+        if ($prop->isDurable()) {
+            return new CustomDurableItem($name, $data);
+        }
+        if ($prop->isFood()) {
+            return new CustomFoodItem($name, $data);
+        }
+        if ($prop->isArmor()) {
+            return new CustomArmorItem($name, $data);
+        }
+        if ($prop->isBlock()) {
+            return new CustomItemBlock($name, $data);
+        }
+        if ($prop->isTool()) {
+            return new CustomToolItem($name, $data);
+        }
+        return new CustomItem($name, $data);
+    }
 }

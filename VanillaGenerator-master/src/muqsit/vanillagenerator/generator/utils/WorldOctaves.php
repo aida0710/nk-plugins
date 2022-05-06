@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace muqsit\vanillagenerator\generator\utils;
 
 use muqsit\vanillagenerator\generator\noise\bukkit\OctaveGenerator;
@@ -12,7 +11,7 @@ use muqsit\vanillagenerator\generator\noise\bukkit\OctaveGenerator;
  * @phpstan-template V of OctaveGenerator
  * @phpstan-template W of OctaveGenerator
  */
-class WorldOctaves{
+class WorldOctaves {
 
 	/**
 	 * @var OctaveGenerator
@@ -68,7 +67,7 @@ class WorldOctaves{
 		OctaveGenerator $roughness_2,
 		OctaveGenerator $detail,
 		OctaveGenerator $surface
-	){
+	) {
 		$this->height = $height;
 		$this->roughness = $roughness;
 		$this->roughness_2 = $roughness_2;

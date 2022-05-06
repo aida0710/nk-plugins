@@ -3,7 +3,6 @@
 declare(strict_types=1);
 namespace space\yurisi\Form\Sell;
 
-use pocketmine\block\BlockLegacyIds;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
@@ -97,12 +96,12 @@ class SellRegisterForm implements Form {
         $cls = new YamlConfig();
         $all = $cls->getAll();
         $count = 0;
-        foreach($all as $name){
-            if(stristr($name['player'], $player->getName()) !== false){
+        foreach ($all as $name) {
+            if (stristr($name['player'], $player->getName()) !== false) {
                 $count++;
             }
         }
-        if ($count >= 3){
+        if ($count >= 3) {
             $player->sendForm(new self($player, "§c現在3つ出品しているため新規に出品することは出来ません"));
             return;
         }

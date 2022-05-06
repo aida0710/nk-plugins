@@ -38,7 +38,6 @@ class BlockTripwire extends Tripwire {
     public function onBreak(Item $item, ?Player $player = null): bool {
         parent::onBreak($item, $player);
         if (!$this->isConnected()) return true;
-
         $faces = [Facing::SOUTH, Facing::WEST];
         for ($i = 0; $i < count($faces); $i++) {
             $face = $faces[$i];
@@ -58,12 +57,10 @@ class BlockTripwire extends Tripwire {
         if ($this->isTriggered()) {
             $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
             if (count($entities) > 0) return;
-
             $this->setTriggered(false);
             $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
             return;
         }
-
         $this->setConnected(false);
         $this->setSuspended(false);
         $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
@@ -72,12 +69,10 @@ class BlockTripwire extends Tripwire {
     public function onEntityInside(Entity $entity): bool {
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         if (count($entities) <= 0) return true;
-
         $this->setTriggered(true);
         $world = $this->getPosition()->getWorld();
         $world->setBlock($this->getPosition(), $this);
         $world->scheduleDelayedBlockUpdate($this->getPosition(), 1);
-
         $faces = [Facing::SOUTH, Facing::WEST];
         for ($i = 0; $i < count($faces); $i++) {
             $face = $faces[$i];

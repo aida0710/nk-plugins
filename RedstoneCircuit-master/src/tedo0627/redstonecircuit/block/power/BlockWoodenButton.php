@@ -20,6 +20,7 @@ use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockWoodenButton extends WoodenButton implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 
@@ -35,7 +36,6 @@ class BlockWoodenButton extends WoodenButton implements IRedstoneComponent, ILin
 
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null): bool {
         if ($this->isPressed()) return true;
-
         parent::onInteract($item, $face, $clickVector, $player);
         BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
         return true;
@@ -43,12 +43,10 @@ class BlockWoodenButton extends WoodenButton implements IRedstoneComponent, ILin
 
     public function onScheduledUpdate(): void {
         if (!$this->isPressed()) return;
-
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         for ($i = 0; $i < count($entities); $i++) {
             if ($entities[$i] instanceof Arrow) return;
         }
-
         parent::onScheduledUpdate();
         BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
     }
@@ -66,10 +64,8 @@ class BlockWoodenButton extends WoodenButton implements IRedstoneComponent, ILin
     public function onEntityInside(Entity $entity): bool {
         if (!$entity instanceof Arrow) return true;
         if (!$this->getHitCollision()->intersectsWith($entity->getBoundingBox())) return true;
-
         $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 1);
         if ($this->isPressed()) return true;
-
         $this->setPressed(true);
         $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
         BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
@@ -111,7 +107,7 @@ class BlockWoodenButton extends WoodenButton implements IRedstoneComponent, ILin
         $bb->maxY /= 16;
         $bb->minZ /= 16;
         $bb->maxZ /= 16;
-        return [ $bb ];
+        return [$bb];
     }
 
     public function getStrongPower(int $face): int {

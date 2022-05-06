@@ -26,9 +26,7 @@
  *
  */
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando\constraint;
-
 
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -45,6 +43,6 @@ class InGameRequiredConstraint extends BaseConstraint {
     }
 
     public function isVisibleTo(CommandSender $sender): bool {
-		return $sender instanceof Player;
-	}
+        return $sender instanceof Player;
+    }
 }

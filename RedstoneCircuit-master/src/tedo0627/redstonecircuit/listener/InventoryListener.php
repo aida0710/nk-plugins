@@ -23,7 +23,6 @@ class InventoryListener implements Listener {
         for ($i = 0; $i < count($packets); $i++) {
             $packet = $packets[$i];
             if (!$packet instanceof ContainerOpenPacket) continue;
-
             $inventory = $this->lastInventory;
             $this->lastInventory = null;
             $type = $inventory instanceof IWindowType ? $inventory->getWindowType() : null;

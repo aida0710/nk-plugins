@@ -1,4 +1,5 @@
 <?php
+
 namespace deceitya\repair\form;
 
 use Deceitya\MiningLevel\MiningLevelAPI;

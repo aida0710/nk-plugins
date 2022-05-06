@@ -32,6 +32,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
+
     use AnyFacingTrait;
     use CommandBlockTrait;
     use PermissibleDelegateTrait;
@@ -46,7 +47,7 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
 
     protected string $customName = "";
 
-    public function __construct(BlockIdentifierFlattened $idInfo, string $name, BlockBreakInfo $breakInfo){
+    public function __construct(BlockIdentifierFlattened $idInfo, string $name, BlockBreakInfo $breakInfo) {
         $this->idInfoFlattened = $idInfo;
         $this->perm = new PermissibleBase([DefaultPermissions::ROOT_OPERATOR => true]);
         parent::__construct($idInfo, $name, $breakInfo);
@@ -72,8 +73,7 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
     public function readStateFromWorld(): void {
         parent::readStateFromWorld();
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
-        if(!$tile instanceof BlockEntityCommand) return;
-
+        if (!$tile instanceof BlockEntityCommand) return;
         $this->setCommandBlockMode($tile->getCommandBlockMode());
         $this->setCommand($tile->getCommand());
         $this->setLastOutput($tile->getLastOutput());
@@ -91,7 +91,6 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
         parent::writeStateToWorld();
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
         assert($tile instanceof BlockEntityCommand);
-
         $tile->setCommandBlockMode($this->getCommandBlockMode());
         $tile->setCommand($this->getCommand());
         $tile->setLastOutput($this->getLastOutput());
@@ -127,12 +126,10 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
 
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null): bool {
         if ($player === null) return false;
-
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
         if (!$tile instanceof BlockEntityCommand) return true;
         if (!$player->isCreative()) return true;
         if (!Server::getInstance()->isOp($player->getName())) return true;
-
         $inventory = $tile->getInventory();
         if ($inventory === $player->getCurrentWindow()) $player->removeCurrentWindow();
         $player->setCurrentWindow($inventory);
@@ -149,20 +146,16 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
                 $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 1);
                 return;
             }
-
             $this->setTick($tick - 1);
             if ($tick === 1) {
                 $this->execute();
                 if ($mode === BlockCommand::REPEATING) $this->delay();
                 return;
             }
-
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 1);
             return;
         }
-
         if ($mode !== BlockCommand::REPEATING) return;
-
         if ($this->getTickDelay() === 0 || ($tick === -1 && $this->isExecuteOnFirstTick())) {
             $this->setTick(0);
             $this->execute();
@@ -176,12 +169,10 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
             $this->setPowered(true);
             $mode = $this->getCommandBlockMode();
             if ($mode === BlockCommand::REPEATING) $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 1);
-
             if ($mode !== BlockCommand::NORMAL) {
                 $this->writeStateToWorld();
                 return;
             }
-
             if ($this->getTickDelay() === 0) {
                 $this->execute();
             } else {
@@ -189,9 +180,7 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
             }
             return;
         }
-
         if ($power || !$this->isPowered()) return;
-
         $this->setPowered(false);
         $this->writeStateToWorld();
     }
@@ -207,11 +196,9 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
         if ($this->check()) $successful = $this->dispatch();
         $this->setSuccessCount($successful ? 1 : 0);
         $this->writeStateToWorld();
-
         $block = $this->getSide($this->getFacing());
         if (!$block instanceof BlockCommand) return;
         if ($block->getCommandBlockMode() !== BlockCommand::CHAIN) return;
-
         $pos = $this->getPosition();
         $index = World::blockHash($pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ());
         $block->chain([$index]);
@@ -219,13 +206,11 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
 
     protected function check(): bool {
         if ($this->getCommand() === "") return false;
-
         if ($this->isConditionalMode()) {
             $block = $this->getSide(Facing::opposite($this->getFacing()));
             if (!$block instanceof BlockCommand) return false;
             if ($block->getSuccessCount() <= 0) return false;
         }
-
         if ($this->isAuto()) return true;
         return BlockPowerHelper::isPowered($this);
     }
@@ -234,19 +219,16 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
         $pos = $this->getPosition();
         $index = World::blockHash($pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ());
         if (in_array($index, $blockIndex, true)) return;
-
         if ($this->getTickDelay() !== 0) {
             $this->delay();
             return;
         }
-
         $successful = false;
         if ($this->check()) $successful = $this->dispatch();
         $this->setSuccessCount($successful ? 1 : 0);
         $block = $this->getSide($this->getFacing());
         if (!$block instanceof BlockCommand) return;
         if ($block->getCommandBlockMode() !== BlockCommand::CHAIN) return;
-
         $pos = $this->getPosition();
         $blockIndex[] = World::blockHash($pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ());
         $block->chain($blockIndex);
@@ -255,31 +237,28 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
     protected function dispatch(): bool {
         $args = [];
         preg_match_all('/"((?:\\\\.|[^\\\\"])*)"|(\S+)/u', $this->getCommand(), $matches);
-        foreach($matches[0] as $k => $_){
-            for($i = 1; $i <= 2; ++$i){
-                if($matches[$i][$k] !== ""){
+        foreach ($matches[0] as $k => $_) {
+            for ($i = 1; $i <= 2; ++$i) {
+                if ($matches[$i][$k] !== "") {
                     $args[$k] = $i === 1 ? stripslashes($matches[$i][$k]) : $matches[$i][$k];
                     break;
                 }
             }
         }
-
         $successful = false;
         $sentCommandLabel = array_shift($args);
-        if($sentCommandLabel !== null && ($target = Server::getInstance()->getCommandMap()->getCommand($sentCommandLabel)) !== null){
+        if ($sentCommandLabel !== null && ($target = Server::getInstance()->getCommandMap()->getCommand($sentCommandLabel)) !== null) {
             $target->timings->startTiming();
-
-            try{
+            try {
                 $successful = $target->execute($this, $sentCommandLabel, $args);
-            }catch(InvalidCommandSyntaxException $e){
+            } catch (InvalidCommandSyntaxException $e) {
                 $this->sendMessage($this->getLanguage()->translate(KnownTranslationFactory::commands_generic_usage($target->getUsage())));
-            }finally{
+            } finally {
                 $target->timings->stopTiming();
             }
         } else {
             $this->sendMessage(KnownTranslationFactory::pocketmine_command_notFound($sentCommandLabel ?? "", "/help")->prefix(TextFormat::RED));
         }
-
         return $successful;
     }
 
@@ -292,7 +271,6 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
     }
 
     // interface CommandSender
-
     public function getLanguage(): Language {
         return $this->getServer()->getLanguage();
     }
@@ -311,6 +289,5 @@ class BlockCommand extends Opaque implements IRedstoneComponent, CommandSender {
     }
 
     public function setScreenLineHeight(?int $height): void {
-
     }
 }

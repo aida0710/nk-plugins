@@ -1,9 +1,12 @@
 <?php
+
 namespace ErikPDev\AdvanceDeaths\utils;
 
-class configValidator{
-    private $Config,$plugin,$VariablesInstances;
-    public function __construct($plugin, $Config){
+class configValidator {
+
+    private $Config, $plugin, $VariablesInstances;
+
+    public function __construct($plugin, $Config) {
         $this->plugin = $plugin;
         $this->Config = $Config;
         $this->VariablesInstances = array(
@@ -37,35 +40,51 @@ class configValidator{
             "database" => "array",
             "config-verison" => "float"
         );
-        
     }
 
-    private function isInstanceOf($value, $type){
+    private function isInstanceOf($value, $type) {
         switch ($type) {
             case "string":
-                if(is_string($value) == true){return true;}else{return false;}
+                if (is_string($value) == true) {
+                    return true;
+                } else {
+                    return false;
+                }
                 break;
             case 'bool':
-                if(is_bool($value) == true){return true;}else{return false;}
+                if (is_bool($value) == true) {
+                    return true;
+                } else {
+                    return false;
+                }
                 break;
             case 'array':
-                if(is_array($value) == true){return true;}else{return false;}
+                if (is_array($value) == true) {
+                    return true;
+                } else {
+                    return false;
+                }
                 break;
             case 'float':
-                if(is_float($value) == true){return true;}else{return false;}
+                if (is_float($value) == true) {
+                    return true;
+                } else {
+                    return false;
+                }
                 break;
             default:
                 return false;
                 break;
         }
     }
-    public function Check(){
+
+    public function Check() {
         $ConfigVariables = $this->Config->getAll();
         foreach ($ConfigVariables as $key => $value) {
-            if(!array_key_exists($key, $this->VariablesInstances)) continue;
-            if(!$this->isInstanceOf($value, $this->VariablesInstances[$key])){
+            if (!array_key_exists($key, $this->VariablesInstances)) continue;
+            if (!$this->isInstanceOf($value, $this->VariablesInstances[$key])) {
                 $this->plugin->getLogger()->critical("Unsupported value type on config.yml.");
-                $this->plugin->getLogger()->critical("Key: $key, ".$this->VariablesInstances[$key]);
+                $this->plugin->getLogger()->critical("Key: $key, " . $this->VariablesInstances[$key]);
                 $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
             }
         }

@@ -45,7 +45,6 @@ class BlockRedstoneRepeater extends RedstoneRepeater implements IRedstoneCompone
 
     public function onScheduledUpdate(): void {
         if ($this->isLocked()) return;
-
         $powered = $this->isPowered();
         $side = BlockPowerHelper::isSidePowered($this, $this->getFacing());
         if ($powered && !$side) {
@@ -54,12 +53,10 @@ class BlockRedstoneRepeater extends RedstoneRepeater implements IRedstoneCompone
             BlockUpdateHelper::updateDiodeRedstone($this, Facing::opposite($this->getFacing()));
             return;
         }
-
         if (!$powered) {
             $this->setPowered(true);
             $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
             BlockUpdateHelper::updateDiodeRedstone($this, Facing::opposite($this->getFacing()));
-
             if (!$side) $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), $this->getDelay() * 2);
         }
     }
@@ -68,7 +65,6 @@ class BlockRedstoneRepeater extends RedstoneRepeater implements IRedstoneCompone
         $face = Facing::rotateY($this->getFacing(), true);
         $block = $this->getSide($face);
         if ($block instanceof IRedstoneDiode && BlockPowerHelper::getStrongPower($block, $face)) return true;
-
         $face = Facing::opposite($face);
         $block = $this->getSide($face);
         return $block instanceof IRedstoneDiode && BlockPowerHelper::getStrongPower($block, $face);
@@ -88,13 +84,11 @@ class BlockRedstoneRepeater extends RedstoneRepeater implements IRedstoneCompone
 
     public function onRedstoneUpdate(): void {
         if ($this->isLocked()) return;
-
         $side = BlockPowerHelper::isSidePowered($this, $this->getFacing());
         if ($side && !$this->isPowered()) {
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), $this->getDelay() * 2);
             return;
         }
-
         if ($side || !$this->isPowered()) return;
         $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), $this->getDelay() * 2);
     }

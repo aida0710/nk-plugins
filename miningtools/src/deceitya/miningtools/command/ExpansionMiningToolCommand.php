@@ -26,11 +26,11 @@ class ExpansionMiningToolCommand extends Command {
         if (MiningLevelAPI::getInstance()->getLevel($sender) >= 120) {
             $namedTag = $sender->getInventory()->getItemInHand()->getNamedTag();
             if ($namedTag->getTag('MiningTools_3') !== null || $namedTag->getTag('MiningTools_Expansion') !== null) {
-                if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_PICKAXE || $sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL){
+                if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_PICKAXE || $sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
                     $sender->sendMessage("§bMiningTool §7>> §cDiamondMiningToolsはアップグレードに対応していません");
                     return;
                 }
-                if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_AXE || $sender->getInventory()->getItemInHand()->getId() === self::NETHERITE_AXE){
+                if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_AXE || $sender->getInventory()->getItemInHand()->getId() === self::NETHERITE_AXE) {
                     $sender->sendMessage("§bMiningTool §7>> §cMiningTools Axeはアップグレードに対応していません");
                     return;
                 }

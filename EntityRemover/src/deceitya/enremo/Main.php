@@ -43,7 +43,7 @@ class RemoveTask extends Task {
     public function onRun(): void {
         if ($this->plugin->getCurrent() > 0) {
             $this->plugin->setCurrent($this->plugin->getCurrent() - 1);
-            if ($this->plugin->getCurrent() === 15){
+            if ($this->plugin->getCurrent() === 15) {
                 $this->plugin->getServer()->broadcastTip("§bEntityRemover §7>> §e残り15秒で落下しているアイテムが消去されます");
             }
         } else {
@@ -56,7 +56,7 @@ class RemoveTask extends Task {
                     }
                 }
             }
-            if ($c >= 1){
+            if ($c >= 1) {
                 $this->plugin->getServer()->broadcastTip("§bEntityRemover §7>> §eItem&Exp Entityを{$c}個削除しました");
             }
             $this->plugin->setCurrent($this->plugin->getInterval() - 1);

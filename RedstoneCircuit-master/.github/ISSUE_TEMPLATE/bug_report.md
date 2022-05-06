@@ -12,6 +12,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. ...
 2. ...
 
@@ -19,9 +20,10 @@ Steps to reproduce the behavior:
 If applicable, add screenshots or videos to help explain your problem.
 
 **OS and versions**
- - PocketMine-MP:
- - Server OS:
- - Plugin:
+
+- PocketMine-MP:
+- Server OS:
+- Plugin:
 
 **Plugins**
 <!--- Please provide a list of plugins you have installed -->

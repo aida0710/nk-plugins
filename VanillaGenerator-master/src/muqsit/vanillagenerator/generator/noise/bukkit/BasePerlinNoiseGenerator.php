@@ -1,12 +1,11 @@
 <?php
 
 declare(strict_types=1);
-
 namespace muqsit\vanillagenerator\generator\noise\bukkit;
 
 use pocketmine\utils\Random;
 
-abstract class BasePerlinNoiseGenerator extends NoiseGenerator{
+abstract class BasePerlinNoiseGenerator extends NoiseGenerator {
 
 	/** @var int[][] */
 	protected const GRAD3 = [
@@ -15,8 +14,8 @@ abstract class BasePerlinNoiseGenerator extends NoiseGenerator{
 		[0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]
 	];
 
-	public function __construct(?Random $rand = null){
-		if($rand === null){
+	public function __construct(?Random $rand = null) {
+		if ($rand === null) {
 			static $p = [
 				151, 160, 137, 91, 90, 15, 131, 13, 201,
 				95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37,
@@ -37,23 +36,19 @@ abstract class BasePerlinNoiseGenerator extends NoiseGenerator{
 				176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222,
 				114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
 			];
-
-			for($i = 0; $i < 512; ++$i){
+			for ($i = 0; $i < 512; ++$i) {
 				$this->perm[$i] = $p[$i & 255];
 			}
-		}else{
+		} else {
 			$this->offset_x = $rand->nextFloat() * 256;
 			$this->offset_y = $rand->nextFloat() * 256;
 			$this->offset_z = $rand->nextFloat() * 256;
-
-			for($i = 0; $i < 256; ++$i){
+			for ($i = 0; $i < 256; ++$i) {
 				$this->perm[$i] = $rand->nextBoundedInt(256);
 			}
-
-			for($i = 0; $i < 256; ++$i){
+			for ($i = 0; $i < 256; ++$i) {
 				$pos = $rand->nextBoundedInt(256 - $i) + $i;
 				$old = $this->perm[$i];
-
 				$this->perm[$i] = $this->perm[$pos];
 				$this->perm[$pos] = $old;
 				$this->perm[$i + 256] = $this->perm[$i];
@@ -61,30 +56,25 @@ abstract class BasePerlinNoiseGenerator extends NoiseGenerator{
 		}
 	}
 
-	public function noise3d(float $x, float $y = 0.0, float $z = 0.0) : float{
+	public function noise3d(float $x, float $y = 0.0, float $z = 0.0): float {
 		$x += $this->offset_x;
 		$y += $this->offset_y;
 		$z += $this->offset_z;
-
 		$floor_x = self::floor($x);
 		$floor_y = self::floor($y);
 		$floor_z = self::floor($z);
-
 		// Find unit cube containing the point
 		$X = $floor_x & 255;
 		$Y = $floor_y & 255;
 		$Z = $floor_z & 255;
-
 		// Get relative xyz coordinates of the point within the cube
 		$x -= $floor_x;
 		$y -= $floor_y;
 		$z -= $floor_z;
-
 		// Compute fade curves for xyz
 		$fX = self::fade($x);
 		$fY = self::fade($y);
 		$fZ = self::fade($z);
-
 		// Hash coordinates of the cube corners
 		$A = $this->perm[$X] + $Y;
 		$AA = $this->perm[$A] + $Z;
@@ -92,7 +82,6 @@ abstract class BasePerlinNoiseGenerator extends NoiseGenerator{
 		$B = $this->perm[$X + 1] + $Y;
 		$BA = $this->perm[$B] + $Z;
 		$BB = $this->perm[$B + 1] + $Z;
-
 		return self::lerp($fZ, self::lerp($fY, self::lerp($fX, self::grad($this->perm[$AA], $x, $y, $z),
 			self::grad($this->perm[$BA], $x - 1, $y, $z)),
 			self::lerp($fX, self::grad($this->perm[$AB], $x, $y - 1, $z),

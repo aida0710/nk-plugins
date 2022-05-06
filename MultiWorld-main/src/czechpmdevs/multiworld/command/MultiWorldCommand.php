@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command;
 
 use czechpmdevs\multiworld\command\subcommand\CreateSubCommand;
@@ -47,125 +45,121 @@ use function array_shift;
 
 class MultiWorldCommand extends Command implements PluginOwned {
 
-	/** @var SubCommand[] */
-	public array $subcommands = [];
+    /** @var SubCommand[] */
+    public array $subcommands = [];
 
-	public function __construct() {
-		parent::__construct("multiworld", "MultiWorld commands", null, ["mw"]);
-		$this->setPermission("multiworld.command");
-		$this->registerSubcommands();
-	}
+    public function __construct() {
+        parent::__construct("multiworld", "MultiWorld commands", null, ["mw"]);
+        $this->setPermission("multiworld.command");
+        $this->registerSubcommands();
+    }
 
-	public function registerSubcommands(): void {
-		$this->subcommands["create"] = new CreateSubCommand;
-		$this->subcommands["delete"] = new DeleteSubCommand;
-		$this->subcommands["duplicate"] = new DuplicateSubCommand;
-		$this->subcommands["help"] = new HelpSubCommand;
-		$this->subcommands["info"] = new InfoSubCommand;
-		$this->subcommands["list"] = new ListSubCommand;
-		$this->subcommands["load"] = new LoadSubCommand;
-		$this->subcommands["manage"] = new ManageSubCommand;
-		$this->subcommands["rename"] = new RenameSubCommand;
-		$this->subcommands["teleport"] = new TeleportSubCommand;
-		$this->subcommands["unload"] = new UnloadSubCommand;
-		$this->subcommands["update"] = new UpdateSubCommand;
-	}
+    public function registerSubcommands(): void {
+        $this->subcommands["create"] = new CreateSubCommand;
+        $this->subcommands["delete"] = new DeleteSubCommand;
+        $this->subcommands["duplicate"] = new DuplicateSubCommand;
+        $this->subcommands["help"] = new HelpSubCommand;
+        $this->subcommands["info"] = new InfoSubCommand;
+        $this->subcommands["list"] = new ListSubCommand;
+        $this->subcommands["load"] = new LoadSubCommand;
+        $this->subcommands["manage"] = new ManageSubCommand;
+        $this->subcommands["rename"] = new RenameSubCommand;
+        $this->subcommands["teleport"] = new TeleportSubCommand;
+        $this->subcommands["unload"] = new UnloadSubCommand;
+        $this->subcommands["update"] = new UpdateSubCommand;
+    }
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args) {
-		if(!isset($args[0])) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "default-usage"));
-			return;
-		}
+    public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!isset($args[0])) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "default-usage"));
+            return;
+        }
+        $subCommandName = $this->getSubCommandNameByAlias($args[0]);
+        if ($subCommandName === null) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "default-usage"));
+            return;
+        }
+        $subCommand = $this->subcommands[$subCommandName] ?? null;
+        if ($subCommand === null) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "default-usage"));
+            return;
+        }
+        if (!$this->checkPermissions($sender, $args[0])) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "not-perms"));
+            return;
+        }
+        array_shift($args);
+        $subCommand->execute($sender, $args, $subCommandName);
+    }
 
-		$subCommandName = $this->getSubCommandNameByAlias($args[0]);
-		if($subCommandName === null) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "default-usage"));
-			return;
-		}
+    public function getSubCommandNameByAlias(string $alias): ?string {
+        switch ($alias) {
+            case "help":
+            case "?":
+                return "help";
+            case "create":
+            case "generate":
+            case "new":
+                return "create";
+            case "tp":
+            case "teleport":
+            case "move":
+                return "teleport";
+            case "list":
+            case "ls":
+                return "list";
+            case "load":
+            case "ld":
+                return "load";
+            case "unload":
+            case "unld":
+                return "unload";
+            case "remove":
+            case "delete":
+            case "rm":
+            case "del":
+            case "dl":
+                return "delete";
+            case "update":
+            case "ue":
+                return "update";
+            case "info":
+            case "i":
+                return "info";
+            case "gamerule":
+            case "gr":
+            case "gamer":
+            case "grule":
+                return "gamerule";
+            case "manage":
+            case "mng":
+            case "mg":
+                return "manage";
+            case "rename":
+            case "rnm":
+            case "re":
+                return "rename";
+            case "duplicate":
+            case "copy":
+            case "cp":
+                return "duplicate";
+        }
+        return null;
+    }
 
-		$subCommand = $this->subcommands[$subCommandName] ?? null;
-		if($subCommand === null) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "default-usage"));
-			return;
-		}
+    public function checkPermissions(CommandSender $sender, string $command): bool {
+        if ($sender instanceof Player && !$sender->hasPermission("multiworld.command.{$this->getSubCommandNameByAlias($command)}")) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "not-perms"));
+            return false;
+        }
+        return true;
+    }
 
-		if(!$this->checkPermissions($sender, $args[0])) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "not-perms"));
-			return;
-		}
+    public function getServer(): Server {
+        return Server::getInstance();
+    }
 
-		array_shift($args);
-		$subCommand->execute($sender, $args, $subCommandName);
-	}
-
-	public function getSubCommandNameByAlias(string $alias): ?string {
-		switch($alias) {
-			case "help":
-			case "?":
-				return "help";
-			case "create":
-			case "generate":
-			case "new":
-				return "create";
-			case "tp":
-			case "teleport":
-			case "move":
-				return "teleport";
-			case "list":
-			case "ls":
-				return "list";
-			case "load":
-			case "ld":
-				return "load";
-			case "unload":
-			case "unld":
-				return "unload";
-			case "remove":
-			case "delete":
-			case "rm":
-			case "del":
-			case "dl":
-				return "delete";
-			case "update":
-			case "ue":
-				return "update";
-			case "info":
-			case "i":
-				return "info";
-			case "gamerule":
-			case "gr":
-			case "gamer":
-			case "grule":
-				return "gamerule";
-			case "manage":
-			case "mng":
-			case "mg":
-				return "manage";
-			case "rename":
-			case "rnm":
-			case "re":
-				return "rename";
-			case "duplicate":
-			case "copy":
-			case "cp":
-				return "duplicate";
-		}
-		return null;
-	}
-
-	public function checkPermissions(CommandSender $sender, string $command): bool {
-		if($sender instanceof Player && !$sender->hasPermission("multiworld.command.{$this->getSubCommandNameByAlias($command)}")) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "not-perms"));
-			return false;
-		}
-		return true;
-	}
-
-	public function getServer(): Server {
-		return Server::getInstance();
-	}
-
-	public function getOwningPlugin(): Plugin {
-		return MultiWorld::getInstance();
-	}
+    public function getOwningPlugin(): Plugin {
+        return MultiWorld::getInstance();
+    }
 }

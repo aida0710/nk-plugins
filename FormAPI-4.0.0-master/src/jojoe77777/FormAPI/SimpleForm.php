@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types = 1);
-
+declare(strict_types=1);
 namespace jojoe77777\FormAPI;
 
 class SimpleForm extends Form {
@@ -24,35 +23,35 @@ class SimpleForm extends Form {
         $this->data["content"] = $this->content;
     }
 
-    public function processData(&$data) : void {
+    public function processData(&$data): void {
         $data = $this->labelMap[$data] ?? null;
     }
 
     /**
      * @param string $title
      */
-    public function setTitle(string $title) : void {
+    public function setTitle(string $title): void {
         $this->data["title"] = $title;
     }
 
     /**
      * @return string
      */
-    public function getTitle() : string {
+    public function getTitle(): string {
         return $this->data["title"];
     }
 
     /**
      * @return string
      */
-    public function getContent() : string {
+    public function getContent(): string {
         return $this->data["content"];
     }
 
     /**
      * @param string $content
      */
-    public function setContent(string $content) : void {
+    public function setContent(string $content): void {
         $this->data["content"] = $content;
     }
 
@@ -62,9 +61,9 @@ class SimpleForm extends Form {
      * @param string $imagePath
      * @param string $label
      */
-    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : void {
+    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null): void {
         $content = ["text" => $text];
-        if($imageType !== -1) {
+        if ($imageType !== -1) {
             $content["image"]["type"] = $imageType === 0 ? "path" : "url";
             $content["image"]["data"] = $imagePath;
         }

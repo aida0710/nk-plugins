@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,32 +14,32 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use pocketmine\item\Food;
 use pocketmine\item\Item;
 
-class CustomFoodItem extends Food{
-	use CustomItemTrait;
+class CustomFoodItem extends Food {
 
-	public function getMaxStackSize() : int{
-		return $this->getProperties()->getMaxStackSize();
-	}
+    use CustomItemTrait;
 
-	public function getFoodRestore() : int{
-		return $this->getProperties()->getNutrition();
-	}
+    public function getMaxStackSize(): int {
+        return $this->getProperties()->getMaxStackSize();
+    }
 
-	public function requiresHunger() : bool{
-		return $this->getProperties()->getCanAlwaysEat();
-	}
+    public function getFoodRestore(): int {
+        return $this->getProperties()->getNutrition();
+    }
 
-	public function getSaturationRestore() : float{
-		return $this->getProperties()->getSaturation();
-	}
+    public function requiresHunger(): bool {
+        return $this->getProperties()->getCanAlwaysEat();
+    }
 
-	public function getResidue() : Item{
-		return $this->getProperties()->getResidue();
-	}
+    public function getSaturationRestore(): float {
+        return $this->getProperties()->getSaturation();
+    }
+
+    public function getResidue(): Item {
+        return $this->getProperties()->getResidue();
+    }
 }

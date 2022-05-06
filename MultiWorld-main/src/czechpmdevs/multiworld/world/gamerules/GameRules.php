@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\world\gamerules;
 
 use InvalidArgumentException;
@@ -46,132 +44,120 @@ use function json_encode;
 /** @internal */
 final class GameRules {
 
-	/** @var GameRule[] */
-	private array $gameRules;
+    /** @var GameRule[] */
+    private array $gameRules;
 
-	/**
-	 * @param GameRule[] $gameRules Game rules whose are not set, will be replaced by default values
-	 * @phpstan-param array<string, GameRule> $gameRules
-	 */
-	public function __construct(array $gameRules = []) {
-		$this->gameRules = $gameRules;
-		$this->addMissingRules();
-	}
+    /**
+     * @param GameRule[] $gameRules Game rules whose are not set, will be replaced by default values
+     * @phpstan-param array<string, GameRule> $gameRules
+     */
+    public function __construct(array $gameRules = []) {
+        $this->gameRules = $gameRules;
+        $this->addMissingRules();
+    }
 
-	private function addMissingRules(): void {
-		foreach(GameRule::getAll() as $rule) {
-			if(!array_key_exists($rule->getRuleName(), $this->gameRules)) {
-				$this->gameRules[$rule->getRuleName()] = $rule;
-			}
-		}
-	}
+    private function addMissingRules(): void {
+        foreach (GameRule::getAll() as $rule) {
+            if (!array_key_exists($rule->getRuleName(), $this->gameRules)) {
+                $this->gameRules[$rule->getRuleName()] = $rule;
+            }
+        }
+    }
 
-	/**
-	 * @return GameRule[]
-	 */
-	public function getRules(): array {
-		return $this->gameRules;
-	}
+    /**
+     * @return GameRule[]
+     */
+    public function getRules(): array {
+        return $this->gameRules;
+    }
 
-	public function setRule(GameRule $rule): self {
-		$this->gameRules[$rule->getRuleName()] = $rule;
-		return $this;
-	}
+    public function setRule(GameRule $rule): self {
+        $this->gameRules[$rule->getRuleName()] = $rule;
+        return $this;
+    }
 
-	public function getRule(GameRule $rule): GameRule {
-		return $this->gameRules[$rule->getRuleName()];
-	}
+    public function getRule(GameRule $rule): GameRule {
+        return $this->gameRules[$rule->getRuleName()];
+    }
 
-	public static function loadFromWorld(World $world): GameRules {
-		$worldData = $world->getProvider()->getWorldData();
-		if(!$worldData instanceof BaseNbtWorldData) {
-			return new GameRules();
-		}
+    public static function loadFromWorld(World $world): GameRules {
+        $worldData = $world->getProvider()->getWorldData();
+        if (!$worldData instanceof BaseNbtWorldData) {
+            return new GameRules();
+        }
+        $nbt = $worldData->getCompoundTag()->getCompoundTag("GameRules");
+        if ($nbt === null) {
+            return new GameRules();
+        }
+        if ($nbt->count() == 0) { // PocketMine creates GameRules nbt, but without any rules
+            return new GameRules();
+        }
+        return GameRules::unserializeGameRules($nbt);
+    }
 
-		$nbt = $worldData->getCompoundTag()->getCompoundTag("GameRules");
-		if($nbt === null) {
-			return new GameRules();
-		}
+    public static function saveForWorld(World $world, GameRules $gameRules): bool {
+        $worldData = $world->getProvider()->getWorldData();
+        if (!$worldData instanceof BaseNbtWorldData) {
+            return false;
+        }
+        $worldData->getCompoundTag()->setTag("GameRules", GameRules::serializeGameRules($gameRules));
+        return true;
+    }
 
-		if($nbt->count() == 0) { // PocketMine creates GameRules nbt, but without any rules
-			return new GameRules();
-		}
+    /**
+     * Serializes GameRules for World Provider
+     */
+    public static function serializeGameRules(GameRules $gameRules): CompoundTag {
+        $nbt = new CompoundTag();
+        /** @var BoolGameRule|IntGameRule|FloatGameRule $gameRule */
+        foreach ($gameRules->getRules() as $name => $gameRule) {
+            if ($value = json_encode($gameRule->getValue())) {
+                $nbt->setString($name, $value);
+                continue;
+            }
+            throw new UnexpectedValueException("Unable to encode value ({$gameRule->getValue()}) for rule $name.");
+        }
+        return $nbt;
+    }
 
-		return GameRules::unserializeGameRules($nbt);
-	}
+    /**
+     * Unserializes GameRules from World Provider
+     */
+    public static function unserializeGameRules(CompoundTag $nbt): GameRules {
+        $rules = [];
+        /** @var StringTag|IntTag|FloatTag $value */
+        foreach ($nbt->getValue() as $index => $value) {
+            $ruleValue = json_decode((string)$value->getValue());
+            if (!is_bool($ruleValue) && !is_int($ruleValue) && !is_float($ruleValue)) {
+                throw new LogicException("Invalid game rule value for $index");
+            }
+            $rule = GameRule::fromRuleName($index)->setValue($ruleValue);
+            $rules[$rule->getRuleName()] = $rule;
+        }
+        return new GameRules($rules);
+    }
 
-	public static function saveForWorld(World $world, GameRules $gameRules): bool {
-		$worldData = $world->getProvider()->getWorldData();
-		if(!$worldData instanceof BaseNbtWorldData) {
-			return false;
-		}
+    public function getRuleValue(string $name): GameRule {
+        if (!array_key_exists($name, $this->gameRules)) {
+            throw new InvalidArgumentException("Requested invalid game rule $name.");
+        }
+        return $this->gameRules[$name]; // TODO - Find better way to make the analyser happy
+    }
 
-		$worldData->getCompoundTag()->setTag("GameRules", GameRules::serializeGameRules($gameRules));
-		return true;
-	}
+    public function applyToPlayer(Player $player): self {
+        $pk = new GameRulesChangedPacket();
+        $pk->gameRules = $this->gameRules;
+        $player->getNetworkSession()->sendDataPacket($pk);
+        return $this;
+    }
 
-	/**
-	 * Serializes GameRules for World Provider
-	 */
-	public static function serializeGameRules(GameRules $gameRules): CompoundTag {
-		$nbt = new CompoundTag();
-		/** @var BoolGameRule|IntGameRule|FloatGameRule $gameRule */
-		foreach($gameRules->getRules() as $name => $gameRule) {
-			if($value = json_encode($gameRule->getValue())) {
-				$nbt->setString($name, $value);
-				continue;
-			}
-			throw new UnexpectedValueException("Unable to encode value ({$gameRule->getValue()}) for rule $name.");
-		}
-
-		return $nbt;
-	}
-
-	/**
-	 * Unserializes GameRules from World Provider
-	 */
-	public static function unserializeGameRules(CompoundTag $nbt): GameRules {
-		$rules = [];
-		/** @var StringTag|IntTag|FloatTag $value */
-		foreach($nbt->getValue() as $index => $value) {
-			$ruleValue = json_decode((string)$value->getValue());
-			if(!is_bool($ruleValue) && !is_int($ruleValue) && !is_float($ruleValue)) {
-				throw new LogicException("Invalid game rule value for $index");
-			}
-
-			$rule = GameRule::fromRuleName($index)->setValue($ruleValue);
-			$rules[$rule->getRuleName()] = $rule;
-		}
-
-		return new GameRules($rules);
-	}
-
-	public function getRuleValue(string $name): GameRule {
-		if(!array_key_exists($name, $this->gameRules)) {
-			throw new InvalidArgumentException("Requested invalid game rule $name.");
-		}
-
-		return $this->gameRules[$name]; // TODO - Find better way to make the analyser happy
-	}
-
-	public function applyToPlayer(Player $player): self {
-		$pk = new GameRulesChangedPacket();
-		$pk->gameRules = $this->gameRules;
-
-		$player->getNetworkSession()->sendDataPacket($pk);
-
-		return $this;
-	}
-
-	public function applyToWorld(World $world): self {
-		$pk = new GameRulesChangedPacket();
-		$pk->gameRules = $this->gameRules;
-
-		foreach($world->getPlayers() as $player) {
-			$player->getNetworkSession()->sendDataPacket($pk);
-		}
-
-		self::saveForWorld($world, $this);
-		return $this;
-	}
+    public function applyToWorld(World $world): self {
+        $pk = new GameRulesChangedPacket();
+        $pk->gameRules = $this->gameRules;
+        foreach ($world->getPlayers() as $player) {
+            $player->getNetworkSession()->sendDataPacket($pk);
+        }
+        self::saveForWorld($world, $this);
+        return $this;
+    }
 }

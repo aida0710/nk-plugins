@@ -12,6 +12,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -28,9 +29,10 @@ If applicable, add screenshots to help explain your problem.
 
 **Version info (please complete the following information):**
 <!-- latest is not correct version name. use commit hash. -->
- - OS: [e.g. iOS]
- - PocketMine-MP Version:
- - CustomItemLoader Version:
+
+- OS: [e.g. iOS]
+- PocketMine-MP Version:
+- CustomItemLoader Version:
 
 **Additional context**
 Add any other context about the problem here.

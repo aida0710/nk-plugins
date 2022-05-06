@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\util\LanguageManager;
@@ -32,33 +30,30 @@ use function count;
 
 class InfoSubCommand implements SubCommand {
 
-	public function execute(CommandSender $sender, array $args, string $name): void {
-		if(!$sender instanceof Player) {
-			$sender->sendMessage("§cThis command can be used only in-game!");
-			return;
-		}
+    public function execute(CommandSender $sender, array $args, string $name): void {
+        if (!$sender instanceof Player) {
+            $sender->sendMessage("§cThis command can be used only in-game!");
+            return;
+        }
+        if (isset($args[0])) {
+            if (!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0])) {
+                $sender->sendMessage(LanguageManager::translateMessage($sender, "info.levelnotexists", [$args[0]]));
+                return;
+            }
+            WorldUtils::lazyLoadWorld($args[0]);
+            $sender->sendMessage($this->getInfoMessage($sender, WorldUtils::getWorldByNameNonNull($args[0])));
+            return;
+        }
+        $sender->sendMessage($this->getInfoMessage($sender, $sender->getWorld()));
+    }
 
-		if(isset($args[0])) {
-			if(!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0])) {
-				$sender->sendMessage(LanguageManager::translateMessage($sender, "info.levelnotexists", [$args[0]]));
-				return;
-			}
-
-			WorldUtils::lazyLoadWorld($args[0]);
-
-			$sender->sendMessage($this->getInfoMessage($sender, WorldUtils::getWorldByNameNonNull($args[0])));
-			return;
-		}
-		$sender->sendMessage($this->getInfoMessage($sender, $sender->getWorld()));
-	}
-
-	private function getInfoMessage(CommandSender $sender, World $world): string {
-		return LanguageManager::translateMessage($sender, "info", [$world->getDisplayName()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-name", [$world->getDisplayName()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-folderName", [$world->getFolderName()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-players", [(string)count($world->getPlayers())]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-generator", [$world->getProvider()->getWorldData()->getGenerator()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-seed", [(string)$world->getSeed()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-time", [(string)$world->getTime()]);
-	}
+    private function getInfoMessage(CommandSender $sender, World $world): string {
+        return LanguageManager::translateMessage($sender, "info", [$world->getDisplayName()]) . "\n" .
+            LanguageManager::translateMessage($sender, "info-name", [$world->getDisplayName()]) . "\n" .
+            LanguageManager::translateMessage($sender, "info-folderName", [$world->getFolderName()]) . "\n" .
+            LanguageManager::translateMessage($sender, "info-players", [(string)count($world->getPlayers())]) . "\n" .
+            LanguageManager::translateMessage($sender, "info-generator", [$world->getProvider()->getWorldData()->getGenerator()]) . "\n" .
+            LanguageManager::translateMessage($sender, "info-seed", [(string)$world->getSeed()]) . "\n" .
+            LanguageManager::translateMessage($sender, "info-time", [(string)$world->getTime()]);
+    }
 }

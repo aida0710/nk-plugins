@@ -21,8 +21,8 @@ class EventListener implements Listener {
     public function onReceived(DataPacketReceiveEvent $event) {
         $packet = $event->getPacket();
         if ($packet instanceof ItemFrameDropItemPacket) {
-        $player = $event->getOrigin()->getPlayer();
-        $name = $player->getName();
+            $player = $event->getOrigin()->getPlayer();
+            $name = $player->getName();
             $pos = $packet->blockPosition;
             $xyzl = $pos->getX() . "," . $pos->getY() . "," . $pos->getZ() . "," . $player->getPosition()->getWorld()->getFolderName();
             if ($this->FrameGuard->config->exists($xyzl)) {

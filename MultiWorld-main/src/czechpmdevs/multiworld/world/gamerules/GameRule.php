@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\world\gamerules;
 
 use czechpmdevs\multiworld\world\gamerules\type\BoolGameRule;
@@ -31,6 +29,7 @@ use function strtolower;
 /**
  * This doc-block is generated automatically, do not modify it manually.
  * This must be regenerated whenever registry members are added, removed or changed.
+ *
  * @see \pocketmine\utils\RegistryUtils::_generateMethodAnnotations()
  *
  * @method static BoolGameRule COMMAND_BLOCKS_ENABLED()
@@ -62,86 +61,86 @@ use function strtolower;
  * @method static BoolGameRule TNT_EXPLODES()
  */
 abstract class GameRule extends \pocketmine\network\mcpe\protocol\types\GameRule {
-	use EnumTrait {
-		__construct as Enum___construct;
-	}
 
-	protected static function setup(): void {
-		self::registerAll(
-			new BoolGameRule("command_blocks_enabled", "commandBlocksEnabled", true),
-			new BoolGameRule("command_block_output", "commandBlockOutput", true),
-			new BoolGameRule("do_daylight_cycle", "doDaylightCycle", true),
-			new BoolGameRule("do_entity_drops", "doEntityDrops", true),
-			new BoolGameRule("do_fire_tick", "doFireTick", true),
-			new BoolGameRule("do_insomnia", "doInsomnia", true),
-			new BoolGameRule("do_immediate_respawn", "doImmediateRespawn", false),
-			new BoolGameRule("do_mob_loot", "doMobLoot", true),
-			new BoolGameRule("do_tile_drops", "doTileDrops", true),
-			new BoolGameRule("do_weather_cycle", "doWeatherCycle", true),
-			new BoolGameRule("drowning_damage", "drowningDamage", true),
-			new BoolGameRule("fall_damage", "fallDamage", true),
-			new BoolGameRule("fire_damage", "fireDamage", true),
-			new BoolGameRule("freeze_damage", "freezeDamage", true),
-			new BoolGameRule("function_command_limit", "functionCommandLimit", true),
-			new BoolGameRule("keep_inventory", "keepInventory", false),
-			new IntGameRule("max_command_chain_length", "maxCommandChainLength", 65536),
-			new BoolGameRule("mob_griefing", "mobGriefing", true),
-			new BoolGameRule("natural_regeneration", "naturalRegeneration", true),
-			new BoolGameRule("pvp", "pvp", true),
-			new IntGameRule("random_tick_speed", "randomTickSpeed", 1),
-			new BoolGameRule("send_command_feedback", "sendCommandFeedback", true),
-			new BoolGameRule("show_coordinates", "showCoordinates", true),
-			new BoolGameRule("show_death_message", "showDeathMessage", true),
-			new IntGameRule("spawn_radius", "spawnRadius", 5),
-			new BoolGameRule("tnt_explodes", "tntExplodes", true),
-			new BoolGameRule("show_tags", "showTags", true)
-		);
-	}
+    use EnumTrait {
+        __construct as Enum___construct;
+    }
 
-	private string $ruleName;
-	private int $type;
-	protected bool|int|float $value;
+    protected static function setup(): void {
+        self::registerAll(
+            new BoolGameRule("command_blocks_enabled", "commandBlocksEnabled", true),
+            new BoolGameRule("command_block_output", "commandBlockOutput", true),
+            new BoolGameRule("do_daylight_cycle", "doDaylightCycle", true),
+            new BoolGameRule("do_entity_drops", "doEntityDrops", true),
+            new BoolGameRule("do_fire_tick", "doFireTick", true),
+            new BoolGameRule("do_insomnia", "doInsomnia", true),
+            new BoolGameRule("do_immediate_respawn", "doImmediateRespawn", false),
+            new BoolGameRule("do_mob_loot", "doMobLoot", true),
+            new BoolGameRule("do_tile_drops", "doTileDrops", true),
+            new BoolGameRule("do_weather_cycle", "doWeatherCycle", true),
+            new BoolGameRule("drowning_damage", "drowningDamage", true),
+            new BoolGameRule("fall_damage", "fallDamage", true),
+            new BoolGameRule("fire_damage", "fireDamage", true),
+            new BoolGameRule("freeze_damage", "freezeDamage", true),
+            new BoolGameRule("function_command_limit", "functionCommandLimit", true),
+            new BoolGameRule("keep_inventory", "keepInventory", false),
+            new IntGameRule("max_command_chain_length", "maxCommandChainLength", 65536),
+            new BoolGameRule("mob_griefing", "mobGriefing", true),
+            new BoolGameRule("natural_regeneration", "naturalRegeneration", true),
+            new BoolGameRule("pvp", "pvp", true),
+            new IntGameRule("random_tick_speed", "randomTickSpeed", 1),
+            new BoolGameRule("send_command_feedback", "sendCommandFeedback", true),
+            new BoolGameRule("show_coordinates", "showCoordinates", true),
+            new BoolGameRule("show_death_message", "showDeathMessage", true),
+            new IntGameRule("spawn_radius", "spawnRadius", 5),
+            new BoolGameRule("tnt_explodes", "tntExplodes", true),
+            new BoolGameRule("show_tags", "showTags", true)
+        );
+    }
 
-	private bool $isPlayerModifiable = false;
+    private string $ruleName;
+    private int $type;
+    protected bool|int|float $value;
 
-	/** @noinspection PhpMissingParentConstructorInspection */
-	protected function __construct(string $enumName, string $ruleName, int $type) {
-		$this->Enum___construct($enumName);
-		$this->ruleName = $ruleName;
-		$this->type = $type;
-	}
+    private bool $isPlayerModifiable = false;
 
-	public function getRuleName(): string {
-		return $this->ruleName;
-	}
+    /** @noinspection PhpMissingParentConstructorInspection */
+    protected function __construct(string $enumName, string $ruleName, int $type) {
+        $this->Enum___construct($enumName);
+        $this->ruleName = $ruleName;
+        $this->type = $type;
+    }
 
-	public function getTypeId(): int {
-		return $this->type;
-	}
+    public function getRuleName(): string {
+        return $this->ruleName;
+    }
 
-	/**
-	 * @return $this
-	 */
-	public function setValue(bool|int|float $value): GameRule {
-		$this->value = $value;
-		return $this;
-	}
+    public function getTypeId(): int {
+        return $this->type;
+    }
 
-	public function getValue(): bool|int|float {
-		return $this->value;
-	}
+    /**
+     * @return $this
+     */
+    public function setValue(bool|int|float $value): GameRule {
+        $this->value = $value;
+        return $this;
+    }
 
-	public function isPlayerModifiable(): bool {
-		return $this->isPlayerModifiable;
-	}
+    public function getValue(): bool|int|float {
+        return $this->value;
+    }
 
-	public static function fromRuleName(string $name): GameRule {
-		foreach(self::getAll() as $rule) {
-			if(strtolower($rule->getRuleName()) === strtolower($name)) {
-				return $rule;
-			}
-		}
+    public function isPlayerModifiable(): bool {
+        return $this->isPlayerModifiable;
+    }
 
-		throw new LogicException("Requested unknown rule $name");
-	}
+    public static function fromRuleName(string $name): GameRule {
+        foreach (self::getAll() as $rule) {
+            if (strtolower($rule->getRuleName()) === strtolower($name)) {
+                return $rule;
+            }
+        }
+        throw new LogicException("Requested unknown rule $name");
+    }
 }

@@ -2,12 +2,7 @@
 
 namespace lazyperson0710\EffectItems\tools;
 
-use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerDropItemEvent;
-use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\event\player\PlayerItemHeldEvent;
-use pocketmine\event\player\PlayerItemUseEvent;
 
 class TestListener implements Listener {
 

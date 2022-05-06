@@ -17,6 +17,7 @@ use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockStoneButton extends StoneButton implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 
@@ -32,7 +33,6 @@ class BlockStoneButton extends StoneButton implements IRedstoneComponent, ILinkR
 
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null): bool {
         if ($this->isPressed()) return true;
-
         parent::onInteract($item, $face, $clickVector, $player);
         BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
         return true;
@@ -40,7 +40,6 @@ class BlockStoneButton extends StoneButton implements IRedstoneComponent, ILinkR
 
     public function onScheduledUpdate(): void {
         if (!$this->isPressed()) return;
-
         parent::onScheduledUpdate();
         BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::opposite($this->getFacing()));
     }

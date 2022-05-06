@@ -21,6 +21,7 @@ use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockWeightedPressurePlateLight extends WeightedPressurePlateLight implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 
@@ -42,16 +43,13 @@ class BlockWeightedPressurePlateLight extends WeightedPressurePlateLight impleme
 
     public function onScheduledUpdate(): void {
         if ($this->getOutputSignalStrength() === 0) return;
-
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         $count = count($entities);
         if ($count !== 0) {
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 20);
         }
-
         $power = min($count, 15);
         if ($this->getOutputSignalStrength() === $power) return;
-
         if ($power === 0) {
             $this->getPosition()->getWorld()->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOffSound());
         }
@@ -64,7 +62,6 @@ class BlockWeightedPressurePlateLight extends WeightedPressurePlateLight impleme
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         $count = count($entities);
         if ($count <= 0) return true;
-
         if ($this->getOutputSignalStrength() === 0) {
             $this->getPosition()->getWorld()->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOnSound());
         }

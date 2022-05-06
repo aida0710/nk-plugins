@@ -1,43 +1,43 @@
 {
     "language": "uk",
-	"commands": {
-		"mymoney": {
-			"usage": "/mymoney",
-			"description": "Показує ваш баланс"
-		},
-		"topmoney": {
-			"usage": "/topmoney [сторінка]",
-			"description": "Показує багачів серверу"
-		},
-		"setmoney": {
-			"usage": "/setmoney <гравець> <кількість>",
-			"description": "Встановлює баланс для гравця"
-		},
-		"seemoney": {
-			"usage": "/seemoney <гравець>",
-			"description": "Показує баланс гравця"
-		},
-		"givemoney": {
-			"usage": "/givemoney <гравець> <кількість>",
-			"description": "Видає гроші гравцю"
-		},
-		"takemoney": {
-			"usage": "/takemoney <гравець> <кількість>",
-			"description": "Забирає гроші у гравця"
-		},
-		"pay": {
-			"usage": "/pay <гравець> <кількість>",
-			"description": "Передає гравцю гроші"
-		},
-		"setlang": {
-			"usage": "/setlang <мова>",
-			"description": "Встановлює мову"
-		},
-		"mystatus": {
-			"usage": "/mystatus",
-			"description": "Показує статус Ваших грошей"
-		}
-	},
+    "commands": {
+        "mymoney": {
+            "usage": "/mymoney",
+            "description": "Показує ваш баланс"
+        },
+        "topmoney": {
+            "usage": "/topmoney [сторінка]",
+            "description": "Показує багачів серверу"
+        },
+        "setmoney": {
+            "usage": "/setmoney <гравець> <кількість>",
+            "description": "Встановлює баланс для гравця"
+        },
+        "seemoney": {
+            "usage": "/seemoney <гравець>",
+            "description": "Показує баланс гравця"
+        },
+        "givemoney": {
+            "usage": "/givemoney <гравець> <кількість>",
+            "description": "Видає гроші гравцю"
+        },
+        "takemoney": {
+            "usage": "/takemoney <гравець> <кількість>",
+            "description": "Забирає гроші у гравця"
+        },
+        "pay": {
+            "usage": "/pay <гравець> <кількість>",
+            "description": "Передає гравцю гроші"
+        },
+        "setlang": {
+            "usage": "/setlang <мова>",
+            "description": "Встановлює мову"
+        },
+        "mystatus": {
+            "usage": "/mystatus",
+            "description": "Показує статус Ваших грошей"
+        }
+    },
     "language-set": "Встановлено мову %1 (перекладено SMLR)",
     "request-cancelled": "Ваш запит було відхилено",
     "гравець-not-connected": "Гравець %1 зараз не грає",

@@ -9,7 +9,7 @@ use pocketmine\world\sound\Sound;
 
 class DetachSound implements Sound {
 
-    public function encode(Vector3 $pos) : array{
+    public function encode(Vector3 $pos): array {
         return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::DETACH, $pos, false)];
     }
 }

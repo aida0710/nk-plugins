@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\MultiWorld;
@@ -29,23 +27,20 @@ use pocketmine\Server;
 
 class LoadSubCommand implements SubCommand {
 
-	public function execute(CommandSender $sender, array $args, string $name): void {
-		if(!isset($args[0])) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "load-usage"));
-			return;
-		}
-
-		if(!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0])) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-levelnotexists", [$args[0]]));
-			return;
-		}
-
-		if(Server::getInstance()->getWorldManager()->isWorldLoaded($args[0])) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-loaded"));
-			return;
-		}
-
-		Server::getInstance()->getWorldManager()->loadWorld($args[0], true);
-		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-done"));
-	}
+    public function execute(CommandSender $sender, array $args, string $name): void {
+        if (!isset($args[0])) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "load-usage"));
+            return;
+        }
+        if (!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0])) {
+            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-levelnotexists", [$args[0]]));
+            return;
+        }
+        if (Server::getInstance()->getWorldManager()->isWorldLoaded($args[0])) {
+            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-loaded"));
+            return;
+        }
+        Server::getInstance()->getWorldManager()->loadWorld($args[0], true);
+        $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-done"));
+    }
 }

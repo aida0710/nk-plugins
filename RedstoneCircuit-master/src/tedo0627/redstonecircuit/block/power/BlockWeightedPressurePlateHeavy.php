@@ -21,6 +21,7 @@ use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockWeightedPressurePlateHeavy extends WeightedPressurePlateHeavy implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
     use RedstoneComponentTrait;
 
@@ -42,16 +43,13 @@ class BlockWeightedPressurePlateHeavy extends WeightedPressurePlateHeavy impleme
 
     public function onScheduledUpdate(): void {
         if ($this->getOutputSignalStrength() === 0) return;
-
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         $count = count($entities);
         if ($count !== 0) {
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 20);
         }
-
-        $power = min((int) (($count + 9) / 10), 15);
+        $power = min((int)(($count + 9) / 10), 15);
         if ($this->getOutputSignalStrength() === $power) return;
-
         if ($power === 0) {
             $this->getPosition()->getWorld()->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOffSound());
         }
@@ -64,11 +62,10 @@ class BlockWeightedPressurePlateHeavy extends WeightedPressurePlateHeavy impleme
         $entities = $this->getPosition()->getWorld()->getNearbyEntities($this->getHitCollision());
         $count = count($entities);
         if ($count <= 0) return true;
-
         if ($this->getOutputSignalStrength() === 0) {
             $this->getPosition()->getWorld()->addSound($this->getPosition()->add(0.5, 0.5, 0.5), new RedstonePowerOnSound());
         }
-        $this->setOutputSignalStrength(min((int) (($count + 9) / 10), 15));
+        $this->setOutputSignalStrength(min((int)(($count + 9) / 10), 15));
         $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
         BlockUpdateHelper::updateAroundDirectionRedstone($this, Facing::DOWN);
         $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 10);

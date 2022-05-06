@@ -14,6 +14,7 @@ use tedo0627\redstonecircuit\block\CommandBlockTrait;
 use tedo0627\redstonecircuit\block\inventory\CommandInventory;
 
 class BlockEntityCommand extends Spawnable implements Container, Nameable {
+
     use NameableTrait {
         addAdditionalSpawnData as addNameSpawnData;
     }
@@ -38,10 +39,8 @@ class BlockEntityCommand extends Spawnable implements Container, Nameable {
         $this->tickDelay = $nbt->getInt("tickDelay", 0);
         $this->executeOnFirstTick = $nbt->getByte("executeOnFirstTick", 0) === 1;
         $this->powered = $nbt->getByte("powered", 0) === 1;
-
         $this->successCount = $nbt->getInt("successCount", 0);
         $this->tick = $nbt->getInt("tick", 0);
-
         $this->loadName($nbt);
     }
 
@@ -54,10 +53,8 @@ class BlockEntityCommand extends Spawnable implements Container, Nameable {
         $nbt->setInt("tickDelay", $this->tickDelay);
         $nbt->setByte("executeOnFirstTick", $this->executeOnFirstTick ? 1 : 0);
         $nbt->setByte("powered", $this->powered ? 1 : 0);
-
         $nbt->setInt("successCount", $this->successCount);
         $nbt->setInt("tick", $this->tick);
-
         $this->saveName($nbt);
     }
 
@@ -88,7 +85,6 @@ class BlockEntityCommand extends Spawnable implements Container, Nameable {
         $nbt->setInt("tickDelay", $this->tickDelay);
         $nbt->setByte("executeOnFirstTick", $this->executeOnFirstTick ? 1 : 0);
         $nbt->setByte("powered", $this->powered ? 1 : 0);
-
         $this->addNameSpawnData($nbt);
     }
 }

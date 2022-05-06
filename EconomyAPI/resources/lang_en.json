@@ -1,43 +1,43 @@
 {
     "language": "en",
-	"commands": {
-		"mymoney": {
-			"usage": "/mymoney",
-			"description": "Shows your money"
-		},
-		"topmoney": {
-			"usage": "/topmoney [page]",
-			"description": "Shows top money of this server"
-		},
-		"setmoney": {
-			"usage": "/setmoney <player> <amount>",
-			"description": "Set money of player"
-		},
-		"seemoney": {
-			"usage": "/seemoney <player>",
-			"description": "Shows money of player"
-		},
-		"givemoney": {
-			"usage": "/givemoney <player> <amount>",
-			"description": "Gives money to player"
-		},
-		"takemoney": {
-			"usage": "/takemoney <player> <amount>",
-			"description": "Takes money from player"
-		},
-		"pay": {
-			"usage": "/pay <player> <amount>",
-			"description": "Pays money to player"
-		},
-		"setlang": {
-			"usage": "/setlang <language>",
-			"description": "Set your language"
-		},
-		"mystatus": {
-			"usage": "/mystatus",
-			"description": "Shows your status of money"
-		}
-	},
+    "commands": {
+        "mymoney": {
+            "usage": "/mymoney",
+            "description": "Shows your money"
+        },
+        "topmoney": {
+            "usage": "/topmoney [page]",
+            "description": "Shows top money of this server"
+        },
+        "setmoney": {
+            "usage": "/setmoney <player> <amount>",
+            "description": "Set money of player"
+        },
+        "seemoney": {
+            "usage": "/seemoney <player>",
+            "description": "Shows money of player"
+        },
+        "givemoney": {
+            "usage": "/givemoney <player> <amount>",
+            "description": "Gives money to player"
+        },
+        "takemoney": {
+            "usage": "/takemoney <player> <amount>",
+            "description": "Takes money from player"
+        },
+        "pay": {
+            "usage": "/pay <player> <amount>",
+            "description": "Pays money to player"
+        },
+        "setlang": {
+            "usage": "/setlang <language>",
+            "description": "Set your language"
+        },
+        "mystatus": {
+            "usage": "/mystatus",
+            "description": "Shows your status of money"
+        }
+    },
     "language-set": "Language set to %1 by onebone",
     "request-cancelled": "Your request was cancelled",
     "player-not-connected": "Player %1 is not online.",

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace muqsit\vanillagenerator\generator\utils;
 
 use muqsit\vanillagenerator\generator\noise\bukkit\OctaveGenerator;
@@ -16,7 +15,7 @@ use muqsit\vanillagenerator\generator\noise\bukkit\OctaveGenerator;
  *
  * @phpstan-extends WorldOctaves<T, U, V, W>
  */
-class NetherWorldOctaves extends WorldOctaves{
+class NetherWorldOctaves extends WorldOctaves {
 
 	/**
 	 * @var OctaveGenerator
@@ -57,7 +56,7 @@ class NetherWorldOctaves extends WorldOctaves{
 		OctaveGenerator $surface,
 		OctaveGenerator $soul_sand,
 		OctaveGenerator $gravel
-	){
+	) {
 		parent::__construct($height, $roughness, $roughness_2, $detail, $surface);
 		$this->soul_sand = $soul_sand;
 		$this->gravel = $gravel;

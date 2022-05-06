@@ -6,7 +6,6 @@ namespace nkserver\ranking\form;
 use Deceitya\MiningLevel\Form\RankForm as MiningLevelRankinkForm;
 use nkserver\ranking\libs\form\SimpleForm;
 use pocketmine\player\Player;
-use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use ree_jp\bank\form\RankingForm as BankRankingForm;
 

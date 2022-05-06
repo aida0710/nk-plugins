@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\MultiWorld;
@@ -30,29 +28,25 @@ use pocketmine\Server;
 
 class UnloadSubCommand implements SubCommand {
 
-	public function execute(CommandSender $sender, array $args, string $name): void {
-		if(!isset($args[0])) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "unload-usage"));
-			return;
-		}
-
-		if(!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0])) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-levelnotexists", [$args[0]]));
-			return;
-		}
-
-		if(!Server::getInstance()->getWorldManager()->isWorldLoaded($args[0])) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-unloaded"));
-			return;
-		}
-
-		$world = WorldUtils::getWorldByNameNonNull($args[0]);
-		if($world->getId() === Server::getInstance()->getWorldManager()->getDefaultWorld()?->getId()) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-default"));
-			return;
-		}
-
-		Server::getInstance()->getWorldManager()->unloadWorld($world);
-		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-done"));
-	}
+    public function execute(CommandSender $sender, array $args, string $name): void {
+        if (!isset($args[0])) {
+            $sender->sendMessage(LanguageManager::translateMessage($sender, "unload-usage"));
+            return;
+        }
+        if (!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0])) {
+            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-levelnotexists", [$args[0]]));
+            return;
+        }
+        if (!Server::getInstance()->getWorldManager()->isWorldLoaded($args[0])) {
+            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-unloaded"));
+            return;
+        }
+        $world = WorldUtils::getWorldByNameNonNull($args[0]);
+        if ($world->getId() === Server::getInstance()->getWorldManager()->getDefaultWorld()?->getId()) {
+            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-default"));
+            return;
+        }
+        Server::getInstance()->getWorldManager()->unloadWorld($world);
+        $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "unload-done"));
+    }
 }

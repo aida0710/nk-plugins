@@ -3,7 +3,6 @@
 namespace deceitya\sersto;
 
 use DateTimeImmutable;
-use pocketmine\network\mcpe\protocol\TransferPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
@@ -87,7 +86,7 @@ class ShutdownTask extends Task {
     public function onRun(): void {
         if ($this->plugin->getCurrent() > 0) {
             $this->plugin->setCurrent($this->plugin->getCurrent() - 1);
-            switch ($this->plugin->getCurrent()){
+            switch ($this->plugin->getCurrent()) {
                 case 900:
                     Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り15分になりました");
                     break;

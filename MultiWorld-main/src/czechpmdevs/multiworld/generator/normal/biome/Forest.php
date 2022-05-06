@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\GrassyBiome;
@@ -32,34 +30,26 @@ use pocketmine\block\VanillaBlocks;
 
 class Forest extends GrassyBiome {
 
-	public function __construct() {
-		parent::__construct(0.7, 0.8);
+    public function __construct() {
+        parent::__construct(0.7, 0.8);
+        $mushrooms = new PlantPopulator(2, 2, 95);
+        $mushrooms->addPlant(new Plant(VanillaBlocks::RED_MUSHROOM()));
+        $mushrooms->addPlant(new Plant(VanillaBlocks::BROWN_MUSHROOM()));
+        $flowers = new PlantPopulator(6, 7, 80);
+        $flowers->addPlant(new Plant(VanillaBlocks::DANDELION()));
+        $flowers->addPlant(new Plant(VanillaBlocks::POPPY()));
+        $roses = new PlantPopulator(5, 4, 80);
+        $roses->addPlant(new Plant(VanillaBlocks::LILAC()));
+        $peonys = new PlantPopulator(5, 4, 80);
+        $peonys->addPlant(new Plant(VanillaBlocks::PEONY()));
+        $oak = new TreePopulator(3, 3);
+        $birch = new TreePopulator(3, 3, 100, TreeType::OAK());
+        $grass = new TallGrassPopulator(56, 30);
+        $this->addPopulators([$oak, $birch, $flowers, $peonys, $roses, $mushrooms, $grass]);
+        $this->setElevation(63, 70);
+    }
 
-		$mushrooms = new PlantPopulator(2, 2, 95);
-		$mushrooms->addPlant(new Plant(VanillaBlocks::RED_MUSHROOM()));
-		$mushrooms->addPlant(new Plant(VanillaBlocks::BROWN_MUSHROOM()));
-
-		$flowers = new PlantPopulator(6, 7, 80);
-		$flowers->addPlant(new Plant(VanillaBlocks::DANDELION()));
-		$flowers->addPlant(new Plant(VanillaBlocks::POPPY()));
-
-		$roses = new PlantPopulator(5, 4, 80);
-		$roses->addPlant(new Plant(VanillaBlocks::LILAC()));
-
-		$peonys = new PlantPopulator(5, 4, 80);
-		$peonys->addPlant(new Plant(VanillaBlocks::PEONY()));
-
-		$oak = new TreePopulator(3, 3);
-		$birch = new TreePopulator(3, 3, 100, TreeType::OAK());
-
-		$grass = new TallGrassPopulator(56, 30);
-
-		$this->addPopulators([$oak, $birch, $flowers, $peonys, $roses, $mushrooms, $grass]);
-
-		$this->setElevation(63, 70);
-	}
-
-	public function getName(): string {
-		return "Forest";
-	}
+    public function getName(): string {
+        return "Forest";
+    }
 }

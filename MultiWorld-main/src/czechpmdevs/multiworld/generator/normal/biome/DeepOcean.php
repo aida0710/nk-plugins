@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,18 +18,16 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 class DeepOcean extends Ocean {
 
-	public function __construct() {
-		parent::__construct();
+    public function __construct() {
+        parent::__construct();
+        $this->setElevation(40, 56);
+    }
 
-		$this->setElevation(40, 56);
-	}
-
-	public function getName(): string {
-		return "Deep Ocean";
-	}
+    public function getName(): string {
+        return "Deep Ocean";
+    }
 }

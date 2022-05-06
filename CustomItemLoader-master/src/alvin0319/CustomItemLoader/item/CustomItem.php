@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,19 +14,19 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use pocketmine\item\Item;
 
-class CustomItem extends Item{
-	use CustomItemTrait;
+class CustomItem extends Item {
 
-	public function getMaxStackSize() : int{
-		return $this->getProperties()->getMaxStackSize();
-	}
+    use CustomItemTrait;
 
-	public function getMiningEfficiency(bool $isCorrectTool) : float{
-		return $this->properties->getMiningSpeed();
-	}
+    public function getMaxStackSize(): int {
+        return $this->getProperties()->getMaxStackSize();
+    }
+
+    public function getMiningEfficiency(bool $isCorrectTool): float {
+        return $this->properties->getMiningSpeed();
+    }
 }

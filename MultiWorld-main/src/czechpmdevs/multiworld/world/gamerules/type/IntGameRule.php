@@ -1,5 +1,4 @@
 <?php
-
 /** @noinspection PhpMissingFieldTypeInspection */
 
 /**
@@ -19,9 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\world\gamerules\type;
 
 use czechpmdevs\multiworld\world\gamerules\GameRule;
@@ -31,28 +28,28 @@ use pocketmine\network\mcpe\protocol\types\GameRuleType;
 /** @internal */
 class IntGameRule extends GameRule {
 
-	/** @var int */
-	protected bool|int|float $value;
+    /** @var int */
+    protected bool|int|float $value;
 
-	public function __construct(string $enumName, string $ruleName, int $defaultValue) {
-		parent::__construct($enumName, $ruleName, GameRuleType::INT);
-		$this->value = $defaultValue;
-	}
+    public function __construct(string $enumName, string $ruleName, int $defaultValue) {
+        parent::__construct($enumName, $ruleName, GameRuleType::INT);
+        $this->value = $defaultValue;
+    }
 
-	/**
-	 * @param int $value
-	 * @return $this
-	 */
-	public function setValue(bool|int|float $value): IntGameRule {
-		$this->value = (int)$value;
-		return $this;
-	}
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setValue(bool|int|float $value): IntGameRule {
+        $this->value = (int)$value;
+        return $this;
+    }
 
-	public function getValue(): int {
-		return (int)$this->value;
-	}
+    public function getValue(): int {
+        return (int)$this->value;
+    }
 
-	public function encode(PacketSerializer $out): void {
-		$out->putUnsignedVarInt($this->getValue());
-	}
+    public function encode(PacketSerializer $out): void {
+        $out->putUnsignedVarInt($this->getValue());
+    }
 }

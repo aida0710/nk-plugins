@@ -13,6 +13,7 @@ use pocketmine\world\World;
 use tedo0627\redstonecircuit\block\inventory\DispenserInventory;
 
 class BlockEntityDispenser extends Spawnable implements Container, Nameable {
+
     use NameableTrait;
     use ContainerTrait;
 

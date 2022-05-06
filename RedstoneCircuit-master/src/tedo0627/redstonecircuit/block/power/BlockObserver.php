@@ -19,6 +19,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockObserver extends Opaque implements IRedstoneComponent, ILinkRedstoneWire {
+
     use AnyFacingTrait;
     use PoweredByRedstoneTrait;
     use RedstoneComponentTrait;
@@ -39,7 +40,7 @@ class BlockObserver extends Opaque implements IRedstoneComponent, ILinkRedstoneW
     public function readStateFromWorld(): void {
         parent::readStateFromWorld();
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
-        if($tile instanceof BlockEntityObserver) {
+        if ($tile instanceof BlockEntityObserver) {
             $this->setSideBlockId($tile->getBlockId());
             $this->setSideStateMeta($tile->getStateMeta());
         }
@@ -84,7 +85,6 @@ class BlockObserver extends Opaque implements IRedstoneComponent, ILinkRedstoneW
         $id = $block->getId();
         $state = $block->getMeta();
         if ($this->getSideBlockId() === $id && $this->getSideStateMeta() === $state) return;
-
         $this->setSideBlockId($id);
         $this->setSideStateMeta($state);
         $pos = $this->getPosition();
@@ -99,7 +99,6 @@ class BlockObserver extends Opaque implements IRedstoneComponent, ILinkRedstoneW
         $world = $pos->getWorld();
         $world->setBlock($pos, $this);
         BlockUpdateHelper::updateDiodeRedstone($this, Facing::opposite($this->getFacing()));
-
         if ($this->isPowered()) $world->scheduleDelayedBlockUpdate($pos, 2);
     }
 

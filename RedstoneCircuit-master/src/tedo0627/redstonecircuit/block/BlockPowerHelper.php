@@ -26,7 +26,6 @@ class BlockPowerHelper {
         for ($face = 0; $face < 6; $face++) {
             if (self::isSidePowered($block, $face)) return true;
         }
-
         return false;
     }
 

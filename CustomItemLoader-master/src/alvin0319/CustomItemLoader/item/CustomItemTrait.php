@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,26 +14,26 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use alvin0319\CustomItemLoader\item\properties\CustomItemProperties;
 use pocketmine\item\ItemIdentifier;
 
-trait CustomItemTrait{
-	/** @var CustomItemProperties */
-	protected CustomItemProperties $properties;
+trait CustomItemTrait {
 
-	public function __construct(string $name, array $data){
-		$this->properties = new CustomItemProperties($name, $data);
-		parent::__construct(new ItemIdentifier($this->properties->getId(), $this->properties->getMeta()), $this->properties->getName());
-	}
+    /** @var CustomItemProperties */
+    protected CustomItemProperties $properties;
 
-	public function getProperties() : CustomItemProperties{
-		return $this->properties;
-	}
+    public function __construct(string $name, array $data) {
+        $this->properties = new CustomItemProperties($name, $data);
+        parent::__construct(new ItemIdentifier($this->properties->getId(), $this->properties->getMeta()), $this->properties->getName());
+    }
 
-	public function getAttackPoints() : int{
-		return $this->properties->getAttackPoints();
-	}
+    public function getProperties(): CustomItemProperties {
+        return $this->properties;
+    }
+
+    public function getAttackPoints(): int {
+        return $this->properties->getAttackPoints();
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -20,27 +19,24 @@
 
 namespace onebone\economyapi\event\money;
 
-use onebone\economyapi\event\EconomyAPIEvent;
 use onebone\economyapi\EconomyAPI;
+use onebone\economyapi\event\EconomyAPIEvent;
 
-class ReduceMoneyEvent extends EconomyAPIEvent
-{
+class ReduceMoneyEvent extends EconomyAPIEvent {
+
     public static $handlerList;
 
-    public function __construct(EconomyAPI $plugin, private $username, private $amount, $issuer)
-    {
+    public function __construct(EconomyAPI $plugin, private $username, private $amount, $issuer) {
         parent::__construct($plugin, $issuer);
         $this->username = $username;
         $this->amount = $amount;
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function getAmount()
-    {
+    public function getAmount() {
         return $this->amount;
     }
 }

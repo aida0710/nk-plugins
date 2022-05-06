@@ -19,13 +19,11 @@ class BlockLoader extends Loader {
             $bid = new BlockIdentifier($bid->getBlockId(), $bid->getVariant(), $bid->getItemId(), $class);
         }
         $block = $callback($bid, $oldBlock->getName(), $oldBlock->getBreakInfo());
-
         return new self($name, $block);
     }
 
     public function __construct(string $name, Block $block) {
         parent::__construct($name);
-
         $this->block = $block;
     }
 

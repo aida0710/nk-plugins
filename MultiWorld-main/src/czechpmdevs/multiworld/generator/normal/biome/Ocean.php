@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\Biome;
@@ -27,18 +25,16 @@ use pocketmine\block\VanillaBlocks;
 
 class Ocean extends Biome {
 
-	public function __construct() {
-		parent::__construct(0.5, 0.5);
+    public function __construct() {
+        parent::__construct(0.5, 0.5);
+        $this->setGroundCover([
+            VanillaBlocks::GRAVEL(),
+            VanillaBlocks::GRAVEL()
+        ]);
+        $this->setElevation(55, 57);
+    }
 
-		$this->setGroundCover([
-			VanillaBlocks::GRAVEL(),
-			VanillaBlocks::GRAVEL()
-		]);
-
-		$this->setElevation(55, 57);
-	}
-
-	public function getName(): string {
-		return "Ocean";
-	}
+    public function getName(): string {
+        return "Ocean";
+    }
 }

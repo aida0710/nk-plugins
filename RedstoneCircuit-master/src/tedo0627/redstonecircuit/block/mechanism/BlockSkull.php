@@ -10,6 +10,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockSkull extends Skull implements IRedstoneComponent {
+
     use RedstoneComponentTrait;
 
     private bool $mouthMoving = false;
@@ -29,16 +30,13 @@ class BlockSkull extends Skull implements IRedstoneComponent {
 
     public function onRedstoneUpdate(): void {
         if ($this->getSkullType() !== SkullType::DRAGON()) return;
-
         $powered = BlockPowerHelper::isPowered($this);
         if ($powered && !$this->isMouthMoving()) {
             $this->setMouthMoving(true);
             $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
             return;
         }
-
         if ($powered || !$this->isMouthMoving()) return;
-
         $this->setMouthMoving(false);
         $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
     }

@@ -1,43 +1,43 @@
 {
     "language": "por",
-	"commands": {
-		"mymoney": {
-			"usage": "/mymoney",
-			"description": "Mostra seu saldo"
-		},
-		"topmoney": {
-			"usage": "/topmoney [page]",
-			"description": "Mostra o rank de riquesa desse servidorr"
-		},
-		"setmoney": {
-			"usage": "/setmoney <player> <amount>",
-			"description": "Seta o saldo de um jogadorr"
-		},
-		"seemoney": {
-			"usage": "/seemoney <player>",
-			"description": "Mostra o dinheiro de um jogador"
-		},
-		"givemoney": {
-			"usage": "/givemoney <player> <amount>",
-			"description": "Da dinheiro a um jogador"
-		},
-		"takemoney": {
-			"usage": "/takemoney <player> <amount>",
-			"description": "Pega dinheiro de um jogador"
-		},
-		"pay": {
-			"usage": "/pay <player> <amount>",
-			"description": "Paga dinheiro a um jogador"
-		},
-		"setlang": {
-			"usage": "/setlang <language>",
-			"description": "set sua linguagem"
-		},
-		"mystatus": {
-			"usage": "/mystatus",
-			"description": "Mostra seu status de Saldo"
-		}
-	},
+    "commands": {
+        "mymoney": {
+            "usage": "/mymoney",
+            "description": "Mostra seu saldo"
+        },
+        "topmoney": {
+            "usage": "/topmoney [page]",
+            "description": "Mostra o rank de riquesa desse servidorr"
+        },
+        "setmoney": {
+            "usage": "/setmoney <player> <amount>",
+            "description": "Seta o saldo de um jogadorr"
+        },
+        "seemoney": {
+            "usage": "/seemoney <player>",
+            "description": "Mostra o dinheiro de um jogador"
+        },
+        "givemoney": {
+            "usage": "/givemoney <player> <amount>",
+            "description": "Da dinheiro a um jogador"
+        },
+        "takemoney": {
+            "usage": "/takemoney <player> <amount>",
+            "description": "Pega dinheiro de um jogador"
+        },
+        "pay": {
+            "usage": "/pay <player> <amount>",
+            "description": "Paga dinheiro a um jogador"
+        },
+        "setlang": {
+            "usage": "/setlang <language>",
+            "description": "set sua linguagem"
+        },
+        "mystatus": {
+            "usage": "/mystatus",
+            "description": "Mostra seu status de Saldo"
+        }
+    },
     "language-set": "Idioma configurado para %1 por Winchester",
     "request-cancelled": "Seu pedido foi cancelado",
     "player-not-connected": "Jogador %1 não esta online.",

@@ -28,7 +28,7 @@ class Main extends PluginBase implements Listener {
         if (!($event->getBlock()->getId() === 145)) {
             return;
         }
-        if (!$player->isSneaking()){
+        if (!$player->isSneaking()) {
             return;
         }
         if ($item->getId() === ItemIds::ELYTRA) {
@@ -53,7 +53,7 @@ class Main extends PluginBase implements Listener {
             return;
         }
         $itemids = $item->getId();
-        if ($itemids >= 1000){
+        if ($itemids >= 1000) {
             $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕することが出来ません');
             return;
         }

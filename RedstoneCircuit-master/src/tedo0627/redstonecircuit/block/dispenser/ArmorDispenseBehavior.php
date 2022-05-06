@@ -23,7 +23,6 @@ class ArmorDispenseBehavior implements DispenseItemBehavior {
         $entities = $pos->getWorld()->getNearbyEntities(new AxisAlignedBB($pos->x, $pos->y, $pos->z, $pos->x + 1, $pos->y + 1, $pos->z + 1));
         foreach ($entities as $entity) {
             if (!$entity instanceof Human) continue;
-
             $entity->getArmorInventory()->setItem($this->slot, $item->pop());
             return null;
         }

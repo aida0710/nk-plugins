@@ -13,6 +13,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\LinkRedstoneWireTrait;
 
 class BlockRedstoneTorch extends RedstoneTorch implements IRedstoneComponent, ILinkRedstoneWire {
+
     use LinkRedstoneWireTrait;
 
     public function onPostPlace(): void {
@@ -42,7 +43,7 @@ class BlockRedstoneTorch extends RedstoneTorch implements IRedstoneComponent, IL
     }
 
     public function getWeakPower(int $face): int {
-        if  (!$this->isLit()) return 0;
+        if (!$this->isLit()) return 0;
         if ($face === Facing::DOWN) return $this->getFacing() !== Facing::DOWN ? 15 : 0;
         return $face !== $this->getFacing() ? 15 : 0;
     }

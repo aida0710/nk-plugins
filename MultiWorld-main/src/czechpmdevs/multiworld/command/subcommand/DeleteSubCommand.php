@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\MultiWorld;
@@ -33,25 +31,22 @@ use function str_replace;
 
 class DeleteSubCommand implements SubCommand {
 
-	public function execute(CommandSender $sender, array $args, string $name): void {
-		if(!isset($args[0])) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "delete-usage"));
-			return;
-		}
-
-		if(!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0]) || !file_exists(Server::getInstance()->getDataPath() . "worlds/$args[0]")) {
-			$sender->sendMessage(MultiWorld::getPrefix() . str_replace("%1", $args[0], LanguageManager::translateMessage($sender, "delete-levelnotexists")));
-			return;
-		}
-
-		$world = Server::getInstance()->getWorldManager()->getWorldByName($args[0]);
-		if($world instanceof World) { // World is loaded
-			if(WorldUtils::getDefaultWorldNonNull()->getId() == $world->getId()) {
-				$sender->sendMessage("§cCould not remove default world!");
-				return;
-			}
-		}
-
-		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "delete-done", [((string)WorldUtils::removeWorld($args[0]))]));
-	}
+    public function execute(CommandSender $sender, array $args, string $name): void {
+        if (!isset($args[0])) {
+            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "delete-usage"));
+            return;
+        }
+        if (!Server::getInstance()->getWorldManager()->isWorldGenerated($args[0]) || !file_exists(Server::getInstance()->getDataPath() . "worlds/$args[0]")) {
+            $sender->sendMessage(MultiWorld::getPrefix() . str_replace("%1", $args[0], LanguageManager::translateMessage($sender, "delete-levelnotexists")));
+            return;
+        }
+        $world = Server::getInstance()->getWorldManager()->getWorldByName($args[0]);
+        if ($world instanceof World) { // World is loaded
+            if (WorldUtils::getDefaultWorldNonNull()->getId() == $world->getId()) {
+                $sender->sendMessage("§cCould not remove default world!");
+                return;
+            }
+        }
+        $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "delete-done", [((string)WorldUtils::removeWorld($args[0]))]));
+    }
 }

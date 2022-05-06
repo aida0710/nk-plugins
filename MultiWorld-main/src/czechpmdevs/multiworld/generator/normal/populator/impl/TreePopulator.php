@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\populator\impl;
 
 use czechpmdevs\multiworld\generator\normal\object\Tree;
@@ -31,25 +29,23 @@ use pocketmine\world\ChunkManager;
 
 class TreePopulator extends AmountPopulator {
 
-	private ?TreeType $treeType;
+    private ?TreeType $treeType;
 
-	private bool $vines;
+    private bool $vines;
 
-	private bool $high;
+    private bool $high;
 
-	public function __construct(int $baseAmount, int $randomAmount, int $spawnPercentage = 100, ?TreeType $treeType = null, bool $vines = false, bool $high = false) {
-		$this->treeType = $treeType;
-		$this->vines = $vines;
-		$this->high = $high;
+    public function __construct(int $baseAmount, int $randomAmount, int $spawnPercentage = 100, ?TreeType $treeType = null, bool $vines = false, bool $high = false) {
+        $this->treeType = $treeType;
+        $this->vines = $vines;
+        $this->high = $high;
+        parent::__construct($baseAmount, $randomAmount, $spawnPercentage);
+    }
 
-		parent::__construct($baseAmount, $randomAmount, $spawnPercentage);
-	}
-
-	public function populateObject(ChunkManager $world, int $chunkX, int $chunkZ, Random $random): void {
-		if(!$this->getSpawnPositionOn($world->getChunk($chunkX, $chunkZ), $random, [VanillaBlocks::GRASS(), VanillaBlocks::MYCELIUM()], $x, $y, $z)) {
-			return;
-		}
-
-		Tree::growTree($world, $chunkX * 16 + $x, $y, $chunkZ * 16 + $z, $random, $this->treeType, $this->vines, $this->high);
-	}
+    public function populateObject(ChunkManager $world, int $chunkX, int $chunkZ, Random $random): void {
+        if (!$this->getSpawnPositionOn($world->getChunk($chunkX, $chunkZ), $random, [VanillaBlocks::GRASS(), VanillaBlocks::MYCELIUM()], $x, $y, $z)) {
+            return;
+        }
+        Tree::growTree($world, $chunkX * 16 + $x, $y, $chunkZ * 16 + $z, $random, $this->treeType, $this->vines, $this->high);
+    }
 }

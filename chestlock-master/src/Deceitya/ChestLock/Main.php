@@ -5,11 +5,9 @@ namespace Deceitya\ChestLock;
 use Deceitya\ChestLock\Command\ChestCommand;
 use Deceitya\ChestLock\Database\SQLDatabase;
 use Deceitya\ChestLock\Event\EventListener;
-use pocketmine\world\Position;
-use pocketmine\permission\Permission;
-use pocketmine\permission\PermissionManager;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\world\Position;
 
 class Main extends PluginBase {
 

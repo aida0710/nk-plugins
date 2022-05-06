@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\SandyBiome;
@@ -27,14 +25,13 @@ use czechpmdevs\multiworld\generator\normal\populator\impl\LakePopulator;
 
 class Beach extends SandyBiome {
 
-	public function __construct() {
-		parent::__construct(0.8, 0.4);
+    public function __construct() {
+        parent::__construct(0.8, 0.4);
+        $this->setElevation(62, 65);
+        $this->addPopulator(new LakePopulator());
+    }
 
-		$this->setElevation(62, 65);
-		$this->addPopulator(new LakePopulator());
-	}
-
-	public function getName(): string {
-		return "Beach";
-	}
+    public function getName(): string {
+        return "Beach";
+    }
 }

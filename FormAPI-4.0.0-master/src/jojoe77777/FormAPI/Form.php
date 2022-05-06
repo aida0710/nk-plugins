@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
-
+declare(strict_types=1);
 namespace jojoe77777\FormAPI;
 
 use pocketmine\form\Form as IForm;
 use pocketmine\player\Player;
 
-abstract class Form implements IForm{
+abstract class Form implements IForm {
 
     /** @var array */
     protected $data = [];
@@ -22,16 +21,16 @@ abstract class Form implements IForm{
     }
 
     /**
-     * @deprecated
+     * @param Player $player
      * @see Player::sendForm()
      *
-     * @param Player $player
+     * @deprecated
      */
-    public function sendToPlayer(Player $player) : void {
+    public function sendToPlayer(Player $player): void {
         $player->sendForm($this);
     }
 
-    public function getCallable() : ?callable {
+    public function getCallable(): ?callable {
         return $this->callable;
     }
 
@@ -39,18 +38,18 @@ abstract class Form implements IForm{
         $this->callable = $callable;
     }
 
-    public function handleResponse(Player $player, $data) : void {
+    public function handleResponse(Player $player, $data): void {
         $this->processData($data);
         $callable = $this->getCallable();
-        if($callable !== null) {
+        if ($callable !== null) {
             $callable($player, $data);
         }
     }
 
-    public function processData(&$data) : void {
+    public function processData(&$data): void {
     }
 
-    public function jsonSerialize(){
+    public function jsonSerialize() {
         return $this->data;
     }
 }

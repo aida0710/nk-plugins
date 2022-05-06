@@ -26,22 +26,23 @@
  *
  */
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando\traits;
-
-
 
 use nkserver\ranking\libs\CortexPE\Commando\args\BaseArgument;
 use pocketmine\command\CommandSender;
 
 interface IArgumentable {
-	public function generateUsageMessage(string $parent = ""): string;
-	public function hasArguments(): bool;
 
-	/**
-	 * @return BaseArgument[][]
-	 */
-	public function getArgumentList(): array;
-	public function parseArguments(array $rawArgs, CommandSender $sender): array;
-	public function registerArgument(int $position, BaseArgument $argument): void;
+    public function generateUsageMessage(string $parent = ""): string;
+
+    public function hasArguments(): bool;
+
+    /**
+     * @return BaseArgument[][]
+     */
+    public function getArgumentList(): array;
+
+    public function parseArguments(array $rawArgs, CommandSender $sender): array;
+
+    public function registerArgument(int $position, BaseArgument $argument): void;
 }

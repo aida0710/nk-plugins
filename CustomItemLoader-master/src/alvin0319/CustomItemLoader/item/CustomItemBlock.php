@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,7 +14,6 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use alvin0319\CustomItemLoader\item\properties\CustomItemProperties;
@@ -23,14 +21,15 @@ use pocketmine\block\BlockFactory;
 use pocketmine\item\ItemBlock;
 use pocketmine\item\ItemIdentifier;
 
-final class CustomItemBlock extends ItemBlock{
-	use CustomItemTrait {
-		__construct as CustomItemTrait___construct;
-	}
+final class CustomItemBlock extends ItemBlock {
 
-	public function __construct(string $name, array $data){
-		$this->properties = new CustomItemProperties($name, $data);
-		parent::__construct(new ItemIdentifier($this->properties->getId(), $this->properties->getMeta()), BlockFactory::getInstance()->get($this->properties->getBlockId(), $this->properties->getMeta()));
-		$this->name = $this->properties->getName();
-	}
+    use CustomItemTrait {
+        __construct as CustomItemTrait___construct;
+    }
+
+    public function __construct(string $name, array $data) {
+        $this->properties = new CustomItemProperties($name, $data);
+        parent::__construct(new ItemIdentifier($this->properties->getId(), $this->properties->getMeta()), BlockFactory::getInstance()->get($this->properties->getBlockId(), $this->properties->getMeta()));
+        $this->name = $this->properties->getName();
+    }
 }

@@ -20,7 +20,7 @@ abstract class CustomFormElement implements Element {
      *
      * @param $value
      */
-    final public function setValue($value){
+    final public function setValue($value) {
         $this->value = $value;
     }
 
@@ -32,6 +32,5 @@ abstract class CustomFormElement implements Element {
     }
 
     public function handleSubmit(Player $player): void {
-
     }
 }

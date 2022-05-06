@@ -12,6 +12,7 @@ use tedo0627\redstonecircuit\block\IRedstoneComponent;
 use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 
 class BlockIronTrapdoor extends Trapdoor implements IRedstoneComponent {
+
     use RedstoneComponentTrait;
 
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null): bool {
@@ -27,9 +28,7 @@ class BlockIronTrapdoor extends Trapdoor implements IRedstoneComponent {
             $world->addSound($this->getPosition(), new DoorSound());
             return;
         }
-
         if ($powered || !$this->isOpen()) return;
-
         $this->setOpen(false);
         $world->setBlock($this->getPosition(), $this);
         $world->addSound($this->getPosition(), new DoorSound());

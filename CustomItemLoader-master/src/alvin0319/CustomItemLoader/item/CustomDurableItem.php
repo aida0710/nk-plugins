@@ -1,5 +1,4 @@
 <?php
-
 /*
  *    ____          _                  ___ _                 _                    _
  *   / ___|   _ ___| |_ ___  _ __ ___ |_ _| |_ ___ _ __ ___ | |    ___   __ _  __| | ___ _ __
@@ -15,36 +14,36 @@
  */
 
 declare(strict_types=1);
-
 namespace alvin0319\CustomItemLoader\item;
 
 use pocketmine\block\Block;
 use pocketmine\entity\Entity;
 use pocketmine\item\Durable;
 
-class CustomDurableItem extends Durable{
-	use CustomItemTrait;
+class CustomDurableItem extends Durable {
 
-	public function getMaxStackSize() : int{
-		return $this->getProperties()->getMaxStackSize();
-	}
+    use CustomItemTrait;
 
-	public function getMaxDurability() : int{
-		return $this->getProperties()->getMaxDurability();
-	}
+    public function getMaxStackSize(): int {
+        return $this->getProperties()->getMaxStackSize();
+    }
 
-	public function onDestroyBlock(Block $block) : bool{
-		return $this->applyDamage(1);
-	}
+    public function getMaxDurability(): int {
+        return $this->getProperties()->getMaxDurability();
+    }
 
-	public function onAttackEntity(Entity $victim) : bool{
-		return $this->applyDamage(1);
-	}
+    public function onDestroyBlock(Block $block): bool {
+        return $this->applyDamage(1);
+    }
 
-	public function getMiningEfficiency(bool $isCorrectTool) : float{
-		if($isCorrectTool){
-			return $this->getProperties()->getMiningSpeed();
-		}
-		return parent::getMiningEfficiency($isCorrectTool);
-	}
+    public function onAttackEntity(Entity $victim): bool {
+        return $this->applyDamage(1);
+    }
+
+    public function getMiningEfficiency(bool $isCorrectTool): float {
+        if ($isCorrectTool) {
+            return $this->getProperties()->getMiningSpeed();
+        }
+        return parent::getMiningEfficiency($isCorrectTool);
+    }
 }

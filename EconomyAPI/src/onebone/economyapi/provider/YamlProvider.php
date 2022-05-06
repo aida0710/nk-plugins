@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -20,134 +19,127 @@
 
 namespace onebone\economyapi\provider;
 
-
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 use pocketmine\utils\Config;
 
-class YamlProvider implements Provider{
-	/**
-	 * @var Config
-	 */
-	private $config;
+class YamlProvider implements Provider {
 
-	/** @var EconomyAPI */
-	private $plugin;
+    /**
+     * @var Config
+     */
+    private $config;
 
-	private $money = [];
+    /** @var EconomyAPI */
+    private $plugin;
 
-	public function __construct(EconomyAPI $plugin){
-		$this->plugin = $plugin;
-	}
+    private $money = [];
 
-	public function open(){
-		$this->config = new Config($this->plugin->getDataFolder() . "Money.yml", Config::YAML, ["version" => 2, "money" => []]);
-		$this->money = $this->config->getAll();
-	}
+    public function __construct(EconomyAPI $plugin) {
+        $this->plugin = $plugin;
+    }
 
-	public function accountExists($player){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
+    public function open() {
+        $this->config = new Config($this->plugin->getDataFolder() . "Money.yml", Config::YAML, ["version" => 2, "money" => []]);
+        $this->money = $this->config->getAll();
+    }
 
-		return isset($this->money["money"][$player]);
-	}
+    public function accountExists($player) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        return isset($this->money["money"][$player]);
+    }
 
-	public function createAccount($player, $defaultMoney = 1000){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
+    public function createAccount($player, $defaultMoney = 1000) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (!isset($this->money["money"][$player])) {
+            $this->money["money"][$player] = $defaultMoney;
+            return true;
+        }
+        return false;
+    }
 
-		if(!isset($this->money["money"][$player])){
-			$this->money["money"][$player] = $defaultMoney;
-			return true;
-		}
-		return false;
-	}
+    public function removeAccount($player) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (isset($this->money["money"][$player])) {
+            unset($this->money["money"][$player]);
+            return true;
+        }
+        return false;
+    }
 
-	public function removeAccount($player){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
+    public function getMoney($player) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (isset($this->money["money"][$player])) {
+            return $this->money["money"][$player];
+        }
+        return false;
+    }
 
-		if(isset($this->money["money"][$player])){
-			unset($this->money["money"][$player]);
-			return true;
-		}
-		return false;
-	}
+    public function setMoney($player, $amount) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (isset($this->money["money"][$player])) {
+            $this->money["money"][$player] = $amount;
+            $this->money["money"][$player] = round($this->money["money"][$player], 2);
+            return true;
+        }
+        return false;
+    }
 
-	public function getMoney($player){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
+    public function addMoney($player, $amount) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (isset($this->money["money"][$player])) {
+            $this->money["money"][$player] += $amount;
+            $this->money["money"][$player] = round($this->money["money"][$player], 2);
+            return true;
+        }
+        return false;
+    }
 
-		if(isset($this->money["money"][$player])){
-			return $this->money["money"][$player];
-		}
-		return false;
-	}
+    public function reduceMoney($player, $amount) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (isset($this->money["money"][$player])) {
+            $this->money["money"][$player] -= $amount;
+            $this->money["money"][$player] = round($this->money["money"][$player], 2);
+            return true;
+        }
+        return false;
+    }
 
-	public function setMoney($player, $amount){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
+    public function getAll() {
+        return isset($this->money["money"]) ? $this->money["money"] : [];
+    }
 
-		if(isset($this->money["money"][$player])){
-			$this->money["money"][$player] = $amount;
-			$this->money["money"][$player] = round($this->money["money"][$player], 2);
-			return true;
-		}
-		return false;
-	}
+    public function save() {
+        $this->config->setAll($this->money);
+        $this->config->save();
+    }
 
-	public function addMoney($player, $amount){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
+    public function close() {
+        $this->save();
+    }
 
-		if(isset($this->money["money"][$player])){
-			$this->money["money"][$player] += $amount;
-			$this->money["money"][$player] = round($this->money["money"][$player], 2);
-			return true;
-		}
-		return false;
-	}
-
-	public function reduceMoney($player, $amount){
-		if($player instanceof Player){
-			$player = $player->getName();
-		}
-		$player = strtolower($player);
-
-		if(isset($this->money["money"][$player])){
-			$this->money["money"][$player] -= $amount;
-			$this->money["money"][$player] = round($this->money["money"][$player], 2);
-			return true;
-		}
-		return false;
-	}
-
-	public function getAll(){
-		return isset($this->money["money"]) ? $this->money["money"] : [];
-	}
-
-	public function save(){
-		$this->config->setAll($this->money);
-		$this->config->save();
-	}
-
-	public function close(){
-		$this->save();
-	}
-
-	public function getName(){
-		return "Yaml";
-	}
+    public function getName() {
+        return "Yaml";
+    }
 }

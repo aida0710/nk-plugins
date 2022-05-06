@@ -13,21 +13,16 @@ class CommandBlockListener implements Listener {
     public function onDataPacketReceive(DataPacketReceiveEvent $event): void {
         $packet = $event->getPacket();
         if (!$packet instanceof CommandBlockUpdatePacket) return;
-
         $player = $event->getOrigin()->getPlayer();
         if ($player === null) return;
-
         $player->removeCurrentWindow();
         if (!$packet->isBlock) return;
-
         $server = Server::getInstance();
         if (!$server->isOp($player->getName()) || !$player->isCreative()) return;
-
         $pos = $packet->blockPosition;
         $world = $player->getWorld();
         $block = $world->getBlockAt($pos->getX(), $pos->getY(), $pos->getZ());
         if (!$block instanceof BlockCommand) return;
-
         $block->setCommandBlockMode($packet->commandBlockMode);
         $block->setAuto(!$packet->isRedstoneMode);
         $block->setConditionalMode($packet->isConditional);

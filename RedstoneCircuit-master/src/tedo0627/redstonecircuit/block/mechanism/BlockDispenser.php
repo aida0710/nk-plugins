@@ -39,6 +39,7 @@ use tedo0627\redstonecircuit\block\RedstoneComponentTrait;
 use tedo0627\redstonecircuit\sound\ClickFailSound;
 
 class BlockDispenser extends Opaque implements IRedstoneComponent {
+
     use AnyFacingTrait;
     use PoweredByRedstoneTrait;
     use RedstoneComponentTrait;
@@ -87,10 +88,8 @@ class BlockDispenser extends Opaque implements IRedstoneComponent {
 
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null): bool {
         if ($player === null) return false;
-
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
         if (!$tile instanceof BlockEntityDispenser) return true;
-
         $inventory = $tile->getInventory();
         $player->setCurrentWindow($inventory);
         return true;
@@ -99,14 +98,12 @@ class BlockDispenser extends Opaque implements IRedstoneComponent {
     public function onScheduledUpdate(): void {
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
         if (!$tile instanceof BlockEntityDispenser) return;
-
         $inventory = $tile->getInventory();
         $slot = $inventory->getRandomSlot();
         if ($slot === -1) {
             $this->getPosition()->getWorld()->addSound($this->getPosition(), new ClickFailSound(1.2));
             return;
         }
-
         $item = $inventory->getItem($slot);
         $result = $this->dispense($item);
         $inventory->setItem($slot, $item);
@@ -122,9 +119,7 @@ class BlockDispenser extends Opaque implements IRedstoneComponent {
             $this->getPosition()->getWorld()->scheduleDelayedBlockUpdate($this->getPosition(), 4);
             return;
         }
-
         if ($powered || !$this->isPowered()) return;
-
         $this->setPowered(false);
         $this->getPosition()->getWorld()->setBlock($this->getPosition(), $this);
     }
@@ -140,26 +135,28 @@ class BlockDispenser extends Opaque implements IRedstoneComponent {
 
     private static function registerBehavior() {
         if (self::$init) return;
-
         self::$init = true;
         self::$default = new DefaultItemDispenseBehavior();
-
         self::$behaviors[ItemIds::ARROW] = new class extends ProjectileDispenseBehavior {
+
             public function getEntity(Location $location, Item $item): Entity {
                 return new Arrow($location, null, false);
             }
         };
         self::$behaviors[ItemIds::EGG] = new class extends ProjectileDispenseBehavior {
+
             public function getEntity(Location $location, Item $item): Entity {
                 return new Egg($location, null);
             }
         };
         self::$behaviors[ItemIds::SNOWBALL] = new class extends ProjectileDispenseBehavior {
+
             public function getEntity(Location $location, Item $item): Entity {
                 return new Snowball($location, null);
             }
         };
         self::$behaviors[ItemIds::EXPERIENCE_BOTTLE] = new class extends ProjectileDispenseBehavior {
+
             public function getEntity(Location $location, Item $item): Entity {
                 return new ExperienceBottle($location, null);
             }
@@ -172,13 +169,13 @@ class BlockDispenser extends Opaque implements IRedstoneComponent {
         self::$behaviors[ItemIds::SHULKER_BOX] = new ShulkerBoxDispenseBehavior();
         self::$behaviors[ItemIds::GLASS_BOTTLE] = new GlassBottleDispenseBehavior();
         foreach ([
-            ItemIds::LEATHER_HELMET => 0, ItemIds::LEATHER_CHESTPLATE => 1, ItemIds::LEATHER_LEGGINGS => 2, ItemIds::LEATHER_BOOTS => 3,
-            ItemIds::CHAIN_HELMET => 0, ItemIds::CHAIN_CHESTPLATE => 1, ItemIds::CHAIN_LEGGINGS => 2, ItemIds::CHAIN_BOOTS => 3,
-            ItemIds::IRON_HELMET => 0, ItemIds::IRON_CHESTPLATE => 1, ItemIds::IRON_LEGGINGS => 2, ItemIds::IRON_BOOTS => 3,
-            ItemIds::DIAMOND_HELMET => 0, ItemIds::DIAMOND_CHESTPLATE => 1, ItemIds::DIAMOND_LEGGINGS => 2, ItemIds::DIAMOND_BOOTS => 3,
-            ItemIds::GOLDEN_HELMET => 0, ItemIds::GOLDEN_CHESTPLATE => 1, ItemIds::GOLDEN_LEGGINGS => 2, ItemIds::GOLDEN_BOOTS => 3,
-            ItemIds::CARVED_PUMPKIN => 0, ItemIds::SKULL => 0, ItemIds::ELYTRA => 2, ItemIds::TURTLE_HELMET => 0,
-            748 => 0, 749 => 1, 750 => 2, 751 => 3,
+                     ItemIds::LEATHER_HELMET => 0, ItemIds::LEATHER_CHESTPLATE => 1, ItemIds::LEATHER_LEGGINGS => 2, ItemIds::LEATHER_BOOTS => 3,
+                     ItemIds::CHAIN_HELMET => 0, ItemIds::CHAIN_CHESTPLATE => 1, ItemIds::CHAIN_LEGGINGS => 2, ItemIds::CHAIN_BOOTS => 3,
+                     ItemIds::IRON_HELMET => 0, ItemIds::IRON_CHESTPLATE => 1, ItemIds::IRON_LEGGINGS => 2, ItemIds::IRON_BOOTS => 3,
+                     ItemIds::DIAMOND_HELMET => 0, ItemIds::DIAMOND_CHESTPLATE => 1, ItemIds::DIAMOND_LEGGINGS => 2, ItemIds::DIAMOND_BOOTS => 3,
+                     ItemIds::GOLDEN_HELMET => 0, ItemIds::GOLDEN_CHESTPLATE => 1, ItemIds::GOLDEN_LEGGINGS => 2, ItemIds::GOLDEN_BOOTS => 3,
+                     ItemIds::CARVED_PUMPKIN => 0, ItemIds::SKULL => 0, ItemIds::ELYTRA => 2, ItemIds::TURTLE_HELMET => 0,
+                     748 => 0, 749 => 1, 750 => 2, 751 => 3,
                  ] as $id => $slot) {
             self::$behaviors[$id] = new ArmorDispenseBehavior($slot);
         }

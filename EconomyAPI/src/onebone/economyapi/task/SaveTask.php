@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -21,16 +20,14 @@
 namespace onebone\economyapi\task;
 
 use onebone\economyapi\EconomyAPI;
-
 use pocketmine\scheduler\Task;
 
-class SaveTask extends Task
-{
+class SaveTask extends Task {
 
-    public function __construct(private EconomyAPI $plugin) {}
+    public function __construct(private EconomyAPI $plugin) {
+    }
 
-    public function onRun(): void
-    {
+    public function onRun(): void {
         $this->plugin->saveAll();
     }
 }

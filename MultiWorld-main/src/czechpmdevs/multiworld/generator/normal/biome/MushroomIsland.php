@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\Biome;
@@ -29,26 +27,23 @@ use pocketmine\block\VanillaBlocks;
 
 class MushroomIsland extends Biome {
 
-	public function __construct() {
-		parent::__construct(0.9, 1);
-		$this->setGroundCover([
-			VanillaBlocks::MYCELIUM(),
-			VanillaBlocks::DIRT(),
-			VanillaBlocks::DIRT(),
-			VanillaBlocks::DIRT(),
-			VanillaBlocks::DIRT()
-		]);
+    public function __construct() {
+        parent::__construct(0.9, 1);
+        $this->setGroundCover([
+            VanillaBlocks::MYCELIUM(),
+            VanillaBlocks::DIRT(),
+            VanillaBlocks::DIRT(),
+            VanillaBlocks::DIRT(),
+            VanillaBlocks::DIRT()
+        ]);
+        $mushrooms = new PlantPopulator(2, 2, 95);
+        $mushrooms->addPlant(new Plant(VanillaBlocks::RED_MUSHROOM(), [VanillaBlocks::MYCELIUM()]));
+        $mushrooms->addPlant(new Plant(VanillaBlocks::BROWN_MUSHROOM(), [VanillaBlocks::MYCELIUM()]));
+        //        $this->addPopulators([$mushrooms, new TreePopulator(1, 1, 100, Tree::MUSHROOM)]); // TODO
+        $this->setElevation(64, 74);
+    }
 
-		$mushrooms = new PlantPopulator(2, 2, 95);
-		$mushrooms->addPlant(new Plant(VanillaBlocks::RED_MUSHROOM(), [VanillaBlocks::MYCELIUM()]));
-		$mushrooms->addPlant(new Plant(VanillaBlocks::BROWN_MUSHROOM(), [VanillaBlocks::MYCELIUM()]));
-
-//        $this->addPopulators([$mushrooms, new TreePopulator(1, 1, 100, Tree::MUSHROOM)]); // TODO
-
-		$this->setElevation(64, 74);
-	}
-
-	public function getName(): string {
-		return "Mushroom Island";
-	}
+    public function getName(): string {
+        return "Mushroom Island";
+    }
 }

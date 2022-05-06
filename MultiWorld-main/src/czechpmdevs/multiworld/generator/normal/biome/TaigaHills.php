@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,18 +18,16 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 class TaigaHills extends Taiga {
 
-	public function __construct() {
-		parent::__construct();
+    public function __construct() {
+        parent::__construct();
+        $this->setElevation(72, 86);
+    }
 
-		$this->setElevation(72, 86);
-	}
-
-	public function getName(): string {
-		return "Taiga Hills";
-	}
+    public function getName(): string {
+        return "Taiga Hills";
+    }
 }

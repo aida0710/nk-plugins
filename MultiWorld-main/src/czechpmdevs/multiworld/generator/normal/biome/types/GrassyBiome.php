@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,21 +18,20 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome\types;
 
 use pocketmine\block\VanillaBlocks;
 
 abstract class GrassyBiome extends Biome {
 
-	public function __construct(float $temperature, float $rainfall) {
-		$this->setGroundCover([
-			VanillaBlocks::GRASS(),
-			VanillaBlocks::DIRT(),
-			VanillaBlocks::DIRT(),
-			VanillaBlocks::DIRT(),
-			VanillaBlocks::DIRT(),
-		]);
-		parent::__construct($temperature, $rainfall);
-	}
+    public function __construct(float $temperature, float $rainfall) {
+        $this->setGroundCover([
+            VanillaBlocks::GRASS(),
+            VanillaBlocks::DIRT(),
+            VanillaBlocks::DIRT(),
+            VanillaBlocks::DIRT(),
+            VanillaBlocks::DIRT(),
+        ]);
+        parent::__construct($temperature, $rainfall);
+    }
 }

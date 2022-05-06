@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,27 +18,24 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use pocketmine\block\VanillaBlocks;
 
 class ExtremeHillsMutated extends ExtremeHills {
 
-	public function __construct() {
-		parent::__construct();
+    public function __construct() {
+        parent::__construct();
+        $this->setElevation(75, 120);
+        $this->setGroundCover([
+            VanillaBlocks::GRAVEL(),
+            VanillaBlocks::GRAVEL(),
+            VanillaBlocks::GRAVEL(),
+            VanillaBlocks::GRAVEL()
+        ]);
+    }
 
-		$this->setElevation(75, 120);
-
-		$this->setGroundCover([
-			VanillaBlocks::GRAVEL(),
-			VanillaBlocks::GRAVEL(),
-			VanillaBlocks::GRAVEL(),
-			VanillaBlocks::GRAVEL()
-		]);
-	}
-
-	public function getName(): string {
-		return "Extreme Hills Mutated";
-	}
+    public function getName(): string {
+        return "Extreme Hills Mutated";
+    }
 }

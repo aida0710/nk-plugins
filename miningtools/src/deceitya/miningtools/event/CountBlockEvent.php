@@ -9,6 +9,7 @@ use pocketmine\event\CancellableTrait;
 use pocketmine\player\Player;
 
 class CountBlockEvent extends BlockEvent implements Cancellable {
+
     use CancellableTrait;
 
     /** @var int[] intの配列 array(1, 1, 5, 6); */

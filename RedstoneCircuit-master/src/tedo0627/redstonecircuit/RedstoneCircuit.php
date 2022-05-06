@@ -70,7 +70,6 @@ class RedstoneCircuit extends PluginBase {
         // mechanism
         $this->addBlock("command_block", new BlockCommand(new BlockIdentifierFlattened(Ids::COMMAND_BLOCK, [Ids::REPEATING_COMMAND_BLOCK, Ids::CHAIN_COMMAND_BLOCK], 0, null, BlockEntityCommand::class), "Command Block", BlockBreakInfo::indestructible()));
         $this->addBlockEntity("command_block", BlockEntityCommand::class, ["CommandBlock", "minecraft:command_block"]);
-
         $info = new BlockBreakInfo(3.5, BlockToolType::PICKAXE, ToolTier::WOOD()->getHarvestLevel());
         $this->addBlock("dispenser", new BlockDispenser(new BlockIdentifier(Ids::DISPENSER, 0, null, BlockEntityDispenser::class), "Dispenser", $info));
         $this->addBlockEntity("dispenser", BlockEntityDispenser::class, ["Dispenser", "minecraft:dispenser"]);
@@ -100,7 +99,6 @@ class RedstoneCircuit extends PluginBase {
             Ids::WOODEN_TRAPDOOR, Ids::ACACIA_TRAPDOOR, Ids::BIRCH_TRAPDOOR,
             Ids::DARK_OAK_TRAPDOOR, Ids::JUNGLE_TRAPDOOR, Ids::SPRUCE_TRAPDOOR
         ], fn($bid, $name, $info) => new BlockWoodenTrapdoor($bid, $name, $info));
-
         // power
         $this->overrideBlock("button", Ids::STONE_BUTTON, fn($bid, $name, $info) => new BlockStoneButton($bid, $name, $info));
         $this->overrideBlocks("button", [
@@ -123,13 +121,11 @@ class RedstoneCircuit extends PluginBase {
         $this->addItemBlock("tripwire", Ids::TRIPWIRE, new ItemIdentifier(ItemIds::STRING, 0));
         $this->overrideBlock("weighted_pressure_plate", Ids::HEAVY_WEIGHTED_PRESSURE_PLATE, fn($bid, $name, $info) => new BlockWeightedPressurePlateHeavy($bid, $name, $info));
         $this->overrideBlock("weighted_pressure_plate", Ids::LIGHT_WEIGHTED_PRESSURE_PLATE, fn($bid, $name, $info) => new BlockWeightedPressurePlateLight($bid, $name, $info));
-
         // transmission
         $this->overrideBlock("comparator", Ids::UNPOWERED_COMPARATOR, fn($bid, $name, $info) => new BlockRedstoneComparator($bid, $name, $info));
         $this->overrideBlock("redstone_wire", Ids::REDSTONE_WIRE, fn($bid, $name, $info) => new BlockRedstoneWire($bid, $name, $info));
         $this->addItemBlock("redstone_wire", Ids::REDSTONE_WIRE, new ItemIdentifier(ItemIds::REDSTONE, 0));
         $this->overrideBlock("repeater", Ids::UNPOWERED_REPEATER, fn($bid, $name, $info) => new BlockRedstoneRepeater($bid, $name, $info));
-
         $this->load();
     }
 

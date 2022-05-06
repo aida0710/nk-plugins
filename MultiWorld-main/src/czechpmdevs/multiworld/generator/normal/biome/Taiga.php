@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\GrassyBiome;
@@ -32,30 +30,24 @@ use pocketmine\block\VanillaBlocks;
 
 class Taiga extends GrassyBiome {
 
-	public function __construct() {
-		parent::__construct(0.25, 0.8);
+    public function __construct() {
+        parent::__construct(0.25, 0.8);
+        $mushrooms = new PlantPopulator(2, 2, 95);
+        $mushrooms->addPlant(new Plant(VanillaBlocks::RED_MUSHROOM()));
+        $mushrooms->addPlant(new Plant(VanillaBlocks::BROWN_MUSHROOM()));
+        $flowers = new PlantPopulator(6, 7, 80);
+        $flowers->addPlant(new Plant(VanillaBlocks::DANDELION()));
+        $flowers->addPlant(new Plant(VanillaBlocks::POPPY()));
+        $spruce = new TreePopulator(3, 2, 100, TreeType::SPRUCE());
+        $tallGrass = new TallGrassPopulator(56, 12);
+        $this->addPopulators([$mushrooms, $flowers, $spruce, $tallGrass]);
+        $this->addPopulator($spruce);
+        $this->addPopulator($flowers);
+        $this->addPopulator($mushrooms);
+        $this->setElevation(70, 79);
+    }
 
-		$mushrooms = new PlantPopulator(2, 2, 95);
-		$mushrooms->addPlant(new Plant(VanillaBlocks::RED_MUSHROOM()));
-		$mushrooms->addPlant(new Plant(VanillaBlocks::BROWN_MUSHROOM()));
-
-		$flowers = new PlantPopulator(6, 7, 80);
-		$flowers->addPlant(new Plant(VanillaBlocks::DANDELION()));
-		$flowers->addPlant(new Plant(VanillaBlocks::POPPY()));
-
-		$spruce = new TreePopulator(3, 2, 100, TreeType::SPRUCE());
-
-		$tallGrass = new TallGrassPopulator(56, 12);
-
-		$this->addPopulators([$mushrooms, $flowers, $spruce, $tallGrass]);
-		$this->addPopulator($spruce);
-		$this->addPopulator($flowers);
-		$this->addPopulator($mushrooms);
-
-		$this->setElevation(70, 79);
-	}
-
-	public function getName(): string {
-		return "Taiga";
-	}
+    public function getName(): string {
+        return "Taiga";
+    }
 }

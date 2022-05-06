@@ -1,5 +1,4 @@
 <?php
-
 /** @noinspection PhpMissingFieldTypeInspection */
 
 /**
@@ -19,9 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\world\gamerules\type;
 
 use czechpmdevs\multiworld\world\gamerules\GameRule;
@@ -31,27 +28,27 @@ use pocketmine\network\mcpe\protocol\types\GameRuleType;
 /** @internal */
 class FloatGameRule extends GameRule {
 
-	/** @var float */
-	protected int|bool|float $value;
+    /** @var float */
+    protected int|bool|float $value;
 
-	public function __construct(string $enumName, string $ruleName, float $defaultValue) {
-		parent::__construct($enumName, $ruleName, GameRuleType::INT);
-		$this->value = $defaultValue;
-	}
+    public function __construct(string $enumName, string $ruleName, float $defaultValue) {
+        parent::__construct($enumName, $ruleName, GameRuleType::INT);
+        $this->value = $defaultValue;
+    }
 
-	/**
-	 * @return $this
-	 */
-	public function setValue(float|bool|int $value): FloatGameRule {
-		$this->value = (float)$value;
-		return $this;
-	}
+    /**
+     * @return $this
+     */
+    public function setValue(float|bool|int $value): FloatGameRule {
+        $this->value = (float)$value;
+        return $this;
+    }
 
-	public function getValue(): float {
-		return (float)$this->value;
-	}
+    public function getValue(): float {
+        return (float)$this->value;
+    }
 
-	public function encode(PacketSerializer $out): void {
-		$out->putLFloat($this->getValue());
-	}
+    public function encode(PacketSerializer $out): void {
+        $out->putLFloat($this->getValue());
+    }
 }

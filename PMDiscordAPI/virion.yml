@@ -1,5 +1,5 @@
 name: PMDiscordAPI
-api: [4.0.0]
+api: [ 4.0.0 ]
 antigen: bbo51dog\pmdiscord
 author: bbo51dog
 description: Send Message to Discord API

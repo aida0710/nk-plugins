@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\world\dimension;
 
 use pocketmine\network\mcpe\protocol\ChangeDimensionPacket;
@@ -29,32 +27,30 @@ use function strtolower;
 
 class Dimension {
 
-	public const OVERWORLD = 0;
-	public const NETHER = 1;
-	public const END = 2;
+    public const OVERWORLD = 0;
+    public const NETHER = 1;
+    public const END = 2;
 
-	public static function getDimensionByWorld(World $world): int {
-		return Dimension::getDimensionByGeneratorName($world->getProvider()->getWorldData()->getGenerator());
-	}
+    public static function getDimensionByWorld(World $world): int {
+        return Dimension::getDimensionByGeneratorName($world->getProvider()->getWorldData()->getGenerator());
+    }
 
-	public static function getDimensionByGeneratorName(string $generatorName): int {
-		$generatorName = strtolower($generatorName);
-		if($generatorName == "nether" || $generatorName == "hell") {
-			return Dimension::NETHER;
-		}
-		if($generatorName == "end" || $generatorName == "ender") {
-			return Dimension::END;
-		}
+    public static function getDimensionByGeneratorName(string $generatorName): int {
+        $generatorName = strtolower($generatorName);
+        if ($generatorName == "nether" || $generatorName == "hell") {
+            return Dimension::NETHER;
+        }
+        if ($generatorName == "end" || $generatorName == "ender") {
+            return Dimension::END;
+        }
+        return Dimension::OVERWORLD;
+    }
 
-		return Dimension::OVERWORLD;
-	}
-
-	public static function sendDimensionToPlayer(Player $player, int $dimension, bool $respawn = false): void {
-		$pk = new ChangeDimensionPacket();
-		$pk->position = $player->getPosition()->asVector3();
-		$pk->dimension = $dimension;
-		$pk->respawn = $respawn;
-
-		$player->getNetworkSession()->sendDataPacket($pk);
-	}
+    public static function sendDimensionToPlayer(Player $player, int $dimension, bool $respawn = false): void {
+        $pk = new ChangeDimensionPacket();
+        $pk->position = $player->getPosition()->asVector3();
+        $pk->dimension = $dimension;
+        $pk->respawn = $respawn;
+        $player->getNetworkSession()->sendDataPacket($pk);
+    }
 }

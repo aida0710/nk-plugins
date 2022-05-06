@@ -3,9 +3,9 @@
 declare(strict_types=1);
 namespace rib\tw\level;
 
-use pocketmine\world\World as PMWorld;
 use pocketmine\player\Player;
 use pocketmine\Server;
+use pocketmine\world\World as PMWorld;
 
 class World {
 

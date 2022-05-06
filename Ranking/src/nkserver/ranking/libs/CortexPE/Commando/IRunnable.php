@@ -26,10 +26,7 @@
  *
  */
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando;
-
-
 
 use nkserver\ranking\libs\CortexPE\Commando\constraint\BaseConstraint;
 
@@ -42,6 +39,7 @@ use nkserver\ranking\libs\CortexPE\Commando\constraint\BaseConstraint;
  * @package CortexPE\Commando
  */
 interface IRunnable {
+
     public function getName(): string;
 
     /**
@@ -49,12 +47,12 @@ interface IRunnable {
      */
     public function getAliases(): array;
 
-    public function getUsageMessage():string;
+    public function getUsageMessage(): string;
 
     public function getPermission(); // f*ck. PM didn't declare a return type... reeee
 
     /**
      * @return BaseConstraint[]
      */
-    public function getConstraints():array;
+    public function getConstraints(): array;
 }

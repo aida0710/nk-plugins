@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\populator\impl;
 
 use czechpmdevs\multiworld\generator\normal\populator\AmountPopulator;
@@ -29,22 +27,20 @@ use pocketmine\world\ChunkManager;
 
 class TallGrassPopulator extends AmountPopulator {
 
-	private bool $allowDoubleGrass = true;
+    private bool $allowDoubleGrass = true;
 
-	public function populateObject(ChunkManager $world, int $chunkX, int $chunkZ, Random $random): void {
-		if(!$this->getSpawnPositionOn($world->getChunk($chunkX, $chunkZ), $random, [VanillaBlocks::GRASS()], $x, $y, $z)) {
-			return;
-		}
+    public function populateObject(ChunkManager $world, int $chunkX, int $chunkZ, Random $random): void {
+        if (!$this->getSpawnPositionOn($world->getChunk($chunkX, $chunkZ), $random, [VanillaBlocks::GRASS()], $x, $y, $z)) {
+            return;
+        }
+        if ($this->allowDoubleGrass && $random->nextBoundedInt(5) == 0) {
+            $world->setBlockAt($chunkX * 16 + $x, $y, $chunkZ * 16 + $z, VanillaBlocks::DOUBLE_TALLGRASS());
+            return;
+        }
+        $world->setBlockAt($chunkX * 16 + $x, $y, $chunkZ * 16 + $z, VanillaBlocks::TALL_GRASS());
+    }
 
-		if($this->allowDoubleGrass && $random->nextBoundedInt(5) == 0) {
-			$world->setBlockAt($chunkX * 16 + $x, $y, $chunkZ * 16 + $z, VanillaBlocks::DOUBLE_TALLGRASS());
-			return;
-		}
-
-		$world->setBlockAt($chunkX * 16 + $x, $y, $chunkZ * 16 + $z, VanillaBlocks::TALL_GRASS());
-	}
-
-	public function setDoubleGrassAllowed(bool $allowed = true): void {
-		$this->allowDoubleGrass = $allowed;
-	}
+    public function setDoubleGrassAllowed(bool $allowed = true): void {
+        $this->allowDoubleGrass = $allowed;
+    }
 }

@@ -19,7 +19,6 @@ class BoneMealDispenseBehavior implements DispenseItemBehavior {
     public function dispense(BlockDispenser $block, Item $item): ?Item {
         $side = $block->getSide($block->getFacing());
         if (!$item instanceof Fertilizer) return $this->default->dispense($block, $item);
-
         if ($side instanceof Sapling || $side instanceof Grass) {
             $side->onInteract($item, 0, $side->getPosition());
             return null;

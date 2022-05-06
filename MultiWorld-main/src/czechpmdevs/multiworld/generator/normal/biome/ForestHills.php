@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,17 +18,16 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 class ForestHills extends Forest {
 
-	public function __construct() {
-		parent::__construct();
-		$this->setElevation(64, 84);
-	}
+    public function __construct() {
+        parent::__construct();
+        $this->setElevation(64, 84);
+    }
 
-	public function getName(): string {
-		return "Forest Hills";
-	}
+    public function getName(): string {
+        return "Forest Hills";
+    }
 }

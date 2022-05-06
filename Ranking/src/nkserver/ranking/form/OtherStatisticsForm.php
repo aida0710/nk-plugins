@@ -15,7 +15,7 @@ class OtherStatisticsForm extends BackableForm {
         $data = PlayerDataPool::getDataByName($receiver);
         $breaks = 0;
         $places = 0;
-        foreach (PlayerDataPool::getAll() as $total){
+        foreach (PlayerDataPool::getAll() as $total) {
             $break = $total->getBlockBreaks();
             $place = $total->getBlockPlaces();
             $breaks = $breaks + $break;

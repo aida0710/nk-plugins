@@ -20,13 +20,10 @@ class BlockEntityChest extends Chest {
         parent::checkPairing();
         $pair = $this->getPair();
         if ($pair === null) return;
-
         $inventory = $this->doubleInventory;
         if (!$inventory instanceof DoubleChestInventory || $inventory instanceof WrappedDoubleChestInventory) return;
-
         $inventory = $pair->doubleInventory;
         if (!$inventory instanceof DoubleChestInventory || $inventory instanceof WrappedDoubleChestInventory) return;
-
         $inventory = new WrappedDoubleChestInventory($inventory->getLeftSide(), $inventory->getRightSide());
         $this->doubleInventory = $inventory;
         $pair->doubleInventory = $inventory;

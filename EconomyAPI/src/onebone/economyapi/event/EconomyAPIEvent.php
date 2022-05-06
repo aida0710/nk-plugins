@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -20,23 +19,20 @@
 
 namespace onebone\economyapi\event;
 
+use onebone\economyapi\EconomyAPI;
+use pocketmine\event\Cancellable;
 use pocketmine\event\CancellableTrait;
 use pocketmine\event\plugin\PluginEvent;
-use pocketmine\event\Cancellable;
 
-use onebone\economyapi\EconomyAPI;
+class EconomyAPIEvent extends PluginEvent implements Cancellable {
 
-class EconomyAPIEvent extends PluginEvent implements Cancellable
-{
     use CancellableTrait;
 
-    public function __construct(EconomyAPI $plugin, private $issuer)
-    {
+    public function __construct(EconomyAPI $plugin, private $issuer) {
         parent::__construct($plugin);
     }
 
-    public function getIssuer()
-    {
+    public function getIssuer() {
         return $this->issuer;
     }
 }

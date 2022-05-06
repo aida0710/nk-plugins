@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\populator\impl\TallGrassPopulator;
@@ -28,14 +26,13 @@ use pocketmine\block\utils\TreeType;
 
 class ExtremeHillsEdge extends ExtremeHills {
 
-	public function __construct() {
-		parent::__construct();
+    public function __construct() {
+        parent::__construct();
+        $this->clearPopulators();
+        $this->addPopulators([new TallGrassPopulator(10, 5), new TreePopulator(1, 1, 100, TreeType::SPRUCE()), new TreePopulator(0, 1)]);
+    }
 
-		$this->clearPopulators();
-		$this->addPopulators([new TallGrassPopulator(10, 5), new TreePopulator(1, 1, 100, TreeType::SPRUCE()), new TreePopulator(0, 1)]);
-	}
-
-	public function getName(): string {
-		return "Extreme Hills Edge";
-	}
+    public function getName(): string {
+        return "Extreme Hills Edge";
+    }
 }

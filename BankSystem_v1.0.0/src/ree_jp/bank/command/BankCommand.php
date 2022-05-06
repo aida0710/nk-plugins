@@ -16,7 +16,7 @@ class BankCommand extends Command {
     function __construct(string $name = "bank", string $description = "銀行システム", string $usageMessage = null, array $aliases = []) {
         $overloads = [
             [
-                CommandParameter::enum("bankMode",new CommandEnum("bankMode", ["ranking", "create", "delete", "log", "put", "out", "share", "transfer"]), AvailableCommandsPacket::ARG_TYPE_STRING, true),
+                CommandParameter::enum("bankMode", new CommandEnum("bankMode", ["ranking", "create", "delete", "log", "put", "out", "share", "transfer"]), AvailableCommandsPacket::ARG_TYPE_STRING, true),
                 CommandParameter::standard("bank", AvailableCommandsPacket::ARG_TYPE_STRING),
                 CommandParameter::standard("money", AvailableCommandsPacket::ARG_TYPE_INT),
             ],

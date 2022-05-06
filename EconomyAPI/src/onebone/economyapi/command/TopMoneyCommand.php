@@ -1,5 +1,4 @@
 <?php
-
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -20,34 +19,25 @@
 
 namespace onebone\economyapi\command;
 
+use onebone\economyapi\EconomyAPI;
+use onebone\economyapi\task\SortTask;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 
-use onebone\economyapi\EconomyAPI;
-use onebone\economyapi\task\SortTask;
+class TopMoneyCommand extends Command {
 
-class TopMoneyCommand extends Command
-{
-
-    public function __construct(private EconomyAPI $plugin)
-    {
+    public function __construct(private EconomyAPI $plugin) {
         $desc = $plugin->getCommandMessage("topmoney");
         parent::__construct("topmoney", $desc["description"], $desc["usage"]);
-
         $this->setPermission("economyapi.command.topmoney");
-
         $this->plugin = $plugin;
     }
 
-    public function execute(CommandSender $sender, string $label, array $params): bool
-    {
+    public function execute(CommandSender $sender, string $label, array $params): bool {
         if (!$this->plugin->isEnabled()) return false;
         if (!$this->testPermission($sender)) return false;
-
         $page = (int)array_shift($params);
-
         $server = $this->plugin->getServer();
-
         $banned = [];
         foreach ($server->getNameBans()->getEntries() as $entry) {
             if ($this->plugin->accountExists($entry->getName())) {
@@ -60,7 +50,6 @@ class TopMoneyCommand extends Command
                 $ops[] = $op;
             }
         }
-
         $task = new SortTask($sender->getName(), $this->plugin->getAllMoney(), $this->plugin->getConfig()->get("add-op-at-rank"), $page, $ops, $banned);
         $server->getAsyncPool()->submitTask($task);
         return true;

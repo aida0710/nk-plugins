@@ -24,7 +24,6 @@ class Button implements SimpleFormElement, ModalFormElement {
     }
 
     public function handleSubmit(Player $player): void {
-
     }
 
     /**

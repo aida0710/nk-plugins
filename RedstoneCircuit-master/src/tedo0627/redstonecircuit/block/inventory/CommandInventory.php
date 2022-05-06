@@ -9,6 +9,7 @@ use pocketmine\network\mcpe\protocol\types\inventory\WindowTypes;
 use pocketmine\world\Position;
 
 class CommandInventory extends SimpleInventory implements BlockInventory, IWindowType {
+
     use BlockInventoryTrait;
 
     public function __construct(Position $holder) {

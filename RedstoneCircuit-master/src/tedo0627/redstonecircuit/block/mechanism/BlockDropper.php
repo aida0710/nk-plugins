@@ -13,14 +13,12 @@ class BlockDropper extends BlockDispenser {
     public function onScheduledUpdate(): void {
         $tile = $this->getPosition()->getWorld()->getTile($this->getPosition());
         if (!$tile instanceof BlockEntityDispenser) return;
-
         $inventory = $tile->getInventory();
         $slot = $inventory->getRandomSlot();
         if ($slot === -1) {
             $this->getPosition()->getWorld()->addSound($this->getPosition(), new ClickFailSound(1.2));
             return;
         }
-
         $item = $inventory->getItem($slot);
         $side = $this->getSide($this->getFacing());
         $tile = $this->getPosition()->getWorld()->getTile($side->getPosition());
@@ -33,7 +31,6 @@ class BlockDropper extends BlockDispenser {
             }
             return;
         }
-
         $result = $this->dispense($item);
         $inventory->setItem($slot, $item);
         if ($result !== null) $inventory->addItem($result);

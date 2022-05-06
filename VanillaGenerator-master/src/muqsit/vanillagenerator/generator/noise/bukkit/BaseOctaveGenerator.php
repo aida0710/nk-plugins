@@ -1,10 +1,9 @@
 <?php
 
 declare(strict_types=1);
-
 namespace muqsit\vanillagenerator\generator\noise\bukkit;
 
-abstract class BaseOctaveGenerator{
+abstract class BaseOctaveGenerator {
 
 	/** @var NoiseGenerator[] */
 	protected array $octaves;
@@ -16,7 +15,7 @@ abstract class BaseOctaveGenerator{
 	/**
 	 * @param NoiseGenerator[] $octaves
 	 */
-	protected function __construct(array $octaves){
+	protected function __construct(array $octaves) {
 		$this->octaves = $octaves;
 	}
 
@@ -28,7 +27,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @param float $scale New value to scale each coordinate by
 	 */
-	public function setScale(float $scale) : void{
+	public function setScale(float $scale): void {
 		$this->setXScale($scale);
 		$this->setYScale($scale);
 		$this->setZScale($scale);
@@ -39,7 +38,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @return float X scale
 	 */
-	public function getXScale() : float{
+	public function getXScale(): float {
 		return $this->x_scale;
 	}
 
@@ -48,7 +47,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @param float $scale New X scale
 	 */
-	public function setXScale(float $scale) : void{
+	public function setXScale(float $scale): void {
 		$this->x_scale = $scale;
 	}
 
@@ -57,7 +56,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @return float Y scale
 	 */
-	public function getYScale() : float{
+	public function getYScale(): float {
 		return $this->y_scale;
 	}
 
@@ -66,7 +65,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @param float $scale New Y scale
 	 */
-	public function setYScale(float $scale) : void{
+	public function setYScale(float $scale): void {
 		$this->y_scale = $scale;
 	}
 
@@ -75,7 +74,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @return float Z scale
 	 */
-	public function getZScale() : float{
+	public function getZScale(): float {
 		return $this->z_scale;
 	}
 
@@ -84,7 +83,7 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @param float $scale New Z scale
 	 */
-	public function setZScale(float $scale) : void{
+	public function setZScale(float $scale): void {
 		$this->z_scale = $scale;
 	}
 
@@ -93,12 +92,11 @@ abstract class BaseOctaveGenerator{
 	 *
 	 * @return NoiseGenerator[] clone of the individual octaves
 	 */
-	public function getOctaves() : array{
+	public function getOctaves(): array {
 		$octaves = [];
-		foreach($this->octaves as $key => $value){
+		foreach ($this->octaves as $key => $value) {
 			$octaves[$key] = clone $value;
 		}
-
 		return $octaves;
 	}
 }

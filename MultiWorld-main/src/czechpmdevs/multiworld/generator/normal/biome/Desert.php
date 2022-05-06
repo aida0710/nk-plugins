@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
  * Copyright (C) 2018 - 2022  CzechPMDevs
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\generator\normal\biome;
 
 use czechpmdevs\multiworld\generator\normal\biome\types\SandyBiome;
@@ -30,20 +28,16 @@ use pocketmine\block\VanillaBlocks;
 
 class Desert extends SandyBiome {
 
-	public function __construct() {
-		parent::__construct(2.0, 0.0);
+    public function __construct() {
+        parent::__construct(2.0, 0.0);
+        $cactus = new CactusPopulator(4, 3);
+        $deadBush = new PlantPopulator(4, 2);
+        $deadBush->addPlant(new Plant(VanillaBlocks::DEAD_BUSH(), [VanillaBlocks::SAND()]));
+        $this->addPopulators([$cactus, $deadBush]);
+        $this->setElevation(63, 69);
+    }
 
-		$cactus = new CactusPopulator(4, 3);
-
-		$deadBush = new PlantPopulator(4, 2);
-		$deadBush->addPlant(new Plant(VanillaBlocks::DEAD_BUSH(), [VanillaBlocks::SAND()]));
-
-		$this->addPopulators([$cactus, $deadBush]);
-
-		$this->setElevation(63, 69);
-	}
-
-	public function getName(): string {
-		return "Desert";
-	}
+    public function getName(): string {
+        return "Desert";
+    }
 }
