@@ -101,13 +101,6 @@ class TicketAPI {
         } else return false;
     }
 
-    /*
-     * 判定方式
-     * 0は何もなし
-     * 1以上は成功
-     *
-     * boolは使用すると判定処理がだるくなるのでこれでゆるちて、、
-     * */
     public function replaceInventoryTicket(Player $player): int {
         $inventory = $player->getInventory();
         $count = 0;
