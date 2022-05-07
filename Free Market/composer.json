@@ -1,8 +1,0 @@
-{
-    "name": "nkserver/nkserver-plugins",
-    "description": "NKServer plugins for pm4",
-    "minimum-stability": "stable",
-    "require": {
-        "pocketmine/pocketmine-mp": "4.1.*"
-    }
-}
