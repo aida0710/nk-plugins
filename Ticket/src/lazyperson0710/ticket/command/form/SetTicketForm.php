@@ -39,6 +39,10 @@ class SetTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
+        if ($this->int->getValue() === "") {
+                $player->sendMessage("§bTicket §7>> §a設定値を入力してください");
+            return;
+        }
         $int = TicketAPI::getInstance()->setTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
         $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚に設定しました");
     }
