@@ -40,7 +40,11 @@ class SetTicketForm extends CustomForm {
             return;
         }
         if ($this->int->getValue() === "") {
-                $player->sendMessage("§bTicket §7>> §a設定値を入力してください");
+            $player->sendMessage("§bTicket §7>> §a設定値を入力してください");
+            return;
+        }
+        if (is_numeric($this->int->getValue()) === false) {
+            $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
             return;
         }
         $int = TicketAPI::getInstance()->setTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());

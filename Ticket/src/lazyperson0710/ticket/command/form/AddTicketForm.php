@@ -43,6 +43,10 @@ class addTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §a増加分を入力してください");
             return;
         }
+        if (is_numeric($this->int->getValue()) === false) {
+            $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
+            return;
+        }
         $int = TicketAPI::getInstance()->addTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
         $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚に増やしました");
     }
