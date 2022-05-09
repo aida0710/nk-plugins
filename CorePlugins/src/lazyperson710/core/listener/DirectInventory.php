@@ -9,24 +9,21 @@ use ree_jp\stackstorage\api\StackStorageAPI;
 class DirectInventory implements Listener {
 
     /**
-     * @param BlockBreakEvent $ev
+     * @param BlockBreakEvent $event
      * @priority HIGH
-     * @ignoreCancelled
      */
-    public function onBreak(BlockBreakEvent $ev) {
-        $drops = $ev->getDrops();
-        $p = $ev->getPlayer();
-        $nbt = $ev->getItem()->getNamedTag();
-        //if (!$nbt->getTag("mining")) {
-        $ev->setDrops([]);
+    public function onBreak(BlockBreakEvent $event) {
+        if ($event->isCancelled()) return;
+        $drops = $event->getDrops();
+        $player = $event->getPlayer();
+        $event->setDrops([]);
         foreach ($drops as $item) {
-            if ($p->getInventory()->canAddItem($item)) {
-                $p->getInventory()->addItem($item);
+            if ($player->getInventory()->canAddItem($item)) {
+                $player->getInventory()->addItem($item);
             } else {
-                StackStorageAPI::$instance->add($p->getXuid(), $item);
-                $p->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item . "が倉庫にしまわれました");
+                StackStorageAPI::$instance->add($player->getXuid(), $item);
+                $player->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました");
             }
         }
-        //}
     }
 }
