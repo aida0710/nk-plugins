@@ -39,7 +39,18 @@ class ReduceTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
-        $int = TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
-        $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚減らしました");
+        if ($this->int->getValue() === "") {
+            $player->sendMessage("§bTicket §7>> §a減算分を入力してください");
+            return;
+        }
+        if (is_numeric($this->int->getValue()) === false) {
+            $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
+            return;
+        }
+        if (TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue()) === false) {
+            $player->sendMessage("§bTicket §7>> §c{$playerName}のTicketを減らせませんでした");
+        } else {
+            $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$this->int->getValue()}枚減らしました");
+        }
     }
 }
