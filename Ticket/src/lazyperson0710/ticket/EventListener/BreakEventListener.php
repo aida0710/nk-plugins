@@ -36,18 +36,6 @@ class BreakEventListener implements Listener {
             $random = rand(1, 5000);
             if ($random === 5000) {
                 TicketAPI::getInstance()->addTicket($player, 1);
-                /*$ticket = ItemFactory::getInstance()->get(465);
-                $ticket->setCustomName("なんか運がいいと思うTicket(?)");
-                $ticket->setLore([
-                    "lore1" => "常設イベント専用ガチャチケット",
-                    "lore2" => "/gatyaでガチャを引いてみよう！",
-                ]);
-                if ($player->getInventory()->canAddItem($ticket)) {
-                    $player->getInventory()->addItem($ticket);
-                } else {
-                    $player->getWorld()->dropItem($player->getPosition(), $ticket);
-                    $player->sendMessage("§bTicket §7>> §aインベントリに空きが無いためTicketはドロップされました");
-                }*/
                 Server::getInstance()->broadcastMessage("§bTicket §7>> §eTicketを{$player->getName()}がゲットしました！確率:1/5000");
             }
         }
