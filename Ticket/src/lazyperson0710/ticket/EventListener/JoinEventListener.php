@@ -17,7 +17,7 @@ class JoinEventListener implements Listener {
         if (TicketAPI::getInstance()->exists($player) !== true) {
             TicketAPI::getInstance()->createData($event->getPlayer());
         }
-        if ((TicketAPI::getInstance()->replaceInventoryTicket($player) || TicketAPI::getInstance()->replaceStackStorageTicket($player)) === true) {
+        if ((TicketAPI::getInstance()->replaceInventoryTicket($player) + TicketAPI::getInstance()->replaceStackStorageTicket($player)) >= 1) {
             $player->sendMessage("§bTicket §7>> §aチケットの変換処理を実行しました");
         }
     }
