@@ -66,42 +66,39 @@ class TicketAPI {
     }
 
     public function containsTicket(Player $player, int $amount): bool {
-        if ($this->exists($player) === true) {
-            if ($this->checkData($player) <= $amount) {
-                return true;
-            } else return false;
+        if ($this->exists($player) === false) return false;
+        if ($this->checkData($player) <= $amount) {
+            return true;
         } else return false;
     }
 
     public function setTicket(Player $player, int $setInt): bool|int {
-        if ($this->exists($player) === true) {
-            $this->cache[$player->getName()] = $setInt;
-            return $setInt;
-        } else return false;
+        if ($this->exists($player) === false) return false;
+        $this->cache[$player->getName()] = $setInt;
+        return $setInt;
     }
 
     public function addTicket(Player $player, int $increase): bool|int {
-        if ($this->exists($player) === true) {
-            $int = $this->cache[$player->getName()];
-            $increase += $int;
-            $this->cache[$player->getName()] = $increase;
-            return $increase;
-        } else return false;
+        if ($this->exists($player) === false) return false;
+        $int = $this->cache[$player->getName()];
+        $result = $increase + $int;
+        $this->cache[$player->getName()] = $result;
+        return $result;
     }
 
     public function reduceTicket(Player $player, int $reduce): bool|int {
-        if ($this->exists($player) === true) {
-            $int = $this->cache[$player->getName()];
-            $reduce -= $int;
-            if ($reduce <= 0) {
-                $reduce = 0;
-            }
-            $this->cache[$player->getName()] = $reduce;
-            return $reduce;
+        if ($this->exists($player) === false) return false;
+        if ($reduce <= 0) return false;
+        $int = $this->cache[$player->getName()];
+        $result = $int - $reduce;
+        if ($result >= 0) {
+            $this->cache[$player->getName()] = $result;
+            return $result;
         } else return false;
     }
 
     public function replaceInventoryTicket(Player $player): int {
+        if ($this->exists($player) === false) return 0;
         $inventory = $player->getInventory();
         $count = 0;
         for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
@@ -116,6 +113,7 @@ class TicketAPI {
     }
 
     public function replaceStackStorageTicket(Player $player): int {
+        if ($this->exists($player) === false) return 0;
         StackStorageAPI::$instance->getCount($player->getXuid(), clone VanillaItems::NAUTILUS_SHELL(), function (int $stCount) use ($player) {
             if ($stCount <= 0) return 0;
             $item = clone VanillaItems::NAUTILUS_SHELL();
