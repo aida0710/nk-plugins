@@ -23,6 +23,6 @@ class Main extends PluginBase {
     }
 
     protected function onDisable(): void {
-        TicketAPI::getInstance()->save();
+        TicketAPI::getInstance()->dataSave();
     }
 }

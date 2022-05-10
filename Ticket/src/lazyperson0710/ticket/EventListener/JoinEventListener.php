@@ -14,7 +14,7 @@ class JoinEventListener implements Listener {
      */
     public function onJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
-        if (TicketAPI::getInstance()->exists($player) !== true) {
+        if (TicketAPI::getInstance()->dataExists($player) !== true) {
             TicketAPI::getInstance()->createData($event->getPlayer());
         }
         if ((TicketAPI::getInstance()->replaceInventoryTicket($player) + TicketAPI::getInstance()->replaceStackStorageTicket($player)) >= 1) {

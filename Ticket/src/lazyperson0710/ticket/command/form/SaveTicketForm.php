@@ -18,7 +18,7 @@ class SaveTicketForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        if (TicketAPI::getInstance()->save() === true) {
+        if (TicketAPI::getInstance()->dataSave() === true) {
             $player->sendMessage("Ticketデータをセーブしました");
         } else {
             $player->sendMessage("Ticketデータのセーブに失敗しました");
