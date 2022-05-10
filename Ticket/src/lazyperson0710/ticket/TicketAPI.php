@@ -152,4 +152,19 @@ class TicketAPI {
         });
         return 0;
     }
+
+    /*
+     * 0未満のデータエラーを防ぐ
+     * 0以上だった場合は1を返す
+     * 0未満の場合(-1)は0を返して値を0にセット
+     * データが存在しない場合は3を返す
+     * */
+    public function checkDataCount(Player $player): int {
+        if ($this->dataExists($player) === false) return 3;
+        if ($this->cache[$player->getName()] < 0) {
+            $this->cache[$player->getName()] = 0;
+            return 0;
+        } else return 1;
+    }
+    //ticketを譲渡する機能良いよね
 }
