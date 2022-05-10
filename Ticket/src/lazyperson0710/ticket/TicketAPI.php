@@ -79,6 +79,11 @@ class TicketAPI {
         return $setInt;
     }
 
+    /*
+     * ticketの数を増やす
+     * データが存在しない場合はfalseを返す//intだけに絞ってもいいかも
+     *
+     * */
     public function addTicket(Player $player, int $increase): bool|int {
         if ($this->dataExists($player) === false) return false;
         $int = $this->cache[$player->getName()];
@@ -87,6 +92,13 @@ class TicketAPI {
         return $result;
     }
 
+    /*
+     * ticketの数を減らす
+     * データが存在しない場合はfalseを返す//intだけに絞ってもいいかも
+     * 指定値が0以下の場合もfalseを返す
+     * 結果の値が0以下の場合は0で返却する
+     * 正常に動作した場合は1以上の数字を返す
+     * */
     public function reduceTicket(Player $player, int $reduce): bool|int {
         if ($this->dataExists($player) === false) return false;
         if ($reduce <= 0) return false;
@@ -101,6 +113,11 @@ class TicketAPI {
         }
     }
 
+    /*
+     * inventory内のticket置換
+     * 変換できる個数を最終的に返す為、受け取り側は0か1以上で判断して欲しいです
+     * また、データが存在しない場合も0を返す
+     * */
     public function replaceInventoryTicket(Player $player): int {
         if ($this->dataExists($player) === false) return 0;
         $inventory = $player->getInventory();
@@ -116,6 +133,11 @@ class TicketAPI {
         return $count;
     }
 
+    /*
+     * stackStorageのticket置換
+     * 変換できる個数を最終的に返す為、受け取り側は0か1以上で判断して欲しいです
+     * また、データが存在しない場合も0を返す
+     * */
     public function replaceStackStorageTicket(Player $player): int {
         if ($this->dataExists($player) === false) return 0;
         StackStorageAPI::$instance->getCount($player->getXuid(), clone VanillaItems::NAUTILUS_SHELL(), function (int $stCount) use ($player) {
