@@ -25,7 +25,7 @@ class Main extends PluginBase {
         ##TestEventListener
         $manager->registerEvents(new TestListener(), $this);
         ##task
-        $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 20);
+        $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 15);
         ##allTools
         $manager->registerEvents(new OldTools(), $this);
         $manager->registerEvents(new TreasureDiscoveryTools(), $this);
