@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\ticket;
 
+use JetBrains\PhpStorm\Pure;
 use JsonException;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
@@ -94,7 +95,10 @@ class TicketAPI {
         if ($result >= 0) {
             $this->cache[$player->getName()] = $result;
             return $result;
-        } else return false;
+        } else {
+            $this->cache[$player->getName()] = 0;
+            return 0;
+        }
     }
 
     public function replaceInventoryTicket(Player $player): int {
