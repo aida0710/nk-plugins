@@ -11,7 +11,8 @@ use pocketmine\Server;
 class ItemEditCommand extends Command {
 
     public function __construct() {
-        parent::__construct("edit", "ItemEditCommand");
+        parent::__construct("edit", "ItemEditor");
+        $this->setPermission("itemEditor.command.edit");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
