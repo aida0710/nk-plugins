@@ -1,4 +1,4 @@
-# MultiTypeEffects
+## MultiTypeEffects
 
 1. [x] 窓一郎の炯眼 NightVisionPickaxe || **MultiType** つるはし、しゃべる、おの<br>
    持っていると暗視がつくだけ
@@ -16,8 +16,10 @@
    持っていると耐火がつく、アイテム化しても燃えない
 7. [x] 重いつるはし HeavyPickaxe || **MultiType** つるはし、しゃべる、おの<br>
    ただ鈍足と採掘低下エフェクトがつくだけ
+8. [x] 破壊は芸術だ！ ExplosionTools || **MultiType** つるはし、しゃべる、おの<br>
+   採掘時に爆発する。1/10の確率でダメージを食らう
 
-# つるはし
+## つるはし
 
 1. [x] アルケミピッケル AlchemyPickaxe<br>
    丸石または焼き石を掘っていても確率で鉱石が手に入る
@@ -32,7 +34,7 @@
 6. [x] おもちゃのつるはし ToyPickaxe<br>
    ヘイストが付与するだけ
 
-# 斧
+## 斧
 
 1. [ ] Here's johnny! Here'sJohnny!<br>
    ドア系を一撃で壊せる。インタラクトイベントでonbreakさせたい
@@ -46,7 +48,7 @@
 5. [ ] 満福の斧<br>
    持っていると空腹度が回復する。ただし、途轍もない勢いで耐久が削れる。50/s
 
-# シャベル
+## シャベル
 
 1. [x] ポイズンシャベル<br>
    使うと確率で毒と空腹になる。1/150
@@ -70,3 +72,8 @@
    `if (EconomyLand::getInstance()->permissionCheck($event) === false) return;`
 6. [ ] 招雷のクワ / **実装方法がわからない**<br>
    使うと雷が落ちる
+
+## その他
+
+1. [ ] AirBlock <br>
+   空中に設置できるブロック(要検証段階)
