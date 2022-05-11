@@ -15,7 +15,11 @@ class UnbreakableForm extends CustomForm {
     public function __construct(Player $player) {
         $itemInHand = $player->getInventory()->getItemInHand();
         if (!($itemInHand instanceof Durable)) {
-            $player->sendMessage("そのアイテムには適用できません");
+            $this
+            ->setTitle("Item Edit")
+            ->addElements(
+                new Label("現在所持しているアイテムは道具ではありません"),
+            );
             return;
         }
         if ($itemInHand->isUnbreakable()){
@@ -32,10 +36,7 @@ class UnbreakableForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         $itemInHand = $player->getInventory()->getItemInHand();
-        if (!($itemInHand instanceof Durable)) {
-            $player->sendMessage("そのアイテムには適用できません");
-            return;
-        }
+        if (!($itemInHand instanceof Durable)) return;
         if ($this->setUnbreakable->getValue() === true) {
             $itemInHand->setUnbreakable(true);
             $player->sendMessage("耐久が無限に変更されました");
