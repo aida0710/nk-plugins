@@ -3,6 +3,7 @@
 namespace lazyperson710\itemEdit\form;
 
 use bbo51dog\bboform\element\Input;
+use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use pocketmine\player\Player;
 
@@ -28,6 +29,7 @@ class ItemEditForm extends CustomForm {
         $this
             ->setTitle("Item Edit")
             ->addElements(
+                new Label("入力しない場合は変更されません"),
                 $this->setName,
                 $this->setLore,
                 $this->setCount,
