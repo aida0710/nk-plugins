@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems;
 
+use lazyperson0710\EffectItems\tools\all\ExplosionTools;
 use lazyperson0710\EffectItems\tools\all\OldTools;
 use lazyperson0710\EffectItems\tools\all\TreasureDiscoveryTools;
 use lazyperson0710\EffectItems\tools\others\AirBlock;
@@ -29,6 +30,7 @@ class Main extends PluginBase {
         ##allTools
         $manager->registerEvents(new OldTools(), $this);
         $manager->registerEvents(new TreasureDiscoveryTools(), $this);
+        $manager->registerEvents(new ExplosionTools(), $this);
         ##others
         $manager->registerEvents(new AirBlock(), $this);
         ##pickaxe
