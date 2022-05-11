@@ -6,6 +6,7 @@ use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
+use lazyperson710\core\particle\ParticleTask;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Armor;
@@ -19,10 +20,12 @@ use pocketmine\Server;
 
 class Main extends PluginBase {
 
+    private static Main $main;
     const ITEM_TURTLE_HELMET = 469;
     const ITEM_GRIND_STONE = -195;
 
     public function onEnable(): void {
+        self::$main = $this;
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 20);
         foreach (scandir("worlds/") as $value) {
             if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
@@ -52,12 +55,17 @@ class Main extends PluginBase {
         ]);
         $this->getScheduler()->scheduleDelayedTask(new TaskScheduler, 60);
         $this->getScheduler()->scheduleRepeatingTask(new TimeScheduler, 20);
+        $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         StringToItemParser::getInstance()->register('grindstone', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         ItemFactory::getInstance()->register(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
         StringToItemParser::getInstance()->register('turtle_helmet', fn(string $input) => new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
         CreativeInventory::getInstance()->add(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
+    }
+
+    public static function getInstance(): Main {
+        return self::$main;
     }
 
 }
