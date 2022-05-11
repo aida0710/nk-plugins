@@ -2,6 +2,7 @@
 
 namespace lazyperson710\itemEdit\form;
 
+use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use pocketmine\item\Durable;
@@ -11,11 +12,20 @@ class UnbreakableForm extends CustomForm {
 
     private Toggle $setUnbreakable;
 
-    public function __construct() {
+    public function __construct(Player $player) {
+        $itemInHand = $player->getInventory()->getItemInHand();
+        if (!($itemInHand instanceof Durable)) {
+            $player->sendMessage("そのアイテムには適用できません");
+            return;
+        }
+        if ($itemInHand->isUnbreakable()){
+            $isUnbreakable = "現在所持しているアイテムは耐久が無限です";
+        } else $isUnbreakable = "現在所持しているアイテムは耐久が有限です";
         $this->setUnbreakable = new Toggle("耐久を有限/無限に変更");
         $this
             ->setTitle("Item Edit")
             ->addElements(
+                new Label($isUnbreakable),
                 $this->setUnbreakable,
             );
     }
