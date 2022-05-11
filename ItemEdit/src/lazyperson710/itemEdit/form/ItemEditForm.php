@@ -47,7 +47,7 @@ class ItemEditForm extends CustomForm {
             if (!preg_match('/^[0-9]+$/', $this->setCount->getValue())) {
                 $player->sendMessage("setCount -> 整数のみで入力してください");
             } elseif ($this->setCount->getValue() >= 65) {
-                $player->sendMessage("setCount -> 64以上は指定できません");
+                $player->sendMessage("setCount -> 65以上は指定できません");
             } else {
                 $itemInHand->setCount($this->setCount->getValue());
                 $player->getInventory()->setItemInHand($itemInHand);
