@@ -3,6 +3,7 @@
 namespace lazyperson710\core;
 
 use onebone\economyapi\EconomyAPI;
+use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\player\Player;
@@ -26,15 +27,28 @@ class TimeScheduler extends Task {
         }
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
             if (!Server::getInstance()->isOp($player->getName())) {
+                if ($player->getHungerManager()->getFood() === $player->getHungerManager()->getMaxFood()) {
+                    $effect = new EffectInstance(VanillaEffects::REGENERATION(), 60, 1, false);
+                    $vanillaEffect = VanillaEffects::REGENERATION();
+                    $this->addEffect($player, $effect, $vanillaEffect);
+                }
+                if ($player->getHungerManager()->getFood() >= 10) {
+                    $effect = new EffectInstance(VanillaEffects::SPEED(), 60, 0, false);
+                    $vanillaEffect = VanillaEffects::SPEED();
+                    $this->addEffect($player, $effect, $vanillaEffect);
+                }
                 if ($player->getHungerManager()->getFood() <= 6) {
                     $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 40, 0, false);
-                    $player->getEffects()->add($effect);
+                    $vanillaEffect = VanillaEffects::SLOWNESS();
+                    $this->addEffect($player, $effect, $vanillaEffect);
                 }
                 if ($player->getHungerManager()->getFood() <= 3) {
                     $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 40, 0, false);
-                    $player->getEffects()->add($effect);
+                    $vanillaEffect = VanillaEffects::SLOWNESS();
+                    $this->addEffect($player, $effect, $vanillaEffect);
                     $effect = new EffectInstance(VanillaEffects::MINING_FATIGUE(), 40, 0, false);
-                    $player->getEffects()->add($effect);
+                    $vanillaEffect = VanillaEffects::MINING_FATIGUE();
+                    $this->addEffect($player, $effect, $vanillaEffect);
                 }
             }
             switch ($count) {
@@ -69,6 +83,15 @@ class TimeScheduler extends Task {
                 EconomyAPI::getInstance()->addMoney($player, 5);
                 Server::getInstance()->broadcastPopup($bonus);
             }
+        }
+    }
+
+    private function addEffect(Player $player, EffectInstance $effect, Effect $vanillaEffects) {
+        $effectInstance = $player->getEffects()->get($vanillaEffects);
+        if ($effectInstance === null) {
+            $player->getEffects()->add($effect);
+        } elseif ($effectInstance->getDuration() < 499) {
+            $player->getEffects()->add($effect);
         }
     }
 
