@@ -16,22 +16,17 @@ class FlyForm extends CustomForm {
 
     public function __construct() {
         $this->count = new Input(
-            "売却したい土地の名前を入力してください\n自分の持っている土地は/land whoseか/land hereから調べることが可能です",
+            "分数を入力してください",
             "例: 1",
         );
         $this->infinity = new Toggle("無制限にする");
         $this
             ->setTitle("Fly Mode")
             ->addElements(
-                new Label("フライ継続中は落下ダメージが消えます\n無制限にした場合秒数は無視されます"),
+                new Label("フライ継続中は落下ダメージが消えます\n無制限にした場合分数は無視されます\n\n毎分1500円づつ消費します\nまた、途中でやめたい場合は/fly endと入力してください"),
                 $this->count,
                 $this->infinity,
             );
-    }
-
-    public function handleClosed(Player $player): void {
-        $player->sendForm(new LandForm($player));
-        return;
     }
 
     public function handleSubmit(Player $player): void {
@@ -42,14 +37,16 @@ class FlyForm extends CustomForm {
         if ($this->count->getValue() === "") {
             $player->sendMessage("§bFlyMode §7>> §c持続時間(分)を入力してください");
             return;
-        } elseif (!preg_match('/^[0-9]+$/', $this->count->getValue())) {
+        }
+        if (is_numeric($this->count->getValue()) === false){
             $player->sendMessage("§bFlyMode §7>> §c持続時間は数字で入力してください");
+            return;
+        }
+        if  ($this->count->getValue() >= 0) {
+            $player->sendMessage("§bFlyMode §7>> §c持続時間は1分以上で入力してください");
             return;
         }
         $this->FlyTaskExecution($player, $this->infinity->getValue(), $this->count->getValue());
     }
 
-    private function FlyTaskExecution(Player $player, bool $infinity, ?int $time = null) {
-        //$infinityがtrueの場合は無制限、falseは有限のため$timeの分数を代わりに使用
-    }
 }

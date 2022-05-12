@@ -6,7 +6,9 @@ use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
-use lazyperson710\core\particle\ParticleTask;
+use lazyperson710\core\task\FlyCheckTask;
+use lazyperson710\core\task\ParticleTask;
+use lazyperson710\sff\command\FlyCommand;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Armor;
@@ -52,10 +54,12 @@ class Main extends PluginBase {
             new DiceCommand(),
             new InvCommand(),
             new BookCommand(),
+            new FlyCommand(),
         ]);
         $this->getScheduler()->scheduleDelayedTask(new TaskScheduler, 60);
         $this->getScheduler()->scheduleRepeatingTask(new TimeScheduler, 20);
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
+        $this->getScheduler()->scheduleRepeatingTask(new FlyCheckTask(), 1200);
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         StringToItemParser::getInstance()->register('grindstone', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
