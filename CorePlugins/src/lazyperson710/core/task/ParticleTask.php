@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\core\particle;
+namespace lazyperson710\core\task;
 
 use pocketmine\color\Color;
 use pocketmine\scheduler\Task;
