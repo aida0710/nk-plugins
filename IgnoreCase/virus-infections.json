@@ -1,0 +1,23 @@
+{
+    "kim\\present\\ignorecase\\libs\\kim\\present\\traits\\removeplugindatadir": {
+        "name": "remove-plugin-data-dir-trait",
+        "antigen": "kim\\present\\traits\\removeplugindatadir",
+        "version": "1.0.0",
+        "api": "4.0.0",
+        "authors": [
+            "PresentKim"
+        ],
+        "description": "Traits to remove unused plugin data directory",
+        "build": {
+            "builder": "PoggitCI\/1.0-beta\/beta poggit-virion\/1.0",
+            "builderName": "poggit",
+            "buildTime": "2022-05-06T02:03:28+00:00",
+            "poggitBuildId": 132231,
+            "buildClass": "Dev",
+            "projectId": 11078,
+            "projectBuildNumber": 2,
+            "fromCommit": "e5f9d38b767060c7f2c386119fcc727f684d81b0",
+            "poggitResourceId": 174319
+        }
+    }
+}
