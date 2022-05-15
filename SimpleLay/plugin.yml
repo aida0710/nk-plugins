@@ -1,0 +1,24 @@
+---
+name: SimpleLay
+main: brokiem\simplelay\SimpleLay
+version: 3.0.1
+api:
+  - 4.0.0
+author: brokiem
+commands:
+  sittoggle:
+    description: タップしたときに座るか座らないかを切り替えられます
+    permission: simplelay.sittoggle
+    usage: /sittoggle
+  skick:
+    description: プレイヤーを座ってる状態から解除します
+    permission: simplelay.skick
+    usage: /skick <player>
+permissions:
+  simplelay.sittoggle:
+    default: true
+    description: permission to allow the use of sittoggle command
+  simplelay.skick:
+    default: op
+    description: permission to allow the use of skick command
+...
