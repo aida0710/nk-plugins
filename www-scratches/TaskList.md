@@ -77,3 +77,5 @@
 ## 公開時にやること
 
 1. あさぽんワールド削除
+2. invseeのconfigファイル編集
+3. lobbyのParticleサイズ確認
