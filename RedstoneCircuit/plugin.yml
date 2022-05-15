@@ -1,0 +1,8 @@
+---
+name: RedstoneCircuit
+main: tedo0627\redstonecircuit\RedstoneCircuit
+version: 3.0.4
+api:
+  - 4.3.0
+author: tedo0627
+...
