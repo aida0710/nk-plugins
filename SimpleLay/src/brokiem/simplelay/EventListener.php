@@ -50,10 +50,12 @@ class EventListener implements Listener {
     public function onInteract(PlayerInteractEvent $event): void {
         $player = $event->getPlayer();
         $block = $event->getBlock();
-        if ($block instanceof Slab and $block->getMeta() < 6) {
-            $this->plugin->sit($player, $block);
-        } elseif ($block instanceof Stair and $block->getMeta() < 4) {
-            $this->plugin->sit($player, $block);
+        if (!$this->plugin->isToggleSit($player)) {
+            if ($block instanceof Slab and $block->getMeta() < 6) {
+                $this->plugin->sit($player, $block);
+            } elseif ($block instanceof Stair and $block->getMeta() < 4) {
+                $this->plugin->sit($player, $block);
+            }
         }
     }
 

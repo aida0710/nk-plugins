@@ -77,7 +77,7 @@ class SimpleLay extends PluginBase {
         $pk->link = new EntityLink($this->sittingData[strtolower($player->getName())]['eid'], $player->getId(), EntityLink::TYPE_REMOVE, true, true);
         unset($this->sittingData[strtolower($player->getName())]);
         $player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::RIDING, false);
-        $player->sendMessage("§bSit §7>> §c{$player->getName()}は座っていません");
+        $player->sendTip("§bSit §7>> §c{$player->getName()}は座っていません");
         $this->getServer()->broadcastPackets($this->getServer()->getOnlinePlayers(), [$pk1, $pk]);
     }
 
@@ -96,11 +96,11 @@ class SimpleLay extends PluginBase {
             }
         }
         if ($this->isSitting($player)) {
-            $player->sendMessage("§bSit §7>> §c既に椅坐位状態です");
+            $player->sendTip("§bSit §7>> §c既に椅坐位状態です");
             return;
         }
         $this->setSit($player, $this->getServer()->getOnlinePlayers(), new Position($pos->x, $pos->y, $pos->z, $this->getServer()->getWorldManager()->getWorldByName($player->getWorld()->getFolderName())));
-        $player->sendMessage("現在椅坐位状態です\n状態を解除するにはスニーク状態にしてください");
+        $player->sendTip("§bSit §7>> §c現在椅坐位状態です\n状態を解除するにはスニーク状態にしてください");
     }
 
     public function setSit(Player $player, array $viewers, Position $pos, ?int $eid = null): void {
