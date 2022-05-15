@@ -34,12 +34,9 @@
     ✔️ Simple API for other plugins
     <br><br>
 </p>
-
 ## 👍 1.7.0 Update:
-
 > - Bug fixes
 > - Update to PocketMine 4.x api
-
 ## ⬇️ Downloads:
 
 | Version     | Phar Download                                                                                                  | Zip Download                                                                                             | API                          | Stable | Pre release |
@@ -73,14 +70,11 @@
 > **Other plugins by CzechPMDevs [here](https://poggit.pmmp.io/plugins/by/CzechPMDevs)**
 
 <br>
-
 ## 📁 Supported software:
-
 **This plugin works only on PocketMine-MP.** You can
 download [MultiWorld by Creeperface](https://github.com/Creeperface01/MultiWorld) for Nukkit
 or [MultiWorld by ferrybig](https://dev.bukkit.org/projects/multiworld-v-2-0) for Bukkit. **PMMP Spoons are NOT
 supported.**
-
 ## 🔧 How to install MultiWorld?
 
 1) [Download](https://poggit.pmmp.io/p/MultiWorld) latest stable released version from poggit
@@ -141,7 +135,6 @@ changes name of the folder and of nbt too. |
 | **/mw manage**   | **Opens world form
 manager** <br><br>Aliases: `/mw mng`, `/mw mg` <br> Usage: `/mw manage` <br><br> The form manager just dispatches
 command as a player, so player needs also permission for the command. |
-
 ## 📃 Permissions:
 
 - You can use permission `mw.cmd` for all commands
@@ -165,9 +158,7 @@ command as a player, so player needs also permission for the command. |
 | mw.cmd.manage   | `/mw manage`   | ✔️       |
 
 ## ⛰️ Generators
-
 ### Custom World Generator:
-
 <img src="https://i.ibb.co/vxyLDT6/image.png">
 <img src="https://i.ibb.co/sW1Y2ch/image.png">
 <img src="https://i.ibb.co/2PSm2C9/image.png">
@@ -177,21 +168,14 @@ command as a player, so player needs also permission for the command. |
 <img src="https://i.ibb.co/p1w1tCV/image.png">
 <img src="https://i.ibb.co/b1qJ6Ys/image.png">
 <img src="https://i.ibb.co/rtY37Gj/image.png">
-
 ### Nether World Generator:
-
 <img src="https://i.ibb.co/1KXb8FX/image.png">
 <img src="https://i.ibb.co/xm05rDw/image.png">
-
 ### End World Generator:
-
 <img src="https://i.ibb.co/G7rbRHp/image.png">
 <img src="https://i.ibb.co/KsPPjrJ/image.png">
-
 ### SkyBlock Generator:
-
 <img src="https://i.ibb.co/DDVM4zM/image.png">
-
 ## 🖊️ World Game Rules API
 
 - The World game rules API was added in MultiWorld v1.5.0, you can download stubs on [release page](), there are all

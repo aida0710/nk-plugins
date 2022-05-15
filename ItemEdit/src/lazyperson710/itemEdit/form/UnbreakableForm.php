@@ -16,13 +16,13 @@ class UnbreakableForm extends CustomForm {
         $itemInHand = $player->getInventory()->getItemInHand();
         if (!($itemInHand instanceof Durable)) {
             $this
-            ->setTitle("Item Edit")
-            ->addElements(
-                new Label("現在所持しているアイテムは道具ではありません"),
-            );
+                ->setTitle("Item Edit")
+                ->addElements(
+                    new Label("現在所持しているアイテムは道具ではありません"),
+                );
             return;
         }
-        if ($itemInHand->isUnbreakable()){
+        if ($itemInHand->isUnbreakable()) {
             $isUnbreakable = "現在所持しているアイテムは耐久が無限です";
         } else $isUnbreakable = "現在所持しているアイテムは耐久が有限です";
         $this->setUnbreakable = new Toggle("耐久を有限/無限に変更");

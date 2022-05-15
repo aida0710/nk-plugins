@@ -1,5 +1,4 @@
 # Basic config format
-
 The following format should be provided to create Custom item
 
 ```yaml
@@ -18,11 +17,8 @@ items:
 `namespace` property is used to identify item as string. use your own namespace like `alvin0319:custom_item`
 
 `name` property will be used to display item name.
-
 # Additional Properties
-
 ## Major Properties
-
 To set item's max stack size, you have to use `max_stack_size` to set item's max stack size
 
 You can set it by adding
@@ -63,7 +59,6 @@ hand_equipped: true
 ```
 
 ## Durable item
-
 To make durable item, you have to enable `durable` to make item as durable.
 
 You can enable it by adding
@@ -83,7 +78,6 @@ max_durability: 64
 ```
 
 ## Placeable item
-
 To make placeable item, you have to enable `isBlock` to make item as placeable.
 
 You can enable it by adding
@@ -102,9 +96,7 @@ blockId: <blockId>
 ```
 
 `<blockId>` must be positive integer
-
 ## Food item
-
 To make food item, you have to enable `food` to make item as food.
 
 You can enable it by adding
@@ -131,9 +123,7 @@ residue:
 `saturation` will fill saturation progress
 
 `residue` will give item when player eats food like beetroot soup
-
 ## Tool item
-
 To make item as tool, You have to enable `tool`
 
 ```yaml
@@ -168,9 +158,7 @@ Types:
 `3`: Stone
 `4`: Iron
 `5`: Diamond
-
 ## Armor item
-
 To make item as armor, you have to enable `armor`
 
 ```yaml
@@ -216,11 +204,9 @@ Allowed values for `armor_slot`:
 - boots
 
 # Templates
-
 You can use this template to make your custom item
 
 Replace `<something>` to your own value
-
 ## Durable
 
 ```yaml

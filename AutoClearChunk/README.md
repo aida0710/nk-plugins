@@ -1,7 +1,5 @@
 # AutoClearChunk
-
 A PocketMine-MP plugin that can reduce or clean up the chunks in your world
-
 # Features
 
 - Custom Clear Message
