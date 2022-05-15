@@ -1,12 +1,11 @@
 <?php
 
-namespace lazyperson710\sff\command;
+namespace lazyperson710\core\command;
 
 use lazyperson710\sff\form\FlyForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class FlyCommand extends Command {
 
@@ -19,6 +18,6 @@ class FlyCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new FlyForm);
+        $sender->sendForm(new FlyForm($sender));
     }
 }

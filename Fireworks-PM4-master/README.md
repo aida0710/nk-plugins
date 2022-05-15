@@ -1,13 +1,9 @@
 # Fireworks-PM4
-
 A plugin by BlockHozirons and updated to API 4 by<br>
 Fixed some and support latest Pocketmine-MP verion<br>
 This plugin will add Fireworks to your Pocketmine Server
-
 ## API
-
 ### Adding firework items to a player's inventory
-
 Giving players fireworks is easy as pie. Here are some examples (where `$player` is a `\pocketmine\player\Player`
 object):
 
@@ -81,7 +77,6 @@ $player->getInventory()->addItem($fw);
 ```
 
 ### Launching fireworks
-
 Fireworks can be launched after you created the firework item.
 This example spawns a green creeper firework at the default world's spawn
 

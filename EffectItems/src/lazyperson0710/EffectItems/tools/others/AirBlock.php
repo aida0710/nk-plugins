@@ -3,7 +3,6 @@
 namespace lazyperson0710\EffectItems\tools\others;
 
 use onebone\economyland\EconomyLand;
-use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemUseEvent;

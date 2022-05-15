@@ -1,7 +1,5 @@
 # EconomyCShop
-
 ChestShop for EconomyAPI.
-
 ## Usage
 
 1. Place chest and add items you want to sell.

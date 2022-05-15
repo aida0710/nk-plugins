@@ -4,11 +4,11 @@ namespace lazyperson710\core;
 
 use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
+use lazyperson710\core\command\FlyCommand;
 use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
 use lazyperson710\core\task\FlyCheckTask;
 use lazyperson710\core\task\ParticleTask;
-use lazyperson710\sff\command\FlyCommand;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Armor;
