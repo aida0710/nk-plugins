@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\sff\form;
+namespace lazyperson710\core\form;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
