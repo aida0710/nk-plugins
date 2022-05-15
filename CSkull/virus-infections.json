@@ -1,0 +1,24 @@
+{
+    "ColinHDev\\CSkull\\libs\\poggit\\libasynql": {
+        "name": "libasynql",
+        "authors": [
+            "SOFe"
+        ],
+        "antigen": "poggit\\libasynql",
+        "version": "3.4.0",
+        "api": [
+            "4.0.0"
+        ],
+        "build": {
+            "builder": "PoggitCI\/1.0-beta\/beta poggit-virion\/1.0",
+            "builderName": "poggit",
+            "buildTime": "2021-12-12T02:21:34+00:00",
+            "poggitBuildId": 117925,
+            "buildClass": "Dev",
+            "projectId": 287,
+            "projectBuildNumber": 160,
+            "fromCommit": "463ab795418a230e89f8c461f64cfb6fd37eca7a",
+            "poggitResourceId": 152075
+        }
+    }
+}
