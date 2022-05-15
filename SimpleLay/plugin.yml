@@ -6,16 +6,16 @@ api:
   - 4.0.0
 author: brokiem
 commands:
-  sittoggle:
+  sit:
     description: タップしたときに座るか座らないかを切り替えられます
-    permission: simplelay.sittoggle
-    usage: /sittoggle
+    permission: simplelay.sit
+    usage: /sit
   skick:
     description: プレイヤーを座ってる状態から解除します
     permission: simplelay.skick
     usage: /skick <player>
 permissions:
-  simplelay.sittoggle:
+  simplelay.sit:
     default: true
     description: permission to allow the use of sittoggle command
   simplelay.skick:

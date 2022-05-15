@@ -38,7 +38,7 @@ class SimpleLay extends PluginBase {
             return true;
         }
         switch (strtolower($command->getName())) {
-            case "sittoggle":
+            case "sit":
                 if ($this->isToggleSit($sender)) {
                     $this->unsetToggleSit($sender);
                 } else {
