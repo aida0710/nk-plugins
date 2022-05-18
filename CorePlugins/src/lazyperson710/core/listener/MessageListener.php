@@ -66,10 +66,6 @@ class MessageListener implements Listener {
         }
     }
 
-    public function PlayerDeath(PlayerDeathEvent $event) {
-        $event->setKeepInventory(true);
-    }
-
     public function Hit(ProjectileHitEvent $event) {
         $entity = $event->getEntity();
         $entity->kill();
@@ -105,71 +101,6 @@ class MessageListener implements Listener {
         $reason = $event->getReason();
         if ($reason === 'Server is white-listed') {
             $player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください\n\nまた、不自然に思った場合TwitterDmへお越しください @lazyperson0710", false);
-        }
-    }
-
-    public function onPlayerDeath(PlayerDeathEvent $event) {
-        $player = $event->getPlayer();
-        $cause = $player->getLastDamageCause();
-        switch ($cause->getCause()) {
-            case EntityDamageEvent::CAUSE_CONTACT:
-                if ($cause instanceof EntityDamageByBlockEvent) {
-                    $block = $cause->getDamager()->getName();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$block}によって圧死しました");
-                } else {
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は不明なブロックによって圧死しました");
-                }
-                break;
-            case EntityDamageEvent::CAUSE_ENTITY_ATTACK:
-                $killer = $cause->getDamager();
-                if ($killer instanceof Player) {
-                    $itemHand = $killer->getInventory()->getItemInHand();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$itemHand}で殺害されました");
-                } else {
-                    $event->setDeathMessage("§bDeath §7>> §e{$killer->getName()}は何かを殺害しました");
-                }
-                break;
-            case EntityDamageEvent::CAUSE_PROJECTILE:
-                $killer = $cause->getDamager();
-                if ($killer instanceof Player) {
-                    $bow = $killer->getInventory()->getItemInHand()->getName();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$bow}で殺害されました");
-                } else {
-                    $event->setDeathMessage("§bDeath §7>> §e{$killer->getName()}は何かを殺害しました");
-                }
-                break;
-            case EntityDamageEvent::CAUSE_SUFFOCATION:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が窒息死しました");
-                break;
-            case EntityDamageEvent::CAUSE_FALL:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が高所から落下しました");
-                break;
-            case EntityDamageEvent::CAUSE_FIRE:
-            case EntityDamageEvent::CAUSE_FIRE_TICK:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が炎上ダメージによって死亡しました");
-                break;
-            case EntityDamageEvent::CAUSE_LAVA:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が溶岩遊泳しようとして死亡しました");
-                break;
-            case EntityDamageEvent::CAUSE_DROWNING:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が溺死しました");
-                break;
-            case EntityDamageEvent::CAUSE_ENTITY_EXPLOSION:
-            case EntityDamageEvent::CAUSE_BLOCK_EXPLOSION:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が爆発四散しました");
-                break;
-            case EntityDamageEvent::CAUSE_VOID:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が奈落に落下しました");
-                break;
-            case EntityDamageEvent::CAUSE_SUICIDE:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が自害しました");
-                break;
-            case EntityDamageEvent::CAUSE_MAGIC:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が呪文によって死亡しました");
-                break;
-            default:
-                $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が死亡しました");
-                break;
         }
     }
 
