@@ -1,0 +1,8 @@
+---
+name: SignEdit
+main: mcbe\boymelancholy\signedit\SignEdit
+api:
+  - 4.0.0
+version: 1.0.1
+load: POSTWORLD
+...
