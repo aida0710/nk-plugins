@@ -23,20 +23,25 @@ class Main extends PluginBase {
     private static Main $main;
     const ITEM_GRIND_STONE = -195;
 
+    public static function getInstance(): Main {
+        return self::$main;
+    }
+
     public function onEnable(): void {
         self::$main = $this;
-        $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 20);
+        /*LoadWorld*/
         foreach (scandir("worlds/") as $value) {
             if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
                 Server::getInstance()->getWorldManager()->loadWorld($value, true);
             }
         }
+        /*PlayerEventListener*/
         $this->getServer()->getPluginManager()->registerEvents(new listener\MessageListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Cmdsigns(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\CancelEvent(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\DamageListener(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\DeathListener(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\DamageListener(false), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\DeathEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Major(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Food(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\FertilizerParticles(), $this);
