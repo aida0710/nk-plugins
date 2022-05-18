@@ -10,6 +10,11 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
 class Main extends PluginBase {
+
+    /* Memo
+     * コマンドを分割し実行時にコマンドファイルの方から定義してもいいかも
+     * インスタンス化してもいいかも
+     * */
     private static array $function = [];
     private static array $specification = [];
 
