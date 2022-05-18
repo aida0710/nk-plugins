@@ -8,17 +8,17 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
-    public function getDataPath() {
+    public function getDataPath(): string {
         return $this->getServer()->getDataPath() . "plugin_data" . DIRECTORY_SEPARATOR;
     }
 
-    public function getExceptionData() {
+    public function getExceptionData(): array {
         $exceptionData = $this->getConfig()->get("exceptionData", [".", ".."]);
         return $exceptionData[] = [".", ".."];
     }
 
     public function deletedMessage(string $data) {
-        $this->getLogger()->notice("Deleted folder: " . $data);
+        //$this->getLogger()->notice("Deleted folder: " . $data);
     }
 
     public function deleteDir($dir = null): void {
