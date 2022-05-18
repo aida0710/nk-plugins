@@ -89,6 +89,7 @@ class ExpansionConfirmForm extends SimpleForm {
     public function onReduceMoney(Player $player, $price) {
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
             $player->sendMessage('§bMiningTool §7>> §cお金が足りません');
+            return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
     }
