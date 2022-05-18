@@ -11,8 +11,8 @@ class ParticleTask extends Task {
 
     public function addParticle(): void {
         for ($t = 0; $t <= 2.0; $t += 0.01) {
-            $x = 13 * cos(M_PI * $t);
-            $z = 13 * sin(M_PI * $t);
+            $x = 12 * cos(M_PI * $t);
+            $z = 12 * sin(M_PI * $t);
             $x = sprintf("%.5f", $x);
             $z = sprintf("%.5f", $z);
             $x += 0.5;
