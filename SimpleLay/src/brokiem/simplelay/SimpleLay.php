@@ -77,7 +77,6 @@ class SimpleLay extends PluginBase {
         $pk->link = new EntityLink($this->sittingData[strtolower($player->getName())]['eid'], $player->getId(), EntityLink::TYPE_REMOVE, true, true);
         unset($this->sittingData[strtolower($player->getName())]);
         $player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::RIDING, false);
-        $player->sendTip("§bSit §7>> §c{$player->getName()}は座っていません");
         $this->getServer()->broadcastPackets($this->getServer()->getOnlinePlayers(), [$pk1, $pk]);
     }
 
