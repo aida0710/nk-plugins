@@ -51,8 +51,8 @@ class SimpleLay extends PluginBase {
                     if ($player !== null) {
                         if ($this->isSitting($player)) {
                             $this->unsetSit($player);
-                            $sender->sendMessage("§bSit §7>> §a{$player->getName()}の椅座位を解除しました");
-                            $player->sendMessage("§bSit §7>> §a椅座位を強制的に解除されました");
+                            $sender->sendMessage("§bSit §7>> §a{$player->getName()}の待機状態を解除しました");
+                            $player->sendMessage("§bSit §7>> §a待機状態を強制的に解除されました");
                         } else {
                             $sender->sendMessage("§bSit §7>> §c{$player->getName()}は座っていません");
                         }
@@ -90,16 +90,13 @@ class SimpleLay extends PluginBase {
         }
         foreach ($this->sittingData as $playerName => $data) {
             if ($pos->equals($data['pos'])) {
+                if ($player->getName() === $playerName) return;
                 $player->sendTip("§bSit §7>> §cこのブロックには他プレイヤーが既に存在します");
                 return;
             }
         }
-        if ($this->isSitting($player)) {
-            $player->sendTip("§bSit §7>> §c既に椅坐位状態です");
-            return;
-        }
         $this->setSit($player, $this->getServer()->getOnlinePlayers(), new Position($pos->x, $pos->y, $pos->z, $this->getServer()->getWorldManager()->getWorldByName($player->getWorld()->getFolderName())));
-        $player->sendTip("§bSit §7>> §c現在椅坐位状態です\n状態を解除するにはスニーク状態にしてください");
+        $player->sendTip("§bSit §7>> §c現在待機状態です\n状態を解除するにはスニーク状態にしてください");
     }
 
     public function setSit(Player $player, array $viewers, Position $pos, ?int $eid = null): void {
