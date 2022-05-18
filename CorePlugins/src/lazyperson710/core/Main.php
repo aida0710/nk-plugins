@@ -4,15 +4,13 @@ namespace lazyperson710\core;
 
 use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
-use lazyperson710\core\command\FlyCommand;
 use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
-use lazyperson710\core\task\FlyCheckTask;
+use lazyperson710\core\task\EffectTaskScheduler;
+use lazyperson710\core\task\MotdTask;
 use lazyperson710\core\task\ParticleTask;
-use pocketmine\inventory\ArmorInventory;
+use lazyperson710\core\task\WorldTimeScheduler;
 use pocketmine\inventory\CreativeInventory;
-use pocketmine\item\Armor;
-use pocketmine\item\ArmorTypeInfo;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
@@ -54,7 +52,6 @@ class Main extends PluginBase {
             new DiceCommand(),
             new InvCommand(),
             new BookCommand(),
-            new FlyCommand(),
         ]);
         $this->getScheduler()->scheduleDelayedTask(new TaskScheduler, 60);
         $this->getScheduler()->scheduleRepeatingTask(new TimeScheduler, 20);
