@@ -1,0 +1,15 @@
+name: NotionForm
+main: Deceitya\SpecificationForm\SpecificationFormPlugin
+version: 1.0.0
+api: 3.11.0
+load: POSTWORLD
+author: deceitya
+commands:
+  specification:
+    usage: "/specification"
+    description: サーバーのわかりにくい仕様などを紹介
+    permission: specification.command.specification
+permissions:
+  specification.command.specification:
+    description: Allows the user to run the Specification command
+    default: true
