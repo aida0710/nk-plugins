@@ -6,18 +6,14 @@ use bbo51dog\announce\service\AnnounceService;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockPlaceEvent;
-use pocketmine\event\entity\EntityDamageByBlockEvent;
-use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\ProjectileHitEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerKickEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
-use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\world\Position;
 
