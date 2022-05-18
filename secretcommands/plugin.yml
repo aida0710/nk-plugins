@@ -1,7 +1,0 @@
-name: secretcommands
-main: secretcommands\test\main
-version: 1.0.1
-api:
-  - 3.0.0
-  - 4.0.0
-load: POSTWORLD
