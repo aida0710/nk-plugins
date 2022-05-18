@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\core;
+namespace lazyperson710\core\task;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
@@ -10,7 +10,7 @@ use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
 
-class TimeScheduler extends Task {
+class EffectTaskScheduler extends Task {
 
     public function onRun(): void {
         //$dtStr = date("H:i:s") . "." . substr(explode(".", (microtime(true) . ""))[1], 0, 3);

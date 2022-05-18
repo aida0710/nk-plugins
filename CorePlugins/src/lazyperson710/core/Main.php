@@ -53,20 +53,11 @@ class Main extends PluginBase {
             new InvCommand(),
             new BookCommand(),
         ]);
-        $this->getScheduler()->scheduleDelayedTask(new TaskScheduler, 60);
-        $this->getScheduler()->scheduleRepeatingTask(new TimeScheduler, 20);
+        /*Task*/
+        $this->getScheduler()->scheduleDelayedTask(new WorldTimeScheduler, 60);
+        $this->getScheduler()->scheduleRepeatingTask(new EffectTaskScheduler, 20);
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
-        $this->getScheduler()->scheduleRepeatingTask(new FlyCheckTask(), 1200);
-        ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
-        StringToItemParser::getInstance()->register('grindstone', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
-        CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
-        ItemFactory::getInstance()->register(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
-        StringToItemParser::getInstance()->register('turtle_helmet', fn(string $input) => new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
-        CreativeInventory::getInstance()->add(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
-    }
-
-    public static function getInstance(): Main {
-        return self::$main;
+        $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 200);
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\core;
+namespace lazyperson710\core\task;
 
 use pocketmine\scheduler\Task;
 use pocketmine\Server;

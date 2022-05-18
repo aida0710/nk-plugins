@@ -1,11 +1,11 @@
 <?php
 
-namespace lazyperson710\core;
+namespace lazyperson710\core\task;
 
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
 
-class TaskScheduler extends Task {
+class WorldTimeScheduler extends Task {
 
     public function onRun(): void {
         foreach (Server::getInstance()->getWorldManager()->getWorlds() as $world) {
