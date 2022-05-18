@@ -45,7 +45,7 @@ class PurchaseForm implements Form {
             EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
             StackStorageAPI::$instance->add($player->getXuid(), $this->item);
             $totalprice1 = $this->price * $count;
-            $player->sendMessage("§bLevelShop §7>> §a{$this->item}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalprice1}");
+            $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalprice1}");
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item)) {
@@ -55,7 +55,7 @@ class PurchaseForm implements Form {
         $player->getInventory()->addItem($this->item);
         EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
         $totalprice1 = $this->price * $count;
-        $player->sendMessage("§bLevelShop §7>> §a{$this->item}を{$count}個購入しました。使用金額 : {$totalprice1}");
+        $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入しました。使用金額 : {$totalprice1}");
     }
 
     private function isInteger($input): bool {
