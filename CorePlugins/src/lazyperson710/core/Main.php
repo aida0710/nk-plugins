@@ -21,7 +21,6 @@ use pocketmine\Server;
 class Main extends PluginBase {
 
     private static Main $main;
-    const ITEM_TURTLE_HELMET = 469;
     const ITEM_GRIND_STONE = -195;
 
     public function onEnable(): void {
@@ -47,6 +46,14 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new listener\BlockInteractEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\WorldProtect(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakSoundPacket(), $this);
+        /*Items*/
+        ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
+        CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
+        StringToItemParser::getInstance()->register('grindstone', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
+        //ItemFactory::getInstance()->register(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
+        //CreativeInventory::getInstance()->add(new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
+        //StringToItemParser::getInstance()->register('turtle_helmet', fn(string $input) => new Armor(new ItemIdentifier(self::ITEM_TURTLE_HELMET, 0), 'Turtle Helmet', new ArmorTypeInfo(2, 275, ArmorInventory::SLOT_HEAD)));
+        /*Command*/
         $this->getServer()->getCommandMap()->registerAll("core", [
             new MajorCommand(),
             new DiceCommand(),
