@@ -9,10 +9,10 @@ website: https://github.com/ColinHDev
 permissions:
   cskull.command.showskulls:
     description: This permission is required to execute the "/showskulls" command.
-    default: true
+    default: op
   cskull.command.skull:
     description: This permission is required to execute the "/skull" command.
-    default: true
+    default: op
   cskull.cooldown.2592000:
     description: Set the cooldown on the "/skull" command to one month for a player
       with this permission.
@@ -24,7 +24,7 @@ permissions:
   cskull.cooldown.86400:
     description: Set the cooldown on the "/skull" command to one day for a player
       with this permission.
-    default: true
+    default: false
   cskull.cooldown.none:
     description: Disable the cooldown on the "/skull" command for a player with this
       permission.
