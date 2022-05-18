@@ -13,14 +13,14 @@ use pocketmine\Server;
 class SignEditListener implements Listener {
 
     public function onInteractSign(InteractSignEvent $event) {
-        if (Server::getInstance()->isOp($event->getPlayer()->getName())) return;
+        if (!Server::getInstance()->isOp($event->getPlayer()->getName())) return;
         $player = $event->getPlayer();
         $sign = $event->getSign();
         $player->sendForm(new HomeForm($sign));
     }
 
     public function onBreakSign(BreakSignEvent $event) {
-        if (Server::getInstance()->isOp($event->getPlayer()->getName())) return;
+        if (!Server::getInstance()->isOp($event->getPlayer()->getName())) return;
         $player = $event->getPlayer();
         $sign = $event->getSign();
         $player->sendForm(new BreakForm($sign));

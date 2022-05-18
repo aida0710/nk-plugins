@@ -13,7 +13,7 @@ use pocketmine\Server;
 class PlayerBlockBreakListener implements Listener {
 
     public function onBreakSign(BlockBreakEvent $event) {
-        if (Server::getInstance()->isOp($event->getPlayer()->getName())) return;
+        if (!Server::getInstance()->isOp($event->getPlayer()->getName())) return;
         $item = $event->getItem();
         if ($item->getId() !== ItemIds::FEATHER) return;
         $block = $event->getBlock();

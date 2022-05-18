@@ -18,7 +18,7 @@ class PlayerInteractListener implements Listener {
      * @ignoreCancelled
      */
     public function onTap(PlayerInteractEvent $event) {
-        if (Server::getInstance()->isOp($event->getPlayer()->getName())) return;
+        if (!Server::getInstance()->isOp($event->getPlayer()->getName())) return;
         $item = $event->getItem();
         if ($item->getId() !== ItemIds::FEATHER) return;
         $block = $event->getBlock();
