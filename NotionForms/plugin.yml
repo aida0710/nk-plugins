@@ -1,6 +1,6 @@
 name: NotionForm
-main: Deceitya\SpecificationForm\SpecificationFormPlugin
+main: Deceitya\NotionForm\Main
 version: 1.0.0
-api: 3.11.0
+api: 4.3.*
 load: POSTWORLD
 author: deceitya

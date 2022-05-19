@@ -3,6 +3,7 @@
 namespace Deceitya\NotionForm;
 
 use Deceitya\NotionForm\command\FunctionCommand;
+use Deceitya\NotionForm\command\SpecificationCommand;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
@@ -18,6 +19,7 @@ class Main extends PluginBase {
         self::$specification = (new Config($this->getDataFolder() . 'specification.json', Config::JSON))->getAll();
         $this->getServer()->getCommandMap()->registerAll("notionForm", [
             new FunctionCommand(),
+            new SpecificationCommand(),
         ]);
     }
 }
