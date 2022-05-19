@@ -1,6 +1,6 @@
 <?php
 
-namespace Deceitya\SpecificationForm\Form;
+namespace Deceitya\NotionForm\Form;
 
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -10,8 +10,10 @@ class SearchResultForm implements Form {
     public $heading = [];
     public $index = [];
     public $searchdefault = [];
+    private array $file;
 
-    public function __construct(array $heading, array $searchdefault = []) {
+    public function __construct(array $file, array $heading, array $searchdefault = []) {
+        $this->file = $file;
         $this->heading = $heading;
         $this->searchdefault = $searchdefault;
     }
@@ -21,7 +23,7 @@ class SearchResultForm implements Form {
             return;
         }
         if ($data === 0) {
-            $player->sendForm(new SearchForm("", $this->searchdefault));
+            $player->sendForm(new SearchForm($this->file, "", $this->searchdefault));
             return;
         }
         if (!isset($this->index[$data - 1])) {
@@ -29,7 +31,7 @@ class SearchResultForm implements Form {
             return;
         }
         $id = $this->index[$data - 1];
-        $player->sendForm(new SearchContentForm($id, $this->heading, $this->searchdefault));
+        $player->sendForm(new SearchContentForm($this->file, $id, $this->heading, $this->searchdefault));
     }
 
     public function jsonSerialize() {

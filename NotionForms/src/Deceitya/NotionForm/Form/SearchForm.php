@@ -1,8 +1,7 @@
 <?php
 
-namespace Deceitya\SpecificationForm\Form;
+namespace Deceitya\NotionForm\Form;
 
-use Deceitya\SpecificationForm\Main;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -13,10 +12,12 @@ class SearchForm implements Form {
     public $error = "";
     /** @var string[] $error */
     public $default = [];
+    private array $file;
 
-    public function __construct(string $error = "", array $default = []) {
+    public function __construct(array $file,string $error = "", array $default = []) {
         $this->error = $error;
         $this->default = $default;
+        $this->file = $file;
     }
 
     public function handleResponse(Player $player, $data): void {
@@ -24,12 +25,12 @@ class SearchForm implements Form {
             return;
         }
         if ($data[4] === true) {
-            $player->sendForm(new StartForm());
+            $player->sendForm(new StartForm($this->file));
             return;
         }
         unset($data[0]);
         unset($data[4]);
-        foreach (Main::getContents() as $id => $c) {
+        foreach ($this->file as $id => $c) {
             foreach ($data as $search) {
                 if ($search === "") {
                     continue;
@@ -49,7 +50,7 @@ class SearchForm implements Form {
         }
         if (count($this->heading) === 0) {
             $message = "§eはるか彼方まで検索したのですが、残念ながら見つかりませんでした。§r\n";
-            $player->sendForm(new self("\n" . $message, $data));
+            $player->sendForm(new self($this->file,"\n" . $message, $data));
             return;
         }
         $player->sendForm(new SearchResultForm($this->heading, $data));

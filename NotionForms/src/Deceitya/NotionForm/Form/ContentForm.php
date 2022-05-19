@@ -1,28 +1,29 @@
 <?php
 
-namespace Deceitya\SpecificationForm\Form;
+namespace Deceitya\NotionForm\Form;
 
-use Deceitya\SpecificationForm\Main;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
 class ContentForm implements Form {
 
     private $index;
+    private array $file;
 
-    public function __construct(int $index, array $heading = [], array $searchdefault = []) {
+    public function __construct(array $file, int $index, array $heading = [], array $searchdefault = []) {
         $this->index = $index;
+        $this->file = $file;
     }
 
     public function handleResponse(Player $player, $data): void {
         if ($data === null) {
             return;
         }
-        $player->sendForm(new StartForm());
+        $player->sendForm(new StartForm($this->file));
     }
 
     public function jsonSerialize() {
-        $content = Main::getContents()[$this->index];
+        $content = $this->file[$this->index];
         return [
             'type' => 'form',
             'title' => $content['title'],

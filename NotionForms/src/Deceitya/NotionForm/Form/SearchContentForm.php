@@ -1,18 +1,19 @@
 <?php
 
-namespace Deceitya\SpecificationForm\Form;
+namespace Deceitya\NotionForm\Form;
 
-use Deceitya\SpecificationForm\Main;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
 class SearchContentForm implements Form {
 
+    private array $file;
     private $index;
     private $heading;
     private $searchdefault;
 
-    public function __construct(int $index, array $heading = [], array $searchdefault = []) {
+    public function __construct(array $file, int $index, array $heading = [], array $searchdefault = []) {
+        $this->file = $file;
         $this->index = $index;
         $this->heading = $heading;
         $this->searchdefault = $searchdefault;
@@ -27,13 +28,12 @@ class SearchContentForm implements Form {
             return;
         }
         if ($data === 1) {
-            $player->sendForm(new StartForm());
-            return;
+            $player->sendForm(new StartForm($this->file));
         }
     }
 
     public function jsonSerialize() {
-        $content = Main::getContents()[$this->index];
+        $content = $this->file[$this->index];
         return [
             'type' => 'form',
             'title' => $content['title'],
