@@ -95,12 +95,12 @@ class EffectTaskScheduler extends Task {
         }
     }
 
-    private function is_Haste(Player $player) {
-        if ($player->getEffects()->get(VanillaEffects::HASTE()) === null) {
-            $effect = new EffectInstance(VanillaEffects::HASTE(), 300, 1, false);
+    private function is_NightVision(Player $player) {
+        if ($player->getEffects()->get(VanillaEffects::NIGHT_VISION()) === null) {
+            $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 300, 0, false);
             $player->getEffects()->add($effect);
-        } elseif ($player->getEffects()->get(VanillaEffects::HASTE())->getDuration() < 299) {
-            $effect = new EffectInstance(VanillaEffects::HASTE(), 300, 1, false);
+        } elseif ($player->getEffects()->get(VanillaEffects::NIGHT_VISION())->getDuration() < 299) {
+            $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 300, 0, false);
             $player->getEffects()->add($effect);
         }
     }
@@ -115,12 +115,12 @@ class EffectTaskScheduler extends Task {
         }
     }
 
-    private function is_NightVision(Player $player) {
-        if ($player->getEffects()->get(VanillaEffects::NIGHT_VISION()) === null) {
-            $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 300, 0, false);
+    private function is_Haste(Player $player) {
+        if ($player->getEffects()->get(VanillaEffects::HASTE()) === null) {
+            $effect = new EffectInstance(VanillaEffects::HASTE(), 300, 1, false);
             $player->getEffects()->add($effect);
-        } elseif ($player->getEffects()->get(VanillaEffects::NIGHT_VISION())->getDuration() < 299) {
-            $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 300, 0, false);
+        } elseif ($player->getEffects()->get(VanillaEffects::HASTE())->getDuration() < 299) {
+            $effect = new EffectInstance(VanillaEffects::HASTE(), 300, 1, false);
             $player->getEffects()->add($effect);
         }
     }

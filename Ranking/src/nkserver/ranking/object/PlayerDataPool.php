@@ -25,6 +25,11 @@ abstract class PlayerDataPool {
         }
     }
 
+    /** @return PlayerDataArray[] */
+    public static function getAll(): array {
+        return self::$players_data;
+    }
+
     public static function finalize(): void {
         $conf = new Config(Main::getDataPath() . 'PlayerData.json', Config::JSON);
         $array = [];
@@ -38,11 +43,6 @@ abstract class PlayerDataPool {
     /** @return string[] */
     public static function getAllPlayers(): array {
         return array_keys(self::$players_data);
-    }
-
-    /** @return PlayerDataArray[] */
-    public static function getAll(): array {
-        return self::$players_data;
     }
 
     public static function onBlockBreak(Player $player, Block $block, World $world): void {

@@ -13,10 +13,6 @@ class SoftEnumStore {
     /** @var CommandEnum[] */
     private static $enums = [];
 
-    public static function getEnumByName(string $name): ?CommandEnum {
-        return static::$enums[$name] ?? null;
-    }
-
     /**
      * @return CommandEnum[]
      */
@@ -32,21 +28,6 @@ class SoftEnumStore {
         self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_ADD);
     }
 
-    public static function updateEnum(string $enumName, array $values): void {
-        if (($enum = self::getEnumByName($enumName)) === null) {
-            throw new CommandoException("Unknown enum named " . $enumName);
-        }
-        self::broadcastSoftEnum(new CommandEnum($enum->getName(), $values), UpdateSoftEnumPacket::TYPE_SET);
-    }
-
-    public static function removeEnum(string $enumName): void {
-        if (($enum = self::getEnumByName($enumName)) === null) {
-            throw new CommandoException("Unknown enum named " . $enumName);
-        }
-        unset(static::$enums[$enumName]);
-        self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_REMOVE);
-    }
-
     public static function broadcastSoftEnum(CommandEnum $enum, int $type): void {
         $pk = new UpdateSoftEnumPacket();
         $pk->enumName = $enum->getName();
@@ -57,5 +38,24 @@ class SoftEnumStore {
 
     private static function broadcastPacket(ClientboundPacket $pk): void {
         ($sv = Server::getInstance())->broadcastPackets($sv->getOnlinePlayers(), [$pk]);
+    }
+
+    public static function updateEnum(string $enumName, array $values): void {
+        if (($enum = self::getEnumByName($enumName)) === null) {
+            throw new CommandoException("Unknown enum named " . $enumName);
+        }
+        self::broadcastSoftEnum(new CommandEnum($enum->getName(), $values), UpdateSoftEnumPacket::TYPE_SET);
+    }
+
+    public static function getEnumByName(string $name): ?CommandEnum {
+        return static::$enums[$name] ?? null;
+    }
+
+    public static function removeEnum(string $enumName): void {
+        if (($enum = self::getEnumByName($enumName)) === null) {
+            throw new CommandoException("Unknown enum named " . $enumName);
+        }
+        unset(static::$enums[$enumName]);
+        self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_REMOVE);
     }
 }

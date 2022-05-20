@@ -55,13 +55,6 @@ class EconomyLand extends PluginBase implements Listener {
     private array $expire = [];
     private $placeQueue;
 
-    /**
-     * @return EconomyLand
-     */
-    public static function getInstance(): EconomyLand {
-        return static::$instance;
-    }
-
     public function onEnable(): void {
         static::$instance = $this;
         $this->saveDefaultConfig();
@@ -596,6 +589,73 @@ class EconomyLand extends PluginBase implements Listener {
     }
 
     /**
+     * @return EconomyLand
+     */
+    public static function getInstance(): EconomyLand {
+        return static::$instance;
+    }
+
+    public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
+        return $this->db->checkOverlap($startX, $endX, $startZ, $endZ, $level);
+    }
+
+    /**
+     * Adds land to the EconomyLand database
+     *
+     * @return int
+     * @var int $startX
+     * @var int $startZ
+     * @var int $endX
+     * @var int $endZ
+     * @var World|string $level
+     * @var float $expires
+     *
+     * @var Player|string $player
+     */
+    public function addLand($player, $startX, $startZ, $endX, $endZ, $level, $expires = null, &$id = null) {
+        if ($level instanceof World) {
+            $level = $level->getFolderName();
+        }
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        if (is_numeric($this->getConfig()->get("player-land-limit", "NaN"))) {
+            $cnt = count($this->db->getLandsByOwner($player));
+            if ($cnt >= $this->getConfig()->get("player-land-limit", "NaN")) {
+                return self::RET_LAND_LIMIT;
+            }
+        }
+        if ($startX > $endX) {
+            $tmp = $startX;
+            $startX = $endX;
+            $endX = $tmp;
+        }
+        if ($startZ > $endZ) {
+            $tmp = $startZ;
+            $startZ = $endZ;
+            $endZ = $tmp;
+        }
+        $startX--;
+        $endX++;
+        $startZ--;
+        $endZ++;
+        $result = $this->db->checkOverlap($startX, $endX, $startZ, $endZ, $level);
+        if ($result !== false and $this->getConfig()->get("allow-overlap", false) === false) {
+            return self::RET_LAND_OVERLAP;
+        }
+        $price = (($endX - $startX) - 1) * (($endZ - $startZ) - 1) * $this->getConfig()->get("price-per-y-axis", 100);
+        $id = $this->db->addLand($startX, $endX, $startZ, $endZ, $level, $price, $player, $expires);
+        if ($expires !== null) {
+            $this->getScheduler()->scheduleDelayedTask(new ExpireTask($this, $id), $expires * 1200);
+            $this->expire[$id] = array(
+                $expires * 60,
+                time()
+            );
+        }
+        return self::RET_SUCCESS;
+    }
+
+    /**
      * @param PlayerInteractEvent $event
      * @return void
      * @priority LOW
@@ -692,62 +752,6 @@ class EconomyLand extends PluginBase implements Listener {
         $this->permissionCheck($event);
     }
 
-    /**
-     * Adds land to the EconomyLand database
-     *
-     * @return int
-     * @var int $startX
-     * @var int $startZ
-     * @var int $endX
-     * @var int $endZ
-     * @var World|string $level
-     * @var float $expires
-     *
-     * @var Player|string $player
-     */
-    public function addLand($player, $startX, $startZ, $endX, $endZ, $level, $expires = null, &$id = null) {
-        if ($level instanceof World) {
-            $level = $level->getFolderName();
-        }
-        if ($player instanceof Player) {
-            $player = $player->getName();
-        }
-        if (is_numeric($this->getConfig()->get("player-land-limit", "NaN"))) {
-            $cnt = count($this->db->getLandsByOwner($player));
-            if ($cnt >= $this->getConfig()->get("player-land-limit", "NaN")) {
-                return self::RET_LAND_LIMIT;
-            }
-        }
-        if ($startX > $endX) {
-            $tmp = $startX;
-            $startX = $endX;
-            $endX = $tmp;
-        }
-        if ($startZ > $endZ) {
-            $tmp = $startZ;
-            $startZ = $endZ;
-            $endZ = $tmp;
-        }
-        $startX--;
-        $endX++;
-        $startZ--;
-        $endZ++;
-        $result = $this->db->checkOverlap($startX, $endX, $startZ, $endZ, $level);
-        if ($result !== false and $this->getConfig()->get("allow-overlap", false) === false) {
-            return self::RET_LAND_OVERLAP;
-        }
-        $price = (($endX - $startX) - 1) * (($endZ - $startZ) - 1) * $this->getConfig()->get("price-per-y-axis", 100);
-        $id = $this->db->addLand($startX, $endX, $startZ, $endZ, $level, $price, $player, $expires);
-        if ($expires !== null) {
-            $this->getScheduler()->scheduleDelayedTask(new ExpireTask($this, $id), $expires * 1200);
-            $this->expire[$id] = array(
-                $expires * 60,
-                time()
-            );
-        }
-        return self::RET_SUCCESS;
-    }
-
     public function addInvitee($landId, $player) {
         return $this->db->addInviteeById($landId, $player);
     }
@@ -758,9 +762,5 @@ class EconomyLand extends PluginBase implements Listener {
 
     public function getLandInfo($landId) {
         return $this->db->getLandById($landId);
-    }
-
-    public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
-        return $this->db->checkOverlap($startX, $endX, $startZ, $endZ, $level);
     }
 }

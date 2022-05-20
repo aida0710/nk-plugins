@@ -17,10 +17,6 @@ class Main extends PluginBase {
     static array $worlds = [];
     private static Main $main;
 
-    public static function getInstance(): Main {
-        return self::$main;
-    }
-
     public function onEnable(): void {
         self::$main = $this;
         $this->reloadConfig();
@@ -48,6 +44,10 @@ class Main extends PluginBase {
                 $player->setFlying(false);
             }
         }
+    }
+
+    public static function getInstance(): Main {
+        return self::$main;
     }
 
 }

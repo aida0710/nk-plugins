@@ -20,13 +20,6 @@ class MiningLevelAPI {
     private function __construct() {
     }
 
-    public static function getInstance(): MiningLevelAPI {
-        if (!isset(self::$instance)) {
-            self::$instance = new MiningLevelAPI();
-        }
-        return self::$instance;
-    }
-
     public function init(MiningLevelSystem $plugin) {
         $this->db = new SQLiteDatabase($plugin);
         $this->databasefile = $plugin->getDataFolder() . 'level.db';
@@ -83,6 +76,16 @@ class MiningLevelAPI {
     public function loaddata($player) {
         $player = $this->convert2lower($player);
         $this->cache[$player] = $this->db->getData($player);
+    }
+
+    /**
+     * @param [type] $player
+     * @return array
+     */
+    public function getData($player): array {
+        $player = $this->convert2lower($player);
+        if (!$this->isLoadeddata($player)) $this->loaddata($player);
+        return $this->cache[$player];
     }
 
     /**
@@ -161,16 +164,6 @@ class MiningLevelAPI {
         }
     }
 
-    /**
-     * @param [type] $player
-     * @return array
-     */
-    public function getData($player): array {
-        $player = $this->convert2lower($player);
-        if (!$this->isLoadeddata($player)) $this->loaddata($player);
-        return $this->cache[$player];
-    }
-
     public function genRanking(): array {//常に同期読み込みにてございます...
         $list = [];
         $i = 0;
@@ -190,6 +183,13 @@ class MiningLevelAPI {
             }
         }
         return $list;
+    }
+
+    public static function getInstance(): MiningLevelAPI {
+        if (!isset(self::$instance)) {
+            self::$instance = new MiningLevelAPI();
+        }
+        return self::$instance;
     }
 
     public function writecache(?string $name = null) {

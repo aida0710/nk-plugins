@@ -13,10 +13,6 @@ class PacketListener implements Listener {
 
     private static ?Plugin $registrant;
 
-    public static function isRegistered(): bool {
-        return self::$registrant instanceof Plugin;
-    }
-
     public static function getRegistrant(): Plugin {
         return self::$registrant;
     }
@@ -31,6 +27,10 @@ class PacketListener implements Listener {
         }
         self::$registrant = $plugin;
         $plugin->getServer()->getPluginManager()->registerEvents(new self, $plugin);
+    }
+
+    public static function isRegistered(): bool {
+        return self::$registrant instanceof Plugin;
     }
 
     public function onDataPacketReceiveEvent(DataPacketReceiveEvent $e) {

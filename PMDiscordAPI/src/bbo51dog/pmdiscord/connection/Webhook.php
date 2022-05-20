@@ -14,12 +14,12 @@ class Webhook {
 
     private string $webhook_url;
 
-    public static function create(string $webhook_url): self {
-        return new Webhook($webhook_url);
-    }
-
     public function __construct(string $webhook_url) {
         $this->webhook_url = $webhook_url;
+    }
+
+    public static function create(string $webhook_url): self {
+        return new Webhook($webhook_url);
     }
 
     /**
@@ -31,6 +31,13 @@ class Webhook {
     public function add(Element $element): self {
         $this->data[$element->getType()] = $element->getData();
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData(): array {
+        return $this->data;
     }
 
     /**
@@ -65,13 +72,6 @@ class Webhook {
                 throw new PMDiscordAPIException('Sending webhook failed');
             }
         }
-    }
-
-    /**
-     * @return array
-     */
-    public function getData(): array {
-        return $this->data;
     }
 
     /**

@@ -17,10 +17,6 @@ class Convert {
         $this->needCount = $needCount;
     }
 
-    public function addItem(Item $item) {
-        $this->items[] = $item;
-    }
-
     public function getItems(): array {
         return $this->items;
     }
@@ -36,5 +32,9 @@ class Convert {
     public function convert(Player $player, int $index) {
         $player->getInventory()->removeItem(ItemFactory::getInstance()->get(-195, 0, $this->needCount));
         $player->getInventory()->addItem($this->items[$index]);
+    }
+
+    public function addItem(Item $item) {
+        $this->items[] = $item;
     }
 }

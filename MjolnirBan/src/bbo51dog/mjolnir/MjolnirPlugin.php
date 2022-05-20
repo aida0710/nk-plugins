@@ -21,19 +21,6 @@ class MjolnirPlugin extends PluginBase {
         $this->initRepository();
     }
 
-    protected function onEnable(): void {
-        $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
-        $this->getServer()->getCommandMap()->register("mjolnir", new MjolnirBanCommand());
-    }
-
-    protected function onDisable(): void {
-        self::$repositoryFactory->close();
-    }
-
-    private function initRepository(): void {
-        self::$repositoryFactory = new SQLiteRepositoryFactory($this->getDataFolder() . "MjolnirData.sqlite");
-    }
-
     private function initSetting(): void {
         $config = new Config($this->getDataFolder() . "Config.yml", Config::YAML, [
             "messages" => [
@@ -43,5 +30,18 @@ class MjolnirPlugin extends PluginBase {
         ]);
         $config->save();
         Setting::getInstance()->setData($config->getAll());
+    }
+
+    private function initRepository(): void {
+        self::$repositoryFactory = new SQLiteRepositoryFactory($this->getDataFolder() . "MjolnirData.sqlite");
+    }
+
+    protected function onEnable(): void {
+        $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
+        $this->getServer()->getCommandMap()->register("mjolnir", new MjolnirBanCommand());
+    }
+
+    protected function onDisable(): void {
+        self::$repositoryFactory->close();
     }
 }

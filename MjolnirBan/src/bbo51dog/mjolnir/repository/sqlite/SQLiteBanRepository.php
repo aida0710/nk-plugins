@@ -16,6 +16,10 @@ class SQLiteBanRepository implements BanRepository {
         $this->prepareTable();
     }
 
+    private function prepareTable(): void {
+        $this->db->query("CREATE TABLE IF NOT EXISTS bans(literal TEXT, banType TEXT, reason TEXT)");
+    }
+
     public function close(): void {
     }
 
@@ -27,19 +31,12 @@ class SQLiteBanRepository implements BanRepository {
         $stmt->execute();
     }
 
-    public function isBannedName(string $name): bool {
-        return $this->exists($name, BanType::PLAYER_NAME());
-    }
-
     //    public function isBannedIp(string $ip): bool {
     //        return $this->exists($ip, BanType::IP());
     //    }
-    public function isBannedCid(int $cid): bool {
-        return $this->exists($cid, BanType::CID());
-    }
 
-    public function isBannedXuid(int $xuid): bool {
-        return $this->exists($xuid, BanType::XUID());
+    public function isBannedName(string $name): bool {
+        return $this->exists($name, BanType::PLAYER_NAME());
     }
 
     private function exists(int|string $literal, BanType $type): bool {
@@ -50,7 +47,11 @@ class SQLiteBanRepository implements BanRepository {
         return $rows[0] > 0;
     }
 
-    private function prepareTable(): void {
-        $this->db->query("CREATE TABLE IF NOT EXISTS bans(literal TEXT, banType TEXT, reason TEXT)");
+    public function isBannedCid(int $cid): bool {
+        return $this->exists($cid, BanType::CID());
+    }
+
+    public function isBannedXuid(int $xuid): bool {
+        return $this->exists($xuid, BanType::XUID());
     }
 }

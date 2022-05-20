@@ -25,14 +25,6 @@ class PlayerEvent implements Listener {
         $this->checkLog($event, "b");
     }
 
-    /**
-     * @priority MONITOR
-     * @param BlockPlaceEvent $event
-     */
-    public function onPlace(BlockPlaceEvent $event) {
-        $this->checkLog($event, "p");
-    }
-
     private function checkLog(BlockBreakEvent|BlockPlaceEvent $event, string $eventType) {
         $player = $event->getPlayer();
         $block = $event->getBlock();
@@ -50,5 +42,13 @@ class PlayerEvent implements Listener {
             $cls->registerlog($x, $y, $z, $world, $id, $meta, $player, $eventType);
         }
         return true;
+    }
+
+    /**
+     * @priority MONITOR
+     * @param BlockPlaceEvent $event
+     */
+    public function onPlace(BlockPlaceEvent $event) {
+        $this->checkLog($event, "p");
     }
 }

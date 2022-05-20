@@ -29,25 +29,6 @@ class Main extends PluginBase implements Listener {
     public array $config;
     private array $flag = [];
 
-    public static function getInstance(): Main {
-        return self::$instance;
-    }
-
-    protected function onLoad(): void {
-        self::$instance = $this;
-    }
-
-    protected function onEnable(): void {
-        $this->saveDefaultConfig();
-        $this->config = $this->getConfig()->getAll();
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getServer()->getCommandMap()->registerAll("MiningTools", [
-            new DiamondMiningToolCommand(),
-            new NetheriteMiningToolCommand(),
-            new ExpansionMiningToolCommand(),
-        ]);
-    }
-
     public function onJoin(PlayerJoinEvent $event) {
         $this->flag[$event->getPlayer()->getName()] = false;
     }
@@ -225,6 +206,10 @@ class Main extends PluginBase implements Listener {
         }
     }
 
+    public static function getInstance(): Main {
+        return self::$instance;
+    }
+
     /**
      * @param Block $block
      * @param $set
@@ -299,5 +284,20 @@ class Main extends PluginBase implements Listener {
         } else {
             $event->setDrops($dropItems);
         }
+    }
+
+    protected function onLoad(): void {
+        self::$instance = $this;
+    }
+
+    protected function onEnable(): void {
+        $this->saveDefaultConfig();
+        $this->config = $this->getConfig()->getAll();
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->getServer()->getCommandMap()->registerAll("MiningTools", [
+            new DiamondMiningToolCommand(),
+            new NetheriteMiningToolCommand(),
+            new ExpansionMiningToolCommand(),
+        ]);
     }
 }

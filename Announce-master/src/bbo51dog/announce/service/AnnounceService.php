@@ -13,6 +13,9 @@ class AnnounceService {
 
     private static RepositoryPool $repositoryPool;
 
+    private function __construct() {
+    }
+
     public static function init(RepositoryPool $repositoryPool) {
         self::$repositoryPool = $repositoryPool;
     }
@@ -27,6 +30,10 @@ class AnnounceService {
         $userRepository->updateAllUserAnnounce($id);
     }
 
+    public static function exsitsAnnounce(int $announeId): bool {
+        return self::getAnnounce($announeId) !== null;
+    }
+
     public static function getAnnounce(int $announceId): ?Announce {
         /** @var AnnounceRepository $announceRepository */
         $announceRepository = self::$repositoryPool->getRepository(AnnounceRepository::class);
@@ -35,10 +42,6 @@ class AnnounceService {
             return Announce::createFromDto($dto);
         }
         return null;
-    }
-
-    public static function exsitsAnnounce(int $announeId): bool {
-        return self::getAnnounce($announeId) !== null;
     }
 
     public static function setAlreadyRead(string $name, bool $b) {
@@ -76,6 +79,12 @@ class AnnounceService {
         return $announceRepository->exists($userDto->getAnnounceId()) && $userDto->isConfirmed();
     }
 
+    public static function isConfirmed(string $name): bool {
+        /** @var UserRepository $userRepository */
+        $userRepository = self::$repositoryPool->getRepository(UserRepository::class);
+        return $userRepository->getUser($name)->isConfirmed();
+    }
+
     public static function hasAlreadyRead(string $name): bool {
         /** @var UserRepository $userRepository */
         $userRepository = self::$repositoryPool->getRepository(UserRepository::class);
@@ -97,20 +106,11 @@ class AnnounceService {
         return $userRepository->exists($name);
     }
 
-    public static function isConfirmed(string $name): bool {
-        /** @var UserRepository $userRepository */
-        $userRepository = self::$repositoryPool->getRepository(UserRepository::class);
-        return $userRepository->getUser($name)->isConfirmed();
-    }
-
     public static function confirm(string $name, bool $b = true) {
         /** @var UserRepository $userRepository */
         $userRepository = self::$repositoryPool->getRepository(UserRepository::class);
         $dto = $userRepository->getUser($name);
         $dto->setConfirmed($b);
         $userRepository->update($dto);
-    }
-
-    private function __construct() {
     }
 }

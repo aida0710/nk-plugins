@@ -19,14 +19,6 @@ class BreakEventListener implements Listener {
         $this->blockBreakTicket($event);
     }
 
-    /**
-     * @param CountBlockEvent $event
-     * @priority HIGHEST
-     */
-    public function onCountEvent(CountBlockEvent $event) {
-        $this->blockBreakTicket($event);
-    }
-
     public function blockBreakTicket(Event $event) {
         if (!$event->isCancelled()) {
             $player = $event->getPlayer();
@@ -39,5 +31,13 @@ class BreakEventListener implements Listener {
                 Server::getInstance()->broadcastMessage("§bTicket §7>> §eTicketを{$player->getName()}がゲットしました！確率:1/5000");
             }
         }
+    }
+
+    /**
+     * @param CountBlockEvent $event
+     * @priority HIGHEST
+     */
+    public function onCountEvent(CountBlockEvent $event) {
+        $this->blockBreakTicket($event);
     }
 }

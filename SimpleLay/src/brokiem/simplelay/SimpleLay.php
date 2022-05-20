@@ -66,6 +66,20 @@ class SimpleLay extends PluginBase {
         return true;
     }
 
+    public function isToggleSit(Player $player): bool {
+        return in_array(strtolower($player->getName()), $this->toggleSit, true);
+    }
+
+    public function unsetToggleSit(Player $player): void {
+        unset($this->toggleSit[strtolower($player->getName())]);
+        $player->sendMessage("§bSit §7>> §aタップで座れるようになりました");
+    }
+
+    public function setToggleSit(Player $player): void {
+        $this->toggleSit[] = strtolower($player->getName());
+        $player->sendMessage("§bSit §7>> §aタップで座らないようになりました");
+    }
+
     public function isSitting(Player $player): bool {
         return isset($this->sittingData[strtolower($player->getName())]);
     }
@@ -122,20 +136,6 @@ class SimpleLay extends PluginBase {
             'eid' => $eid,
             'pos' => $pos
         ];
-    }
-
-    public function isToggleSit(Player $player): bool {
-        return in_array(strtolower($player->getName()), $this->toggleSit, true);
-    }
-
-    public function unsetToggleSit(Player $player): void {
-        unset($this->toggleSit[strtolower($player->getName())]);
-        $player->sendMessage("§bSit §7>> §aタップで座れるようになりました");
-    }
-
-    public function setToggleSit(Player $player): void {
-        $this->toggleSit[] = strtolower($player->getName());
-        $player->sendMessage("§bSit §7>> §aタップで座らないようになりました");
     }
 
     public function optimizeRotation(Player $player): void {

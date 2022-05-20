@@ -20,12 +20,8 @@ use pocketmine\Server;
 
 class Main extends PluginBase {
 
-    private static Main $main;
     const ITEM_GRIND_STONE = -195;
-
-    public static function getInstance(): Main {
-        return self::$main;
-    }
+    private static Main $main;
 
     public function onEnable(): void {
         self::$main = $this;
@@ -70,6 +66,10 @@ class Main extends PluginBase {
         $this->getScheduler()->scheduleRepeatingTask(new EffectTaskScheduler, 20);
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 200);
+    }
+
+    public static function getInstance(): Main {
+        return self::$main;
     }
 
 }

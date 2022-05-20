@@ -51,14 +51,6 @@ class EventListener implements Listener {
         $this->getBreakEvent($event, $player);
     }
 
-    /**
-     * @priority HIGHEST
-     */
-    public function CountBlock(CountBlockEvent $event): void {
-        $player = $event->getPlayer();
-        $this->getBreakEvent($event, $player);
-    }
-
     public function getBreakEvent(Event $event, Player $player) {
         $player = $event->getPlayer();
         if ($event->isCancelled()) {
@@ -187,5 +179,13 @@ class EventListener implements Listener {
             $plugin = $player->getServer()->getPluginManager()->getPlugin("InfoSystem");
             $plugin->ChangeTag($player);
         }
+    }
+
+    /**
+     * @priority HIGHEST
+     */
+    public function CountBlock(CountBlockEvent $event): void {
+        $player = $event->getPlayer();
+        $this->getBreakEvent($event, $player);
     }
 }

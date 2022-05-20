@@ -53,28 +53,6 @@ class JsonShopRepository implements IShopRepository {
         $this->signToShopMapper->set($shop->getWorld(), $sign->getHash(), $shop);
     }
 
-    public function save(Shop $shop): void {
-        $this->jsonConfig->set($shop->getId(), $this->serialize($shop));
-        $this->map($shop);
-    }
-
-    private function serialize(Shop $shop): array {
-        $serializedShop = [
-            "owner" => $shop->getOwner(),
-            "world" => $shop->getWorld(),
-            "product" => [
-                "item" => $shop->getProduct()->getItem(),
-                "price" => $shop->getProduct()->getPrice()
-            ],
-            "sign" => $shop->getSign(),
-            "main-chest" => $shop->getMainChest(),
-        ];
-        if ($shop->getSubChest() !== null) {
-            $serializedShop["sub-chest"] = $shop->getSubChest();
-        }
-        return $serializedShop;
-    }
-
     public function delete(Shop $shop): void {
         $this->unmap($shop);
         $this->jsonConfig->remove($shop->getId());
@@ -101,5 +79,27 @@ class JsonShopRepository implements IShopRepository {
 
     public function close(): void {
         $this->jsonConfig->save();
+    }
+
+    public function save(Shop $shop): void {
+        $this->jsonConfig->set($shop->getId(), $this->serialize($shop));
+        $this->map($shop);
+    }
+
+    private function serialize(Shop $shop): array {
+        $serializedShop = [
+            "owner" => $shop->getOwner(),
+            "world" => $shop->getWorld(),
+            "product" => [
+                "item" => $shop->getProduct()->getItem(),
+                "price" => $shop->getProduct()->getPrice()
+            ],
+            "sign" => $shop->getSign(),
+            "main-chest" => $shop->getMainChest(),
+        ];
+        if ($shop->getSubChest() !== null) {
+            $serializedShop["sub-chest"] = $shop->getSubChest();
+        }
+        return $serializedShop;
     }
 }

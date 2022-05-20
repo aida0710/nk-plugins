@@ -26,14 +26,6 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    static function getInstance(): BankHelper {
-        if (self::$instance === null) self::$instance = new BankHelper(BankPlugin::getInstance()->getDataFolder() . 'Bank.db');
-        return self::$instance;
-    }
-
-    /**
-     * @inheritDoc
-     */
     function create(string $bank, string $leader): void {
         //作成メッセージ
         $text = $leader . "さんによって作成されました";
@@ -58,6 +50,14 @@ class BankHelper implements IBankHelper {
         if ($stmt->execute()->fetchArray()) {
             return true;
         } else return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    static function getInstance(): BankHelper {
+        if (self::$instance === null) self::$instance = new BankHelper(BankPlugin::getInstance()->getDataFolder() . 'Bank.db');
+        return self::$instance;
     }
 
     /**
@@ -141,11 +141,11 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function addMoney(string $bank, string $name, int $money): void {
-        //入金メッセージ
-        $text = $name . "さんが" . $money . "入金しました";
-        $money += $this->getMoney($bank);
-        if (!$this->isExists($bank)) return;
+    function removeMoney(string $bank, string $name, int $money): void {
+        //引き出しメッセージ
+        $text = $name . "さんが" . $money . "引き出しました";
+        $money = $this->getMoney($bank) - $money;
+        if (!$this->isExists($bank) or $money < 0) return;
         $stmt = $this->db->prepare("UPDATE bank SET money = :money WHERE bank = :bank");
         $stmt->bindValue(":money", $money, SQLITE3_TEXT);
         $stmt->bindParam(":bank", $bank, SQLITE3_TEXT);
@@ -161,21 +161,6 @@ class BankHelper implements IBankHelper {
         $stmt = $this->db->prepare("SELECT money FROM bank WHERE bank = :bank");
         $stmt->bindParam(":bank", $bank);
         return current($stmt->execute()->fetchArray());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    function removeMoney(string $bank, string $name, int $money): void {
-        //引き出しメッセージ
-        $text = $name . "さんが" . $money . "引き出しました";
-        $money = $this->getMoney($bank) - $money;
-        if (!$this->isExists($bank) or $money < 0) return;
-        $stmt = $this->db->prepare("UPDATE bank SET money = :money WHERE bank = :bank");
-        $stmt->bindValue(":money", $money, SQLITE3_TEXT);
-        $stmt->bindParam(":bank", $bank, SQLITE3_TEXT);
-        $stmt->execute();
-        LogHelper::getInstance()->addLog($bank, $text);
     }
 
     /**
@@ -221,6 +206,21 @@ class BankHelper implements IBankHelper {
         EconomyAPI::getInstance()->addMoney($target, $money);
         LogHelper::getInstance()->addLog($bank, $text);
         return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function addMoney(string $bank, string $name, int $money): void {
+        //入金メッセージ
+        $text = $name . "さんが" . $money . "入金しました";
+        $money += $this->getMoney($bank);
+        if (!$this->isExists($bank)) return;
+        $stmt = $this->db->prepare("UPDATE bank SET money = :money WHERE bank = :bank");
+        $stmt->bindValue(":money", $money, SQLITE3_TEXT);
+        $stmt->bindParam(":bank", $bank, SQLITE3_TEXT);
+        $stmt->execute();
+        LogHelper::getInstance()->addLog($bank, $text);
     }
 
     /**

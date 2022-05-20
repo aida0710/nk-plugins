@@ -75,6 +75,13 @@ class EconomyAPI extends PluginBase implements Listener {
     private $lang = [], $playerLang = [];
 
     /**
+     * @return EconomyAPI
+     */
+    public static function getInstance(): self {
+        return self::$instance;
+    }
+
+    /**
      * @param string $command
      * @param string|bool $lang
      *
@@ -109,6 +116,27 @@ class EconomyAPI extends PluginBase implements Listener {
         return "Language matching key \"$key\" does not exist.";
     }
 
+    private function replaceParameters($message, $params = []) {
+        $search = ["%MONETARY_UNIT%"];
+        $replace = [$this->getMonetaryUnit()];
+        for ($i = 0; $i < count($params); $i++) {
+            $search[] = "%" . ($i + 1);
+            $replace[] = $params[$i];
+        }
+        $colors = [
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "k", "l", "m", "n", "o", "r"
+        ];
+        foreach ($colors as $code) {
+            $search[] = "&" . $code;
+            $replace[] = TextFormat::ESCAPE . $code;
+        }
+        return str_replace($search, $replace, $message);
+    }
+
+    public function getMonetaryUnit(): string {
+        return $this->getConfig()->get("monetary-unit");
+    }
+
     public function setPlayerLanguage(string $player, string $language): bool {
         $player = strtolower($player);
         $language = strtolower($language);
@@ -119,47 +147,11 @@ class EconomyAPI extends PluginBase implements Listener {
         return false;
     }
 
-    public function getMonetaryUnit(): string {
-        return $this->getConfig()->get("monetary-unit");
-    }
-
     /**
      * @return array
      */
     public function getAllMoney(): array {
         return $this->provider->getAll();
-    }
-
-    /**
-     * @param string|Player $player
-     * @param float $defaultMoney
-     * @param bool $force
-     *
-     * @return bool
-     */
-    public function createAccount($player, $defaultMoney = false, bool $force = false): bool {
-        if ($player instanceof Player) {
-            $player = $player->getName();
-        }
-        $player = strtolower($player);
-        if (!$this->provider->accountExists($player)) {
-            $defaultMoney = ($defaultMoney === false) ? $this->getConfig()->get("default-money") : $defaultMoney;
-            $ev = new CreateAccountEvent($this, $player, $defaultMoney, "none");
-            $ev->call();
-            if (!$ev->isCancelled() or $force === true) {
-                $this->provider->createAccount($player, $ev->getDefaultMoney());
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param string|Player $player
-     *
-     * @return bool
-     */
-    public function accountExists($player): bool {
-        return $this->provider->accountExists($player);
     }
 
     /**
@@ -205,6 +197,15 @@ class EconomyAPI extends PluginBase implements Listener {
             return self::RET_CANCELLED;
         }
         return self::RET_NO_ACCOUNT;
+    }
+
+    /**
+     * @param string|Player $player
+     *
+     * @return bool
+     */
+    public function accountExists($player): bool {
+        return $this->provider->accountExists($player);
     }
 
     /**
@@ -275,13 +276,6 @@ class EconomyAPI extends PluginBase implements Listener {
         return self::RET_NO_ACCOUNT;
     }
 
-    /**
-     * @return EconomyAPI
-     */
-    public static function getInstance(): self {
-        return self::$instance;
-    }
-
     public function onLoad(): void {
         self::$instance = $this;
     }
@@ -314,63 +308,6 @@ class EconomyAPI extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
-    private function registerPermissions(): void {
-        DefaultPermissions::registerPermission(new Permission("economyapi.*", "Allows to control all of functions in EconomyAPI", [
-            "economyapi.command.setmoney",
-            "economyapi.command.mymoney",
-            "economyapi.command.givemoney",
-            "economyapi.command.pay",
-            "economyapi.command.seemoney",
-            "economyapi.command.setlang",
-            "economyapi.command.topmoney",
-            "economyapi.command.mystatus",
-            "economyapi.command.takemoney",
-        ]));
-        DefaultPermissions::registerPermission(new Permission("economyapi.*", "Allows to control all of functions in EconomyAPI", ["economyapi.command.*"]));
-    }
-
-    public function onJoin(PlayerJoinEvent $event) {
-        $player = $event->getPlayer();
-        if (!isset($this->playerLang[strtolower($player->getName())])) {
-            $this->playerLang[strtolower($player->getName())] = $this->getConfig()->get("default-lang");
-        }
-        if (!$this->provider->accountExists($player)) {
-            $this->getLogger()->debug("Account of '" . $player->getName() . "' is not found. Creating account...");
-            $this->createAccount($player, false, true);
-        }
-    }
-
-    public function onDisable(): void {
-        $this->saveAll();
-        if ($this->provider instanceof Provider) {
-            $this->provider->close();
-        }
-    }
-
-    public function saveAll() {
-        if ($this->provider instanceof Provider) {
-            $this->provider->save();
-        }
-        file_put_contents($this->getDataFolder() . "PlayerLang.dat", serialize($this->playerLang));
-    }
-
-    private function replaceParameters($message, $params = []) {
-        $search = ["%MONETARY_UNIT%"];
-        $replace = [$this->getMonetaryUnit()];
-        for ($i = 0; $i < count($params); $i++) {
-            $search[] = "%" . ($i + 1);
-            $replace[] = $params[$i];
-        }
-        $colors = [
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "k", "l", "m", "n", "o", "r"
-        ];
-        foreach ($colors as $code) {
-            $search[] = "&" . $code;
-            $replace[] = TextFormat::ESCAPE . $code;
-        }
-        return str_replace($search, $replace, $message);
-    }
-
     private function initialize() {
         if ($this->getConfig()->get("check-update")) {
             $this->checkUpdate();
@@ -393,11 +330,6 @@ class EconomyAPI extends PluginBase implements Listener {
         $this->registerCommands();
     }
 
-    public function openProvider() {
-        if ($this->provider !== null)
-            $this->provider->open();
-    }
-
     private function checkUpdate() {
         try {
             $info = json_decode(Internet::simpleCurl($this->getConfig()->get("update-host") . "?version=" . $this->getDescription()->getVersion() . "&package_version=" . self::PACKAGE_VERSION)->getBody(), true);
@@ -414,6 +346,30 @@ class EconomyAPI extends PluginBase implements Listener {
             $this->getLogger()->logException($e);
             return false;
         }
+    }
+
+    private function initializeLanguage() {
+        foreach ($this->getResources() as $resource) {
+            if ($resource->isFile() and substr(($filename = $resource->getFilename()), 0, 5) === "lang_") {
+                $this->lang[substr($filename, 5, -5)] = json_decode(file_get_contents($resource->getPathname()), true);
+            }
+        }
+        $this->lang["user-define"] = (new Config($this->getDataFolder() . "messages.yml", Config::YAML, $this->lang["def"]))->getAll();
+    }
+
+    private function registerPermissions(): void {
+        DefaultPermissions::registerPermission(new Permission("economyapi.*", "Allows to control all of functions in EconomyAPI", [
+            "economyapi.command.setmoney",
+            "economyapi.command.mymoney",
+            "economyapi.command.givemoney",
+            "economyapi.command.pay",
+            "economyapi.command.seemoney",
+            "economyapi.command.setlang",
+            "economyapi.command.topmoney",
+            "economyapi.command.mystatus",
+            "economyapi.command.takemoney",
+        ]));
+        DefaultPermissions::registerPermission(new Permission("economyapi.*", "Allows to control all of functions in EconomyAPI", ["economyapi.command.*"]));
     }
 
     private function registerCommands() {
@@ -434,12 +390,56 @@ class EconomyAPI extends PluginBase implements Listener {
         }
     }
 
-    private function initializeLanguage() {
-        foreach ($this->getResources() as $resource) {
-            if ($resource->isFile() and substr(($filename = $resource->getFilename()), 0, 5) === "lang_") {
-                $this->lang[substr($filename, 5, -5)] = json_decode(file_get_contents($resource->getPathname()), true);
+    public function onJoin(PlayerJoinEvent $event) {
+        $player = $event->getPlayer();
+        if (!isset($this->playerLang[strtolower($player->getName())])) {
+            $this->playerLang[strtolower($player->getName())] = $this->getConfig()->get("default-lang");
+        }
+        if (!$this->provider->accountExists($player)) {
+            $this->getLogger()->debug("Account of '" . $player->getName() . "' is not found. Creating account...");
+            $this->createAccount($player, false, true);
+        }
+    }
+
+    /**
+     * @param string|Player $player
+     * @param float $defaultMoney
+     * @param bool $force
+     *
+     * @return bool
+     */
+    public function createAccount($player, $defaultMoney = false, bool $force = false): bool {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        if (!$this->provider->accountExists($player)) {
+            $defaultMoney = ($defaultMoney === false) ? $this->getConfig()->get("default-money") : $defaultMoney;
+            $ev = new CreateAccountEvent($this, $player, $defaultMoney, "none");
+            $ev->call();
+            if (!$ev->isCancelled() or $force === true) {
+                $this->provider->createAccount($player, $ev->getDefaultMoney());
             }
         }
-        $this->lang["user-define"] = (new Config($this->getDataFolder() . "messages.yml", Config::YAML, $this->lang["def"]))->getAll();
+        return false;
+    }
+
+    public function onDisable(): void {
+        $this->saveAll();
+        if ($this->provider instanceof Provider) {
+            $this->provider->close();
+        }
+    }
+
+    public function saveAll() {
+        if ($this->provider instanceof Provider) {
+            $this->provider->save();
+        }
+        file_put_contents($this->getDataFolder() . "PlayerLang.dat", serialize($this->playerLang));
+    }
+
+    public function openProvider() {
+        if ($this->provider !== null)
+            $this->provider->open();
     }
 }

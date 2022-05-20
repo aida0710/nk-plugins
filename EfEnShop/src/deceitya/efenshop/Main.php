@@ -23,10 +23,6 @@ class Main extends PluginBase implements Listener {
     const EFFECT_FORM_ID = 436246;
     const ENCHANT_FORM_ID = 96242;
 
-    protected function onEnable(): void {
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    }
-
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if (!($sender instanceof Player)) {
             $sender->sendMessage("サーバー内で使用してください。");
@@ -292,5 +288,9 @@ class Main extends PluginBase implements Listener {
             $player->sendMessage("§bEnEfShop §7>> §cアイテムを持ってください");
             return;
         }
+    }
+
+    protected function onEnable(): void {
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 }

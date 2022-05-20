@@ -12,22 +12,15 @@ use pocketmine\player\Player;
 
 class LevelShopAPI {
 
+    private static LevelShopAPI $instance;
     protected array $buy = [];
     protected array $sell = [];
     protected array $level = [];
     protected array $type = [];
     protected array $list = [];
-    private static LevelShopAPI $instance;
 
     public function __construct() {
         $this->init();
-    }
-
-    public static function getInstance(): LevelShopAPI {
-        if (!isset(self::$instance)) {
-            self::$instance = new LevelShopAPI();
-        }
-        return self::$instance;
     }
 
     protected function init(): void {
@@ -288,18 +281,20 @@ class LevelShopAPI {
         }
     }
 
+    private function varDump($e): void {
+        var_dump("-----getFile-----");
+        var_dump($e->getFile());
+        var_dump("-----getLine-----");
+        var_dump($e->getLine());
+        var_dump("-----getCode-----");
+        var_dump($e->getCode());
+        var_dump("-----getMessage-----");
+        var_dump($e->getMessage());
+    }
+
     public function getSell(int $id, ?int $meta = null): ?int {
         try {
             return $this->sell[$id][$meta ?? 0] ?? null;
-        } catch (Exception $e) {
-            $this->varDump($e);
-            return null;
-        }
-    }
-
-    public function getLevel(int $id, ?int $meta = null): ?int {
-        try {
-            return $this->level[$id][$meta ?? 0] ?? null;
         } catch (Exception $e) {
             $this->varDump($e);
             return null;
@@ -318,6 +313,22 @@ class LevelShopAPI {
         }
     }
 
+    public static function getInstance(): LevelShopAPI {
+        if (!isset(self::$instance)) {
+            self::$instance = new LevelShopAPI();
+        }
+        return self::$instance;
+    }
+
+    public function getLevel(int $id, ?int $meta = null): ?int {
+        try {
+            return $this->level[$id][$meta ?? 0] ?? null;
+        } catch (Exception $e) {
+            $this->varDump($e);
+            return null;
+        }
+    }
+
     public function checkType(int $id, ?int $meta = null): ?string {
         try {
             return $this->type[$id][$meta ?? 0] ?? null;
@@ -325,16 +336,5 @@ class LevelShopAPI {
             $this->varDump($e);
             return null;
         }
-    }
-
-    private function varDump($e): void {
-        var_dump("-----getFile-----");
-        var_dump($e->getFile());
-        var_dump("-----getLine-----");
-        var_dump($e->getLine());
-        var_dump("-----getCode-----");
-        var_dump($e->getCode());
-        var_dump("-----getMessage-----");
-        var_dump($e->getMessage());
     }
 }

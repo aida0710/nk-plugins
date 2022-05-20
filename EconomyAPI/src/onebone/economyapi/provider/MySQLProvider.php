@@ -60,19 +60,6 @@ class MySQLProvider implements Provider {
 
     /**
      * @param Player|string $player
-     * @return bool
-     */
-    public function accountExists($player) {
-        if ($player instanceof Player) {
-            $player = $player->getName();
-        }
-        $player = strtolower($player);
-        $result = $this->db->query("SELECT * FROM user_money WHERE username='" . $this->db->real_escape_string($player) . "'");
-        return $result->num_rows > 0 ? true : false;
-    }
-
-    /**
-     * @param Player|string $player
      * @param float $defaultMoney
      * @return bool
      */
@@ -86,6 +73,26 @@ class MySQLProvider implements Provider {
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName() {
+        return "MySQL";
+    }
+
+    /**
+     * @param Player|string $player
+     * @return bool
+     */
+    public function accountExists($player) {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        $result = $this->db->query("SELECT * FROM user_money WHERE username='" . $this->db->real_escape_string($player) . "'");
+        return $result->num_rows > 0 ? true : false;
     }
 
     /**
@@ -169,13 +176,6 @@ class MySQLProvider implements Provider {
         }
         $res->free();
         return $ret;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName() {
-        return "MySQL";
     }
 
     public function save() {

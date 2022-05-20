@@ -41,19 +41,6 @@ abstract class BaseSubCommand extends BaseCommand {
         $this->usageMessage = "";
     }
 
-    public function getParent(): ?BaseCommand {
-        return $this->parent;
-    }
-
-    /**
-     * @param BaseCommand $parent
-     *
-     * @internal Used to pass the parent context from the parent command
-     */
-    public function setParent(BaseCommand $parent): void {
-        $this->parent = $parent;
-    }
-
     public function getUsage(): string {
         if (empty($this->usageMessage)) {
             $parent = $this->parent;
@@ -68,5 +55,18 @@ abstract class BaseSubCommand extends BaseCommand {
             $this->usageMessage = $this->generateUsageMessage(trim($parentNames));
         }
         return $this->usageMessage;
+    }
+
+    public function getParent(): ?BaseCommand {
+        return $this->parent;
+    }
+
+    /**
+     * @param BaseCommand $parent
+     *
+     * @internal Used to pass the parent context from the parent command
+     */
+    public function setParent(BaseCommand $parent): void {
+        $this->parent = $parent;
     }
 }

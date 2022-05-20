@@ -34,15 +34,15 @@ class AnnouncePlugin extends PluginBase {
         Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
     }
 
-    protected function onDisable(): void {
-        $this->repoPool->close();
-        $this->db->close();
-    }
-
     private function initRepository() {
         $this->db = new SQLite3($this->getDataFolder() . self::SQLITE_FILE);
         $this->repoPool = new RepositoryPool();
         $this->repoPool->register(UserRepository::class, new SQLiteUserRepository($this->db));
         $this->repoPool->register(AnnounceRepository::class, new SQLiteAnnounceRepository($this->db));
+    }
+
+    protected function onDisable(): void {
+        $this->repoPool->close();
+        $this->db->close();
     }
 }

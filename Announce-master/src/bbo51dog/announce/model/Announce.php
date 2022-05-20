@@ -12,10 +12,6 @@ class Announce {
 
     private int $timestamp;
 
-    public static function createFromDto(AnnounceDto $dto): self {
-        return new Announce($dto->getContent(), $dto->getType(), $dto->getTimestamp());
-    }
-
     /**
      * @param string $content
      * @param int $type
@@ -25,6 +21,10 @@ class Announce {
         $this->content = $content;
         $this->type = $type;
         $this->timestamp = $timestamp;
+    }
+
+    public static function createFromDto(AnnounceDto $dto): self {
+        return new Announce($dto->getContent(), $dto->getType(), $dto->getTimestamp());
     }
 
     /**

@@ -75,6 +75,10 @@ class YamlDatabase implements Database {
         $this->config = $config;
     }
 
+    public function getAll() {
+        return $this->land;
+    }
+
     public function addLand($startX, $endX, $startZ, $endZ, $level, $price, $owner, $expires = null, $invitee = []) {
         if ($level instanceof World) {
             $level = $level->getFolderName();
@@ -113,6 +117,16 @@ class YamlDatabase implements Database {
         return false;
     }
 
+    public function close() {
+        $this->save();
+    }
+
+    public function save() {
+        $config = new Config($this->path, Config::YAML);
+        $config->setAll($this->land);
+        $config->save();
+    }
+
     public function getByCoord($x, $z, $level) {
         if ($level instanceof World) {
             $level = $level->getFolderName();
@@ -125,10 +139,6 @@ class YamlDatabase implements Database {
             }
         }
         return false;
-    }
-
-    public function getAll() {
-        return $this->land;
     }
 
     public function getLandById($id) {
@@ -210,15 +220,5 @@ class YamlDatabase implements Database {
         }
         //	return !in_array($level, $this->config["white-land"]) or $player->hasPermission("economyland.land.modify.whiteland");
         return -1; // If no land found
-    }
-
-    public function close() {
-        $this->save();
-    }
-
-    public function save() {
-        $config = new Config($this->path, Config::YAML);
-        $config->setAll($this->land);
-        $config->save();
     }
 }

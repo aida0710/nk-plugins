@@ -37,21 +37,16 @@ class FlyCheckTask extends Task {
         }
     }
 
-    public function unLimited(Player $player) {
-        ++self::$flyTask[$player->getName()]["TimeLeft"];
-        if (self::$flyTask[$player->getName()]["TimeLeft"] === 60) {
-            self::$flyTask[$player->getName()]["TimeLeft"] = 0;
-            EconomyAPI::getInstance()->reduceMoney($player->getName(), 1500);
-            if ($this->exists($player) === false) return;
-            $player->sendActionBarMessage("§bFlyTask §7>> §a正常に処理されました");
-            $player->sendMessage("§bFlyTask §7>> §aお金を1500円消費しました");
-            $this->reduceMoney($player);
-            if ($this->exists($player) === false) return;
-        } elseif (in_array($player->getWorld()->getFolderName(), Main::$worlds)) {
-            $player->sendActionBarMessage("§bFlyTask §7>> §cこのワールドでは飛行を使用できません\n次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]["TimeLeft"] . "秒");
-        } else {
-            $player->sendActionBarMessage("§bFlyTask §7>> §a次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]["TimeLeft"] . "秒");
+    public function reduceMoney(Player $player) {
+        if (EconomyAPI::getInstance()->myMoney($player->getName()) < 1500) {
+            unset(self::$flyTask[$player->getName()]);
+            Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
+            $player->sendMessage("§bFlyTask §7>> §cお金が足りないためfly機能が自動的に停止しました");
         }
+    }
+
+    public function exists(Player $player): bool {
+        return array_key_exists($player->getName(), self::$flyTask);
     }
 
     public function limited(Player $player) {
@@ -90,15 +85,20 @@ class FlyCheckTask extends Task {
         }
     }
 
-    public function reduceMoney(Player $player) {
-        if (EconomyAPI::getInstance()->myMoney($player->getName()) < 1500) {
-            unset(self::$flyTask[$player->getName()]);
-            Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
-            $player->sendMessage("§bFlyTask §7>> §cお金が足りないためfly機能が自動的に停止しました");
+    public function unLimited(Player $player) {
+        ++self::$flyTask[$player->getName()]["TimeLeft"];
+        if (self::$flyTask[$player->getName()]["TimeLeft"] === 60) {
+            self::$flyTask[$player->getName()]["TimeLeft"] = 0;
+            EconomyAPI::getInstance()->reduceMoney($player->getName(), 1500);
+            if ($this->exists($player) === false) return;
+            $player->sendActionBarMessage("§bFlyTask §7>> §a正常に処理されました");
+            $player->sendMessage("§bFlyTask §7>> §aお金を1500円消費しました");
+            $this->reduceMoney($player);
+            if ($this->exists($player) === false) return;
+        } elseif (in_array($player->getWorld()->getFolderName(), Main::$worlds)) {
+            $player->sendActionBarMessage("§bFlyTask §7>> §cこのワールドでは飛行を使用できません\n次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]["TimeLeft"] . "秒");
+        } else {
+            $player->sendActionBarMessage("§bFlyTask §7>> §a次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]["TimeLeft"] . "秒");
         }
-    }
-
-    public function exists(Player $player): bool {
-        return array_key_exists($player->getName(), self::$flyTask);
     }
 }

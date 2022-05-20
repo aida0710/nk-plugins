@@ -43,18 +43,19 @@ class Account {
     //    public function getIp(): string {
     //        return $this->ip;
     //    }
-    /**
-     * @return string
-     */
-    public function getCid(): string {
-        return $this->cid;
-    }
 
     /**
      * @return string
      */
     public function getXuid(): string {
         return $this->xuid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCid(): string {
+        return $this->cid;
     }
 
 }

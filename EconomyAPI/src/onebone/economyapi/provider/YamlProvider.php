@@ -44,12 +44,20 @@ class YamlProvider implements Provider {
         $this->money = $this->config->getAll();
     }
 
+    public function getAll() {
+        return isset($this->money["money"]) ? $this->money["money"] : [];
+    }
+
     public function accountExists($player) {
         if ($player instanceof Player) {
             $player = $player->getName();
         }
         $player = strtolower($player);
         return isset($this->money["money"][$player]);
+    }
+
+    public function getName() {
+        return "Yaml";
     }
 
     public function createAccount($player, $defaultMoney = 1000) {
@@ -126,20 +134,12 @@ class YamlProvider implements Provider {
         return false;
     }
 
-    public function getAll() {
-        return isset($this->money["money"]) ? $this->money["money"] : [];
+    public function close() {
+        $this->save();
     }
 
     public function save() {
         $this->config->setAll($this->money);
         $this->config->save();
-    }
-
-    public function close() {
-        $this->save();
-    }
-
-    public function getName() {
-        return "Yaml";
     }
 }

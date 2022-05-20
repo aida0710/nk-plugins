@@ -18,8 +18,23 @@ class SQLiteAccountRepository implements AccountRepository {
         $this->prepareTable();
     }
 
+    private function prepareTable(): void {
+        $this->db->query("CREATE TABLE IF NOT EXISTS accounts(playerName TEXT, cid INTEGER, xuid TEXT)");
+    }
+
     public function close(): void {
     }
+
+    //    public function getAccountsByIp(string $ip): array {
+    //        $stmt = $this->db->prepare("SELECT * FROM accounts WHERE ip = :ip");
+    //        $stmt->bindValue(":ip", $ip);
+    //        $result = $stmt->execute();
+    //        $accounts = [];
+    //        for ($data = $result->fetchArray(); is_array($data); $data = $result->fetchArray()) {
+    //            $accounts[] = new Account($data["playerName"], $data["ip"], $data["cid"], $data["xuid"]);
+    //        }
+    //        return $accounts;
+    //    }
 
     public function getAccountsByName(string $name): array {
         $name = strtolower($name);
@@ -33,16 +48,6 @@ class SQLiteAccountRepository implements AccountRepository {
         return $accounts;
     }
 
-    //    public function getAccountsByIp(string $ip): array {
-    //        $stmt = $this->db->prepare("SELECT * FROM accounts WHERE ip = :ip");
-    //        $stmt->bindValue(":ip", $ip);
-    //        $result = $stmt->execute();
-    //        $accounts = [];
-    //        for ($data = $result->fetchArray(); is_array($data); $data = $result->fetchArray()) {
-    //            $accounts[] = new Account($data["playerName"], $data["ip"], $data["cid"], $data["xuid"]);
-    //        }
-    //        return $accounts;
-    //    }
     public function getAccountsByCid(int $cid): array {
         $stmt = $this->db->prepare("SELECT * FROM accounts WHERE cid = :cid");
         $stmt->bindValue(":cid", $cid);
@@ -65,15 +70,6 @@ class SQLiteAccountRepository implements AccountRepository {
         return $accounts;
     }
 
-    public function register(Account $account): void {
-        $stmt = $this->db->prepare("INSERT INTO accounts values(:playerName, :cid, :xuid)");
-        $stmt->bindValue(":playerName", $account->getName());
-        //$stmt->bindValue(":ip", $account->getIp());
-        $stmt->bindValue(":cid", $account->getCid());
-        $stmt->bindValue(":xuid", $account->getXuid());
-        $stmt->execute();
-    }
-
     public function registerIfNotExists(Account $account): void {
         if (!$this->exists($account)) {
             $this->register($account);
@@ -90,7 +86,12 @@ class SQLiteAccountRepository implements AccountRepository {
         return $rows[0] > 0;
     }
 
-    private function prepareTable(): void {
-        $this->db->query("CREATE TABLE IF NOT EXISTS accounts(playerName TEXT, cid INTEGER, xuid TEXT)");
+    public function register(Account $account): void {
+        $stmt = $this->db->prepare("INSERT INTO accounts values(:playerName, :cid, :xuid)");
+        $stmt->bindValue(":playerName", $account->getName());
+        //$stmt->bindValue(":ip", $account->getIp());
+        $stmt->bindValue(":cid", $account->getCid());
+        $stmt->bindValue(":xuid", $account->getXuid());
+        $stmt->execute();
     }
 }

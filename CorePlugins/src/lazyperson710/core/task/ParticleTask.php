@@ -9,6 +9,10 @@ use pocketmine\world\particle\DustParticle;
 
 class ParticleTask extends Task {
 
+    public function onRun(): void {
+        $this->addParticle();
+    }
+
     public function addParticle(): void {
         for ($t = 0; $t <= 2.0; $t += 0.01) {
             $x = 12 * cos(M_PI * $t);
@@ -20,9 +24,5 @@ class ParticleTask extends Task {
             $pos = Server::getInstance()->getWorldManager()->getWorldByName("lobby")->getSpawnLocation()->add($x, 3.5, $z);
             Server::getInstance()->getWorldManager()->getWorldByName("lobby")->addParticle($pos, new DustParticle(new Color(255, 255, 255)));
         }
-    }
-
-    public function onRun(): void {
-        $this->addParticle();
     }
 }

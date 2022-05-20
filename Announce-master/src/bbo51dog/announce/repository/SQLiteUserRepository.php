@@ -17,6 +17,10 @@ class SQLiteUserRepository implements UserRepository {
         $this->createTable();
     }
 
+    private function createTable() {
+        $this->db->exec("CREATE TABLE IF NOT EXISTS users (name TEXT PRIMARY KEY NOT NULL, announceId INTEGER NOT NULL, hasRead NUMERIC NOT NULL, confirmed NUMERIC NOT NULL)");
+    }
+
     public function getUser(string $name): UserDto {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE name = :name");
         $stmt->bindValue(":name", $name);
@@ -58,9 +62,5 @@ class SQLiteUserRepository implements UserRepository {
     }
 
     public function close(): void {
-    }
-
-    private function createTable() {
-        $this->db->exec("CREATE TABLE IF NOT EXISTS users (name TEXT PRIMARY KEY NOT NULL, announceId INTEGER NOT NULL, hasRead NUMERIC NOT NULL, confirmed NUMERIC NOT NULL)");
     }
 }

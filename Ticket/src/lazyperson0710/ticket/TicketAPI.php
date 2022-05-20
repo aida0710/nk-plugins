@@ -30,10 +30,6 @@ class TicketAPI {
         self::$instance = new TicketAPI($dataFile);
     }
 
-    public static function getInstance(): TicketAPI {
-        return self::$instance;
-    }
-
     public function setCache(): void {
         $this->cache = $this->config->getAll();
     }
@@ -49,8 +45,8 @@ class TicketAPI {
         }
     }
 
-    #[Pure] public function dataExists(Player $player): bool {
-        return array_key_exists($player->getName(), $this->cache);
+    public static function getInstance(): TicketAPI {
+        return self::$instance;
     }
 
     public function createData(Player $player): bool {
@@ -60,16 +56,20 @@ class TicketAPI {
         } else return false;
     }
 
-    #[Pure] public function checkData(Player $player): int|bool {
-        if ($this->dataExists($player) === true) {
-            return (int)$this->cache[$player->getName()];
-        } else return false;
+    #[Pure] public function dataExists(Player $player): bool {
+        return array_key_exists($player->getName(), $this->cache);
     }
 
     #[Pure] public function containsTicket(Player $player, int $amount): bool {
         if ($this->dataExists($player) === false) return false;
         if ($this->checkData($player) <= $amount) {
             return true;
+        } else return false;
+    }
+
+    #[Pure] public function checkData(Player $player): int|bool {
+        if ($this->dataExists($player) === true) {
+            return (int)$this->cache[$player->getName()];
         } else return false;
     }
 
@@ -84,21 +84,7 @@ class TicketAPI {
      * データが存在しない場合はfalseを返す//intだけに絞ってもいいかも
      *
      * */
-    public function addTicket(Player $player, int $increase): bool|int {
-        if ($this->dataExists($player) === false) return false;
-        $int = $this->cache[$player->getName()];
-        $result = $increase + $int;
-        $this->cache[$player->getName()] = $result;
-        return $result;
-    }
 
-    /*
-     * ticketの数を減らす
-     * データが存在しない場合はfalseを返す//intだけに絞ってもいいかも
-     * 指定値が0以下の場合もfalseを返す
-     * 結果の値が0以下の場合は0で返却する
-     * 正常に動作した場合は1以上の数字を返す
-     * */
     public function reduceTicket(Player $player, int $reduce): bool|int {
         if ($this->dataExists($player) === false) return false;
         if ($reduce <= 0) return false;
@@ -114,10 +100,13 @@ class TicketAPI {
     }
 
     /*
-     * inventory内のticket置換
-     * 変換できる個数を最終的に返す為、受け取り側は0か1以上で判断して欲しいです
-     * また、データが存在しない場合も0を返す
+     * ticketの数を減らす
+     * データが存在しない場合はfalseを返す//intだけに絞ってもいいかも
+     * 指定値が0以下の場合もfalseを返す
+     * 結果の値が0以下の場合は0で返却する
+     * 正常に動作した場合は1以上の数字を返す
      * */
+
     public function replaceInventoryTicket(Player $player): int {
         if ($this->dataExists($player) === false) return 0;
         $inventory = $player->getInventory();
@@ -134,10 +123,25 @@ class TicketAPI {
     }
 
     /*
+     * inventory内のticket置換
+     * 変換できる個数を最終的に返す為、受け取り側は0か1以上で判断して欲しいです
+     * また、データが存在しない場合も0を返す
+     * */
+
+    public function addTicket(Player $player, int $increase): bool|int {
+        if ($this->dataExists($player) === false) return false;
+        $int = $this->cache[$player->getName()];
+        $result = $increase + $int;
+        $this->cache[$player->getName()] = $result;
+        return $result;
+    }
+
+    /*
      * stackStorageのticket置換
      * 変換できる個数を最終的に返す為、受け取り側は0か1以上で判断して欲しいです
      * また、データが存在しない場合も0を返す
      * */
+
     public function replaceStackStorageTicket(Player $player): int {
         if ($this->dataExists($player) === false) return 0;
         StackStorageAPI::$instance->getCount($player->getXuid(), clone VanillaItems::NAUTILUS_SHELL(), function (int $stCount) use ($player) {

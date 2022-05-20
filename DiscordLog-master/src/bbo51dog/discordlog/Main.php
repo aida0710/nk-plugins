@@ -24,13 +24,7 @@ class Main extends PluginBase {
     public const STOP = "%time サーバーを停止しました";
     public const WHITELIST_ON = "%time %playerさんがホワイトリストを有効にしました";
     public const WHITELIST_OFF = "%time %playerホワイトリストを無効にしました";
-
-    public static function getTime(): string {
-        return date(self::TIME);
-    }
-
     private bool $stop;
-
     private string $url;
 
     protected function onEnable(): void {
@@ -72,6 +66,10 @@ class Main extends PluginBase {
         }
         $this->stop = $setting["stop"];
         $this->url = $setting["url"];
+    }
+
+    public static function getTime(): string {
+        return date(self::TIME);
     }
 
     protected function onDisable(): void {
