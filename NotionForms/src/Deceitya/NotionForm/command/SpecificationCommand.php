@@ -2,15 +2,11 @@
 
 namespace Deceitya\NotionForm\command;
 
-use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\tools\diamond\DiamondToolForm;
 use Deceitya\NotionForm\Form\StartForm;
 use Deceitya\NotionForm\Main;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use pocketmine\Server;
-use pocketmine\utils\Config;
 
 class SpecificationCommand extends Command {
 

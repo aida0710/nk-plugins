@@ -2,7 +2,6 @@
 
 namespace Deceitya\NotionForm\Form;
 
-use Deceitya\NotionForm\Main;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 

@@ -24,7 +24,7 @@ class SearchContentForm implements Form {
             return;
         }
         if ($data === 0) {
-            $player->sendForm(new SearchResultForm($this->heading, $this->searchdefault));
+            $player->sendForm(new SearchResultForm($this->file, $this->heading, $this->searchdefault));
             return;
         }
         if ($data === 1) {

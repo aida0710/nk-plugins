@@ -14,7 +14,7 @@ class SearchForm implements Form {
     public $default = [];
     private array $file;
 
-    public function __construct(array $file,string $error = "", array $default = []) {
+    public function __construct(array $file, string $error = "", array $default = []) {
         $this->error = $error;
         $this->default = $default;
         $this->file = $file;
@@ -50,10 +50,10 @@ class SearchForm implements Form {
         }
         if (count($this->heading) === 0) {
             $message = "§eはるか彼方まで検索したのですが、残念ながら見つかりませんでした。§r\n";
-            $player->sendForm(new self($this->file,"\n" . $message, $data));
+            $player->sendForm(new self($this->file, "\n" . $message, $data));
             return;
         }
-        $player->sendForm(new SearchResultForm($this->heading, $data));
+        $player->sendForm(new SearchResultForm($this->file, $this->heading, $data));
     }
 
     //https://paiza.io/projects/0xkeR4gN6pQvi4n5Eqh3qQ
