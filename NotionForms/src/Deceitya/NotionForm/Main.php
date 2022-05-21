@@ -20,7 +20,7 @@ class Main extends PluginBase {
         $this->saveResource('command.json');
         self::$function = (new Config($this->getDataFolder() . 'function.json', Config::JSON))->getAll();
         self::$specification = (new Config($this->getDataFolder() . 'specification.json', Config::JSON))->getAll();
-        self::$specification = (new Config($this->getDataFolder() . 'command.json', Config::JSON))->getAll();
+        self::$command = (new Config($this->getDataFolder() . 'command.json', Config::JSON))->getAll();
         $this->getServer()->getCommandMap()->registerAll("notionForm", [
             new FunctionCommand(),
             new SpecificationCommand(),
