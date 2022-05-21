@@ -37,7 +37,7 @@ class SearchResultForm implements Form {
     public function jsonSerialize() {
         $form = [
             'type' => 'form',
-            'title' => 'Specification',
+            'title' => 'Notion Form',
             'content' => '見たいコンテンツを選択してください',
             'buttons' => [
                 ['text' => "戻る"]

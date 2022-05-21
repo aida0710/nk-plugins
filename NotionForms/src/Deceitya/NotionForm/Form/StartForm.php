@@ -2,6 +2,7 @@
 
 namespace Deceitya\NotionForm\Form;
 
+use JetBrains\PhpStorm\ArrayShape;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -30,7 +31,7 @@ class StartForm implements Form {
             'title' => 'Notion Form',
             'content' => '見たいコンテンツを選択してください',
             'buttons' => [
-                ['text' => "仕様を検索する"],
+                ['text' => "コンテンツを検索"],
             ]
         ];
         foreach ($this->file as $c) {
