@@ -44,7 +44,6 @@ class SearchForm implements Form {
                 }
                 if (($result = strpos($c["text"], $search)) !== false) {
                     $this->heading[$id] = $c["title"] . "\n" . $this->createHeading($result, $c["text"], $search);
-                    continue;
                 }
             }
         }
@@ -69,7 +68,7 @@ class SearchForm implements Form {
         return $color . $this->strcut($text, $start, 20) . "§8";
     }
 
-    public function convertEOL($string, $to = "\n") {
+    public function convertEOL($string, $to = "\n"): string {
         return strtr($string, array(
             "\r\n" => $to,
             "\r" => $to,
@@ -85,7 +84,7 @@ class SearchForm implements Form {
             $color = "§" . ($beforeColor[2] ?? "8");
         }
         $text = substr_replace($text, $color, $result + strlen($search), 0);
-        $text = substr_replace($text, $color !== "§6" ? "§6" : "§g", $result, 0);
+        $text = substr_replace($text, $color !== "§e" ? "§e" : "§g", $result, 0);
         return [$color, $text];
     }
 
@@ -94,7 +93,7 @@ class SearchForm implements Form {
     }
 
     public function jsonSerialize() {
-        $form = [
+        return [
             'type' => 'custom_form',
             'title' => 'NotionForm',
             'content' => [
@@ -126,7 +125,6 @@ class SearchForm implements Form {
                 ]
             ],
         ];
-        return $form;
     }
 
 }
