@@ -5,6 +5,7 @@ namespace lazyperson0710\EffectItems;
 use lazyperson0710\EffectItems\tools\all\ExplosionTools;
 use lazyperson0710\EffectItems\tools\all\OldTools;
 use lazyperson0710\EffectItems\tools\all\TreasureDiscoveryTools;
+use lazyperson0710\EffectItems\tools\Axe\QuadAxe;
 use lazyperson0710\EffectItems\tools\others\AirBlock;
 use lazyperson0710\EffectItems\tools\pickaxe\AlchemyPickaxe;
 use lazyperson0710\EffectItems\tools\pickaxe\BlastFurnacePickaxe;
@@ -43,5 +44,8 @@ class Main extends PluginBase {
         ##shovel
         $manager->registerEvents(new PoisonShovel(), $this);
         $manager->registerEvents(new WitherShovel(), $this);
+        ##Axe
+        $manager->registerEvents(new QuadAxe(), $this);
+        #Here's johnny! Here'sJohnny!
     }
 }
