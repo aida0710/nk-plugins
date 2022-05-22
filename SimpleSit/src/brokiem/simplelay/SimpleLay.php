@@ -26,7 +26,6 @@ use pocketmine\world\Position;
 class SimpleLay extends PluginBase {
 
     public array $toggleSit = [];
-
     public array $sittingData = [];
 
     public function onEnable(): void {
@@ -39,10 +38,10 @@ class SimpleLay extends PluginBase {
         }
         switch (strtolower($command->getName())) {
             case "sit":
-                if ($this->isToggleSit($sender)) {
-                    $this->unsetToggleSit($sender);
+                if ($this->isSitting($sender)) {
+                    $this->unsetSit($sender);
                 } else {
-                    $this->setToggleSit($sender);
+                    $this->sit($sender, $sender->getWorld()->getBlock($sender->getPosition()->add(0, -0.5, 0)));
                 }
                 break;
             case "skick":
@@ -79,7 +78,6 @@ class SimpleLay extends PluginBase {
         $this->toggleSit[] = strtolower($player->getName());
         $player->sendMessage("§bSit §7>> §aタップで座らないようになりました");
     }
-
     public function isSitting(Player $player): bool {
         return isset($this->sittingData[strtolower($player->getName())]);
     }
@@ -100,6 +98,7 @@ class SimpleLay extends PluginBase {
         } elseif ($block instanceof Opaque) {
             $pos = $block->getPosition()->add(0.5, 2.1, 0.5);
         } else {
+            $player->sendTip("§bSit §7>> §cこのブロックには座ることはできません");
             return;
         }
         foreach ($this->sittingData as $playerName => $data) {
@@ -108,6 +107,10 @@ class SimpleLay extends PluginBase {
                 $player->sendTip("§bSit §7>> §cこのブロックには他プレイヤーが既に存在します");
                 return;
             }
+        }
+        if ($this->isSitting($player)) {
+            $player->sendTip("§bSit §7>> §c既に待機状態です");
+            return;
         }
         $this->setSit($player, $this->getServer()->getOnlinePlayers(), new Position($pos->x, $pos->y, $pos->z, $this->getServer()->getWorldManager()->getWorldByName($player->getWorld()->getFolderName())));
         $player->sendTip("§bSit §7>> §c現在待機状態です\n状態を解除するにはスニーク状態にしてください");

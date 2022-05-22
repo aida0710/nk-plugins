@@ -47,18 +47,6 @@ class EventListener implements Listener {
         }), 30);
     }
 
-    public function onInteract(PlayerInteractEvent $event): void {
-        $player = $event->getPlayer();
-        $block = $event->getBlock();
-        if (!$this->plugin->isToggleSit($player)) {
-            if ($block instanceof Slab and $block->getMeta() < 6) {
-                $this->plugin->sit($player, $block);
-            } elseif ($block instanceof Stair and $block->getMeta() < 4) {
-                $this->plugin->sit($player, $block);
-            }
-        }
-    }
-
     public function onPlayerQuit(PlayerQuitEvent $event): void {
         $player = $event->getPlayer();
         if ($this->plugin->isSitting($player)) {
