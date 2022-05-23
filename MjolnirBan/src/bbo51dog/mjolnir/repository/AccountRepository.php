@@ -12,11 +12,7 @@ interface AccountRepository extends Repository {
      */
     public function getAccountsByName(string $name): array;
 
-    //    /**
-    //     * @param string $ip
-    //     * @return Account[]
-    //     */
-    //    public function getAccountsByIp(string $ip): array;
+
     /**
      * @param int $cid
      * @return Account[]

@@ -25,17 +25,6 @@ class SQLiteAccountRepository implements AccountRepository {
     public function close(): void {
     }
 
-    //    public function getAccountsByIp(string $ip): array {
-    //        $stmt = $this->db->prepare("SELECT * FROM accounts WHERE ip = :ip");
-    //        $stmt->bindValue(":ip", $ip);
-    //        $result = $stmt->execute();
-    //        $accounts = [];
-    //        for ($data = $result->fetchArray(); is_array($data); $data = $result->fetchArray()) {
-    //            $accounts[] = new Account($data["playerName"], $data["ip"], $data["cid"], $data["xuid"]);
-    //        }
-    //        return $accounts;
-    //    }
-
     public function getAccountsByName(string $name): array {
         $name = strtolower($name);
         $stmt = $this->db->prepare("SELECT * FROM accounts WHERE playerName = :playerName");
@@ -43,7 +32,7 @@ class SQLiteAccountRepository implements AccountRepository {
         $result = $stmt->execute();
         $accounts = [];
         for ($data = $result->fetchArray(); is_array($data); $data = $result->fetchArray()) {
-            $accounts[] = new Account($data["playerName"], $data["ip"], $data["cid"], $data["xuid"]);
+            $accounts[] = new Account($data["playerName"], $data["cid"], $data["xuid"]);
         }
         return $accounts;
     }
@@ -79,7 +68,6 @@ class SQLiteAccountRepository implements AccountRepository {
     public function exists(Account $account): bool {
         $stmt = $this->db->prepare("SELECT COUNT (*) FROM accounts WHERE playerName = :playerName AND cid = :cid AND xuid = :xuid");
         $stmt->bindValue(":playerName", $account->getName());
-        //$stmt->bindValue(":ip", $account->getIp());
         $stmt->bindValue(":cid", $account->getCid());
         $stmt->bindValue(":xuid", $account->getXuid());
         $rows = $stmt->execute()->fetchArray();
@@ -89,7 +77,6 @@ class SQLiteAccountRepository implements AccountRepository {
     public function register(Account $account): void {
         $stmt = $this->db->prepare("INSERT INTO accounts values(:playerName, :cid, :xuid)");
         $stmt->bindValue(":playerName", $account->getName());
-        //$stmt->bindValue(":ip", $account->getIp());
         $stmt->bindValue(":cid", $account->getCid());
         $stmt->bindValue(":xuid", $account->getXuid());
         $stmt->execute();

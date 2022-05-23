@@ -8,8 +8,6 @@ class Account {
 
     private string $name;
 
-    private string $ip;
-
     private int $cid;
 
     private string $xuid;
@@ -21,7 +19,6 @@ class Account {
      */
     public function __construct(string $name, int $cid, string $xuid) {
         $this->name = strtolower($name);
-        //$this->ip = $ip;
         $this->cid = $cid;
         $this->xuid = $xuid;
     }
@@ -36,13 +33,6 @@ class Account {
     public function getName(): string {
         return $this->name;
     }
-
-    //    /**
-    //     * @return string
-    //     */
-    //    public function getIp(): string {
-    //        return $this->ip;
-    //    }
 
     /**
      * @return string

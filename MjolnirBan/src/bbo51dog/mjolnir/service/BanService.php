@@ -36,15 +36,7 @@ class BanService {
         }
     }
 
-    //    public static function banIp(string $ip, string $reason) {
-    //        /** @var AccountRepository $accountRepo */
-    //        $accountRepo = MjolnirPlugin::getRepositoryFactory()->getRepository(AccountRepository::class);
-    //        /** @var BanRepository $banRepo */
-    //        $banRepo = MjolnirPlugin::getRepositoryFactory()->getRepository(BanRepository::class);
-    //        $banRepo->register(new Ban($ip, BanType::IP(), $reason));
-    //        self::banAccounts($accountRepo->getAccountsByIp($ip), $reason);
-    //        self::checkBannedPlayers();
-    //    }
+
 
     private static function banAccount(Account $account, string $reason) {
         /** @var BanRepository $banRepo */
@@ -55,10 +47,7 @@ class BanService {
             $banRepo->register(new Ban($account->getName(), BanType::PLAYER_NAME(), $reason));
             self::banAccounts($accountRepo->getAccountsByName($account->getName()), "Related to {$account->getName()}");
         }
-        //        if (!$banRepo->isBannedIp($account->getIp())) {
-        //            $banRepo->register(new Ban($account->getIp(), BanType::IP(), $reason));
-        //            self::banAccounts($accountRepo->getAccountsByIp($account->getIp()), "Related to {$account->getName()}");
-        //        }
+ 
         if (!$banRepo->isBannedCid($account->getCid())) {
             $banRepo->register(new Ban($account->getCid(), BanType::CID(), $reason));
             self::banAccounts($accountRepo->getAccountsByCid($account->getCid()), "Related to {$account->getName()}");

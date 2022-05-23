@@ -30,9 +30,7 @@ class MjolnirBanCommand extends Command {
                 BanService::banName($args[1], $reason);
                 Server::getInstance()->getPlayerExact($args[1])?->kick(Setting::getInstance()->getKickMessage());
                 break;
-            /*case BanType::IP()->name():
-                BanService::banIp($args[1], $reason);
-                break;*/
+        
             case BanType::CID()->name():
                 BanService::banCid($args[1], $reason);
                 break;

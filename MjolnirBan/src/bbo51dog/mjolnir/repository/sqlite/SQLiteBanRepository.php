@@ -31,9 +31,6 @@ class SQLiteBanRepository implements BanRepository {
         $stmt->execute();
     }
 
-    //    public function isBannedIp(string $ip): bool {
-    //        return $this->exists($ip, BanType::IP());
-    //    }
 
     public function isBannedName(string $name): bool {
         return $this->exists($name, BanType::PLAYER_NAME());
