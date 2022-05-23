@@ -17,7 +17,7 @@ class ReplaceTicketForm extends CustomForm {
     public function __construct(Player $player) {
         $names = null;
         foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
-            $name = $player->getName();
+            $name = $playerName->getName();
             $names[] .= $name;
         }
         if (is_null($names)) {
@@ -37,11 +37,11 @@ class ReplaceTicketForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         if (Server::getInstance()->isOp($player->getName())) {
             $playerName = $this->playerList->getSelectedOption();
-            $playerInstance = Server::getInstance()->getPlayerByPrefix($playerName);
             if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
                 $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
                 return;
             }
+            $playerInstance = Server::getInstance()->getPlayerByPrefix($playerName);
         } else {
             $playerInstance = $player;
         }

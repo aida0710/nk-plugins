@@ -16,8 +16,8 @@ class ReduceTicketForm extends CustomForm {
 
     public function __construct(Player $player) {
         $names = null;
-        foreach (Server::getInstance()->getOnlinePlayers() as $player) {
-            $name = $player->getName();
+        foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
+            $name = $playerName->getName();
             $names[] .= $name;
         }
         if (is_null($names)) {
