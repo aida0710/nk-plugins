@@ -16,7 +16,7 @@ class EffectTaskScheduler extends Task {
         //$dtStr = date("H:i:s") . "." . substr(explode(".", (microtime(true) . ""))[1], 0, 3);
         //var_dump("{$dtStr} - 1秒");
         $count = count(Server::getInstance()->getOnlinePlayers());
-        $color = rand(1, 2);
+        $color = mt_rand(1, 2);
         switch ($color) {
             case 1:
                 $color = "§e";

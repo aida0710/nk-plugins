@@ -19,8 +19,8 @@ class BreakSoundPacket implements Listener {
         $pk->x = $player->getPosition()->getX();
         $pk->y = $player->getPosition()->getY();
         $pk->z = $player->getPosition()->getZ();
-        $volume = rand(1, 2);
-        $pitch = rand(5, 10);
+        $volume = mt_rand(1, 2);
+        $pitch = mt_rand(5, 10);
         $pk->soundName = "random.orb";
         $pk->volume = $volume / 10;
         $pk->pitch = $pitch / 10;

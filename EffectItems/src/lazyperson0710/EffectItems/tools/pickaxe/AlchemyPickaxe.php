@@ -23,7 +23,7 @@ class AlchemyPickaxe implements Listener {
                     case BlockLegacyIds::STONE:
                         if (rand(1, 500) === 5) {
                             if ($inHand->hasEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE))) {
-                                $fortune = rand(1, 3);
+                                $fortune = mt_rand(1, 3);
                             } else {
                                 $fortune = 1;
                             }
