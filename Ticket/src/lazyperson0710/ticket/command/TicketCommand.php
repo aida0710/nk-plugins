@@ -3,11 +3,9 @@
 namespace lazyperson0710\ticket\command;
 
 use lazyperson0710\ticket\command\form\MainTicketForm;
-use lazyperson0710\ticket\command\form\ReplaceTicketForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class TicketCommand extends Command {
 
@@ -20,10 +18,6 @@ class TicketCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (Server::getInstance()->isOp($sender->getName())) {
-            $sender->sendForm(new MainTicketForm($sender));
-            return;
-        }
-        $sender->sendForm(new ReplaceTicketForm($sender));
+        $sender->sendForm(new MainTicketForm($sender));
     }
 }
