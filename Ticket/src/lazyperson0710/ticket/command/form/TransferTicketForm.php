@@ -53,7 +53,7 @@ class TransferTicketForm extends CustomForm {
             $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
             return;
         }
-        if (TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue()) === false) {
+        if (TicketAPI::getInstance()->reduceTicket($player, $this->int->getValue()) === false) {
             $player->sendMessage("§bTicket §7>> §c{$playerName}のTicketの枚数が足らないかエラーが発生しました");
             return;
         }
