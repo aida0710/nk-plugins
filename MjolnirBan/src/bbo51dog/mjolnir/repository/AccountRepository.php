@@ -12,7 +12,6 @@ interface AccountRepository extends Repository {
      */
     public function getAccountsByName(string $name): array;
 
-
     /**
      * @param int $cid
      * @return Account[]

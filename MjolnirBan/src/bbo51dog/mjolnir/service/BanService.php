@@ -36,8 +36,6 @@ class BanService {
         }
     }
 
-
-
     private static function banAccount(Account $account, string $reason) {
         /** @var BanRepository $banRepo */
         $banRepo = MjolnirPlugin::getRepositoryFactory()->getRepository(BanRepository::class);
@@ -47,7 +45,6 @@ class BanService {
             $banRepo->register(new Ban($account->getName(), BanType::PLAYER_NAME(), $reason));
             self::banAccounts($accountRepo->getAccountsByName($account->getName()), "Related to {$account->getName()}");
         }
- 
         if (!$banRepo->isBannedCid($account->getCid())) {
             $banRepo->register(new Ban($account->getCid(), BanType::CID(), $reason));
             self::banAccounts($accountRepo->getAccountsByCid($account->getCid()), "Related to {$account->getName()}");

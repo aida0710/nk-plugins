@@ -7,7 +7,6 @@ use lazyperson0710\ticket\TicketAPI;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Event;
 use pocketmine\event\Listener;
-use pocketmine\player\Player;
 use pocketmine\Server;
 
 class BreakEventListener implements Listener {

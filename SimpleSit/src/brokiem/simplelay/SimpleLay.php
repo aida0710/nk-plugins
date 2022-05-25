@@ -78,6 +78,7 @@ class SimpleLay extends PluginBase {
         $this->toggleSit[] = strtolower($player->getName());
         $player->sendMessage("§bSit §7>> §aタップで座らないようになりました");
     }
+
     public function isSitting(Player $player): bool {
         return isset($this->sittingData[strtolower($player->getName())]);
     }

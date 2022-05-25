@@ -2,7 +2,6 @@
 
 namespace Deceitya\NotionForm\Form;
 
-use JetBrains\PhpStorm\ArrayShape;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
