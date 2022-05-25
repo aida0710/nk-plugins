@@ -17,12 +17,12 @@ class BankPlugin extends PluginBase {
         return self::$instance;
     }
 
-    function onLoad(): void {
+    public function onLoad(): void {
         self::$instance = $this;
         parent::onLoad();
     }
 
-    function onEnable(): void {
+    public function onEnable(): void {
         $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
         $this->getServer()->getCommandMap()->register("bank", new BankCommand());
         parent::onEnable();

@@ -20,7 +20,7 @@ use pocketmine\Server;
 
 class Main extends PluginBase {
 
-    const ITEM_GRIND_STONE = -195;
+    public const ITEM_GRIND_STONE = -195;
     private static Main $main;
 
     public function onEnable(): void {

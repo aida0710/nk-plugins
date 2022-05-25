@@ -19,11 +19,11 @@ use pocketmine\utils\Config;
 
 class InfoSystem extends PluginBase implements Listener {
 
-    const owner = [
+    public const owner = [
         'lazyperson710'
     ];
 
-    const debugger = [
+    public const debugger = [
         'sloth0710',
         'asapon128'
     ];

@@ -9,9 +9,9 @@ use SQLite3;
 
 class AsyncDataWriteTask extends AsyncTask {
 
-    const TYPE_LEVEL = 1;
-    const TYPE_EXP = 2;
-    const TYPE_UPEXP = 3;
+    public const TYPE_LEVEL = 1;
+    public const TYPE_EXP = 2;
+    public const TYPE_UPEXP = 3;
 
     public string $cache;
     public string $databasefile;

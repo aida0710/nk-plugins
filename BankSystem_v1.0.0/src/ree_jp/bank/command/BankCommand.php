@@ -13,7 +13,7 @@ use ree_jp\bank\form\BankForm;
 
 class BankCommand extends Command {
 
-    function __construct(string $name = "bank", string $description = "銀行システム", string $usageMessage = null, array $aliases = []) {
+    public function __construct(string $name = "bank", string $description = "銀行システム", string $usageMessage = null, array $aliases = []) {
         $overloads = [
             [
                 CommandParameter::enum("bankMode", new CommandEnum("bankMode", ["ranking", "create", "delete", "log", "put", "out", "share", "transfer"]), AvailableCommandsPacket::ARG_TYPE_STRING, true),
@@ -28,7 +28,7 @@ class BankCommand extends Command {
     /**
      * @inheritDoc
      */
-    function execute(CommandSender $sender, string $commandLabel, array $args) {
+    public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if ($sender instanceof Player) {
             if ($this->testPermission($sender)) {
                 $sender->sendForm(new BankForm());

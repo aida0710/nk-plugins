@@ -15,17 +15,17 @@ interface ILogHelper {
      * @param string $bank
      * @return bool
      */
-    function isExists(string $bank): bool;
+    public function isExists(string $bank): bool;
 
     /**
      * @param string $bank
      * @return ResultLog
      */
-    function getLog(string $bank): ResultLog;
+    public function getLog(string $bank): ResultLog;
 
     /**
      * @param string $bank
      * @param string $message
      */
-    function addLog(string $bank, string $message): void;
+    public function addLog(string $bank, string $message): void;
 }

@@ -41,14 +41,14 @@ use Throwable;
 
 class EconomyAPI extends PluginBase implements Listener {
 
-    const API_VERSION = 3;
-    const PACKAGE_VERSION = "5.7";
+    public const API_VERSION = 3;
+    public const PACKAGE_VERSION = "5.7";
 
-    const RET_NO_ACCOUNT = -3;
-    const RET_CANCELLED = -2;
-    const RET_NOT_FOUND = -1;
-    const RET_INVALID = 0;
-    const RET_SUCCESS = 1;
+    public const RET_NO_ACCOUNT = -3;
+    public const RET_CANCELLED = -2;
+    public const RET_NOT_FOUND = -1;
+    public const RET_INVALID = 0;
+    public const RET_SUCCESS = 1;
 
     private static $instance = null;
 
