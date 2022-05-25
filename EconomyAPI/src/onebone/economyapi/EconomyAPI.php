@@ -55,23 +55,6 @@ class EconomyAPI extends PluginBase implements Listener {
     /** @var Provider */
     private $provider;
 
-    private $langList = [
-        "def" => "Default",
-        "user-define" => "User Defined",
-        "ch" => "简体中文",
-        "cs" => "Čeština",
-        "en" => "English",
-        "fr" => "Français",
-        "id" => "Bahasa Indonesia",
-        "it" => "Italiano",
-        "ja" => "日本語",
-        "ko" => "한국어",
-        "nl" => "Nederlands",
-        "por" => "Portugues",
-        "ru" => "Русский",
-        "uk" => "Українська",
-        "zh" => "繁體中文",
-    ];
     private $lang = [], $playerLang = [];
 
     /**
