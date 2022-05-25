@@ -37,9 +37,7 @@ class CmdListener implements Listener {
             }
         }
         if ($event->getCommand() === "s" || $event->getCommand() === "e") {
-            if ($worldSuffix === "-f" || $worldSuffix === "-c") {
-                /*nnn...*/
-            } else {
+            if (!($worldSuffix === "-f" || $worldSuffix === "-c")) {
                 $event->cancel();
                 $form = new ModalForm(
                     new ClosureButton("他のワールドに行く", null, function (Player $player, Button $button) {

@@ -101,9 +101,7 @@ class CancelEvent implements Listener {
                     break;
             }
         }
-        if ($faming === "-f" || $faming === "-c") {
-            /*分からない。。。*/
-        } else {
+        if (!($faming === "-f" || $faming === "-c")) {
             switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
                 //水関係
                 case BlockLegacyIds::WATER:
