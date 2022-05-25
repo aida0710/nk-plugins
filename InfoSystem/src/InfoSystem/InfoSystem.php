@@ -118,9 +118,7 @@ class InfoSystem extends PluginBase implements Listener {
             $id = $pk->formId;
             $data = $pk->formData;
             $result = json_decode($data);
-            if ($data == "null\n") {
-                //何もしない
-            } else {
+            if ($data != "null\n") {
                 if ($id === 78533) {
                     if ($result[1] === "") {
                         $player->sendMessage("§bTag §7>> §c未記入です。");
