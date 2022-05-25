@@ -46,7 +46,6 @@ class DamageEventListener implements Listener {
                 }
             }
         } catch (Exception $exception) {
-            var_dump($exception);
             return;
         }
     }

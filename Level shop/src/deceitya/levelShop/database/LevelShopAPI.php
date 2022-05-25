@@ -276,27 +276,14 @@ class LevelShopAPI {
         try {
             return $this->buy[$id][$meta ?? 0] ?? null;
         } catch (Exception $e) {
-            $this->varDump($e);
             return null;
         }
-    }
-
-    private function varDump($e): void {
-        var_dump("-----getFile-----");
-        var_dump($e->getFile());
-        var_dump("-----getLine-----");
-        var_dump($e->getLine());
-        var_dump("-----getCode-----");
-        var_dump($e->getCode());
-        var_dump("-----getMessage-----");
-        var_dump($e->getMessage());
     }
 
     public function getSell(int $id, ?int $meta = null): ?int {
         try {
             return $this->sell[$id][$meta ?? 0] ?? null;
         } catch (Exception $e) {
-            $this->varDump($e);
             return null;
         }
     }
@@ -324,7 +311,6 @@ class LevelShopAPI {
         try {
             return $this->level[$id][$meta ?? 0] ?? null;
         } catch (Exception $e) {
-            $this->varDump($e);
             return null;
         }
     }
@@ -333,7 +319,6 @@ class LevelShopAPI {
         try {
             return $this->type[$id][$meta ?? 0] ?? null;
         } catch (Exception $e) {
-            $this->varDump($e);
             return null;
         }
     }

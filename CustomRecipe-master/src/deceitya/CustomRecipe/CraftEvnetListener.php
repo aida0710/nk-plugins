@@ -33,7 +33,6 @@ class CraftEvnetListener implements Listener {
                     $player->getInventory()->addItem($output);
                     break;
                 case ItemFactory::getInstance()->get(745, 0, 1)://つるはし
-                    var_dump($item . "80");
                     $window = $player->getCurrentWindow() ?? $player->getCraftingGrid();
                     $table = $window->getContents();
                     foreach ($table as $id => $craftitem) {
@@ -119,7 +118,6 @@ class CraftEvnetListener implements Listener {
                     Server::getInstance()->broadcastMessage("§bLiberation §7>> §e{$event->getPlayer()->getName()}がNetherite Hoeを製作しました");
                     break;
                 case ItemFactory::getInstance()->get(742):
-                    var_dump($item . "166");
                     $event->cancel();
                     break;
             }
