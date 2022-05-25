@@ -56,7 +56,7 @@ class SearchForm implements Form {
     }
 
     //https://paiza.io/projects/0xkeR4gN6pQvi4n5Eqh3qQ
-    function createHeading(int $result, string $text, string $search): string {
+    public function createHeading(int $result, string $text, string $search): string {
         $text = $this->convertEOL($text);
         $array = $this->InjectDecoration($result, $text, $search);
         $color = $array[0];

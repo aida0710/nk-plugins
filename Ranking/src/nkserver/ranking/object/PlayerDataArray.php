@@ -10,10 +10,10 @@ use pocketmine\world\World;
 
 class PlayerDataArray {
 
-    const BLOCK_BREAKS = 'block.breaks';
-    const BLOCK_PLACES = 'block.places';
-    const CHAT = 'chat.count';
-    const DEATH = 'death.count';
+    public const BLOCK_BREAKS = 'block.breaks';
+    public const BLOCK_PLACES = 'block.places';
+    public const CHAT = 'chat.count';
+    public const DEATH = 'death.count';
     protected array $array = [];
 
     public function __construct(?array $array = null) {

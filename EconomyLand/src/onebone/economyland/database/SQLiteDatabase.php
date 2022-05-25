@@ -25,7 +25,7 @@ use SQLite3;
 
 class SQLiteDatabase implements Database {
 
-    const INVITEE_SEPERATOR = ";";
+    public const INVITEE_SEPERATOR = ";";
     /**
      * @var array
      */

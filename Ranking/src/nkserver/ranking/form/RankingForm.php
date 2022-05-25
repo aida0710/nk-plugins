@@ -11,11 +11,11 @@ use pocketmine\utils\TextFormat;
 
 class RankingForm extends BackableForm {
 
-    const TYPE_BLOCKBREAK = PlayerDataArray::BLOCK_BREAKS;
-    const TYPE_BLOCKPLACE = PlayerDataArray::BLOCK_PLACES;
-    const TYPE_CHAT = PlayerDataArray::CHAT;
-    const TYPE_DEATH = PlayerDataArray::DEATH;
-    const FALL_BACK_TEXT = '?????';
+    public const TYPE_BLOCKBREAK = PlayerDataArray::BLOCK_BREAKS;
+    public const TYPE_BLOCKPLACE = PlayerDataArray::BLOCK_PLACES;
+    public const TYPE_CHAT = PlayerDataArray::CHAT;
+    public const TYPE_DEATH = PlayerDataArray::DEATH;
+    public const FALL_BACK_TEXT = '?????';
 
     public function __construct(Form $before, string $receiver, string $type, ?string $level = null, ?int $id = null) {
         parent::__construct($before);

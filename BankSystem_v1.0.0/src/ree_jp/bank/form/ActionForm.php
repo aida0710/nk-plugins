@@ -10,8 +10,8 @@ use ree_jp\bank\sqlite\BankHelper;
 
 class ActionForm implements Form {
 
-    const BANK_PUT = 1;
-    const BANK_OUT = 2;
+    public const BANK_PUT = 1;
+    public const BANK_OUT = 2;
 
     /**
      * @var string

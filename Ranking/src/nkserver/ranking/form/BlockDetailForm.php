@@ -13,8 +13,8 @@ use pocketmine\utils\TextFormat;
 
 class BlockDetailForm extends BackableForm {
 
-    const TYPE_BLOCKBREAK = PlayerDataArray::BLOCK_BREAKS;
-    const TYPE_BLOCKPLACE = PlayerDataArray::BLOCK_PLACES;
+    public const TYPE_BLOCKBREAK = PlayerDataArray::BLOCK_BREAKS;
+    public const TYPE_BLOCKPLACE = PlayerDataArray::BLOCK_PLACES;
 
     public function __construct(Form $before, string $type, string $receiver) {
         parent::__construct($before);

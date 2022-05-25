@@ -20,8 +20,8 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {
 
-    const EFFECT_FORM_ID = 436246;
-    const ENCHANT_FORM_ID = 96242;
+    public const EFFECT_FORM_ID = 436246;
+    public const ENCHANT_FORM_ID = 96242;
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if (!($sender instanceof Player)) {

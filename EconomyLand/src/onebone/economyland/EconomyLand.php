@@ -39,9 +39,9 @@ use pocketmine\world\World;
 
 class EconomyLand extends PluginBase implements Listener {
 
-    const RET_LAND_OVERLAP = 0;
-    const RET_LAND_LIMIT = 1;
-    const RET_SUCCESS = 2;
+    public const RET_LAND_OVERLAP = 0;
+    public const RET_LAND_LIMIT = 1;
+    public const RET_SUCCESS = 2;
     private static EconomyLand $instance;
     /**
      * @var Database;
