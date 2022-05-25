@@ -364,18 +364,5 @@ class BossBar {
         return $this->propertyManager;
     }
 
-    /**
-     * @param Player[] $players
-     * @param BossEventPacket $pk
-     * @throws InvalidArgumentException
-     */
-    private function broadcastPacket(array $players, BossEventPacket $pk) {
-        foreach ($players as $player) {
-            if (!$player->isConnected()) continue;
-            $pk->bossActorUniqueId = $player->getId();
-            $player->getNetworkSession()->sendDataPacket($pk);
-        }
-    }
-
     //TODO callable on client2server register/unregister request
 }
