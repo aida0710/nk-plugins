@@ -8,7 +8,7 @@ use pocketmine\event\player\PlayerInteractEvent;
 
 class Major implements Listener {
 
-    public $data = [];
+    public array $data = [];
 
     public function ontap(PlayerInteractEvent $event) {
         $player = $event->getPlayer();
@@ -19,6 +19,9 @@ class Major implements Listener {
                 if (!$player->isSneaking()) {
                     $block = $event->getblock();
                     if (isset($this->data[$name])) {
+                        //for ($i = $this->data[$name]->distance($block->getPosition()); $i <= 0; $i--)
+                        //$block->getPosition()->getWorld()->addParticle($, new DustParticle(new Color(255, 255, 255)));
+                        //todo 点と点を線で繋ぎたい
                         $distance = $this->data[$name]->distance($block->getPosition());
                         $player->sendActionBarMessage("§bMajor §7>> §a" . (round($distance, 2) + 1) . " mです");
                     } else {
