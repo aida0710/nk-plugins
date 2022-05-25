@@ -33,7 +33,7 @@ class LogHelper implements ILogHelper {
     /**
      * @inheritDoc
      */
-    function getLog(string $bank): ResultLog {
+    public function getLog(string $bank): ResultLog {
         if (!$this->isExists($bank)) return null;
         $result = $this->db->query("SELECT * FROM [${bank}]");
         $logs = [];
@@ -44,7 +44,7 @@ class LogHelper implements ILogHelper {
     /**
      * @inheritDoc
      */
-    function isExists(string $bank): bool {
+    public function isExists(string $bank): bool {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = :bank");
         $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
         return current($stmt->execute()->fetchArray(SQLITE3_NUM));
@@ -53,7 +53,7 @@ class LogHelper implements ILogHelper {
     /**
      * @inheritDoc
      */
-    function addLog(string $bank, string $message): void {
+    public function addLog(string $bank, string $message): void {
         if (!$this->isExists($bank)) $this->setTable($bank);
         $time = time();
         $stmt = $this->db->prepare("INSERT INTO [${bank}] VALUES (:time, :message)");

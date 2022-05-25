@@ -16,7 +16,7 @@ class ResultLog {
      */
     private $bank;
 
-    function __construct(string $bank, array $logs) {
+    public function __construct(string $bank, array $logs) {
         $this->bank = $bank;
         $this->covert($logs);
     }

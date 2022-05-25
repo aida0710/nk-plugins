@@ -26,7 +26,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function create(string $bank, string $leader): void {
+    public function create(string $bank, string $leader): void {
         //作成メッセージ
         $text = $leader . "さんによって作成されました";
         if ($this->isExists($bank)) return;
@@ -44,7 +44,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function isExists(string $bank): bool {
+    public function isExists(string $bank): bool {
         $stmt = $this->db->prepare("SELECT * FROM bank WHERE bank = :bank");
         $stmt->bindParam(":bank", $bank, SQLITE3_TEXT);
         if ($stmt->execute()->fetchArray()) {
@@ -63,7 +63,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function remove(string $bank): void {
+    public function remove(string $bank): void {
         if (!$this->isExists($bank)) return;
         $stmt = $this->db->prepare("DELETE FROM bank WHERE bank = :bank");
         $stmt->bindParam(":bank", $bank, SQLITE3_TEXT);
@@ -73,7 +73,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function share(string $bank, string $target, string $name): void {
+    public function share(string $bank, string $target, string $name): void {
         //共有したメッセージ
         $text = $name . "さんが" . $target . "さんを共有しました";
         if (!$this->isExists($bank) or $this->isShare($bank, $target)) return;
@@ -91,7 +91,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function isShare(string $bank, string $name): bool {
+    public function isShare(string $bank, string $name): bool {
         if (!$this->isExists($bank)) return false;
         $name = strtolower($name);
         $stmt = $this->db->prepare("SELECT member FROM bank WHERE bank = :bank");
@@ -111,7 +111,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function removeShare(string $bank, string $target, string $name): void {
+    public function removeShare(string $bank, string $target, string $name): void {
         //共有をはずすメッセージ
         $text = $name . "さんが" . $target . "さんから共有を外しました";
         if (!$this->isExists($bank) or $this->getLeader($bank) === $target or !$this->isShare($bank, $target)) return;
@@ -128,7 +128,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function getLeader(string $bank): string {
+    public function getLeader(string $bank): string {
         if (!$this->isExists($bank)) return "";
         $stmt = $this->db->prepare("SELECT leader FROM bank WHERE bank = :bank");
         $stmt->bindParam(":bank", $bank, SQLITE3_TEXT);
@@ -141,7 +141,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function removeMoney(string $bank, string $name, int $money): void {
+    public function removeMoney(string $bank, string $name, int $money): void {
         //引き出しメッセージ
         $text = $name . "さんが" . $money . "引き出しました";
         $money = $this->getMoney($bank) - $money;
@@ -156,7 +156,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function getMoney(string $bank): int {
+    public function getMoney(string $bank): int {
         if (!$this->isExists($bank)) return 0;
         $stmt = $this->db->prepare("SELECT money FROM bank WHERE bank = :bank");
         $stmt->bindParam(":bank", $bank);
@@ -166,7 +166,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function getAllLeaderBank(string $name): array {
+    public function getAllLeaderBank(string $name): array {
         $name = strtolower($name);
         $result = [];
         $stmt = $this->db->prepare("SELECT bank FROM bank WHERE leader = :leader");
@@ -179,7 +179,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function getAllBank(string $name): array {
+    public function getAllBank(string $name): array {
         $like = '%' . strtolower($name) . '%';
         $result = [];
         $stmt = $this->db->prepare("SELECT bank FROM bank WHERE member LIKE :name");
@@ -194,7 +194,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function transferMoney(string $bank, string $name, int $money, string $target): bool {
+    public function transferMoney(string $bank, string $name, int $money, string $target): bool {
         //引き出しメッセージ
         $text = $name . "さんが" . $money . "円" . $target . "さんに送金しました";
         $after = $this->getMoney($bank) - $money;
@@ -211,7 +211,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function addMoney(string $bank, string $name, int $money): void {
+    public function addMoney(string $bank, string $name, int $money): void {
         //入金メッセージ
         $text = $name . "さんが" . $money . "入金しました";
         $money += $this->getMoney($bank);
@@ -226,7 +226,7 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    function getBankDate(): array {
+    public function getBankDate(): array {
         $result = $this->db->query("SELECT * FROM bank ORDER BY money DESC");
         $date = [];
         while ($bank = $result->fetchArray(SQLITE3_ASSOC)) {

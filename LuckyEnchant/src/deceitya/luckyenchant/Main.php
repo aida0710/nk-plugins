@@ -14,7 +14,7 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {
 
-    const TARGET = [16, 56, 129, 153, 21];
+    public const TARGET = [16, 56, 129, 153, 21];
 
     public function onEnable(): void {
         $enchant = new Enchantment(

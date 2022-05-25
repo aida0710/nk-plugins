@@ -9,8 +9,8 @@ use pocketmine\math\Vector3;
 
 class Elevator implements Listener {
 
-    const block = 133;
-    const elevator = 0;
+    public const block = 133;
+    public const elevator = 0;
 
     public function onJump(PlayerJumpEvent $ev) {
         $p = $ev->getPlayer();
