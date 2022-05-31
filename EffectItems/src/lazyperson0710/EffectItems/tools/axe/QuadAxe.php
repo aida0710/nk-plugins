@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\tools\Axe;
+namespace lazyperson0710\EffectItems\tools\axe;
 
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
