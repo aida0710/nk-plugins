@@ -20,12 +20,10 @@ class RedStone extends SimpleForm {
             VanillaBlocks::TRIPWIRE_HOOK()->asItem(),
             VanillaBlocks::TRAPPED_CHEST()->asItem(),
             VanillaBlocks::REDSTONE_TORCH()->asItem(),
-            VanillaBlocks::REDSTONE_REPEATER()->asItem(),
-            VanillaBlocks::REDSTONE_COMPARATOR()->asItem(),
         ];
         $this
             ->setTitle("Level Shop")
-            ->setText("§7選択してください");
+            ->setText("§7選択してください\n§c注意 : ホッパー以外は機能が存在しません");
         foreach ($contents as $content) {
             if (is_int($content)) {
                 $item = match ($content) {
