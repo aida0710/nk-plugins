@@ -49,7 +49,7 @@ class WarpForm extends SimpleForm {
                 new CommandDispatchButton("ロビー", "warp lobby", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/worldsIcon.png")),
                 new CommandDispatchButton("ルールワールド", "warp tos", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/worldsIcon.png")),
                 new CommandDispatchButton("アスレチックワールド\n{$level10}", "warp athletic", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/worldsIcon.png")),
-                new CommandDispatchButton("PVPワールド\n{$level30}", "warp pvp", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/worldsIcon.png")),
+                new CommandDispatchButton("PVPワールド\n{$level30}", "pvp", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/worldsIcon.png")),
                 $backButton,
             );
         $cities = (new SimpleForm())
