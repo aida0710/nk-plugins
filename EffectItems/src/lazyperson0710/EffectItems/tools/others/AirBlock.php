@@ -20,10 +20,16 @@ class AirBlock implements Listener {
             $world_search = mb_substr($world_name, 0, null, 'utf-8');
             if (!(str_contains($world_search, "-c") || str_contains($world_search, "-f") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug"))) {
                 $player->sendMessage("§bAirBlock §7>> §c使用可能なワールドは資源系ワールドと生活ワールドのみとなります");
+                return;
             }
             if ($player->getPosition()->getWorld()->getBlock($pos)->getId() != BlockLegacyIds::AIR) return;
             if (EconomyLand::getInstance()->posCheck($pos, $player) === false) {
                 $player->sendMessage("§bAirBlock §7>> §c他人の土地には設置できません");
+                return;
+            }
+            if ($pos->getFloorY() <= 0){
+                $player->sendMessage("§bAirBlock §7>> §c0以下には設置できません");
+                return;
             }
             $item = $inHand;
             $item->setCount(1);
