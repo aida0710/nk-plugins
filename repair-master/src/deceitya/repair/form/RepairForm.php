@@ -6,9 +6,12 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
+use Exception;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Durable;
+use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\ItemIds;
+use pocketmine\item\TieredTool;
 use pocketmine\player\Player;
 use pocketmine\world\sound\AnvilBreakSound;
 use pocketmine\world\sound\AnvilUseSound;
@@ -29,7 +32,7 @@ class RepairForm extends CustomForm {
             $warning = new Label("ExpLevelを消費してツールを修繕することができます\n稀に修繕した際に破損する可能性があります\n破損確率は下記を参照\n\n消費レベル : {$this->level}\nまた、コマンドから表示している為、手数料として3500円徴収されます");
             $probability = new Label("§l修理失敗確率§r\n80Lv以上90Lv未満->2％で破損\n90Lv以上100Lv未満->1％で破損\n§g100Lv以上は破損無し");
         } else {
-            $warning = new Label("消費レベル : {$level}");
+            $warning = new Label("ExpLevelを消費してツールを修繕することができます\n稀に修繕した際に破損する可能性があります\n破損確率は下記を参照\n\n消費レベル : {$level}");
             $probability = new Label("§l修理失敗確率§r\n10Lv未満->10％で破損\n10Lv以上20Lv未満->9％で破損\n20Lv以上30Lv未満->8％で破損\n30Lv以上40Lv未満->7％で破損\n40Lv以上50Lv未満->6％で破損\n50Lv以上60Lv未満->5％で破損\n60Lv以上70Lv未満->4％で破損\n70Lv以上80Lv未満->3％で破損\n80Lv以上90Lv未満->2％で破損\n90Lv以上100Lv未満->1％で破損\n§g100Lv以上は破損無し");
         }
         $this
@@ -47,6 +50,12 @@ class RepairForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         $consumption = "error";
+        try {
+            if ($this->checkItem($player) === false) {
+                return;
+            }
+        } catch (Exception $e) {
+        }
         if ($this->mode === "command") {
             if (EconomyAPI::getInstance()->myMoney($player->getName()) < 3500) {
                 $player->sendMessage("§bRepair §7>> §c手数料分を取得できませんでした。手数料3500円");
@@ -185,5 +194,39 @@ class RepairForm extends CustomForm {
                 $player->sendMessage("§bRepair §7>> §c何かを消費してアイテムを修理しました");
                 break;
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function checkItem(Player $player): bool {
+        $item = $player->getInventory()->getItemInHand();
+        if ($item->getId() === ItemIds::ELYTRA) {
+            if (!($item instanceof Durable)) {
+                throw new Exception();
+            }
+            if ($item->getDamage() <= 0) {
+                $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
+                return false;
+            }
+        }
+        if (!$item instanceof TieredTool) {
+            $player->sendMessage("§bRepair §7>> §c持っているアイテムは修繕することが出来ません");
+            return false;
+        }
+        if ($item->getDamage() <= 0) {
+            $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
+            return false;
+        }
+        if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
+            $player->sendMessage('§bRepair §7>> §c衝撃エンチャントが付与されている為、修繕することが出来ません');
+            return false;
+        }
+        $itemIds = $item->getId();
+        if ($itemIds >= 1000) {
+            $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕することが出来ません');
+            return false;
+        }
+        return true;
     }
 }
