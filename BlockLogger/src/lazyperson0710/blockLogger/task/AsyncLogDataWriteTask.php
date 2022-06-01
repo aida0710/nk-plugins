@@ -5,7 +5,6 @@ namespace lazyperson0710\blockLogger\task;
 use lazyperson0710\blockLogger\event\PlayerEvent;
 use lazyperson0710\blockLogger\Main;
 use pocketmine\scheduler\AsyncTask;
-use pocketmine\Server;
 use SQLite3;
 
 class AsyncLogDataWriteTask extends AsyncTask {
@@ -34,7 +33,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
         $db->close();
     }
 
-//    public function onCompletion(): void {
-//        Server::getInstance()->getLogger()->info("§bLevel §7>> §a保存は完了致しました。");
-//    }
+    //    public function onCompletion(): void {
+    //        Server::getInstance()->getLogger()->info("§bLevel §7>> §a保存は完了致しました。");
+    //    }
 }

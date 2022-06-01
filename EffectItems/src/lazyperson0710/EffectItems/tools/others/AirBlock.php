@@ -27,7 +27,7 @@ class AirBlock implements Listener {
                 $player->sendMessage("§bAirBlock §7>> §c他人の土地には設置できません");
                 return;
             }
-            if ($pos->getFloorY() <= 0){
+            if ($pos->getFloorY() <= 0) {
                 $player->sendMessage("§bAirBlock §7>> §c0以下には設置できません");
                 return;
             }

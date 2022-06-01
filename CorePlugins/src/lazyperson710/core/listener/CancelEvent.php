@@ -18,7 +18,6 @@ use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
-use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\item\VanillaItems;
 use pocketmine\Server;

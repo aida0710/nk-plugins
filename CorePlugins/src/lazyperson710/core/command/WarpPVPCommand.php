@@ -125,8 +125,8 @@ class WarpPVPCommand extends Command {
                 $sender->sendMessage("§bPVP §7>> §cエラーが発生しました");
         }
     }
-    
-    public function teleportPlayer(Player $player,Vector3 $pos){
+
+    public function teleportPlayer(Player $player, Vector3 $pos) {
         $world = Server::getInstance()->getWorldManager()->getWorldByName("pvp");
         $player->teleport(new Position($pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ(), $world));
         $player->sendTip("§bPVP §7>> §aTeleportしました！");
