@@ -61,6 +61,7 @@ class Main extends PluginBase implements Listener {
         foreach ($item->getEnchantments() as $enchant) {
             $level += 8 + $enchant->getLevel();
         }
-        $player->sendForm(new RepairForm($level, $item));
+        $mode = "others";
+        $player->sendForm(new RepairForm($level, $item, $mode));
     }
 }

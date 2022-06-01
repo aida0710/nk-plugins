@@ -4,6 +4,7 @@ namespace deceitya\repair\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\repair\form\RepairCommandForm;
+use deceitya\repair\form\RepairForm;
 use Exception;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -60,7 +61,8 @@ class RepairCommand extends Command {
             foreach ($item->getEnchantments() as $enchant) {
                 $level += 8 + $enchant->getLevel();
             }
-            $player->sendForm(new RepairCommandForm($level, $item));
+            $mode = "command";
+            $player->sendForm(new RepairForm($level, $item, $mode));
         } else {
             $sender->sendMessage("§bRepair §7>> §cRepairコマンドは80レベル以上でないと開くことが出来ません。通常はかなとこをスニークタップすることで修繕出来ます");
         }
