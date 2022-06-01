@@ -10,18 +10,18 @@ use ree_jp\stackStorage\api\StackStorageAPI;
 
 class SaleForm implements Form {
 
-    private $item;
-    private $price;
-    private $count;
-    private $mymoney;
-    private $strage;
+    private Item $item;
+    private int $price;
+    private int $count;
+    private int $myMoney;
+    private int $storage;
 
-    public function __construct(Item $item, int $price, int $count, int $mymoney, int $strage) {
+    public function __construct(Item $item, int $price, int $count, int $myMoney, int $storage) {
         $this->item = $item;
         $this->price = $price;
         $this->count = $count;
-        $this->mymoney = $mymoney;
-        $this->strage = $strage;
+        $this->myMoney = $myMoney;
+        $this->storage = $storage;
     }
 
     public function handleResponse(Player $player, $data): void {
@@ -36,10 +36,10 @@ class SaleForm implements Form {
         $count = (int)floor($data[1]);
         $this->item->setCount($count);
         StackStorageAPI::$instance->getCount($player->getXuid(), $this->item, function ($count) use ($player, $data): void {
-            $this->strage = $count;
+            $this->storage = $count;
             $this->transaction($player, $data);
         }, function () use ($player, $data): void {
-            $this->strage = 0;
+            $this->storage = 0;
             $this->transaction($player, $data);
         });
     }
@@ -52,53 +52,49 @@ class SaleForm implements Form {
         $count = floor($data[1]);
         $this->item->setCount($count);
         $inventory = $this->countItem($player, $this->item);
-        if ($data[2] === true && $this->strage !== 0) {
-            if ($count <= $this->strage) {
-                $stackstorage_totalprice = $this->buyItemFromStackStorage($player, $this->item, $count);
-                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $count . "個アイテムが売却され、所持金が{$stackstorage_totalprice}円増えました");
+        if ($data[2] === true && $this->storage !== 0) {
+            if ($count <= $this->storage) {
+                $storageResult = $this->buyItemFromStackStorage($player, $this->item, $count);
+                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $count . "個アイテムが売却され、所持金が{$storageResult}円増えました");
                 return;
             }
-            $stackstorage_count = $count - $this->strage;
-            if ($stackstorage_count <= $inventory) {
-                //stackstorage
-                $stackstorage_totalprice = $this->buyItemFromStackStorage($player, $this->item, $this->strage);
-                //inventory
-                $inventory_totalprice = $this->buyItemFromInventory($player, $this->item, $stackstorage_count);
-                $totalprice = $inventory_totalprice + $stackstorage_totalprice;
-                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $this->strage . "個とインベントリから" . $stackstorage_count . "個、計" . ($this->strage + $stackstorage_count) . "アイテムが売却され、所持金が{$totalprice}円増えました");
+            $storageItemCount = $count - $this->storage;
+            if ($storageItemCount <= $inventory) {
+                $storageResult = $this->buyItemFromStackStorage($player, $this->item, $this->storage);
+                $inventoryResult = $this->buyItemFromInventory($player, $this->item, $storageItemCount);
+                $result = $inventoryResult + $storageResult;
+                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $this->storage . "個とインベントリから" . $storageItemCount . "個、計" . ($this->storage + $storageItemCount) . "アイテムが売却され、所持金が{$result}円増えました");
                 return;
             }
             $player->sendMessage('§bLevelShop §7>> §cアイテムがない、もしくは足りません');
             return;
         }
         if (!$player->getInventory()->contains($this->item)) {
-            $stackstorage_count = $count - $inventory;
-            if ($stackstorage_count <= $this->strage) {
-                //stackstorage
-                $stackstorage_totalprice = $this->buyItemFromStackStorage($player, $this->item, $stackstorage_count); //$this->price * $stackstorage_count;
+            $storageItemCount = $count - $inventory;
+            if ($storageItemCount <= $this->storage) {
+                $storageResult = $this->buyItemFromStackStorage($player, $this->item, $storageItemCount); //$this->price * $storageItemCount;
                 if ($inventory === 0) {
-                    $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $stackstorage_count . "個アイテムが売却され、所持金が{$stackstorage_totalprice}円増えました");
+                    $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $storageItemCount . "個アイテムが売却され、所持金が{$storageResult}円増えました");
                     return;
                 }
-                //inventory
-                $inventory_totalprice = $this->buyItemFromInventory($player, $this->item, $inventory);
-                $totalprice = $inventory_totalprice + $stackstorage_totalprice;
-                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $stackstorage_count . "個とインベントリから" . $inventory . "個、計" . ($stackstorage_count + $inventory) . "アイテムが売却され、所持金が{$totalprice}円増えました");
+                $inventoryResult = $this->buyItemFromInventory($player, $this->item, $inventory);
+                $result = $inventoryResult + $storageResult;
+                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $storageItemCount . "個とインベントリから" . $inventory . "個、計" . ($storageItemCount + $inventory) . "アイテムが売却され、所持金が{$result}円増えました");
                 return;
             }
             $player->sendMessage('§bLevelShop §7>> §cアイテムがない、もしくは足りません');
             return;
         }
         $this->buyItemFromInventory($player, $this->item, $count);
-        $totalprice = $this->price * $count;
-        $player->sendMessage("§bLevelShop §7>> §aアイテムが" . $count . "個売却され、所持金が{$totalprice}円増えました");
+        $result = $this->price * $count;
+        $player->sendMessage("§bLevelShop §7>> §aアイテムが" . $count . "個売却され、所持金が{$result}円増えました");
     }
 
-    public function countItem(Player $player, Item $targetitem): int {
+    public function countItem(Player $player, Item $targetItem): int {
         $inventory = 0;
         for ($i = 0; $i <= 35; $i++) {
             $item = $player->getInventory()->getItem($i);
-            if ($targetitem->equals($item)) {
+            if ($targetItem->equals($item)) {
                 $inventory += $item->getCount();
             }
         }
@@ -107,24 +103,18 @@ class SaleForm implements Form {
 
     public function buyItemFromStackStorage(Player $player, Item $item, int $count): int {
         $item = (clone $item)->setCount($count);
-        //		if($count > $this->strage){
-        //
-        //		}
-        $stackstorage_totalprice = $this->price * $count;
+        $storageResult = $this->price * $count;
         StackStorageAPI::$instance->remove($player->getXuid(), $item);
-        EconomyAPI::getInstance()->addMoney($player, $stackstorage_totalprice);
-        return $stackstorage_totalprice;
+        EconomyAPI::getInstance()->addMoney($player, $storageResult);
+        return $storageResult;
     }
 
     public function buyItemFromInventory(Player $player, Item $item, int $count): int {
         $item = (clone $item)->setCount($count);
-        //		if(!$player->getInventory()->contains($item)){
-        //			throw new \RuntimeException("");
-        //		}
-        $totalprice = $this->price * $count;
+        $result = $this->price * $count;
         $player->getInventory()->removeItem($item);
         EconomyAPI::getInstance()->addMoney($player, $this->price * $count);
-        return $totalprice;
+        return $result;
     }
 
     public function jsonSerialize() {
@@ -134,7 +124,7 @@ class SaleForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "売却するアイテム/{$this->item->getName()}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->strage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->mymoney}"
+                    'text' => "売却するアイテム/{$this->item->getName()}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
                 ],
                 [
                     'type' => 'input',

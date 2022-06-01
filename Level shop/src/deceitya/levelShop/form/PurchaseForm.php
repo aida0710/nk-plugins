@@ -13,15 +13,15 @@ class PurchaseForm implements Form {
     private Item $item;
     private int $price;
     private int $count;
-    private int $mymoney;
-    private int $strage;
+    private int $myMoney;
+    private int $storage;
 
-    public function __construct(Item $item, int $price, int $count, int $mymoney, int $strage) {
+    public function __construct(Item $item, int $price, int $count, int $myMoney, int $storage) {
         $this->item = $item;
         $this->price = $price;
         $this->count = $count;
-        $this->mymoney = $mymoney;
-        $this->strage = $strage;
+        $this->myMoney = $myMoney;
+        $this->storage = $storage;
     }
 
     public function handleResponse(Player $player, $data): void {
@@ -34,18 +34,18 @@ class PurchaseForm implements Form {
             return;
         }
         $count = (int)floor($data[1]);
-        $totalprice1 = $this->price * $count; //1 = 変数名、衝突対策...
-        $goukei = $totalprice1 - $this->mymoney;
-        if ($this->mymoney < $totalprice1) {
-            $player->sendMessage("§bLevelShop §7>> §cお金が{$goukei}円足りませんでした。合計必要金額:{$totalprice1}円");
+        $totalPrice = $this->price * $count; //1 = 変数名、衝突対策...
+        $result = $totalPrice - $this->myMoney;
+        if ($this->myMoney < $totalPrice) {
+            $player->sendMessage("§bLevelShop §7>> §cお金が{$result}円足りませんでした。合計必要金額:{$totalPrice}円");
             return;
         }
         $this->item->setCount($count);
         if ($data[2] === true) {
             EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
             StackStorageAPI::$instance->add($player->getXuid(), $this->item);
-            $totalprice1 = $this->price * $count;
-            $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalprice1}");
+            $totalPrice = $this->price * $count;
+            $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalPrice}");
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item)) {
@@ -54,8 +54,8 @@ class PurchaseForm implements Form {
         }
         $player->getInventory()->addItem($this->item);
         EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
-        $totalprice1 = $this->price * $count;
-        $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入しました。使用金額 : {$totalprice1}");
+        $totalPrice = $this->price * $count;
+        $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入しました。使用金額 : {$totalPrice}");
     }
 
     private function isInteger($input): bool {
@@ -69,7 +69,7 @@ class PurchaseForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "購入するアイテム/{$this->item->getName()}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->strage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->mymoney}"
+                    'text' => "購入するアイテム/{$this->item->getName()}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
                 ],
                 [
                     'type' => 'input',
