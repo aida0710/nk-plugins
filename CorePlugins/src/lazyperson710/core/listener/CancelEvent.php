@@ -18,63 +18,26 @@ use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\item\VanillaItems;
 use pocketmine\Server;
 
 class CancelEvent implements Listener {
 
+    public function onUes(PlayerItemUseEvent $event) {
+        $this->banItems($event);
+    }
+
+    public function onPlace(BlockPlaceEvent $event) {
+        $this->banItems($event);
+    }
+
     public function onInteract(PlayerInteractEvent $event) {
-        switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
-            case BlockLegacyIds::INFO_UPDATE;
-            case BlockLegacyIds::INFO_UPDATE2;
-            case BlockLegacyIds::RESERVED6;
-            case BlockLegacyIds::ICE:
-                //BanItems
-            case ItemIds::BUCKET:
-            case ItemIds::BANNER:
-            case ItemIds::BANNER_PATTERN:
-            case ItemIds::STANDING_BANNER:
-            case ItemIds::WALL_BANNER:
-            case ItemIds::FIRE_CHARGE:
-            case ItemIds::FIRE:
-            case ItemIds::FIREBALL:
-            case ItemIds::LAVA:
-            case ItemIds::FLOWING_LAVA:
-            case ItemIds::STILL_LAVA:
-            case ItemIds::MINECART:
-            case ItemIds::MINECART_WITH_CHEST:
-            case ItemIds::MINECART_WITH_COMMAND_BLOCK:
-            case ItemIds::MINECART_WITH_HOPPER:
-            case ItemIds::MINECART_WITH_TNT:
-            case ItemIds::ENCHANTED_BOOK:
-            case ItemIds::ENDER_CHEST:
-            case ItemIds::ENDER_EYE:
-            case ItemIds::ENDER_PEARL:
-            case ItemIds::LEAD:
-            case ItemIds::ARMOR_STAND:
-            case ItemIds::CHORUS_FLOWER:
-            case ItemIds::CHORUS_FRUIT:
-            case ItemIds::CHORUS_FRUIT_POPPED:
-            case ItemIds::CHORUS_PLANT:
-            case ItemIds::BOAT:
-            case ItemIds::FIREWORKS:
-            case ItemIds::FIREWORKS_CHARGE:
-            case ItemIds::CARROT_ON_A_STICK:
-            case ItemIds::LINGERING_POTION:
-            case ItemIds::SPLASH_POTION:
-            case ItemIds::POTION:
-            case ItemIds::PAINTING:
-            case ItemIds::FLINT_AND_STEEL:
-                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
-                    $event->cancel();
-                }
-                $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
-                break;
-        }
+        $this->banItems($event);
         $world_name = $event->getPlayer()->getWorld()->getDisplayName();
-        $faming = mb_substr($world_name, -2, 2, 'utf-8');
-        if ($faming !== "-f") {
+        $farming = mb_substr($world_name, -2, 2, 'utf-8');
+        if ($farming !== "-f") {
             switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
                 //クワ
                 case ItemIds::WOODEN_HOE:
@@ -101,7 +64,7 @@ class CancelEvent implements Listener {
                     break;
             }
         }
-        if (!($faming === "-f" || $faming === "-c")) {
+        if (!($farming === "-f" || $farming === "-c")) {
             switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
                 //水関係
                 case BlockLegacyIds::WATER:
@@ -118,7 +81,7 @@ class CancelEvent implements Listener {
         }
     }
 
-    public function onUes(PlayerItemUseEvent $event) {
+    public function banItems(BlockPlaceEvent|PlayerItemUseEvent|PlayerInteractEvent $event) {
         switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
             case BlockLegacyIds::INFO_UPDATE;
             case BlockLegacyIds::INFO_UPDATE2;
@@ -160,56 +123,10 @@ class CancelEvent implements Listener {
             case ItemIds::POTION:
             case ItemIds::PAINTING:
             case ItemIds::FLINT_AND_STEEL:
-                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
-                    $event->cancel();
-                }
-                $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
-                break;
-        }
-    }
-
-    public function onPlace(BlockPlaceEvent $event) {
-        switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
-            case BlockLegacyIds::INFO_UPDATE;
-            case BlockLegacyIds::INFO_UPDATE2;
-            case BlockLegacyIds::RESERVED6;
-            case BlockLegacyIds::ICE:
-                //BanItems
-            case ItemIds::BUCKET:
-            case ItemIds::BANNER:
-            case ItemIds::BANNER_PATTERN:
-            case ItemIds::STANDING_BANNER:
-            case ItemIds::WALL_BANNER:
-            case ItemIds::FIRE_CHARGE:
-            case ItemIds::FIRE:
-            case ItemIds::FIREBALL:
-            case ItemIds::LAVA:
-            case ItemIds::FLOWING_LAVA:
-            case ItemIds::STILL_LAVA:
-            case ItemIds::MINECART:
-            case ItemIds::MINECART_WITH_CHEST:
-            case ItemIds::MINECART_WITH_COMMAND_BLOCK:
-            case ItemIds::MINECART_WITH_HOPPER:
-            case ItemIds::MINECART_WITH_TNT:
-            case ItemIds::ENCHANTED_BOOK:
-            case ItemIds::ENDER_CHEST:
-            case ItemIds::ENDER_EYE:
-            case ItemIds::ENDER_PEARL:
-            case ItemIds::LEAD:
-            case ItemIds::ARMOR_STAND:
-            case ItemIds::CHORUS_FLOWER:
-            case ItemIds::CHORUS_FRUIT:
-            case ItemIds::CHORUS_FRUIT_POPPED:
-            case ItemIds::CHORUS_PLANT:
-            case ItemIds::BOAT:
-            case ItemIds::FIREWORKS:
-            case ItemIds::FIREWORKS_CHARGE:
-            case ItemIds::CARROT_ON_A_STICK:
-            case ItemIds::LINGERING_POTION:
-            case ItemIds::SPLASH_POTION:
-            case ItemIds::POTION:
-            case ItemIds::PAINTING:
-            case ItemIds::FLINT_AND_STEEL:
+            case ItemIds::PISTON:
+            case ItemIds::STICKY_PISTON:
+            case ItemIds::REPEATER:
+            case ItemIds::COMPARATOR:
                 if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                     $event->cancel();
                 }
@@ -226,23 +143,9 @@ class CancelEvent implements Listener {
                 case BlockLegacyIds::RESERVED6:
                     $event->setDrops([
                         VanillaItems::NETHER_STAR()->setCount(1),
-                        //ItemFactory::getInstance()->get(ItemIds::NETHER_STAR, 0, 1),
-                        //VanillaItems::AIR(),//なし
                     ]);
             }
         }
-    }
-
-    public function onBlockForm(BlockFormEvent $event) {
-        $event->cancel();
-    }
-
-    public function onBrewItem(BrewItemEvent $event) {
-        $event->cancel();
-    }
-
-    public function onEntityTrampleFarmland(EntityTrampleFarmlandEvent $event) {
-        $event->cancel();
     }
 
     public function onInventoryOpen(InventoryOpenEvent $event) {
@@ -256,6 +159,18 @@ class CancelEvent implements Listener {
             $player->sendTip("§bRepair §7>> §cスニークしながらタップするとアイテムの修繕が可能です");
             $event->cancel();
         }
+    }
+
+    public function onBlockForm(BlockFormEvent $event) {
+        $event->cancel();
+    }
+
+    public function onBrewItem(BrewItemEvent $event) {
+        $event->cancel();
+    }
+
+    public function onEntityTrampleFarmland(EntityTrampleFarmlandEvent $event) {
+        $event->cancel();
     }
 
     public function onEntityExplode(EntityExplodeEvent $event) {
