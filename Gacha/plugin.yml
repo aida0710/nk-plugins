@@ -1,0 +1,9 @@
+name: Gacha
+main: lazyperson0710\Gacha\Main
+version: 1.0.0
+api: 4.0.0
+load: POSTWORLD
+author: lazyperson0710
+description: ガチャプラグイン
+depend:
+  - EconomyAPI
