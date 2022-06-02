@@ -6,6 +6,7 @@ use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\InvCommand;
 use lazyperson710\core\command\MajorCommand;
+use lazyperson710\core\command\WarpPVPCommand;
 use lazyperson710\core\task\EffectTaskScheduler;
 use lazyperson710\core\task\MotdTask;
 use lazyperson710\core\task\ParticleTask;
@@ -60,6 +61,7 @@ class Main extends PluginBase {
             new DiceCommand(),
             new InvCommand(),
             new BookCommand(),
+            new WarpPVPCommand(),
         ]);
         /*Task*/
         $this->getScheduler()->scheduleDelayedTask(new WorldTimeScheduler, 60);

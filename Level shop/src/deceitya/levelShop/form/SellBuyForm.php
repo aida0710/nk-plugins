@@ -35,19 +35,19 @@ class SellBuyForm implements Form {
         });
     }
 
-    public function callback(Player $player, Item $item, bool $data, int $strage): void {
+    public function callback(Player $player, Item $item, bool $data, int $storage): void {
         $count = 0;
-        $mymoney = EconomyAPI::getInstance()->mymoney($player);
+        $myMoney = EconomyAPI::getInstance()->mymoney($player);
         foreach ($player->getInventory()->getContents() as $v) {
             if ($item->getId() === $v->getId() && $item->getMeta() === $v->getMeta()) {
                 $count += $v->getCount();
             }
         }
         if ($data) {
-            $player->sendForm(new PurchaseForm($item, $this->buy, $count, $mymoney, $strage));
+            $player->sendForm(new PurchaseForm($item, $this->buy, $count, $myMoney, $storage));
             return;
         }
-        $player->sendForm(new SaleForm($item, $this->sell, $count, $mymoney, $strage));
+        $player->sendForm(new SaleForm($item, $this->sell, $count, $myMoney, $storage));
     }
 
     public function jsonSerialize() {

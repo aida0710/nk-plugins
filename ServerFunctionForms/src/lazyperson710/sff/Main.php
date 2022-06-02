@@ -51,8 +51,4 @@ class Main extends PluginBase {
         self::$tos = stream_get_contents($resource);
         fclose($resource);
     }
-
-    public function onDisable(): void {
-        $this->getLogger()->info("pluginが正常に停止しました。");
-    }
 }

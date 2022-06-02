@@ -14,6 +14,7 @@ class WorldTimeScheduler extends Task {
                 case "resource":
                 case "event-1":
                 case "tos":
+                case "pvp":
                     Server::getInstance()->getWorldManager()->getWorldByName($world->getFolderName())->setTime(18000);
                     Server::getInstance()->getWorldManager()->getWorldByName($world->getFolderName())->stopTime();
                     break;

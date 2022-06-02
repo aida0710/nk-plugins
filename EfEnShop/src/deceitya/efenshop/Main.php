@@ -117,19 +117,11 @@ class Main extends PluginBase implements Listener {
                 }
                 switch ($data[1]) {
                     case 0:
-                        $need = 99999999999999999999999999999999999999999999999999999 * $data[0];
-                        if (EconomyAPI::getInstance()->myMoney($player) < $need) {
-                            $player->sendMessage("§bEnEfShop §7>> §c付与したいエフェクトを選択してください");
-                            return;
-                        }
-                        $effect = new EffectInstance(VanillaEffects::HASTE(), $data[0] * 20 * 60, 1, false);
-                        $player->getEffects()->add($effect);
-                        EconomyAPI::getInstance()->reduceMoney($player, $need);
-                        $player->sendMessage("§bEnEfShop §7>> §a{$need}円で採掘速度上昇を{$data[0]}分間付与しました");
-                        break;
+                        $player->sendMessage("§bEnEfShop §7>> §c付与したいエフェクトを選択してください");
+                        return;
                     case 1:
                         $need = 800 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $effect = new EffectInstance(VanillaEffects::HASTE(), $data[0] * 20 * 60, 1, false);
                         $player->getEffects()->add($effect);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -137,7 +129,7 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 2:
                         $need = 150 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $effect = new EffectInstance(VanillaEffects::SPEED(), $data[0] * 20 * 60, 1, false);
                         $player->getEffects()->add($effect);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -145,7 +137,7 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 3:
                         $need = 1600 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $effect = new EffectInstance(VanillaEffects::REGENERATION(), $data[0] * 20 * 60, 2, true);
                         $player->getEffects()->add($effect);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -153,7 +145,7 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 4:
                         $need = 50 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), $data[0] * 20 * 60, 0, false);
                         $player->getEffects()->add($effect);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -170,24 +162,13 @@ class Main extends PluginBase implements Listener {
                 }
                 switch ($data[1]) {
                     case 0:
-                        $need = 9999999999999999999999999999999999999999999999999 * $data[0];
-                        if (EconomyAPI::getInstance()->myMoney($player) < $need) {
-                            $player->sendMessage("§bEnEfShop §7>> §c付与したいエンチャントを選択してください");
-                            return;
-                        }
-                        $item = $player->getInventory()->getItemInHand();
-                        $this->isHandInItem($player, $item);
-                        $enchant = new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), $data[0]);
-                        $item->addEnchantment($enchant);
-                        EconomyAPI::getInstance()->reduceMoney($player, $need);
-                        $player->getInventory()->setItemInHand($item);
-                        $player->sendMessage("§bEnEfShop §7>> §aダメージ増加を{$data[0]}レベル、{$need}円で付与しました");
-                        break;
+                        $player->sendMessage("§bEnEfShop §7>> §c付与したいエンチャントを選択してください");
+                        return;
                     case 1:
                         $need = 3000 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $item = $player->getInventory()->getItemInHand();
-                        $this->isHandInItem($player, $item);
+                        if ($this->isHandInItem($player, $item) === false) return;
                         $enchant = new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), $data[0]);
                         $item->addEnchantment($enchant);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -196,9 +177,9 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 2:
                         $need = 5000 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $item = $player->getInventory()->getItemInHand();
-                        $this->isHandInItem($player, $item);
+                        if ($this->isHandInItem($player, $item) === false) return;
                         $enchant = new EnchantmentInstance(VanillaEnchantments::EFFICIENCY(), $data[0]);
                         $item->addEnchantment($enchant);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -207,9 +188,9 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 3:
                         $need = 15000 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $item = $player->getInventory()->getItemInHand();
-                        $this->isHandInItem($player, $item);
+                        if ($this->isHandInItem($player, $item) === false) return;
                         if ($item->hasEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE))) {
                             $player->sendMessage('§bEnEfShop §7>> §c幸運がついているため、シルクタッチはつけられません');
                             return;
@@ -222,9 +203,9 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 4:
                         $need = 30000 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $item = $player->getInventory()->getItemInHand();
-                        $this->isHandInItem($player, $item);
+                        if ($this->isHandInItem($player, $item) === false) return;
                         if ($item->hasEnchantment(VanillaEnchantments::SILK_TOUCH())) {
                             $player->sendMessage('§bEnEfShop §7>> §cシルクタッチエンチャントがついているため、幸運はつけられません');
                             return;
@@ -241,9 +222,9 @@ class Main extends PluginBase implements Listener {
                         break;
                     case 5:
                         $need = 10000 * $data[0];
-                        $this->isMoney($player, $need);
+                        if ($this->isMoney($player, $need) === false) return;
                         $item = $player->getInventory()->getItemInHand();
-                        $this->isHandInItem($player, $item);
+                        if ($this->isHandInItem($player, $item) === false) return;
                         if ($data[0] >= 4) {
                             $player->sendMessage("§bCustomEncchant §7>> §c4レベル以上のエンチャントを購入する事はできません。付与しようとしたレベル " . $data[0] . "§r");
                             return;
@@ -257,8 +238,8 @@ class Main extends PluginBase implements Listener {
                     case 6:
                         $need = 30000 * $data[0];
                         $item = $player->getInventory()->getItemInHand();
-                        $this->isMoney($player, $need);
-                        $this->isHandInItem($player, $item);
+                        if ($this->isMoney($player, $need) === false) return;
+                        if ($this->isHandInItem($player, $item) === false) return;
                         $enchant = new EnchantmentInstance(VanillaEnchantments::POWER(), $data[0]);
                         $item->addEnchantment($enchant);
                         EconomyAPI::getInstance()->reduceMoney($player, $need);
@@ -276,18 +257,20 @@ class Main extends PluginBase implements Listener {
         return (ctype_digit(strval($input)));
     }
 
-    public function isMoney(Player $player, int $need) {
+    public function isMoney(Player $player, int $need): bool {
         if (EconomyAPI::getInstance()->myMoney($player) < $need) {
             $player->sendMessage("§bEnEfShop §7>> §cお金が足りません");
-            return;
+            return false;
         }
+        return true;
     }
 
-    public function isHandInItem(Player $player, $item) {
+    public function isHandInItem(Player $player, $item): bool {
         if ($item->isNull()) {
             $player->sendMessage("§bEnEfShop §7>> §cアイテムを持ってください");
-            return;
+            return false;
         }
+        return true;
     }
 
     protected function onEnable(): void {

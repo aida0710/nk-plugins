@@ -6,7 +6,6 @@ use bbo51dog\announce\service\AnnounceService;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockPlaceEvent;
-use pocketmine\event\entity\ProjectileHitEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -60,11 +59,6 @@ class MessageListener implements Listener {
                 $event->getPlayer()->teleport($pos);
             }
         }
-    }
-
-    public function Hit(ProjectileHitEvent $event) {
-        $entity = $event->getEntity();
-        $entity->kill();
     }
 
     public function onUse(PlayerInteractEvent $event) {

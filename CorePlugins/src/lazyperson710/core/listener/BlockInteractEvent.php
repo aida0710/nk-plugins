@@ -17,9 +17,9 @@ class BlockInteractEvent implements Listener {
     public function onInteract(PlayerInteractEvent $event) {
         if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == "tos") {
             $player = $event->getPlayer();
-            $x = $event->getBlock()->getPosition()->getX();
-            $y = $event->getBlock()->getPosition()->getY();
-            $z = $event->getBlock()->getPosition()->getZ();
+            $x = $event->getBlock()->getPosition()->getFloorX();
+            $y = $event->getBlock()->getPosition()->getFloorY();
+            $z = $event->getBlock()->getPosition()->getFloorZ();
             if ($x === 214 && $y === 106 && $z === 246) {//パスワード解除用石英ブロック
                 Server::getInstance()->dispatchCommand($player, "pass");
             }
@@ -35,9 +35,9 @@ class BlockInteractEvent implements Listener {
     public function onBreak(BlockBreakEvent $event) {
         if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == "tos") {
             $player = $event->getPlayer();
-            $x = $event->getBlock()->getPosition()->getX();
-            $y = $event->getBlock()->getPosition()->getY();
-            $z = $event->getBlock()->getPosition()->getZ();
+            $x = $event->getBlock()->getPosition()->getFloorX();
+            $y = $event->getBlock()->getPosition()->getFloorY();
+            $z = $event->getBlock()->getPosition()->getFloorZ();
             if ($x === 214 && $y === 106 && $z === 246) {//パスワード解除用石英ブロック
                 Server::getInstance()->dispatchCommand($player, "pass");
             }

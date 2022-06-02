@@ -28,7 +28,7 @@ class LevelShopAPI {
         #Currency
         $this->register(VanillaItems::NETHER_STAR(), 1000, 1000, 1, "item");##Nether_Star
         #Foods
-        $this->register(VanillaItems::STEAK(), 50, 30, 1, "item");##Steak
+        $this->register(VanillaItems::STEAK(), 25, 15, 1, "item");##Steak
         $this->register(VanillaItems::BREAD(), 250, 15, 1, "item");##Bread
         $this->register(VanillaBlocks::CAKE()->asItem(), 1500, 50, 1, "block");##Cake
         #Logs
