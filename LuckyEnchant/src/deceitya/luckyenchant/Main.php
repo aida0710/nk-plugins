@@ -27,7 +27,6 @@ class Main extends PluginBase implements Listener {
         EnchantmentIdMap::getInstance()->register(EnchantmentIds::FORTUNE, $enchant);
         StringToEnchantmentParser::getInstance()->register("fortune", fn() => $enchant);
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        srand();
     }
 
     /**
