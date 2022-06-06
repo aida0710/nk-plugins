@@ -13,9 +13,18 @@ class Major implements Listener {
 
     public array $data = [];
 
-    public function ontap(PlayerInteractEvent $event) {
+    public function interactEvent(PlayerInteractEvent $event) {
+        $this->setMajor($event);
+    }
+
+    public function breakEvent(BlockBreakEvent $event) {
+        $this->setMajor($event);
+    }
+
+    public function setMajor(PlayerInteractEvent|BlockBreakEvent $event) {
         $player = $event->getPlayer();
         if ($player->getInventory()->getItemInHand()->getId() == 318) {
+            $event->cancel();
             $name = $player->getName();
             if ($player->getInventory()->getItemInHand()->getName() === "Major") {
                 $event->cancel();
