@@ -11,7 +11,6 @@ use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\ItemFlags;
 use pocketmine\item\enchantment\Rarity;
 use pocketmine\item\enchantment\StringToEnchantmentParser;
-use pocketmine\item\VanillaItems;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {

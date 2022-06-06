@@ -26,7 +26,7 @@ class BreakListener implements Listener {
             if (!empty($inhanditem->getNamedTag()->getTag('MiningTools_3'))) {
                 if (!empty($inhanditem->getNamedTag()->getTag('gacha_mining'))) {
                     return;
-                }else {
+                } else {
                     if ($item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) === 0) {
                         $event->cancel();
                         $event->getPlayer()->sendMessage('§bEnchant §7>> §cこのアイテムは使用不可です。なまけものに言って交換してもらうか買いなおしてください');

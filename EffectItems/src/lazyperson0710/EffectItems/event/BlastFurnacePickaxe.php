@@ -7,7 +7,6 @@ use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\VanillaItems;
-use pocketmine\player\Player;
 
 class BlastFurnacePickaxe implements Listener {
 

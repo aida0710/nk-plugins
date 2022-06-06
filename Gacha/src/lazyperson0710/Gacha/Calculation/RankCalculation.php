@@ -18,10 +18,8 @@ class RankCalculation {
     private array $content;
     private array $cost;
 
-
     public function __construct() {
         $this->content = Main::getInstance()->getAllData();
-
         $this->tmp_table = $this->getTmpTable();
         $this->initTable();
     }
@@ -32,7 +30,6 @@ class RankCalculation {
     }
 
     public function run($num, Player $player, $key): string|false {
-
         $this->cost = $this->content[$key]["cost"][0];
         $result = null;
         for ($i = 1; $i <= $num; $i++) {
@@ -46,7 +43,7 @@ class RankCalculation {
             foreach ($this->rank as $table => $item) {
                 $count += $item;
                 if ($rand <= $count) {
-                    $result .= $table. ",";
+                    $result .= $table . ",";
                     continue 2;
                 }
             }

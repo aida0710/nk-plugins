@@ -173,7 +173,7 @@ class Main extends PluginBase implements Listener {
                             $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
                             $blockIds[] = $targetBlock->getId();
                             if ($haveDurable) {
-                                if ($player->getGamemode() !== GameMode::CREATIVE()){
+                                if ($player->getGamemode() !== GameMode::CREATIVE()) {
                                     /** @var Durable $handItem */
                                     $handItem->applyDamage(1);
                                     $player->getInventory()->setItemInHand($handItem);
@@ -191,7 +191,7 @@ class Main extends PluginBase implements Listener {
                             $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
                             $blockIds[] = $targetBlock->getId();
                             if ($haveDurable) {
-                                if ($player->getGamemode() !== GameMode::CREATIVE()){
+                                if ($player->getGamemode() !== GameMode::CREATIVE()) {
                                     /** @var Durable $handItem */
                                     $handItem->applyDamage(1);
                                     $player->getInventory()->setItemInHand($handItem);
@@ -253,7 +253,7 @@ class Main extends PluginBase implements Listener {
                     continue;
                 }
                 if ($haveDurable) {
-                    if ($player->getGamemode() !== GameMode::CREATIVE()){
+                    if ($player->getGamemode() !== GameMode::CREATIVE()) {
                         /** @var Durable $handItem */
                         $handItem->applyDamage(1);
                         $player->getInventory()->setItemInHand($handItem);
