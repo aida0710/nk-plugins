@@ -121,7 +121,6 @@ class CancelEvent implements Listener {
             case ItemIds::CARROT_ON_A_STICK:
             case ItemIds::LINGERING_POTION:
             case ItemIds::SPLASH_POTION:
-            case ItemIds::POTION:
             case ItemIds::PAINTING:
             case ItemIds::FLINT_AND_STEEL:
             case ItemIds::PISTON:
