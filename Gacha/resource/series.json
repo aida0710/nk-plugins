@@ -1,0 +1,453 @@
+[
+    {
+        "id": 1,
+        "name": "常駐ガチャ",
+        "cost": [
+            {
+                "money": 0,
+                "ticket": 1,
+                "eventTicket": 0
+            }
+        ],
+        "rank": {
+            "C": 60,
+            "UC": 27,
+            "R": 11,
+            "SR": 1.7,
+            "L": 0.3
+        },
+        "items": [
+            {
+                "C": [
+                    {
+                        "id": 406,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "はずれ石",
+                        "description": "一枚のTicketに変換出来ます\n\n/ticket",
+                        "enchants": [],
+                        "nbt": [
+                            "ExchangeTicket"
+                        ]
+                    },
+                    {
+                        "id": 399,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "通貨アイテム",
+                        "description": "/shop->LevelShop1->通貨アイテム\nから換金することが可能です",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 364,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "ステーキ",
+                        "description": "食料です！！！！！！！！！！！！",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 264,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "水色のごみ",
+                        "description": "ごみ、、、？",
+                        "enchants": [],
+                        "nbt": []
+                    }
+                ],
+                "UC": [
+                    {
+                        "id": 301,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "落下ダメージ完全防御ブーツ Rank.1",
+                        "description": "Rank.1のブーツ\n着用していると落下ダメージから自分を守ってくれる\n革製なのですぐ壊れる",
+                        "enchants": [],
+                        "nbt": [
+                            "DefensiveStone"
+                        ]
+                    },
+                    {
+                        "id": 20,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "エンジェルブロック",
+                        "description": "自分の下にブロックを設置する",
+                        "enchants": [],
+                        "nbt": [
+                            "AirBlock"
+                        ]
+                    },
+                    {
+                        "id": 352,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "びーぼの骨",
+                        "description": "びーぼがいつも握りしめてるお気に入りの骨",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 373,
+                        "meta": 13,
+                        "count": 1,
+                        "name": "耐火のポーション",
+                        "description": "燃えなくなるよ！！！うれしい！",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 406,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "ぴかぴかした石",
+                        "description": "きれいですね",
+                        "enchants": [
+                            {
+                                "id": 17,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": []
+                    }
+                ],
+                "R": [
+                    {
+                        "id": 313,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "落下ダメージ完全防御ブーツ Rank.2",
+                        "description": "Rank.2のブーツ\n着用していると落下ダメージから自分を守ってくれる",
+                        "enchants": [],
+                        "nbt": [
+                            "DefensiveStone"
+                        ]
+                    },
+                    {
+                        "id": 46,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "爆発物",
+                        "description": "設置すると爆発します",
+                        "enchants": [],
+                        "nbt": [
+                            "ExplosionBlock"
+                        ]
+                    },
+                    {
+                        "id": 256,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "鋭利なシャベル",
+                        "description": "ゾンビを倒すために使うものではない",
+                        "enchants": [
+                            {
+                                "id": 9,
+                                "level": 5
+                            }
+                        ],
+                        "nbt": []
+                    },
+                    {
+                        "id": 325,
+                        "meta": 1,
+                        "count": 1,
+                        "name": "腐りかけの牛乳",
+                        "description": "少し膜を張ってるみたい、、、\n飲めるのかな、、、？",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 384,
+                        "meta": 0,
+                        "count": 128,
+                        "name": "魔剤中毒セット",
+                        "description": "浴びるように飲もう",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 344,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "温泉卵",
+                        "description": "温まってるので中身はない",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 339,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "バスタオル",
+                        "description": "常時濡れてるので叩かれると若干痛い",
+                        "enchants": [
+                            {
+                                "id": 9,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": []
+                    },
+                    {
+                        "id": 355,
+                        "meta": 6,
+                        "count": 1,
+                        "name": "修繕費用代替Ticket",
+                        "description": "アイテムの修繕費用(ExpLevel)を代替します",
+                        "enchants": [],
+                        "nbt": [
+                            "repairTicket"
+                        ]
+                    },
+                    {
+                        "id": 257,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "溶鉱炉付きのつるはし",
+                        "description": "効果 : 鉱石が焼かれた状態で採れるが、確率(1/15)で火炎ダメージを受ける",
+                        "enchants": [
+                            {
+                                "id": 20,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": [
+                            "BlastFurnacePickaxe"
+                        ]
+                    }
+                ],
+                "SR": [
+                    {
+                        "id": 715,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "落下ダメージ完全防御ブーツ Rank.3",
+                        "description": "[最上位]Rank.3のブーツ\n着用していると落下ダメージから自分を守ってくれる",
+                        "enchants": [],
+                        "nbt": [
+                            "DefensiveStone"
+                        ]
+                    },
+                    {
+                        "id": 373,
+                        "meta": 7,
+                        "count": 1,
+                        "name": "不可視のポーション",
+                        "description": "ｴｯﾁ",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 278,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "黒曜石ブレイカー",
+                        "description": "黒曜石だけを徹底的に破壊する",
+                        "enchants": [
+                            {
+                                "id": 20,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": [
+                            "ObsidianBreaker"
+                        ]
+                    },
+                    {
+                        "id": 747,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "グロウストーンブレイカー",
+                        "description": "グロウストーンだけを徹底的に破壊する",
+                        "enchants": [
+                            {
+                                "id": 20,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": [
+                            "GlowstoneBreaker"
+                        ]
+                    },
+                    {
+                        "id": 38,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "ﾌｧｲﾔｰﾌﾗﾜｰ",
+                        "description": "ふぁいやー",
+                        "enchants": [
+                            {
+                                "id": 13,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": []
+                    },
+                    {
+                        "id": 52,
+                        "meta": 0,
+                        "count": 3,
+                        "name": "レベルブロック",
+                        "description": "れぇべぇるぅ",
+                        "enchants": [],
+                        "nbt": []
+                    },
+                    {
+                        "id": 346,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "SpeedRod",
+                        "description": "どこまでも走れる気がする",
+                        "enchants": [
+                            {
+                                "id": 20,
+                                "level": 1
+                            }
+                        ],
+                        "nbt": [
+                            "SpeedRod"
+                        ]
+                    },
+                    {
+                        "id": 277,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "§a[Gacha]DiamondMiningShovel",
+                        "description": "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3",
+                            "gacha_mining"
+                        ]
+                    },
+                    {
+                        "id": 278,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "§a[Gacha]DiamondMiningPickaxe",
+                        "description": "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3",
+                            "gacha_mining"
+                        ]
+                    },
+                    {
+                        "id": 279,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "§a[Gacha]DiamondMiningAxe",
+                        "description": "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3",
+                            "gacha_mining"
+                        ]
+                    }
+                ],
+                "L": [
+                    {
+                        "id": -302,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "MiningTool UltimateItem",
+                        "description": "",
+                        "enchants": [],
+                        "nbt": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "ちけっと",
+        "cost": [
+            {
+                "money": 100,
+                "ticket": 0,
+                "eventTicket": 1
+            }
+        ],
+        "rank": {
+            "C": 80,
+            "UC": 10,
+            "R": 10,
+            "SR": 0,
+            "L": 0
+        },
+        "items": [
+            {
+                "C": [
+                    {
+                        "id": 1,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "はずれのいし",
+                        "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3"
+                        ]
+                    }
+                ],
+                "UC": [
+                    {
+                        "id": 1,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "はずれのいし",
+                        "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3"
+                        ]
+                    }
+                ],
+                "R": [
+                    {
+                        "id": 1,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "はずれのいし",
+                        "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3"
+                        ]
+                    }
+                ],
+                "SR": [
+                    {
+                        "id": 1,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "はずれのいし",
+                        "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3"
+                        ]
+                    }
+                ],
+                "L": [
+                    {
+                        "id": 1,
+                        "meta": 0,
+                        "count": 1,
+                        "name": "はずれのいし",
+                        "description": "私じゃないほうがよかったよね。。。出てきちゃってごめんね。。。",
+                        "enchants": [],
+                        "nbt": [
+                            "MiningTools_3"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,8 +1,8 @@
 <?php
 
-namespace lazyperson710\Gacha\command;
+namespace lazyperson0710\Gacha\command;
 
-use onebone\economyapi\EconomyAPI;
+use lazyperson0710\Gacha\form\MainForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -10,7 +10,7 @@ use pocketmine\player\Player;
 class GachaCommand extends Command {
 
     public function __construct() {
-        parent::__construct("book", "50円で署名済みの本を一冊複製する");
+        parent::__construct("gacha", "ガチャを引く");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -18,7 +18,7 @@ class GachaCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        //ここからformを出す感じ
+        $sender->sendForm(new MainForm());
     }
 
 }

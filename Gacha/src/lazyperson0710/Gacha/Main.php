@@ -1,12 +1,15 @@
 <?php
 
-namespace lazyperson710\Gacha;
+namespace lazyperson0710\Gacha;
 
-use lazyperson710\Gacha\command\GachaCommand;
+use lazyperson0710\Gacha\command\GachaCommand;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
+    private array $allData;
+
+    private array $gachaNameAll = [];
     private static Main $main;
 
     public function onEnable(): void {
@@ -14,20 +17,39 @@ class Main extends PluginBase {
         $this->getServer()->getCommandMap()->registerAll("Gacha", [
             new GachaCommand(),
         ]);
+        $this->registerConfigData();
+        if ($this->checkChance() === false) {
+            $this->getLogger()->critical("確率が100%でないガチャが存在する為、プラグインを停止します");
+            $this->getServer()->getPluginManager()->disablePlugin($this);
+        }
     }
 
-    /*
-     * 起動時にすること
-     *
-     * 確率のチェックC,UC,R,SR,L
-     * 構文チェック(可能なのか不明)
-     *
-     * あとは全部当たってから処理
-     * */
-    public function chanceCheck() {
-        foreach (json_decode(file_get_contents(Main::getInstance()->getDataFolder() . "series.json"), true) as $content) {
-
+    public function registerConfigData() {
+        $this->allData = json_decode(file_get_contents($this->getDataFolder() . "series.json"), true);
+        foreach ($this->allData as $key => $contents) {
+            $this->gachaNameAll[] = [$key => $contents["name"]];
         }
+    }
+
+    public function checkChance(): bool {
+        foreach ($this->gachaNameAll as $key => $name) {
+            $rank = $this->allData[$key]["rank"];
+            $result = $rank["C"] + $rank["UC"] + $rank["R"] + $rank["SR"] + $rank["L"];
+            if ((float)$result !== 100.0) {
+                $this->getLogger()->critical("{$name}の確率が合計{$result}%になっています");
+                return false;
+            }
+        }
+        $this->getLogger()->info("正常に確率が計算されました");
+        return true;
+    }
+
+    public function getAllData(): array {
+        return $this->allData;
+    }
+
+    public function getGachaName(): array {
+        return $this->gachaNameAll;
     }
 
     public static function getInstance(): Main {
