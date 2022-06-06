@@ -121,6 +121,28 @@ class TicketAPI {
     }
 
     /*
+     * ticketの数を減らす
+     * データが存在しない場合は0を返す
+     * 指定値が0以下の場合も0を返す
+     * 結果の値が0以下の場合は0で返却する
+     * 正常に動作した場合は1以上の数字を返す
+     * */
+    public function InventoryConfirmationTicket(Player $player): int {
+        if ($this->dataExists($player) === false) return 0;
+        $inventory = $player->getInventory();
+        $count = 0;
+        for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
+            $item = clone $inventory->getItem($i);
+            if ($item->getNamedTag()->getTag('ExchangeTicket') !== null) {
+                $count += $item->getCount();
+                $inventory->clear($i);
+            }
+        }
+        if ($count === 0) return 0;
+        return $count;
+    }
+
+    /*
      * inventory内のticket置換
      * 変換できる個数を最終的に返す為、受け取り側は0か1以上で判断して欲しいです
      * また、データが存在しない場合も0を返す

@@ -18,7 +18,8 @@ class MainTicketForm extends SimpleForm {
                     new SendFormButton(new SetTicketForm($player), "Ticket枚数を設定する"),
                     new SendFormButton(new AddTicketForm($player), "Ticket枚数を増やす"),
                     new SendFormButton(new ReduceTicketForm($player), "Ticket枚数を減らす"),
-                    new SendFormButton(new ReplaceTicketForm($player), "Ticketを変換する"),
+                    new SendFormButton(new GachaTicketReplaceForm($player), "Ticketを変換する\n[gachaはずれ -> ticket]"),
+                    new SendFormButton(new ReplaceTicketForm($player), "Ticketを変換する\n[旧 -> 新]"),
                     new SendFormButton(new SaveTicketForm($player), "Ticketデータをセーブする"),
                 );
         } else {
@@ -26,7 +27,8 @@ class MainTicketForm extends SimpleForm {
                 ->setTitle("Ticket")
                 ->addElements(
                     new SendFormButton(new TransferTicketForm($player), "Ticketを譲渡する"),
-                    new SendFormButton(new ReplaceTicketForm($player), "Ticketを変換する"),
+                    new SendFormButton(new GachaTicketReplaceForm($player), "Ticketを変換する\n[gachaはずれ -> ticket]"),
+                    new SendFormButton(new ReplaceTicketForm($player), "Ticketを変換する\n[旧 -> 新]"),
                 );
         }
     }
