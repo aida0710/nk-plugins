@@ -80,7 +80,7 @@ class Main extends PluginBase implements Listener {
                         $set = $this->config['netherite_axe'];
                         break;
                     default:
-                        Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                        Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                         return;
                 }
             }
@@ -114,12 +114,12 @@ class Main extends PluginBase implements Listener {
                         }
                         break;
                     default:
-                        Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                        Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                         return;
                 }
             }
             if (!isset($set)) {
-                Server::getInstance()->broadcastMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
             }
             $world_name = $event->getPlayer()->getWorld()->getDisplayName();
