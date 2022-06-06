@@ -18,6 +18,7 @@ use pocketmine\item\Durable;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\math\Facing;
+use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
@@ -37,6 +38,7 @@ class Main extends PluginBase implements Listener {
      * @ignoreCancelled
      * @priority LOW
      */
+    //todo 優先度要検証
     public function block(BlockBreakEvent $event): void {
         if ($event->isCancelled()) {
             return;
@@ -171,9 +173,11 @@ class Main extends PluginBase implements Listener {
                             $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
                             $blockIds[] = $targetBlock->getId();
                             if ($haveDurable) {
-                                /** @var Durable $handItem */
-                                $handItem->applyDamage(1);
-                                $player->getInventory()->setItemInHand($handItem);
+                                if ($player->getGamemode() !== GameMode::CREATIVE()){
+                                    /** @var Durable $handItem */
+                                    $handItem->applyDamage(1);
+                                    $player->getInventory()->setItemInHand($handItem);
+                                }
                                 if ($handItem->getDamage() >= $maxDurability - 15) {
                                     $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                     break 3;
@@ -187,9 +191,11 @@ class Main extends PluginBase implements Listener {
                             $dropItems = array_merge($dropItems ?? [], $this->getDrop($player, $targetBlock));
                             $blockIds[] = $targetBlock->getId();
                             if ($haveDurable) {
-                                /** @var Durable $handItem */
-                                $handItem->applyDamage(1);
-                                $player->getInventory()->setItemInHand($handItem);
+                                if ($player->getGamemode() !== GameMode::CREATIVE()){
+                                    /** @var Durable $handItem */
+                                    $handItem->applyDamage(1);
+                                    $player->getInventory()->setItemInHand($handItem);
+                                }
                                 if ($handItem->getDamage() >= $maxDurability - 15) {
                                     $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                     break 3;
@@ -247,9 +253,11 @@ class Main extends PluginBase implements Listener {
                     continue;
                 }
                 if ($haveDurable) {
-                    /** @var Durable $handItem */
-                    $handItem->applyDamage(1);
-                    $player->getInventory()->setItemInHand($handItem);
+                    if ($player->getGamemode() !== GameMode::CREATIVE()){
+                        /** @var Durable $handItem */
+                        $handItem->applyDamage(1);
+                        $player->getInventory()->setItemInHand($handItem);
+                    }
                     if ($handItem->getDamage() >= $maxDurability - 15) {
                         $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                         break 2;
