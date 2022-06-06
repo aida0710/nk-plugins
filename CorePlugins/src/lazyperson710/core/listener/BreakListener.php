@@ -24,9 +24,13 @@ class BreakListener implements Listener {
         }
         if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
             if (!empty($inhanditem->getNamedTag()->getTag('MiningTools_3'))) {
-                if ($item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) === 0) {
-                    $event->cancel();
-                    $event->getPlayer()->sendMessage('§bEnchant §7>> §cこのアイテムは使用不可です。なまけものに言って交換してもらうか買いなおしてください');
+                if (!empty($inhanditem->getNamedTag()->getTag('gacha_mining'))) {
+                    return;
+                }else {
+                    if ($item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) === 0) {
+                        $event->cancel();
+                        $event->getPlayer()->sendMessage('§bEnchant §7>> §cこのアイテムは使用不可です。なまけものに言って交換してもらうか買いなおしてください');
+                    }
                 }
             }
             if ($item->getEnchantmentLevel(VanillaEnchantments::INFINITY()) >= 50 || $item->getEnchantmentLevel(VanillaEnchantments::UNBREAKING()) >= 11 || $item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) >= 2 || $item->getEnchantmentLevel(VanillaEnchantments::EFFICIENCY()) >= 51) {
