@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems;
+namespace lazyperson0710\EffectItems\event;
 
 use Exception;
 use pocketmine\entity\object\ItemEntity;
