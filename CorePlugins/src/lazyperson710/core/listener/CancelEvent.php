@@ -90,7 +90,6 @@ class CancelEvent implements Listener {
             case BlockLegacyIds::RESERVED6;
             case BlockLegacyIds::ICE:
                 //BanItems
-            case ItemIds::BUCKET:
             case ItemIds::BANNER:
             case ItemIds::BANNER_PATTERN:
             case ItemIds::STANDING_BANNER:
@@ -134,6 +133,14 @@ class CancelEvent implements Listener {
                 }
                 $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
                 break;
+        }
+        if ($event->getPlayer()->getInventory()->getItemInHand()->getId() === 325) {
+            if ($event->getPlayer()->getInventory()->getItemInHand()->getMeta() !== 1) {
+                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    $event->cancel();
+                }
+                $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
+            }
         }
     }
 
