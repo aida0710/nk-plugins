@@ -3,7 +3,7 @@
 namespace deceitya\miningtools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\tools\netherite\NetheriteToolForm;
+use deceitya\miningtools\normal\ConfirmForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -20,12 +20,12 @@ class NetheriteMiningToolCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($sender) >= 30) {
-            $sender->sendForm(new NetheriteToolForm());
-        } else {
+        //todo テスト必須
+        if (MiningLevelAPI::getInstance()->getLevel($sender) <= 31) {
             $sender->sendMessage("§bMiningToolShop §7>> §cレベル30以上でないと開けません。");
             Server::getInstance()->dispatchCommand($sender, "mt");
         }
+        $sender->sendForm(new ConfirmForm($sender, "netherite"));
     }
 
 }

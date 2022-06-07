@@ -3,7 +3,7 @@
 namespace deceitya\miningtools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\tools\diamond\DiamondToolForm;
+use deceitya\miningtools\normal\ConfirmForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -20,12 +20,12 @@ class DiamondMiningToolCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($sender) >= 15) {
-            $sender->sendForm(new DiamondToolForm());
-        } else {
+        //todo テスト必須
+        if (MiningLevelAPI::getInstance()->getLevel($sender) <= 16) {
             $sender->sendMessage("§bMiningToolShop §7>> §cレベル15以上でないと開けません。");
             Server::getInstance()->dispatchCommand($sender, "mt");
         }
+        $sender->sendForm(new ConfirmForm($sender, "diamond"));
     }
 
 }

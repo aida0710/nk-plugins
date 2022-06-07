@@ -71,7 +71,7 @@ class ExpansionConfirmForm extends SimpleForm {
             if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
                 $radius = 1;
                 $price = 3500000;
-                $this->onReduceMoney($player, $price);
+                if (!$this->onReduceMoney($player, $price)) return;
                 $nbt = $item->getNamedTag();
                 $tag = "MiningTools_3";
                 $nbt->removeTag($tag);
@@ -86,12 +86,13 @@ class ExpansionConfirmForm extends SimpleForm {
         }
     }
 
-    public function onReduceMoney(Player $player, $price) {
+    public function onReduceMoney(Player $player, $price): bool {
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
             $player->sendMessage('§bMiningTool §7>> §cお金が足りません');
-            return;
+            return false;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
+        return true;
     }
 
 }
