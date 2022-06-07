@@ -29,7 +29,7 @@ class DiverseBossBar extends BossBar {
      * DiverseBossBar constructor.
      *
      * @see BossBar::__construct
-     * TODO might be useless, remove?
+     * tod0: might be useless, remove?
      */
     public function __construct() {
         parent::__construct();
@@ -80,7 +80,7 @@ class DiverseBossBar extends BossBar {
     /**
      * @param Player[] $players
      */
-    protected function sendAttributesPacket(array $players): void {//TODO might not be needed anymore
+    protected function sendAttributesPacket(array $players): void {//tod0: might not be needed anymore
         if ($this->actorId === null) return;
         $pk = new UpdateAttributesPacket();
         $pk->actorRuntimeId = $this->actorId;
@@ -216,7 +216,7 @@ class DiverseBossBar extends BossBar {
     }
 
     /**
-     * TODO: Only registered players validation
+     * tod0: Only registered players validation
      * Displays the bar to the specified players
      *
      * @param Player[] $players
@@ -233,7 +233,7 @@ class DiverseBossBar extends BossBar {
 
     public function getPropertyManager(Player $player = null): EntityMetadataCollection {
         $propertyManager = /*clone*/
-            $this->propertyManager;//TODO check if memleak
+            $this->propertyManager;//tod0: check if memleak
         if ($player instanceof Player) $propertyManager->setString(EntityMetadataProperties::NAMETAG, $this->getFullTitleFor($player));
         else $propertyManager->setString(EntityMetadataProperties::NAMETAG, $this->getFullTitle());
         return $propertyManager;

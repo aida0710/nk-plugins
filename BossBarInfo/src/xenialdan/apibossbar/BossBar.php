@@ -263,7 +263,7 @@ class BossBar {
     }
 
     /**
-     * TODO: Only registered players validation
+     * tod0: nly registered players validation
      * Hides the bar from the specified players without removing it.
      * Useful when saving some bandwidth or when you'd like to keep the entity
      *
@@ -287,7 +287,7 @@ class BossBar {
     }
 
     /**
-     * TODO: Only registered players validation
+     * tod0: Only registered players validation
      * Displays the bar to the specified players
      *
      * @param Player[] $players
@@ -317,11 +317,11 @@ class BossBar {
     }
 
     /**
-     * STILL TODO, SHOULD NOT BE USED YET
+     * STILL tod0: SHOULD NOT BE USED YET
      *
      * @param null|Entity $entity
      * @return BossBar
-     * TODO: use attributes and properties of the custom entity
+     * tod0: use attributes and properties of the custom entity
      */
     public function setEntity(?Entity $entity = null): BossBar {
         if ($entity instanceof Entity && ($entity->isClosed() || $entity->isFlaggedForDespawn())) throw new InvalidArgumentException("Entity $entity can not be used since its not valid anymore (closed or flagged for despawn)");
@@ -333,8 +333,8 @@ class BossBar {
         }
         if ($entity instanceof Entity) {
             $this->actorId = $entity->getId();
-            $this->attributeMap = $entity->getAttributeMap();//TODO try some kind of auto-updating reference
-            $this->getAttributeMap()->add($entity->getAttributeMap()->get(Attribute::HEALTH));//TODO Auto-update bar for entity? Would be cool, so the api can be used for actual bosses
+            $this->attributeMap = $entity->getAttributeMap();//tod0: try some kind of auto-updating reference
+            $this->getAttributeMap()->add($entity->getAttributeMap()->get(Attribute::HEALTH));//tod0:  Auto-update bar for entity? Would be cool, so the api can be used for actual bosses
             $this->propertyManager = $entity->getNetworkProperties();
             if (!$entity instanceof Player) $entity->despawnFromAll();
         } else {
@@ -352,7 +352,7 @@ class BossBar {
     /**
      * @param Player[] $players
      */
-    protected function sendAttributesPacket(array $players): void {//TODO might not be needed anymore
+    protected function sendAttributesPacket(array $players): void {//tod0: might not be needed anymore
         if ($this->actorId === null) return;
         $pk = new UpdateAttributesPacket();
         $pk->actorRuntimeId = $this->actorId;
@@ -364,5 +364,5 @@ class BossBar {
         return $this->propertyManager;
     }
 
-    //TODO callable on client2server register/unregister request
+    //tod0: callable on client2server register/unregister request
 }
