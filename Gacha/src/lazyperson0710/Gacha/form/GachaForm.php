@@ -61,7 +61,14 @@ class GachaForm extends CustomForm {
         $onDrop = false;
         foreach ($result as $rank) {
             $item = (new ItemRegister($this->key, $rank))->Items($this->key, $rank);
-            $formMessage .= "{$rank} > {$item->getCustomName()}§rを{$rankProbability[$rank]}％で当てました\n";
+            $formDisplayRank = match ($rank) {
+                "C" => "§7Common§r",
+                "UC" => "§aUnCommon§r",
+                "R" => "§bRare§r",
+                "SR" => "§dSuperRare§r",
+                "L" => "§cLegendary§r",
+            };
+            $formMessage .= "{$formDisplayRank} > {$item->getCustomName()}§rを{$rankProbability[$rank]}％で当てました\n";
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
                 switch ($rank) {
