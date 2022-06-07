@@ -66,7 +66,7 @@ class GachaForm extends CustomForm {
                 $player->getInventory()->addItem($item);
                 switch ($rank) {
                     case "SR":
-                        $this->addSound($player, "beacon.power");
+                        $this->addSound($player, "mob.wither.spawn");
                         $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$rankProbability[$rank]}％で当てました");
                         break;
                     case "L":
