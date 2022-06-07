@@ -27,7 +27,7 @@ class RepairForm extends CustomForm {
         $this->item = $item;
         $this->level = $level;
         $this->mode = $mode;
-        $this->ticket = new Toggle("修繕費用代替Ticketを使用する\n(インベントリから取得)");
+        $this->ticket = new Toggle("修繕費用代替インゴットを使用する\n(インベントリから取得)");
         if ($this->mode === "command") {
             $warning = new Label("ExpLevelを消費してツールを修繕することができます\n稀に修繕した際に破損する可能性があります\n破損確率は下記を参照\n\n消費レベル : {$this->level}\nまた、コマンドから表示している為、手数料として3500円徴収されます");
             $probability = new Label("§l修理失敗確率§r\n80Lv以上90Lv未満->2％で破損\n90Lv以上100Lv未満->1％で破損\n§g100Lv以上は破損無し");
@@ -66,9 +66,9 @@ class RepairForm extends CustomForm {
             for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
                 $item = clone $player->getInventory()->getItem($i);
                 if ($item->getId() == ItemIds::AIR) continue;
-                if ($item->getNamedTag()->getTag('repairTicket') !== null) {
+                if ($item->getNamedTag()->getTag('repairIngot') !== null) {
                     $player->getInventory()->removeItem($item->setCount(1));
-                    $consumption = "ticket";
+                    $consumption = "ingot";
                     break;
                 }
             }
@@ -184,8 +184,8 @@ class RepairForm extends CustomForm {
         $player->getInventory()->setItemInHand($this->item);
         $player->getWorld()->addSound($player->getPosition(), new AnvilUseSound());
         switch ($consumption) {
-            case "ticket":
-                $player->sendMessage("§bRepair §7>> §aTicketを一枚消費してアイテムを修理しました");
+            case "ingot":
+                $player->sendMessage("§bRepair §7>> §aインゴットを一個消費してアイテムを修理しました");
                 break;
             case "level":
                 $player->sendMessage("§bRepair §7>> §aLevelを{$this->level}消費してアイテムを修理しました");
