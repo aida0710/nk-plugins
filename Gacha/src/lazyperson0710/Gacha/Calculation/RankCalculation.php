@@ -30,7 +30,7 @@ class RankCalculation {
     }
 
     public function run($num, Player $player, $key): string|false {
-        $this->cost = $this->content[$key]["cost"][0];
+        $this->cost = $this->content[$key]["cost"];
         $result = null;
         for ($i = 1; $i <= $num; $i++) {
             if ($this->checkMoney($player) === false) return false;

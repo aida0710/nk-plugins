@@ -23,7 +23,7 @@ class GachaForm extends CustomForm {
     public function __construct(string $gachaName, int $key) {
         $this->key = $key;
         $this->content = Main::getInstance()->getAllData();
-        $this->cost = $this->content[$key]["cost"][0];
+        $this->cost = $this->content[$key]["cost"];
         $rank = $this->content[$key]["rank"];
         $this->quantity = new Input("ガチャを回したい回数を入力してください", "0");
         $this
