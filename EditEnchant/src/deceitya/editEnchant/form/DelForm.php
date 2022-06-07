@@ -1,24 +1,25 @@
 <?php
 
-namespace deceitya\delenchant;
+namespace deceitya\editEnchant\form;
 
 use bbo51dog\bboform\form\SimpleForm;
+use deceitya\editEnchant\form\element\SendConfirmFormButton;
 use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
-class ReduceForm extends SimpleForm {
+class DelForm extends SimpleForm {
 
     public function __construct(Player $player) {
-        $this->setTitle("Reduce Enchant");
+        $this
+            ->setTitle("Delete Enchant")
+            ->setText("削除したいエンチャントを選択してください");
         foreach ($player->getInventory()->getItemInHand()->getEnchantments() as $enchant) {
             $enchantName = $enchant->getType()->getName();
             if ($enchantName instanceof Translatable) {
                 $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
             }
-            $this->addElement(
-                new ReduceButton("$enchantName(Lv{$enchant->getLevel()})", $enchant)
-            );
+            $this->addElement(new SendConfirmFormButton("{$enchantName}(Lv{$enchant->getLevel()})", $enchant, "del"));
         }
     }
 }

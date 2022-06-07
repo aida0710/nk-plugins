@@ -1,9 +1,9 @@
 <?php
 
-namespace deceitya\delenchant;
+namespace deceitya\editEnchant;
 
-use deceitya\delenchant\command\DeleteCommand;
-use deceitya\delenchant\command\ReductionCommand;
+use deceitya\editEnchant\command\DeleteCommand;
+use deceitya\editEnchant\command\ReductionCommand;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
