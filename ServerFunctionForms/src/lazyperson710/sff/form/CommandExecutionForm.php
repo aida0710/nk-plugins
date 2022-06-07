@@ -37,7 +37,7 @@ class CommandExecutionForm extends SimpleForm {
             new CommandDispatchButton("Level Shop", "shop", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_balloon.png")),
             new CommandDispatchButton("bank System", "bank", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/MCoin.png")),
             new CommandDispatchButton("My Warp", "myw", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/broadcast_glyph_color.png")),
-            new CommandDispatchButton("Free Market", "market", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/subscription_glyph_color.png")),
+            new CommandDispatchButton("Gacha", "gacha", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_random.png")),
             new CommandDispatchButton("Statistics & Ranking", "ranking", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_best3.png")),
             new SendFormButton($others1, "Others - 1", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/book_normal.png")),
             new SendFormButton($others2, "Others - 2", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/book_normal.png")),
