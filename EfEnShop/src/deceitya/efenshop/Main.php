@@ -41,7 +41,7 @@ class Main extends PluginBase implements Listener {
                     ],
                     [
                         "type" => "dropdown",
-                        "text" => "§7Enchant名 | Lv2(付与されるレベル) | 1m/800円(1分の値段)",
+                        "text" => "§7Enchant名 | Lv.n(付与されるレベル) | 1m/n円(1分の値段)",
                         "options" => [
                             "タップして付与したいエフェクトを選択してください",
                             "採掘速度上昇 | Lv2 | 1m/800円", //1#HASTE
@@ -70,7 +70,7 @@ class Main extends PluginBase implements Listener {
                     ],
                     [
                         "type" => "dropdown",
-                        "text" => "§7Enchant名 | 2lv以下(最大レベル) | Lv/1レベルごとの値段",
+                        "text" => "§7Enchant名 | nLv以下(最大レベル) | Lv/n(レベルごとの値段)",
                         "options" => [
                             "タップして付与したいエンチャントを選択してください",
                             "ダメージ増加 | 5lv以下 | Lv/3000円",
