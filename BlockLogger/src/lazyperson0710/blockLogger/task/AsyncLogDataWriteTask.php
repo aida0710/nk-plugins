@@ -5,6 +5,7 @@ namespace lazyperson0710\blockLogger\task;
 use lazyperson0710\blockLogger\event\PlayerEvent;
 use lazyperson0710\blockLogger\Main;
 use pocketmine\scheduler\AsyncTask;
+use pocketmine\Server;
 use SQLite3;
 
 class AsyncLogDataWriteTask extends AsyncTask {
@@ -12,8 +13,10 @@ class AsyncLogDataWriteTask extends AsyncTask {
     public string $cache;
     public string $dataBaseFile;
     public string $name;
+    //private $time;
 
-    public function __construct() {
+    public function __construct(/*$time*/) {
+        //$this->time = $time;
         $this->cache = serialize(PlayerEvent::getInstance()->getBlockLogTemp());
         PlayerEvent::getInstance()->refreshBlockLogTemp();
         $this->dataBaseFile = Main::getInstance()->getDataFolder() . 'log.db';
@@ -33,7 +36,10 @@ class AsyncLogDataWriteTask extends AsyncTask {
         $db->close();
     }
 
-    //    public function onCompletion(): void {
-    //        Server::getInstance()->getLogger()->info("§bLevel §7>> §a保存は完了致しました。");
-    //    }
+    public function onCompletion(): void {
+        //$totalTime = microtime(true) - $this->time;
+        //$totalTime = sprintf("%.7f", $totalTime);
+        //echo "合計出力時間 : {$totalTime}\n";
+        //Server::getInstance()->getLogger()->info("§bLevel §7>> §a保存は完了致しました。");
+    }
 }

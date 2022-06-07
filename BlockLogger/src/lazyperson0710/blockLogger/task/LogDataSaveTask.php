@@ -11,9 +11,8 @@ class LogDataSaveTask extends Task {
     public function onRun(): void {
         if (empty(PlayerEvent::getInstance()->getBlockLogTemp())) return;
         //$totalTime = microtime(true);
-        Server::getInstance()->getAsyncPool()->submitTask(new AsyncLogDataWriteTask());
-        //$totalTime = microtime(true) - $totalTime;
-        //$totalTime = sprintf("%.7f", $totalTime);
-        //echo "合計出力時間 : {$totalTime}\n";
+        //echo "保存を開始しました";
+        Server::getInstance()->getAsyncPool()->submitTask(new AsyncLogDataWriteTask(/*$totalTime*/));
+
     }
 }
