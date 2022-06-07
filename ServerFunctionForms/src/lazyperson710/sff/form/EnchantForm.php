@@ -13,7 +13,7 @@ class EnchantForm extends SimpleForm {
             ->setTitle("Enchant Form")
             ->setText("使用したい機能を選択してください")
             ->addElements(
-                new CommandDispatchButton("通常エンチャントを付与", "ven", null),
+                new CommandDispatchButton("エンチャントを付与", "ven", null),
                 new CommandDispatchButton("エンチャントを削減", "enreduce", null),
                 new CommandDispatchButton("エンチャントを削除", "endelete", null),
             );
