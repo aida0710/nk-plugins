@@ -13,6 +13,5 @@ class LogDataSaveTask extends Task {
         //$totalTime = microtime(true);
         //echo "保存を開始しました";
         Server::getInstance()->getAsyncPool()->submitTask(new AsyncLogDataWriteTask(/*$totalTime*/));
-
     }
 }
