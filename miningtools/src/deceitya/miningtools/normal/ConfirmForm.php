@@ -44,6 +44,6 @@ class ConfirmForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         var_dump($this->toolType->getSelectedOption());
-        $player->sendForm(new ConfirmForm($player, $this->mode, $this->cost, $this->toolType->getSelectedOption()));
+        $player->sendForm(new BuyForm($player, $this->mode, $this->cost, $this->toolType->getSelectedOption()));
     }
 }
