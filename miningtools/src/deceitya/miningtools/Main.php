@@ -299,8 +299,10 @@ class Main extends PluginBase implements Listener {
     }
 
     protected function onEnable(): void {
-        $this->saveDefaultConfig();
-        $this->config = $this->getConfig()->getAll();
+        $this->saveResource("config.json");
+        //$this->config = $this->getConfig()->getAll();
+        $data = json_decode(file_get_contents($this->getDataFolder() . "config.json"), true);
+        var_dump($data);
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getServer()->getCommandMap()->registerAll("MiningTools", [
             new DiamondMiningToolCommand(),

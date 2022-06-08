@@ -78,7 +78,6 @@ class BuyForm extends CustomForm {
                     break;
                 case "おの":
                     $item = ItemFactory::getInstance()->get(self::NETHERITE_AXE);
-                    $item->
                     break;
             }
         }
