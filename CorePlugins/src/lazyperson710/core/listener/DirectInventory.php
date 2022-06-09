@@ -10,7 +10,7 @@ class DirectInventory implements Listener {
 
     /**
      * @param BlockBreakEvent $event
-     * @priority HIGH
+     * @priority HIGHEST
      */
     public function onBreak(BlockBreakEvent $event) {
         if ($event->isCancelled()) return;
