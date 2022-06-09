@@ -32,7 +32,11 @@ class PlayerForm extends SimpleForm {
                 $effectIds = "なし";
             }
             $position = $player->getPosition();
-            $playerPosition = "X, {$position->getFloorX()} Y, {$position->getFloorY()} Z, {$position->getFloorZ()} \nWorld : {$position->getWorld()->getDisplayName()}";
+            if ($position->getWorld()->getDisplayName() !== "pvp") {
+                $playerPosition = "X, {$position->getFloorX()} Y, {$position->getFloorY()} Z, {$position->getFloorZ()} \nWorld : {$position->getWorld()->getDisplayName()}";
+            } else {
+                $playerPosition = "PVPワールドにいるため座標を開示出来ませんでした\nWorld : {$position->getWorld()->getDisplayName()}";
+            }
             $date = date("Y/m/d - H:i:s");
             $life = "{$player->getHealth()}/{$player->getMaxHealth()}";
             $gameMode = match ($player->getGamemode()) {
