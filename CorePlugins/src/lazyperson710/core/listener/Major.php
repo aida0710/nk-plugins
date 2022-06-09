@@ -57,7 +57,7 @@ class Major implements Listener {
      * @param float $percent
      * @return Vector3
      */
-    function lerp(Vector3 $start, Vector3 $end, float $percent): Vector3 {
+    public function lerp(Vector3 $start, Vector3 $end, float $percent): Vector3 {
         if (0 > $percent or $percent > 1) {
             throw new InvalidArgumentException("percentage $percent should have a value of 0 to 1");
         }
