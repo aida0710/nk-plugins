@@ -25,7 +25,7 @@ class Main extends PluginBase implements Listener {
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if (!($sender instanceof Player)) {
-            $sender->sendMessage("サーバー内で使用してください。");
+            $sender->sendMessage("サーバー内で使用してください");
             return true;
         }
         if ($label == 'ef') {
@@ -102,7 +102,7 @@ class Main extends PluginBase implements Listener {
                 return;
             }
             if ($data === null) {
-                $player->sendMessage("§bEnEfShop §7>> §bキャンセルしました。");
+                $player->sendMessage("§bEnEfShop §7>> §bキャンセルしました");
                 return;
             }
             if (!$this->isInteger($data[0]) || ((int)$data[0]) < 1) {
@@ -112,7 +112,7 @@ class Main extends PluginBase implements Listener {
             $data[0] = (int)$data[0];
             if ($id == self::EFFECT_FORM_ID) {
                 if ($data[0] > 500) {
-                    $player->sendMessage("§bEnEfShop §7>> §c値は500以下にして下さい。");
+                    $player->sendMessage("§bEnEfShop §7>> §c値は500以下にして下さい");
                     return;
                 }
                 switch ($data[1]) {
@@ -157,7 +157,7 @@ class Main extends PluginBase implements Listener {
             }
             if ($id == self::ENCHANT_FORM_ID) {
                 if ($data[0] > 5) {
-                    $player->sendMessage("§bEnEfShop §7>> §c値は5以下にして下さい。");
+                    $player->sendMessage("§bEnEfShop §7>> §c値は5以下にして下さい");
                     return;
                 }
                 switch ($data[1]) {
