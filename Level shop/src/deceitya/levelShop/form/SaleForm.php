@@ -129,7 +129,7 @@ class SaleForm implements Form {
                 [
                     'type' => 'input',
                     'text' => '個数を入力',
-                    'placeholder' => '個数を入力してください。',
+                    'placeholder' => '個数を入力してください',
                     'default' => ''
                 ],
                 [

@@ -21,7 +21,7 @@ class ConfirmForm implements Form {
             return;
         }
         Database::getInstance()->removeWarpPosition($player, $this->target);
-        $player->sendMessage("§bMyWarp §7>> §aワープ地点を削除しました。");
+        $player->sendMessage("§bMyWarp §7>> §aワープ地点を削除しました");
     }
 
     public function jsonSerialize() {

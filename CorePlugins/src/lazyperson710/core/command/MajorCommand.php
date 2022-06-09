@@ -23,7 +23,7 @@ class MajorCommand extends Command {
         $major->setCustomName("Major");
         $major->setLore([
             "lore1" => "ブロック間を簡単に測定出来ます",
-            "lore2" => "一度目のタップで始点を設定し、二度目以降のタップで終点を設定できます。",
+            "lore2" => "一度目のタップで始点を設定し、二度目以降のタップで終点を設定できます",
             "lore3" => "また、スニークしながらタップすることで設定したポイントを削除することが出来ます",
         ]);
         if (!$sender->getInventory()->contains($major) && $sender->getInventory()->canAddItem($major)) {

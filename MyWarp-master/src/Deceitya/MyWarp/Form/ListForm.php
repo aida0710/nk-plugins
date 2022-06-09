@@ -24,7 +24,7 @@ class ListForm implements Form {
         if ($pos !== null) {
             $player->teleport($pos);
         } else {
-            $player->sendMessage('§bMyWarp §7>> §cワープ地点が見つかりませんでした。');
+            $player->sendMessage('§bMyWarp §7>> §cワープ地点が見つかりませんでした');
         }
     }
 

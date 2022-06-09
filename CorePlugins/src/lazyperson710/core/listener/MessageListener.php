@@ -54,7 +54,7 @@ class MessageListener implements Listener {
             if (AnnounceService::isConfirmed($player->getName())) {
                 $event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
             } else {
-                $event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。Passが認証されていません。");
+                $event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。Passが認証されていません");
                 $pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName("tos"));
                 $event->getPlayer()->teleport($pos);
             }
@@ -74,9 +74,9 @@ class MessageListener implements Listener {
         if ($reason === 'client disconnect') {
             $event->setQuitMessage("§bLogout §7>> §e{$name}がサーバーを退出しました。Ping {$event->getPlayer()->getNetworkSession()->getPing()}ms");
         } elseif ($reason === 'timeout') {
-            $event->setQuitMessage("§bLogout §7>> §e{$name}がタイムアウトしサーバーを退出しました。");
+            $event->setQuitMessage("§bLogout §7>> §e{$name}がタイムアウトしサーバーを退出しました");
         } else {
-            $event->setQuitMessage("§bLogout §7>> §e{$name}がサーバーを退出しました。");
+            $event->setQuitMessage("§bLogout §7>> §e{$name}がサーバーを退出しました");
         }
     }
 

@@ -23,7 +23,7 @@ class Shop5Command extends Command {
         if (MiningLevelAPI::getInstance()->getLevel($sender) >= 120) {
             $sender->sendForm(new Shop5Form());
         } else {
-            $sender->sendMessage("§bLevelShop §7>> §cレベル120以上でないと開けません。");
+            $sender->sendMessage("§bLevelShop §7>> §cレベル120以上でないと開けません");
             Server::getInstance()->dispatchCommand($sender, "shop");
         }
     }

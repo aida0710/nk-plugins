@@ -48,7 +48,7 @@ class SearchForm implements Form {
             }
         }
         if (count($this->heading) === 0) {
-            $message = "§eはるか彼方まで検索したのですが、残念ながら見つかりませんでした。§r\n";
+            $message = "§eはるか彼方まで検索したのですが、残念ながら見つかりませんでした§r\n";
             $player->sendForm(new self($this->file, "\n" . $message, $data));
             return;
         }

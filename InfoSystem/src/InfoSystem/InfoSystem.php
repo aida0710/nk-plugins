@@ -43,12 +43,12 @@ class InfoSystem extends PluginBase implements Listener {
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML, ["デフォルト称号" => "§b鯖民"]);
         $this->money = EconomyAPI::getInstance();
         if ($this->money == null) {
-            $this->getLogger()->error("§cEconomyAPI が存在しないため、サーバーを終了します。");
+            $this->getLogger()->error("§cEconomyAPI が存在しないため、サーバーを終了します");
             $this->getServer()->shutdown();
         }
         $this->level = MiningLevelAPI::getInstance();
         if ($this->level == null) {
-            $this->getLogger()->error("§cMiningLevelSystem が存在しないため、サーバーを終了します。");
+            $this->getLogger()->error("§cMiningLevelSystem が存在しないため、サーバーを終了します");
             $this->getServer()->shutdown();
         }
     }
@@ -121,19 +121,19 @@ class InfoSystem extends PluginBase implements Listener {
             if ($data != "null\n") {
                 if ($id === 78533) {
                     if ($result[1] === "") {
-                        $player->sendMessage("§bTag §7>> §c未記入です。");
+                        $player->sendMessage("§bTag §7>> §c未記入です");
                         return true;
                     }
                     if (str_contains($result[1], "l")) {
                         if (!Server::getInstance()->isOp($player->getName())) {
-                            $player->sendMessage("§bTag §7>> §c太文字を使用することはできません。");
+                            $player->sendMessage("§bTag §7>> §c太文字を使用することはできません");
                             return true;
                         }
                     }
                     if (Server::getInstance()->isOp($player->getName())) {
                         $this->data[$name]->set("tag", $result[1]);
                         $this->data[$name]->save();
-                        $player->sendMessage("§bTag §7>> §a称号を " . $result[1] . " §r§aに変更しました。");
+                        $player->sendMessage("§bTag §7>> §a称号を " . $result[1] . " §r§aに変更しました");
                         $this->getScheduler()->scheduleDelayedTask(new CPTask($this, "ChangeTag", [$player]), 10);
                     } else {
                         $Section = mb_substr_count($result[1], "§");
@@ -145,7 +145,7 @@ class InfoSystem extends PluginBase implements Listener {
                         } else {
                             $this->data[$name]->set("tag", $result[1]);
                             $this->data[$name]->save();
-                            $player->sendMessage("§bTag §7>> §a称号を " . $result[1] . " §r§aに変更しました。");
+                            $player->sendMessage("§bTag §7>> §a称号を " . $result[1] . " §r§aに変更しました");
                             $this->getScheduler()->scheduleDelayedTask(new CPTask($this, "ChangeTag", [$player]), 10);
                         }
                     }

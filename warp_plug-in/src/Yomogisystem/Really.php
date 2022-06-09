@@ -60,7 +60,7 @@ class Really extends PluginBase implements Listener {
                 break;
             case "warpset":
                 if (!Server::getInstance()->isOp($sender->getName())) {
-                    $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした。");
+                    $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした");
                     return true;
                 }
                 if (!isset($args[0])) {
@@ -92,7 +92,7 @@ class Really extends PluginBase implements Listener {
                 break;
             case "warpdel":
                 if (!Server::getInstance()->isOp($sender->getName())) {
-                    $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした。");
+                    $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした");
                     return true;
                 }
                 if (!isset($args[0])) {
@@ -111,7 +111,7 @@ class Really extends PluginBase implements Listener {
                 }
             case "warplist":
                 if (!Server::getInstance()->isOp($sender->getName())) {
-                    $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした。");
+                    $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした");
                     return true;
                 }
                 $wl = $this->warp->getAll();
