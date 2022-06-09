@@ -2,6 +2,7 @@
     {
         "diamond": {
             "description": "このクラスのマイニングツールは修繕することが出来ません\n修繕が可能なクラスは最上位のNetheriteのみになります",
+            "enchant": [[16, 1], [20, 1], [17, 5]],
             "shovel": {
                 "name": "§aDiamondMiningShovel",
                 "destructible": [12, 3, 2, 13, 80, 78, 88]
@@ -11,12 +12,12 @@
                 "destructible": [24, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 153, 89, 87]
             },
             "axe": {
-                "name": "§aDiamondMiningAxe",
-                "destructible": [17, 162, 18, 161]
+                "name": "§aDiamondMiningAxe"
             }
         },
         "netherite": {
             "description": "このMiningToolは最上位ツールの為修繕が可能です",
+            "enchant": [[16, 1], [17, 10]],
             "shovel": {
                 "name": "§aNetheriteMiningShovel",
                 "destructible": [12, 3, 2, 13, 80, 78, 88]
@@ -26,8 +27,7 @@
                 "destructible": [24, 1, 4, 129, 121, 15, 14, 56, 21, 73, 74, 155, 16, 153, 89, 87]
             },
             "axe": {
-                "name": "§aNetheriteMiningAxe",
-                "destructible": [17, 162, 18, 161]
+                "name": "§aNetheriteMiningAxe"
             }
         }
     }
