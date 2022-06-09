@@ -14,6 +14,7 @@ class Main extends PluginBase {
 
     public function onEnable(): void {
         self::$main = $this;
+        $this->saveResource("series.json");
         $this->getServer()->getCommandMap()->registerAll("Gacha", [
             new GachaCommand(),
         ]);
