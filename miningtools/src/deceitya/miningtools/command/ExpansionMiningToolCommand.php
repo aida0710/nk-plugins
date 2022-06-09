@@ -23,29 +23,27 @@ class ExpansionMiningToolCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($sender) >= 120) {
-            $namedTag = $sender->getInventory()->getItemInHand()->getNamedTag();
-            if ($namedTag->getTag('MiningTools_3') !== null || $namedTag->getTag('MiningTools_Expansion') !== null) {
-                if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_PICKAXE || $sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
-                    $sender->sendMessage("§bMiningTool §7>> §cDiamondMiningToolsはアップグレードに対応していません");
-                    return;
-                }
-                if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_AXE || $sender->getInventory()->getItemInHand()->getId() === self::NETHERITE_AXE) {
-                    $sender->sendMessage("§bMiningTool §7>> §cMiningTools Axeはアップグレードに対応していません");
-                    return;
-                }
-                if ($namedTag->getTag('MiningTools_Expansion') !== null && $namedTag->getInt('MiningTools_Expansion') === 3) {
-                    $sender->sendMessage("§bMiningTool §7>> §cこのアイテムは最上位ツールの為、以降のアップグレードに対応していません");
-                    return;
-                }
-                $sender->sendForm(new ExpansionToolForm($sender));
-            } else {
-                $sender->sendMessage("§bMiningTool §7>> §cこのアイテムはアップグレードに対応していません");
-            }
-        } else {
-            $sender->sendMessage("§bMiningToolShop §7>> §cレベル120以上でないと開けません。");
+        if (MiningLevelAPI::getInstance()->getLevel($sender) < 120) {
+            $sender->sendMessage("§bMiningToolShop §7>> §cレベル120以上でないと開けません");
             Server::getInstance()->dispatchCommand($sender, "mt");
         }
+        $namedTag = $sender->getInventory()->getItemInHand()->getNamedTag();
+        if ($namedTag->getTag('MiningTools_3') === null && $namedTag->getTag('MiningTools_Expansion') === null) {
+            $sender->sendMessage("§bMiningTools §7>> §cこのアイテムはアップグレードに対応していません");
+        }
+        if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_PICKAXE || $sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
+            $sender->sendMessage("§bMiningTools §7>> §cDiamondMiningToolsはアップグレードに対応していません");
+            return;
+        }
+        if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_AXE || $sender->getInventory()->getItemInHand()->getId() === self::NETHERITE_AXE) {
+            $sender->sendMessage("§bMiningTools §7>> §cMiningTools Axeはアップグレードに対応していません");
+            return;
+        }
+        if ($namedTag->getTag('MiningTools_Expansion') !== null && $namedTag->getInt('MiningTools_Expansion') === 3) {
+            $sender->sendMessage("§bMiningTools §7>> §cこのアイテムは最上位ツールの為、以降のアップグレードに対応していません");
+            return;
+        }
+        $sender->sendForm(new ExpansionToolForm($sender));
     }
 
 }

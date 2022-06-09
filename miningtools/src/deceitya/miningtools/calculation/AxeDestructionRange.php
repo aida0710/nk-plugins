@@ -1,0 +1,76 @@
+<?php
+
+namespace deceitya\miningtools\calculation;
+
+use deceitya\miningtools\event\CountBlockEvent;
+use pocketmine\block\Block;
+use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\VanillaBlocks;
+use pocketmine\item\Durable;
+use pocketmine\item\Item;
+use pocketmine\math\Facing;
+use pocketmine\player\GameMode;
+use pocketmine\player\Player;
+use pocketmine\world\World;
+
+class AxeDestructionRange {
+
+    /**
+     * @param Block $block
+     * @param Player $player
+     * @param Item[] $dropItems
+     * @return array
+     */
+    public function breakTree(Block $block, Player $player, array &$dropItems): array {
+        $world = $player->getWorld();
+        $startPos = $block->getPosition()->asVector3();
+        $handItem = $player->getInventory()->getItemInHand();
+        $haveDurable = $handItem instanceof Durable;
+        $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+        $open = [World::blockHash($startPos->x, $startPos->y, $startPos->z) => $startPos];
+        $close = [];
+        $drops = [];
+        //350(回)*6(方向) = 2100(ブロック(概算))
+        for ($i = 1; $i <= 350; $i++) {
+            if (count($open) === 0) {
+                break;
+            }
+            $key = array_key_first($open);
+            $now = $open[$key];
+            $close[$key] = null;
+            unset($open[$key]);
+            foreach (Facing::ALL as $side) {
+                $pos = $now->getSide($side);
+                $hash = World::blockHash($pos->x, $pos->y, $pos->z);
+                if (isset($open[$hash]) || isset($close[$hash])) continue;
+                $targetBlock = $world->getBlock($pos);
+                $getBlock = [
+                    BlockLegacyIds::LOG,
+                    BlockLegacyIds::LOG2,
+                    BlockLegacyIds::LEAVES,
+                    BlockLegacyIds::LEAVES2,
+                ];
+                if (!in_array($targetBlock->getId(), $getBlock)) {
+                    $close[$hash] = null;
+                    continue;
+                }
+                if ($haveDurable) {
+                    if ($player->getGamemode() !== GameMode::CREATIVE()) {
+                        /** @var Durable $handItem */
+                        $handItem->applyDamage(1);
+                        $player->getInventory()->setItemInHand($handItem);
+                    }
+                    if ($handItem->getDamage() >= $maxDurability - 15) {
+                        $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
+                        break 2;
+                    }
+                }
+                $drops[] = (new ItemDrop())->getDrop($player, $targetBlock);
+                (new CountBlockEvent($player, $targetBlock))->call();
+                $world->setBlock($pos, VanillaBlocks::AIR());
+                $open[$hash] = $pos;
+            }
+        }
+        return $dropItems = array_merge($dropItems, array_merge(...$drops));
+    }
+}

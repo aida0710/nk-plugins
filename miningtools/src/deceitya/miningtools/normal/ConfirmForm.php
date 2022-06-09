@@ -39,7 +39,10 @@ class ConfirmForm extends CustomForm {
         $this->toolType = new Dropdown("購入したいツールタイプを選択してください", $type);
         $this
             ->setTitle("Mining Tools")
-            ->addElements($explanation);
+            ->addElements(
+                $explanation,
+                $this->toolType,
+            );
     }
 
     public function handleSubmit(Player $player): void {

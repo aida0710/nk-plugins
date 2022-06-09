@@ -30,7 +30,7 @@ class EnchantConfirmForm extends SimpleForm {
     }
 
     public function handleClosed(Player $player): void {
-        $player->sendMessage('§bMiningTool §7>> §aアップグレードをキャンセルしました');
+        $player->sendMessage('§bMiningTools §7>> §aアップグレードをキャンセルしました');
     }
 
     public function handleSubmit(Player $player): void {
@@ -53,7 +53,7 @@ class EnchantConfirmForm extends SimpleForm {
                         $this->onReduceMoney($player, $price);
                         break;
                     default:
-                        $player->sendMessage("§bMiningTool §7>> §cエラーが発生しました。\nツールを交換してください");
+                        $player->sendMessage("§bMiningTools §7>> §cエラーが発生しました。\nツールを交換してください");
                         return;
                 }
                 $tag = "MiningTools_Expansion";
@@ -80,15 +80,15 @@ class EnchantConfirmForm extends SimpleForm {
                 $item->setCustomName("§aNetheriteMiningPickaxe Ex.Primary");
                 $player->getInventory()->setItemInHand($item);
             }
-            Server::getInstance()->broadcastMessage("§bMiningTool §7>> §e{$user}がNetheriteMiningToolsをEx.Rank{$radius}にアップグレードしました");
+            Server::getInstance()->broadcastMessage("§bMiningTools §7>> §e{$user}がNetheriteMiningToolsをEx.Rank{$radius}にアップグレードしました");
         } else {
-            $player->sendMessage("§bMiningTool §7>> §cこのアイテムはアップグレードに対応していません");
+            $player->sendMessage("§bMiningTools §7>> §cこのアイテムはアップグレードに対応していません");
         }
     }
 
     public function onReduceMoney(Player $player, $price) {
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
-            $player->sendMessage('§bMiningTool §7>> §cお金が足りません');
+            $player->sendMessage('§bMiningTools §7>> §cお金が足りません');
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
     }

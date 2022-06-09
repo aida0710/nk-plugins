@@ -16,6 +16,10 @@ class CountBlockEvent extends BlockEvent implements Cancellable {
     public array $blockIds;
     private Player $player;
 
+    /**
+     * @param Player $player
+     * @param Block $block
+     */
     public function __construct(Player $player, Block $block) {
         parent::__construct($block);
         $this->player = $player;
