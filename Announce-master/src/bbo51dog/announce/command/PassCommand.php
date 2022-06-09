@@ -27,7 +27,7 @@ class PassCommand extends Command {
             return;
         }
         if (AnnounceService::isConfirmed($sender->getName())) {
-            $sender->sendMessage(MessageFormat::PREFIX_PASS . TextFormat::RED . "既にアクティベートされています。");
+            $sender->sendMessage(MessageFormat::PREFIX_PASS . TextFormat::RED . "既にアクティベートされています");
             $sender->sendForm(new WarpForm($sender));
             return;
         }

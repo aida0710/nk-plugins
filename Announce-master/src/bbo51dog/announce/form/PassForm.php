@@ -13,7 +13,7 @@ use pocketmine\utils\TextFormat;
 
 class PassForm extends CustomForm {
 
-    private const MESSAGE_WRONG_PASS = MessageFormat::PREFIX_PASS . TextFormat::RED . "パスワードが間違っています。";
+    private const MESSAGE_WRONG_PASS = MessageFormat::PREFIX_PASS . TextFormat::RED . "パスワードが間違っています";
     private const PASS = "利用規約に同意";
 
     private Input $input;

@@ -10,7 +10,7 @@ use pocketmine\utils\TextFormat;
 
 class AnnounceAdminCommand extends Command {
 
-    private const DEFAULT_CONTENT = "詳細を確認したい方はお手数をおかけしますが、下記のサイトへアクセスしてください。";
+    private const DEFAULT_CONTENT = "詳細を確認したい方はお手数をおかけしますが、下記のサイトへアクセスしてください";
 
     private const DEFAULT_CONTENTS = [
         AnnounceType::TYPE_UPDATE => "サーバーの機能が更新されました。" . self::DEFAULT_CONTENT,
