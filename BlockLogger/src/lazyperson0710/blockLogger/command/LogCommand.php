@@ -25,7 +25,7 @@ class LogCommand extends Command {
             $msg = ["ON", "OFF"];
             $this->main->changeParam($sender);
             $flag = $this->main->isOn($sender) ? 0 : 1;
-            $sender->sendMessage("[Main]§a{$msg[$flag]}にしました。");
+            $sender->sendMessage("[Main]§a{$msg[$flag]}にしました");
             return true;
         }
         if (isset($args[1]) && isset($args[2]) && isset($args[3])) {
