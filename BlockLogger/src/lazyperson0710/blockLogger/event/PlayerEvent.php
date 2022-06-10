@@ -34,15 +34,20 @@ class PlayerEvent implements Listener {
         $this->checkLog($event, "Place");
     }
 
-    ///**
-    // * @priority MONITOR
-    // * @param CountBlockEvent $event
-    // */
-    //public function onMiningBreak(CountBlockEvent $event) {
-    //    var_dump($event->getBlockPosition());
-    //    $this->checkLog($event, "MiningTools");
-    //}
-    private function checkLog(BlockBreakEvent|BlockPlaceEvent|CountBlockEvent $event, string $type): void {
+    /**
+     * @priority MONITOR
+     * @param CountBlockEvent $event
+     */
+    public function countBlock(CountBlockEvent $event) {
+        $this->checkLog($event, "MiningTools");
+    }
+
+    /**
+     * @param $event
+     * @param string $type
+     * @return void
+     */
+    private function checkLog($event, string $type): void {
         $position = $event->getBlock()->getPosition()->asPosition();
         $date = date("Y/m/d");
         $time = date("H:i:s");
@@ -61,15 +66,6 @@ class PlayerEvent implements Listener {
             "time" => $time
         ];
         $this->setBlockLogTemp($log);
-        //var_dump($this->getBlockLogTemp());
-        /*$cls = $this->main->getDatabase();
-        if ($this->main->isOn($player)) {
-            $message = $cls->checklog($event, $type);
-            $player->sendTip($message);
-            $event->cancel();
-        } else {
-            $cls->registerlog($event, $type);
-        }*/
     }
 
     /**
@@ -87,10 +83,16 @@ class PlayerEvent implements Listener {
         $this->blockLogTemp = $blockLogTemp;
     }
 
+    /**
+     * @return void
+     */
     public function refreshBlockLogTemp(): void {
         $this->blockLogTemp = [];
     }
 
+    /**
+     * @return PlayerEvent
+     */
     public static function getInstance(): PlayerEvent {
         return self::$playerEvent;
     }
