@@ -28,12 +28,14 @@ class BuyForm extends CustomForm {
         $this->selection = $selection;
         $this->diamond = Main::getInstance()->dataAcquisition("diamond");
         $this->netherite = Main::getInstance()->dataAcquisition("netherite");
+        $diamondCost = ConfirmForm::DIAMOND_COST;
+        $netheriteCost = ConfirmForm::NETHERITE_COST;
         switch ($mode) {
             case 'diamond':
-                $explanation = new Label("dummy text");
+                $explanation = new Label("DiamondMiningTools\nType :　{$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない");
                 break;
             case 'netherite':
-                $explanation = new Label("dummy text2");
+                $explanation = new Label("NetheriteMiningTools\nType :　{$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10");
                 break;
             default:
                 Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");

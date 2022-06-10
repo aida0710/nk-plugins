@@ -18,14 +18,16 @@ class ConfirmForm extends CustomForm {
 
     public function __construct(Player $player, string $mode) {
         $this->mode = $mode;
+        $diamondCost = self::DIAMOND_COST;
+        $netheriteCost = self::NETHERITE_COST;
         switch ($mode) {
-            case 'diamond'://todo しっかりtextを書いてください
+            case 'diamond':
                 $this->cost = self::DIAMOND_COST;
-                $explanation = new Label("dummy text");
+                $explanation = new Label("DiamondMiningTools\n\n必要金額 : {$diamondCost}\n\n「送信」を押すと確認画面に飛びます\n\nしゃべるとピッケルの機能\n採掘地点を中心とした3x3の範囲採掘\n範囲破壊が行われるのはツールに対応したブロックのみになります\n\n斧の機能\nマインオールのような機能を持ち、採掘したブロック(原木と葉っぱが対象)に隣接するブロックを破壊していく");
                 break;
             case 'netherite':
                 $this->cost = self::NETHERITE_COST;
-                $explanation = new Label("dummy text2");
+                $explanation = new Label("NetheriteMiningTools\n\n必要金額 : {$netheriteCost}\n\n「送信」を押すと確認画面に飛びます\n\nしゃべるとピッケルの機能\n採掘地点を中心とした3x3の範囲採掘\n範囲破壊が行われるのはツールに対応したブロックのみになります\n\n斧の機能\nマインオールのような機能を持ち、採掘したブロック(原木と葉っぱが対象)に隣接するブロックを破壊していく");
                 break;
             default:
                 Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
