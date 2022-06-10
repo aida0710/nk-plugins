@@ -15,11 +15,6 @@ class PlayerInfoForm extends CustomForm {
         $names = null;
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
             $name = $player->getName();
-            if (Server::getInstance()->isOp($name)) {
-                if (!Server::getInstance()->isOp($player->getName())) {
-                    continue;
-                }
-            }
             /*if ($player->getName() === $name) {
                 continue;
             }*/
