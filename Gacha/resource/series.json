@@ -60,7 +60,7 @@
                     "id": 301,
                     "meta": 0,
                     "count": 1,
-                    "name": "落下ダメージ完全防御ブーツ Rank.1",
+                    "name": "落下ダメージ完全防御ブーツ-Rank.1",
                     "description": "Rank.1のブーツ\n着用していると落下ダメージから自分を守ってくれる\n革製なのですぐ壊れる",
                     "enchants": [],
                     "nbt": [
@@ -116,7 +116,7 @@
                     "id": 313,
                     "meta": 0,
                     "count": 1,
-                    "name": "落下ダメージ完全防御ブーツ Rank.2",
+                    "name": "落下ダメージ完全防御ブーツ-Rank.2",
                     "description": "Rank.2のブーツ\n着用していると落下ダメージから自分を守ってくれる",
                     "enchants": [],
                     "nbt": [
@@ -190,22 +190,6 @@
                     "nbt": []
                 },
                 {
-                    "id": 265,
-                    "meta": 6,
-                    "count": 1,
-                    "name": "修繕費用代替インゴット",
-                    "description": "アイテムの修繕費用(ExpLevel)を代替します",
-                    "enchants": [
-                        {
-                            "id": 26,
-                            "level": 15
-                        }
-                    ],
-                    "nbt": [
-                        "repairIngot"
-                    ]
-                },
-                {
                     "id": 257,
                     "meta": 0,
                     "count": 1,
@@ -231,11 +215,27 @@
                     "id": 751,
                     "meta": 0,
                     "count": 1,
-                    "name": "落下ダメージ完全防御ブーツ Rank.3",
+                    "name": "落下ダメージ完全防御ブーツ-Rank.3",
                     "description": "[最上位]Rank.3のブーツ\n着用していると落下ダメージから自分を守ってくれる",
                     "enchants": [],
                     "nbt": [
                         "DefensiveStone"
+                    ]
+                },
+                {
+                    "id": 265,
+                    "meta": 6,
+                    "count": 1,
+                    "name": "修繕費用代替インゴット",
+                    "description": "アイテムの修繕費用(ExpLevel)を代替します",
+                    "enchants": [
+                        {
+                            "id": 26,
+                            "level": 15
+                        }
+                    ],
+                    "nbt": [
+                        "repairIngot"
                     ]
                 },
                 {
@@ -283,8 +283,8 @@
                     "id": 38,
                     "meta": 0,
                     "count": 1,
-                    "name": "ﾌｧｲﾔｰﾌﾗﾜｰ",
-                    "description": "ふぁいやー",
+                    "name": "§cﾌｧｲﾔｰﾌﾗﾜｰ",
+                    "description": "ふぁいやー！！！",
                     "enchants": [
                         {
                             "id": 13,
@@ -303,11 +303,11 @@
                     "nbt": []
                 },
                 {
-                    "id": 166,
-                    "meta": 2,
+                    "id": 346,
+                    "meta": 0,
                     "count": 1,
-                    "name": "ネギ",
-                    "description": "どこまでも走れる気がする\n",
+                    "name": "SuperRod",
+                    "description": "どこまでも走れる気がする",
                     "enchants": [
                         {
                             "id": 20,
