@@ -140,3 +140,4 @@
     * secretcommands
         * makeplugin
     * redstone削除
+* stackStorageのid0を削除{data.sqlite}
