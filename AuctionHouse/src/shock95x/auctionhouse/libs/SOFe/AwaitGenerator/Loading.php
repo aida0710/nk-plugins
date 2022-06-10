@@ -1,5 +1,4 @@
 <?php
-
 /*
  * await-generator
  *
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\SOFe\AwaitGenerator;
 
 use AssertionError;
@@ -34,49 +32,49 @@ use Generator;
  *
  * @template T
  */
-final class Loading{
-	/** @var list<Closure(): void>|null */
-	private ?array $onLoaded = [];
-	private $value;
+final class Loading {
 
-	/**
-	 * @param Closure(): Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator, mixed, T> $loader
-	 */
-	public function __construct(Closure $loader){
-		Await::f2c(function() use($loader) {
-			$this->value = yield from $loader();
-			$onLoaded = $this->onLoaded;
-			$this->onLoaded = null;
+    /** @var list<Closure(): void>|null */
+    private ?array $onLoaded = [];
+    private $value;
 
-			if($onLoaded === null){
-				throw new AssertionError("loader is called twice on the same object");
-			}
+    /**
+     * @param Closure(): Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
+     *     mixed, T> $loader
+     */
+    public function __construct(Closure $loader) {
+        Await::f2c(function () use ($loader) {
+            $this->value = yield from $loader();
+            $onLoaded = $this->onLoaded;
+            $this->onLoaded = null;
+            if ($onLoaded === null) {
+                throw new AssertionError("loader is called twice on the same object");
+            }
+            foreach ($onLoaded as $closure) {
+                $closure();
+            }
+        });
+    }
 
-			foreach($onLoaded as $closure){
-				$closure();
-			}
-		});
-	}
+    /**
+     * @return Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
+     *     mixed, T>
+     */
+    public function get(): Generator {
+        if ($this->onLoaded !== null) {
+            yield from Await::promise(function ($resolve) {
+                $this->onLoaded[] = $resolve;
+            });
+        }
+        return $this->value;
+    }
 
-	/**
-	 * @return Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator, mixed, T>
-	 */
-	public function get() : Generator{
-		if($this->onLoaded !== null){
-			yield from Await::promise(function($resolve){
-				$this->onLoaded[] = $resolve;
-			});
-		}
-
-		return $this->value;
-	}
-
-	/**
-	 * @template U
-	 * @param U $default
-	 * @return T|U
-	 */
-	public function getSync($default) {
-		return $this->onLoaded === null ? $this->value : $default;
-	}
+    /**
+     * @template U
+     * @param U $default
+     * @return T|U
+     */
+    public function getSync($default) {
+        return $this->onLoaded === null ? $this->value : $default;
+    }
 }

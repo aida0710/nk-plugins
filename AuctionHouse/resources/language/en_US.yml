@@ -2,236 +2,220 @@
 # DO NOT EDIT THIS VALUE, INTERNAL USE ONLY. #
 lang-version: 4
 
-# Refer to https://minecraft.gamepedia.com/Formatting_codes for formatting codes, you can replace the '§' symbol with a '&'
+# Refer to https://minecraft.gamepedia.com/Formatting_codes for formatting codes, you can replace the '§' symbol with a '
 
 # AH Menu titles
-menu-name: "Auction House"
-listings-menu-name: "&aActive Listings"
-expired-menu-name: "&cCancelled / Expired Listings"
-purchase-menu-name: "Confirm Purchase"
-admin-menu-name: "&l&cAdmin Menu"
-category-menu-name: "&6Category Menu"
-manage-listing-name: "&6Manage Listing"
-player-listing: "&b{PLAYER}'s &6Listings"
+menu-name: "Auction System"
+listings-menu-name: "Auction System"
+expired-menu-name: "Auction System"
+purchase-menu-name: "Auction System"
+admin-menu-name: "Auction System"
+category-menu-name: "Auction System"
+manage-listing-name: "Auction System"
+player-listing: "Auction System / {PLAYER}"
 
 # Chat messages
-item-listed: "&2You have listed &d{ITEM} &r&d(x{AMOUNT}) &2for &d{PRICE}. Type &e/ah listings &dto view all your listings"
-cancelled-item: "&eYou have &6cancelled &ean auction. Return cancelled and expired items at &6/ah expired&e."
-cancelled-purchase: "&cYou have cancelled this purchase"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
-purchased-item: "&2You have bought &d{ITEM} &r&d(x{AMOUNT}) &2for &d{PRICE}"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
-seller-message: "&e{PLAYER} &bpurchased {ITEM} (x{AMOUNT}) from you for &d{PRICE}!"    #{ITEM}, {AMOUNT}
-returned-item: "&2You have removed &d{ITEM} &r&d(x{AMOUNT}) &2from the auction house." 
+item-listed: "{ITEM} (x{AMOUNT})を{PRICE}円で出品開始しました"
+cancelled-item: "§c出品を取り下げました。/ah expiredからアイテムを回収することができます"
+cancelled-purchase: "§c{ITEM} (x{AMOUNT})の購入をキャンセルしました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
+purchased-item: "{ITEM} (x{AMOUNT})を{PRICE}円で購入しました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
+seller-message: "{ITEM} (x{AMOUNT})を{PRICE}円で{PLAYER}が購入しました"    #{ITEM}, {AMOUNT}
+returned-item: "{ITEM} (x{AMOUNT}) が返却されました"
 
 # Error messages
-in-creative: "&cYou cannot sell items while in creative mode."
-max-listings: "&cYou cannot have more than {MAX} active listings."
-invalid-price: "&cInvalid price."
-not-enough-space: "&cYou do not have enough inventory space to buy this item"
-self-purchase: "&cYou cannot buy your own items on the auction house!"
-no-item: "&cYou must be holding an item in your hand!"
-cannot-afford: "&cYou do not have enough money to buy this item."
-item-blacklisted: "&cThat item is not allowed to be put on the auction house!"
-invalid-balance: "&cYou do not have enough money to list an auction."
-listing-gone: "&cThis listing no longer exists."
-price-range: "&cInvalid price range"    #{MIN}, {MAX}
-in-cooldown: "&cYou are currently in cooldown, please wait &b{M} minute(s) &cand &b{S} second(s)&c."    #{M}, {S}
-player-not-found: "&cThis player has no active listings."
-player-listings-usage: "&cView your listings with /ah listings"
-inventory-full: "&cYour inventory is full, remove some items to claim your listings."
-purchase-economy-error: "&cCould not complete transaction."
+in-creative: "§cクリエイティブモードではアイテムの出品は禁止されています"
+max-listings: "§c{MAX}以上の出品をすることはできません"
+invalid-price: "§c入力された価格が無効な値です"
+not-enough-space: "§cインベントリに購入しようとしたアイテムが入らない為キャンセルされました"
+self-purchase: "§c自身で出品したアイテムは購入できません"
+no-item: "§c出品したいアイテムを持ってください"
+cannot-afford: "§c所持金が足りませんでした"
+item-blacklisted: "§cこのアイテムはオークションには出品できません"
+invalid-balance: "§c現在の所持金では出品手数料分が足りません"
+listing-gone: "§c選択したアイテムはもう出品されていません"
+price-range: "§c入力した値では出品することは出来ません。出品可能金額は{MIN}円から{MAX}円までとなります"    #{MIN}, {MAX}
+in-cooldown: "§c現在クールダウン中です。残り{M}分{S}秒"    #{M}, {S}
+player-not-found: "§cこのプレイヤーが出品しているアイテムは存在しません"
+player-listings-usage: "/ah listingsで自分の出品中のアイテムリストを表示出来ます"
+inventory-full: "§c在庫がいっぱいなため出品できません。出品中のアイテムを削除してください"
+purchase-economy-error: "§cトランザクションに失敗しました"
 
 # Items in the menu UI
 listed-item:
-    # {PRICE} = Price of listing
-    # {SELLER} = Username of seller
-    # {D} = Days, {H} = Hours, {M} = Minutes
-    - "&7-------------------------"
-    - "&aClick here to purchase."
-    - ""
-    - "&9Price: &e{PRICE}"
-    - "&9Seller: &e{SELLER}"
-    - "&9Expire: &e{D}d {H}h {M}m"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  # {SELLER} = Username of seller
+  # {D} = Days, {H} = Hours, {M} = Minutes
+  - "-------------------------"
+  - "アイテムを購入したい場合はタップしてください"
+  - ""
+  - "出品価格: {PRICE}"
+  - "残り時間: {D}日と{H}時間{M}分"
+  - "出品者: {SELLER}"
+  - "-------------------------"
 your-listed-item:
-    # {PRICE} = Price of listing
-    # {D} = Days, {H} = Hours, {M} = Minutes
-    - "&7-------------------------"
-    - "&cClick here to remove listing."
-    - ""
-    - "&9Price: &e{PRICE}"
-    - "&9Expire: &e{D}d {H}h {M}m"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  # {D} = Days, {H} = Hours, {M} = Minutes
+  - "-------------------------"
+  - "出品を取り消す場合はアイテムをタップしてください"
+  - ""
+  - "出品価格: {PRICE}"
+  - "残り時間: {D}日と{H}時間{M}分"
+  - "-------------------------"
 expired-item:
-    # {PRICE} = Price of listing
-    - "&7-------------------------"
-    - "&aClick here to receive item."
-    - ""
-    - ""
-    - "&9Price: &e{PRICE}"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  - "-------------------------"
+  - "出品期限が切れました"
+  - "アイテムを受け取る場合はタップしてください"
+  - ""
+  - "出品価格: {PRICE}"
+  - "-------------------------"
 view-listed-items:
-    # {SELLING} = Number of active listings
-    name: "&6Items you're selling"
-    lore:
-        - "&aClick here to view all of the items you"
-        - "&aare currently selling on the auction."
-        - ""
-        - "&9Selling: &e{SELLING}"
+  # {SELLING} = Number of active listings
+  name: "現在出品中のアイテムを表示"
+  lore:
+    - "タップすると現在自身が出品している"
+    - "アイテムの一覧を見ることが可能です"
+    - "出品アイテム数: {SELLING}"
 view-expired-items:
-    # {EXPIRED} = Number of expired listings
-    name: "&6Collect Expired / Cancelled Items"
-    lore:
-      - "&r&aClick here to view and collect all of the"
-      - "&aitems you have cancelled or have expired."
-      - ""
-      - "&9Items to collect: &e{EXPIRED}"
+  # {EXPIRED} = Number of expired listings
+  name: "出品期限が切れた又はキャンセルされたアイテム"
+  lore:
+    - "タップすると出品期限が切れた又は"
+    - "キャンセルされたアイテムを回収することが出来ます"
+    - ""
+    - "保管されているアイテム数: {EXPIRED}"
 
 # Admin Menu
 view-admin-menu:
-    name: "&e&k----- &r&l&c Admin Menu &r&e&k-----"
-    lore:
-        - "&r&aClick here to view the admin menu."
-        #- "&aYou can remove specific items here."
+  name: "管理者用メニュー"
+  lore:
+  #- "You can remove specific items here."
 main-stats-admin:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {EXPIRED} = Expired listing count
-    # {TOTAL} = Total listing count
-    name: "&l&cAdmin Menu"
-    lore:
-        - "&aPage {PAGE}/{MAX}"
-        - "&7Total of &b{TOTAL} &7items"
-        - "&c(&b{EXPIRED} &cexpired items)"
-        - "Click to refresh page"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {EXPIRED} = Expired listing count
+  # {TOTAL} = Total listing count
+  name: "管理者用メニュー"
+  lore:
+    - "現在のページ {PAGE}/{MAX}"
+    - "{TOTAL}個のアイテムが出品されています"
+    - "{EXPIRED}種類のアイテムが期限切れになっています"
+    - "タップでリロード出来ます"
 listed-item-admin:
-    # {PRICE} = Price of listing
-    # {SELLER} = Username of seller
-    # {STATUS} = Listing status (Active/Expired)
-    - "&7-------------------------"
-    - "&6Click here to manage listing."
-    - ""
-    - "&9Price: &e{PRICE}"
-    - "&9Seller: &e{SELLER}"
-    - "&9Status: {STATUS}"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  # {SELLER} = Username of seller
+  # {STATUS} = Listing status (Active/Expired)
+  - "-------------------------"
+  - "Clickで編集する."
+  - ""
+  - "出品価格: {PRICE}"
+  - "状態: {STATUS}"
+  - "出品者: {SELLER}"
+  - "-------------------------"
 
-status-active: "&aActive"
-status-expired: "&cExpired"
-selected-listing-name: "&l&eManage Listing"
+status-active: "出品中"
+status-expired: "出品期間は終了しました"
+selected-listing-name: "リスト表示"
 
-#duplicate-item: "&aClick here to duplicate item to inventory"
-#listing-expired: "&eClick here to make listing &cexpired"
-#listing-active: "&eClick here to make listing &aactive"
-#delete-item: "&cClick here to delete item and listing"
+#duplicate-item: "Click here to duplicate item to inventory"
+#listing-expired: "Click here to make listing expired"
+#listing-active: "Click here to make listing active"
+#delete-item: "Click here to delete item and listing"
 
-duplicate-item: "&aAdd item to inventory"
+duplicate-item: "インベントリにアイテムをコピー"
 listing-status:
-    - "Status: {STATUS}"
-    - "&6Change listing status"
-delete-item: "&cDelete listing and item"
+  - "状態: {STATUS}"
+  - "アイテムの状態を変更する"
+delete-item: "オークションからアイテムを削除する"
 
 # Pagination items
 previous-page:
-    name: "&a<- Previous Page"
-    lore:
-        - "&7Go to the previous page"
+  name: "前のページに戻る"
+  lore:
+    - "アイテムをタップしてください"
 next-page:
-    name: "&aNext Page ->"
-    lore:
-        - "&7Go to the next page"
+  name: "次のページに進む"
+  lore:
+    - "アイテムをタップしてください"
 back-button:
-    name: "&6Back"
-    lore:
-
+  name: "戻る"
+  lore:
+    - "アイテムをタップしてください"
 sell-description:
-    name: "&6How to sell an item"
-    lore:
-        - "&aTo list an item on the auction house, just hold"
-        - "&athe item in your hand and type &b/ah sell <price>&a."
+  name: "アイテムを出品するには？"
+  lore:
+    - "出品したいアイテムを持って"
+    - "/ah sell <出品価格>とコマンドを実行してください"
 main-description:
-    name: "&6What is this page?"
-    lore:
-        - "&aThis is the auction house, here you can"
-        - "&alist items for sale and purchase items"
-        - "&athat others have listed for sale."
-        - ""
-        - "&aThe auction is also a great way to make"
-        - "&amoney by selling farmable items other"
-        - "&aplayers may be interested in buying."
+  name: "Auctionについて"
+  lore:
+    - "オークションが見にくい場合は[設定>ビデオ>UIプロフィール]"
+    - "をクラシックに変更してみてください"
 main-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "&l&6Auction House"
-    lore:
-        - "&aPage {PAGE}/{MAX}"
-        - "&7Total of &b{TOTAL} &7items"
-        - "Click to refresh page"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "メインページ"
+  lore:
+    - "現在のページ {PAGE}/{MAX}"
+    - "{TOTAL}個のアイテムが出品されています"
+    - "タップでリロード出来ます"
 listings-description:
-    name: "&6What is this Page?"
-    lore:
-        - "&aThese are your current listings, all of"
-        - "&athe items you currently have listed on"
-        - "&athe auction house are displayed here."
-        - ""
-        - "&aYou can cancel and view your listing's"
-        - "&aexpire time here."
+  name: "Auctionについて"
+  lore:
+    - "オークションが見にくい場合は[設定>ビデオ>UIプロフィール]"
+    - "をクラシックに変更してみてください"
 listings-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "&l&6Listings"
-    lore:
-        - "&aPage {PAGE}/{MAX}"
-        - "&7Total of &b{TOTAL} &7items"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "リスト表示"
+  lore:
+    - "現在のページ {PAGE}/{MAX}"
+    - "{TOTAL}個のアイテムが出品されています"
 expired-description:
-    name: "&6What is this page?"
-    lore:
-        - "&aThis page houses all of your cancelled and"
-        - "&aexpired items, when a listings is cancelled"
-        - "&aor expires you will be able to return that"
-        - "&aitem back to you from this menu."
-        - ""
-        - "&aJust click on the item and if you have enough"
-        - "&ainventory space you will receive the item."
+  name: "Auctionについて"
+  lore:
+    - "オークションが見にくい場合は[設定>ビデオ>UIプロフィール]"
+    - "をクラシックに変更してみてください"
 expired-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Number of categories
-    name: "&l&6Expired"
-    lore:
-        - "&aPage {PAGE}/{MAX}"
-        - "&7Total of &b{TOTAL} &7items"
-        - "&3Click here to return all items"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Number of categories
+  name: "出品期限が切れているアイテム"
+  lore:
+    - "現在のページ {PAGE}/{MAX}"
+    - "{TOTAL}個のアイテムが出品されています"
+    - "タップでリロード出来ます"
 
 # Category menu
 category-stats:
-    # {CATEGORY} = Category
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "{CATEGORY}"
-    lore:
-        - "&aPage {PAGE}/{MAX}"
-        - "&7Total of &b{TOTAL} &7listings"
+  # {CATEGORY} = Category
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "{CATEGORY}"
+  lore:
+    - "現在のページ {PAGE}/{MAX}"
+    - "{TOTAL}個のアイテムが出品されています"
 category-list-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "&l&6Category Menu"
-    lore:
-        - "&aPage {PAGE}/{MAX}"
-        - "&7Total of &b{TOTAL} &7categories"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "アイテムカテゴリー"
+  lore:
+    - "現在のページ {PAGE}/{MAX}"
+    - "{TOTAL}個のアイテムが出品されています"
 
 # Confirm purchase menu
 purchase-confirm:
-    name: "&aConfirm Purchase"
+  name: "アイテムを購入する"
 purchase-cancel:
-    name: "&cCancel Purchase"
+  name: "アイテムの購入をキャンセルする"
 purchase-item:
-    lore:
-        - "&7-------------------------"
-        - "&9Price: &e{PRICE}"
-        - "&9Seller: &e{SELLER}"
-        - "&7-------------------------"
+  lore:
+    - "-------------------------"
+    - "出品価格: {PRICE}"
+    - "出品者: {SELLER}"
+    - "-------------------------"
 ...

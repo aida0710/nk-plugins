@@ -1,12 +1,8 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace shock95x\auctionhouse\menu\type;
 
-use shock95x\auctionhouse\libs\muqsit\invmenu\InvMenu;
-use shock95x\auctionhouse\libs\muqsit\invmenu\InvMenuHandler;
-use shock95x\auctionhouse\libs\muqsit\invmenu\session\InvMenuInfo;
-use shock95x\auctionhouse\libs\muqsit\invmenu\transaction\DeterministicInvMenuTransaction;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
@@ -19,116 +15,117 @@ use shock95x\auctionhouse\AHListing;
 use shock95x\auctionhouse\AuctionHouse;
 use shock95x\auctionhouse\database\storage\DataStorage;
 use shock95x\auctionhouse\event\MenuCloseEvent;
+use shock95x\auctionhouse\libs\muqsit\invmenu\InvMenu;
+use shock95x\auctionhouse\libs\muqsit\invmenu\InvMenuHandler;
+use shock95x\auctionhouse\libs\muqsit\invmenu\transaction\DeterministicInvMenuTransaction;
+use shock95x\auctionhouse\libs\SOFe\AwaitGenerator\Await;
 use shock95x\auctionhouse\menu\ConfirmPurchaseMenu;
 use shock95x\auctionhouse\menu\ShopMenu;
 use shock95x\auctionhouse\utils\Locale;
 use shock95x\auctionhouse\utils\Utils;
-use shock95x\auctionhouse\libs\SOFe\AwaitGenerator\Await;
 
 abstract class AHMenu extends InvMenu {
 
-	protected ?Player $player;
-	protected Inventory $inventory;
+    protected ?Player $player;
+    protected Inventory $inventory;
 
-	protected bool $returnMain = false;
+    protected bool $returnMain = false;
 
-	/** @var AHListing[] */
-	protected array $listings = [];
+    /** @var AHListing[] */
+    protected array $listings = [];
 
-	protected static string $inventoryType = InvMenu::TYPE_DOUBLE_CHEST;
+    protected static string $inventoryType = InvMenu::TYPE_DOUBLE_CHEST;
 
-	const INDEX_RETURN = 45;
+    const INDEX_RETURN = 45;
 
-	public function __construct(Player $player, bool $returnMain = false) {
-		parent::__construct(InvMenuHandler::getTypeRegistry()->get(static::$inventoryType));
-		$this->player = $player;
-		$this->returnMain = $returnMain;
+    public function __construct(Player $player, bool $returnMain = false) {
+        parent::__construct(InvMenuHandler::getTypeRegistry()->get(static::$inventoryType));
+        $this->player = $player;
+        $this->returnMain = $returnMain;
+        $this->setListener(InvMenu::readonly(function (DeterministicInvMenuTransaction $transaction) {
+            $this->player->getWorld()->addSound($this->player->getPosition(), new ClickSound(), [$this->player]);
+            $this->handle($transaction->getPlayer(), $transaction->getItemClicked(), $transaction->getAction()->getInventory(), $transaction->getAction()->getSlot());
+        }));
+        $this->init(DataStorage::getInstance());
+    }
 
-		$this->setListener(InvMenu::readonly(function(DeterministicInvMenuTransaction $transaction) {
-			$this->player->getWorld()->addSound($this->player->getPosition(), new ClickSound(), [$this->player]);
-			$this->handle($transaction->getPlayer(), $transaction->getItemClicked(), $transaction->getAction()->getInventory(), $transaction->getAction()->getSlot());
-		}));
+    protected function init(DataStorage $storage): void {
+        $this->renderButtons();
+        $this->renderListings();
+    }
 
-		$this->init(DataStorage::getInstance());
-	}
+    public function renderButtons(): void {
+        if ($this->returnMain) {
+            $this->getInventory()->setItem(self::INDEX_RETURN, Utils::getButtonItem($this->player, "back", "back-button"));
+        }
+    }
 
-	protected function init(DataStorage $storage): void {
-		$this->renderButtons();
-		$this->renderListings();
-	}
+    public function renderListings(): void {
+        for ($i = count($this->listings); $i < 45; ++$i) {
+            $this->getInventory()->setItem($i, VanillaItems::AIR());
+        }
+    }
 
-	public function renderButtons(): void {
-		if($this->returnMain) {
-			$this->getInventory()->setItem(self::INDEX_RETURN, Utils::getButtonItem($this->player, "back", "back-button"));
-		}
-	}
+    public function handle(Player $player, Item $itemClicked, Inventory $inventory, int $slot): bool {
+        if ($this->returnMain && $slot == self::INDEX_RETURN) {
+            self::open(new ShopMenu($player), false);
+        }
+        return true;
+    }
 
-	public function renderListings(): void {
-		for($i = count($this->listings); $i < 45; ++$i) {
-			$this->getInventory()->setItem($i, VanillaItems::AIR());
-		}
-	}
+    protected function openListing(int $slot, Item $itemClicked): bool {
+        if ($slot <= 44 && isset($this->getListings()[$slot])) {
+            Await::f2c(function () use ($itemClicked, $slot) {
+                $plugin = AuctionHouse::getInstance();
+                $listing = $this->getListings()[$slot];
+                $balance = yield $plugin->getEconomyProvider()->getMoney($this->player, yield) => Await::ONCE;
+                if ($balance < $listing->getPrice()) {
+                    if ($itemClicked->getId() == -161) return;
+                    $this->getInventory()->setItem($slot, ItemFactory::getInstance()->get(-161)->setCustomName(TextFormat::RESET . Locale::get($this->player, "cannot-afford")));
+                    $plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($itemClicked, $slot) {
+                        $this->inventory?->setItem($slot, $itemClicked);
+                    }), 40);
+                } else {
+                    $this->player->removeCurrentWindow();
+                    self::open(new ConfirmPurchaseMenu($this->player, $listing));
+                }
+            });
+        }
+        return true;
+    }
 
-	public function handle(Player $player, Item $itemClicked, Inventory $inventory, int $slot): bool {
-		if($this->returnMain && $slot == self::INDEX_RETURN) {
-			self::open(new ShopMenu($player), false);
-		}
-		return true;
-	}
+    /**
+     * @param AHListing[] $listings
+     */
+    protected function setListings(array $listings): void {
+        $this->listings = $listings;
+    }
 
-	protected function openListing(int $slot, Item $itemClicked): bool {
-		if($slot <= 44 && isset($this->getListings()[$slot])) {
-			Await::f2c(function () use ($itemClicked, $slot) {
-				$plugin = AuctionHouse::getInstance();
-				$listing = $this->getListings()[$slot];
-				$balance = yield $plugin->getEconomyProvider()->getMoney($this->player, yield) => Await::ONCE;
-				if($balance < $listing->getPrice()) {
-					if($itemClicked->getId() == -161) return;
-					$this->getInventory()->setItem($slot, ItemFactory::getInstance()->get(-161)->setCustomName(TextFormat::RESET . Locale::get($this->player, "cannot-afford")));
-					$plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($itemClicked, $slot) {
-						$this->inventory?->setItem($slot, $itemClicked);
-					}), 40);
-				} else {
-					$this->player->removeCurrentWindow();
-					self::open(new ConfirmPurchaseMenu($this->player, $listing));
-				}
-			});
-		}
-		return true;
-	}
+    /**
+     * @return AHListing[]
+     */
+    public function getListings(): array {
+        return $this->listings;
+    }
 
-	/**
-	 * @param AHListing[] $listings
-	 */
-	protected function setListings(array $listings): void {
-		$this->listings = $listings;
-	}
+    public function getPlayer(): Player {
+        return $this->player;
+    }
 
-	/**
-	 * @return AHListing[]
-	 */
-	public function getListings(): array {
-		return $this->listings;
-	}
+    public function onClose(Player $player): void {
+        (new MenuCloseEvent($player, $this))->call();
+        parent::onClose($player);
+    }
 
-	public function getPlayer(): Player {
-		return $this->player;
-	}
-
-	public function onClose(Player $player): void {
-		(new MenuCloseEvent($player, $this))->call();
-		parent::onClose($player);
-	}
-
-	public static function open(self $menu, bool $newWindow = true): void {
-		$session = InvMenuHandler::getPlayerManager()->get($menu->player);
-		$currentMenu = $session->getCurrent()?->menu;
-		if($session->getCurrent() == null || ($newWindow && $currentMenu instanceof AHMenu)) {
-			$menu->send($menu->player);
-			return;
-		}
-		$currentMenu->getInventory()->clearAll();
-		$currentMenu->setInventory($menu->getInventory());
-		$currentMenu->setListener($menu->listener);
-	}
+    public static function open(self $menu, bool $newWindow = true): void {
+        $session = InvMenuHandler::getPlayerManager()->get($menu->player);
+        $currentMenu = $session->getCurrent()?->menu;
+        if ($session->getCurrent() == null || ($newWindow && $currentMenu instanceof AHMenu)) {
+            $menu->send($menu->player);
+            return;
+        }
+        $currentMenu->getInventory()->clearAll();
+        $currentMenu->setInventory($menu->getInventory());
+        $currentMenu->setListener($menu->listener);
+    }
 }

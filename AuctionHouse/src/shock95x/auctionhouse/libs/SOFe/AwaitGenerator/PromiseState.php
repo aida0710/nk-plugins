@@ -1,5 +1,4 @@
 <?php
-
 /*
  * await-generator
  *
@@ -19,41 +18,39 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\SOFe\AwaitGenerator;
 
 use Throwable;
 use function assert;
 
-abstract class PromiseState{
-	public const STATE_PENDING = 0;
-	public const STATE_RESOLVED = 1;
-	public const STATE_REJECTED = 2;
+abstract class PromiseState {
 
-	/** @var int */
-	protected $state = self::STATE_PENDING;
-	/** @var mixed */
-	protected $resolved;
-	/** @var Throwable */
-	protected $rejected;
+    public const STATE_PENDING = 0;
+    public const STATE_RESOLVED = 1;
+    public const STATE_REJECTED = 2;
 
-	/** @var bool  */
-	protected $cancelled = false;
+    /** @var int */
+    protected $state = self::STATE_PENDING;
+    /** @var mixed */
+    protected $resolved;
+    /** @var Throwable */
+    protected $rejected;
 
-	/**
-	 * @param mixed $value
-	 */
-	public function resolve($value) : void{
-		assert($this->state === self::STATE_PENDING);
+    /** @var bool */
+    protected $cancelled = false;
 
-		$this->state = self::STATE_RESOLVED;
-		$this->resolved = $value;
-	}
+    /**
+     * @param mixed $value
+     */
+    public function resolve($value): void {
+        assert($this->state === self::STATE_PENDING);
+        $this->state = self::STATE_RESOLVED;
+        $this->resolved = $value;
+    }
 
-	public function reject(Throwable $value) : void{
-		assert($this->state === self::STATE_PENDING);
-
-		$this->state = self::STATE_REJECTED;
-		$this->rejected = $value;
-	}
+    public function reject(Throwable $value): void {
+        assert($this->state === self::STATE_PENDING);
+        $this->state = self::STATE_REJECTED;
+        $this->rejected = $value;
+    }
 }

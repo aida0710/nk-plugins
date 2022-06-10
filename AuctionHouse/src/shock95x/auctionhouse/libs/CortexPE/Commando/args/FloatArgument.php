@@ -26,28 +26,27 @@
  *
  */
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\CortexPE\Commando\args;
-
 
 use pocketmine\command\CommandSender;
 use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
 use function preg_match;
 
 class FloatArgument extends BaseArgument {
-	public function getNetworkType(): int {
-		return AvailableCommandsPacket::ARG_TYPE_FLOAT;
-	}
 
-	public function getTypeName(): string {
-		return "decimal";
-	}
+    public function getNetworkType(): int {
+        return AvailableCommandsPacket::ARG_TYPE_FLOAT;
+    }
 
-	public function canParse(string $testString, CommandSender $sender): bool {
-		return (bool)preg_match("/^-?(?:\d+|\d*\.\d+)$/", $testString);
-	}
+    public function getTypeName(): string {
+        return "decimal";
+    }
 
-	public function parse(string $argument, CommandSender $sender) {
-		return (float)$argument;
-	}
+    public function canParse(string $testString, CommandSender $sender): bool {
+        return (bool)preg_match("/^-?(?:\d+|\d*\.\d+)$/", $testString);
+    }
+
+    public function parse(string $argument, CommandSender $sender) {
+        return (float)$argument;
+    }
 }

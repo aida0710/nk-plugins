@@ -3,52 +3,54 @@
 config-version: 5
 
 # Sets the prefix for this plugin.
-prefix: "[&l&6Auction House&r]"
+prefix: "&bAuction &7>> &a"
 # Minimum price required to create a listing
-min-price: 0
+min-price: 300
 # Maximum price a listing can have (-1 = No limit)
-max-price: -1
+max-price: 10000000
 # Sets the default language for the plugin, you can edit text and messages in this file.
 default-language: en_US
 # Sets the amount of hours a listing is active before being automatically cancelled and expired.
-expire-interval: 48
+expire-interval: 72
 # Sets the price it costs to list an item on the auction house.
 listing-price: 0
 # Sets a cooldown between listing items in seconds
 listing-cooldown: 0
 # Allows or blocks players in creative mode from selling items.
-creative-sale: false
+creative-sale: true
 # Maximum amount of listings a player can have by default
-max-listings: 45
+max-listings: 100
 # Shows item lore on the auction house
 show-lore: true
 # Days to automatically delete expired listings (-1 to disable)
-expired-duration: 15
+expired-duration: -1
 # Formats price with commas (ex. 1,000,000)
 price-formatted: true
 # Items that cannot be listed on the auction. Refer to https://minecraftitemids.com/ or https://minecraft-ids.grahamedgecombe.com/ for a list of item ids.
 blacklist:
   - '1000' # Example items
+  - '205'
+  - '218'
   - '1234:5'
   - 'minecraft:air'
 
 # AH sign triggers
 sign-triggers:
-  - "[AuctionHouse]"
-  - "[AH]"
+  - "47Qx8V1MiOlzUTs8ayY9gha53AGghYwzGYX8Jsvm1hH97owdMA"
+  - "uMRTDqN9q7Q5Y3Df8s9VIP3uA1O4sIlXdPNnp2cjD0OfY2OcgG"
 
 # Menu button items
 buttons:
-  stats: "minecraft:chest"
-  back: "minecraft:paper"
-  previous: "minecraft:paper"
-  next: "minecraft:paper"
+  stats: "minecraft:gold_block"
+  back: "minecraft:arrow"
+  previous: "minecraft:arrow"
+  next: "minecraft:arrow"
   info: "minecraft:book"
   howto: "minecraft:emerald"
-  return_all: "minecraft:redstone_block"
+  return_all: "minecraft:barrier"
   player_listings: "minecraft:diamond"
   expired_listings: "minecraft:poisonous_potato"
-  admin_menu: "minecraft:redstone"
+  admin_menu: "minecraft:nether_star"
   confirm_purchase: "minecraft:stained_glass_pane:5"
   cancel_purchase: "minecraft:stained_glass_pane:14"
 

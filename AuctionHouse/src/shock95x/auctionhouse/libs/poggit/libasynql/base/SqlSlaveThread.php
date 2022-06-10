@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\base;
 
 use ClassLoader;
@@ -34,122 +32,116 @@ use shock95x\auctionhouse\libs\poggit\libasynql\SqlThread;
 use const PTHREADS_INHERIT_CONSTANTS;
 use const PTHREADS_INHERIT_INI;
 
-abstract class SqlSlaveThread extends Thread implements SqlThread{
-	/** @var SleeperNotifier */
-	private $notifier;
+abstract class SqlSlaveThread extends Thread implements SqlThread {
 
-	private static $nextSlaveNumber = 0;
+    /** @var SleeperNotifier */
+    private $notifier;
 
-	protected $slaveNumber;
-	protected $bufferSend;
-	protected $bufferRecv;
-	protected $connCreated = false;
-	protected $connError;
-	protected $busy = false;
+    private static $nextSlaveNumber = 0;
 
-	protected function __construct(SleeperNotifier $notifier, QuerySendQueue $bufferSend = null, QueryRecvQueue $bufferRecv = null){
-		$this->notifier = $notifier;
+    protected $slaveNumber;
+    protected $bufferSend;
+    protected $bufferRecv;
+    protected $connCreated = false;
+    protected $connError;
+    protected $busy = false;
 
-		$this->slaveNumber = self::$nextSlaveNumber++;
-		$this->bufferSend = $bufferSend ?? new QuerySendQueue();
-		$this->bufferRecv = $bufferRecv ?? new QueryRecvQueue();
+    protected function __construct(SleeperNotifier $notifier, QuerySendQueue $bufferSend = null, QueryRecvQueue $bufferRecv = null) {
+        $this->notifier = $notifier;
+        $this->slaveNumber = self::$nextSlaveNumber++;
+        $this->bufferSend = $bufferSend ?? new QuerySendQueue();
+        $this->bufferRecv = $bufferRecv ?? new QueryRecvQueue();
+        if (!libasynql::isPackaged()) {
+            /** @noinspection PhpUndefinedMethodInspection */
+            /** @noinspection NullPointerExceptionInspection */
+            /** @var ClassLoader $cl */
+            $cl = Server::getInstance()->getPluginManager()->getPlugin("DEVirion")->getVirionClassLoader();
+            $this->setClassLoaders([Server::getInstance()->getLoader(), $cl]);
+        }
+        $this->start(PTHREADS_INHERIT_INI | PTHREADS_INHERIT_CONSTANTS);
+    }
 
-		if(!libasynql::isPackaged()){
-			/** @noinspection PhpUndefinedMethodInspection */
-			/** @noinspection NullPointerExceptionInspection */
-			/** @var ClassLoader $cl */
-			$cl = Server::getInstance()->getPluginManager()->getPlugin("DEVirion")->getVirionClassLoader();
-			$this->setClassLoaders([Server::getInstance()->getLoader(), $cl]);
-		}
-		$this->start(PTHREADS_INHERIT_INI | PTHREADS_INHERIT_CONSTANTS);
-	}
+    protected function onRun(): void {
+        $error = $this->createConn($resource);
+        $this->connCreated = true;
+        $this->connError = $error;
+        if ($error !== null) {
+            return;
+        }
+        while (true) {
+            $row = $this->bufferSend->fetchQuery();
+            if (!is_string($row)) {
+                break;
+            }
+            $this->busy = true;
+            [$queryId, $mode, $query, $params] = unserialize($row, ["allowed_classes" => true]);
+            try {
+                $result = $this->executeQuery($resource, $mode, $query, $params);
+                $this->bufferRecv->publishResult($queryId, $result);
+            } catch (SqlError $error) {
+                $this->bufferRecv->publishError($queryId, $error);
+            }
+            $this->notifier->wakeupSleeper();
+            $this->busy = false;
+        }
+        $this->close($resource);
+    }
 
-	protected function onRun() : void{
-		$error = $this->createConn($resource);
-		$this->connCreated = true;
-		$this->connError = $error;
+    /**
+     * @return bool
+     */
+    public function isBusy(): bool {
+        return $this->busy;
+    }
 
-		if($error !== null){
-			return;
-		}
+    public function stopRunning(): void {
+        $this->bufferSend->invalidate();
+        parent::quit();
+    }
 
-		while(true){
-			$row = $this->bufferSend->fetchQuery();
-			if(!is_string($row)){
-				break;
-			}
-			$this->busy = true;
-			[$queryId, $mode, $query, $params] = unserialize($row, ["allowed_classes" => true]);
-			try{
-				$result = $this->executeQuery($resource, $mode, $query, $params);
-				$this->bufferRecv->publishResult($queryId, $result);
-			}catch(SqlError $error){
-				$this->bufferRecv->publishError($queryId, $error);
-			}
-			$this->notifier->wakeupSleeper();
-			$this->busy = false;
-		}
-		$this->close($resource);
-	}
+    public function quit(): void {
+        $this->stopRunning();
+        parent::quit();
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isBusy(): bool {
-		return $this->busy;
-	}
+    public function addQuery(int $queryId, int $mode, string $query, array $params): void {
+        $this->bufferSend->scheduleQuery($queryId, $mode, $query, $params);
+    }
 
-	public function stopRunning() : void{
-		$this->bufferSend->invalidate();
+    public function readResults(array &$callbacks): void {
+        while ($this->bufferRecv->fetchResult($queryId, $result)) {
+            if (!isset($callbacks[$queryId])) {
+                throw new InvalidArgumentException("Missing handler for query #$queryId");
+            }
+            $callbacks[$queryId]($result);
+            unset($callbacks[$queryId]);
+        }
+    }
 
-		parent::quit();
-	}
+    public function connCreated(): bool {
+        return $this->connCreated;
+    }
 
-	public function quit() : void{
-		$this->stopRunning();
-		parent::quit();
-	}
+    public function hasConnError(): bool {
+        return $this->connError !== null;
+    }
 
-	public function addQuery(int $queryId, int $mode, string $query, array $params) : void{
-		$this->bufferSend->scheduleQuery($queryId, $mode, $query, $params);
-	}
+    public function getConnError(): ?string {
+        return $this->connError;
+    }
 
-	public function readResults(array &$callbacks) : void{
-		while($this->bufferRecv->fetchResult($queryId, $result)){
-			if(!isset($callbacks[$queryId])){
-				throw new InvalidArgumentException("Missing handler for query #$queryId");
-			}
+    protected abstract function createConn(&$resource): ?string;
 
-			$callbacks[$queryId]($result);
-			unset($callbacks[$queryId]);
-		}
-	}
+    /**
+     * @param mixed $resource
+     * @param int $mode
+     * @param string $query
+     * @param mixed[] $params
+     *
+     * @return SqlResult
+     * @throws SqlError
+     */
+    protected abstract function executeQuery($resource, int $mode, string $query, array $params): SqlResult;
 
-	public function connCreated() : bool{
-		return $this->connCreated;
-	}
-
-	public function hasConnError() : bool{
-		return $this->connError !== null;
-	}
-
-	public function getConnError() : ?string{
-		return $this->connError;
-	}
-
-	protected abstract function createConn(&$resource) : ?string;
-
-	/**
-	 * @param mixed   $resource
-	 * @param int     $mode
-	 * @param string  $query
-	 * @param mixed[] $params
-	 *
-	 * @return SqlResult
-	 * @throws SqlError
-	 */
-	protected abstract function executeQuery($resource, int $mode, string $query, array $params) : SqlResult;
-
-
-	protected abstract function close(&$resource) : void;
+    protected abstract function close(&$resource): void;
 }

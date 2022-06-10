@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\base;
 
 use shock95x\auctionhouse\libs\poggit\libasynql\SqlError;
@@ -29,21 +27,22 @@ use function is_string;
 use function serialize;
 use function unserialize;
 
-class QueryRecvQueue extends Threaded{
-	public function publishResult(int $queryId, SqlResult $result) : void{
-		$this[] = serialize([$queryId, $result]);
-	}
+class QueryRecvQueue extends Threaded {
 
-	public function publishError(int $queryId, SqlError $error) : void{
-		$this[] = serialize([$queryId, $error]);
-	}
+    public function publishResult(int $queryId, SqlResult $result): void {
+        $this[] = serialize([$queryId, $result]);
+    }
 
-	public function fetchResult(&$queryId, &$result) : bool{
-		$row = $this->shift();
-		if(is_string($row)){
-			[$queryId, $result] = unserialize($row, ["allowed_classes" => true]);
-			return true;
-		}
-		return false;
-	}
+    public function publishError(int $queryId, SqlError $error): void {
+        $this[] = serialize([$queryId, $error]);
+    }
+
+    public function fetchResult(&$queryId, &$result): bool {
+        $row = $this->shift();
+        if (is_string($row)) {
+            [$queryId, $result] = unserialize($row, ["allowed_classes" => true]);
+            return true;
+        }
+        return false;
+    }
 }

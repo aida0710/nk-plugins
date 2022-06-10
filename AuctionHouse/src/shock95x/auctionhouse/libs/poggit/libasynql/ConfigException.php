@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,13 +18,13 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql;
 
 use InvalidArgumentException;
 
-class ConfigException extends InvalidArgumentException{
-	public function __construct(string $message = ""){
-		parent::__construct("Config problem: " . $message);
-	}
+class ConfigException extends InvalidArgumentException {
+
+    public function __construct(string $message = "") {
+        parent::__construct("Config problem: " . $message);
+    }
 }

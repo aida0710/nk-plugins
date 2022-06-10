@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace shock95x\auctionhouse\category\defaults;
 
 use pocketmine\item\Armor;
@@ -12,19 +12,19 @@ use shock95x\auctionhouse\category\ICategory;
 
 class ArmorCategory implements ICategory {
 
-	public function sort(AHListing $listing): bool {
-		return $listing->getItem() instanceof Armor;
-	}
+    public function sort(AHListing $listing): bool {
+        return $listing->getItem() instanceof Armor;
+    }
 
-	public function getName(): string {
-		return "Armor";
-	}
+    public function getName(): string {
+        return "Armor";
+    }
 
-	public function getDisplayName(): string {
-		return TextFormat::BOLD . TextFormat::AQUA . $this->getName();
-	}
+    public function getDisplayName(): string {
+        return "装備";
+    }
 
-	public function getMenuItem(): Item {
-		return VanillaItems::DIAMOND_CHESTPLATE()->setCustomName(TextFormat::RESET . $this->getDisplayName());
-	}
+    public function getMenuItem(): Item {
+        return VanillaItems::DIAMOND_CHESTPLATE()->setCustomName(TextFormat::RESET . $this->getDisplayName());
+    }
 }

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  *  _   _           _       _       _   _       _   _  __ _
  * | | | |         | |     | |     | \ | |     | | (_)/ _(_)
@@ -30,23 +29,22 @@ declare(strict_types=1);
  * <https://opensource.org/licenses/GPL-3.0>.
  * ------------------------------------------------------------------------
  */
-
 namespace shock95x\auctionhouse\libs\JackMD\UpdateNotifier;
 
-use shock95x\auctionhouse\libs\JackMD\UpdateNotifier\task\UpdateNotifyTask;
 use pocketmine\Server;
+use shock95x\auctionhouse\libs\JackMD\UpdateNotifier\task\UpdateNotifyTask;
 
-class UpdateNotifier{
+class UpdateNotifier {
 
-	/**
-	 * Submits an async task which then checks if a new version for the plugin is available.
-	 * If an update is available then it would print a message on the console.
-	 *
-	 * @param string $pluginName
-	 * @param string $pluginVersion
-	 */
-	public static function checkUpdate(string $pluginName, string $pluginVersion) : void{
-		Server::getInstance()->getAsyncPool()->submitTask(new UpdateNotifyTask($pluginName, $pluginVersion));
-	}
+    /**
+     * Submits an async task which then checks if a new version for the plugin is available.
+     * If an update is available then it would print a message on the console.
+     *
+     * @param string $pluginName
+     * @param string $pluginVersion
+     */
+    public static function checkUpdate(string $pluginName, string $pluginVersion): void {
+        Server::getInstance()->getAsyncPool()->submitTask(new UpdateNotifyTask($pluginName, $pluginVersion));
+    }
 
 }

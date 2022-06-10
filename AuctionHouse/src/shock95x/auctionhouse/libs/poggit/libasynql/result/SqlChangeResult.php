@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,19 +18,19 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\result;
 
 use shock95x\auctionhouse\libs\poggit\libasynql\SqlResult;
 
-class SqlChangeResult extends SqlResult{
-	private $affectedRows;
+class SqlChangeResult extends SqlResult {
 
-	public function __construct(int $affectedRows){
-		$this->affectedRows = $affectedRows;
-	}
+    private $affectedRows;
 
-	public function getAffectedRows() : int{
-		return $this->affectedRows;
-	}
+    public function __construct(int $affectedRows) {
+        $this->affectedRows = $affectedRows;
+    }
+
+    public function getAffectedRows(): int {
+        return $this->affectedRows;
+    }
 }

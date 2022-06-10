@@ -3,19 +3,22 @@ name: AuctionHouse
 main: shock95x\auctionhouse\AuctionHouse
 version: 2.0.1
 api:
-- 4.0.0
+  - 4.0.0
 author: Shock95x
 softdepend:
-- InvCrashFix
-- BedrockEconomy
+  - InvCrashFix
+  - BedrockEconomy
 virions:
-- InvMenu
-- libasynql
-- await-generator
-- UpdateNotifier
-- Commando
+  - InvMenu
+  - libasynql
+  - await-generator
+  - UpdateNotifier
+  - Commando
 permissions:
   auctionhouse.command.shop:
+    default: true
+    description: Allows player to open the shop menu
+  auctionhouse.command.form:
     default: true
     description: Allows player to open the shop menu
   auctionhouse.command.sell:

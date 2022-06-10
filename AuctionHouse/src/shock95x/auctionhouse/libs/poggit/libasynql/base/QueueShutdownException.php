@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,12 +18,10 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\base;
-
 
 use RuntimeException;
 
-class QueueShutdownException extends RuntimeException{
+class QueueShutdownException extends RuntimeException {
 
 }

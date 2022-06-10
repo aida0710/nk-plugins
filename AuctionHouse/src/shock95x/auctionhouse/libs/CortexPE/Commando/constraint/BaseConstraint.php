@@ -26,14 +26,13 @@
  *
  */
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\CortexPE\Commando\constraint;
 
-
-use shock95x\auctionhouse\libs\CortexPE\Commando\IRunnable;
 use pocketmine\command\CommandSender;
+use shock95x\auctionhouse\libs\CortexPE\Commando\IRunnable;
 
 abstract class BaseConstraint {
+
     /** @var IRunnable */
     protected $context;
 

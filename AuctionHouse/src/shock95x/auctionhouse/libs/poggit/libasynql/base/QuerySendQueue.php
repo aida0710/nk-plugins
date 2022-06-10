@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,52 +18,52 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\base;
 
 use Threaded;
 use function serialize;
 
-class QuerySendQueue extends Threaded{
-	/** @var bool */
-	private $invalidated = false;
-	/** @var Threaded */
-	private $queries;
+class QuerySendQueue extends Threaded {
 
-	public function __construct(){
-		$this->queries = new Threaded();
-	}
+    /** @var bool */
+    private $invalidated = false;
+    /** @var Threaded */
+    private $queries;
 
-	public function scheduleQuery(int $queryId, int $mode, string $query, array $params) : void{
-		if($this->invalidated){
-			throw new QueueShutdownException("You cannot schedule a query on an invalidated queue.");
-		}
-		$this->synchronized(function() use ($queryId, $mode, $query, $params) : void{
-			$this->queries[] = serialize([$queryId, $mode, $query, $params]);
-			$this->notifyOne();
-		});
-	}
+    public function __construct() {
+        $this->queries = new Threaded();
+    }
 
-	public function fetchQuery() : ?string {
-		return $this->synchronized(function(): ?string {
-			while($this->queries->count() === 0 && !$this->isInvalidated()){
-				$this->wait();
-			}
-			return $this->queries->shift();
-		});
-	}
+    public function scheduleQuery(int $queryId, int $mode, string $query, array $params): void {
+        if ($this->invalidated) {
+            throw new QueueShutdownException("You cannot schedule a query on an invalidated queue.");
+        }
+        $this->synchronized(function () use ($queryId, $mode, $query, $params): void {
+            $this->queries[] = serialize([$queryId, $mode, $query, $params]);
+            $this->notifyOne();
+        });
+    }
 
-	public function invalidate() : void {
-		$this->synchronized(function():void{
-			$this->invalidated = true;
-			$this->notify();
-		});
-	}
+    public function fetchQuery(): ?string {
+        return $this->synchronized(function (): ?string {
+            while ($this->queries->count() === 0 && !$this->isInvalidated()) {
+                $this->wait();
+            }
+            return $this->queries->shift();
+        });
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isInvalidated(): bool {
-		return $this->invalidated;
-	}
+    public function invalidate(): void {
+        $this->synchronized(function (): void {
+            $this->invalidated = true;
+            $this->notify();
+        });
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInvalidated(): bool {
+        return $this->invalidated;
+    }
 }

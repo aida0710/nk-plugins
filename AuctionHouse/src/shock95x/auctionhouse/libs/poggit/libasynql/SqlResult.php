@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,9 +18,8 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql;
 
-class SqlResult{
+class SqlResult {
 
 }

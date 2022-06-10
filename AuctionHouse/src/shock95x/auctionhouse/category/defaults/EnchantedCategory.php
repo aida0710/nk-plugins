@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace shock95x\auctionhouse\category\defaults;
 
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -14,21 +14,21 @@ use shock95x\auctionhouse\category\ICategory;
 
 class EnchantedCategory implements ICategory {
 
-	public function sort(AHListing $listing): bool {
-		return $listing->getItem()->hasEnchantments();
-	}
+    public function sort(AHListing $listing): bool {
+        return $listing->getItem()->hasEnchantments();
+    }
 
-	public function getName(): string {
-		return "Enchanted";
-	}
+    public function getName(): string {
+        return "Enchanted";
+    }
 
-	public function getDisplayName(): string {
-		return TextFormat::BOLD . TextFormat::GOLD . $this->getName();
-	}
+    public function getDisplayName(): string {
+        return "エンチャント済みアイテム";
+    }
 
-	public function getMenuItem(): Item {
-		$item = VanillaItems::BOOK()->setCustomName(TextFormat::RESET . $this->getDisplayName());
-		$item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(AuctionHouse::FAKE_ENCH_ID)));
-		return $item;
-	}
+    public function getMenuItem(): Item {
+        $item = VanillaItems::BOOK()->setCustomName(TextFormat::RESET . $this->getDisplayName());
+        $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(AuctionHouse::FAKE_ENCH_ID)));
+        return $item;
+    }
 }

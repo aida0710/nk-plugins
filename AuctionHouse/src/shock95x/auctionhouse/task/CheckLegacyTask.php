@@ -9,13 +9,14 @@ use shock95x\auctionhouse\libs\SOFe\AwaitGenerator\Await;
 
 class CheckLegacyTask extends Task {
 
-	public function __construct(private AuctionHouse $plugin) {}
+    public function __construct(private AuctionHouse $plugin) {
+    }
 
-	public function onRun(): void {
-		Await::f2c(function () {
-			if(yield LegacyConverter::getInstance()->isLegacy()) {
-				$this->plugin->getLogger()->notice("Old database format detected! Run '/ah convert' to update");
-			}
-		});
-	}
+    public function onRun(): void {
+        Await::f2c(function () {
+            if (yield LegacyConverter::getInstance()->isLegacy()) {
+                $this->plugin->getLogger()->notice("Old database format detected! Run '/ah convert' to update");
+            }
+        });
+    }
 }

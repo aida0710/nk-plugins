@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,19 +18,19 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\result;
 
-class SqlInsertResult extends SqlChangeResult{
-	/** @var int */
-	private $insertId;
+class SqlInsertResult extends SqlChangeResult {
 
-	public function __construct(int $affectedRows, int $insertId){
-		parent::__construct($affectedRows);
-		$this->insertId = $insertId;
-	}
+    /** @var int */
+    private $insertId;
 
-	public function getInsertId() : int{
-		return $this->insertId;
-	}
+    public function __construct(int $affectedRows, int $insertId) {
+        parent::__construct($affectedRows);
+        $this->insertId = $insertId;
+    }
+
+    public function getInsertId(): int {
+        return $this->insertId;
+    }
 }

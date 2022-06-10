@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,7 +18,6 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql\sqlite3;
 
 use Closure;
@@ -49,105 +47,105 @@ use const SQLITE3_INTEGER;
 use const SQLITE3_NULL;
 use const SQLITE3_TEXT;
 
-class Sqlite3Thread extends SqlSlaveThread{
-	/** @var string */
-	private $path;
+class Sqlite3Thread extends SqlSlaveThread {
 
-	public static function createFactory(string $path) : Closure{
-		return function(SleeperNotifier $notifier, QuerySendQueue $send, QueryRecvQueue $recv) use ($path){
-			return new Sqlite3Thread($path, $notifier, $send, $recv);
-		};
-	}
+    /** @var string */
+    private $path;
 
-	public function __construct(string $path, SleeperNotifier $notifier, QuerySendQueue $send = null, QueryRecvQueue $recv = null){
-		$this->path = $path;
-		parent::__construct($notifier, $send, $recv);
-	}
+    public static function createFactory(string $path): Closure {
+        return function (SleeperNotifier $notifier, QuerySendQueue $send, QueryRecvQueue $recv) use ($path) {
+            return new Sqlite3Thread($path, $notifier, $send, $recv);
+        };
+    }
 
-	protected function createConn(&$sqlite) : ?string{
-		try{
-			$sqlite = new SQLite3($this->path);
-			$sqlite->busyTimeout(60000); // default value in SQLite2
-			return null;
-		}catch(Exception $e){
-			return $e->getMessage();
-		}
-	}
+    public function __construct(string $path, SleeperNotifier $notifier, QuerySendQueue $send = null, QueryRecvQueue $recv = null) {
+        $this->path = $path;
+        parent::__construct($notifier, $send, $recv);
+    }
 
-	protected function executeQuery($sqlite, int $mode, string $query, array $params) : SqlResult{
-		assert($sqlite instanceof SQLite3);
-		$stmt = $sqlite->prepare($query);
-		if($stmt === false){
-			throw new SqlError(SqlError::STAGE_PREPARE, $sqlite->lastErrorMsg(), $query, $params);
-		}
-		foreach($params as $paramName => $param){
-			$bind = $stmt->bindValue($paramName, $param);
-			if(!$bind){
-				throw new SqlError(SqlError::STAGE_PREPARE, "when binding $paramName: " . $sqlite->lastErrorMsg(), $query, $params);
-			}
-		}
-		$result = $stmt->execute();
-		if($result === false){
-			throw new SqlError(SqlError::STAGE_EXECUTE, $sqlite->lastErrorMsg(), $query, $params);
-		}
-		switch($mode){
-			case SqlThread::MODE_GENERIC:
-				$ret = new SqlResult();
-				$result->finalize();
-				$stmt->close();
-				return $ret;
-			case SqlThread::MODE_CHANGE:
-				$ret = new SqlChangeResult($sqlite->changes());
-				$result->finalize();
-				$stmt->close();
-				return $ret;
-			case SqlThread::MODE_INSERT:
-				$ret = new SqlInsertResult($sqlite->changes(), $sqlite->lastInsertRowID());
-				$result->finalize();
-				$stmt->close();
-				return $ret;
-			case SqlThread::MODE_SELECT:
-				/** @var SqlColumnInfo[] $colInfo */
-				$colInfo = [];
-				$rows = [];
-				while(is_array($row = $result->fetchArray(SQLITE3_ASSOC))){
-					foreach(array_values($row) as $i => &$value){
-						static $columnTypeMap = [
-							SQLITE3_INTEGER => SqlColumnInfo::TYPE_INT,
-							SQLITE3_FLOAT => SqlColumnInfo::TYPE_FLOAT,
-							SQLITE3_TEXT => SqlColumnInfo::TYPE_STRING,
-							SQLITE3_BLOB => SqlColumnInfo::TYPE_STRING,
-							SQLITE3_NULL => SqlColumnInfo::TYPE_NULL,
-						];
-						$colInfo[$i] = new SqlColumnInfo($result->columnName($i), $columnTypeMap[$result->columnType($i)]);
-						if($colInfo[$i]->getType() === SqlColumnInfo::TYPE_FLOAT){
-							if($value === "NAN"){
-								$value = NAN;
-							}elseif($value === "INF"){
-								$value = INF;
-							}elseif($value === "-INF"){
-								$value = -INF;
-							}
-						}
-					}
-					unset($value);
-					$rows[] = $row;
-				}
-				$ret = new SqlSelectResult($colInfo, $rows);
-				$result->finalize();
-				$stmt->close();
-				return $ret;
-		}
+    protected function createConn(&$sqlite): ?string {
+        try {
+            $sqlite = new SQLite3($this->path);
+            $sqlite->busyTimeout(60000); // default value in SQLite2
+            return null;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
-		throw new InvalidArgumentException("Unknown mode $mode");
-	}
+    protected function executeQuery($sqlite, int $mode, string $query, array $params): SqlResult {
+        assert($sqlite instanceof SQLite3);
+        $stmt = $sqlite->prepare($query);
+        if ($stmt === false) {
+            throw new SqlError(SqlError::STAGE_PREPARE, $sqlite->lastErrorMsg(), $query, $params);
+        }
+        foreach ($params as $paramName => $param) {
+            $bind = $stmt->bindValue($paramName, $param);
+            if (!$bind) {
+                throw new SqlError(SqlError::STAGE_PREPARE, "when binding $paramName: " . $sqlite->lastErrorMsg(), $query, $params);
+            }
+        }
+        $result = $stmt->execute();
+        if ($result === false) {
+            throw new SqlError(SqlError::STAGE_EXECUTE, $sqlite->lastErrorMsg(), $query, $params);
+        }
+        switch ($mode) {
+            case SqlThread::MODE_GENERIC:
+                $ret = new SqlResult();
+                $result->finalize();
+                $stmt->close();
+                return $ret;
+            case SqlThread::MODE_CHANGE:
+                $ret = new SqlChangeResult($sqlite->changes());
+                $result->finalize();
+                $stmt->close();
+                return $ret;
+            case SqlThread::MODE_INSERT:
+                $ret = new SqlInsertResult($sqlite->changes(), $sqlite->lastInsertRowID());
+                $result->finalize();
+                $stmt->close();
+                return $ret;
+            case SqlThread::MODE_SELECT:
+                /** @var SqlColumnInfo[] $colInfo */
+                $colInfo = [];
+                $rows = [];
+                while (is_array($row = $result->fetchArray(SQLITE3_ASSOC))) {
+                    foreach (array_values($row) as $i => &$value) {
+                        static $columnTypeMap = [
+                            SQLITE3_INTEGER => SqlColumnInfo::TYPE_INT,
+                            SQLITE3_FLOAT => SqlColumnInfo::TYPE_FLOAT,
+                            SQLITE3_TEXT => SqlColumnInfo::TYPE_STRING,
+                            SQLITE3_BLOB => SqlColumnInfo::TYPE_STRING,
+                            SQLITE3_NULL => SqlColumnInfo::TYPE_NULL,
+                        ];
+                        $colInfo[$i] = new SqlColumnInfo($result->columnName($i), $columnTypeMap[$result->columnType($i)]);
+                        if ($colInfo[$i]->getType() === SqlColumnInfo::TYPE_FLOAT) {
+                            if ($value === "NAN") {
+                                $value = NAN;
+                            } elseif ($value === "INF") {
+                                $value = INF;
+                            } elseif ($value === "-INF") {
+                                $value = -INF;
+                            }
+                        }
+                    }
+                    unset($value);
+                    $rows[] = $row;
+                }
+                $ret = new SqlSelectResult($colInfo, $rows);
+                $result->finalize();
+                $stmt->close();
+                return $ret;
+        }
+        throw new InvalidArgumentException("Unknown mode $mode");
+    }
 
-	protected function close(&$resource) : void{
-		assert($resource instanceof SQLite3);
-		$resource->close();
-	}
+    protected function close(&$resource): void {
+        assert($resource instanceof SQLite3);
+        $resource->close();
+    }
 
-	public function getThreadName() : string{
-		return __NAMESPACE__ . " connector #$this->slaveNumber";
-	}
+    public function getThreadName(): string {
+        return __NAMESPACE__ . " connector #$this->slaveNumber";
+    }
 }

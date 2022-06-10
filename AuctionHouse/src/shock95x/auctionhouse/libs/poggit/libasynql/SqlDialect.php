@@ -1,5 +1,4 @@
 <?php
-
 /*
  * libasynql
  *
@@ -19,10 +18,10 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\poggit\libasynql;
 
-interface SqlDialect{
-	public const SQLITE = "sqlite";
-	public const MYSQL = "mysql";
+interface SqlDialect {
+
+    public const SQLITE = "sqlite";
+    public const MYSQL = "mysql";
 }

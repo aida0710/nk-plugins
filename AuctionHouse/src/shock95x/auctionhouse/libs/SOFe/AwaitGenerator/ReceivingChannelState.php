@@ -1,5 +1,4 @@
 <?php
-
 /*
  * await-generator
  *
@@ -19,14 +18,14 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\SOFe\AwaitGenerator;
 
 /**
  * @template T
  * @internal
  */
-final class ReceivingChannelState{
-	/** @var list<Closure(T): void> */
-	public array $queue = [];
+final class ReceivingChannelState {
+
+    /** @var list<Closure(T): void> */
+    public array $queue = [];
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * await-generator
  *
@@ -19,11 +18,10 @@
  */
 
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\SOFe\AwaitGenerator;
 
 use RuntimeException;
 
-class AwaitException extends RuntimeException{
+class AwaitException extends RuntimeException {
 
 }

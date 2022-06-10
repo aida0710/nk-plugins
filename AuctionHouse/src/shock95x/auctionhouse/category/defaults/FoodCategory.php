@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace shock95x\auctionhouse\category\defaults;
 
 use pocketmine\item\Food;
@@ -12,19 +12,19 @@ use shock95x\auctionhouse\category\ICategory;
 
 class FoodCategory implements ICategory {
 
-	public function sort(AHListing $listing): bool {
-		return $listing->getItem() instanceof Food;
-	}
+    public function sort(AHListing $listing): bool {
+        return $listing->getItem() instanceof Food;
+    }
 
-	public function getName(): string {
-		return "Food";
-	}
+    public function getName(): string {
+        return "Food";
+    }
 
-	public function getDisplayName(): string {
-		return TextFormat::BOLD . TextFormat::LIGHT_PURPLE . $this->getName();
-	}
+    public function getDisplayName(): string {
+        return "食べ物";
+    }
 
-	public function getMenuItem(): Item {
-		return VanillaItems::STEAK()->setCustomName(TextFormat::RESET . $this->getDisplayName());
-	}
+    public function getMenuItem(): Item {
+        return VanillaItems::STEAK()->setCustomName(TextFormat::RESET . $this->getDisplayName());
+    }
 }

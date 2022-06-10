@@ -26,21 +26,23 @@
  *
  */
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\CortexPE\Commando\traits;
 
-
-use shock95x\auctionhouse\libs\CortexPE\Commando\args\BaseArgument;
 use pocketmine\command\CommandSender;
+use shock95x\auctionhouse\libs\CortexPE\Commando\args\BaseArgument;
 
 interface IArgumentable {
-	public function generateUsageMessage(): string;
-	public function hasArguments(): bool;
 
-	/**
-	 * @return BaseArgument[][]
-	 */
-	public function getArgumentList(): array;
-	public function parseArguments(array $rawArgs, CommandSender $sender): array;
-	public function registerArgument(int $position, BaseArgument $argument): void;
+    public function generateUsageMessage(): string;
+
+    public function hasArguments(): bool;
+
+    /**
+     * @return BaseArgument[][]
+     */
+    public function getArgumentList(): array;
+
+    public function parseArguments(array $rawArgs, CommandSender $sender): array;
+
+    public function registerArgument(int $position, BaseArgument $argument): void;
 }

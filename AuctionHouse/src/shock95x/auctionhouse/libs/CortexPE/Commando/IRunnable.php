@@ -26,9 +26,7 @@
  *
  */
 declare(strict_types=1);
-
 namespace shock95x\auctionhouse\libs\CortexPE\Commando;
-
 
 use shock95x\auctionhouse\libs\CortexPE\Commando\constraint\BaseConstraint;
 
@@ -41,6 +39,7 @@ use shock95x\auctionhouse\libs\CortexPE\Commando\constraint\BaseConstraint;
  * @package CortexPE\Commando
  */
 interface IRunnable {
+
     public function getName(): string;
 
     /**
@@ -48,12 +47,12 @@ interface IRunnable {
      */
     public function getAliases(): array;
 
-    public function getUsageMessage():string;
+    public function getUsageMessage(): string;
 
     public function getPermission(); // f*ck. PM didn't declare a return type... reeee
 
     /**
      * @return BaseConstraint[]
      */
-    public function getConstraints():array;
+    public function getConstraints(): array;
 }

@@ -40,77 +40,77 @@ player-listings-usage: "&cMit /ah listings kannst du deine Angebote ansehen"
 
 # Items in the menu UI
 listed-item:
-    # {PRICE} = Price of listing
-    # {SELLER} = Username of seller
-    # {H} = Hours | {M} = Minutes
-    - "&7-------------------------"
-    - "&aKlicke hier um es zu Kaufen."
-    - ""
-    - "&9Preis: &e{PRICE}"
-    - "&9Verkäufer: &e{SELLER}"
-    - "&9Läuft aus in: &e{H}:{M} Stunden"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  # {SELLER} = Username of seller
+  # {H} = Hours | {M} = Minutes
+  - "&7-------------------------"
+  - "&aKlicke hier um es zu Kaufen."
+  - ""
+  - "&9Preis: &e{PRICE}"
+  - "&9Verkäufer: &e{SELLER}"
+  - "&9Läuft aus in: &e{H}:{M} Stunden"
+  - "&7-------------------------"
 your-listed-item:
-    # {PRICE} = Price of listing
-    # {H} = Hours | {M} = Minutes
-    - "&7-------------------------"
-    - "&cKlick hier um das Angebot zu schließen."
-    - ""
-    - "&9Preis: &e{PRICE}"
-    - "&9Läuft aus in: &e{H}:{M} Stunden"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  # {H} = Hours | {M} = Minutes
+  - "&7-------------------------"
+  - "&cKlick hier um das Angebot zu schließen."
+  - ""
+  - "&9Preis: &e{PRICE}"
+  - "&9Läuft aus in: &e{H}:{M} Stunden"
+  - "&7-------------------------"
 expired-item:
-    # {PRICE} = Price of listing
-    - "&7-------------------------"
-    - "&aKlicke um das Item Abzuholen."
-    - ""
-    - ""
-    - "&9Preis: &e{PRICE}$"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  - "&7-------------------------"
+  - "&aKlicke um das Item Abzuholen."
+  - ""
+  - ""
+  - "&9Preis: &e{PRICE}$"
+  - "&7-------------------------"
 view-listed-items:
-    # {SELLING} = Number of active listings
-    name: "&6Items die du Verkaufst:"
-    lore:
-        - "&aKlicke hier um eine liste deiner Items zu sehen"
-        - "&aDie du Verkaufst."
-        - ""
-        - "&9Verkauft: &e{SELLING}"
+  # {SELLING} = Number of active listings
+  name: "&6Items die du Verkaufst:"
+  lore:
+    - "&aKlicke hier um eine liste deiner Items zu sehen"
+    - "&aDie du Verkaufst."
+    - ""
+    - "&9Verkauft: &e{SELLING}"
 view-expired-items:
-    # {EXPIRED} = Number of Expired / Cancelled Items
-    name: "&6Abholen: Abgelaufender/Abbgebrochende Angebote"
-    lore:
-        - "&r&aKlicke um eine list der Abgelaufenden Items zu erhalten und einzusammeln"
-        - "&aItems die Abgelaufenoder abbgebrochen wurden."
-        - ""
-        - "&9Items zum einsammeln: &e{EXPIRED}"
+  # {EXPIRED} = Number of Expired / Cancelled Items
+  name: "&6Abholen: Abgelaufender/Abbgebrochende Angebote"
+  lore:
+    - "&r&aKlicke um eine list der Abgelaufenden Items zu erhalten und einzusammeln"
+    - "&aItems die Abgelaufenoder abbgebrochen wurden."
+    - ""
+    - "&9Items zum einsammeln: &e{EXPIRED}"
 
 # Admin Menu
 view-admin-menu:
-    name: "&e&k----- &r&l&c Admin-Menü &r&e&k-----"
-    lore:
-        - "&r&aKlickt hier, um das Admin-Menü anzuzeigen"
+  name: "&e&k----- &r&l&c Admin-Menü &r&e&k-----"
+  lore:
+    - "&r&aKlickt hier, um das Admin-Menü anzuzeigen"
 main-stats-admin:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {EXPIRED} = Expired listing count
-    # {TOTAL} = Total listing count
-    name: "&l&cAdmin-Menü"
-    lore:
-        - "&aSeite {PAGE}/{MAX}"
-        - "&7Insgesamt &b{TOTAL} &7Angebote"
-        - "&c(&b{EXPIRED} &cabgelaufene Angebote)"
-        - "Klickt hier zum Aktualisieren der Seite"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {EXPIRED} = Expired listing count
+  # {TOTAL} = Total listing count
+  name: "&l&cAdmin-Menü"
+  lore:
+    - "&aSeite {PAGE}/{MAX}"
+    - "&7Insgesamt &b{TOTAL} &7Angebote"
+    - "&c(&b{EXPIRED} &cabgelaufene Angebote)"
+    - "Klickt hier zum Aktualisieren der Seite"
 listed-item-admin:
-    # {PRICE} = Price of listing
-    # {SELLER} = Username of seller
-    # {STATUS} = Status of the listing (Active/Expired)
-    - "&7-------------------------"
-    - "&6Klickt hier um das Angebot zu bearbeiten"
-    - ""
-    - "&9Preis: &e{PRICE}"
-    - "&9Verkäufer: &e{SELLER}"
-    - "&9Status: {STATUS}"
-    - "&7-------------------------"
+  # {PRICE} = Price of listing
+  # {SELLER} = Username of seller
+  # {STATUS} = Status of the listing (Active/Expired)
+  - "&7-------------------------"
+  - "&6Klickt hier um das Angebot zu bearbeiten"
+  - ""
+  - "&9Preis: &e{PRICE}"
+  - "&9Verkäufer: &e{SELLER}"
+  - "&9Status: {STATUS}"
+  - "&7-------------------------"
 
 status-active: "&aAktiv"
 status-expired: "&cAbgelaufen"
@@ -123,74 +123,74 @@ delete-item: "&cKlickt hier um das Angebot und das Item zu löschen"
 
 # Pagination items
 previous-page:
-    name: "&a<- Haupt Seite"
-    lore:
-        - "&7Gehe zum Start"
+  name: "&a<- Haupt Seite"
+  lore:
+    - "&7Gehe zum Start"
 next-page:
-    name: "&aNächste seite ->"
-    lore:
-        - "&7Gehe zur nächsten seite"
+  name: "&aNächste seite ->"
+  lore:
+    - "&7Gehe zur nächsten seite"
 back-button:
-    name: "&6Zurück"
-    lore:
+  name: "&6Zurück"
+  lore:
 sell-description:
-    name: "&6Verkauf von Items"
-    lore:
-        - "&aUm ein Item zum verkauf anzubieten:"
-        - "&aHalte das Item in derine hand und schreibe; &b/ah sell <preis>|in den Chat&a."
+  name: "&6Verkauf von Items"
+  lore:
+    - "&aUm ein Item zum verkauf anzubieten:"
+    - "&aHalte das Item in derine hand und schreibe; &b/ah sell <preis>|in den Chat&a."
 main-description:
-    name: "&6Was ist das Hier?"
-    lore:
-        - "&aDas hier ist ein verkaufshaus!"
-        - "&aDu kannst hier Items zum verkauf Anbieten"
-        - "&aWelche andere kaufen können."
-        - ""
-        - "&aDas ist ein guter weg deine Items zu verkauf"
-        - "&aAnzubieten und geld zu verdienen"
-        - "&adurch vielleicht Interresierte spieler."
+  name: "&6Was ist das Hier?"
+  lore:
+    - "&aDas hier ist ein verkaufshaus!"
+    - "&aDu kannst hier Items zum verkauf Anbieten"
+    - "&aWelche andere kaufen können."
+    - ""
+    - "&aDas ist ein guter weg deine Items zu verkauf"
+    - "&aAnzubieten und geld zu verdienen"
+    - "&adurch vielleicht Interresierte spieler."
 main-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "&l&6Verkaufs Haus"
-    lore:
-        - "&aSeite {PAGE}/{MAX}"
-        - "&7Anzahl der Items; &b{TOTAL} &7"
-        - "Klicke um die seite neu zu Laden"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "&l&6Verkaufs Haus"
+  lore:
+    - "&aSeite {PAGE}/{MAX}"
+    - "&7Anzahl der Items; &b{TOTAL} &7"
+    - "Klicke um die seite neu zu Laden"
 listings-description:
-    name: "&6Was ist das?"
-    lore:
-        - "&aDas ist eine liste all deiner Angebote"
-        - "&adie du momentan in Verkaufs Haus hast"
-        - ""
-        - "&aDu kannst deine angebote hier abbrechen"
-        - "&aund alle Items die Abgelaufen sind Einsammeln ."
+  name: "&6Was ist das?"
+  lore:
+    - "&aDas ist eine liste all deiner Angebote"
+    - "&adie du momentan in Verkaufs Haus hast"
+    - ""
+    - "&aDu kannst deine angebote hier abbrechen"
+    - "&aund alle Items die Abgelaufen sind Einsammeln ."
 listings-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "&l&6Liste"
-    lore:
-        - "&aSeite {PAGE}/{MAX}"
-        - "&7Items &b{TOTAL} &7"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "&l&6Liste"
+  lore:
+    - "&aSeite {PAGE}/{MAX}"
+    - "&7Items &b{TOTAL} &7"
 expired-description:
-    name: "&6Was ist das?"
-    lore:
-        - "&aDiese seite zeigt dir all deine:"
-        - "&aAbgelaufende oder Abgebrochende angebote an"
-        - "&adie du dir hier abholen kannst"
-        - "&aitem back to you from this menu."
-        - ""
-        - "&aKlicke einfach auf das Item wenn du"
-        - "&agenug platz im inventar hast."
+  name: "&6Was ist das?"
+  lore:
+    - "&aDiese seite zeigt dir all deine:"
+    - "&aAbgelaufende oder Abgebrochende angebote an"
+    - "&adie du dir hier abholen kannst"
+    - "&aitem back to you from this menu."
+    - ""
+    - "&aKlicke einfach auf das Item wenn du"
+    - "&agenug platz im inventar hast."
 expired-stats:
-    # {PAGE} = Current page
-    # {MAX} = Max page
-    # {TOTAL} = Total listing count
-    name: "&l&6Abgelaufen"
-    lore:
-        - "&aSeite: {PAGE}/{MAX}"
-        - "&7Anzahl der Items &b{TOTAL} &7"
+  # {PAGE} = Current page
+  # {MAX} = Max page
+  # {TOTAL} = Total listing count
+  name: "&l&6Abgelaufen"
+  lore:
+    - "&aSeite: {PAGE}/{MAX}"
+    - "&7Anzahl der Items &b{TOTAL} &7"
 
 # Category menu
 # category-stats:
@@ -212,13 +212,13 @@ expired-stats:
 #         - "&7Total of &b{TOTAL} &7categories"
 
 purchase-confirm:
-    name: "&aKauf durchführen"
+  name: "&aKauf durchführen"
 purchase-cancel:
-    name: "&cKauf abbrechen"
+  name: "&cKauf abbrechen"
 purchase-item:
-    lore:
-        - "&7-------------------------"
-        - "&9Preis: &e${PRICE}"
-        - "&9Verkäufer: &e{SELLER}"
-        - "&7-------------------------"
+  lore:
+    - "&7-------------------------"
+    - "&9Preis: &e${PRICE}"
+    - "&9Verkäufer: &e{SELLER}"
+    - "&7-------------------------"
 ...
