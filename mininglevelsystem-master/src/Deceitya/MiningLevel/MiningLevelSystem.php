@@ -80,7 +80,7 @@ class MiningLevelSystem extends PluginBase {
                 } else {
                     $sender->sendMessage("§bLevel §7>> §c/set player level");
                 }
-                return false;
+                return true;
             case 'reset':
                 $name = $sender->getName();
                 MiningLevelAPI::getInstance()->setData($name, 0, 0, 80);
