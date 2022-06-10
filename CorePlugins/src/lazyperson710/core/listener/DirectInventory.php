@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use ree_jp\stackstorage\api\StackStorageAPI;
@@ -21,6 +22,9 @@ class DirectInventory implements Listener {
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
             } else {
+                if ($item->getId() === BlockLegacyIds::AIR) {
+                    continue;
+                }
                 StackStorageAPI::$instance->add($player->getXuid(), $item);
                 $player->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました");
             }
