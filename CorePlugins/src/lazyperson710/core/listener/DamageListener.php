@@ -35,7 +35,7 @@ class DamageListener implements Listener {
                     $event->cancel();
                 }
                 if (isset(self::$damageFlags[$entity->getName()])) {
-                    $entity->sendMessage("ワープ直前のためダメージが無効化されました");
+                    $entity->sendMessage("§bDamageProtect §7>> §cワープ直前のためダメージが無効化されました");
                     $event->cancel();
                 }
                 break;
