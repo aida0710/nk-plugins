@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningtools\tools\upgrade\expansion;
+namespace deceitya\miningtools\extensions\range;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
@@ -8,7 +8,7 @@ use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
-class ExpansionConfirmForm extends SimpleForm {
+class RangeBuyForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $upgrade = null;
@@ -27,10 +27,6 @@ class ExpansionConfirmForm extends SimpleForm {
             ->setTitle("Mining Tools")
             ->setText($upgrade)
             ->addElements(new Button("アップグレード"));
-    }
-
-    public function handleClosed(Player $player): void {
-        $player->sendMessage('§bMiningTools §7>> §aアップグレードをキャンセルしました');
     }
 
     public function handleSubmit(Player $player): void {

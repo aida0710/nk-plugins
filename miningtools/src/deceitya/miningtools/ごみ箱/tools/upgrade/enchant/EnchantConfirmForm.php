@@ -63,7 +63,7 @@ class EnchantConfirmForm extends SimpleForm {
                 $itemName = match ($namedTag->getInt("MiningTools_Expansion")) {
                     1 => "§aNetheriteMiningPickaxe Ex.Secondary",
                     2 => "§aNetheriteMiningPickaxe Ex.Tertiary",
-                    default => "Error ,ExpansionConfirmForm/72"
+                    default => "Error ,RangeBuyForm/72"
                 };
                 $item->setCustomName($itemName);
                 $player->getInventory()->setItemInHand($item);

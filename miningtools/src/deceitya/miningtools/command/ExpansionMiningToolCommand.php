@@ -3,7 +3,7 @@
 namespace deceitya\miningtools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\tools\upgrade\expansion\ExpansionToolForm;
+use deceitya\miningtools\tools\upgrade\expansion\RangeConfirmForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\ItemIds;
@@ -43,7 +43,7 @@ class ExpansionMiningToolCommand extends Command {
             $sender->sendMessage("§bMiningTools §7>> §cこのアイテムは最上位ツールの為、以降のアップグレードに対応していません");
             return;
         }
-        $sender->sendForm(new ExpansionToolForm($sender));
+        $sender->sendForm(new RangeConfirmForm($sender));
     }
 
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace deceitya\miningtools\tools\upgrade\expansion;
+namespace deceitya\miningtools\extensions\range;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use pocketmine\player\Player;
 
-class ExpansionToolForm extends SimpleForm {
+class RangeConfirmForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $upgrade = "未定義のエラー";
@@ -32,6 +32,6 @@ class ExpansionToolForm extends SimpleForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new ExpansionConfirmForm($player));
+        $player->sendForm(new RangeBuyForm($player));
     }
 }
