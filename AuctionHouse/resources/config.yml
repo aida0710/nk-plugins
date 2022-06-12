@@ -11,7 +11,7 @@ max-price: 10000000
 # Sets the default language for the plugin, you can edit text and messages in this file.
 default-language: en_US
 # Sets the amount of hours a listing is active before being automatically cancelled and expired.
-expire-interval: 72
+expire-interval: 168
 # Sets the price it costs to list an item on the auction house.
 listing-price: 0
 # Sets a cooldown between listing items in seconds
@@ -19,7 +19,7 @@ listing-cooldown: 0
 # Allows or blocks players in creative mode from selling items.
 creative-sale: true
 # Maximum amount of listings a player can have by default
-max-listings: 100
+max-listings: 20
 # Shows item lore on the auction house
 show-lore: true
 # Days to automatically delete expired listings (-1 to disable)
@@ -28,7 +28,6 @@ expired-duration: -1
 price-formatted: true
 # Items that cannot be listed on the auction. Refer to https://minecraftitemids.com/ or https://minecraft-ids.grahamedgecombe.com/ for a list of item ids.
 blacklist:
-  - '1000' # Example items
   - '205'
   - '218'
   - '1234:5'

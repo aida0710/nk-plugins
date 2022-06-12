@@ -17,7 +17,7 @@ player-listing: "Auction System / {PLAYER}"
 # Chat messages
 item-listed: "{ITEM} (x{AMOUNT})を{PRICE}円で出品開始しました"
 cancelled-item: "§c出品を取り下げました。/ah expiredからアイテムを回収することができます"
-cancelled-purchase: "§c{ITEM} (x{AMOUNT})の購入をキャンセルしました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
+cancelled-purchase: "§c出品されたアイテムの購入をキャンセルしました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
 purchased-item: "{ITEM} (x{AMOUNT})を{PRICE}円で購入しました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
 seller-message: "{ITEM} (x{AMOUNT})を{PRICE}円で{PLAYER}が購入しました"    #{ITEM}, {AMOUNT}
 returned-item: "{ITEM} (x{AMOUNT}) が返却されました"
