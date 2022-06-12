@@ -12,7 +12,7 @@ use pocketmine\Server;
 class MjolnirBanCommand extends Command {
 
     public function __construct() {
-        parent::__construct("mjolnirban", "MjolnirBan command", "/mjolnirban [type: player_name | ip | cid | xuid] [literal] [reason]", ["mban"]);
+        parent::__construct("mjolnirban", "MjolnirBan command", "/mjolnirban [type: player_name | cid | xuid] [literal] [reason]", ["mban"]);
         $this->setPermission("mjolnir.command.mjolnirban");
     }
 
@@ -30,14 +30,14 @@ class MjolnirBanCommand extends Command {
                 BanService::banName($args[1], $reason);
                 Server::getInstance()->getPlayerExact($args[1])?->kick(Setting::getInstance()->getKickMessage());
                 break;
-            case BanType::IP()->name():
-                BanService::banIp($args[1], $reason);
-                break;
             case BanType::CID()->name():
                 BanService::banCid($args[1], $reason);
                 break;
             case BanType::XUID()->name():
-                BanService::banXuid($args[1], $reason);
+                $player = Server::getInstance()->getPlayerExact($args[1]);
+                if (is_null($player)) return;
+                BanService::banXuid($player->getXuid(), $reason);
+                $player->kick(Setting::getInstance()->getKickMessage());
                 break;
             default:
                 $sender->sendMessage("Types: " . implode(", ", BanType::getAll()));
