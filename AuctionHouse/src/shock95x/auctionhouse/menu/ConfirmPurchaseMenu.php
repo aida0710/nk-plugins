@@ -24,7 +24,7 @@ use shock95x\auctionhouse\utils\Utils;
 class ConfirmPurchaseMenu extends AHMenu {
 
     const INDEX_CONFIRM = [11];
-    const INDEX_CANCEL = [16];
+    const INDEX_CANCEL = [15];
 
     protected static string $inventoryType = InvMenu::TYPE_CHEST;
 
