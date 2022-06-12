@@ -19,7 +19,7 @@ class BanService {
     public static function isBanned(Account $account): bool {
         /** @var BanRepository $banRepo */
         $banRepo = MjolnirPlugin::getRepositoryFactory()->getRepository(BanRepository::class);
-        return $banRepo->isBannedName($account->getName()) || $banRepo->isBannedIp($account->getIp()) || $banRepo->isBannedCid($account->getCid()) || $banRepo->isBannedXuid($account->getXuid());
+        return $banRepo->isBannedName($account->getName()) || $banRepo->isBannedCid($account->getCid()) || $banRepo->isBannedXuid($account->getXuid());
     }
 
     public static function banName(string $name, string $reason) {
@@ -52,7 +52,7 @@ class BanService {
         self::checkBannedPlayers();
     }
 
-    public static function banXuid(int $xuid, string $reason) {
+    public static function banXuid(string $xuid, string $reason) {
         /** @var AccountRepository $accountRepo */
         $accountRepo = MjolnirPlugin::getRepositoryFactory()->getRepository(AccountRepository::class);
         /** @var BanRepository $banRepo */
@@ -71,10 +71,10 @@ class BanService {
             $banRepo->register(new Ban($account->getName(), BanType::PLAYER_NAME(), $reason));
             self::banAccounts($accountRepo->getAccountsByName($account->getName()), "Related to {$account->getName()}");
         }
-        if (!$banRepo->isBannedIp($account->getIp())) {
-            $banRepo->register(new Ban($account->getIp(), BanType::IP(), $reason));
-            self::banAccounts($accountRepo->getAccountsByIp($account->getIp()), "Related to {$account->getName()}");
-        }
+        //if (!$banRepo->isBannedIp($account->getIp())) {
+        //    $banRepo->register(new Ban($account->getIp(), BanType::IP(), $reason));
+        //    self::banAccounts($accountRepo->getAccountsByIp($account->getIp()), "Related to {$account->getName()}");
+        //}
         if (!$banRepo->isBannedCid($account->getCid())) {
             $banRepo->register(new Ban($account->getCid(), BanType::CID(), $reason));
             self::banAccounts($accountRepo->getAccountsByCid($account->getCid()), "Related to {$account->getName()}");

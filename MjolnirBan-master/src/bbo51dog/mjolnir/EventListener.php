@@ -20,7 +20,6 @@ class EventListener implements Listener {
             $event->cancel();
             $reason = "Login from banned account: {$account->getName()}";
             BanService::banName($account->getName(), $reason);
-            BanService::banIp($account->getIp(), $reason);
             BanService::banCid($account->getCid(), $reason);
             BanService::banXuid($account->getXuid(), $reason);
         }
