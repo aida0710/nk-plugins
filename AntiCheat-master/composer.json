@@ -1,0 +1,16 @@
+{
+    "name": "bbo51dog/anti_nuker",
+    "description": "AntiNuker",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "require": {
+        "pocketmine/pocketmine-mp": "4.*",
+        "bbo51dog/pmdiscordapi": "4.*"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/bbo51dog/PMDiscordAPI"
+        }
+    ]
+}
