@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningtools\tools\element;
+namespace deceitya\miningtools\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
