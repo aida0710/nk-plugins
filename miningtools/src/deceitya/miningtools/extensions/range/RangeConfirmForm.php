@@ -22,8 +22,6 @@ class RangeConfirmForm extends SimpleForm {
             }
         } elseif ($namedTag->getTag('MiningTools_3') !== null) { //MiningTools_3があるかどうか
             $upgrade = "上位ツールにアップグレードしますか？\n費用は350万円\n範囲は5x5になります\n\n残りアップグレード回数 3 回";
-        } elseif ($namedTag->getTag('4mining') !== null) {//4miningがあるかどうか
-            $upgrade = "一度ブロックを採掘してつるはしを変換してください";
         }
         $this
             ->setTitle("Expansion Mining Tools")
