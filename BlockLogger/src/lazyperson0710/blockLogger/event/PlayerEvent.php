@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace lazyperson0710\blockLogger\event;
 
-use deceitya\miningtools\event\CountBlockEvent;
+use deceitya\miningtools\event\MiningToolsBreakEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
@@ -36,9 +36,9 @@ class PlayerEvent implements Listener {
 
     /**
      * @priority MONITOR
-     * @param CountBlockEvent $event
+     * @param MiningToolsBreakEvent $event
      */
-    public function countBlock(CountBlockEvent $event) {
+    public function countBlock(MiningToolsBreakEvent $event) {
         $this->checkLog($event, "MiningTools");
     }
 

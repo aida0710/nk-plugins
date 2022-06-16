@@ -20,15 +20,15 @@ class BreakEventListener implements Listener {
     }
 
     /**
-     * @param CountBlockEvent $event
+     * @param MiningToolsBreakEvent $event
      * @priority HIGHEST
      */
-    public function onCountEvent(CountBlockEvent $event) {
+    public function onCountEvent(MiningToolsBreakEvent $event) {
         if ($event->isCancelled()) return;
         $this->blockBreakTicket($event);
     }
 
-    public function blockBreakTicket(Event $event) {
+    public function blockBreakTicket(BlockBreakEvent|MiningToolsBreakEvent $event) {
         $player = $event->getPlayer();
         if (Server::getInstance()->isOp($player->getName())) {
             return;

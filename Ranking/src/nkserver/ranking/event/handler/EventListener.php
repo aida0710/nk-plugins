@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace nkserver\ranking\event\handler;
 
-use deceitya\miningTools\event\CountBlockEvent;
+use deceitya\miningTools\event\MiningToolsBreakEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Event;
@@ -48,7 +48,7 @@ class EventListener implements Listener {
     /**
      * @priority HIGH
      */
-    public function onBlockBreakMiningToolsHandler(CountBlockEvent $ev): void {
+    public function onBlockBreakMiningToolsHandler(MiningToolsBreakEvent $ev): void {
         if ($ev->isCancelled()) {
             return;
         }
