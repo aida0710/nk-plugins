@@ -2,7 +2,7 @@
 
 namespace deceitya\miningtools\calculation;
 
-use deceitya\miningtools\event\CountBlockEvent;
+use deceitya\miningtools\event\MiningToolsBreakEvent;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
@@ -66,7 +66,7 @@ class AxeDestructionRange {
                     }
                 }
                 $drops[] = (new ItemDrop())->getDrop($player, $targetBlock);
-                (new CountBlockEvent($player, $targetBlock))->call();
+                (new MiningToolsBreakEvent($player, $targetBlock))->call();
                 $world->setBlock($pos, VanillaBlocks::AIR());
                 $open[$hash] = $pos;
             }

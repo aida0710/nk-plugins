@@ -8,7 +8,7 @@ use pocketmine\event\Cancellable;
 use pocketmine\event\CancellableTrait;
 use pocketmine\player\Player;
 
-class CountBlockEvent extends BlockEvent implements Cancellable {
+class MiningToolsBreakEvent extends BlockEvent implements Cancellable {
 
     use CancellableTrait;
 
