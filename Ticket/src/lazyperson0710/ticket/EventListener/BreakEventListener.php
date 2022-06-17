@@ -42,7 +42,11 @@ class BreakEventListener implements Listener {
         }
         if ($random === 4500) {
             TicketAPI::getInstance()->addTicket($player, 1);
-            Server::getInstance()->broadcastMessage("§bTicket §7>> §eTicketを{$player->getName()}がゲットしました！確率:1/5000");
+            if (Server::getInstance()->isOp($player->getName())) {
+                $player->sendMessage("§bTicket §7>> §aTicketを{$probability}％の確率で{$player->getName()}がゲットしました(op取得)");
+            } else {
+                Server::getInstance()->broadcastMessage("§bTicket §7>> §eTicketを{$probability}％の確率で{$player->getName()}がゲットしました");
+            }
         }
     }
 }
