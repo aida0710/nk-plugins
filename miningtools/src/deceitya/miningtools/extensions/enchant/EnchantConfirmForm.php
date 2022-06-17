@@ -20,7 +20,7 @@ class EnchantConfirmForm extends CustomForm {
     const Rank_2_ItemCost = 1500;
     const Rank_3_ItemCost = 1500;
 
-    const CostItemId = BlockLegacyIds::ENCHANTMENT_TABLE;
+    const CostItemId = BlockLegacyIds::PACKED_ICE;
     const CostItemNBT = "MiningToolsEnchantCostItem";
 
     public function __construct(Player $player) {
