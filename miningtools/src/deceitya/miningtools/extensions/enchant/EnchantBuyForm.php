@@ -48,18 +48,18 @@ class EnchantBuyForm extends CustomForm {
             if ($enchantName === VanillaEnchantments::UNBREAKING()->getName()) {
                 switch ($enchant->getLevel()) {
                     case 10:
-                        $moneyCost = EffectConfirmForm::Rank_2_MoneyCost;
-                        $itemCost = EffectConfirmForm::Rank_1_ItemCost;
+                        $moneyCost = EnchantConfirmForm::Rank_1_MoneyCost;
+                        $itemCost = EnchantConfirmForm::Rank_1_ItemCost;
                         $enchantLevel = 25;
                         break;
                     case 25:
-                        $moneyCost = EffectConfirmForm::Rank_2_MoneyCost;
-                        $itemCost = EffectConfirmForm::Rank_2_ItemCost;
+                        $moneyCost = EnchantConfirmForm::Rank_2_MoneyCost;
+                        $itemCost = EnchantConfirmForm::Rank_2_ItemCost;
                         $enchantLevel = 35;
                         break;
                     case 35:
-                        $moneyCost = EffectConfirmForm::Rank_3_MoneyCost;
-                        $itemCost = EffectConfirmForm::Rank_3_ItemCost;
+                        $moneyCost = EnchantConfirmForm::Rank_3_MoneyCost;
+                        $itemCost = EnchantConfirmForm::Rank_3_ItemCost;
                         $enchantLevel = "mending";
                         break;
                     default:
@@ -72,9 +72,9 @@ class EnchantBuyForm extends CustomForm {
                 return;
             }
             if ((new CheckBuyItemCost())->MoneyCheck($player, $moneyCost) === false) return;
-            if ((new CheckBuyItemCost())->CostItemCheck($player, $itemCost, EffectConfirmForm::CostItemId, EffectConfirmForm::CostItemNBT)) return;
+            if ((new CheckBuyItemCost())->CostItemCheck($player, $itemCost, EnchantConfirmForm::CostItemId, EnchantConfirmForm::CostItemNBT)) return;
             EconomyAPI::getInstance()->reduceMoney($player, $moneyCost);
-            $item = ItemFactory::getInstance()->get(EffectConfirmForm::CostItemId);
+            $item = ItemFactory::getInstance()->get(EnchantConfirmForm::CostItemId);
             $player->getInventory()->removeItem($item->setCount($itemCost));
             $inventory = $player->getInventory();
             $inventory->removeItem($item);
