@@ -30,18 +30,14 @@ class BreakEventListener implements Listener {
 
     public function blockBreakTicket(BlockBreakEvent|MiningToolsBreakEvent $event) {
         $player = $event->getPlayer();
-        if (Server::getInstance()->isOp($player->getName())) {
-            return;
-        }
-        if ($event->getEventName() === "MiningToolsBreakEvent") {
-            $random = mt_rand(1, 10000);
-        } elseif ($event->getEventName() === "BlockBreakEvent") {
+        if ($event->getEventName() === (new BlockBreakEvent($player, $event->getBlock(), $player->getInventory()->getItemInHand()))->getEventName()) {
+            $probability = "0.02";
             $random = mt_rand(1, 5000);
-        } else {
-            echo "error";
+        } elseif ($event->getEventName() === (new MiningToolsBreakEvent($player, $event->getBlock()))->getEventName()) {
+            $probability = "0.0125";
+            $random = mt_rand(1, 8000);
         }
-        if (empty($random)) {
-            echo "aaaaaaaaa";
+        if (empty($random) || empty($probability)) {
             return;
         }
         if ($random === 4500) {
