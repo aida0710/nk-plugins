@@ -66,8 +66,8 @@ class PickaxeDestructionRange {
                                 $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                 break 3;
                             }
-                            (new MiningToolsBreakEvent($player, $block))->call();
-                            $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
+                            (new MiningToolsBreakEvent($player, $targetBlock))->call();
+                            $targetBlock->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
                         }
                     } elseif ($pos->getFloorY() <= $player->getPosition()->getFloorY() - 1) {
                         continue;
@@ -78,8 +78,8 @@ class PickaxeDestructionRange {
                                 $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                 break 3;
                             }
-                            (new MiningToolsBreakEvent($player, $block))->call();
-                            $block->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
+                            (new MiningToolsBreakEvent($player, $targetBlock))->call();
+                            $targetBlock->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
                         }
                     }
                 }
