@@ -43,11 +43,11 @@ class PlayerEvent implements Listener {
     }
 
     /**
-     * @param $event
+     * @param BlockBreakEvent|BlockPlaceEvent|MiningToolsBreakEvent $event
      * @param string $type
      * @return void
      */
-    private function checkLog($event, string $type): void {
+    private function checkLog(BlockBreakEvent|BlockPlaceEvent|MiningToolsBreakEvent $event, string $type): void {
         $position = $event->getBlock()->getPosition()->asPosition();
         $date = date("Y/m/d");
         $time = date("H:i:s");
