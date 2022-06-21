@@ -36,6 +36,10 @@ class Main extends PluginBase implements Listener {
         if ($enchant === null) {
             return;
         }
+        if ($event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::SILK_TOUCH)) !== null) {
+            $event->getPlayer()->sendMessage("シルクタッチと幸運が同時付与されているツールは使用することができません");
+            return;
+        }
         if (empty($event->getDrops())) return;
         if (!in_array($event->getBlock()->getId(), [
             BlockLegacyIds::DIAMOND_ORE,
