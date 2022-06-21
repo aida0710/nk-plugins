@@ -29,7 +29,10 @@ class PlayerDataArray {
         return $this->array;
     }
 
-    /** @return Generator<string> */
+    /**
+     * @param string $type
+     * @return Generator<string>
+     */
     public function getLoadedWorlds(string $type): Generator {
         foreach (
         match ($type) {
@@ -43,7 +46,10 @@ class PlayerDataArray {
         }
     }
 
-    /** @return Generator<int> */
+    /**
+     * @param string $type
+     * @return Generator<int>
+     */
     public function getLoadedIds(string $type): Generator {
         foreach (
         match ($type) {
