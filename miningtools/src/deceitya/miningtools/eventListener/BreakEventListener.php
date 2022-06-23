@@ -33,7 +33,7 @@ class BreakEventListener implements Listener {
         $id = $item->getId();
         $block = $event->getBlock();
         $this->itemNbtConversion($player, $item);
-        if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion') !== null)) return;
+        if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) return;
         if (!Main::$flag[$player->getName()]) {
             //破壊したときに範囲破壊が適用されるブロック
             //また、範囲内にあったときに破壊されるブロック
@@ -61,8 +61,8 @@ class BreakEventListener implements Listener {
             }
             //破壊したときに範囲破壊が適用されるブロック
             //範囲内にあるブロックは全部破壊される
-            if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
-                switch ($item->getNamedTag()->getInt("MiningTools_Expansion")) {
+            if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
+                switch ($item->getNamedTag()->getInt("MiningTools_Expansion_Range")) {
                     case 1:
                         switch ($id) {
                             case Main::NETHERITE_SHOVEL:

@@ -10,13 +10,6 @@ use pocketmine\player\Player;
 class ExtensionsMainForm extends SimpleForm {
 
     public function __construct(Player $player) {
-        if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('4mining') !== null) {
-            //todo これを購入時に一応全部やった方がいいかも
-            $this
-                ->setTitle("test")
-                ->setText("一度ブロックを採掘してつるはしを変換してください\n変換が完了するまでこの機能は利用できません");
-            return;
-        }
         $this
             ->setTitle("Expansion Mining Tools")
             ->setText("強化したい機能を選択してください")
