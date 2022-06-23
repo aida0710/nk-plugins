@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\miningtools\extensions\enchant;
+namespace deceitya\miningtools\extensions\effect;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
@@ -36,9 +36,7 @@ class EffectBuyForm extends CustomForm {
                 );
                 return;
             default:
-                Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 $this->addElement(new Label("例外が発生しました"));
-                return;
         }
     }
 
@@ -63,12 +61,12 @@ class EffectBuyForm extends CustomForm {
                         $enchantLevel = "mending";
                         break;
                     default:
-                        Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                        "Errorが発生しました";
                         return;
                 }
             }
             if (empty($itemCost) || empty($moneyCost) || empty($enchantLevel)) {
-                Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                Server::getInstance()->getLogger()->error(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
             }
             if ((new CheckBuyItemCost())->MoneyCheck($player, $moneyCost) === false) return;

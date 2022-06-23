@@ -2,6 +2,7 @@
 
 namespace deceitya\miningtools\tools\diamond;
 
+use JetBrains\PhpStorm\ArrayShape;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
@@ -32,7 +33,7 @@ class DiamondConfirmForm implements Form {
         $player->sendMessage('§bMiningTools §7>> §aDiamondMiningToolsを購入しました');
     }
 
-    public function jsonSerialize() {
+    #[ArrayShape(['type' => "string", 'title' => "string", 'content' => "string", 'button1' => "string", 'button2' => "string"])] public function jsonSerialize(): array {
         return [
             'type' => 'modal',
             'title' => 'DiamondMiningTools',

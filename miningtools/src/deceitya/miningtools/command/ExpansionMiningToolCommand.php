@@ -3,7 +3,7 @@
 namespace deceitya\miningtools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\miningtools\extensions\range\ExtensionsMainForm;
+use deceitya\miningtools\extensions\ExtensionsMainForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\ItemIds;
@@ -40,6 +40,7 @@ class ExpansionMiningToolCommand extends Command {
             $sender->sendMessage("§bMiningTools §7>> §cMiningTools Axeはアップグレードに対応していません");
             return;
         }
+        //rangeなんとかーにするかも
         if ($namedTag->getTag('MiningTools_Expansion') !== null && $namedTag->getInt('MiningTools_Expansion') === 3) {
             $sender->sendMessage("§bMiningTools §7>> §cこのアイテムは最上位ツールの為、以降のアップグレードに対応していません");
             return;

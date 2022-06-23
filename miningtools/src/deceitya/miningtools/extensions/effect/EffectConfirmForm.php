@@ -1,18 +1,16 @@
 <?php
 
-namespace deceitya\miningtools\extensions\enchant;
+namespace deceitya\miningtools\extensions\effect;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use pocketmine\block\BlockLegacyIds;
-use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\entity\effect\Effect;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class EffectConfirmForm extends CustomForm {
 
     private int $level;
-    //Money / Item;
     const Money_FIRE_RESISTANCE = 15000;
     const Money_WATER_BREATHING = 15000;
     const Money_NIGHT_VISION = 15000;
@@ -28,42 +26,16 @@ class EffectConfirmForm extends CustomForm {
     const Item_HEALTH_BOOST = 15000;
     const Item_REGENERATION = 15000;
 
-    const CostItemId = BlockLegacyIds::ENCHANTMENT_TABLE;
-    const CostItemNBT = "MiningToolsEnchantCostItem";
+    const CostItemId = BlockLegacyIds::PRISMARINE;
+    const CostItemNBT = "MiningToolsEffectCostItem";
 
-    public function __construct(Player $player) {
-        //$item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 1));
+    public function __construct(Player $player, Effect $effect) {
+        $this->addElements(
+            new Label("現在、耐久力エンチャントはされていません\n以下のコストを支払ってMiningToolを強化しますか？"),
+            new Label("コスト\n")
+        );
         $this->setTitle("Expansion Mining Tools");
-        foreach ($player->getInventory()->getItemInHand()->getEnchantments() as $enchant) {
-            $enchantName = $enchant->getType()->getName();
-            if ($enchantName === VanillaEnchantments::UNBREAKING()->getName()) {
-                $this->level = $enchant->getLevel();
-                switch ($enchant->getLevel()) {
-                    case 10:
-                        $this->addElements(
-                            new Label("現在、耐久力エンチャントはされていません\n以下のコストを支払ってMiningToolを強化しますか？"),
-                            new Label("コスト\n")
-                        );
-                        return;
-                    case 25:
-                        $this->addElements(
-                            new Label("現在、耐久力エンチャントはRank.2です\n以下のコストを支払ってMiningToolを強化しますか？"),
-                            new Label("コスト\n")
-                        );
-                        return;
-                    case 35:
-                        $this->addElements(
-                            new Label("現在、耐久力エンチャントは最大レベルです\nエンドコンテンツとして修繕を付与することが可能です"),
-                            new Label("コスト\n")
-                        );
-                        return;
-                    default:
-                        Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
-                        $this->addElement(new Label("例外が発生しました"));
-                        return;
-                }
-            }
-        }
+        $this->addElement(new Label("例外が発生しました"));
     }
 
     public function handleSubmit(Player $player): void {

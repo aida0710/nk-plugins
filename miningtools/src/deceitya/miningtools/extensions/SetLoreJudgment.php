@@ -1,37 +1,39 @@
 <?php
 
-namespace deceitya\miningtools\extensions\range;
+namespace deceitya\miningtools\extensions;
 
 use pocketmine\item\Item;
-use pocketmine\lang\Translatable;
-use pocketmine\player\Player;
-use pocketmine\Server;
 
 class SetLoreJudgment {
 
-    public function SetLoreJudgment(Player $player, Item $item): array {
+    public function SetLoreJudgment(Item $item): array {
         $lore = "このMiningToolは最上位ツールの為修繕が可能です\n\n現在付与されている特殊効果";
         if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-            switch ($item->getNamedTag()->getInt("MiningTools_Expansion")) {
+            $lore .= "\n採掘範囲拡張アタッチメント";
+            switch ($item->getNamedTag()->getInt("MiningTools_Expansion_Range")) {
                 case 1:
-                    $lore .= "\n範囲拡張 Rank.1[5x5x5]";
+                    $lore .= "\nRank.1 - 範囲5x5x5";
                     break;
                 case 2:
-                    $lore .= "\n範囲拡張 Rank.2[7x7x7]";
+                    $lore .= "\nRank.2 - 範囲7x7x7";
                     break;
                 case 3:
-                    $lore .= "\n範囲拡張 Rank.3[9x9x9]";
+                    $lore .= "\nRank.3 - 範囲9x9x9";
                     break;
             }
         }
         if ($item->getNamedTag()->getTag('MiningTools_Expansion_Enchant') !== null) {
-            $lore .= "\n拡張エンチャント";
-            foreach ($player->getInventory()->getItemInHand()->getEnchantments() as $enchant) {
-                $enchantName = $enchant->getType()->getName();
-                if ($enchantName instanceof Translatable) {
-                    $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
-                }
-                $lore .= "{$enchantName}(Lv{$enchant->getLevel()})";
+            $lore .= "\n拡張エンチャント機能";
+            switch ($item->getNamedTag()->getInt("MiningTools_Expansion_Enchant")) {
+                case 1:
+                    $lore .= "\nRank.1 - 耐久25";
+                    break;
+                case 2:
+                    $lore .= "\nRank.2 - 耐久35";
+                    break;
+                case 3:
+                    $lore .= "\nRank.3 - 耐久50/修繕1";
+                    break;
             }
         }
         if ($item->getNamedTag()->getTag('MiningTools_Expansion_Effect') !== null) {

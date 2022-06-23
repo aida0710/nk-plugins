@@ -3,6 +3,7 @@
 namespace deceitya\miningtools\tools\diamond;
 
 use deceitya\miningTools\Main;
+use JetBrains\PhpStorm\ArrayShape;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\form\Form;
 use pocketmine\item\enchantment\EnchantmentInstance;
@@ -48,7 +49,7 @@ class DiamondToolForm implements Form {
         $player->sendForm(new DiamondConfirmForm($item, 150000));
     }
 
-    public function jsonSerialize() {
+    #[ArrayShape(['type' => "string", 'title' => "string", 'content' => "array[]"])] public function jsonSerialize(): array {
         return [
             'type' => 'custom_form',
             'title' => 'DiamondMiningTools',

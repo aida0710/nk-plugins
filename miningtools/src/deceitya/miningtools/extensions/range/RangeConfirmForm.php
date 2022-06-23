@@ -5,22 +5,25 @@ namespace deceitya\miningtools\extensions\range;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class RangeConfirmForm extends SimpleForm {
+
+    private array $nbt = [];
 
     public function __construct(Player $player) {
         $upgrade = "未定義のエラー";
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
-        if ($namedTag->getTag('MiningTools_Expansion') !== null) {//MiningTools_Expansionがあるかどうか
-            switch ($namedTag->getInt("MiningTools_Expansion")) {
-                case  1:
-                    $upgrade = "上位ツールにアップグレードしますか？\n費用は600万円\n範囲は7x7になります\n\n残りアップグレード回数 2 回";
-                    break;
-                case 2:
-                    $upgrade = "最上位ツールにアップグレードしますか？\n費用は1500万円\n範囲は9x9になります\n\n残りアップグレード回数 1 回";
-                    break;
-            }
-        } elseif ($namedTag->getTag('MiningTools_3') !== null) { //MiningTools_3があるかどうか
+        if ($namedTag->getTag('MiningTools_Expansion_Range') !== null) {
+            $this->nbt = ["MiningTools_Expansion_Range" => $namedTag->getInt("MiningTools_Expansion_Range")];
+            $upgrade = match ($namedTag->getInt('MiningTools_Expansion_Range')) {
+                1 => "上位ツールにアップグレードしますか？\n費用は600万円\n範囲は7x7になります\n\n残りアップグレード回数 2 回",
+                2 => "最上位ツールにアップグレードしますか？\n費用は1500万円\n範囲は9x9になります\n\n残りアップグレード回数 1 回",
+                3 => "最上位ツールの為アップグレードに対応していません",
+                default => "Errorが発生しました",
+            };
+        } elseif ($namedTag->getTag('MiningTools_3') !== null) {
+            $this->nbt = ["MiningTools_3" => $namedTag->getInt("MiningTools_3")];
             $upgrade = "上位ツールにアップグレードしますか？\n費用は350万円\n範囲は5x5になります\n\n残りアップグレード回数 3 回";
         }
         $this
@@ -30,6 +33,13 @@ class RangeConfirmForm extends SimpleForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new RangeBuyForm($player));
+        if (empty($this->nbt)) {
+            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+            return;
+        }
+        if ($player->getInventory()->getItemInHand()->getNamedTag()->getInt('MiningTools_Expansion_Range') === 3) {
+            return;
+        }
+        $player->sendForm(new RangeBuyForm($player, $this->nbt));
     }
 }

@@ -93,7 +93,7 @@ class BreakEventListener implements Listener {
                 }
             }
             if (!isset($set)) {
-                Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
             }
             $world_name = $event->getPlayer()->getWorld()->getDisplayName();

@@ -5,11 +5,10 @@ namespace deceitya\miningtools\extensions\effect;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\element\SendEffectFormButton;
 use pocketmine\entity\effect\VanillaEffects;
-use pocketmine\player\Player;
 
 class EffectSelectForm extends SimpleForm {
 
-    public function __construct(Player $player) {
+    public function __construct() {
         $this
             ->setTitle("Expansion Mining Tools")
             ->setText("強化したい機能を選択してください\n付与されたMiningToolsを持った時にエフェクトが付きます")

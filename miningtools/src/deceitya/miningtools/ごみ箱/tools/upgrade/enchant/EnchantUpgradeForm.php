@@ -17,7 +17,7 @@ class EnchantUpgradeForm extends SimpleForm {
                     $player->sendMessage("last level");
                     break;
                 default:
-                    $player->sendMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                    Server::getInstance()->getLogger()->error(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                     return;
             }
         }
@@ -33,7 +33,7 @@ class EnchantUpgradeForm extends SimpleForm {
                     $player->sendMessage("last level");
                     break;
                 default:
-                    $player->sendMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                    Server::getInstance()->getLogger()->error(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                     return;
             }
         }
@@ -55,7 +55,7 @@ class EnchantUpgradeForm extends SimpleForm {
                     $player->sendMessage("last level");
                     break;
                 default:
-                    $player->sendMessage(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                    Server::getInstance()->getLogger()->error(__DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                     return;
             }
         }

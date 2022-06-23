@@ -2,6 +2,7 @@
 
 namespace deceitya\miningtools\tools\netherite;
 
+use JetBrains\PhpStorm\ArrayShape;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
@@ -28,19 +29,16 @@ class NetheriteConfirmForm implements Form {
                     Server::getInstance()->broadcastMessage("§bMiningTools §7>> §e{$user}がNetheriteMiningToolsを購入しました");
                 } else {
                     $player->sendMessage('§bMiningTools §7>> §cお金が足りません');
-                    return;
                 }
             } else {
                 $player->sendMessage('§bMiningTools §7>> §cインベントリに空きがありません');
-                return;
             }
         } else {
             $player->sendMessage('§bMiningTools §7>> §a購入をキャンセルしました');
-            return;
         }
     }
 
-    public function jsonSerialize() {
+    #[ArrayShape(['type' => "string", 'title' => "string", 'content' => "string", 'button1' => "string", 'button2' => "string"])] public function jsonSerialize(): array {
         return [
             'type' => 'modal',
             'title' => 'NetheriteMiningTools',
