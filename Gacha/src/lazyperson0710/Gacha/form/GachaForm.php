@@ -53,7 +53,8 @@ class GachaForm extends CustomForm {
         $result = (new RankCalculation)->run($this->quantity->getValue(), $player, $this->key);
         if ($result === false) return;
         if (empty($result)) {
-            Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+            return;
         }
         $result = substr($result, 0, -1);
         $result = explode(",", $result);

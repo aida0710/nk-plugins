@@ -38,7 +38,7 @@ class BuyForm extends CustomForm {
                 $explanation = new Label("NetheriteMiningTools\nType :　{$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10");
                 break;
             default:
-                Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
                 return;
         }
         $this
@@ -53,7 +53,7 @@ class BuyForm extends CustomForm {
         }
         $item = $this->itemRegister();
         if (empty($item)) {
-            Server::getInstance()->broadcastMessage("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
             return;
         }
         if (!$player->getInventory()->canAddItem($item)) {
