@@ -105,6 +105,7 @@ class BreakEventListener implements Listener {
             }
             $handItem = $player->getInventory()->getItemInHand();
             $haveDurable = $handItem instanceof Durable;
+            /** @var Durable $handItem */
             $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
             if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
                 $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
