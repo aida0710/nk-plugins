@@ -4,6 +4,7 @@ namespace deceitya\miningtools\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
+use deceitya\miningtools\extensions\CheckPlayerData;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -22,6 +23,7 @@ class SendFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
+        if ((new CheckPlayerData())->checkMining4($player) === false) return;
         $player->sendForm($this->form);
     }
 }
