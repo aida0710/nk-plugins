@@ -13,25 +13,23 @@ class EnchantShopAPI {
 
     private static EnchantShopAPI $instance;
     protected array $buy = [];
-    protected array $level = [];
+    protected array $limit = [];
     protected array $list = [];
+    protected array $miningLevel = [];
 
     public function __construct() {
         $this->init();
     }
 
     protected function init(): void {
-        $this->register(VanillaEnchantments::MENDING(), 2500, 250);
+        $this->register(VanillaEnchantments::MENDING(), 2500, 3, 250);
+        $this->register(VanillaEnchantments::UNBREAKING(), 2500, 3, 250);
     }
 
-    public function register(Enchantment $enchantment, int $buy, int $level): void {
+    public function register(Enchantment $enchantment, int $buy, int $limit, int $miningLevel): void {
         $this->buy[$enchantment->getName()] = $buy;
-        $this->level[$enchantment->getName()] = $level;
-    }
-
-    protected function registerFromId(Enchantment $enchantment, int $buy, int $level): void {
-        $this->buy[$enchantment->getName()] = $buy;
-        $this->level[$enchantment->getName()] = $level;
+        $this->limit[$enchantment->getName()] = $limit;
+        $this->miningLevel[$enchantment->getName()] = $miningLevel;
     }
 
     public function getBuy(Enchantment $enchantment): ?int {
@@ -42,15 +40,31 @@ class EnchantShopAPI {
         }
     }
 
-    public function checkLevel(Player $player, Enchantment $enchantment): string {
+    public function checkLevel(Player $player, Enchantment $enchantment): bool {
         $miningLevel = MiningLevelAPI::getInstance();
         try {
-            if (!($this->getLevel($enchantment) < $miningLevel->getLevel($player->getName()))) {
-                return "failure";
+            if (!($this->getMiningLevel($enchantment) < $miningLevel->getLevel($player->getName()))) {
+                return false;
             }
-            return "success";
+            return true;
         } catch (Exception $e) {
-            return "exception";
+            return false;
+        }
+    }
+
+    public function getLimit(Enchantment $enchantment): ?int {
+        try {
+            return $this->limit[$enchantment->getName()];
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getMiningLevel(Enchantment $enchantment): ?int {
+        try {
+            return $this->miningLevel[$enchantment->getName()];
+        } catch (Exception $e) {
+            return null;
         }
     }
 
@@ -59,14 +73,6 @@ class EnchantShopAPI {
             self::$instance = new EnchantShopAPI();
         }
         return self::$instance;
-    }
-
-    public function getLevel(Enchantment $enchantment): ?int {
-        try {
-            return $this->level[$enchantment->getName()];
-        } catch (Exception $e) {
-            return null;
-        }
     }
 
 }

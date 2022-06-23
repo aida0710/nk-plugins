@@ -1,5 +1,5 @@
 name: LevelShop
-main: deceitya\levelShop\Main
+main: deceitya\ShopAPI\Main
 version: 1.0.0
 api: 4.0.0
 

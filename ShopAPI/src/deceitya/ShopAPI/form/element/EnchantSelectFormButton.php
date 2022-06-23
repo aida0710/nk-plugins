@@ -4,6 +4,7 @@ namespace deceitya\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
+use deceitya\ShopAPI\form\enchantShop\EnchantConfirmationForm;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\player\Player;
 

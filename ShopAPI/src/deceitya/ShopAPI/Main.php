@@ -1,7 +1,8 @@
 <?php
 
-namespace deceitya\levelShop;
+namespace deceitya\ShopAPI;
 
+use deceitya\ShopAPI\command\EnchantShopCommand;
 use deceitya\ShopAPI\command\InvSellCommand;
 use deceitya\ShopAPI\command\Shop1Command;
 use deceitya\ShopAPI\command\Shop2Command;
@@ -24,6 +25,7 @@ class Main extends PluginBase {
             new Shop6Command(),
             new Shop7Command(),
             new InvSellCommand(),
+            new EnchantShopCommand(),
         ]);
     }
 }
