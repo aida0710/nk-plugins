@@ -18,7 +18,7 @@ class RangeBuyForm extends SimpleForm {
         $upgrade = "未定義のエラー";
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_Range') !== null) {
-            $upgrade = match ($namedTag->getInt("MiningTools_Expansion")) {
+            $upgrade = match ($namedTag->getInt("MiningTools_Expansion_Range")) {
                 1 => "上位ツールにアップグレードしますか？\n\n費用は600万円\n範囲は7x7になります",
                 2 => "最上位ツールにアップグレードしますか？\n\n費用は1500万円\n範囲は9x9になります",
             };
