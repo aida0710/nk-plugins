@@ -3,6 +3,7 @@
 namespace deceitya\miningtools\extensions;
 
 use onebone\economyapi\EconomyAPI;
+use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
@@ -13,11 +14,12 @@ class CheckPlayerData {
      * @param int $subtraction
      * @return bool
      */
-    public function MoneyCheck(Player $player, int $subtraction): bool {
+    public function ReduceMoney(Player $player, int $subtraction): bool {
         if (EconomyAPI::getInstance()->myMoney($player) <= $subtraction) {
             $player->sendMessage('§bMiningTools §7>> §c所持金が足りません');
             return false;
         }
+        EconomyAPI::getInstance()->reduceMoney($player, $subtraction);
         return true;
     }
 
@@ -28,7 +30,7 @@ class CheckPlayerData {
      * @param string $tagName
      * @return bool
      */
-    public function CostItemCheck(Player $player, int $count, int $checkBlock, string $tagName): bool {
+    public function ReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
         $ItemCount = 0;
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
@@ -43,6 +45,10 @@ class CheckPlayerData {
             $player->sendMessage('§bMiningTools §7>> §c所持アイテム数量が足りません');
             return false;
         }
+        $costItem = ItemFactory::getInstance()->get($checkBlock);
+        $player->getInventory()->removeItem($costItem->setCount($count));
+        $inventory = $player->getInventory();
+        $inventory->removeItem($costItem);
         return true;
     }
 
