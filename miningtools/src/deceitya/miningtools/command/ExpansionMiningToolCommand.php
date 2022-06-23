@@ -30,6 +30,7 @@ class ExpansionMiningToolCommand extends Command {
         $namedTag = $sender->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_3') === null && $namedTag->getTag('MiningTools_Expansion') === null) {
             $sender->sendMessage("§bMiningTools §7>> §cこのアイテムはアップグレードに対応していません");
+            return;
         }
         if ($sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_PICKAXE || $sender->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
             $sender->sendMessage("§bMiningTools §7>> §cDiamondMiningToolsはアップグレードに対応していません");
