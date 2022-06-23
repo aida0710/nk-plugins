@@ -62,6 +62,7 @@ class PickaxeDestructionRange {
                     if (!$player->isSneaking()) {
                         if ($haveDurable) {
                             $this->toolDamageProcessing($player, $handItem);
+                            /** @var Durable $handItem */
                             if ($handItem->getDamage() >= $maxDurability - 15) {
                                 $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                 break 3;
@@ -74,6 +75,7 @@ class PickaxeDestructionRange {
                     } else {
                         if ($haveDurable) {
                             $this->toolDamageProcessing($player, $handItem);
+                            /** @var Durable $handItem */
                             if ($handItem->getDamage() >= $maxDurability - 15) {
                                 $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                                 break 3;
