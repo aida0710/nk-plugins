@@ -6,7 +6,6 @@ use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\SetLoreJudgment;
-use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\player\Player;
@@ -83,15 +82,6 @@ class EnchantBuyForm extends SimpleForm {
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($item));
         $player->getInventory()->setItemInHand($item);
         Server::getInstance()->broadcastMessage("§bMiningTools §7>> §e{$player->getName()}がNetheriteMiningToolsをEx.Rank{$rank}にアップグレードしました");
-    }
-
-    public function onReduceMoney(Player $player, $price): bool {
-        if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
-            $player->sendMessage('§bMiningTools §7>> §cお金が足りません');
-            return false;
-        }
-        EconomyAPI::getInstance()->reduceMoney($player, $price);
-        return true;
     }
 }
 
