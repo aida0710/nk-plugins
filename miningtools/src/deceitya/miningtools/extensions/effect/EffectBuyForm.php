@@ -4,8 +4,6 @@ namespace deceitya\miningtools\extensions\effect;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
-use deceitya\miningtools\extensions\range\CheckBuyItemCost;
-use deceitya\miningtools\extensions\range\SetLoreJudgment;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;

@@ -34,7 +34,7 @@ class RangeConfirmForm extends SimpleForm {
 
     public function handleSubmit(Player $player): void {
         if (empty($this->nbt)) {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
             return;
         }
         if ($player->getInventory()->getItemInHand()->getNamedTag()->getInt('MiningTools_Expansion_Range') === 3) {

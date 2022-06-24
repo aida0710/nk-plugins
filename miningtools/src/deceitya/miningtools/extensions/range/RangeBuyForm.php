@@ -54,7 +54,7 @@ class RangeBuyForm extends SimpleForm {
                         $this->onReduceMoney($player, $price);
                         break;
                     default:
-                        Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "の" . __LINE__ . "行目でエラーが発生しました");
+                        Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
                         return;
                 }
                 $tag = "MiningTools_Expansion_Range";
