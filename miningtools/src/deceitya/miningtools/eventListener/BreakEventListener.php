@@ -21,7 +21,6 @@ class BreakEventListener implements Listener {
      * @param BlockBreakEvent $event
      * @return void
      */
-    //todo 優先度要検証
     public function block(BlockBreakEvent $event): void {
         if ($event->isCancelled()) {
             return;
@@ -35,92 +34,44 @@ class BreakEventListener implements Listener {
         $this->itemNbtConversion($player, $item);
         if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) return;
         if (!Main::$flag[$player->getName()]) {
-            //破壊したときに範囲破壊が適用されるブロック
-            //また、範囲内にあったときに破壊されるブロック
-            if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
-                switch ($id) {
-                    case ItemIds::DIAMOND_SHOVEL:
-                        $set = $diamond['shovel'];
-                        break;
-                    case ItemIds::DIAMOND_PICKAXE:
-                        $set = $diamond['pickaxe'];
-                        break;
-                    case ItemIds::DIAMOND_AXE:
-                        $set = $diamond['axe'];
-                        break;
-                    case Main::NETHERITE_SHOVEL:
-                        $set = $netherite['shovel'];
-                        break;
-                    case Main::NETHERITE_PICKAXE:
-                        $set = $netherite['pickaxe'];
-                        break;
-                    case Main::NETHERITE_AXE:
-                        $set = $netherite['axe'];
-                        break;
-                }
-            }
-            //破壊したときに範囲破壊が適用されるブロック
-            //範囲内にあるブロックは全部破壊される
-            if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-                switch ($item->getNamedTag()->getInt("MiningTools_Expansion_Range")) {
-                    case 1:
-                        switch ($id) {
-                            case Main::NETHERITE_SHOVEL:
-                                $set = $this->config['expansion_shovel'];
-                                break 2;
-                            case Main::NETHERITE_PICKAXE:
-                                $set = $this->config['expansion_pickaxe'];
-                                break 2;
-                            case Main::NETHERITE_AXE:
-                                $set = $this->config['expansion_axe'];
-                                break 2;
-                        }
-                        break;
-                    case 2:
-                    case 3:
-                        switch ($id) {
-                            case Main::NETHERITE_SHOVEL:
-                                $set = $this->config['ex_expansion_shovel'];
-                                break 2;
-                            case Main::NETHERITE_PICKAXE:
-                                $set = $this->config['ex_expansion_pickaxe'];
-                                break 2;
-                            case Main::NETHERITE_AXE:
-                                $set = $this->config['emaxax_expansion_axe'];
-                                break 2;
-                        }
-                        break;
-                }
-            }
-            if (!isset($set)) {
-                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                return;
-            }
-            $world_name = $event->getPlayer()->getWorld()->getDisplayName();
-            $world_search = mb_substr($world_name, 0, null, 'utf-8');
-            $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
-            if (!(str_contains($world_search, "-c") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($player->getName()))) {
-                $player->sendTip("§bMiningTools §7>> §c現在のワールドでは範囲破壊は行われません");
-                return;
-            }
-            $handItem = $player->getInventory()->getItemInHand();
-            $haveDurable = $handItem instanceof Durable;
-            /** @var Durable $handItem */
-            $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
-            if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-                $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-                return;
-            }
-            if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
-                $dropItems = [];
-                $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player, $dropItems);
-                (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
-                return;
-            }
-            $dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $item, $haveDurable, $handItem, $maxDurability, $set);
-            (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
-            Main::$flag[$player->getName()] = false;
+            $set = match ($id) {
+                ItemIds::DIAMOND_SHOVEL => $diamond['shovel'],
+                ItemIds::DIAMOND_PICKAXE => $diamond['pickaxe'],
+                ItemIds::DIAMOND_AXE => $diamond['axe'],
+                Main::NETHERITE_SHOVEL => $netherite['shovel'],
+                Main::NETHERITE_PICKAXE => $netherite['pickaxe'],
+                Main::NETHERITE_AXE => $netherite['axe'],
+                default => null,
+            };
         }
+        if (empty($set)) {
+            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
+            return;
+        }
+        $world_name = $event->getPlayer()->getWorld()->getDisplayName();
+        $world_search = mb_substr($world_name, 0, null, 'utf-8');
+        $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
+        if (!(str_contains($world_search, "-c") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($player->getName()))) {
+            $player->sendTip("§bMiningTools §7>> §c現在のワールドでは範囲破壊は行われません");
+            return;
+        }
+        $handItem = $player->getInventory()->getItemInHand();
+        $haveDurable = $handItem instanceof Durable;
+        /** @var Durable $handItem */
+        $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+        if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
+            $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
+            return;
+        }
+        if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
+            $dropItems = [];
+            $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player, $dropItems);
+            (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
+            return;
+        }
+        $dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $item, $haveDurable, $handItem, $maxDurability, $set);
+        (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
+        Main::$flag[$player->getName()] = false;
     }
 
     /**
@@ -139,5 +90,4 @@ class BreakEventListener implements Listener {
             $player->sendMessage("§bMiningTools §7>> §a所持しているマイニングツールの変換に成功しました");
         }
     }
-
 }

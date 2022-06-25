@@ -21,6 +21,10 @@ class Main extends PluginBase implements Listener {
     private array $allData;
     static array $flag = [];
 
+    const PrefixGreen = "§bMiningTools §7>> §a";
+    const PrefixRed = "§bMiningTools §7>> §c";
+    const PrefixYellow = "§bMiningTools §7>> §e";
+
     /**
      * @return void
      */

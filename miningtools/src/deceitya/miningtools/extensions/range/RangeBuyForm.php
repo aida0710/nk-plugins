@@ -4,8 +4,9 @@ namespace deceitya\miningtools\extensions\range;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\SetLoreJudgment;
-use onebone\economyapi\EconomyAPI;
+use deceitya\miningtools\Main;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -35,9 +36,10 @@ class RangeBuyForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         $radius = 0;
         $item = $player->getInventory()->getItemInHand();
+        if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (array_key_exists("MiningTools_Expansion_Range", $this->nbt)) {
             if ($this->nbt["MiningTools_Expansion_Range"] !== $namedTag->getInt("MiningTools_Expansion_Range")) {
-                $player->sendMessage("現在所持しているアイテムは最初に持っているアイテムでは無いため不正防止の為処理が中断されました");
+                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
                 return;
             }
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
@@ -46,12 +48,12 @@ class RangeBuyForm extends SimpleForm {
                     case 1:
                         $price = 6000000;
                         $radius = 2;
-                        $this->onReduceMoney($player, $price);
+                        if ((new CheckPlayerData())->ReduceMoney($player, $price) === false) return;
                         break;
                     case 2:
                         $price = 15000000;
                         $radius = 3;
-                        $this->onReduceMoney($player, $price);
+                        if ((new CheckPlayerData())->ReduceMoney($player, $price) === false) return;
                         break;
                     default:
                         Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
@@ -71,13 +73,13 @@ class RangeBuyForm extends SimpleForm {
         }
         if (array_key_exists("MiningTools_3", $this->nbt)) {
             if ($this->nbt["MiningTools_3"] !== $namedTag->getInt("MiningTools_3")) {
-                $player->sendMessage("現在所持しているアイテムは最初に持っているアイテムでは無いため不正防止の為処理が中断されました");
+                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
                 return;
             }
             if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
                 $radius = 1;
                 $price = 3500000;
-                if (!$this->onReduceMoney($player, $price)) return;
+                if ((new CheckPlayerData())->ReduceMoney($player, $price) === false) return;
                 $nbt = $item->getNamedTag();
                 $tag = "MiningTools_3";
                 $nbt->removeTag($tag);
@@ -87,18 +89,9 @@ class RangeBuyForm extends SimpleForm {
                 $player->getInventory()->setItemInHand($item);
             }
         }
-        $item->setLore((new SetLoreJudgment())->SetLoreJudgment($item));
+        $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
         Server::getInstance()->broadcastMessage("§bMiningTools §7>> §e{$player->getName()}がNetheriteMiningToolsをEx.Rank{$radius}にアップグレードしました");
-    }
-
-    public function onReduceMoney(Player $player, $price): bool {
-        if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
-            $player->sendMessage('§bMiningTools §7>> §cお金が足りません');
-            return false;
-        }
-        EconomyAPI::getInstance()->reduceMoney($player, $price);
-        return true;
     }
 
 }

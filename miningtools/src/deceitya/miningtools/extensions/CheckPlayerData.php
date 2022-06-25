@@ -2,12 +2,15 @@
 
 namespace deceitya\miningtools\extensions;
 
+use deceitya\miningtools\Main;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
 class CheckPlayerData {
+
+    const NETHERITE_AXE = 746;
 
     /**
      * @param Player $player
@@ -42,7 +45,7 @@ class CheckPlayerData {
             }
         }
         if ($ItemCount <= $count) {
-            $player->sendMessage('§bMiningTools §7>> §c所持アイテム数量が足りません');
+            $player->sendMessage(Main::PrefixRed . 'コストアイテムの所持数量が必要個数より少ない為処理を中断しました');
             return false;
         }
         $costItem = ItemFactory::getInstance()->get($checkBlock);
@@ -58,20 +61,28 @@ class CheckPlayerData {
      */
     public function checkMining4(Player $player): bool {
         if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('4mining') !== null) {
-            $player->sendMessage("現在所持しているアイテムは旧バージョンのアイテムの為更新が必要です。更新はブロックを破壊することで可能です");
+            $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは旧バージョンのアイテムの為更新が必要です。更新はブロックを破壊することで可能です");
             return false;
         }
         return true;
     }
 
-    public function checkNBTInt(Player $player, string $tagName, int $value): bool {
-        if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag($tagName) === null) {
-            $player->sendMessage("現在所持しているアイテムは拡張機能選択時と持っているアイテムと内部データが違う為処理が中断されました");
+    /**
+     * @param Player $player
+     * @return bool
+     */
+    public function checkMiningToolsNBT(Player $player): bool {
+        $item = $player->getInventory()->getItemInHand();
+        if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) {
+            $player->sendMessage(Main::PrefixRed . "現在選択された機能はMiningTools専用機能の為所持しているアイテムでは使用できません");
             return false;
         }
-        $now = $player->getInventory()->getItemInHand()->getNamedTag()->getInt($tagName);
-        if ($now !== $value) {
-            $player->sendMessage("現在所持しているアイテムは拡張機能選択時と持っているアイテムと内部データが違う為処理が中断されました");
+        if ($item->getId() === ItemIds::DIAMOND_PICKAXE || $player->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
+            $player->sendMessage("§bMiningTools §7>> §cDiamondMiningToolsはアップグレードに対応していません");
+            return false;
+        }
+        if ($item->getId() === ItemIds::DIAMOND_AXE || $player->getInventory()->getItemInHand()->getId() === self::NETHERITE_AXE) {
+            $player->sendMessage("§bMiningTools §7>> §cMiningTools Axeはアップグレードに対応していません");
             return false;
         }
         return true;

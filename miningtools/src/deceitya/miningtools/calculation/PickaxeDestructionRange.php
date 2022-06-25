@@ -6,10 +6,10 @@ use deceitya\miningtools\event\MiningToolsBreakEvent;
 use deceitya\miningtools\Main;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
+use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\Durable;
 use pocketmine\item\Item;
-use pocketmine\item\ItemIds;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 
@@ -27,37 +27,44 @@ class PickaxeDestructionRange {
      */
     public function PickaxeDestructionRange(Player $player, Block $block, Item $item, bool $haveDurable, Item $handItem, $maxDurability, array $set): array {
         $dropItems = [];
-        if ($item->getNamedTag()->getTag('MiningTools_Ultimate') === null) {//MiningTools_Ultimateがあった際は全部無視
+        if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') === null) {
             if (!in_array($block->getId(), $set['destructible'], true)) return [];
         }
         $radius = 0;
-        if ($item->getNamedTag()->getTag('MiningTools_Expansion') !== null) {
+        if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
             $nbt = $item->getNamedTag();
-            $radius = $nbt->getInt("MiningTools_Expansion");
+            $radius = $nbt->getInt("MiningTools_Expansion_Range");
         }
         Main::$flag[$player->getName()] = true;
+        var_dump(__LINE__ . "行目は実行されました");
         for ($y = -1 - $radius; $y < 2 + $radius; $y++) {
             for ($x = -1 - $radius; $x < 2 + $radius; $x++) {
                 for ($z = -1 - $radius; $z < 2 + $radius; $z++) {
                     $pos = $block->getPosition()->add($x, $y, $z);
                     $targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
-                    if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
-                    if ($item->getNamedTag()->getTag('MiningTools_Expansion') === null || $item->getNamedTag()->getTag('MiningTools_Ultimate') === null) {
-                        //MiningTools_ExpansionとMiningTools_Ultimateが存在しない場合は無視できない
-                        //あったら無視(範囲破壊内にあったブロック)
-                        if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
-                    }
-                    if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
                     switch ($targetBlock->getId()) {
-                        case ItemIds::AIR:
-                        case ItemIds::BEDROCK:
-                        case ItemIds::BARRIER:
-                        case ItemIds::WATER:
-                        case ItemIds::FLOWING_WATER:
-                        case ItemIds::WATER_LILY:
-                        case ItemIds::MAGMA:
-                            break;
+                        case BlockLegacyIds::AIR:
+                        case BlockLegacyIds::BEDROCK:
+                        case BlockLegacyIds::BARRIER:
+                        case BlockLegacyIds::WATER:
+                        case BlockLegacyIds::FLOWING_WATER:
+                        case BlockLegacyIds::WATER_LILY:
+                        case BlockLegacyIds::MAGMA:
+                            break 2;
                     }
+                    //var_dump("§a" . $targetBlock->getId() . "§r");
+                    //if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') === null) {
+                    //    var_dump(__LINE__ . "行目は実行されましたeeeeeeee");
+                    //    if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
+                    //} elseif ($item->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
+                    //    var_dump(__LINE__ . "行目は実行されましたbbbbbbbbbbbbbbbbbbbbbbbb");
+                    //    if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
+                    //} else {
+                    //    var_dump(__LINE__ . "行目は実行されましたsssssssssssssssssssssssssss");
+                    //}
+                    if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
+                    if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
+                    if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
                     $dropItems = array_merge($dropItems ?? [], (new ItemDrop())->getDrop($player, $targetBlock));
                     if (!$player->isSneaking()) {
                         if ($haveDurable) {
