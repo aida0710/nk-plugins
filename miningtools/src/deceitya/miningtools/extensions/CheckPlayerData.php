@@ -10,8 +10,6 @@ use pocketmine\player\Player;
 
 class CheckPlayerData {
 
-    const NETHERITE_AXE = 746;
-
     /**
      * @param Player $player
      * @param int $subtraction
@@ -81,7 +79,7 @@ class CheckPlayerData {
             $player->sendMessage("§bMiningTools §7>> §cDiamondMiningToolsはアップグレードに対応していません");
             return false;
         }
-        if ($item->getId() === ItemIds::DIAMOND_AXE || $player->getInventory()->getItemInHand()->getId() === self::NETHERITE_AXE) {
+        if ($item->getId() === ItemIds::DIAMOND_AXE || $player->getInventory()->getItemInHand()->getId() === Main::NETHERITE_AXE) {
             $player->sendMessage("§bMiningTools §7>> §cMiningTools Axeはアップグレードに対応していません");
             return false;
         }

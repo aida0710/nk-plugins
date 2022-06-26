@@ -6,13 +6,9 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\element\SendFormButton;
 use deceitya\miningtools\extensions\enchant\fortune\FortuneEnchantConfirmForm;
 use deceitya\miningtools\extensions\enchant\unbreaking\UnbreakingEnchantConfirmForm;
-use pocketmine\block\BlockLegacyIds;
 use pocketmine\player\Player;
 
 class EnchantFunctionSelectForm extends SimpleForm {
-
-    const CostItemId = BlockLegacyIds::PACKED_ICE;
-    const CostItemNBT = "MiningToolsEnchantCostItem";
 
     public function __construct(Player $player) {
         $this
