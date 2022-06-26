@@ -18,7 +18,7 @@ class AxeDestructionRange {
     /**
      * @param Block $block
      * @param Player $player
-	 * @return array
+     * @return array
      */
     public function breakTree(Block $block, Player $player): array {
         $world = $player->getWorld();
