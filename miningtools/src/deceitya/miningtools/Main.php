@@ -27,9 +27,8 @@ class Main extends PluginBase implements Listener {
 
     static array $flag = [];
 
-    const PrefixGreen = "§bMiningTools §7>> §a";
-    const PrefixRed = "§bMiningTools §7>> §c";
-    const PrefixYellow = "§bMiningTools §7>> §e";
+    static array $diamond;
+    static array $netherite;
 
     /**
      * @return void
@@ -44,6 +43,8 @@ class Main extends PluginBase implements Listener {
             new ExpansionMiningToolCommand(),
         ]);
         $this->allData = json_decode(file_get_contents($this->getDataFolder() . "config.json"), true);
+        self::$diamond = Main::getInstance()->dataAcquisition("diamond");
+        self::$netherite = Main::getInstance()->dataAcquisition("netherite");
     }
 
     /**
