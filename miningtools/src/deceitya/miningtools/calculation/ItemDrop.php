@@ -5,6 +5,7 @@ namespace deceitya\miningtools\calculation;
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\item\Item;
 use pocketmine\player\Player;
 
 class ItemDrop {
@@ -12,7 +13,7 @@ class ItemDrop {
     /**
      * @param Player $player
      * @param Block $block
-     * @return array
+     * @return item[]
      */
     public function getDrop(Player $player, Block $block): array {
         $item = $player->getInventory()->getItemInHand();
@@ -22,12 +23,12 @@ class ItemDrop {
     /**
      * @param Player $player
      * @param BlockBreakEvent $event
-     * @param $dropItems
-     * @param $startBlock
+     * @param array $dropItems
+     * @param Block $startBlock
      * @return void
      */
-    public function DropItem(Player $player, BlockBreakEvent $event, $dropItems, $startBlock): void {
-        if (is_null($dropItems)) {
+    public function DropItem(Player $player, BlockBreakEvent $event, array $dropItems, Block $startBlock): void {
+        if (empty($dropItems)) {
             return;
         }
         $dropItems = array_diff($dropItems, array($startBlock));
@@ -39,4 +40,5 @@ class ItemDrop {
             $event->setDrops($dropItems);
         }
     }
+
 }

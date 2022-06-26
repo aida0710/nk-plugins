@@ -47,6 +47,7 @@ class BreakEventListener implements Listener {
             Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
             return;
         }
+        $block = $event->getBlock();
         $world_name = $event->getPlayer()->getWorld()->getDisplayName();
         $world_search = mb_substr($world_name, 0, null, 'utf-8');
         $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
@@ -63,12 +64,12 @@ class BreakEventListener implements Listener {
             return;
         }
         if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
-            $dropItems = [];
-            $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player, $dropItems);
+            $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player, $dropItems = [])
             (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
+            Main::$flag[$player->getName()] = false;
             return;
         }
-        $dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $item, $haveDurable, $handItem, $maxDurability, $set);
+        $dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $item, $haveDurable, $handItem, $set, $dropItems = []);
         (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
         Main::$flag[$player->getName()] = false;
     }

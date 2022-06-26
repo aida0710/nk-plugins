@@ -21,7 +21,7 @@ class AxeDestructionRange {
      * @param Item[] $dropItems
      * @return array
      */
-    public function breakTree(Block $block, Player $player, array &$dropItems): array {
+    public function breakTree(Block $block, Player $player, array $dropItems): array {
         $world = $player->getWorld();
         $startPos = $block->getPosition()->asVector3();
         $handItem = $player->getInventory()->getItemInHand();
@@ -72,6 +72,6 @@ class AxeDestructionRange {
                 $open[$hash] = $pos;
             }
         }
-        return $dropItems = array_merge($dropItems, array_merge(...$drops));
+        return array_merge($dropItems, array_merge(...$drops));
     }
 }
