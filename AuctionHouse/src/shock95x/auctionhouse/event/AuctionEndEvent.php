@@ -11,12 +11,12 @@ use shock95x\auctionhouse\AHListing;
 
 class AuctionEndEvent extends Event {
 
-    const CANCELLED = 0;
-    const EXPIRED = 1;
-    const PURCHASED = 2;
-    const EXPIRED_PURGED = 3;
-    const ADMIN_PURGED = 4;
-    const ADMIN_REMOVED = 5;
+    public const CANCELLED = 0;
+    public const EXPIRED = 1;
+    public const PURCHASED = 2;
+    public const EXPIRED_PURGED = 3;
+    public const ADMIN_PURGED = 4;
+    public const ADMIN_REMOVED = 5;
 
     public function __construct(
         private AHListing $listing,

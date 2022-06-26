@@ -20,7 +20,7 @@ class ExpiredMenu extends PagingMenu {
 
     private int $total;
 
-    const INDEX_RETURN_ALL = 49;
+    public const INDEX_RETURN_ALL = 49;
 
     public function __construct(Player $player, bool $returnMain = true) {
         $this->setName(Locale::get($player, "expired-menu-name"));

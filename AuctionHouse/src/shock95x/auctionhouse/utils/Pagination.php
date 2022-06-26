@@ -5,8 +5,8 @@ namespace shock95x\auctionhouse\utils;
 
 final class Pagination {
 
-    const BACK = 0;
-    const NEXT = 1;
-    const REFRESH = 2;
+    public const BACK = 0;
+    public const NEXT = 1;
+    public const REFRESH = 2;
 
 }

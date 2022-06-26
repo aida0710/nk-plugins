@@ -15,9 +15,9 @@ abstract class PagingMenu extends AHMenu {
     protected int $page = 1;
     protected int $pages = 1;
 
-    const INDEX_BACK = 48;
-    const INDEX_REFRESH = 49;
-    const INDEX_NEXT = 50;
+    public const INDEX_BACK = 48;
+    public const INDEX_REFRESH = 49;
+    public const INDEX_NEXT = 50;
 
     public function __construct(Player $player, bool $returnMain = false) {
         parent::__construct($player, $returnMain);

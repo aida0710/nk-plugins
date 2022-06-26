@@ -8,8 +8,8 @@ use pocketmine\nbt\tag\CompoundTag;
 
 class AHSign extends Sign {
 
-    const TYPE_SHOP = "auctionhouse-menu";
-    const TYPE_PLAYER = "auctionhouse-player";
+    public const TYPE_SHOP = "auctionhouse-menu";
+    public const TYPE_PLAYER = "auctionhouse-player";
 
     private string $type = "";
     private string $value = "";
