@@ -25,22 +25,21 @@ class BreakEventListener implements Listener {
         if ($event->isCancelled()) {
             return;
         }
-        $diamond = Main::getInstance()->dataAcquisition("diamond");
-        $netherite = Main::getInstance()->dataAcquisition("netherite");
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
-        $id = $item->getId();
-        $block = $event->getBlock();
+        //mining4を変換
         $this->itemNbtConversion($player, $item);
+        //所持しているアイテムがMiningToolsかどうかを確認
         if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) return;
+        $id = $item->getId();
         if (!Main::$flag[$player->getName()]) {
             $set = match ($id) {
-                ItemIds::DIAMOND_SHOVEL => $diamond['shovel'],
-                ItemIds::DIAMOND_PICKAXE => $diamond['pickaxe'],
-                ItemIds::DIAMOND_AXE => $diamond['axe'],
-                Main::NETHERITE_SHOVEL => $netherite['shovel'],
-                Main::NETHERITE_PICKAXE => $netherite['pickaxe'],
-                Main::NETHERITE_AXE => $netherite['axe'],
+                ItemIds::DIAMOND_SHOVEL => Main::$diamond['shovel'],
+                ItemIds::DIAMOND_PICKAXE => Main::$diamond['pickaxe'],
+                ItemIds::DIAMOND_AXE => Main::$diamond['axe'],
+                Main::NETHERITE_SHOVEL => Main::$netherite['shovel'],
+                Main::NETHERITE_PICKAXE => Main::$netherite['pickaxe'],
+                Main::NETHERITE_AXE => Main::$netherite['axe'],
                 default => null,
             };
         }
