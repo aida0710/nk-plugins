@@ -11,12 +11,12 @@ class EffectConfirmForm extends CustomForm {
 
     private Effect $effect;
 
-    const Rare = 250000;
-    const Epic = 500000;
-    const Legendary = 1000000;
-    const Rare_ItemCost = 1;
-    const Epic_ItemCost = 2;
-    const Legendary_ItemCost = 3;
+    public const Rare = 250000;
+    public const Epic = 500000;
+    public const Legendary = 1000000;
+    public const Rare_ItemCost = 1;
+    public const Epic_ItemCost = 2;
+    public const Legendary_ItemCost = 3;
 
     const CostItemId = BlockLegacyIds::PRISMARINE;
     const CostItemNBT = "MiningToolsEffectCostItem";

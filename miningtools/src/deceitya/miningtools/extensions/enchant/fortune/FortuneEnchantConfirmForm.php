@@ -9,9 +9,9 @@ use pocketmine\player\Player;
 class FortuneEnchantConfirmForm extends SimpleForm {
 
     private array $nbt = [];
-    const Rank1_MoneyCost = 1500;
-    const Rank2_MoneyCost = 1500;
-    const Rank3_MoneyCost = 1500;
+    public const Rank1_MoneyCost = 1500;
+    public const Rank2_MoneyCost = 1500;
+    public const Rank3_MoneyCost = 1500;
 
     public function __construct(Player $player) {
         $upgrade = "未定義のエラー";
