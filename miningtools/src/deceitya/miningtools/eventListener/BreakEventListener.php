@@ -64,7 +64,7 @@ class BreakEventListener implements Listener {
             return;
         }
         if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
-            $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player, $dropItems = [])
+            $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player);
             (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
             Main::$flag[$player->getName()] = false;
             return;
