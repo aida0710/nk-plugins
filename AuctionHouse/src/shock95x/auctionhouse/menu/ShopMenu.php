@@ -21,10 +21,10 @@ use shock95x\auctionhouse\utils\Utils;
 
 class ShopMenu extends PagingMenu {
 
-    const INDEX_STATS = 49;
-    const INDEX_LISTINGS = 45;
-    const INDEX_EXPIRED = 46;
-    const INDEX_ADMIN = [47, 51];
+    public const INDEX_STATS = 49;
+    public const INDEX_LISTINGS = 45;
+    public const INDEX_EXPIRED = 46;
+    public const INDEX_ADMIN = [47, 51];
 
     private int $selling = 0;
     private int $expired = 0;

@@ -18,9 +18,9 @@ use shock95x\auctionhouse\utils\Utils;
 
 class ManageListingMenu extends AHMenu {
 
-    const INDEX_DUPLICATE = 38;
-    const INDEX_STATUS = 40;
-    const INDEX_DELETE = 42;
+    public const INDEX_DUPLICATE = 38;
+    public const INDEX_STATUS = 40;
+    public const INDEX_DELETE = 42;
 
     public function __construct(Player $player, AHListing $listing) {
         $this->setName(Locale::get($player, "manage-listing-name"));

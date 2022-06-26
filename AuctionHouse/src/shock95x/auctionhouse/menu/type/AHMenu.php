@@ -36,7 +36,7 @@ abstract class AHMenu extends InvMenu {
 
     protected static string $inventoryType = InvMenu::TYPE_DOUBLE_CHEST;
 
-    const INDEX_RETURN = 45;
+    public const INDEX_RETURN = 45;
 
     public function __construct(Player $player, bool $returnMain = false) {
         parent::__construct(InvMenuHandler::getTypeRegistry()->get(static::$inventoryType));

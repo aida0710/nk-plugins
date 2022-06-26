@@ -18,8 +18,8 @@ class EffectConfirmForm extends CustomForm {
     public const Epic_ItemCost = 2;
     public const Legendary_ItemCost = 3;
 
-    const CostItemId = BlockLegacyIds::PRISMARINE;
-    const CostItemNBT = "MiningToolsEffectCostItem";
+    public const CostItemId = BlockLegacyIds::PRISMARINE;
+    public const CostItemNBT = "MiningToolsEffectCostItem";
 
     public function __construct(Effect $effect) {
         $this->effect = $effect;
