@@ -3,12 +3,13 @@
 namespace deceitya\ShopAPI\form\enchantShop;
 
 use bbo51dog\bboform\form\SimpleForm;
+use deceitya\ShopAPI\database\EnchantShopAPI;
 use deceitya\ShopAPI\form\element\EnchantSelectFormButton;
 use pocketmine\item\enchantment\VanillaEnchantments;
 
 class EnchantSelectForm extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(?string $error = "") {
         /**
          *  "text" => "",
          * "options" => [
@@ -21,11 +22,12 @@ class EnchantSelectForm extends SimpleForm {
          * "射撃ダメージ増加 | 5lv以下 | Lv/30000円"
          * ],
          */
+        $api = EnchantShopAPI::getInstance();
         $this
             ->setTitle("Enchant Form")
-            ->setText("§7Enchant名 | nLv以下(最大レベル) | Lv/n(レベルごとの値段)")
+            ->setText("§7Enchant名 | nLv以下(最大レベル) | Lv/n(レベルごとの値段){$error}")
             ->addElements(
-                new EnchantSelectFormButton("耐久力 | レベル制限 -> 3以下\nレベルにつき1万円", VanillaEnchantments::UNBREAKING())
+                new EnchantSelectFormButton("耐久力 価格 - 毎lv.{$api->getBuy(VanillaEnchantments::UNBREAKING())}\nMiningLevel制限{$api->getMiningLevel(VanillaEnchantments::UNBREAKING())} | 付与レベル制限 - {$api->getLimit(VanillaEnchantments::UNBREAKING())}以下", VanillaEnchantments::UNBREAKING())
             );
     }
 
