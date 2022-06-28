@@ -7,7 +7,6 @@ use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\Durable;
-use pocketmine\item\Item;
 use pocketmine\math\Facing;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
