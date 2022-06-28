@@ -18,7 +18,6 @@ class Main extends PluginBase {
         self::$Main = $this;
         $this->saveResource("log.db");
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEvent(), $this);
-        //$this->getServer()->getCommandMap()->register($this->getName(), new LogCommand($this));
         $this->getScheduler()->scheduleRepeatingTask(new LogDataSaveTask(), 20 * 60);
         $this->log = new DataBase($this->getDataFolder());
     }
@@ -27,20 +26,6 @@ class Main extends PluginBase {
         return $this->log;
     }
 
-    /* public function changeParam(Player $player) {
-         if (!isset($this->data[$player->getName()]) or !$this->data[$player->getName()]) {
-             $this->data[$player->getName()] = true;
-             return;
-         }
-         $this->data[$player->getName()] = false;
-     }
-
-     public function isOn(Player $player): bool {
-         if (isset($this->data[$player->getName()])) {
-             return $this->data[$player->getName()];
-         }
-         return false;
-     }*/
     public function onDisable(): void {
         $this->log->close();
     }
