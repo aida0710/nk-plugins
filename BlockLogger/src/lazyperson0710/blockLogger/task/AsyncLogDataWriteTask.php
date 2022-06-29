@@ -35,7 +35,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
         $db->exec('begin');
         try {
             foreach ($cache as $data) {
-                $db->query("INSERT INTO log VALUES(\"$data[name]\",  \"$data[type]\", \"$data[world]\", \"$data[x]\",\"$data[y]\",\"$data[z]\",\"$data[blockName]\",\"$data[blockId]\",\"$data[blockMeta]\",\"$data[date]\",\"$data[time]\")");
+                $db->query("INSERT INTO log VALUES(\"$data[name]\",  \"$data[type]\", \"$data[world]\", \"$data[x]\",\"$data[y]\",\"$data[z]\",\"$data[blockName]\",\"$data[blockId]\",\"$data[blockMeta]\",\"$data[others]\",\"$data[date]\",\"$data[time]\")");
             }
             $db->exec('commit');
             $db->close();
@@ -51,7 +51,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
     public function onCompletion(): void {
         $totalTime = microtime(true) - $this->time;
         $totalTime = sprintf("%.7f", $totalTime);
-        echo "合計出力時間 : {$totalTime}\n";
-        echo "保存は完了致しました\n";
+        //echo "合計出力時間 : {$totalTime}\n";
+        //echo "保存は完了致しました\n";
     }
 }
