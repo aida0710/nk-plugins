@@ -20,10 +20,6 @@ class CommandStorageForm extends CustomForm {
             ->addElement($this->input1);
     }
 
-    public function handleClosed(Player $player): void {
-        return;
-    }
-
     public function handleSubmit(Player $player): void {
         if ($this->input1->getValue() === "") {
             $player->sendMessage("§bCmdStorage §7>> §c実行させたいコマンドを入力してください");
