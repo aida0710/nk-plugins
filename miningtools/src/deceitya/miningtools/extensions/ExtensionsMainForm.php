@@ -18,7 +18,6 @@ class ExtensionsMainForm extends SimpleForm {
             ->addElements(
                 new SendFormButton(new RangeConfirmForm($player), "採掘範囲拡張\n最大9x9まで拡張できます"),
                 new SendFormButton(new EnchantFunctionSelectForm($player), "拡張エンチャント\nオーバーエンチャントが可能"),
-                new SendFormButton(new EffectSelectForm(), "拡張エフェクト効果\n手に持った時にエフェクトが付与されるように")
             );
     }
 }
