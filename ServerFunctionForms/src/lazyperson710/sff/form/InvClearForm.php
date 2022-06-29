@@ -17,7 +17,7 @@ class InvClearForm extends CustomForm {
         $this->Armor = new Toggle("Armorインベントリの削除(default/off)", false);
         $this->Hotbar = new Toggle("ホットバーアイテムの削除(default/off)", false);
         $this
-            ->setTitle("Land Command")
+            ->setTitle("InventoryClear")
             ->addElements(
                 new label("インベントリ内のアイテムを削除します"),
                 $this->Armor,
@@ -49,17 +49,17 @@ class InvClearForm extends CustomForm {
             $armorInventory->getContents();
         }
         if (($count + $armorCount) == 0) {
-            $player->sendMessage("§bTicket §7>> §cインベントリからは何も消去されませんでした");
+            $player->sendMessage("§bInvClear §7>> §cインベントリからは何も消去されませんでした");
             return;
         }
         if (($armorCount) == 0) {
-            $player->sendMessage("§bTicket §7>> §aインベントリから{$count}個のアイテムが削除されました");
+            $player->sendMessage("§bInvClear §7>> §aインベントリから{$count}個のアイテムが削除されました");
             return;
         }
         if (($count) == 0) {
-            $player->sendMessage("§bTicket §7>> §aArmorインベントリから{$armorCount}個のアイテムが削除されました");
+            $player->sendMessage("§bInvClear §7>> §aArmorインベントリから{$armorCount}個のアイテムが削除されました");
             return;
         }
-        $player->sendMessage("§bTicket §7>> §aインベントリから{$count}個、Armorインベントリからは{$armorCount}個のアイテムが削除されました");
+        $player->sendMessage("§bInvClear §7>> §aインベントリから{$count}個、Armorインベントリからは{$armorCount}個のアイテムが削除されました");
     }
 }
