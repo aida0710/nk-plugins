@@ -19,11 +19,11 @@ class EnchantConfirmationForm extends CustomForm {
     private Enchantment $enchantment;
 
     public function __construct(Player $player, Enchantment $enchantment) {
-        $enchantName = null;
-        if ($enchantment->getName() instanceof Translatable) {
-            $enchantName = Server::getInstance()->getLanguage()->translate($enchantment->getName());
+        $enchantName = $enchantment->getName();
+        if ($enchantName instanceof Translatable) {
+            $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
         }
-        $this->level = new Slider("付与したいレベルにスライドして下さい", 1, EnchantShopAPI::getInstance()->getLimit($enchantment));
+        $this->level = new Slider("付与したいレベルにスライドして下さい", 1, EnchantShopAPI::getInstance()->getLimit($enchantName));
         $this->enchantment = $enchantment;
         $this->enchantName = $enchantName;
         $api = EnchantShopAPI::getInstance();
@@ -31,7 +31,7 @@ class EnchantConfirmationForm extends CustomForm {
             ->setTitle("Enchant Form")
             ->addElements(
                 new Label("{$enchantName}を付与しようとしています"),
-                new Label("{$enchantName}は1レベルごとに{$api->getBuy($enchantment)}円かかります"),
+                new Label("{$enchantName}は1レベルごとに{$api->getBuy($enchantName)}円かかります"),
                 new Label("\n現在の所持金 -> " . EconomyAPI::getInstance()->myMoney($player)),
                 $this->level,
             );

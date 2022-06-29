@@ -14,7 +14,7 @@ use pocketmine\Server;
 class EnchantSelectForm extends SimpleForm {
 
     public function __construct(?string $error = "") {
-        $enchant = [
+        $enchants = [
             VanillaEnchantments::SHARPNESS(),
             VanillaEnchantments::EFFICIENCY(),
             VanillaEnchantments::SILK_TOUCH(),
@@ -25,13 +25,13 @@ class EnchantSelectForm extends SimpleForm {
         $api = EnchantShopAPI::getInstance();
         $this
             ->setTitle("Enchant Form")
-            ->setText("§7せつめい\n{$error}");
-        foreach ($enchant as $value) {
-            $enchantName = null;
-            if ($value->getName() instanceof Translatable) {
-                $enchantName = Server::getInstance()->getLanguage()->translate($value->getName());
+            ->setText("§7せつめい。。。\n{$error}");
+        foreach ($enchants as $enchantment) {
+            $enchantName = $enchantment->getName();
+            if ($enchantName instanceof Translatable) {
+                $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
             }
-            $this->addElement(new EnchantSelectFormButton("{$enchantName} 価格 - 毎lv.{$api->getBuy($value)}\nMiningLevel制限{$api->getMiningLevel($value)} | 付与レベル制限 - {$api->getLimit($value)}以下", $value));
+            $this->addElement(new EnchantSelectFormButton("{$enchantName} 価格 - 毎lv.{$api->getBuy($enchantName)}\nMiningLevel制限{$api->getMiningLevel($enchantName)} | 付与レベル制限 - {$api->getLimit($enchantName)}以下", $enchantment, $enchantName));
         }
     }
 

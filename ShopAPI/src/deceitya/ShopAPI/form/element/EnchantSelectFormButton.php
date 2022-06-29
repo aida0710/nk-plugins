@@ -14,19 +14,22 @@ use pocketmine\player\Player;
 class EnchantSelectFormButton extends Button {
 
     private Enchantment $enchantment;
+    private string $enchantName;
 
     /**
      * @param string $text
      * @param Enchantment $enchantment
+     * @param string $enchantName
      * @param ButtonImage|null $image
      */
-    public function __construct(string $text, Enchantment $enchantment, ?ButtonImage $image = null) {
+    public function __construct(string $text, Enchantment $enchantment, string $enchantName, ?ButtonImage $image = null) {
         parent::__construct($text, $image);
         $this->enchantment = $enchantment;
+        $this->enchantName = $enchantName;
     }
 
     public function handleSubmit(Player $player): void {
-        if (MiningLevelAPI::getInstance()->getLevel($player) >= EnchantShopAPI::getInstance()->getMiningLevel($this->enchantment)) {
+        if (MiningLevelAPI::getInstance()->getLevel($player) >= EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName)) {
             $player->sendForm(new EnchantConfirmationForm($player, $this->enchantment));
         } else {
             $player->sendForm(new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantment) . "lv"));
