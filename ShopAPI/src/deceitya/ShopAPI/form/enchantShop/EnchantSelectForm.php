@@ -5,30 +5,34 @@ namespace deceitya\ShopAPI\form\enchantShop;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\database\EnchantShopAPI;
 use deceitya\ShopAPI\form\element\EnchantSelectFormButton;
+use pocketmine\data\bedrock\EnchantmentIdMap;
+use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\lang\Translatable;
+use pocketmine\Server;
 
 class EnchantSelectForm extends SimpleForm {
 
     public function __construct(?string $error = "") {
-        /**
-         *  "text" => "",
-         * "options" => [
-         * "タップして付与したいエンチャントを選択してください",
-         * "ダメージ増加 | 5lv以下 | Lv/3000円",
-         * "効率強化 | 5lv以下 | Lv/5000円",
-         * "シルクタッチ | 1lv以下 | Lv/15000円",
-         * "幸運 | 3lv以下 | Lv/30000円",
-         * "耐久力 | 3lv以下 | Lv/10000円",
-         * "射撃ダメージ増加 | 5lv以下 | Lv/30000円"
-         * ],
-         */
+        $enchant = [
+            VanillaEnchantments::SHARPNESS(),
+            VanillaEnchantments::EFFICIENCY(),
+            VanillaEnchantments::SILK_TOUCH(),
+            EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE),
+            VanillaEnchantments::UNBREAKING(),
+            VanillaEnchantments::POWER(),
+        ];
         $api = EnchantShopAPI::getInstance();
         $this
             ->setTitle("Enchant Form")
-            ->setText("§7Enchant名 | nLv以下(最大レベル) | Lv/n(レベルごとの値段){$error}")
-            ->addElements(
-                new EnchantSelectFormButton("耐久力 価格 - 毎lv.{$api->getBuy(VanillaEnchantments::UNBREAKING())}\nMiningLevel制限{$api->getMiningLevel(VanillaEnchantments::UNBREAKING())} | 付与レベル制限 - {$api->getLimit(VanillaEnchantments::UNBREAKING())}以下", VanillaEnchantments::UNBREAKING())
-            );
+            ->setText("§7せつめい\n{$error}");
+        foreach ($enchant as $value) {
+            $enchantName = null;
+            if ($value->getName() instanceof Translatable) {
+                $enchantName = Server::getInstance()->getLanguage()->translate($value->getName());
+            }
+            $this->addElement(new EnchantSelectFormButton("{$enchantName} 価格 - 毎lv.{$api->getBuy($value)}\nMiningLevel制限{$api->getMiningLevel($value)} | 付与レベル制限 - {$api->getLimit($value)}以下", $value));
+        }
     }
 
 }
