@@ -18,9 +18,9 @@ class LandForm extends SimpleForm {
             ->setTitle("Land Command")
             ->addElements(
                 new SendFormButton(new LandPositionForm($player), "土地の範囲を設定\n土地の購入、売却など", null),
-                new SendFormButton(new LandWarpForm($player), "他の土地にワープ", null),
+                new SendFormButton(new LandWarpForm(), "他の土地にワープ", null),
                 new SendFormButton(new LandInviteForm($player), "土地の共有関係", null),
-                new SendFormButton(new LandGiveForm($player), "土地を譲渡", null),
+                new SendFormButton(new LandGiveForm(), "土地を譲渡", null),
                 new CommandDispatchButton("自分の所持している土地リスト", "land whose", null),
                 new CommandDispatchButton("現在いる地点の土地所有者と土地番号を表示", "land here", null),
             );
