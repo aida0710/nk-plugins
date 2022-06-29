@@ -3,62 +3,55 @@
 declare(strict_types=1);
 namespace deceitya\ShopAPI\database;
 
-use Deceitya\MiningLevel\MiningLevelAPI;
-use Exception;
-use pocketmine\block\VanillaBlocks;
-use pocketmine\item\Item;
-use pocketmine\player\Player;
+use pocketmine\data\bedrock\EnchantmentIdMap;
+use pocketmine\data\bedrock\EnchantmentIds;
+use pocketmine\item\enchantment\Enchantment;
+use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\lang\Translatable;
+use pocketmine\Server;
 
 class EffectShopAPI {
 
     private static EffectShopAPI $instance;
     protected array $buy = [];
-    protected array $sell = [];
-    protected array $level = [];
-    protected array $type = [];
-    protected array $list = [];
+    protected array $limit = [];
+    protected array $miningLevel = [];
 
     public function __construct() {
         $this->init();
     }
 
     protected function init(): void {
-        $this->register(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 0, 250, "block");##Redstone_Comparator
+        $this->register(VanillaEnchantments::SHARPNESS(), 2500, 3, 250);
+        $this->register(VanillaEnchantments::EFFICIENCY(), 2500, 3, 250);
+        $this->register(VanillaEnchantments::SILK_TOUCH(), 2500, 3, 250);
+        $this->register(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 2500, 3, 250);
+        $this->register(VanillaEnchantments::UNBREAKING(), 2500, 3, 250);
+        $this->register(VanillaEnchantments::POWER(), 2500, 3, 250);
     }
 
-    public function register(Item $item, int $buy, int $sell, int $level, string $type): void {
-        $this->buy[$item->getId()][$item->getMeta()] = $buy;
-        $this->sell[$item->getId()][$item->getMeta()] = $sell;
-        $this->level[$item->getId()][$item->getMeta()] = $level;
-        $this->type[$item->getId()][$item->getMeta()] = $type;
-    }
-
-    public function getBuy(int $id, ?int $meta = null): ?int {
-        try {
-            return $this->buy[$id][$meta ?? 0] ?? null;
-        } catch (Exception $e) {
-            return null;
+    public function register(Enchantment $enchantment, int $buy, int $limit, int $miningLevel): void {
+        $enchantName = $enchantment->getName();
+        if ($enchantName instanceof Translatable) {
+            $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
+            //$player->getLanguage()->translate($enchantName);
+            //$enchantName = $enchantName->getText();
         }
+        $this->buy[$enchantName] = $buy;
+        $this->limit[$enchantName] = $limit;
+        $this->miningLevel[$enchantName] = $miningLevel;
     }
 
-    public function getSell(int $id, ?int $meta = null): ?int {
-        try {
-            return $this->sell[$id][$meta ?? 0] ?? null;
-        } catch (Exception $e) {
-            return null;
-        }
+    public function getBuy(string $enchantmentName): ?int {
+        return $this->buy[$enchantmentName];
     }
 
-    public function checkLevel(Player $player, int $id, ?int $meta = null): string {
-        $miningLevel = MiningLevelAPI::getInstance();
-        try {
-            if (!($this->getLevel($id, $meta) < $miningLevel->getLevel($player->getName()))) {
-                return "failure";
-            }
-            return "success";
-        } catch (Exception $e) {
-            return "exception";
-        }
+    public function getLimit(string $enchantmentName): ?int {
+        return $this->limit[$enchantmentName];
+    }
+
+    public function getMiningLevel(string $enchantmentName): ?int {
+        return $this->miningLevel[$enchantmentName];
     }
 
     public static function getInstance(): EffectShopAPI {
@@ -68,19 +61,4 @@ class EffectShopAPI {
         return self::$instance;
     }
 
-    public function getLevel(int $id, ?int $meta = null): ?int {
-        try {
-            return $this->level[$id][$meta ?? 0] ?? null;
-        } catch (Exception $e) {
-            return null;
-        }
-    }
-
-    public function checkType(int $id, ?int $meta = null): ?string {
-        try {
-            return $this->type[$id][$meta ?? 0] ?? null;
-        } catch (Exception $e) {
-            return null;
-        }
-    }
 }

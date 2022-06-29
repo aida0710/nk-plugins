@@ -8,7 +8,9 @@ use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class EnchantShopAPI {
 
@@ -31,29 +33,35 @@ class EnchantShopAPI {
     }
 
     public function register(Enchantment $enchantment, int $buy, int $limit, int $miningLevel): void {
-        $this->buy[$enchantment->getName()] = $buy;
-        $this->limit[$enchantment->getName()] = $limit;
-        $this->miningLevel[$enchantment->getName()] = $miningLevel;
+        $enchantName = $enchantment->getName();
+        if ($enchantName instanceof Translatable) {
+            $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
+            //$player->getLanguage()->translate($enchantName);
+            //$enchantName = $enchantName->getText();
+        }
+        $this->buy[$enchantName] = $buy;
+        $this->limit[$enchantName] = $limit;
+        $this->miningLevel[$enchantName] = $miningLevel;
     }
 
-    public function getBuy(Enchantment $enchantment): ?int {
-        return $this->buy[$enchantment->getName()];
+    public function getBuy(string $enchantmentName): ?int {
+        return $this->buy[$enchantmentName];
     }
 
-    public function checkLevel(Player $player, Enchantment $enchantment): bool {
+    public function checkLevel(Player $player, string $enchantmentName): bool {
         $miningLevel = MiningLevelAPI::getInstance();
-        if (!($this->getMiningLevel($enchantment) < $miningLevel->getLevel($player->getName()))) {
+        if (!($this->getMiningLevel($enchantmentName) < $miningLevel->getLevel($player->getName()))) {
             return false;
         }
         return true;
     }
 
-    public function getLimit(Enchantment $enchantment): ?int {
-        return $this->limit[$enchantment->getName()];
+    public function getLimit(string $enchantmentName): ?int {
+        return $this->limit[$enchantmentName];
     }
 
-    public function getMiningLevel(Enchantment $enchantment): ?int {
-        return $this->miningLevel[$enchantment->getName()];
+    public function getMiningLevel(string $enchantmentName): ?int {
+        return $this->miningLevel[$enchantmentName];
     }
 
     public static function getInstance(): EnchantShopAPI {
