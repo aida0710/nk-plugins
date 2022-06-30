@@ -3,10 +3,8 @@
 declare(strict_types=1);
 namespace deceitya\ShopAPI\database;
 
-use pocketmine\data\bedrock\EnchantmentIdMap;
-use pocketmine\data\bedrock\EnchantmentIds;
-use pocketmine\item\enchantment\Enchantment;
-use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\entity\effect\Effect;
+use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\lang\Translatable;
 use pocketmine\Server;
 
@@ -14,46 +12,81 @@ class EffectShopAPI {
 
     private static EffectShopAPI $instance;
     protected array $buy = [];
-    protected array $limit = [];
-    protected array $miningLevel = [];
+    protected array $levelLimit = [];
+    protected array $amplifiedMoney = [];
+    protected array $timeRestriction = [];
 
     public function __construct() {
         $this->init();
     }
 
+    /**
+     * @return void
+     */
     protected function init(): void {
-        $this->register(VanillaEnchantments::SHARPNESS(), 2500, 3, 250);
-        $this->register(VanillaEnchantments::EFFICIENCY(), 2500, 3, 250);
-        $this->register(VanillaEnchantments::SILK_TOUCH(), 2500, 3, 250);
-        $this->register(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 2500, 3, 250);
-        $this->register(VanillaEnchantments::UNBREAKING(), 2500, 3, 250);
-        $this->register(VanillaEnchantments::POWER(), 2500, 3, 250);
+        $this->register(VanillaEffects::HASTE(), 2500, 3, 80, 250);
+        $this->register(VanillaEffects::HASTE(), 2500, 3, 80, 250);
+        $this->register(VanillaEffects::HASTE(), 2500, 3, 80, 250);
+        $this->register(VanillaEffects::HASTE(), 2500, 3, 80, 250);
+        $this->register(VanillaEffects::HASTE(), 2500, 3, 80, 250);
     }
 
-    public function register(Enchantment $enchantment, int $buy, int $limit, int $miningLevel): void {
-        $enchantName = $enchantment->getName();
-        if ($enchantName instanceof Translatable) {
-            $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
-            //$player->getLanguage()->translate($enchantName);
-            //$enchantName = $enchantName->getText();
+    /**
+     * @param Effect $effect
+     * @param int $buy
+     * @param int $levelLimit
+     * @param int $amplifiedMoney
+     * @param int $timeRestriction
+     * @return void
+     */
+    public function register(Effect $effect, int $buy, int $levelLimit, int $amplifiedMoney, int $timeRestriction): void {
+        $effectName = $effect->getName();
+        if ($effectName instanceof Translatable) {
+            $effectName = Server::getInstance()->getLanguage()->translate($effectName);
+            //$player->getLanguage()->translate($effectName);
+            //$effectName = $effectName->getText();
         }
-        $this->buy[$enchantName] = $buy;
-        $this->limit[$enchantName] = $limit;
-        $this->miningLevel[$enchantName] = $miningLevel;
+        $this->buy[$effectName] = $buy;
+        $this->levelLimit[$effectName] = $levelLimit;
+        $this->amplifiedMoney[$effectName] = $amplifiedMoney;
+        $this->timeRestriction[$effectName] = $timeRestriction;
     }
 
-    public function getBuy(string $enchantmentName): ?int {
-        return $this->buy[$enchantmentName];
+    /**
+     * @param string $effectName
+     * @return int|null
+     */
+    public function getBuy(string $effectName): ?int {
+        return $this->buy[$effectName];
     }
 
-    public function getLimit(string $enchantmentName): ?int {
-        return $this->limit[$enchantmentName];
+    /**
+     * @param string $effectName
+     * @return int|null
+     */
+    public function getLevelLimit(string $effectName): ?int {
+        return $this->levelLimit[$effectName];
     }
 
-    public function getMiningLevel(string $enchantmentName): ?int {
-        return $this->miningLevel[$enchantmentName];
+    /**
+     * @param string $effectName
+     * @return int|null
+     */
+    public function getTimeRestriction(string $effectName): ?int {
+        return $this->timeRestriction[$effectName];
     }
 
+    /**
+     * @param string $effectName
+     * @return int|null
+     */
+    public function getAmplifiedMoney(string $effectName): ?int {
+        return $this->amplifiedMoney[$effectName];
+    }
+
+    /**
+     * @return EffectShopAPI
+     */
     public static function getInstance(): EffectShopAPI {
         if (!isset(self::$instance)) {
             self::$instance = new EffectShopAPI();

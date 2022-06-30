@@ -31,7 +31,7 @@ class EnchantSelectForm extends SimpleForm {
             if ($enchantName instanceof Translatable) {
                 $enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
             }
-            $this->addElement(new EnchantSelectFormButton("{$enchantName} 価格 - 毎lv.{$api->getBuy($enchantName)}\nMiningLevel制限{$api->getMiningLevel($enchantName)} | 付与レベル制限 - {$api->getLimit($enchantName)}以下", $enchantment, $enchantName));
+            $this->addElement(new EnchantSelectFormButton("{$enchantName} 価格 - 毎lv.{$api->getBuy($enchantName)}\nMiningLevel制限{$api->getMiningLevel($enchantName)} | 付与レベル制限 - {$api->getLevelLimit($enchantName)}以下", $enchantment, $enchantName));
         }
     }
 

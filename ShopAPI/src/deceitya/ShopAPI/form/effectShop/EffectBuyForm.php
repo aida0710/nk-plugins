@@ -4,23 +4,23 @@ namespace deceitya\ShopAPI\form\effectShop;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
-use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\ShopAPI\database\effectShopAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
-use pocketmine\item\effectment\effectment;
-use pocketmine\item\effectment\effectmentInstance;
+use pocketmine\entity\effect\EffectInstance;
 use pocketmine\player\Player;
 
 class EffectBuyForm extends CustomForm {
 
     private int $level;
-    private Effect $effectment;
+    private int $time;
+    private Effect $effect;
     private string $effectName;
 
-    public function __construct(Player $player, int $level, Effect $effectment, string $effectName) {
+    public function __construct(Player $player, int $level, Effect $effect, string $effectName, int $time) {
         $this->level = $level;
-        $this->effectment = $effectment;
+        $this->time = $time;
+        $this->effect = $effect;
         $this->effectName = $effectName;
         $this
             ->setTitle("effect Form")
@@ -39,12 +39,8 @@ class EffectBuyForm extends CustomForm {
             $player->sendMessage("§beffect §7>> §c所持金が足りません。要求価格 -> {$price}円");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($player) < effectShopAPI::getInstance()->getMiningLevel($this->effectName)) {
-            $player->sendForm(new effectSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . effectShopAPI::getInstance()->getMiningLevel($this->effectName) . "lv"));
-            return;
-        }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
-        $player->getInventory()->addItem($player->getInventory()->getItemInHand()->addeffectment(new effectmentInstance($this->effectment, $this->level)));
+        $player->getEffects()->add(new EffectInstance($this->effect, $this->time, $this->level - 1, false));
         $player->sendMessage("§beffect §7>> §a{$this->effectName}を{$this->level}レベルで付与しました");
     }
 

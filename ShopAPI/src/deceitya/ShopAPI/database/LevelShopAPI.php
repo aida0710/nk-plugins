@@ -23,6 +23,9 @@ class LevelShopAPI {
         $this->init();
     }
 
+    /**
+     * @return void
+     */
     protected function init(): void {
         /*Shop1*/
         #Currency
@@ -259,6 +262,14 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 0, 250, "block");##Redstone_Comparator
     }
 
+    /**
+     * @param Item $item
+     * @param int $buy
+     * @param int $sell
+     * @param int $level
+     * @param string $type
+     * @return void
+     */
     public function register(Item $item, int $buy, int $sell, int $level, string $type): void {
         $this->buy[$item->getId()][$item->getMeta()] = $buy;
         $this->sell[$item->getId()][$item->getMeta()] = $sell;
@@ -266,12 +277,25 @@ class LevelShopAPI {
         $this->type[$item->getId()][$item->getMeta()] = $type;
     }
 
+    /**
+     * @param int $itemId
+     * @param int $itemMeta
+     * @param int $buy
+     * @param int $sell
+     * @param $level
+     * @return void
+     */
     protected function registerFromId(int $itemId, int $itemMeta, int $buy, int $sell, $level): void {
         $this->buy[$itemId][$itemMeta] = $buy;
         $this->sell[$itemId][$itemMeta] = $sell;
         $this->level[$itemId][$itemMeta] = $level;
     }
 
+    /**
+     * @param int $id
+     * @param int|null $meta
+     * @return int|null
+     */
     public function getBuy(int $id, ?int $meta = null): ?int {
         try {
             return $this->buy[$id][$meta ?? 0] ?? null;
@@ -280,6 +304,11 @@ class LevelShopAPI {
         }
     }
 
+    /**
+     * @param int $id
+     * @param int|null $meta
+     * @return int|null
+     */
     public function getSell(int $id, ?int $meta = null): ?int {
         try {
             return $this->sell[$id][$meta ?? 0] ?? null;
@@ -288,6 +317,12 @@ class LevelShopAPI {
         }
     }
 
+    /**
+     * @param Player $player
+     * @param int $id
+     * @param int|null $meta
+     * @return string
+     */
     public function checkLevel(Player $player, int $id, ?int $meta = null): string {
         $miningLevel = MiningLevelAPI::getInstance();
         try {
@@ -300,6 +335,9 @@ class LevelShopAPI {
         }
     }
 
+    /**
+     * @return LevelShopAPI
+     */
     public static function getInstance(): LevelShopAPI {
         if (!isset(self::$instance)) {
             self::$instance = new LevelShopAPI();
@@ -307,6 +345,11 @@ class LevelShopAPI {
         return self::$instance;
     }
 
+    /**
+     * @param int $id
+     * @param int|null $meta
+     * @return int|null
+     */
     public function getLevel(int $id, ?int $meta = null): ?int {
         try {
             return $this->level[$id][$meta ?? 0] ?? null;
@@ -315,6 +358,11 @@ class LevelShopAPI {
         }
     }
 
+    /**
+     * @param int $id
+     * @param int|null $meta
+     * @return string|null
+     */
     public function checkType(int $id, ?int $meta = null): ?string {
         try {
             return $this->type[$id][$meta ?? 0] ?? null;
