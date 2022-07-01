@@ -53,7 +53,6 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
                 $costItem = UnbreakingEnchantConfirmForm::Rank1_ItemCost;
                 if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                 if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                 EconomyAPI::getInstance()->reduceMoney($player, $price);
                 $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 25));
             }
@@ -71,7 +70,6 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
                         $costItem = UnbreakingEnchantConfirmForm::Rank2_ItemCost;
                         if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                         if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 35));
                         break;
@@ -81,7 +79,6 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
                         $costItem = UnbreakingEnchantConfirmForm::Rank3_ItemCost;
                         if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                         if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::MENDING(), 1));
                         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 50));

@@ -54,7 +54,6 @@ class FortuneEnchantBuyForm extends SimpleForm {
             $costItem = FortuneEnchantConfirmForm::Rank1_ItemCost;
             if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
             if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-            if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
             EconomyAPI::getInstance()->reduceMoney($player, $price);
             $item->removeEnchantment(VanillaEnchantments::SILK_TOUCH());
             $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 1));
@@ -77,7 +76,6 @@ class FortuneEnchantBuyForm extends SimpleForm {
                         $costItem = FortuneEnchantConfirmForm::Rank2_ItemCost;
                         if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                         if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 2));
                         break;
@@ -87,7 +85,6 @@ class FortuneEnchantBuyForm extends SimpleForm {
                         $costItem = FortuneEnchantConfirmForm::Rank3_ItemCost;
                         if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                         if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 3));
                         break;

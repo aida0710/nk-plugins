@@ -54,7 +54,6 @@ class RangeBuyForm extends SimpleForm {
                         $costItem = RangeConfirmForm::Rank2_ItemCost;
                         if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                         if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         break;
                     case 2:
@@ -63,7 +62,6 @@ class RangeBuyForm extends SimpleForm {
                         $costItem = RangeConfirmForm::Rank3_ItemCost;
                         if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                         if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         break;
                     default:
@@ -93,7 +91,6 @@ class RangeBuyForm extends SimpleForm {
                 $costItem = RangeConfirmForm::Rank1_ItemCost;
                 if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
                 if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
                 EconomyAPI::getInstance()->reduceMoney($player, $price);
                 $nbt = $item->getNamedTag();
                 $tag = "MiningTools_3";
