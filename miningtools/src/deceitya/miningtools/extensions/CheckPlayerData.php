@@ -6,7 +6,6 @@ use deceitya\miningtools\Main;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
-use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 
 class CheckPlayerData {
@@ -32,28 +31,22 @@ class CheckPlayerData {
      * @return bool
      */
     public function CheckReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
-        $ItemCount = 0;
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
-            if ($item->getId() === $checkBlock) {
-                if ($item->getNamedTag()->getTag($tagName) !== null) {
-                    $ItemCount += $item->getCount();
+            if ($item->getId() !== $checkBlock) continue;
+            if ($item->getNamedTag()->getTag($tagName) !== null) {
+                if ($count <= $item->getCount()) {
+                    $value = $item->getCount() - $count;
+                    $costItem = ItemFactory::getInstance()->get($checkBlock, $value);
+                    $player->getInventory()->removeItem($costItem);
+                    $player->getInventory()->setItem($i, $costItem);
+                    return true;
                 }
             }
         }
-        if ($ItemCount <= $count) {
-            $player->sendMessage(Main::PrefixRed . 'コストアイテムの所持数量が必要個数より少ない為処理を中断しました');
-            return false;
-        }
-        return true;
-    }
-
-    public function ReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
-        $nbt = CompoundTag::create()->setString($tagName, "1");
-        $costItem = ItemFactory::getInstance()->get($checkBlock, 0, $count, $nbt);
-        $player->getInventory()->removeItem($costItem);
-        return true;
+        $player->sendMessage(Main::PrefixRed . 'コストアイテムの所持数量が必要個数より少ない為処理を中断しました');
+        return false;
     }
 
     /**
