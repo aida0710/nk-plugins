@@ -4,7 +4,6 @@ namespace deceitya\miningtools\extensions;
 
 use deceitya\miningtools\Main;
 use onebone\economyapi\EconomyAPI;
-use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
@@ -37,10 +36,7 @@ class CheckPlayerData {
             if ($item->getId() !== $checkBlock) continue;
             if ($item->getNamedTag()->getTag($tagName) !== null) {
                 if ($count <= $item->getCount()) {
-                    $value = $item->getCount() - $count;
-                    $costItem = ItemFactory::getInstance()->get($checkBlock, $value);
-                    $player->getInventory()->removeItem($costItem);
-                    $player->getInventory()->setItem($i, $costItem);
+                    $player->getInventory()->removeItem($item->setCount($count));
                     return true;
                 }
             }
