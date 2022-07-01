@@ -4,7 +4,6 @@ namespace deceitya\miningtools\extensions;
 
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\element\SendFormButton;
-use deceitya\miningtools\extensions\effect\EffectSelectForm;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\range\RangeConfirmForm;
 use pocketmine\player\Player;
