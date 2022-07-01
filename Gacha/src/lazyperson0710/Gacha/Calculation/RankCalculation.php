@@ -66,7 +66,7 @@ class RankCalculation {
             if (EconomyAPI::getInstance()->myMoney($player->getName()) >= $this->cost["money"]) {
                 return true;
             } else {
-                $player->sendMessage("所持金が足りません");
+                $player->sendMessage("§bGacha §7>> §c所持金が足りない為処理が中断されました");
                 return false;
             }
         }
@@ -78,7 +78,7 @@ class RankCalculation {
             if (TicketAPI::getInstance()->checkData($player) >= $this->cost["ticket"]) {
                 return true;
             } else {
-                $player->sendMessage("所持Ticketが足りません");
+                $player->sendMessage("§bGacha §7>> §c所持Ticketが足りない為処理が中断されました");
                 return false;
             }
         }
