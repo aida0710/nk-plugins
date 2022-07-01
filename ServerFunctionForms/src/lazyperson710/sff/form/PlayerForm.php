@@ -25,7 +25,7 @@ class PlayerForm extends SimpleForm {
                     $effectIds .= "{$effectName} Lv.{$effectLevel}, ";
                 } else {
                     $effectTranslate = Server::getInstance()->getLanguage()->translate($effectName);
-                    $effectIds .= "{$effectTranslate} Lv.{$effectLevel},　";
+                    $effectIds .= "{$effectTranslate} Lv.{$effectLevel}, ";
                 }
             }
             if (is_null($effectIds)) {
