@@ -102,6 +102,9 @@ class PlayerEvent implements Listener {
      */
     public function playerExperienceChange(PlayerExperienceChangeEvent $event) {
         $player = $event->getEntity();
+        if (!$player instanceof Player) {
+            return;
+        }
         /** @var Player $player */
         $this->othersLog($player->getName(), $event->getEventName(), $player->getWorld(), $player->getPosition(), $player->getInventory()->getItemInHand(), "level - {$event->getOldLevel()}");
     }
@@ -112,6 +115,9 @@ class PlayerEvent implements Listener {
      */
     public function entityDamage(EntityDamageEvent $event) {
         $player = $event->getEntity();
+        if (!$player instanceof Player) {
+            return;
+        }
         /** @var Player $player */
         $damage = match ($event->getCause()) {
             0 => "CONTACT",
