@@ -38,7 +38,7 @@ class ActionForm implements Form {
     public function handleResponse(Player $player, $data): void {
         if ($data === null) return;
         if (!is_numeric($data[0]) or $data[0] <= 0) {
-            $player->sendMessage(TextFormat::RED . ">> " . TextFormat::RESET . "エラーが発生しました");
+            $player->sendMessage("§bBank §7>> §cエラーが発生しました");
             return;
         }
         switch ($this->type) {

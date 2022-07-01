@@ -50,7 +50,7 @@ class Really extends PluginBase implements Listener {
                             return true;
                         }
                     } else {
-                        $sender->sendMessage("§bWarp §7>>　§c{$point}には移動出来ませんでした");
+                        $sender->sendMessage("§bWarp §7>> §c{$point}には移動出来ませんでした");
                         return true;
                     }
                 } else {
@@ -80,10 +80,10 @@ class Really extends PluginBase implements Listener {
                         $z = $sender->getPosition()->getFloorZ();
                         $this->warp->set($args[0], array("X" => $x, "Y" => $y, "Z" => $z, "world" => $wname, "mining" => $args[1]));
                         $this->warp->save();
-                        $sender->sendMessage("{$args[0]}という名前の地点を新しく作成しました");
+                        $sender->sendMessage("§bWarp §7>> §a{$args[0]}という名前の地点を新しく作成しました");
                         return true;
                     } else {
-                        $sender->sendMessage("{$args[0]}という名前の地点は既に存在します");
+                        $sender->sendMessage("§bWarp §7>> §c{$args[0]}という名前の地点は既に存在します");
                         return true;
                     }
                 } else {

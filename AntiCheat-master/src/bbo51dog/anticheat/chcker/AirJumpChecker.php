@@ -33,7 +33,7 @@ class AirJumpChecker extends Checker {
         Server::getInstance()->dispatchCommand($this->getPlayerData()->getPlayer(), Main::getSetting()->getAntiJumpCommand());
         Logger::getInstance()->warnPunishment($this);
         $this->reset();
-        $this->getPlayerData()->getPlayer()->sendMessage("空中ジャンプを検知したためワープしました");
+        $this->getPlayerData()->getPlayer()->sendMessage("§bAntiCheat §7>> §c空中ジャンプを検知したためワープしました");
     }
 
     public function getCheatingMessage(): string {

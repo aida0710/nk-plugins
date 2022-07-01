@@ -36,7 +36,7 @@ class CheckPositionTask extends Task {
             }
             foreach ($world->getPlayers() as $player) {
                 if (!$property->inSafeArea($player->getPosition())) {
-                    $player->sendMessage("ワールドの上限を越えています。" . Main::TELEPORT_INTERVAL . "秒以内にセーフエリアに戻ってください\n戻らなかった場合、強制的にテレポートされます");
+                    $player->sendMessage("§bWorldBorder §7>> §cワールドの上限を越えています。" . Main::TELEPORT_INTERVAL . "秒以内にセーフエリアに戻ってください\n戻らなかった場合、強制的にテレポートされます");
                     $this->scheduler->scheduleDelayedTask(new PlayerTeleportTask($player, $property), Main::TELEPORT_INTERVAL * 20);
                 }
             }

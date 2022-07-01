@@ -48,7 +48,7 @@ class FlyForm extends CustomForm {
         if (array_key_exists($player->getName(), FlyCheckTask::$flyTask)) {
             unset(FlyCheckTask::$flyTask[$player->getName()]);
             Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
-            $player->sendMessage("FlyTaskを停止させました");
+            $player->sendMessage("§bFlyTask §7>> §aFlyTaskを停止させました");
             return;
         }
         if ($this->infinity->getValue() === true) {

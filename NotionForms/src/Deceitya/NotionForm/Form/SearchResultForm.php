@@ -27,7 +27,7 @@ class SearchResultForm implements Form {
             return;
         }
         if (!isset($this->index[$data - 1])) {
-            $player->sendMessage("[NotionForm][SearchResultForm] error1");
+            $player->sendMessage("§bNotionForm §7>> §cエラーが発生しました");
             return;
         }
         $id = $this->index[$data - 1];

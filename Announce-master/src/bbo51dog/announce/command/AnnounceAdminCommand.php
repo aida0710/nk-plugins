@@ -40,6 +40,6 @@ class AnnounceAdminCommand extends Command {
             $content = $args[1];
         }
         AnnounceService::createAnnounce($content, $type);
-        $sender->sendMessage("新しいアナウンスを作成しました");
+        $sender->sendMessage("§bNotice §7>> §a新しいアナウンスを作成しました");
     }
 }

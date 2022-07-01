@@ -31,7 +31,7 @@ class PlayerTeleportTask extends Task {
         }
         if (!$this->property->inSafeArea($this->player->getPosition())) {
             Server::getInstance()->dispatchCommand($this->player, "warp lobby");
-            $this->player->sendMessage("セーフエリアに戻らなかったため、ロビーにテレポートしました");
+            $this->player->sendMessage("§bWorldBorder §7>> §cセーフエリアに戻らなかったため、ロビーにテレポートしました");
         }
     }
 }

@@ -25,7 +25,7 @@ class AnnounceCommand extends Command {
             $sender->sendForm(new AnnounceForm(AnnounceService::getAnnounceIdByName($sender->getName())));
             AnnounceService::setAlreadyRead($sender->getName(), true);
         } else {
-            $sender->sendMessage("表示するアナウンスがありません");
+            $sender->sendMessage("§bNotice §7>> §c表示するアナウンスがありません");
         }
     }
 }
