@@ -3,6 +3,7 @@
 namespace lazyperson710\sff;
 
 use lazyperson710\sff\command\BonusCommand;
+use lazyperson710\sff\command\DonationCommand;
 use lazyperson710\sff\command\EnchantCommand;
 use lazyperson710\sff\command\InvClearCommand;
 use lazyperson710\sff\command\LockCommand;
@@ -45,6 +46,7 @@ class Main extends PluginBase {
             new ShopCommand(),
             new PlayerCommand(),
             new StackAllCommand(),
+            new DonationCommand(),
         ]);
     }
 
