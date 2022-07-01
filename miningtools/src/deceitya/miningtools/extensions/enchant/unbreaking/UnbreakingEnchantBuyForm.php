@@ -30,7 +30,7 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
             $upgrade = "上位ツールにアップグレードしますか？\n\n費用は350万円\n範囲は5x5になります";
         }
         $this
-            ->setTitle("Mining Tools")
+            ->setTitle("Expansion Mining Tools")
             ->setText($upgrade)
             ->addElements(new Button("アップグレード"));
     }

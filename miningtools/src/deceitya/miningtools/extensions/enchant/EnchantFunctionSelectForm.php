@@ -16,7 +16,7 @@ class EnchantFunctionSelectForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
-            ->setTitle("Enchant Form")
+            ->setTitle("Expansion Mining Tools")
             ->setText("付与したい拡張機能を選択して下さい")
             ->addElements(
                 new SendFormButton(new UnbreakingEnchantConfirmForm($player), "耐久エンチャントを強化"),

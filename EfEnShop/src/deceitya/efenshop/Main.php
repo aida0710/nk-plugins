@@ -44,10 +44,10 @@ class Main extends PluginBase implements Listener {
                         "text" => "§7Enchant名 | Lv.n(付与されるレベル) | 1m/n円(1分の値段)",
                         "options" => [
                             "タップして付与したいエフェクトを選択してください",
-                            "採掘速度上昇 | Lv2 | 1m/800円", //1#HASTE
-                            "移動速度上昇 | Lv2 | 1m/250円", //1#HASTE
-                            "再生速度上昇 | Lv2 | 1m/1600円", //3#REGENERATION
-                            "暗視 | Lv1 | 1m/50円" //6#NIGHT_VISION
+                            "採掘速度上昇 | Lv2 |  1m/ 800円", //1#HASTE
+                            "移動速度上昇 | Lv2 |  1m/ 250円", //1#HASTE
+                            "再生速度上昇 | Lv2 |  1m/ 1600円", //3#REGENERATION
+                            "暗視     | Lv1 |  1m/ 50円" //6#NIGHT_VISION
                         ],
                         "default" => 0
                     ]
