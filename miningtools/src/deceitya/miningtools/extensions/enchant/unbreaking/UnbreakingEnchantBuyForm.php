@@ -8,6 +8,7 @@ use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
 use deceitya\miningtools\Main;
+use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\player\Player;
@@ -38,6 +39,8 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         $rank = null;
         $item = $player->getInventory()->getItemInHand();
+        $costItemId = EnchantFunctionSelectForm::CostItemId;
+        $costItemNBT = EnchantFunctionSelectForm::CostItemNBT;
         if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (empty($this->nbt)) {
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_UnbreakingEnchant') !== null) {
@@ -46,8 +49,12 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
             }
             if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
                 $rank = 1;
-                if ((new CheckPlayerData())->ReduceMoney($player, UnbreakingEnchantConfirmForm::Rank1_MoneyCost) === false) return;
-                if ((new CheckPlayerData())->ReduceCostItem($player, 1, EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) return;
+                $price = UnbreakingEnchantConfirmForm::Rank1_MoneyCost;
+                $costItem = UnbreakingEnchantConfirmForm::Rank1_ItemCost;
+                if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                EconomyAPI::getInstance()->reduceMoney($player, $price);
                 $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 25));
             }
         }
@@ -60,14 +67,22 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
                 switch ($namedTag->getInt("MiningTools_Expansion_UnbreakingEnchant")) {
                     case 1:
                         $rank = 2;
-                        if ((new CheckPlayerData())->ReduceMoney($player, UnbreakingEnchantConfirmForm::Rank2_MoneyCost) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, 2, EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) return;
+                        $price = UnbreakingEnchantConfirmForm::Rank2_MoneyCost;
+                        $costItem = UnbreakingEnchantConfirmForm::Rank2_ItemCost;
+                        if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                        if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 35));
                         break;
                     case 2:
                         $rank = 3;
-                        if ((new CheckPlayerData())->ReduceMoney($player, UnbreakingEnchantConfirmForm::Rank3_MoneyCost) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, 5, EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) return;
+                        $price = UnbreakingEnchantConfirmForm::Rank3_MoneyCost;
+                        $costItem = UnbreakingEnchantConfirmForm::Rank3_ItemCost;
+                        if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                        if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::MENDING(), 1));
                         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 50));
                         break;

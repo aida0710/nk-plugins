@@ -13,6 +13,10 @@ class UnbreakingEnchantConfirmForm extends SimpleForm {
     public const Rank2_MoneyCost = 1500;
     public const Rank3_MoneyCost = 1500;
 
+    public const Rank1_ItemCost = 1;
+    public const Rank2_ItemCost = 8;
+    public const Rank3_ItemCost = 20;
+
     public function __construct(Player $player) {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_UnbreakingEnchant') !== null) {

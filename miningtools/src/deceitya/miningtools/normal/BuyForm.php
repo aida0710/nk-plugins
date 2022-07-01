@@ -32,10 +32,10 @@ class BuyForm extends CustomForm {
         $netheriteCost = ConfirmForm::NETHERITE_COST;
         switch ($mode) {
             case 'diamond':
-                $explanation = new Label("DiamondMiningTools\nType :　{$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない");
+                $explanation = new Label("DiamondMiningTools\nType : {$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない");
                 break;
             case 'netherite':
-                $explanation = new Label("NetheriteMiningTools\nType :　{$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10");
+                $explanation = new Label("NetheriteMiningTools\nType : {$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10");
                 break;
             default:
                 Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
@@ -48,7 +48,7 @@ class BuyForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (EconomyAPI::getInstance()->myMoney($player) <= $this->cost) {
-            $player->sendMessage('§bMiningTools §7>> §c所持金が足りません');
+            $player->sendMessage(Main::PrefixRed . '所持金が足りない為処理が中断されました');
             return;
         }
         $item = $this->itemRegister();
@@ -57,12 +57,12 @@ class BuyForm extends CustomForm {
             return;
         }
         if (!$player->getInventory()->canAddItem($item)) {
-            $player->sendMessage('§bMiningTools §7>> §cインベントリに空きがありません');
+            $player->sendMessage(Main::PrefixRed . 'インベントリに空きが無い為処理が中断されました');
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $this->cost);
         $player->getInventory()->addItem($item);
-        $player->sendMessage('§bMiningTools §7>> §aMiningToolsを購入しました');
+        $player->sendMessage(Main::PrefixGreen . '§bMiningTools §7>> §aMiningToolsを購入しました');
     }
 
     public function itemRegister(): Item {

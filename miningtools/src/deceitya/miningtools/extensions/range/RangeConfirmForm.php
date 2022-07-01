@@ -11,6 +11,17 @@ class RangeConfirmForm extends SimpleForm {
 
     private array $nbt = [];
 
+    public const Rank1_MoneyCost = 800000;
+    public const Rank2_MoneyCost = 6000000;
+    public const Rank3_MoneyCost = 15000000;
+
+    public const Rank1_ItemCost = 1;
+    public const Rank2_ItemCost = 5;
+    public const Rank3_ItemCost = 15;
+
+    public const CostItemId = -302;
+    public const CostItemNBT = "MiningToolsRangeCostItem";
+
     public function __construct(Player $player) {
         $upgrade = "未定義のエラー";
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
@@ -24,7 +35,7 @@ class RangeConfirmForm extends SimpleForm {
             };
         } elseif ($namedTag->getTag('MiningTools_3') !== null) {
             $this->nbt = ["MiningTools_3" => $namedTag->getInt("MiningTools_3")];
-            $upgrade = "上位ツールにアップグレードしますか？\n費用は350万円\n範囲は5x5になります\n\n残りアップグレード回数 3 回";
+            $upgrade = "上位ツールにアップグレードしますか？\n費用は80万円\n範囲は5x5になります\n\n残りアップグレード回数 3 回";
         }
         $this
             ->setTitle("Expansion Mining Tools")

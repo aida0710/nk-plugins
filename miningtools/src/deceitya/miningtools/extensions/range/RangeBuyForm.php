@@ -7,6 +7,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\SetLoreJudgment;
 use deceitya\miningtools\Main;
+use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -35,6 +36,8 @@ class RangeBuyForm extends SimpleForm {
     public function handleSubmit(Player $player): void {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         $radius = 0;
+        $costItemId = RangeConfirmForm::CostItemId;
+        $costItemNBT = RangeConfirmForm::CostItemNBT;
         $item = $player->getInventory()->getItemInHand();
         if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (array_key_exists("MiningTools_Expansion_Range", $this->nbt)) {
@@ -46,14 +49,22 @@ class RangeBuyForm extends SimpleForm {
                 $nbt = $item->getNamedTag();
                 switch ($namedTag->getInt("MiningTools_Expansion_Range")) {
                     case 1:
-                        $price = 6000000;
                         $radius = 2;
-                        if ((new CheckPlayerData())->ReduceMoney($player, $price) === false) return;
+                        $price = RangeConfirmForm::Rank2_MoneyCost;
+                        $costItem = RangeConfirmForm::Rank2_ItemCost;
+                        if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                        if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        EconomyAPI::getInstance()->reduceMoney($player, $price);
                         break;
                     case 2:
-                        $price = 15000000;
                         $radius = 3;
-                        if ((new CheckPlayerData())->ReduceMoney($player, $price) === false) return;
+                        $price = RangeConfirmForm::Rank3_MoneyCost;
+                        $costItem = RangeConfirmForm::Rank3_ItemCost;
+                        if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                        if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        EconomyAPI::getInstance()->reduceMoney($player, $price);
                         break;
                     default:
                         Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
@@ -78,8 +89,12 @@ class RangeBuyForm extends SimpleForm {
             }
             if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
                 $radius = 1;
-                $price = 3500000;
-                if ((new CheckPlayerData())->ReduceMoney($player, $price) === false) return;
+                $price = RangeConfirmForm::Rank1_MoneyCost;
+                $costItem = RangeConfirmForm::Rank1_ItemCost;
+                if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                EconomyAPI::getInstance()->reduceMoney($player, $price);
                 $nbt = $item->getNamedTag();
                 $tag = "MiningTools_3";
                 $nbt->removeTag($tag);

@@ -13,8 +13,11 @@ class FortuneEnchantConfirmForm extends SimpleForm {
     public const Rank2_MoneyCost = 1500;
     public const Rank3_MoneyCost = 1500;
 
+    public const Rank1_ItemCost = 1;
+    public const Rank2_ItemCost = 3;
+    public const Rank3_ItemCost = 8;
+
     public function __construct(Player $player) {
-        $upgrade = "未定義のエラー";
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
             $this->nbt = ["MiningTools_Expansion_FortuneEnchant" => $namedTag->getInt("MiningTools_Expansion_FortuneEnchant")];

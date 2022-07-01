@@ -6,6 +6,7 @@ use deceitya\miningtools\Main;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
+use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 
 class CheckPlayerData {
@@ -15,12 +16,11 @@ class CheckPlayerData {
      * @param int $subtraction
      * @return bool
      */
-    public function ReduceMoney(Player $player, int $subtraction): bool {
+    public function CheckReduceMoney(Player $player, int $subtraction): bool {
         if (EconomyAPI::getInstance()->myMoney($player) <= $subtraction) {
-            $player->sendMessage('§bMiningTools §7>> §c所持金が足りません');
+            $player->sendMessage(Main::PrefixRed . '所持金が足りないため処理を中断しました');
             return false;
         }
-        EconomyAPI::getInstance()->reduceMoney($player, $subtraction);
         return true;
     }
 
@@ -31,7 +31,7 @@ class CheckPlayerData {
      * @param string $tagName
      * @return bool
      */
-    public function ReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
+    public function CheckReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
         $ItemCount = 0;
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
@@ -46,10 +46,13 @@ class CheckPlayerData {
             $player->sendMessage(Main::PrefixRed . 'コストアイテムの所持数量が必要個数より少ない為処理を中断しました');
             return false;
         }
-        $costItem = ItemFactory::getInstance()->get($checkBlock);
-        $player->getInventory()->removeItem($costItem->setCount($count));
-        $inventory = $player->getInventory();
-        $inventory->removeItem($costItem);
+        return true;
+    }
+
+    public function ReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
+        $nbt = CompoundTag::create()->setString($tagName, "1");
+        $costItem = ItemFactory::getInstance()->get($checkBlock, 0, $count, $nbt);
+        $player->getInventory()->removeItem($costItem);
         return true;
     }
 
@@ -76,11 +79,11 @@ class CheckPlayerData {
             return false;
         }
         if ($item->getId() === ItemIds::DIAMOND_PICKAXE || $player->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
-            $player->sendMessage("§bMiningTools §7>> §cDiamondMiningToolsはアップグレードに対応していません");
+            $player->sendMessage(Main::PrefixRed . "DiamondMiningToolsはアップグレードに対応していません");
             return false;
         }
         if ($item->getId() === ItemIds::DIAMOND_AXE || $player->getInventory()->getItemInHand()->getId() === Main::NETHERITE_AXE) {
-            $player->sendMessage("§bMiningTools §7>> §cMiningTools Axeはアップグレードに対応していません");
+            $player->sendMessage(Main::PrefixRed . "MiningTools Axeはアップグレードに対応していません");
             return false;
         }
         return true;

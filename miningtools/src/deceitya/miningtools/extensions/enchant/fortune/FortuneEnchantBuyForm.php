@@ -8,6 +8,7 @@ use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
 use deceitya\miningtools\Main;
+use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\item\enchantment\EnchantmentInstance;
@@ -40,19 +41,23 @@ class FortuneEnchantBuyForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         $rank = null;
         $item = $player->getInventory()->getItemInHand();
+        $costItemId = EnchantFunctionSelectForm::CostItemId;
+        $costItemNBT = EnchantFunctionSelectForm::CostItemNBT;
         if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (empty($this->nbt)) {
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
-                $player->sendMessage("現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
+                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
                 return;
             }
-            if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
-                $rank = 1;
-                if ((new CheckPlayerData())->ReduceMoney($player, FortuneEnchantConfirmForm::Rank1_MoneyCost) === false) return;
-                if ((new CheckPlayerData())->ReduceCostItem($player, $rank, EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) return;
-                $item->removeEnchantment(VanillaEnchantments::SILK_TOUCH());
-                $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 1));
-            }
+            $rank = 1;
+            $price = FortuneEnchantConfirmForm::Rank1_MoneyCost;
+            $costItem = FortuneEnchantConfirmForm::Rank1_ItemCost;
+            if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+            if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+            if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+            EconomyAPI::getInstance()->reduceMoney($player, $price);
+            $item->removeEnchantment(VanillaEnchantments::SILK_TOUCH());
+            $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 1));
         }
         if (array_key_exists("MiningTools_Expansion_FortuneEnchant", $this->nbt)) {
             if ($item->hasEnchantment(VanillaEnchantments::SILK_TOUCH())) {
@@ -68,14 +73,22 @@ class FortuneEnchantBuyForm extends SimpleForm {
                 switch ($namedTag->getInt("MiningTools_Expansion_FortuneEnchant")) {
                     case 1:
                         $rank = 2;
-                        if ((new CheckPlayerData())->ReduceMoney($player, FortuneEnchantConfirmForm::Rank2_MoneyCost) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $rank, EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) return;
+                        $price = FortuneEnchantConfirmForm::Rank2_MoneyCost;
+                        $costItem = FortuneEnchantConfirmForm::Rank2_ItemCost;
+                        if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                        if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 2));
                         break;
                     case 2:
                         $rank = 3;
-                        if ((new CheckPlayerData())->ReduceMoney($player, FortuneEnchantConfirmForm::Rank3_MoneyCost) === false) return;
-                        if ((new CheckPlayerData())->ReduceCostItem($player, $rank, EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) return;
+                        $price = FortuneEnchantConfirmForm::Rank3_MoneyCost;
+                        $costItem = FortuneEnchantConfirmForm::Rank3_ItemCost;
+                        if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+                        if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        if ((new CheckPlayerData())->ReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+                        EconomyAPI::getInstance()->reduceMoney($player, $price);
                         $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 3));
                         break;
                     default:
