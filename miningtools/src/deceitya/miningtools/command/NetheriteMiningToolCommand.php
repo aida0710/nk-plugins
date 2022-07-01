@@ -20,10 +20,10 @@ class NetheriteMiningToolCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        //todo テスト必須
-        if (MiningLevelAPI::getInstance()->getLevel($sender) <= 31) {
+        if (MiningLevelAPI::getInstance()->getLevel($sender) <= 29) {
             $sender->sendMessage("§bMiningToolShop §7>> §cレベル30以上でないと開けません");
             Server::getInstance()->dispatchCommand($sender, "mt");
+            return;
         }
         $sender->sendForm(new ConfirmForm($sender, "netherite"));
     }

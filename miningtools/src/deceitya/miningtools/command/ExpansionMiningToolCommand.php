@@ -24,6 +24,7 @@ class ExpansionMiningToolCommand extends Command {
         if (MiningLevelAPI::getInstance()->getLevel($sender) < 120) {
             $sender->sendMessage("§bMiningToolShop §7>> §cレベル120以上でないと開けません");
             Server::getInstance()->dispatchCommand($sender, "mt");
+            return;
         }
         if ((new CheckPlayerData())->checkMiningToolsNBT($sender) === false) return;
         $sender->sendForm(new ExtensionsMainForm($sender));
