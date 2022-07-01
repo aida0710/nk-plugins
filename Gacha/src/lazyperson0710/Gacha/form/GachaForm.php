@@ -46,9 +46,11 @@ class GachaForm extends CustomForm {
             $player->sendMessage("§bGacha §7>> §c整数のみで入力してください");
             return;
         }
-        if ($this->quantity->getValue() >= 301) {
-            $player->sendMessage("§bGacha §7>> §c301回以上は連続で回すことはできません");
-            return;
+        if (!Server::getInstance()->isOp($player->getName())) {
+            if ($this->quantity->getValue() >= 301) {
+                $player->sendMessage("§bGacha §7>> §c301回以上は連続で回すことはできません");
+                return;
+            }
         }
         $result = (new RankCalculation)->run($this->quantity->getValue(), $player, $this->key);
         if ($result === false) return;
