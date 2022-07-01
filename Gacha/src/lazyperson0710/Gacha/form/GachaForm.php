@@ -62,6 +62,16 @@ class GachaForm extends CustomForm {
         $onDrop = false;
         foreach ($result as $rank) {
             $item = (new ItemRegister($this->key, $rank))->Items($this->key, $rank);
+            switch ($rank) {
+                case "SR":
+                    $this->addSound($player, "mob.wither.spawn");
+                    $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$rankProbability[$rank]}％で当てました");
+                    break;
+                case "L":
+                    $this->addSound($player, "mob.enderdragon.death");
+                    Server::getInstance()->broadcastMessage("§bGacha §7>> §eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$rankProbability[$rank]}％で当てました");
+                    break;
+            }
             $formDisplayRank = match ($rank) {
                 "C" => "§7Common§r",
                 "UC" => "§aUnCommon§r",
@@ -72,16 +82,6 @@ class GachaForm extends CustomForm {
             $formMessage .= "{$formDisplayRank} > {$item->getCustomName()}§rを{$rankProbability[$rank]}％で当てました\n";
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
-                switch ($rank) {
-                    case "SR":
-                        $this->addSound($player, "mob.wither.spawn");
-                        $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$rankProbability[$rank]}％で当てました");
-                        break;
-                    case "L":
-                        $this->addSound($player, "mob.enderdragon.death");
-                        Server::getInstance()->broadcastMessage("§bGacha §7>> §eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$rankProbability[$rank]}％で当てました");
-                        break;
-                }
             } else {
                 $player->dropItem($item);
                 $onDrop = true;
