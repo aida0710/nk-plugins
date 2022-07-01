@@ -360,10 +360,23 @@
                     "id": -302,
                     "meta": 0,
                     "count": 1,
-                    "name": "MiningTool UltimateItem",
-                    "description": "",
+                    "name": "MiningToolRangeExpansion",
+                    "description": "Netherite MiningToolsの範囲を強化できます",
                     "enchants": [],
-                    "nbt": []
+                    "nbt": [
+                        "MiningToolsRangeCostItem"
+                    ]
+                },
+                {
+                    "id": 174,
+                    "meta": 0,
+                    "count": 1,
+                    "name": "MiningToolEnchantExpansion",
+                    "description": "Netherite MiningToolsのエンチャントを強化できます",
+                    "enchants": [],
+                    "nbt": [
+                        "MiningToolsEnchantCostItem"
+                    ]
                 }
             ]
         }
