@@ -27,12 +27,12 @@ class EnchantShopAPI {
      * @return void
      */
     protected function init(): void {
-        $this->register(VanillaEnchantments::SHARPNESS(), 2500, 3, 250);
-        $this->register(VanillaEnchantments::EFFICIENCY(), 2500, 3, 250);
-        $this->register(VanillaEnchantments::SILK_TOUCH(), 2500, 3, 250);
-        $this->register(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 2500, 3, 250);
-        $this->register(VanillaEnchantments::UNBREAKING(), 2500, 3, 250);
-        $this->register(VanillaEnchantments::POWER(), 2500, 3, 250);
+        $this->register(VanillaEnchantments::SHARPNESS(), 3000, 5, 30);
+        $this->register(VanillaEnchantments::EFFICIENCY(), 5000, 5, 15);
+        $this->register(VanillaEnchantments::SILK_TOUCH(), 15000, 1, 15);
+        $this->register(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 30000, 3, 25);
+        $this->register(VanillaEnchantments::UNBREAKING(), 10000, 3, 5);
+        $this->register(VanillaEnchantments::POWER(), 30000, 5, 30);
     }
 
     /**

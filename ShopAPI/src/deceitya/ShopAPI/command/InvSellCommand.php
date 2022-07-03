@@ -3,7 +3,7 @@
 namespace deceitya\ShopAPI\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use deceitya\ShopAPI\form\InvSell\Confirmation;
+use deceitya\ShopAPI\form\levelShop\InvSell\Confirmation;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

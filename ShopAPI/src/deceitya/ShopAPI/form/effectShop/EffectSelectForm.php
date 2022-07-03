@@ -17,6 +17,8 @@ class EffectSelectForm extends SimpleForm {
             VanillaEffects::SPEED(),
             VanillaEffects::REGENERATION(),
             VanillaEffects::NIGHT_VISION(),
+            VanillaEffects::JUMP_BOOST(),
+            VanillaEffects::WATER_BREATHING(),
         ];
         $api = EffectShopAPI::getInstance();
         $this
@@ -27,7 +29,7 @@ class EffectSelectForm extends SimpleForm {
             if ($effectName instanceof Translatable) {
                 $effectName = Server::getInstance()->getLanguage()->translate($effectName);
             }
-            $this->addElement(new EffectSelectFormButton("{$effectName} 価格 - 毎lv.{$api->getBuy($effectName)}\nMiningLevel制限{$api->getTimeRestriction($effectName)} | 付与レベル制限 - {$api->getLevelLimit($effectName)}以下", $effect, $effectName));
+            $this->addElement(new EffectSelectFormButton("{$effectName} 価格 - 毎lv.{$api->getBuy($effectName)}\nレベル増加時価格{$api->getAmplifiedMoney($effectName)} | 付与レベル制限 - {$api->getLevelLimit($effectName)}以下", $effect));
         }
     }
 

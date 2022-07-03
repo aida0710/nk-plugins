@@ -22,26 +22,26 @@ class EffectBuyForm extends CustomForm {
         $this->time = $time;
         $this->effect = $effect;
         $this->effectName = $effectName;
+        $api = EffectShopAPI::getInstance();
         $this
-            ->setTitle("effect Form")
+            ->setTitle("Effect Form")
             ->addElements(
                 new Label("現在の所持金 -> " . EconomyAPI::getInstance()->myMoney($player) . "円\n"),
-                new Label("購入価格 -> " . effectShopAPI::getInstance()->getBuy($effectName) * $this->level . "円"),
-                new Label("{$effectName}を{$level}レベル付与しますか？\n"),
-                new Label("§c注意 : エンチャントレベルは上書きされます(1lvを二度付与しても2lvにはならず1lvになります)§r"),
-                new Label("所持しているアイテム -> " . $player->getInventory()->getItemInHand()->getName()),
+                new Label("購入価格 -> " . $this->time * $api->getBuy($effectName) + ($this->level * $api->getAmplifiedMoney($effectName)) . "円"),
+                new Label("{$effectName}を{$level}レベルで{$this->time}分付与しますか？\n"),
+                new Label("§c注意 : エフェクト時間は加算されず、上書きされます(30分を二度付与しても60分にはならず30分になります)§r"),
             );
     }
 
     public function handleSubmit(Player $player): void {
-        $price = effectShopAPI::getInstance()->getBuy($this->effectName) * $this->level;
+        $price = EffectShopAPI::getInstance()->getBuy($this->effectName) * $this->level;
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
-            $player->sendMessage("§beffect §7>> §c所持金が足りません。要求価格 -> {$price}円");
+            $player->sendMessage("§bEffect §7>> §c所持金が足りない為処理が中断されました。要求価格 -> {$price}円");
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
-        $player->getEffects()->add(new EffectInstance($this->effect, $this->time, $this->level - 1, false));
-        $player->sendMessage("§beffect §7>> §a{$this->effectName}を{$this->level}レベルで付与しました");
+        $player->getEffects()->add(new EffectInstance($this->effect, $this->time * 20 * 60, $this->level - 1, false));
+        $player->sendMessage("§bEffect §7>> §a{$this->effectName}を{$this->level}レベルで{$this->time}分付与しました");
     }
 
 }

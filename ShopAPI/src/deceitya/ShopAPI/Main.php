@@ -2,6 +2,7 @@
 
 namespace deceitya\ShopAPI;
 
+use deceitya\ShopAPI\command\EffectShopCommand;
 use deceitya\ShopAPI\command\EnchantShopCommand;
 use deceitya\ShopAPI\command\InvSellCommand;
 use deceitya\ShopAPI\command\Shop1Command;
@@ -26,6 +27,7 @@ class Main extends PluginBase {
             new Shop7Command(),
             new InvSellCommand(),
             new EnchantShopCommand(),
+            new EffectShopCommand(),
         ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace deceitya\ShopAPI\command;
 
-use deceitya\ShopAPI\form\levelShop\shop1\Shop1Form;
+use deceitya\ShopAPI\form\effectShop\EffectSelectForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -18,6 +18,6 @@ class EffectShopCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new Shop1Form());
+        $sender->sendForm(new EffectSelectForm());
     }
 }
