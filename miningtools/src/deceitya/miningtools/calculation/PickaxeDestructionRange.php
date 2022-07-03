@@ -46,7 +46,37 @@ class PickaxeDestructionRange {
                         case BlockLegacyIds::WATER:
                         case BlockLegacyIds::FLOWING_WATER:
                         case BlockLegacyIds::WATER_LILY:
-                        case BlockLegacyIds::MAGMA:
+                        case BlockLegacyIds::LAVA:
+                        case BlockLegacyIds::FLOWING_LAVA:
+                        case BlockLegacyIds::CRAFTING_TABLE:
+                        case BlockLegacyIds::HOPPER_BLOCK:
+                            ##sign
+                        case BlockLegacyIds::SIGN_POST:
+                        case BlockLegacyIds::WALL_SIGN:
+                        case BlockLegacyIds::SPRUCE_STANDING_SIGN:
+                        case BlockLegacyIds::SPRUCE_WALL_SIGN:
+                        case BlockLegacyIds::BIRCH_STANDING_SIGN:
+                        case BlockLegacyIds::BIRCH_WALL_SIGN:
+                        case BlockLegacyIds::JUNGLE_STANDING_SIGN:
+                        case BlockLegacyIds::JUNGLE_WALL_SIGN:
+                        case BlockLegacyIds::ACACIA_STANDING_SIGN:
+                        case BlockLegacyIds::ACACIA_WALL_SIGN:
+                        case BlockLegacyIds::DARKOAK_STANDING_SIGN:
+                        case BlockLegacyIds::DARKOAK_WALL_SIGN:
+                            ##chest
+                        case BlockLegacyIds::CHEST:
+                        case BlockLegacyIds::ENDER_CHEST:
+                        case BlockLegacyIds::TRAPPED_CHEST:
+                        case BlockLegacyIds::BARREL:
+                        case BlockLegacyIds::SHULKER_BOX:
+                        case BlockLegacyIds::UNDYED_SHULKER_BOX:
+                            ##furnace
+                        case BlockLegacyIds::FURNACE:
+                        case BlockLegacyIds::LIT_FURNACE:
+                        case BlockLegacyIds::BLAST_FURNACE:
+                        case BlockLegacyIds::LIT_BLAST_FURNACE:
+                        case BlockLegacyIds::SMOKER:
+                        case BlockLegacyIds::LIT_SMOKER:
                             continue 2;
                     }
                     if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') === null) {
