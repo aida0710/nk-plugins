@@ -136,7 +136,7 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::NETHER_QUARTZ_ORE()->asItem(), 50000, 30, 50, "block"); ##Nether_Quartz_Ore
         $this->register(VanillaBlocks::EMERALD_ORE()->asItem(), 50000, 3000, 50, "block"); ##Emerald_Ore
         #OtherBlocks3
-        $this->register(VanillaBlocks::PACKED_ICE()->asItem(), 50, 1, 50, "block"); ##Packed_Ice
+        $this->register(VanillaBlocks::PACKED_ICE()->asItem(), 50, 0, 50, "block"); ##Packed_Ice
         $this->register(VanillaBlocks::OBSIDIAN()->asItem(), 50, 5, 50, "block"); ##Obsidian
         $this->register(VanillaBlocks::END_ROD()->asItem(), 50, 1, 50, "block"); ##End_Rod
         $this->register(VanillaBlocks::ANVIL()->asItem(), 150, 1, 50, "block"); ##Anvil
