@@ -64,13 +64,13 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::SANDSTONE()->asItem(), 15, 1, 1, "block"); ##Sandstone
         $this->register(VanillaBlocks::GRAVEL()->asItem(), 15, 1, 1, "block"); ##Gravel
         #Tools
-        $this->register(VanillaItems::IRON_PICKAXE(), 150, 1, 1, "item"); ##Iron_Pickaxe
-        $this->register(VanillaItems::IRON_SHOVEL(), 150, 1, 1, "item"); ##Iron_Shovel
-        $this->register(VanillaItems::IRON_AXE(), 150, 1, 1, "item"); ##Iron_Axe
-        $this->register(VanillaItems::DIAMOND_PICKAXE(), 250, 1, 1, "item"); ##Diamond_Pickaxe
-        $this->register(VanillaItems::DIAMOND_SHOVEL(), 250, 1, 1, "item"); ##Diamond_Shovel
-        $this->register(VanillaItems::DIAMOND_AXE(), 250, 1, 1, "item"); ##Diamond_Axe
-        $this->register(VanillaItems::SHEARS(), 15000, 1, 1, "item"); ##Shears
+        $this->register(VanillaItems::IRON_PICKAXE(), 150, 0, 1, "item"); ##Iron_Pickaxe
+        $this->register(VanillaItems::IRON_SHOVEL(), 150, 0, 1, "item"); ##Iron_Shovel
+        $this->register(VanillaItems::IRON_AXE(), 150, 0, 1, "item"); ##Iron_Axe
+        $this->register(VanillaItems::DIAMOND_PICKAXE(), 250, 0, 1, "item"); ##Diamond_Pickaxe
+        $this->register(VanillaItems::DIAMOND_SHOVEL(), 250, 0, 1, "item"); ##Diamond_Shovel
+        $this->register(VanillaItems::DIAMOND_AXE(), 250, 0, 1, "item"); ##Diamond_Axe
+        $this->register(VanillaItems::SHEARS(), 15000, 0, 1, "item"); ##Shears
         /*Shop2*/
         #Crop
         $this->register(VanillaItems::WHEAT(), 250, 8, 25, "item"); ##Wheat
@@ -86,7 +86,7 @@ class LevelShopAPI {
         #FarmingTools
         $this->register(VanillaBlocks::WATER()->asItem(), 800, 150, 25, "block"); ##Water
         $this->register(VanillaBlocks::FARMLAND()->asItem(), 50, 1, 25, "block"); ##Farmland
-        $this->register(VanillaItems::DIAMOND_HOE(), 15000, 1, 25, "item"); ##Diamond_Hoe
+        $this->register(VanillaItems::DIAMOND_HOE(), 15000, 0, 25, "item"); ##Diamond_Hoe
         #Seeds
         $this->register(VanillaItems::WHEAT_SEEDS(), 250, 3, 25, "item"); ##Wheat_Seeds
         $this->register(VanillaItems::BEETROOT_SEEDS(), 250, 3, 25, "item"); ##Beetroot_Seeds
@@ -160,11 +160,11 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::SMOOTH_SANDSTONE()->asItem(), 10, 1, 80, "block"); ##Smooth_Sandstone
         $this->register(VanillaBlocks::SMOOTH_RED_SANDSTONE()->asItem(), 10, 1, 80, "block"); ##Smooth_Red_Sandstone
         #Weapon
-        $this->register(VanillaItems::IRON_SWORD(), 300, 1, 80, "item"); ##Iron_Sword
-        $this->register(VanillaItems::DIAMOND_SWORD(), 800, 1, 80, "item"); ##Diamond_Sword
-        $this->register(VanillaItems::BOW(), 500, 1, 80, "item"); ##Bow
-        $this->register(VanillaItems::ARROW(), 50, 1, 80, "item"); ##Arrow
-        $this->register(VanillaItems::SNOWBALL(), 15, 1, 80, "item"); ##Snowball
+        $this->register(VanillaItems::IRON_SWORD(), 300, 0, 80, "item"); ##Iron_Sword
+        $this->register(VanillaItems::DIAMOND_SWORD(), 800, 0, 80, "item"); ##Diamond_Sword
+        $this->register(VanillaItems::BOW(), 500, 0, 80, "item"); ##Bow
+        $this->register(VanillaItems::ARROW(), 50, 0, 80, "item"); ##Arrow
+        $this->register(VanillaItems::SNOWBALL(), 15, 0, 80, "item"); ##Snowball
         $this->register(VanillaItems::EGG(), 10, 1, 80, "item"); ##Egg
         $this->registerFromId(513, 0, 500, 0, 80); ##Shield
         $this->registerFromId(772, 0, 300000, 0, 80); ##Spyglass
