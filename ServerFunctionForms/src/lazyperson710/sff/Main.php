@@ -3,8 +3,10 @@
 namespace lazyperson710\sff;
 
 use lazyperson710\sff\command\BonusCommand;
+use lazyperson710\sff\command\CmdExecutionCommand;
 use lazyperson710\sff\command\DonationCommand;
 use lazyperson710\sff\command\EnchantCommand;
+use lazyperson710\sff\command\InformationCommand;
 use lazyperson710\sff\command\InvClearCommand;
 use lazyperson710\sff\command\LockCommand;
 use lazyperson710\sff\command\MiningToolsCommand;
@@ -13,6 +15,7 @@ use lazyperson710\sff\command\RecipeCommand;
 use lazyperson710\sff\command\ShopCommand;
 use lazyperson710\sff\command\StackAllCommand;
 use lazyperson710\sff\command\TosCommand;
+use lazyperson710\sff\command\WarpUICommand;
 use lazyperson710\sff\command\WpCommand;
 use lazyperson710\sff\listener\CmdListener;
 use lazyperson710\sff\listener\CommandStorageListener;
@@ -47,6 +50,9 @@ class Main extends PluginBase {
             new PlayerCommand(),
             new StackAllCommand(),
             new DonationCommand(),
+            new InformationCommand(),
+            new WarpUICommand(),
+            new CmdExecutionCommand()
         ]);
     }
 
