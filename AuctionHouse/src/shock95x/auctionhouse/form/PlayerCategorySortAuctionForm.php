@@ -45,7 +45,7 @@ class PlayerCategorySortAuctionForm extends CustomForm {
         } else {
             $value = $this->offlinePlayer->getValue();
             if ($value === $player->getName()) {
-                Server::getInstance()->dispatchCommand($player, "ah listings");
+                $player->sendMessage("§bAuction §7>> §c自身のアイテムを確認する場合は/ah shopから表示することが可能です");
                 return;
             }
         }
