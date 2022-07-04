@@ -92,7 +92,7 @@ class ItemListener implements Listener {
      * @return void
      * @priority LOWEST
      */
-    public function onInteract(PlayerInteractEvent $event) {
+    public function onInteract(PlayerInteractEvent $event): void {
         $this->onUse($event->getPlayer());
     }
 

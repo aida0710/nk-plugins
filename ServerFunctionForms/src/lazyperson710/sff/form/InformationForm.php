@@ -12,7 +12,7 @@ class InformationForm extends SimpleForm {
 
     public function __construct() {
         $this->setTitle("InformationForm");
-        $this->setText("見たいコンテンツを選択してください");
+        $this->setText("見たいコンテンツを選択してください\nこのFormは/infoで使用可能です");
         $this->addElements(
             new CommandDispatchButton("お知らせ", "announce", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/invite_base.png")),
             new CommandDispatchButton("コマンドリスト\nコマンドリストを表示する", "command", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/mute_off.png")),

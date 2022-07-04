@@ -1,17 +1,16 @@
 <?php
 
-namespace Deceitya\NotionForm\command;
+namespace lazyperson710\sff\command;
 
-use Deceitya\NotionForm\Form\StartForm;
-use Deceitya\NotionForm\Main;
+use lazyperson710\sff\form\InformationForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
-class CommandListCommand extends Command {
+class InformationCommand extends Command {
 
     public function __construct() {
-        parent::__construct("cmdls", "鯖内で使用できるコマンドの機能や仕様が書かれています");
+        parent::__construct("info", "InformationFormを表示します");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -19,7 +18,6 @@ class CommandListCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new StartForm(Main::$command));
+        $sender->sendForm(new InformationForm($sender));
     }
-
 }
