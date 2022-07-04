@@ -47,7 +47,7 @@ class ReplaceTicketForm extends CustomForm {
         }
         $count = TicketAPI::getInstance()->replaceInventoryTicket($playerInstance);
         $count += TicketAPI::getInstance()->replaceStackStorageTicket($playerInstance);
-        if ($count <= 1) {
+        if ($count >= 1) {
             $playerInstance->sendMessage("§bTicket §7>> §aチケットの変換処理を実行し、{$count}枚のチケットを取得しました");
             if (!isset($playerName)) return;
             if ($playerName != $player->getName()) {
