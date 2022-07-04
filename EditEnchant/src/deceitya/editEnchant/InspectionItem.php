@@ -16,7 +16,17 @@ class InspectionItem {
             $player->sendMessage('§bEditEnchant §7>> §c現在所持しているアイテムは道具では無いためエンチャントを編集することは出来ません');
             return false;
         }
-        if ($item->getNamedTag()->getInt('MiningTools_3', -1) !== -1 || $item->getNamedTag()->getInt('4mining', -1) !== -1 || $item->getNamedTag()->getInt('MiningTools_Expansion', -1) !== -1 || $item->hasEnchantment(VanillaEnchantments::PUNCH())) {
+        if ($item->getNamedTag()->getTag('gacha_mining') === null) {
+            if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+                $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
+                return false;
+            }
+        }
+        if ($item->getNamedTag()->getTag('4mining') !== null) {
+            $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
+            return false;
+        }
+        if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
             $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
             return false;
         }
