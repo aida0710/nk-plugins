@@ -26,12 +26,16 @@ class MajorCommand extends Command {
             "lore2" => "一度目のタップで始点を設定し、二度目以降のタップで終点を設定できます",
             "lore3" => "また、スニークしながらタップすることで設定したポイントを削除することが出来ます",
         ]);
-        if (!$sender->getInventory()->contains($major) && $sender->getInventory()->canAddItem($major)) {
-            $sender->getInventory()->addItem($major);
-            $sender->sendMessage("§bMajor §7>> §aMajorを一つ配布しました。使いかたはアイテム説明をご覧ください");
+        if ($sender->getInventory()->contains($major)) {
+            $sender->sendMessage("§bMajor §7>> §c既にMajorがインベントリに存在する為、処理が中断されました");
             return;
         }
-        $sender->sendMessage("§bMajor §7>> §cインベントリが満タンの為、majorを配布できませんでした");
+        if ($sender->getInventory()->canAddItem($major)) {
+            $sender->getInventory()->addItem($major);
+            $sender->sendMessage("§bMajor §7>> §aMajorを一つ配布しました。使いかたはアイテム説明をご覧ください");
+        } else {
+            $sender->sendMessage("§bMajor §7>> §cインベントリが満タンの為、majorを配布できませんでした");
+        }
     }
 
 }
