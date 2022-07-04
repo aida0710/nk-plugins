@@ -113,6 +113,7 @@ class WarpForm extends SimpleForm {
             );
         $this
             ->setTitle("World Select")
+            ->setText("このFormは/warpuiで使用可能です")
             ->addElements(
                 new SendFormButton($facilities, "公共施設", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_best3.png")),
                 new SendFormButton($cityAndFarm, "農業 & 生活ワールド", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/inventory_icon.png")),
