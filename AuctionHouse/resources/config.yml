@@ -7,7 +7,7 @@ prefix: "&bAuction &7>> &a"
 # Minimum price required to create a listing
 min-price: 300
 # Maximum price a listing can have (-1 = No limit)
-max-price: 10000000
+max-price: 100000000
 # Sets the default language for the plugin, you can edit text and messages in this file.
 default-language: en_US
 # Sets the amount of hours a listing is active before being automatically cancelled and expired.
