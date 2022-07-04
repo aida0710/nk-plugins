@@ -10,9 +10,6 @@ use lazyperson710\sff\form\element\SendFormButton;
 class CommandExecutionForm extends SimpleForm {
 
     public function __construct() {
-        $this
-            ->setTitle("Command Execution")
-            ->setText("実行したいコマンドを選択してください");
         $others1 = (new SimpleForm())
             ->setTitle("Command Execution")
             ->setText("実行したいコマンドを選択してください")
@@ -32,16 +29,19 @@ class CommandExecutionForm extends SimpleForm {
                 new CommandDispatchButton("Lock System", "lock", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_lock.png")),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
-        $this->addElements(
-            new CommandDispatchButton("Virtual Storage", "st", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/inventory_icon.png")),
-            new CommandDispatchButton("Level Shop", "shop", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_balloon.png")),
-            new CommandDispatchButton("bank System", "bank", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/MCoin.png")),
-            new CommandDispatchButton("My Warp", "myw", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/broadcast_glyph_color.png")),
-            new CommandDispatchButton("Gacha", "gacha", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_random.png")),
-            new CommandDispatchButton("Statistics & Ranking", "ranking", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_best3.png")),
-            new SendFormButton($others1, "Others - 1", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/book_normal.png")),
-            new SendFormButton($others2, "Others - 2", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/book_normal.png")),
-            new CommandDispatchButton("Report\nサーバー内から直接メッセージを送ります", "report", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/mute_off.png")),
-        );
+        $this
+            ->setTitle("Command Execution")
+            ->setText("実行したいコマンドを選択してください\nコマンドの一覧は/cmdlsで確認できます")
+            ->addElements(
+                new CommandDispatchButton("Virtual Storage", "st", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/inventory_icon.png")),
+                new CommandDispatchButton("Level Shop", "shop", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_balloon.png")),
+                new CommandDispatchButton("bank System", "bank", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/MCoin.png")),
+                new CommandDispatchButton("My Warp", "myw", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/broadcast_glyph_color.png")),
+                new CommandDispatchButton("Gacha", "gacha", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_random.png")),
+                new CommandDispatchButton("Statistics & Ranking", "ranking", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_best3.png")),
+                new SendFormButton($others1, "Others - 1", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/book_normal.png")),
+                new SendFormButton($others2, "Others - 2", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/book_normal.png")),
+                new CommandDispatchButton("Report\nサーバー内から直接メッセージを送ります", "report", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/mute_off.png")),
+            );
     }
 }
