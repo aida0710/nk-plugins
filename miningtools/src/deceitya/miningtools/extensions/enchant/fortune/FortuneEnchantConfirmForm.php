@@ -5,13 +5,14 @@ namespace deceitya\miningtools\extensions\enchant\fortune;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class FortuneEnchantConfirmForm extends SimpleForm {
 
     private array $nbt = [];
-    public const Rank1_MoneyCost = 1500;
-    public const Rank2_MoneyCost = 1500;
-    public const Rank3_MoneyCost = 1500;
+    public const Rank1_MoneyCost = 2500000;
+    public const Rank2_MoneyCost = 4500000;
+    public const Rank3_MoneyCost = 12000000;
 
     public const Rank1_ItemCost = 1;
     public const Rank2_ItemCost = 3;
@@ -21,18 +22,31 @@ class FortuneEnchantConfirmForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
             $this->nbt = ["MiningTools_Expansion_FortuneEnchant" => $namedTag->getInt("MiningTools_Expansion_FortuneEnchant")];
-            $upgrade = match ($namedTag->getInt('MiningTools_Expansion_FortuneEnchant')) {
-                1 => "現在、幸運エンチャントはRank.1です\n以下のコストを支払ってMiningToolを強化しますか？",
-                2 => "現在、幸運エンチャントはRank.2です\n以下のコストを支払ってMiningToolを強化しますか？",
-                3 => "最上位ツールの為アップグレードに対応していません",
-                default => "Errorが発生しました",
-            };
+            $cost = "";
+            switch ($namedTag->getInt('MiningTools_Expansion_FortuneEnchant')) {
+                case 1:
+                    $upgrade = "現在耐久エンチャントはRank.1です\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
+                    $cost = "コストは\n" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    break;
+                case 2:
+                    $upgrade = "現在、耐久力エンチャントは最大レベルです\nエンドコンテンツとして修繕を付与することが可能です";
+                    $cost = "コストは\n" . self::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    break;
+                case 3:
+                    $upgrade = "最上位ツールの為アップグレードに対応していません";
+                    break;
+                default:
+                    $upgrade = "Errorが発生しました";
+                    Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
+                    break;
+            }
         } else {
-            $upgrade = "現在、シルクタッチエンチャントが付与されています\n幸運エンチャントに変換することが可能です\n以下のコストを支払ってMiningToolを強化しますか？";
+            $upgrade = "現在、耐久強化はされていません\n以下のコストを支払ってMiningToolを強化しますか？";
+            $cost = "コストは\n" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         }
         $this
             ->setTitle("Expansion Mining Tools")
-            ->setText($upgrade)
+            ->setText("{$upgrade}\n\n{$cost}")
             ->addElements(new Button("アップデートする"));
     }
 

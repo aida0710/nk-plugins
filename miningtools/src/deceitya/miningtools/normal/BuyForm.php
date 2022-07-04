@@ -62,7 +62,14 @@ class BuyForm extends CustomForm {
         }
         EconomyAPI::getInstance()->reduceMoney($player, $this->cost);
         $player->getInventory()->addItem($item);
-        $player->sendMessage(Main::PrefixGreen . '§bMiningTools §7>> §aMiningToolsを購入しました');
+        switch ($this->mode) {
+            case "diamond":
+                $player->sendMessage(Main::PrefixGreen . 'DiamondMiningToolsを購入しました');
+                break;
+            case "netherite":
+                Server::getInstance()->broadcastMessage(Main::PrefixYellow . $player->getName() . 'がNetheriteMiningToolsを購入しました');
+                break;
+        }
     }
 
     public function itemRegister(): Item {

@@ -47,15 +47,13 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
                 $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
                 return;
             }
-            if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
-                $rank = 1;
-                $price = UnbreakingEnchantConfirmForm::Rank1_MoneyCost;
-                $costItem = UnbreakingEnchantConfirmForm::Rank1_ItemCost;
-                if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
-                if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
-                EconomyAPI::getInstance()->reduceMoney($player, $price);
-                $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 25));
-            }
+            $rank = 1;
+            $price = UnbreakingEnchantConfirmForm::Rank1_MoneyCost;
+            $costItem = UnbreakingEnchantConfirmForm::Rank1_ItemCost;
+            if ((new CheckPlayerData())->CheckReduceMoney($player, $price) === false) return;
+            if ((new CheckPlayerData())->CheckReduceCostItem($player, $costItem, $costItemId, $costItemNBT) === false) return;
+            EconomyAPI::getInstance()->reduceMoney($player, $price);
+            $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 25));
         }
         if (array_key_exists("MiningTools_Expansion_UnbreakingEnchant", $this->nbt)) {
             if ($this->nbt["MiningTools_Expansion_UnbreakingEnchant"] !== $namedTag->getInt("MiningTools_Expansion_UnbreakingEnchant")) {
@@ -99,6 +97,6 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         $item->setNamedTag($nbt);
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
-        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がNetheriteMiningToolsをEx.Rank{$rank}にアップグレードしました");
+        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がMiningToolsを耐久エンチャント強化 - Rank{$rank}にアップグレードしました");
     }
 }

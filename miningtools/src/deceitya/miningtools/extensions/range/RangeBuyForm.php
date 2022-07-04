@@ -103,7 +103,7 @@ class RangeBuyForm extends SimpleForm {
         }
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
-        Server::getInstance()->broadcastMessage("§bMiningTools §7>> §e{$player->getName()}がNetheriteMiningToolsをEx.Rank{$radius}にアップグレードしました");
+        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がMiningToolsを採掘範囲強化 - Rank{$radius}にアップグレードしました");
     }
 
 }

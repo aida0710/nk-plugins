@@ -104,6 +104,6 @@ class FortuneEnchantBuyForm extends SimpleForm {
         $item->setNamedTag($nbt);
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
-        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がNetheriteMiningToolsをEx.Rank{$rank}にアップグレードしました");
+        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がMiningToolsを幸運エンチャント強化 - Rank{$rank}にアップグレードしました");
     }
 }
