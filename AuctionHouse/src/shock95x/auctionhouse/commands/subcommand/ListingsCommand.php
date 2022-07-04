@@ -9,7 +9,6 @@ use shock95x\auctionhouse\commands\arguments\PlayerArgument;
 use shock95x\auctionhouse\libs\CortexPE\Commando\BaseSubCommand;
 use shock95x\auctionhouse\libs\CortexPE\Commando\constraint\InGameRequiredConstraint;
 use shock95x\auctionhouse\libs\CortexPE\Commando\exception\ArgumentOrderException;
-use shock95x\auctionhouse\menu\ListingsMenu;
 use shock95x\auctionhouse\menu\player\PlayerListingMenu;
 use shock95x\auctionhouse\menu\type\AHMenu;
 use shock95x\auctionhouse\utils\Locale;
@@ -28,7 +27,7 @@ class ListingsCommand extends BaseSubCommand {
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void {
         assert($sender instanceof Player);
         if (!isset($args["player"])) {
-            AHMenu::open(new ListingsMenu($sender, false));
+            $sender->sendMessage("§bAuction §7>> §c引数を省略することはできません");
             return;
         }
         $player = strtolower($args["player"]);

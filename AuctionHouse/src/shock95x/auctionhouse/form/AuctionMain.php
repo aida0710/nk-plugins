@@ -19,7 +19,7 @@ class AuctionMain extends SimpleForm {
                 new SendFormButton(new SellItemAuctionForm($player), "アイテムを出品する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/diamond.png")),
                 new CommandDispatchButton("出品期限が切れたアイテム\nキャンセルされたアイテムを表示", "ah expired", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/potato_poisonous.png")),
                 new SendFormButton(new ItemCategorySortAuctionForm(), "カテゴリ指定で表示する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/hopper.png")),
-                new SendFormButton(new PlayerCategorySortAuctionForm(), "プレイヤー指定で表示する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/armor_stand.png")),
+                new SendFormButton(new PlayerCategorySortAuctionForm($player), "プレイヤー指定で表示する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/armor_stand.png")),
             );
     }
 }
