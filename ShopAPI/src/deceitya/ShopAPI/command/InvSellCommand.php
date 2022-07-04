@@ -12,7 +12,7 @@ use pocketmine\Server;
 class InvSellCommand extends Command {
 
     public function __construct() {
-        parent::__construct("invsell", "ホットバーを除いたinventoryのアイテムを一括売却します");
+        parent::__construct("invsell", "inventoryのアイテムを一括売却します");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {

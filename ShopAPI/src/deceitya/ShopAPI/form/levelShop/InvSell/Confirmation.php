@@ -13,7 +13,7 @@ class Confirmation extends SimpleForm {
     public function __construct() {
         $this
             ->setTitle("Level Shop")
-            ->setText("inventory内のアイテムを一括売却します\n\nホットバーのアイテムは判定されません\n売却値が0円のアイテムや解放されていないアイテム(レベル不足)は売却されません")
+            ->setText("inventory内のアイテムを一括売却します\n\n売却値が0円のアイテムや解放されていないアイテム(レベル不足)は売却されません")
             ->addElements(new Button("確認画面に進む"));
     }
 
@@ -27,7 +27,6 @@ class Confirmation extends SimpleForm {
         for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
             $item = clone $inventory->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
-            if ($i >= 0 && $i <= $inventory->getHotbarSize() - 1) continue;
             if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
             if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "failure") {
                 $insufficientLevelAllCount += $item->getCount();

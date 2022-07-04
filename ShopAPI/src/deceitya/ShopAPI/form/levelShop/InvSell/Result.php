@@ -25,7 +25,6 @@ class Result extends SimpleForm {
         for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
             $item = clone $inventory->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
-            if ($i >= 0 && $i <= $inventory->getHotbarSize() - 1) continue;
             if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
             if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "failure") {
                 continue;
