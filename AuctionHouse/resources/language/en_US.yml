@@ -36,7 +36,7 @@ listing-gone: "§c選択したアイテムはもう出品されていません"
 price-range: "§c入力した値では出品することは出来ません。出品可能金額は{MIN}円から{MAX}円までとなります"    #{MIN}, {MAX}
 in-cooldown: "§c現在クールダウン中です。残り{M}分{S}秒"    #{M}, {S}
 player-not-found: "§cこのプレイヤーが出品しているアイテムは存在しません"
-player-listings-usage: "/ah listingsで自分の出品中のアイテムリストを表示出来ます"
+player-listings-usage: "/ah shopで自分の出品中のアイテムリストを表示出来ます"
 inventory-full: "§c在庫がいっぱいなため出品できません。出品中のアイテムを削除してください"
 purchase-economy-error: "§cトランザクションに失敗しました"
 
