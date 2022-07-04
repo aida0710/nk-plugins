@@ -11,7 +11,7 @@ use pocketmine\player\Player;
 class CommandListCommand extends Command {
 
     public function __construct() {
-        parent::__construct("command", "鯖内で使用できるコマンドの機能や仕様が書かれています");
+        parent::__construct("cmdls", "鯖内で使用できるコマンドの機能や仕様が書かれています");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
