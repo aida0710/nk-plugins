@@ -323,7 +323,7 @@
                     "meta": 0,
                     "count": 1,
                     "name": "§a[Gacha]DiamondMiningShovel",
-                    "description": "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です",
+                    "description": "がちゃ仕様の特殊範囲破壊シャベル\n\n自由にエンチャントしたり修繕することが可能です",
                     "enchants": [],
                     "nbt": [
                         "MiningTools_3",
@@ -347,7 +347,7 @@
                     "meta": 0,
                     "count": 1,
                     "name": "§a[Gacha]DiamondMiningAxe",
-                    "description": "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です",
+                    "description": "がちゃ仕様の特殊範囲破壊アックス\n\n自由にエンチャントしたり修繕することが可能です",
                     "enchants": [],
                     "nbt": [
                         "MiningTools_3",
