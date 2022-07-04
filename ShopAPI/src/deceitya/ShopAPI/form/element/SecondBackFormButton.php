@@ -21,7 +21,7 @@ class SecondBackFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $class = '\deceitya\ShopAPI\form\shop' . $this->shopNumber . '\Shop' . $this->shopNumber . 'Form';
+        $class = '\deceitya\ShopAPI\form\levelShop\shop' . $this->shopNumber . '\Shop' . $this->shopNumber . 'Form';
         $player->sendForm(new $class);
     }
 }

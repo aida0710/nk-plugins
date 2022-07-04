@@ -4,7 +4,6 @@ namespace deceitya\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
-use deceitya\ShopAPI\database\EnchantShopAPI;
 use deceitya\ShopAPI\database\LevelShopAPI;
 use deceitya\ShopAPI\form\levelShop\PurchaseForm;
 use deceitya\ShopAPI\form\levelShop\SellBuyForm;
@@ -41,7 +40,7 @@ class SellBuyItemFormButton extends Button {
             });
             return;
         }
-        $player->sendForm(new SellBuyForm($this->itemId, $this->itemMeta, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), EnchantShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta)));
+        $player->sendForm(new SellBuyForm($this->itemId, $this->itemMeta, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), LevelShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta)));
     }
 
     public function callback(Player $player, Item $item, int $strage): void {
