@@ -55,6 +55,8 @@ class PlayerEventListener implements Listener {
         ), 20);
     }
 
-    public function onContentChange(Inventory $inventory, array $oldContents): void {
+    public function changeGameMode(PlayerGameModeChangeEvent $event): void {
+        $player = $event->getPlayer();
+        Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
     }
 }
