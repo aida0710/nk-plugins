@@ -23,7 +23,7 @@ class EffectSelectForm extends SimpleForm {
         $api = EffectShopAPI::getInstance();
         $this
             ->setTitle("effect Form")
-            ->setText("§7せつめい\n{$error}");
+            ->setText("付与したい効果を選択してください\n{$error}");
         foreach ($effects as $effect) {
             $effectName = $effect->getName();
             if ($effectName instanceof Translatable) {

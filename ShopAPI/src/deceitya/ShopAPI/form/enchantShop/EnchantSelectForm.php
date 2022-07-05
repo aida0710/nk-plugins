@@ -25,7 +25,7 @@ class EnchantSelectForm extends SimpleForm {
         $api = EnchantShopAPI::getInstance();
         $this
             ->setTitle("Enchant Form")
-            ->setText("§7せつめい。。。\n{$error}");
+            ->setText("付与したい効果を選択してください\n{$error}");
         foreach ($enchants as $enchantment) {
             $enchantName = $enchantment->getName();
             if ($enchantName instanceof Translatable) {
