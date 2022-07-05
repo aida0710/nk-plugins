@@ -38,7 +38,7 @@ class Shop6Form extends SimpleForm {
     //    }
     //
     //    public function jsonSerialize() {
-    //        $shop = LevelShopAPI::getInstance();
+    //        $shopNumber = basename(__DIR__);
     //        return [
     //            'type' => 'form',
     //            'title' => 'LevelShop',

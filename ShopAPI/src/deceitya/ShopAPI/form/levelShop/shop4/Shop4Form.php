@@ -3,7 +3,6 @@
 namespace deceitya\ShopAPI\form\levelShop\shop4;
 
 use bbo51dog\bboform\form\SimpleForm;
-use deceitya\ShopAPI\database\LevelShopAPI;
 use deceitya\ShopAPI\form\element\FirstBackFormButton;
 use deceitya\ShopAPI\form\element\SellBuyItemFormButton;
 use deceitya\ShopAPI\form\element\ShopItemFormButton;
@@ -22,7 +21,7 @@ class Shop4Form extends SimpleForm {
         foreach ($contents as $key => $value) {
             $class = __NAMESPACE__ . "\\" . $value;
             if (is_int($value)) {
-                $shop = LevelShopAPI::getInstance();
+                $shopNumber = basename(__DIR__);
                 $item = match ($value) {
                     444 => "Elytra",
                     default => "Undefined Error",

@@ -2,6 +2,7 @@
 
 namespace deceitya\ShopAPI\form\levelShop;
 
+use deceitya\ShopAPI\database\LevelShopAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
@@ -124,7 +125,7 @@ class SaleForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "売却するアイテム/{$this->item->getName()}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
+                    'text' => "売却するアイテム/" . LevelShopAPI::getInstance()->getItemName($this->item->getId(), $this->item->getMeta()) . "\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
                 ],
                 [
                     'type' => 'input',

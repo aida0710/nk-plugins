@@ -2,6 +2,7 @@
 
 namespace deceitya\ShopAPI\form\levelShop;
 
+use deceitya\ShopAPI\database\LevelShopAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
@@ -15,6 +16,7 @@ class PurchaseForm implements Form {
     private int $count;
     private int $myMoney;
     private int $storage;
+    private LevelShopAPI $api;
 
     public function __construct(Item $item, int $price, int $count, int $myMoney, int $storage) {
         $this->item = $item;
@@ -22,11 +24,12 @@ class PurchaseForm implements Form {
         $this->count = $count;
         $this->myMoney = $myMoney;
         $this->storage = $storage;
+        $this->api = LevelShopAPI::getInstance();
     }
 
     public function handleResponse(Player $player, $data): void {
         if ($data === null || $data[1] === null) {
-            $player->sendMessage('§bLevelShop §7>> §a購入をキャンセルしました');
+            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getName())}の購入をキャンセルしました");
             return;
         }
         if ($data[1] === '' || !$this->isInteger($data[1]) || (int)floor($data[1]) <= 0) {
@@ -45,7 +48,7 @@ class PurchaseForm implements Form {
             EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
             StackStorageAPI::$instance->add($player->getXuid(), $this->item);
             $totalPrice = $this->price * $count;
-            $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalPrice}");
+            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalPrice}");
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item)) {
@@ -55,7 +58,7 @@ class PurchaseForm implements Form {
         $player->getInventory()->addItem($this->item);
         EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
         $totalPrice = $this->price * $count;
-        $player->sendMessage("§bLevelShop §7>> §a{$this->item->getName()}を{$count}個購入しました。使用金額 : {$totalPrice}");
+        $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を{$count}個購入しました。使用金額 : {$totalPrice}");
     }
 
     private function isInteger($input): bool {
@@ -69,7 +72,7 @@ class PurchaseForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "購入するアイテム/{$this->item->getName()}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
+                    'text' => "購入するアイテム/{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
                 ],
                 [
                     'type' => 'input',
