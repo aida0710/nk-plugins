@@ -37,7 +37,7 @@ class FlyForm extends CustomForm {
             $this
                 ->setTitle("Fly Mode")
                 ->addElements(
-                    new Label("フライ継続中は落下ダメージが消えます\n無制限にした場合分数は無視されます\n\n毎分1500円づつ消費します\nまた、途中でやめたい場合は再度/flyと入力してください"),
+                    new Label("フライ継続中は落下ダメージが消えます\n無制限にした場合分数は無視されます\n\n毎分1500円づつ消費します\nまた、途中でやめたい場合は再度/flyと入力してください\n\n注意 : 鯖を退出した場合はflyTaskが自動的に停止されます"),
                     $this->count,
                     $this->infinity,
                 );

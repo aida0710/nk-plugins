@@ -2,9 +2,12 @@
 
 namespace Deceitya\Flytra;
 
+use Deceitya\Flytra\task\FlyCheckTask;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerGameModeChangeEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\Inventory;
@@ -34,6 +37,13 @@ class PlayerEventListener implements Listener {
         $player = $event->getPlayer();
         $player->getArmorInventory()->getListeners()->add(new PlayerEventListener());
         Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
+    }
+
+    public function onQuit(PlayerQuitEvent $event) {
+        $player = $event->getPlayer();
+        if (array_key_exists($player->getName(), FlyCheckTask::$flyTask)) {
+            unset(FlyCheckTask::$flyTask[$player->getName()]);
+        }
     }
 
     public function onPlayerRespawn(PlayerRespawnEvent $event) {
