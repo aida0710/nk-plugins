@@ -19,14 +19,10 @@ class EnchantShopAPI {
     protected array $levelLimit = [];
     protected array $miningLevel = [];
 
-    public function __construct() {
-        $this->init();
-    }
-
     /**
      * @return void
      */
-    protected function init(): void {
+    public function init(): void {
         $this->register(VanillaEnchantments::SHARPNESS(), 3000, 5, 30);
         $this->register(VanillaEnchantments::EFFICIENCY(), 5000, 5, 15);
         $this->register(VanillaEnchantments::SILK_TOUCH(), 15000, 1, 15);

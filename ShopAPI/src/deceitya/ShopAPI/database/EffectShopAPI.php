@@ -16,14 +16,10 @@ class EffectShopAPI {
     protected array $amplifiedMoney = [];
     protected array $timeRestriction = [];
 
-    public function __construct() {
-        $this->init();
-    }
-
     /**
      * @return void
      */
-    protected function init(): void {
+    public function init(): void {
         $this->register(VanillaEffects::HASTE(), 600, 2, 800, 800);
         $this->register(VanillaEffects::SPEED(), 250, 15, 1200, 800);
         $this->register(VanillaEffects::REGENERATION(), 1200, 5, 800, 30);

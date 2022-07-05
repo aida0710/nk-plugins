@@ -26,7 +26,7 @@ class LevelShopAPI {
     /**
      * @return void
      */
-    protected function init(): void {
+    public function init(): void {
         /*Shop1*/
         #Currency
         $this->register(VanillaItems::NETHER_STAR(), 1000, 1000, 1, "item"); ##Nether_Star

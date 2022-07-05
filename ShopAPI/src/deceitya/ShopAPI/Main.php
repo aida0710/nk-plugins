@@ -12,11 +12,17 @@ use deceitya\ShopAPI\command\Shop4Command;
 use deceitya\ShopAPI\command\Shop5Command;
 use deceitya\ShopAPI\command\Shop6Command;
 use deceitya\ShopAPI\command\Shop7Command;
+use deceitya\ShopAPI\database\EffectShopAPI;
+use deceitya\ShopAPI\database\EnchantShopAPI;
+use deceitya\ShopAPI\database\LevelShopAPI;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
     public function onEnable(): void {
+        LevelShopAPI::getInstance()->init();
+        EffectShopAPI::getInstance()->init();
+        EnchantShopAPI::getInstance()->init();
         $this->getServer()->getCommandMap()->registerAll("levelshop", [
             new Shop1Command(),
             new Shop2Command(),
