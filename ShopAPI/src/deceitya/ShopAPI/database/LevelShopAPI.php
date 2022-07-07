@@ -22,6 +22,15 @@ class LevelShopAPI {
     protected array $itemName = [];
     protected array $multiByteItemName = [];
 
+    public const RestrictionLevel_OtherShop = 35;
+    public const RestrictionLevel_Shop1 = 0;
+    public const RestrictionLevel_Shop2 = 25;
+    public const RestrictionLevel_Shop3 = 50;
+    public const RestrictionLevel_Shop4 = 80;
+    public const RestrictionLevel_Shop5 = 120;
+    public const RestrictionLevel_Shop6 = 180;
+    public const RestrictionLevel_Shop7 = 250;
+
     /**
      * @return void
      */

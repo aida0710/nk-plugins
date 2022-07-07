@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\ShopAPI\form\levelShop\InvSell;
+namespace deceitya\ShopAPI\form\levelShop\other\InvSell;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;

@@ -1,8 +1,8 @@
 <?php
 
-namespace lazyperson710\sff\command;
+namespace deceitya\ShopAPI\command;
 
-use lazyperson710\sff\form\ShopForm;
+use deceitya\ShopAPI\form\levelShop\MainLevelShopForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -18,6 +18,6 @@ class ShopCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new ShopForm($sender));
+        $sender->sendForm(new MainLevelShopForm($sender));
     }
 }
