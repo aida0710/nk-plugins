@@ -9,11 +9,21 @@ use pocketmine\event\player\PlayerGameModeChangeEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
+use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\Inventory;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 
 class PlayerEventListener implements Listener {
+
+    public function onSlotChange(Inventory $inventory, int $slot): void {
+        if ($inventory instanceof ArmorInventory && $slot === ArmorInventory::SLOT_CHEST) {
+            $holder = $inventory->getHolder();
+            if ($holder instanceof Player) {
+                Main::getInstance()->checkFly($holder, $holder->getWorld(), $inventory->getChestplate());
+            }
+        }
+    }
 
     public function onContentChange(Inventory $inventory, array $oldContents): void {
     }
