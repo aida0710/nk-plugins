@@ -12,7 +12,6 @@ use lazyperson710\sff\command\LockCommand;
 use lazyperson710\sff\command\MiningToolsCommand;
 use lazyperson710\sff\command\PlayerCommand;
 use lazyperson710\sff\command\RecipeCommand;
-use lazyperson710\sff\command\ShopCommand;
 use lazyperson710\sff\command\StackAllCommand;
 use lazyperson710\sff\command\TosCommand;
 use lazyperson710\sff\command\WarpUICommand;
@@ -46,7 +45,6 @@ class Main extends PluginBase {
             new RecipeCommand(),
             new InvClearCommand(),
             new MiningToolsCommand(),
-            new ShopCommand(),
             new PlayerCommand(),
             new StackAllCommand(),
             new DonationCommand(),
