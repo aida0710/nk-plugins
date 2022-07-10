@@ -29,7 +29,7 @@ class Calculation {
                 $meta = $item->getMeta();
             }
             if (MiningLevelAPI::getInstance()->getLevel($player) < LevelShopAPI::getInstance()->getLevel($id, $meta)) {
-                $error = "§c{$api->getItemName($id ,$meta)} - レベル不足/{$api->getLevel($id, $meta)}§r";
+                $error = "§c{$api->getItemName($id ,$meta)} - レベル不足/lv.{$api->getLevel($id, $meta)}§r";
             } else $error = "{$api->getItemName($id ,$meta)}";
             $class->addElements(new SellBuyItemFormButton("{$error}\n購入:{$api->getBuy($id ,$meta)} / 売却:{$api->getSell($id ,$meta)}", $id, $meta));
         }
