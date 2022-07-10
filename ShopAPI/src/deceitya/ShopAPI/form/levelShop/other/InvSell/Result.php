@@ -11,7 +11,7 @@ use pocketmine\player\Player;
 
 class Result extends SimpleForm {
 
-    public function __construct(Player $player, int $allCount, int $allSellMoney, string $allItem, int $insufficientLevelAllCount, string $insufficientLevelAllItem) {
+    public function __construct(int $allCount, int $allSellMoney, string $allItem, int $insufficientLevelAllCount, string $insufficientLevelAllItem) {
         $this
             ->setTitle("Level Shop")
             ->setText("下記のアイテムを売却しても本当によろしいでしょうか？\n\n売却合計金額 {$allSellMoney}円\n売却アイテム合計数 {$allCount}個\n\n売却アイテム一覧\n{$allItem}\nレベル不足で売却ができないアイテム合計数 {$insufficientLevelAllCount}個\nレベル不足で売却ができないアイテム一覧\n{$insufficientLevelAllItem}")

@@ -4,7 +4,7 @@ namespace deceitya\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
-use lazyperson710\sff\form\ShopForm;
+use deceitya\ShopAPI\form\levelShop\MainLevelShopForm;
 use pocketmine\player\Player;
 
 class FirstBackFormButton extends Button {
@@ -18,6 +18,6 @@ class FirstBackFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new ShopForm($player));
+        $player->sendForm(new MainLevelShopForm($player));
     }
 }

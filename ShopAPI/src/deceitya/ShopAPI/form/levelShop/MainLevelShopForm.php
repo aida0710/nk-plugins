@@ -20,7 +20,7 @@ class MainLevelShopForm extends SimpleForm {
 
     public function __construct(Player $player, ?string $error = null) {
         $levelShopList = [
-            LevelShopAPI::RestrictionLevel_OtherShop => new OtherShopFunctionSelectForm($player),
+            LevelShopAPI::RestrictionLevel_OtherShop => new OtherShopFunctionSelectForm(),
             LevelShopAPI::RestrictionLevel_Shop1 => new Shop1Form(),
             LevelShopAPI::RestrictionLevel_Shop2 => new Shop2Form(),
             LevelShopAPI::RestrictionLevel_Shop3 => new Shop3Form(),

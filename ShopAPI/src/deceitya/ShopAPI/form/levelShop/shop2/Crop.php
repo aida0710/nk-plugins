@@ -6,10 +6,11 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\levelShop\Calculation;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
 
 class Crop extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $shopNumber = basename(__DIR__);
         $contents = [
             VanillaItems::WHEAT(),
@@ -23,6 +24,6 @@ class Crop extends SimpleForm {
             VanillaBlocks::MELON()->asItem(),
             VanillaBlocks::PUMPKIN()->asItem(),
         ];
-        (new Calculation())->sendButton($shopNumber, $contents, $this);
+        (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
 }

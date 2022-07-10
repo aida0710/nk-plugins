@@ -266,13 +266,6 @@ class LevelShopAPI {
         $this->register(VanillaBlocks::REDSTONE_TORCH()->asItem(), 2500, 1, 250, "レッドストーントーチ"); ## Redstone_torch
         $this->register(VanillaBlocks::REDSTONE_REPEATER()->asItem(), 2500, 1, 250, "リピーター"); ## Redstone_Repeater
         $this->register(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 1, 250, "コンパレーター"); ## Redstone_Comparator
-        //foreach ($this->itemName as $itemName) {
-        //    foreach ($itemName as $item) {
-        //        if (mb_strpos($item, "ブロック")) {
-        //            $this->getDataFromItemName($item);
-        //        }
-        //    }
-        //}
     }
 
     /**
@@ -379,4 +372,12 @@ class LevelShopAPI {
         }
         return self::$instance;
     }
+
+    /**
+     * @return array
+     */
+    public function getItemNameVariable(): array {
+        return $this->itemName;
+    }
+
 }

@@ -4,10 +4,11 @@ namespace deceitya\ShopAPI\form\levelShop\shop5;
 
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\levelShop\Calculation;
+use pocketmine\player\Player;
 
 class OtherItems extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $shopNumber = basename(__DIR__);
         $contents = [
             -228,
@@ -17,6 +18,6 @@ class OtherItems extends SimpleForm {
             -223,
             -224,
         ];
-        (new Calculation())->sendButton($shopNumber, $contents, $this);
+        (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
 }

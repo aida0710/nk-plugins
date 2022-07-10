@@ -5,10 +5,11 @@ namespace deceitya\ShopAPI\form\levelShop\shop6;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\levelShop\Calculation;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\player\Player;
 
 class Vegetation extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $shopNumber = basename(__DIR__);
         $contents = [
             VanillaBlocks::DANDELION()->asItem(),
@@ -36,7 +37,7 @@ class Vegetation extends SimpleForm {
             VanillaBlocks::LILY_PAD()->asItem(),
             VanillaBlocks::VINES()->asItem(),
         ];
-        (new Calculation())->sendButton($shopNumber, $contents, $this);
+        (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
 }
 

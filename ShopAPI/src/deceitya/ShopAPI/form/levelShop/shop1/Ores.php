@@ -6,10 +6,11 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\levelShop\Calculation;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
 
 class Ores extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $shopNumber = basename(__DIR__);
         $contents = [
             VanillaItems::COAL(),
@@ -22,6 +23,6 @@ class Ores extends SimpleForm {
             VanillaItems::DIAMOND(),
             VanillaItems::EMERALD(),
         ];
-        (new Calculation())->sendButton($shopNumber, $contents, $this);
+        (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
 }

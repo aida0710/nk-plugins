@@ -47,6 +47,6 @@ class Confirmation extends SimpleForm {
         if (is_null($insufficientLevelAllItem)) {
             $insufficientLevelAllItem .= "none\n";
         }
-        $player->sendForm(new Result($player, $allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem));
+        $player->sendForm(new Result($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem));
     }
 }

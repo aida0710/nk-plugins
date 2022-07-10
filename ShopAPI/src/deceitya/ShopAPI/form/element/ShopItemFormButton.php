@@ -21,6 +21,6 @@ class ShopItemFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new $this->class);
+        $player->sendForm(new $this->class($player));
     }
 }

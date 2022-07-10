@@ -5,10 +5,11 @@ namespace deceitya\ShopAPI\form\levelShop\shop4;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\levelShop\Calculation;
 use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
 
 class Weapon extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $shopNumber = basename(__DIR__);
         $contents = [
             VanillaItems::IRON_SWORD(),
@@ -20,6 +21,6 @@ class Weapon extends SimpleForm {
             513,
             772,
         ];
-        (new Calculation())->sendButton($shopNumber, $contents, $this);
+        (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
 }
