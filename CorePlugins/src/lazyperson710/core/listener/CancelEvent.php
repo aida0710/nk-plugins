@@ -74,10 +74,12 @@ class CancelEvent implements Listener {
                 case BlockLegacyIds::WATERLILY:
                 case BlockLegacyIds::FLOWING_WATER:
                 case BlockLegacyIds::STILL_WATER:
+                    //その他
+                case BlockLegacyIds::HOPPER_BLOCK;
                     if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                         $event->cancel();
                     }
-                    $event->getPlayer()->sendTip("§bWater §7>> §c水は生活ワールドと農業ワールドでのみ使用可能です");
+                    $event->getPlayer()->sendTip("§bWater §7>> §c{$event->getPlayer()->getInventory()->getItemInHand()->getName()}は生活ワールドと農業ワールドでのみ使用可能です");
                     break;
             }
         }
