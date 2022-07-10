@@ -57,7 +57,7 @@ class LevelShopAPI {
         $this->register(VanillaItems::GOLD_INGOT(), 900, 180, 1, "金インゴット"); ## Gold_Ingot
         $this->register(VanillaItems::LAPIS_LAZULI(), 750, 80, 1, "ラピスラズリ"); ## Lapis_Lazuli
         $this->register(VanillaItems::REDSTONE_DUST(), 75, 15, 1, "レッドストーン"); ## Redstone
-        $this->register(VanillaItems::DIAMOND(), 4500, 800, 1, "ダイアモンド"); ## Diamond
+        $this->register(VanillaItems::DIAMOND(), 4500, 800, 1, "ダイヤモンド"); ## Diamond
         $this->register(VanillaItems::EMERALD(), 15000, 3000, 1, "エメラルド"); ## Emerald
         #Others
         $this->register(VanillaItems::WRITABLE_BOOK(), 50, 1, 1, "本と羽根ペン"); ## Book_&_Quill
