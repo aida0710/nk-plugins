@@ -12,6 +12,7 @@ use lazyperson0710\ticket\TicketAPI;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
+use ree_jp\stackstorage\api\StackStorageAPI;
 
 class GachaForm extends CustomForm {
 
@@ -85,7 +86,7 @@ class GachaForm extends CustomForm {
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
             } else {
-                $player->dropItem($item);
+                StackStorageAPI::$instance->add($player->getXuid(), $item);
                 $onDrop = true;
             }
             if (mt_rand(1, 1000000) === 15000) {
