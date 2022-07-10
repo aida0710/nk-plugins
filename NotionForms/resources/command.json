@@ -1,7 +1,11 @@
 [
     {
-        "title": "最終更新 : 2022年5月31日",
-        "text": "最終更新 : 2022年5月31日"
+        "title": "最終更新 : 2022年07月10日",
+        "text": "最終更新 : 2022年07月10日"
+    },
+    {
+        "title": "/ah",
+        "text": "使い方/ah\n\nAuctionを利用することができます\nform操作だけではなくsubコマンドから操作することも可能となっており/ah category,shop,expired,from,listing,sellが使用できます"
     },
     {
         "title": "/announce",
@@ -20,12 +24,24 @@
         "text": "使い方/book\n\n署名済みの本を複製することができます。また、原本ではない複製された本を複製することはできません"
     },
     {
+        "title": "/cmd",
+        "text": "使い方/cmd\n\nCommandExecutionFormを表示します"
+    },
+    {
+        "title": "/cmdls",
+        "text": "使い方/cmdls\n\nこのformが開きます。コマンドの機能の解説などを表示"
+    },
+    {
         "title": "/coordinates",
         "text": "使い方/coordinates on/off\n\n左上に表示されている座標をon/off出来ます"
     },
     {
         "title": "/dice",
         "text": "使い方/dice 範囲の最小値 範囲の最大値 (連続で回す回数指定 当たりを指定(無制限))無くても可\n例/rand 1 5\n/rand 1 100 9 1\n\n指定した範囲内で乱数を発生させることが出来ます\nまた、連続で回したり、回した中で指定した値(当たり)だけを表示することもできます"
+    },
+    {
+        "title": "/donation",
+        "text": "使い方/donation\n\n寄付してくださった方の名前や寄付によって解放されたアイテムを取得することができます"
     },
     {
         "title": "/e",
@@ -44,8 +60,12 @@
         "text": "使い方/fly\n\nエリトラがなくてもお金を犠牲にして飛行することができます\n分数指定や無制限にすることができます"
     },
     {
-        "title": "/gatya",
-        "text": "使い方/gatya\n\nがちゃを引くことをできます"
+        "title": "/gacha",
+        "text": "使い方/gacha\n\nチケットを使用してがちゃを引くことをできます"
+    },
+    {
+        "title": "/info",
+        "text": "使い方/info\n\nInformationFormを表示します"
     },
     {
         "title": "/inv",
@@ -100,6 +120,10 @@
         "text": "使い方/player\n\n他人の情報を取得できます"
     },
     {
+        "title": "/pvp",
+        "text": "使い方/pvp\n\npvpワールドに複数の指定された座標にランダムにワープします\nWarpCompassからも同じ動作をします"
+    },
+    {
         "title": "/ranking",
         "text": "使い方/ranking\n\n現在の統計や様々な情報のランキングを見ることができます"
     },
@@ -145,7 +169,7 @@
     },
     {
         "title": "/ticket",
-        "text": "使い方/ticket\n\n採掘時に稀に取得できるチケットを相手に渡したり旧チケットを変換したりすることができます\nまた、チケットは/gatyaで使用可能です"
+        "text": "使い方/ticket\n\n採掘時に稀に取得できるチケットを相手に渡したり旧チケットを変換したりすることができます\nまた、チケットは/gachaで使用可能です"
     },
     {
         "title": "/tos",
@@ -154,6 +178,10 @@
     {
         "title": "/vote",
         "text": "使い方/vote\n\n投票することができます。投票用のお題はopが設定します"
+    },
+    {
+        "title": "/warpui",
+        "text": "使い方/warpui\n\nWarpCompassFormを表示します"
     },
     {
         "title": "/wp",
