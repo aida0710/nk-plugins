@@ -11,6 +11,7 @@ use Deceitya\MiningLevel\Form\MiningLevelUPForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use InfoSystem\InfoSystem;
+use lazyperson0710\ticket\TicketAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -124,6 +125,8 @@ class EventListener implements Listener {
                         break;
                     case 3:
                         $player->sendMessage("§bTutorial §7>> §gアイテムを修繕するにはかなとこをスニークしてタップしてみて！");
+                        $player->sendMessage("ガチャTicketを3枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 3);
                         break;
                     case 5:
                         $player->sendMessage("§bTutorial §7>> §gストレージは/stを活用してみよう");
@@ -146,16 +149,19 @@ class EventListener implements Listener {
                     case 20:
                         $player->sendMessage("§bTutorial §7>> §g浜松市が解放されました！25レベルでshop2が解放されます！");
                         $player->sendMessage("§bTutorial §7>> §gネザーディメンション2,3が解放されました！");
+                        $player->sendMessage("ガチャTicketを15枚配布しました！");
+                        TicketAPI::getInstance()->addTicket($player, 15);
                         break;
                     case 25:
-                        $msg .= "LevelShop2が解放されました！浜松市に行って農業をやってみよう！\n";
-                        $msg .= "インベントリからアイテムを一括売却できる機能が解放されました！/shop\n\n";
-                        $msg .= "MyWarpでのワープ地点上限が5 -> 10になりました！/mw\n";
+                        $player->sendMessage("LevelShop2が解放されました！浜松市に行って農業をやってみよう！\n");
+                        $player->sendMessage("MyWarpでのワープ地点上限が5 -> 10になりました！/mw\n");
                         break;
                     case 30:
                         $msg .= "サーバーオリジナルレシピが存在します！/recipeから見れるよ！\n";
                         $msg .= "PVPワールドが解放されました！/pvp\n";
                         $msg .= "連続で同じメッセージを発言できるようになりました\n";
+                        $msg .= "インベントリからアイテムを一括売却できる機能が解放されました！/shop\n";
+                        $msg .= "shopにてアイテムを検索する機能が解放されました/shop\n";
                         $msg .= "MiningWorldが解放されました！一週間に一度リセットされる特殊なワールドです！\n";
                         break;
                     case 45:
