@@ -75,7 +75,7 @@ class CancelEvent implements Listener {
                 case BlockLegacyIds::FLOWING_WATER:
                 case BlockLegacyIds::STILL_WATER:
                     //その他
-                case BlockLegacyIds::HOPPER_BLOCK;
+                case ItemIds::HOPPER:
                     if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                         $event->cancel();
                     }
