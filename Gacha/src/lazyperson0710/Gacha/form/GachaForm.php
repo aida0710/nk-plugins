@@ -9,6 +9,7 @@ use lazyperson0710\Gacha\Calculation\ItemRegister;
 use lazyperson0710\Gacha\Calculation\RankCalculation;
 use lazyperson0710\Gacha\Main;
 use lazyperson0710\ticket\TicketAPI;
+use pocketmine\block\BlockLegacyIds;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -86,6 +87,7 @@ class GachaForm extends CustomForm {
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
             } else {
+                if ($item->getId() === BlockLegacyIds::AIR) continue;
                 StackStorageAPI::$instance->add($player->getXuid(), $item);
                 $onDrop = true;
             }
