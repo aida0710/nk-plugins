@@ -12,7 +12,7 @@ class AuctionMain extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
-            ->setTitle("Land Command")
+            ->setTitle("Auction System")
             ->setText("選択してください\nチェストGUIが開かない場合はお手数おかけしますがリログを推奨しています")
             ->addElements(
                 new CommandDispatchButton("AuctionGUIを開く", "ah shop", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/carrot_golden.png")),
