@@ -28,7 +28,7 @@ class InputItemForm extends CustomForm {
         }
         foreach (LevelShopAPI::getInstance()->getItemNameVariable() as $itemArray) {
             foreach ($itemArray as $itemName) {
-                if (mb_strpos($itemName, $this->itemName->getValue())) {
+                if (str_contains($itemName, $this->itemName->getValue())) {
                     $items[] = LevelShopAPI::getInstance()->getDataFromItemName($itemName);
                 }
             }
