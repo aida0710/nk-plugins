@@ -8,10 +8,8 @@ use pocketmine\player\Player;
 
 class Convert {
 
-    /** @var int */
-    private $needCount;
-    /** @var Item[] */
-    private $items = [];
+    private int $needCount;
+    private array $items = [];
 
     public function __construct(int $needCount) {
         $this->needCount = $needCount;
