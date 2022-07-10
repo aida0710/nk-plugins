@@ -31,21 +31,21 @@ class BreakEventListener implements Listener {
     public function blockBreakTicket(BlockBreakEvent|MiningToolsBreakEvent $event) {
         $player = $event->getPlayer();
         if ($event->getEventName() === (new BlockBreakEvent($player, $event->getBlock(), $player->getInventory()->getItemInHand()))->getEventName()) {
-            $probability = "0.02";
-            $random = mt_rand(1, 5000);
+            $probability = "0.125";
+            $random = mt_rand(1, 800);
         } elseif ($event->getEventName() === (new MiningToolsBreakEvent($player, $event->getBlock()))->getEventName()) {
-            $probability = "0.0125";
-            $random = mt_rand(1, 8000);
+            $probability = "0.0769";
+            $random = mt_rand(1, 1300);
         }
         if (empty($random) || empty($probability)) {
             return;
         }
-        if ($random === 4500) {
+        if ($random === 500) {
             TicketAPI::getInstance()->addTicket($player, 1);
             if (Server::getInstance()->isOp($player->getName())) {
-                $player->sendMessage("§bTicket §7>> §aTicketを{$probability}％の確率で{$player->getName()}がゲットしました(op取得)");
+                $player->sendTip("§bTicket §7>> §aTicketを{$probability}％の確率で{$player->getName()}がゲットしました(op取得)");
             } else {
-                Server::getInstance()->broadcastMessage("§bTicket §7>> §eTicketを{$probability}％の確率で{$player->getName()}がゲットしました");
+                Server::getInstance()->broadcastTip("§bTicket §7>> §eTicketを{$probability}％の確率で{$player->getName()}がゲットしました");
             }
         }
     }
