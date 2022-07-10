@@ -29,15 +29,15 @@ class RangeConfirmForm extends SimpleForm {
             $this->nbt = ["MiningTools_Expansion_Range" => $namedTag->getInt("MiningTools_Expansion_Range")];
             switch ($namedTag->getInt('MiningTools_Expansion_Range')) {
                 case 1:
-                    $upgrade = "現在、範囲強化はRank.1[5x5]です\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
-                    $cost = "コストは\n" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    $upgrade = "現在、範囲強化はRank.1[5x5]です\n\n強化効果 : 破壊範囲[5x5]->[7x7]\n\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
+                    $cost = "コストは" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
                 case 2:
-                    $upgrade = "現在、範囲強化はRank.2[7x7]です\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
-                    $cost = "コストは\n" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    $upgrade = "現在、範囲強化はRank.2[7x7]です\n\n強化効果 : 破壊範囲[7x7]->[9x9]\n\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
+                    $cost = "コストは" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
                 case 3:
-                    $upgrade = "最上位ツールの為アップグレードに対応していません";
+                    $upgrade = "最上位ランクの為アップグレードに対応していません";
                     break;
                 default:
                     $upgrade = "Errorが発生しました";
@@ -46,8 +46,8 @@ class RangeConfirmForm extends SimpleForm {
             }
         } elseif ($namedTag->getTag('MiningTools_3') !== null) {
             $this->nbt = ["MiningTools_3" => $namedTag->getInt("MiningTools_3")];
-            $upgrade = "現在、範囲強化はされていません\n以下のコストを支払ってMiningToolを強化しますか？";
-            $cost = "コストは\n" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+            $upgrade = "現在、範囲強化はされていません\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\n以下のコストを支払ってMiningToolを強化しますか？";
+            $cost = "コストは" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         } else {
             $upgrade = "Errorが発生しました";
             Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");

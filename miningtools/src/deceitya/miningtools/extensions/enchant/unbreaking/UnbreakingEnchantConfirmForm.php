@@ -25,15 +25,15 @@ class UnbreakingEnchantConfirmForm extends SimpleForm {
             $this->nbt = ["MiningTools_Expansion_UnbreakingEnchant" => $namedTag->getInt("MiningTools_Expansion_UnbreakingEnchant")];
             switch ($namedTag->getInt('MiningTools_Expansion_UnbreakingEnchant')) {
                 case 1:
-                    $upgrade = "現在耐久エンチャントはRank.1です\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
-                    $cost = "コストは\n" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    $upgrade = "現在耐久エンチャントはRank.1です\n\n強化効果 : 耐久25から耐久35に強化\n\n以下のコストを支払ってMiningToolを強化しますか？";
+                    $cost = "コストは" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
                 case 2:
-                    $upgrade = "現在、耐久力エンチャントは最大レベルです\nエンドコンテンツとして修繕を付与することが可能です";
-                    $cost = "コストは\n" . self::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    $upgrade = "現在耐久エンチャントはRank.2です\n\n強化効果 : 耐久35から耐久50に強化し更に修繕を付与\n\n以下のコストを支払ってMiningToolを強化しますか？";
+                    $cost = "コストは" . self::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
                 case 3:
-                    $upgrade = "最上位ツールの為アップグレードに対応していません";
+                    $upgrade = "最上位ランクの為アップグレードに対応していません";
                     break;
                 default:
                     $upgrade = "Errorが発生しました";
@@ -41,8 +41,8 @@ class UnbreakingEnchantConfirmForm extends SimpleForm {
                     break;
             }
         } else {
-            $upgrade = "現在、耐久強化はされていません\n以下のコストを支払ってMiningToolを強化しますか？";
-            $cost = "コストは\n" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+            $upgrade = "現在、耐久強化はされていません\n\n強化効果 : 耐久10から耐久25に強化\n\n以下のコストを支払ってMiningToolを強化しますか？";
+            $cost = "コストは" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         }
         $this
             ->setTitle("Expansion Mining Tools")

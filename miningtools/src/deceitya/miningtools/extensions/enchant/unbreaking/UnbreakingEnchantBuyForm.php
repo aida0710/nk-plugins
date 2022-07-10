@@ -23,11 +23,11 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_UnbreakingEnchant') !== null) {
             $upgrade = match ($namedTag->getInt("MiningTools_Expansion_UnbreakingEnchant")) {
-                1 => "上位ツールにアップグレードしますか？\n\n費用は600万円\n範囲は7x7になります",
-                2 => "最上位ツールにアップグレードしますか？\n\n費用は1500万円\n範囲は9x9になります",
+                1 => "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 耐久25から耐久35に強化\n\nコストは" . UnbreakingEnchantConfirmForm::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります",
+                2 => "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 耐久35から耐久50に強化し更に修繕を付与\n\nコストは" . UnbreakingEnchantConfirmForm::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります",
             };
         } else {
-            $upgrade = "上位ツールにアップグレードしますか？\n\n費用は350万円\n範囲は5x5になります";
+            $upgrade = "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 耐久10から耐久25に強化\n\nコストは" . UnbreakingEnchantConfirmForm::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         }
         $this
             ->setTitle("Expansion Mining Tools")

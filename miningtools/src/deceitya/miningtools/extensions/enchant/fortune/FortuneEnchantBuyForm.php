@@ -25,11 +25,11 @@ class FortuneEnchantBuyForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
             $upgrade = match ($namedTag->getInt("MiningTools_Expansion_FortuneEnchant")) {
-                1 => "上位ツールにアップグレードしますか？\n\n費用は600万円\n範囲は7x7になります",
-                2 => "最上位ツールにアップグレードしますか？\n\n費用は1500万円\n範囲は9x9になります",
+                1 => "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 幸運1から幸運2に強化\n\nコストは" . FortuneEnchantConfirmForm::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . FortuneEnchantConfirmForm::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります",
+                2 => "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 幸運2から幸運3に強化\n\nコストは" . FortuneEnchantConfirmForm::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . FortuneEnchantConfirmForm::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります",
             };
         } else {
-            $upgrade = "上位ツールにアップグレードしますか？\n\n費用は350万円\n範囲は5x5になります";
+            $upgrade = "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : シルクタッチを削除し幸運1を付与\n\nコストは" . FortuneEnchantConfirmForm::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . FortuneEnchantConfirmForm::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         }
         $this
             ->setTitle("Expansion Mining Tools")

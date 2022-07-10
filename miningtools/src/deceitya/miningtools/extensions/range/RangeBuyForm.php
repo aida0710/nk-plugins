@@ -5,6 +5,7 @@ namespace deceitya\miningtools\extensions\range;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
+use deceitya\miningtools\extensions\enchant\unbreaking\UnbreakingEnchantConfirmForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
 use deceitya\miningtools\Main;
 use onebone\economyapi\EconomyAPI;
@@ -21,11 +22,11 @@ class RangeBuyForm extends SimpleForm {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_Range') !== null) {
             $upgrade = match ($namedTag->getInt("MiningTools_Expansion_Range")) {
-                1 => "上位ツールにアップグレードしますか？\n\n費用は600万円\n範囲は7x7になります",
-                2 => "最上位ツールにアップグレードしますか？\n\n費用は1500万円\n範囲は9x9になります",
+                1 => "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 破壊範囲[5x5]->[7x7]\n\nコストは" . UnbreakingEnchantConfirmForm::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります",
+                2 => "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 破壊範囲[7x7]->[9x9]\n\nコストは" . UnbreakingEnchantConfirmForm::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります",
             };
         } elseif ($namedTag->getTag('MiningTools_3') !== null) {
-            $upgrade = "上位ツールにアップグレードしますか？\n\n費用は350万円\n範囲は5x5になります";
+            $upgrade = "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\nコストは" . UnbreakingEnchantConfirmForm::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         }
         $this
             ->setTitle("Expansion Mining Tools")
