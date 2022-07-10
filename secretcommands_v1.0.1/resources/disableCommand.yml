@@ -1,0 +1,31 @@
+---
+## DefaultCommand
+- ban
+- ban-ip
+- banlist
+- defaultgamemode
+- difficulty
+- extraactplugin
+- genplugin
+- pardon
+- pardon-ip
+- pkreload
+- save-off
+- seed
+- title
+- transferserver
+- unban
+- unban-ip
+## CSkull
+- showskulls
+- showheads
+## EconomyAPI
+- mymoney
+- mystatus
+- setlang
+- topmoney
+## InvSee
+- invseegrant
+- invseereq
+## Others
+...

@@ -1,0 +1,69 @@
+---
+##DefaultCommand
+- about
+- checkperm
+- clear
+- kill
+- suicide
+- ver
+- version
+##CSkull
+- skull
+- head
+- playerhead
+##Gatya
+- gatya
+##WorldWarpSystem
+- wtp
+##InvSee
+- invsee
+- enderinvsee
+##MiningLevelAPI
+- level
+##MultiWorld
+- multiworld
+- mw
+##EconomyAPI
+- seemoney
+##XP
+- xp
+##MiningTools
+- mt4
+##WorldEdit
+- /bi
+- /blockinfo
+- /pos1
+- /pos2
+- /extend
+- /set
+- /replace
+- /naturalize
+- /smooth
+- /center
+- /walls
+- /sides
+- /move
+- /stack
+- /istack
+- /count
+- /extinguish
+- /undo
+- /redo
+- /copy
+- /cut
+- /paste
+- /insert
+- /rotate
+- /flip
+- /loadschematic
+- /saveschematic
+- /sphere
+- /hsphere
+- /cylinder
+- /hcylinder
+- /noise
+- /brush
+- /status
+- /cancel
+- /benchmark
+...
