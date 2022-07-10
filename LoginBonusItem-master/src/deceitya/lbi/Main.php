@@ -72,7 +72,7 @@ class Main extends PluginBase implements Listener {
         }
         $player->sendMessage((count($result) === 0) ?
             '§bLogin §7>> §aログインボーナスを受け取りました' :
-            '§bLogin §7>> §aインベントリに空きがないため、ログインボーナスを受け取れませんでした。/bonusitemから保留になっているログインボーナスアイテムを受け取ろう');
+            '§bLogin §7>> §aインベントリに空きがないため、ログインボーナスを受け取れませんでした。/bonusから保留になっているログインボーナスアイテムを受け取ろう');
     }
 
     /**
