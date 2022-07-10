@@ -9,7 +9,7 @@ class ResultForm extends CustomForm {
 
     public function __construct(string $formMessage, bool $onDrop) {
         if ($onDrop === true) {
-            $this->addElements(new Label("§l§c一部または全てのアイテムがInventoryが満タンの為仮想ストレージに入りました§r\n"));
+            $this->addElements(new Label("§l§cアイテムを渡せない為itemをdropさせました§r\n"));
         }
         $this
             ->setTitle("Gacha System")
