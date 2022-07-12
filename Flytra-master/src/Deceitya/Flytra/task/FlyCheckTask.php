@@ -4,6 +4,8 @@ namespace Deceitya\Flytra\task;
 
 use Deceitya\Flytra\Main;
 use onebone\economyapi\EconomyAPI;
+use pocketmine\item\Durable;
+use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
@@ -13,6 +15,18 @@ class FlyCheckTask extends Task {
     static array $flyTask = [];
 
     public function onRun(): void {
+        foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {//エリトラの耐久を無限にする
+            $chest = $onlinePlayer->getArmorInventory()->getChestplate();
+            if ($chest->getId() === ItemIds::ELYTRA) {
+                if ($chest instanceof Durable) {
+                    if ($chest->getDamage() !== 0){
+                        $chest->setDamage(0);
+                        $chest->setUnbreakable(true);
+                        $onlinePlayer->getArmorInventory()->setChestplate($chest);
+                    }
+                }
+            }
+        }
         if (empty(self::$flyTask)) {
             return;
         }
