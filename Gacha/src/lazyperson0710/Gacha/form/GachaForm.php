@@ -9,6 +9,7 @@ use lazyperson0710\Gacha\Calculation\ItemRegister;
 use lazyperson0710\Gacha\Calculation\RankCalculation;
 use lazyperson0710\Gacha\Main;
 use lazyperson0710\ticket\TicketAPI;
+use onebone\economyapi\EconomyAPI;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -20,16 +21,18 @@ class GachaForm extends CustomForm {
     private array $cost;
     private int $key;
 
-    public function __construct(string $gachaName, int $key) {
+    public function __construct(Player $player, string $gachaName, int $key) {
         $this->key = $key;
         $this->content = Main::getInstance()->getAllData();
+        $moneyApi = EconomyAPI::getInstance();
+        $ticket = TicketAPI::getInstance();
         $this->cost = $this->content[$key]["cost"];
         $rank = $this->content[$key]["rank"];
         $this->quantity = new Input("ガチャを回したい回数を入力してください", "0");
         $this
             ->setTitle("Gacha System / {$gachaName}")
             ->addElements(
-                new Label("ガチャコスト\nMoney -> {$this->cost["money"]}\nMiningTicket -> {$this->cost["ticket"]}枚\nEventTicket -> {$this->cost["eventTicket"]}枚"),
+                new Label("ガチャコスト / 所持数量\nMoney -> {$this->cost["money"]} / {$moneyApi->myMoney($player->getName())}円\nMiningTicket -> {$this->cost["ticket"]}枚 / {$ticket->checkData($player)}枚\nEventTicket -> {$this->cost["eventTicket"]}枚"),
                 new Label("ガチャの排出確率\nCommon -> {$rank["C"]}％\nUnCommon -> {$rank["UC"]}％\nRare -> {$rank["R"]}％\nSuperRare -> {$rank["SR"]}％\nLegendary -> {$rank["L"]}％"),
                 new Label("inventoryが満タンの場合アイテムはドロップする為アイテム削除には十分にお気を付けください"),
                 $this->quantity,

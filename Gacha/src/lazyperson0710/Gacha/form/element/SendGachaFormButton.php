@@ -24,6 +24,6 @@ class SendGachaFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new GachaForm($this->text, $this->key));
+        $player->sendForm(new GachaForm($player, $this->text, $this->key));
     }
 }
