@@ -22,18 +22,6 @@ class BreakListener implements Listener {
             $setExp = 5000;
             $event->getPlayer()->getXpManager()->addXp($setExp);
         }
-        if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
-            if (!empty($inhanditem->getNamedTag()->getTag('MiningTools_3'))) {
-                if (!empty($inhanditem->getNamedTag()->getTag('gacha_mining'))) {
-                    return;
-                } else {
-                    if ($item->getEnchantmentLevel(VanillaEnchantments::SILK_TOUCH()) === 0) {
-                        $event->cancel();
-                        $event->getPlayer()->sendMessage('§bEnchant §7>> §cこのアイテムは使用不可です。なまけものに言って交換してもらうか買いなおしてください');
-                    }
-                }
-            }
-        }
         if ($item instanceof Durable) {
             $value = $item->getMaxDurability() - $item->getDamage();
             $value--;
