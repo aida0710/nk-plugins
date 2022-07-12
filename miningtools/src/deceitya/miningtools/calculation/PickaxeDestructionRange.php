@@ -86,6 +86,12 @@ class PickaxeDestructionRange {
                     }
                     if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
                     if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
+                    /** @var Durable $handItem */
+                    $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+                    if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
+                        $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
+                        continue;
+                    }
                     $blockIds[] = $targetBlock->getId();
                     $dropItems = array_merge($dropItems ?? [], (new ItemDrop())->getDrop($player, $targetBlock));
                     if (!$player->isSneaking()) {
