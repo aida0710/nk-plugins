@@ -29,7 +29,7 @@ class PurchaseForm implements Form {
 
     public function handleResponse(Player $player, $data): void {
         if ($data === null || $data[1] === null) {
-            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getName())}の購入をキャンセルしました");
+            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}の購入をキャンセルしました");
             return;
         }
         if ($data[1] === '' || !$this->isInteger($data[1]) || (int)floor($data[1]) <= 0) {
