@@ -52,12 +52,7 @@ class GachaForm extends CustomForm {
                 return;
             }
         }
-        $result = (new RankCalculation)->run($this->quantity->getValue(), $player, $this->key);
-        if ($result === false) return;
-        if (empty($result)) {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-            return;
-        }
+        if($result = (new RankCalculation)->run($this->quantity->getValue(), $player, $this->key) !== true) return;
         $result = substr($result, 0, -1);
         $result = explode(",", $result);
         $formMessage = null;

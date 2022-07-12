@@ -33,9 +33,9 @@ class RankCalculation {
         $this->cost = $this->content[$key]["cost"];
         $result = null;
         for ($i = 1; $i <= $num; $i++) {
-            if ($this->checkMoney($player) === false) return false;
-            if ($this->checkTicket($player) === false) return false;
-            if ($this->checkEventTicket($player) === false) return false;//無条件でtrue
+            if ($this->checkMoney($player) !== true) return false;
+            if ($this->checkTicket($player) !== true) return false;
+            if ($this->checkEventTicket($player) !== true) return false;//無条件でtrue
             EconomyAPI::getInstance()->reduceMoney($player->getName(), $this->cost["money"]);
             TicketAPI::getInstance()->reduceTicket($player, $this->cost["ticket"]);
             $rand = mt_rand(1, $this->num);
