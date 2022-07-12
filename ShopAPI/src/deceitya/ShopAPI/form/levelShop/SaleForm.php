@@ -16,6 +16,7 @@ class SaleForm implements Form {
     private int $count;
     private int $myMoney;
     private int $storage;
+    private LevelShopAPI $api;
 
     public function __construct(Item $item, int $price, int $count, int $myMoney, int $storage) {
         $this->item = $item;
@@ -23,11 +24,13 @@ class SaleForm implements Form {
         $this->count = $count;
         $this->myMoney = $myMoney;
         $this->storage = $storage;
+        $this->api = LevelShopAPI::getInstance();
     }
 
     public function handleResponse(Player $player, $data): void {
+        $api = LevelShopAPI::getInstance();
         if ($data === null || $data[1] === null) {
-            $player->sendMessage('§bLevelShop §7>> §aアイテムの売却がキャンセルされました');
+            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}の売却がキャンセルされました");
             return;
         }
         if ($data[1] === '' || !$this->isInteger($data[1]) || (int)floor($data[1]) <= 0) {
