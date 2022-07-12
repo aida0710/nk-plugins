@@ -143,6 +143,14 @@ class CancelEvent implements Listener {
                 $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
             }
         }
+        if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningToolsRangeCostItem') !== null) {
+            $event->cancel();
+            $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
+        }
+        if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningToolsEnchantCostItem') !== null) {
+            $event->cancel();
+            $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
+        }
     }
 
     public function onBreak(BlockBreakEvent $event) {
