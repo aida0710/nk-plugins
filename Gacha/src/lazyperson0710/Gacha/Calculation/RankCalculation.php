@@ -29,7 +29,13 @@ class RankCalculation {
         $this->num = (int)array_sum($this->rank);
     }
 
-    public function run($num, Player $player, $key): string|false {
+    /**
+     * @param $num
+     * @param Player $player
+     * @param $key
+     * @return string|null
+     */
+    public function run($num, Player $player, $key): string|null {
         $this->cost = $this->content[$key]["cost"];
         $result = null;
         for ($i = 1; $i <= $num; $i++) {
