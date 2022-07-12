@@ -19,18 +19,10 @@ class TicketAPI {
     private array $cache;
     private Config $config;
 
-    private function __construct(string $dataFile) {
+    public function setCache($dataFile): void {
         $this->config = new Config($dataFile, Config::YAML, [
             "player" => 0,
         ]);
-        $this->cache = $this->config->getAll();
-    }
-
-    public static function init(string $dataFile): void {
-        self::$instance = new TicketAPI($dataFile);
-    }
-
-    public function setCache(): void {
         $this->cache = $this->config->getAll();
     }
 
@@ -46,6 +38,9 @@ class TicketAPI {
     }
 
     public static function getInstance(): TicketAPI {
+        if (!isset(self::$instance)) {
+            self::$instance = new TicketAPI();
+        }
         return self::$instance;
     }
 
