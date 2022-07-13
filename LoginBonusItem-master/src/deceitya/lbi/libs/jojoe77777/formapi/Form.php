@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\lbi\libs\jojoe77777\formapi;
 
 use pocketmine\form\Form as IForm;

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace nkserver\ranking\command;
 
 use nkserver\ranking\command\sub\SearchSubCommand;

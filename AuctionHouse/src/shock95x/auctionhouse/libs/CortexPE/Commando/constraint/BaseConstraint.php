@@ -25,7 +25,7 @@
  * Written by @CortexPE <https://CortexPE.xyz>
  *
  */
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace shock95x\auctionhouse\libs\CortexPE\Commando\constraint;
 
 use pocketmine\command\CommandSender;

@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace shock95x\auctionhouse\libs\poggit\libasynql\result;
 
 class SqlInsertResult extends SqlChangeResult {
