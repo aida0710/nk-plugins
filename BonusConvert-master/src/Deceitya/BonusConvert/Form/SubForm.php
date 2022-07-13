@@ -27,7 +27,7 @@ class SubForm implements Form {
             'type' => 'form',
             'title' => 'LoginBonus',
             'content' => '選択して下さい',
-            'buttons' => []
+            'buttons' => [],
         ];
         foreach ($this->convert->getItems() as $item) {
             $name = $item->getCustomName() === '' ? $item->getName() : $item->getCustomName();

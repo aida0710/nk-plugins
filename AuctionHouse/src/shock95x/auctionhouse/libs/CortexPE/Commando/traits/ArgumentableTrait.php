@@ -81,14 +81,14 @@ trait ArgumentableTrait {
     public function parseArguments(array $rawArgs, CommandSender $sender): array {
         $return = [
             "arguments" => [],
-            "errors" => []
+            "errors" => [],
         ];
         // try parsing arguments
         $required = count($this->requiredArgumentCount);
         if (!$this->hasArguments() && count($rawArgs) > 0) { // doesnt take args but sender gives args anyways
             $return["errors"][] = [
                 "code" => BaseCommand::ERR_NO_ARGUMENTS,
-                "data" => []
+                "data" => [],
             ];
         }
         $offset = 0;
@@ -135,8 +135,8 @@ trait ArgumentableTrait {
                         "code" => BaseCommand::ERR_INVALID_ARG_VALUE,
                         "data" => [
                             "value" => $rawArgs[$offset] ?? "",
-                            "position" => $pos + 1
-                        ]
+                            "position" => $pos + 1,
+                        ],
                     ];
                     return $return; // let's break it here.
                 }
@@ -145,13 +145,13 @@ trait ArgumentableTrait {
         if ($offset < count($rawArgs)) { // this means that the arguments our user sent is more than the needed amount
             $return["errors"][] = [
                 "code" => BaseCommand::ERR_TOO_MANY_ARGUMENTS,
-                "data" => []
+                "data" => [],
             ];
         }
         if ($required > 0) {// We still have more unfilled required arguments
             $return["errors"][] = [
                 "code" => BaseCommand::ERR_INSUFFICIENT_ARGUMENTS,
-                "data" => []
+                "data" => [],
             ];
         }
         return $return;

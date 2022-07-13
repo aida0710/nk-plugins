@@ -134,7 +134,7 @@ class MysqlCredentials implements JsonSerializable {
             "password" => str_repeat("*", strlen($this->password)),
             "schema" => $this->schema,
             "port" => $this->port,
-            "socket" => $this->socket
+            "socket" => $this->socket,
         ];
     }
 
@@ -145,7 +145,7 @@ class MysqlCredentials implements JsonSerializable {
             "password" => $this->password,
             "schema" => $this->schema,
             "port" => $this->port,
-            "socket" => $this->socket
+            "socket" => $this->socket,
         ];
     }
 }

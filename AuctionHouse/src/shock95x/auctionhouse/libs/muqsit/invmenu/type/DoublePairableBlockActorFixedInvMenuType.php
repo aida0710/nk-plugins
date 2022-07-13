@@ -40,7 +40,7 @@ final class DoublePairableBlockActorFixedInvMenuType implements FixedInvMenuType
         $menu_name = $menu->getName();
         foreach ([
                      [$origin, $origin->east()],
-                     [$origin->east(), $origin]
+                     [$origin->east(), $origin],
                  ] as [$origin_pos, $pair_pos]) {
             $graphics[] = new BlockActorInvMenuGraphic(
                 $this->block,

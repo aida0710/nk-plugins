@@ -57,7 +57,7 @@ class FlyForm extends CustomForm {
                     "Mode" => "unlimited",
                     "TimeLeft" => null,
                     "Flag" => false,
-                ]
+                ],
             ];
             return;
         }
@@ -79,7 +79,7 @@ class FlyForm extends CustomForm {
                 "Mode" => "limited",
                 "TimeLeft" => $timeLeft,
                 "Flag" => false,
-            ]
+            ],
         ];
     }
 

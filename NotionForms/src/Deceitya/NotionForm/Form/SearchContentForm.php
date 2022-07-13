@@ -38,7 +38,7 @@ class SearchContentForm implements Form {
             'type' => 'form',
             'title' => $content['title'],
             'content' => $content['text'],
-            'buttons' => [['text' => '検索結果へ戻る'], ['text' => '戻る']]
+            'buttons' => [['text' => '検索結果へ戻る'], ['text' => '戻る']],
         ];
     }
 }

@@ -33,7 +33,7 @@ class Database {
             $this->type = $this->config->getNested("database.type");
             $this->connector = libasynql::create($this->plugin, $this->config->get("database"), [
                 "sqlite" => "statements/sqlite.sql",
-                "mysql" => "statements/mysql.sql"
+                "mysql" => "statements/mysql.sql",
             ], true);
             $this->connector->executeGeneric(Query::INIT);
         } catch (SqlError $error) {

@@ -95,7 +95,7 @@ class ActionForm implements Form {
                     "placeholder" => "金額",
                     "default" => "",
                 ],
-            ]
+            ],
         ];
     }
 }

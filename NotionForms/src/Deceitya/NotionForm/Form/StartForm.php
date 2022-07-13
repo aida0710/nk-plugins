@@ -31,7 +31,7 @@ class StartForm implements Form {
             'content' => '見たいコンテンツを選択してください',
             'buttons' => [
                 ['text' => "コンテンツを検索"],
-            ]
+            ],
         ];
         foreach ($this->file as $c) {
             $form['buttons'][] = ['text' => $c['title']];

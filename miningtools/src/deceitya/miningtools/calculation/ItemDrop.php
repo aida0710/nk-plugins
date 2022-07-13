@@ -31,7 +31,7 @@ class ItemDrop {
         if (empty($dropItems)) {
             return;
         }
-        $dropItems = array_diff($dropItems, array($startBlock));
+        $dropItems = array_diff($dropItems, [$startBlock]);
         $dropItems = array_values($dropItems);
         $dropItems = $player->getInventory()->addItem(...$dropItems);
         if (count($dropItems) === 0) {

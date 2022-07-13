@@ -12,7 +12,7 @@ class CustomForm extends BaseForm {
             'type' => 'dropdown',
             'text' => $text,
             'options' => $options,
-            'default' => $default
+            'default' => $default,
         ];
     }
 
@@ -21,14 +21,14 @@ class CustomForm extends BaseForm {
             'type' => 'input',
             'text' => $text,
             'placeholder' => $placeholder,
-            'default' => $default
+            'default' => $default,
         ];
     }
 
     public function addLabel(string $id, string $text = ''): void {
         $this->contents[$id] = [
             'type' => 'label',
-            'text' => $text
+            'text' => $text,
         ];
     }
 
@@ -39,7 +39,7 @@ class CustomForm extends BaseForm {
             'text' => $text,
             'min' => $min,
             'max' => $max,
-            'default' => $default
+            'default' => $default,
         ];
     }
 
@@ -48,7 +48,7 @@ class CustomForm extends BaseForm {
             'type' => 'step_slider',
             'text' => $text,
             'steps' => $steps,
-            'default' => $default
+            'default' => $default,
         ];
     }
 
@@ -56,7 +56,7 @@ class CustomForm extends BaseForm {
         $this->contents[$id] = [
             'type' => 'toggle',
             'text' => $text,
-            'default' => $default
+            'default' => $default,
         ];
     }
 
@@ -72,7 +72,7 @@ class CustomForm extends BaseForm {
     final public function jsonSerialize() {
         $json = [
             'type' => self::CUSTOM,
-            'title' => $this->title
+            'title' => $this->title,
         ];
         $json['content'] = array_values($this->contents);
         return $json;

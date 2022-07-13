@@ -23,7 +23,7 @@ class ModalForm extends BaseForm {
     final public function jsonSerialize() {
         $json = [
             'type' => self::MODAL,
-            'title' => $this->title
+            'title' => $this->title,
         ];
         $json['content'] = $this->label;
         $json['button1'] = $this->contents[0];

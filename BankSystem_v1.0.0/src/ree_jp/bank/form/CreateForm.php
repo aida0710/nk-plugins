@@ -16,13 +16,13 @@ class CreateForm implements Form {
      * @inheritDoc
      */
     public function handleResponse(Player $player, $data): void {
-        if ($data === NULL) {
+        if ($data === null) {
             return;
         }
         $money = EconomyAPI::getInstance()->myMoney($player);
         if ($money and $money >= self::MONEY) {
             $string = $data[0];
-            $string = str_replace(array("[", "]", "{", "}"), "***sqliteで使用出来ない記号です***", $string);
+            $string = str_replace(["[", "]", "{", "}"], "***sqliteで使用出来ない記号です***", $string);
             if (!str_contains($string, '§')) {
                 if (!BankHelper::getInstance()->isExists($string)) {
                     BankHelper::getInstance()->create($string, $player->getName());
@@ -47,7 +47,7 @@ class CreateForm implements Form {
                     "placeholder" => "なまけもの銀行",
                     "default" => "",
                 ],
-            ]
+            ],
         ];
     }
 }

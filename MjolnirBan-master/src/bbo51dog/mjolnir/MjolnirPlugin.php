@@ -39,7 +39,7 @@ class MjolnirPlugin extends PluginBase {
             "messages" => [
                 "kick-message" => "You are banned",
                 "default-ban-reason" => "Banned by admin",
-            ]
+            ],
         ]);
         $config->save();
         Setting::getInstance()->setData($config->getAll());

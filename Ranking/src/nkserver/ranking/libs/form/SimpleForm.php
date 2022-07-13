@@ -12,7 +12,7 @@ class SimpleForm extends BaseForm {
         if ($image !== null) {
             $button['image'] = [
                 'type' => 'path',
-                'data' => $image
+                'data' => $image,
             ];
         }
         $this->contents[] = $button;
@@ -29,7 +29,7 @@ class SimpleForm extends BaseForm {
     final public function jsonSerialize() {
         $json = [
             'type' => self::SIMPLE,
-            'title' => $this->title
+            'title' => $this->title,
         ];
         $json['content'] = $this->label;
         $json['buttons'] = $this->contents;

@@ -28,7 +28,7 @@ class ContentForm implements Form {
             'type' => 'form',
             'title' => $content['title'],
             'content' => $content['text'],
-            'buttons' => [['text' => '戻る']]
+            'buttons' => [['text' => '戻る']],
         ];
     }
 }

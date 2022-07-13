@@ -21,12 +21,12 @@ class DetailForm implements Form {
         $form = [
             'type' => 'custom_form',
             'title' => 'MyWarp',
-            'content' => []
+            'content' => [],
         ];
         foreach (Database::getInstance()->getWarpPositions($this->player) as $warp) {
             $form['content'][] = [
                 'type' => 'label',
-                'text' => "> {$warp['name']}§r\nワールド ： {$warp['world']}\n作成時刻 ： {$warp['created_at']}\n座標 ： x. {$warp['x']} / y. {$warp['y']} / z. {$warp['z']}"
+                'text' => "> {$warp['name']}§r\nワールド ： {$warp['world']}\n作成時刻 ： {$warp['created_at']}\n座標 ： x. {$warp['x']} / y. {$warp['y']} / z. {$warp['z']}",
             ];
         }
         return $form;

@@ -45,7 +45,7 @@ class ShareForm implements Form {
                     "placeholder" => "gameTag",
                     "default" => "",
                 ],
-            ]
+            ],
         ];
     }
 }

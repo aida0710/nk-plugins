@@ -50,7 +50,7 @@ class Main extends PluginBase {
             new DonationCommand(),
             new InformationCommand(),
             new WarpUICommand(),
-            new CmdExecutionCommand()
+            new CmdExecutionCommand(),
         ]);
     }
 

@@ -23,9 +23,9 @@ class RankForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => $res
-                ]
-            ]
+                    'text' => $res,
+                ],
+            ],
         ];
     }
 }

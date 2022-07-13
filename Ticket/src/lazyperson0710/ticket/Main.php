@@ -18,7 +18,7 @@ class Main extends PluginBase {
         if (!file_exists($this->getDataFolder())) {
             mkdir($this->getDataFolder() . "TicketData.yml");
         }
-        $this->getScheduler()->scheduleRepeatingTask(new SaveTask(),  20 * 60);
+        $this->getScheduler()->scheduleRepeatingTask(new SaveTask(), 20 * 60);
         TicketAPI::getInstance()->setCache($this->getDataFolder() . "TicketData.yml");
     }
 

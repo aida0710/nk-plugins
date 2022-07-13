@@ -27,7 +27,7 @@ class DeleteForm implements Form {
      * @inheritDoc
      */
     public function handleResponse(Player $player, $data): void {
-        if ($data === NULL) {
+        if ($data === null) {
             return;
         }
         if (isset($this->option[$data[0]])) {
@@ -51,7 +51,7 @@ class DeleteForm implements Form {
                     "text" => "選択してください",
                     "options" => $option,
                 ],
-            ]
+            ],
         ];
     }
 }

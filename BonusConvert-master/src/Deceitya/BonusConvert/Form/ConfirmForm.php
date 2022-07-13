@@ -39,7 +39,7 @@ class ConfirmForm implements Form {
             'title' => 'LoginBonus',
             'content' => "ログインボーナス{$this->convert->getNeedCount()}個と{$name}を交換しますか？",
             'button1' => 'はい',
-            'button2' => 'いいえ'
+            'button2' => 'いいえ',
         ];
     }
 }

@@ -26,7 +26,7 @@ class TeleportForm implements Form {
             'type' => 'form',
             'title' => 'WorldUI',
             'content' => '選択してください',
-            'buttons' => $this->conversionArray($this->worlds_array)
+            'buttons' => $this->conversionArray($this->worlds_array),
         ];
     }
 

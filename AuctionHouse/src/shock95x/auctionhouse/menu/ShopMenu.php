@@ -57,7 +57,7 @@ class ShopMenu extends PagingMenu {
             self::INDEX_LISTINGS => $listings,
             self::INDEX_EXPIRED => $expired,
             52 => $howto,
-            53 => $info
+            53 => $info,
         ];
         if ($this->player->hasPermission("auctionhouse.command.admin")) {
             $admin = Utils::getButtonItem($this->player, "admin_menu", "view-admin-menu");

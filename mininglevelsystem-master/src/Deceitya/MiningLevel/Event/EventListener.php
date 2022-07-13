@@ -90,7 +90,7 @@ class EventListener implements Listener {
                     $player->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました");
                 }
                 $player->sendMessage("§bLevel §7>> §aレベルアップボーナスとして{$item->getName()}が付与されました");
-            } else if ($level % 5 == 0) {
+            } elseif ($level % 5 == 0) {
                 EconomyAPI::getInstance()->addMoney($player, 8000);
                 $player->sendMessage("§bLevel §7>> §aレベルアップボーナスとして8000円が付与されました");
             }

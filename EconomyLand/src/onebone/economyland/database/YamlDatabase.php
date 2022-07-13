@@ -96,7 +96,7 @@ class YamlDatabase implements Database {
             "owner" => $owner,
             "level" => $level,
             "invitee" => [],
-            "expires" => $expires
+            "expires" => $expires,
         ];
         (new LandAddedEvent($this->landNum, $startX, $endX, $startZ, $endZ, $level, $price, $owner, $expires))->call();
         return $this->landNum++;

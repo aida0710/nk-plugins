@@ -21,7 +21,7 @@ class MainForm implements Form {
             'type' => 'form',
             'title' => 'LoginBonus',
             'content' => '選択して下さい',
-            'buttons' => []
+            'buttons' => [],
         ];
         foreach (BonusConvertPlugin::getConverts() as $convert) {
             $form['buttons'][] = ['text' => "必要数 : {$convert->getNeedCount()}"];

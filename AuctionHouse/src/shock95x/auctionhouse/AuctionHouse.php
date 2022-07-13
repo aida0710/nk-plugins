@@ -60,7 +60,7 @@ class AuctionHouse extends PluginBase {
         LegacyConverter::getInstance()->init($this->database);
         if ($pluginManager->getPlugin(EconomySProvider::getName()) !== null) {
             $this->setEconomyProvider(new EconomySProvider());
-        } else if ($pluginManager->getPlugin(BedrockEconomyProvider::getName()) !== null) {
+        } elseif ($pluginManager->getPlugin(BedrockEconomyProvider::getName()) !== null) {
             $this->setEconomyProvider(new BedrockEconomyProvider());
         }
         $this->getScheduler()->scheduleDelayedTask(new ClosureTask(function () {

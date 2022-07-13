@@ -58,7 +58,7 @@ class SellBuyForm implements Form {
             'title' => 'LevelShop',
             'content' => "購入か売却かを選択してください\n選択したアイテム : {$api->getItemName($this->itemId, $this->itemMeta)}\n\n一つ当たりの購入値 : {$this->buy}円\n一つ当たりの売却値 : {$this->sell}円",
             'button1' => '購入する',
-            'button2' => '売却する'
+            'button2' => '売却する',
         ];
     }
 }

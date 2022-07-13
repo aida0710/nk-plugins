@@ -22,7 +22,7 @@ class DeleteCheckForm implements Form {
      * @inheritDoc
      */
     public function handleResponse(Player $player, $data): void {
-        if ($data === NULL) {
+        if ($data === null) {
             return;
         }
         if ($data) {

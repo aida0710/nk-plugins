@@ -24,7 +24,7 @@ class Main extends PluginBase {
         $this->getServer()->getCommandMap()->registerAll("notionForm", [
             new FunctionCommand(),
             new SpecificationCommand(),
-            new CommandListCommand()
+            new CommandListCommand(),
         ]);
     }
 }

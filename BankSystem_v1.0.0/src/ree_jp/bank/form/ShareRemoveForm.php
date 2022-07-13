@@ -53,7 +53,7 @@ class ShareRemoveForm implements Form {
                     "text" => "選択してください",
                     "options" => $option,
                 ],
-            ]
+            ],
         ];
     }
 }

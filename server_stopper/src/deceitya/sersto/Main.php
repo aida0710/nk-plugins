@@ -59,7 +59,7 @@ class Main extends PluginBase {
     }
 
     private function deleteDir($dir) {
-        $files = array_diff(scandir($dir), array('.', '..'));
+        $files = array_diff(scandir($dir), ['.', '..']);
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? $this->deleteDir("$dir/$file") : unlink("$dir/$file");
         }

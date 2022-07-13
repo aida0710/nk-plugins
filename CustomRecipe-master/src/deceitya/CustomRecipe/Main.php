@@ -17,7 +17,7 @@ class Main extends PluginBase {
         $shape = [
             "GAG",
             "ABA",
-            "GAG"
+            "GAG",
         ];
         $input = [
             "A" => VanillaBlocks::GOLD()->asItem(),

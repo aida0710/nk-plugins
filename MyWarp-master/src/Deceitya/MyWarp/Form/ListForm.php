@@ -33,7 +33,7 @@ class ListForm implements Form {
             'type' => 'form',
             'title' => 'MyWarp',
             'content' => '選択してください',
-            'buttons' => []
+            'buttons' => [],
         ];
         foreach ($this->warps as $pos) {
             $form['buttons'][] = ['text' => $pos];

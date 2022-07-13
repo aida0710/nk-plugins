@@ -69,11 +69,11 @@ class SearchForm implements Form {
     }
 
     public function convertEOL($string, $to = "\n"): string {
-        return strtr($string, array(
+        return strtr($string, [
             "\r\n" => $to,
             "\r" => $to,
             "\n" => $to,
-        ));
+        ]);
     }
 
     public function InjectDecoration(int $result, string $text, string $search): array {
@@ -105,24 +105,24 @@ class SearchForm implements Form {
                     'type' => 'input',
                     'text' => '検索ワード',
                     'placeholder' => '',
-                    'default' => $this->default[1] ?? ''
+                    'default' => $this->default[1] ?? '',
                 ],
                 [
                     'type' => 'input',
                     'text' => '検索ワード1',
                     'placeholder' => '',
-                    'default' => $this->default[2] ?? ''
+                    'default' => $this->default[2] ?? '',
                 ],
                 [
                     'type' => 'input',
                     'text' => '検索ワード2',
                     'placeholder' => '',
-                    'default' => $this->default[3] ?? ''
+                    'default' => $this->default[3] ?? '',
                 ],
                 [
                     "type" => "toggle",
                     "text" => "戻る",
-                ]
+                ],
             ],
         ];
     }

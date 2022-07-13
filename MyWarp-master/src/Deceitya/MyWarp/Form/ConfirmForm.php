@@ -31,7 +31,7 @@ class ConfirmForm implements Form {
             'title' => 'MyWarp',
             'content' => "{$this->target}を本当に削除しますか？\n\n" . "{$warp['name']}\nワールド ： {$warp['world']}\n作成時刻 ： {$warp['created_at']}\n座標 ： x. {$warp['x']} / y. {$warp['y']} / z. {$warp['z']}",
             "button1" => 'はい',
-            "button2" => 'いいえ'
+            "button2" => 'いいえ',
         ];
     }
 }

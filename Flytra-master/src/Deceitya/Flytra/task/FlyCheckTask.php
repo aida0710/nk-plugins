@@ -19,7 +19,7 @@ class FlyCheckTask extends Task {
             $chest = $onlinePlayer->getArmorInventory()->getChestplate();
             if ($chest->getId() === ItemIds::ELYTRA) {
                 if ($chest instanceof Durable) {
-                    if ($chest->getDamage() !== 0){
+                    if ($chest->getDamage() !== 0) {
                         $chest->setDamage(0);
                         $chest->setUnbreakable(true);
                         $onlinePlayer->getArmorInventory()->setChestplate($chest);

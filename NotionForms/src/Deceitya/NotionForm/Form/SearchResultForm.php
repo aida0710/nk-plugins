@@ -40,8 +40,8 @@ class SearchResultForm implements Form {
             'title' => 'Notion Form',
             'content' => '見たいコンテンツを選択してください',
             'buttons' => [
-                ['text' => "戻る"]
-            ]
+                ['text' => "戻る"],
+            ],
         ];
         foreach ($this->heading as $key => $heading) {
             $form['buttons'][] = ['text' => $heading];

@@ -20,12 +20,12 @@ use pocketmine\utils\Config;
 class InfoSystem extends PluginBase implements Listener {
 
     public const owner = [
-        'lazyperson710'
+        'lazyperson710',
     ];
 
     public const debugger = [
         'sloth0710',
-        'asapon128'
+        'asapon128',
     ];
 
     /**
@@ -65,15 +65,15 @@ class InfoSystem extends PluginBase implements Listener {
                     "content" => [
                         [
                             "type" => "label",
-                            "text" => $text
+                            "text" => $text,
                         ],
                         [
                             "type" => "input",
                             "text" => "作成する称号",
                             "placeholder" => "ナマケモノ",
-                            "default" => ""
-                        ]
-                    ]
+                            "default" => "",
+                        ],
+                    ],
                 ];
                 $this->createWindow($sender, $data, 78533);
             } else {

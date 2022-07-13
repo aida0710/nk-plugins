@@ -138,7 +138,7 @@ class SimpleLay extends PluginBase {
         }
         $this->sittingData[strtolower($player->getName())] = [
             'eid' => $eid,
-            'pos' => $pos
+            'pos' => $pos,
         ];
     }
 

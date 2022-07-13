@@ -311,7 +311,7 @@ class PlayerEvent implements Listener {
             "blockMeta" => $blockMeta,
             "others" => $others,
             "date" => date("Y-m-d"),
-            "time" => date("H:i:s") . "." . substr(explode(".", microtime())[1], 0, 3)
+            "time" => date("H:i:s") . "." . substr(explode(".", microtime())[1], 0, 3),
         ];
         $this->setBlockLogTemp($log);
     }

@@ -128,19 +128,19 @@ class SaleForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "売却するアイテム/" . LevelShopAPI::getInstance()->getItemName($this->item->getId(), $this->item->getMeta()) . "\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}"
+                    'text' => "売却するアイテム/" . LevelShopAPI::getInstance()->getItemName($this->item->getId(), $this->item->getMeta()) . "\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}",
                 ],
                 [
                     'type' => 'input',
                     'text' => '個数を入力',
                     'placeholder' => '個数を入力してください',
-                    'default' => ''
+                    'default' => '',
                 ],
                 [
                     'type' => 'toggle',
-                    'text' => "仮想ストレージ優先"
-                ]
-            ]
+                    'text' => "仮想ストレージ優先",
+                ],
+            ],
         ];
     }
 }

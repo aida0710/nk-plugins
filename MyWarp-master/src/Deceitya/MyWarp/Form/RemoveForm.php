@@ -28,7 +28,7 @@ class RemoveForm implements Form {
             'type' => 'form',
             'title' => 'MyWarp',
             'content' => '',
-            'buttons' => []
+            'buttons' => [],
         ];
         foreach ($this->warps as $pos) {
             $form['buttons'][] = ['text' => $pos];

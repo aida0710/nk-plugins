@@ -12,7 +12,7 @@ class BankForm implements Form {
      * @inheritDoc
      */
     public function handleResponse(Player $player, $data): void {
-        if ($data === NULL) {
+        if ($data === null) {
             return;
         }
         switch ($data) {
@@ -40,15 +40,15 @@ class BankForm implements Form {
             'content' => "選択してください",
             'buttons' => [
                 [
-                    'text' => "銀行を選択する"
+                    'text' => "銀行を選択する",
                 ],
                 [
-                    'text' => "銀行を作成する"
+                    'text' => "銀行を作成する",
                 ],
                 [
-                    'text' => "銀行を削除する"
+                    'text' => "銀行を削除する",
                 ],
-            ]
+            ],
         ];
     }
 }

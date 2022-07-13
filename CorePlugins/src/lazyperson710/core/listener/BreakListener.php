@@ -6,8 +6,6 @@ use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
-use pocketmine\item\enchantment\VanillaEnchantments;
-use pocketmine\Server;
 
 class BreakListener implements Listener {
 
@@ -17,7 +15,6 @@ class BreakListener implements Listener {
     public function onBreak(BlockBreakEvent $event) {
         $player = $event->getPlayer();
         $item = $event->getItem();
-        $inhanditem = $event->getPlayer()->getInventory()->getItemInHand();
         if ($event->getBlock()->getId() == BlockLegacyIds::MONSTER_SPAWNER) {
             $setExp = 5000;
             $event->getPlayer()->getXpManager()->addXp($setExp);

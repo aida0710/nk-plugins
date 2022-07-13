@@ -61,9 +61,9 @@ class MakingForm implements Form {
                     'type' => 'input',
                     'text' => "ワープ地点の名前を入力\n作成には{$cost}円かかります。\n\nワープ地点の作成制限は\n1レベル以上24レベル以下 : 5\n25レベル以上49レベル以下 : 10\n50レベル以上 : 15\nとなっております",
                     'placeholder' => '',
-                    'default' => ''
-                ]
-            ]
+                    'default' => '',
+                ],
+            ],
         ];
     }
 }

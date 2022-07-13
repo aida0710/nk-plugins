@@ -46,7 +46,7 @@ class TicketAPI {
 
     public function createData(Player $player): bool {
         if ($this->dataExists($player) === false) {
-            $this->cache += array($player->getName() => 0);
+            $this->cache += [$player->getName() => 0];
             return true;
         } else return false;
     }

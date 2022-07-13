@@ -26,7 +26,7 @@ class BankMenuForm implements Form {
      * @inheritDoc
      */
     public function handleResponse(Player $player, $data): void {
-        if ($data === NULL) return;
+        if ($data === null) return;
         switch ($data) {
             case 0:
                 $player->sendForm(new ActionForm($this->bank, $this->p, ActionForm::BANK_PUT));
@@ -55,18 +55,18 @@ class BankMenuForm implements Form {
             'content' => "",
             'buttons' => [
                 [
-                    'text' => "振り込み"
+                    'text' => "振り込み",
                 ],
                 [
-                    'text' => "引き出し"
+                    'text' => "引き出し",
                 ],
                 [
-                    'text' => "共有"
+                    'text' => "共有",
                 ],
                 [
-                    'text' => "記録"
+                    'text' => "記録",
                 ],
-            ]
+            ],
         ];
     }
 }

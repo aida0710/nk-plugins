@@ -18,7 +18,7 @@ class Really extends PluginBase implements Listener {
         if (!file_exists($this->getDataFolder())) {
             mkdir($this->getDataFolder(), 0755, true);
         }
-        $this->warp = new Config($this->getDataFolder() . "WarpPoint.yml", Config::YAML, array());
+        $this->warp = new Config($this->getDataFolder() . "WarpPoint.yml", Config::YAML, []);
     }//Enable終了
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
@@ -78,7 +78,7 @@ class Really extends PluginBase implements Listener {
                         $x = $sender->getPosition()->getFloorX();
                         $y = $sender->getPosition()->getFloorY();
                         $z = $sender->getPosition()->getFloorZ();
-                        $this->warp->set($args[0], array("X" => $x, "Y" => $y, "Z" => $z, "world" => $wname, "mining" => $args[1]));
+                        $this->warp->set($args[0], ["X" => $x, "Y" => $y, "Z" => $z, "world" => $wname, "mining" => $args[1]]);
                         $this->warp->save();
                         $sender->sendMessage("§bWarp §7>> §a{$args[0]}という名前の地点を新しく作成しました");
                         return true;

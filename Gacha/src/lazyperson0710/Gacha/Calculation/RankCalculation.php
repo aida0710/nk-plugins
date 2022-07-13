@@ -63,7 +63,7 @@ class RankCalculation {
             "UC" => 13,
             "R" => 5,
             "SR" => 1.7,
-            "L" => 0.3
+            "L" => 0.3,
         ];
     }
 
