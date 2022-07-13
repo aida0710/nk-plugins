@@ -110,7 +110,7 @@ class BossBar {
         $pk->title = $this->getFullTitle();
         $pk->healthPercent = $this->getPercentage();
         $pk->unknownShort = 1;
-        $pk->color = 0;//Does not function anyways
+        $pk->color = 0;  //Does not function anyways
         $pk->overlay = 0;//Neither. Typical for Mojang: Copy-pasted from Java edition
         return $pk;
     }
@@ -333,7 +333,7 @@ class BossBar {
         }
         if ($entity instanceof Entity) {
             $this->actorId = $entity->getId();
-            $this->attributeMap = $entity->getAttributeMap();//tod0: try some kind of auto-updating reference
+            $this->attributeMap = $entity->getAttributeMap();                                 //tod0: try some kind of auto-updating reference
             $this->getAttributeMap()->add($entity->getAttributeMap()->get(Attribute::HEALTH));//tod0:  Auto-update bar for entity? Would be cool, so the api can be used for actual bosses
             $this->propertyManager = $entity->getNetworkProperties();
             if (!$entity instanceof Player) $entity->despawnFromAll();

@@ -204,7 +204,7 @@ class Main extends PluginBase {
         $input = [
             "A" => ItemFactory::getInstance()->get(383, 110, 1),//採掘速度上昇バフアイテム
             "B" => ItemFactory::getInstance()->get(383, 125, 1),//スパナ
-            "C" => ItemFactory::getInstance()->get(383, 26, 1),//小さな惑星のモーメント
+            "C" => ItemFactory::getInstance()->get(383, 26, 1), //小さな惑星のモーメント
             "D" => ItemFactory::getInstance()->get(752, 729, 1),//スクラップmark.2
             "E" => ItemFactory::getInstance()->get(383, 111, 1),//歯車
         ];

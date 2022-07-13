@@ -108,7 +108,7 @@ class DiverseBossBar extends BossBar {
         $pk->title = $this->getFullTitleFor($player);
         $pk->healthPercent = $this->getPercentageFor($player);
         $pk->unknownShort = 1;
-        $pk->color = 0;//Does not function anyways
+        $pk->color = 0;  //Does not function anyways
         $pk->overlay = 0;//neither. Typical for Mojang: Copy-pasted from Java edition
         return $pk;
     }
