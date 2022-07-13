@@ -27,7 +27,11 @@ class PickaxeDestructionRange {
      */
     public function PickaxeDestructionRange(Player $player, Block $block, Item $item, bool $haveDurable, Item $handItem, array $set, array $dropItems): array {
         if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') === null) {
-            if (!in_array($block->getId(), $set['destructible'], true)) return [];
+            $toolType = $handItem->getBlockToolType();
+            if ($toolType !== $block->getBreakInfo()->getToolType()) {
+                return [];
+            }
+            //if (!in_array($block->getId(), $set['destructible'], true)) return [];
         }
         $radius = 0;
         if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
@@ -80,9 +84,17 @@ class PickaxeDestructionRange {
                             continue 2;
                     }
                     if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') === null) {
-                        if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
+                        $toolType = $handItem->getBlockToolType();
+                        if ($toolType !== $block->getBreakInfo()->getToolType()) {
+                            continue;
+                        }
+                        //if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
                     } elseif ($item->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
-                        if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
+                        $toolType = $handItem->getBlockToolType();
+                        if ($toolType !== $block->getBreakInfo()->getToolType()) {
+                            continue;
+                        }
+                        //if (!in_array($targetBlock->getId(), $set['destructible'], true)) continue;
                     }
                     if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
                     if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
@@ -92,7 +104,7 @@ class PickaxeDestructionRange {
                         $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
                         continue;
                     }
-                    $blockIds[] = $targetBlock->getId();
+                    //$blockIds[] = $targetBlock->getId();
                     $dropItems = array_merge($dropItems ?? [], (new ItemDrop())->getDrop($player, $targetBlock));
                     if (!$player->isSneaking()) {
                         if ($haveDurable) {
