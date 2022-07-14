@@ -2,6 +2,8 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson0710\WorldManagement\database\WorldCategory;
+use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use lazyperson710\core\Main;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityTeleportEvent;
@@ -24,14 +26,13 @@ class DamageListener implements Listener {
         }
         switch ($event->getCause()) {
             case EntityDamageEvent::CAUSE_FALL:
-                $worlds = [
-                    "rule",
-                    "lobby",
-                    "event-1",
-                    "pvp",
-                    "athletic",
-                ];
-                if (in_array($entity->getWorld()->getFolderName(), $worlds)) {
+                if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PublicWorld)) {
+                    $event->cancel();
+                }
+                if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PublicEventWorld)) {
+                    $event->cancel();
+                }
+                if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PVP)) {
                     $event->cancel();
                 }
                 if (isset(self::$damageFlags[$entity->getName()])) {
