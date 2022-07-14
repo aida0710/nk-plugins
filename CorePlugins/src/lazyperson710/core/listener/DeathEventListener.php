@@ -122,8 +122,5 @@ class DeathEventListener implements Listener {
         $player = $event->getPlayer();
         $name = $player->getName();
         Server::getInstance()->broadcastTip("§bReSpawn §7>> §e{$name}がリスポーンしました");
-        if ($player->getWorld()->getDisplayName() === "rule") {
-            $player->sendForm(new WarpForm($player));
-        }
     }
 }
