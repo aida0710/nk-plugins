@@ -40,13 +40,10 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new listener\DamageListener(false), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\DeathEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Major(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\Food(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\FertilizerParticles(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Elevator(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\DirectInventory(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\WorldChange(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BlockInteractEvent(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\WorldProtect(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakSoundPacket(), $this);
         /*Items*/
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
