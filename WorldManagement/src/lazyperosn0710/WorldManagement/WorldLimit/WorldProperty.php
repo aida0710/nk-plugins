@@ -1,6 +1,6 @@
 <?php
 
-namespace bbo51dog\limitedworld;
+namespace lazyperson0710\WorldManagement\WorldLimit;
 
 use pocketmine\world\Position;
 

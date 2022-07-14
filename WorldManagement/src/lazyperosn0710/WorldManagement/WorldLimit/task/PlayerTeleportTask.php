@@ -1,8 +1,8 @@
 <?php
 
-namespace bbo51dog\limitedworld\task;
+namespace lazyperson0710\WorldManagement\WorldLimit\task;
 
-use bbo51dog\limitedworld\WorldProperty;
+use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;

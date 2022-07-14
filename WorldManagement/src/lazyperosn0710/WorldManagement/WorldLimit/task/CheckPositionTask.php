@@ -1,9 +1,9 @@
 <?php
 
-namespace bbo51dog\limitedworld\task;
+namespace lazyperson0710\WorldManagement\WorldLimit\task;
 
-use bbo51dog\limitedworld\Main;
-use bbo51dog\limitedworld\WorldProperty;
+use lazyperson0710\WorldManagement\Main;
+use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
 use pocketmine\scheduler\Task;
 use pocketmine\scheduler\TaskScheduler;
 use pocketmine\Server;
@@ -36,7 +36,7 @@ class CheckPositionTask extends Task {
             }
             foreach ($world->getPlayers() as $player) {
                 if (!$property->inSafeArea($player->getPosition())) {
-                    $player->sendMessage("§bWorldBorder §7>> §cワールドの上限を越えています。" . Main::TELEPORT_INTERVAL . "秒以内にセーフエリアに戻ってください\n戻らなかった場合、強制的にテレポートされます");
+                    $player->sendMessage("§bWorldBorder §7>> §cワールドの上限を越えています。" . Main::TELEPORT_INTERVAL . "秒以内にセーフエリアに戻ってください\n§7>> §c戻らなかった場合、強制的にテレポートされます");
                     $this->scheduler->scheduleDelayedTask(new PlayerTeleportTask($player, $property), Main::TELEPORT_INTERVAL * 20);
                 }
             }

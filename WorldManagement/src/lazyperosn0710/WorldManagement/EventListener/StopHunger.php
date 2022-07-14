@@ -1,11 +1,12 @@
 <?php
 
-namespace lazyperson710\core\listener;
+namespace lazyperson0710\WorldManagement\EventListener;
 
+use lazyperson0710\WorldManagement\database\WorldCategory;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerExhaustEvent;
 
-class Food implements Listener {
+class StopHunger implements Listener {
 
     /**
      * 特定のワールドにて、空腹の減少を停止するコード
@@ -14,7 +15,7 @@ class Food implements Listener {
      */
     public function onHunger(PlayerExhaustEvent $event) {
         $WorldName = $event->getPlayer()->getWorld()->getFolderName();
-        if ($WorldName === "lobby" || $WorldName === "rule" || $WorldName === "athletic") {
+        if (in_array($WorldName, WorldCategory::PublicWorld) || in_array($WorldName, WorldCategory::PublicEventWorld)) {
             $event->cancel();
         }
     }
