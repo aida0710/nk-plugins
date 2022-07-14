@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="996f096f-b33a-476d-8bdb-c6dd33b231a4" name="自宅鯖">
+        <fileTransfer accessType="LOCAL" port="0" />
+      </webServer>
+      <webServer id="f132586a-7d45-4203-a485-8f485bf78b68" name="自宅鯖sftp">
+        <fileTransfer rootFolder="/home/nk/pmmp/debug/nk-plugins" accessType="SFTP" host="192.168.0.3" port="2222" sshConfigId="8f137aa3-8c73-4f7e-b231-7fb66583038b" sshConfig="nk@192.168.0.3:2222:2222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
