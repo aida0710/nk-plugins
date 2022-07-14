@@ -13,32 +13,32 @@ class WarpForm extends SimpleForm {
 
     public function __construct(Player $player) {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 5) {
-            $level5 = "§a5レベルの為、開放済み";
+            $level5 = "§a開放済み";
         } else {
             $level5 = "§c5レベル以上で開放されます";
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 10) {
-            $level10 = "§a10レベルの為、開放済み";
+            $level10 = "§a開放済み";
         } else {
             $level10 = "§c10レベル以上で開放されます";
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 15) {
-            $level15 = "§a15レベルの為、開放済み";
+            $level15 = "§a開放済み";
         } else {
             $level15 = "§c15レベル以上で開放されます";
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 20) {
-            $level20 = "§a20レベルの為、開放済み";
+            $level20 = "§a開放済み";
         } else {
             $level20 = "§c20レベル以上で開放されます";
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 30) {
-            $level30 = "§a30レベルの為、開放済み";
+            $level30 = "§a開放済み";
         } else {
             $level30 = "§c30レベル以上で開放されます";
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 200) {
-            $level200 = "§a200レベルの為、開放済み";
+            $level200 = "§a開放済み";
         } else {
             $level200 = "§c200レベル以上で開放されます";
         }
