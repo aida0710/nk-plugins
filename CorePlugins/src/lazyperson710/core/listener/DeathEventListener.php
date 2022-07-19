@@ -2,7 +2,6 @@
 
 namespace lazyperson710\core\listener;
 
-use lazyperson710\sff\form\WarpForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByBlockEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -37,7 +36,7 @@ class DeathEventListener implements Listener {
                 $killer = $cause->getDamager();
                 if ($killer instanceof Player) {
                     $itemHand = $killer->getInventory()->getItemInHand();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$itemHand}で殺害されました");
+                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$itemHand->getName()}で殺害されました");
                 } else {
                     $event->setDeathMessage("§bDeath §7>> §e{$killer->getName()}は何かを殺害しました");
                 }
@@ -46,7 +45,7 @@ class DeathEventListener implements Listener {
                 $killer = $cause->getDamager();
                 if ($killer instanceof Player) {
                     $bow = $killer->getInventory()->getItemInHand()->getName();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$bow}で殺害されました");
+                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$bow->getName()}で殺害されました");
                 } else {
                     $event->setDeathMessage("§bDeath §7>> §e{$killer->getName()}は何かを殺害しました");
                 }
