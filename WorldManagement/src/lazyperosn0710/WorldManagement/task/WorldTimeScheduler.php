@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\core\task;
+namespace lazyperson0710\WorldManagement\task;
 
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
@@ -15,6 +15,7 @@ class WorldTimeScheduler extends Task {
                 case "event-1":
                 case "tos":
                 case "pvp":
+                case "八街市-f":
                     Server::getInstance()->getWorldManager()->getWorldByName($world->getFolderName())->setTime(18000);
                     Server::getInstance()->getWorldManager()->getWorldByName($world->getFolderName())->stopTime();
                     break;
