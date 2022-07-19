@@ -22,6 +22,11 @@ class Main extends PluginBase {
 
     protected function onEnable(): void {
         WorldManagementAPI::getInstance()->init();
+        foreach (scandir("worlds/") as $value) {
+            if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
+                Server::getInstance()->getWorldManager()->loadWorld($value, true);
+            }
+        }
         $this->getServer()->getPluginManager()->registerEvents(new CancelItemUseEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new PlayerDamageEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new PlayerTeleportEvent(), $this);

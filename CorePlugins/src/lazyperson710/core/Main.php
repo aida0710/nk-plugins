@@ -10,14 +10,12 @@ use lazyperson710\core\command\WarpPVPCommand;
 use lazyperson710\core\task\EffectTaskScheduler;
 use lazyperson710\core\task\MotdTask;
 use lazyperson710\core\task\ParticleTask;
-use lazyperson710\core\task\WorldTimeScheduler;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Server;
 
 class Main extends PluginBase {
 
@@ -26,18 +24,11 @@ class Main extends PluginBase {
 
     public function onEnable(): void {
         self::$main = $this;
-        /*LoadWorld*/
-        foreach (scandir("worlds/") as $value) {
-            if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
-                Server::getInstance()->getWorldManager()->loadWorld($value, true);
-            }
-        }
         /*PlayerEventListener*/
         $this->getServer()->getPluginManager()->registerEvents(new listener\MessageListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Cmdsigns(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\CancelEvent(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\DamageListener(false), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\DeathEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Major(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\FertilizerParticles(), $this);
@@ -61,7 +52,6 @@ class Main extends PluginBase {
             new WarpPVPCommand(),
         ]);
         /*Task*/
-        $this->getScheduler()->scheduleDelayedTask(new WorldTimeScheduler, 60);
         $this->getScheduler()->scheduleRepeatingTask(new EffectTaskScheduler, 20);
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 200);
