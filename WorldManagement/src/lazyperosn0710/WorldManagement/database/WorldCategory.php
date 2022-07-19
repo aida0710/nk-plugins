@@ -35,6 +35,10 @@ class WorldCategory {
         "MiningWorld",
     ];
 
+    public const MiningWorld = [
+        "MiningWorld",
+    ];
+
     public const Nether = [
         "nether-1",
         "nether-2",
@@ -55,8 +59,11 @@ class WorldCategory {
 
     public const AgricultureWorld = [
         "浜松市-f",
-        "にんじん市-f",
-        "ぽてと市-f",
+        "八街市-f",
+    ];
+
+    public const UniqueAgricultureWorld = [
+        "八街市-f",
     ];
 
 }
