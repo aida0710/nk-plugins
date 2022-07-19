@@ -62,11 +62,19 @@ class DamageListener implements Listener {
         $player = $event->getEntity();
         if ($player instanceof Player) {
             self::$damageFlags[$player->getName()] = true;
-            Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
-                function () use ($player): void {
-                    $this->unset($player);
-                }
-            ), 60);
+            if (in_array($event->getTo()->getWorld()->getFolderName(), WorldCategory::MiningWorld)) {
+                Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
+                    function () use ($player): void {
+                        $this->unset($player);
+                    }
+                ), 20 * 25);
+            } else {
+                Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
+                    function () use ($player): void {
+                        $this->unset($player);
+                    }
+                ), 20 * 8);
+            }
         }
     }
 
