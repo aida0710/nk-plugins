@@ -19,7 +19,12 @@ class DamageListener implements Listener {
         self::$damageFlags = [];
     }
 
-    public function onDamage(EntityDamageEvent $event) {
+    /**
+     * @param EntityDamageEvent $event
+     * @return void
+     * @priority LOW
+     */
+    public function onDamage(EntityDamageEvent $event): void {
         $entity = $event->getEntity();
         if (!$entity instanceof Player) {
             return;
