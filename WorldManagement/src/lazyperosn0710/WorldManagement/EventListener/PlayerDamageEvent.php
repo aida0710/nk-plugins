@@ -15,7 +15,7 @@ class DamageListener implements Listener {
 
     private static array $damageFlags;
 
-    public function __construct($damageFlag) {
+    public function __construct() {
         self::$damageFlags = [];
     }
 
