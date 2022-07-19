@@ -4,7 +4,12 @@ namespace lazyperson0710\WorldManagement;
 
 use lazyperson0710\WorldManagement\command\TestCommand;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
+use lazyperson0710\WorldManagement\EventListener\CancelItemUseEvent;
+use lazyperson0710\WorldManagement\EventListener\PlayerDamageEvent;
 use lazyperson0710\WorldManagement\EventListener\PlayerTeleportEvent;
+use lazyperson0710\WorldManagement\EventListener\StopHunger;
+use lazyperson0710\WorldManagement\EventListener\WorldProtect;
+use lazyperson0710\WorldManagement\task\WorldTimeScheduler;
 use lazyperson0710\WorldManagement\WorldLimit\task\CheckPositionTask;
 use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
 use pocketmine\plugin\PluginBase;
@@ -17,7 +22,12 @@ class Main extends PluginBase {
 
     protected function onEnable(): void {
         WorldManagementAPI::getInstance()->init();
+        $this->getServer()->getPluginManager()->registerEvents(new CancelItemUseEvent(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerDamageEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new PlayerTeleportEvent(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new StopHunger(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new WorldProtect(), $this);
+        $this->getScheduler()->scheduleDelayedTask(new WorldTimeScheduler, 60);
         $this->getServer()->getCommandMap()->registerAll("worldManagement", [
             new TestCommand(),
         ]);
