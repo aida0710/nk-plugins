@@ -11,6 +11,7 @@ use pocketmine\item\Durable;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\ItemIds;
 use pocketmine\item\TieredTool;
+use pocketmine\item\ToolTier;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {
@@ -51,6 +52,18 @@ class Main extends PluginBase implements Listener {
         if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
             $player->sendMessage('§bRepair §7>> §c衝撃エンチャントが付与されている為、修繕することが出来ません');
             return;
+        }
+        if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+            if ($item->getTier() === ToolTier::DIAMOND()) {
+                $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕が出来なくなりました');
+                return;
+            }
+        }
+        if ($item->getNamedTag()->getTag('4mining') !== null) {
+            if ($item->getTier() === ToolTier::DIAMOND()) {
+                $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕が出来なくなりました');
+                return;
+            }
         }
         $itemids = $item->getId();
         if ($itemids >= 1000) {

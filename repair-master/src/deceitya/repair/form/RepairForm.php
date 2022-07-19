@@ -12,6 +12,7 @@ use pocketmine\item\Durable;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\ItemIds;
 use pocketmine\item\TieredTool;
+use pocketmine\item\ToolTier;
 use pocketmine\player\Player;
 use pocketmine\world\sound\AnvilBreakSound;
 use pocketmine\world\sound\AnvilUseSound;
@@ -221,6 +222,18 @@ class RepairForm extends CustomForm {
         if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
             $player->sendMessage('§bRepair §7>> §c衝撃エンチャントが付与されている為、修繕することが出来ません');
             return false;
+        }
+        if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+            if ($item->getTier() === ToolTier::DIAMOND()) {
+                $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕が出来なくなりました');
+                return false;
+            }
+        }
+        if ($item->getNamedTag()->getTag('4mining') !== null) {
+            if ($item->getTier() === ToolTier::DIAMOND()) {
+                $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕が出来なくなりました');
+                return false;
+            }
         }
         $itemIds = $item->getId();
         if ($itemIds >= 1000) {
