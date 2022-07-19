@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="自宅鯖" uploadOnCheckin="f132586a-7d45-4203-a485-8f485bf78b68" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" persistUploadOnCheckin="false" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="自宅鯖">
         <serverdata>
@@ -17,6 +17,5 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="自宅鯖sftp" />
   </component>
 </project>
