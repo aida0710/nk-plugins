@@ -6,7 +6,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\ShopAPI\database\LevelShopAPI;
 use deceitya\ShopAPI\form\element\ShopMainCategoryFormButton;
-use deceitya\ShopAPI\form\levelShop\other\OtherShopFunctionSelectForm;
+use deceitya\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
 use deceitya\ShopAPI\form\levelShop\shop1\Shop1Form;
 use deceitya\ShopAPI\form\levelShop\shop2\Shop2Form;
 use deceitya\ShopAPI\form\levelShop\shop3\Shop3Form;
@@ -20,7 +20,7 @@ class MainLevelShopForm extends SimpleForm {
 
     public function __construct(Player $player, ?string $error = null) {
         $levelShopList = [
-            LevelShopAPI::RestrictionLevel_OtherShop => new OtherShopFunctionSelectForm(),
+            LevelShopAPI::RestrictionLevel_OtherShop => new InputItemForm(),
             LevelShopAPI::RestrictionLevel_Shop1 => new Shop1Form(),
             LevelShopAPI::RestrictionLevel_Shop2 => new Shop2Form(),
             LevelShopAPI::RestrictionLevel_Shop3 => new Shop3Form(),
@@ -34,7 +34,7 @@ class MainLevelShopForm extends SimpleForm {
             ->setText("見たいコンテンツを選択してください\n{$error}");
         foreach ($levelShopList as $restrictionLevel => $levelShop) {
             $content = match ($levelShop::class) {
-                OtherShopFunctionSelectForm::class => 'Other - 一括売却 & 検索',
+                InputItemForm::class => '販売アイテムを検索',
                 Shop1Form::class => "Level Shop - 1",
                 Shop2Form::class => "Level Shop - 2",
                 Shop3Form::class => "Level Shop - 3",
