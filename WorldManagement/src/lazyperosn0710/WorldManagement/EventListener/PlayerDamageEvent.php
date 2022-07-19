@@ -1,9 +1,8 @@
 <?php
 
-namespace lazyperson710\core\listener;
+namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use lazyperson710\core\Main;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityTeleportEvent;
@@ -11,7 +10,7 @@ use pocketmine\event\Listener;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 
-class DamageListener implements Listener {
+class PlayerDamageEvent implements Listener {
 
     private static array $damageFlags;
 
