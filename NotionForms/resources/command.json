@@ -180,10 +180,6 @@
         "text": "使い方/vote\n\n投票することができます。投票用のお題はopが設定します"
     },
     {
-        "title": "/warpui",
-        "text": "使い方/warpui\n\nWarpCompassFormを表示します"
-    },
-    {
         "title": "/wp",
         "text": "使い方/wp\n\n他ワールドにワープできます"
     }
