@@ -15,9 +15,12 @@ class PlayerInfoForm extends CustomForm {
         $names = null;
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
             $name = $player->getName();
-            /*if ($player->getName() === $name) {
+            if (Server::getInstance()->isOp($player->getName())) {
                 continue;
-            }*/
+            }
+            if ($player->getName() === $name) {
+                continue;
+            }
             $names[] .= $name;
         }
         if (is_null($names)) {//こんなことは存在しないけど一応条件分岐だけ(上記のコメントアウトを消したら必要になります)
