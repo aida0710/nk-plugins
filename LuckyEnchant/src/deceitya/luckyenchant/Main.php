@@ -50,7 +50,8 @@ class Main extends PluginBase implements Listener {
             BlockLegacyIds::EMERALD_ORE,
             BlockLegacyIds::NETHER_QUARTZ_ORE,
             BlockLegacyIds::CARROT_BLOCK,
-            BlockLegacyIds::POTATO_BLOCK,])) {
+            BlockLegacyIds::POTATO_BLOCK,
+        ])) {
             return;
         }
         $rand = mt_rand(0, 999);
