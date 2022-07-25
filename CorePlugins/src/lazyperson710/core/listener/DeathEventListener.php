@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson0710\WorldManagement\database\WorldCategory;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByBlockEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -88,12 +89,24 @@ class DeathEventListener implements Listener {
     public function deathPenalty(Event $event) {
         $player = $event->getPlayer();
         $see = EconomyAPI::getInstance()->myMoney($player);
+        $world = $player->getWorld()->getFolderName();
+        $floor_x = floor($player->getPosition()->getX());
+        $floor_y = floor($player->getPosition()->getY());
+        $floor_z = floor($player->getPosition()->getZ());
+        $player->sendMessage("§bDeath §7>> §a死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です");
+        if (in_array($player->getWorld()->getFolderName(), WorldCategory::PublicWorld) || in_array($player->getWorld()->getFolderName(), WorldCategory::PublicEventWorld) || in_array($player->getWorld()->getFolderName(), WorldCategory::PVP)) {
+            $player->sendMessage("§bDeath §7>> §a死亡ペナルティーは死亡ワールドが公共ワールド&PVPワールドでは適用されません");
+            return;
+        }
         if ($see >= 2000) {
             if ($see >= 1000000) {
-                if (Server::getInstance()->isOp($player->getName())) return;
                 $floor_money1000000 = floor($see / 2);
                 EconomyAPI::getInstance()->reduceMoney($player, $floor_money1000000);
-                Server::getInstance()->broadcastMessage("§bDeath §7>> §e{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました");
+                if (Server::getInstance()->isOp($player->getName())) {
+                    $player->sendMessage("§bDeath §7>> §a{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました");
+                } else {
+                    Server::getInstance()->broadcastMessage("§bDeath §7>> §e{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました");
+                }
                 return;
             }
             $floor_money = floor($see / 2);
@@ -110,11 +123,6 @@ class DeathEventListener implements Listener {
         } else {
             $player->sendMessage("§bDeath §7>> §a所持金が2000円以下の{$see}円だっため死亡ペナルティーは経験値のみとなりました");
         }
-        $world = $player->getWorld()->getFolderName();
-        $floor_x = floor($player->getPosition()->getX());
-        $floor_y = floor($player->getPosition()->getY());
-        $floor_z = floor($player->getPosition()->getZ());
-        $player->sendMessage("§bDeath §7>> §a死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です");
     }
 
     public function Respawn(PlayerRespawnEvent $event) {
