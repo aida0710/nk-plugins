@@ -1,6 +1,6 @@
 ﻿name: Really_simple_warp
 main: Yomogisystem\Really
-version: 1.0
+version: 1.0.0
 api: [ 4.0.0 ]
 load: POSTWORLD
 author: Yomogis
