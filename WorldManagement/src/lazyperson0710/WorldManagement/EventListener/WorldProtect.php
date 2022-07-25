@@ -38,6 +38,9 @@ class WorldProtect implements Listener {
         if ($event->isCancelled()) {
             return;
         }
+        if (in_array($event->getBlock()->getPosition()->getWorld()->getFolderName(), WorldCategory::PVP)) {
+            return;
+        }
         $this->PlayerAction($event);
     }
 
