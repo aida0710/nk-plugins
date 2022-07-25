@@ -12,10 +12,7 @@ use lazyperson710\sff\command\LockCommand;
 use lazyperson710\sff\command\MiningToolsCommand;
 use lazyperson710\sff\command\PlayerCommand;
 use lazyperson710\sff\command\RecipeCommand;
-use lazyperson710\sff\command\StackAllCommand;
 use lazyperson710\sff\command\TosCommand;
-use lazyperson710\sff\command\WarpUICommand;
-use lazyperson710\sff\command\WpCommand;
 use lazyperson710\sff\listener\CmdListener;
 use lazyperson710\sff\listener\CommandStorageListener;
 use lazyperson710\sff\listener\ItemListener;
@@ -38,7 +35,6 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new CommandStorageListener(), $this);
         $this->getServer()->getCommandMap()->registerAll("sff", [
             new TosCommand(),
-            new WpCommand(),
             new LockCommand(),
             new EnchantCommand(),
             new BonusCommand(),
@@ -46,10 +42,8 @@ class Main extends PluginBase {
             new InvClearCommand(),
             new MiningToolsCommand(),
             new PlayerCommand(),
-            new StackAllCommand(),
             new DonationCommand(),
             new InformationCommand(),
-            new WarpUICommand(),
             new CmdExecutionCommand(),
         ]);
     }
