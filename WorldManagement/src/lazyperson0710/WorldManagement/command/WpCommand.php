@@ -1,8 +1,8 @@
 <?php
 
-namespace lazyperson710\sff\command;
+namespace lazyperson0710\WorldManagement\command;
 
-use lazyperson710\sff\form\WarpForm;
+use lazyperson0710\WorldManagement\form\WarpForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -10,8 +10,7 @@ use pocketmine\player\Player;
 class WpCommand extends Command {
 
     public function __construct() {
-        parent::__construct("wp", "Warp form");
-        $this->setPermission("sff.command.wp");
+        parent::__construct("wp", "ワープフォームを開きます");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
