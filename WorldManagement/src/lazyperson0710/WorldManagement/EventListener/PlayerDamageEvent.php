@@ -53,9 +53,9 @@ class PlayerDamageEvent implements Listener {
                 break;
             case EntityDamageEvent::CAUSE_ENTITY_ATTACK:
             case EntityDamageEvent::CAUSE_PROJECTILE:
-            if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PVP)) {
-                $event->cancel();
-            }
+                if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PVP)) {
+                    $event->cancel();
+                }
                 break;
         }
     }
