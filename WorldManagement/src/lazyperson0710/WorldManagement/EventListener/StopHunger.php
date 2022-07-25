@@ -9,8 +9,6 @@ use pocketmine\event\player\PlayerExhaustEvent;
 class StopHunger implements Listener {
 
     /**
-     * 特定のワールドにて、空腹の減少を停止するコード
-     *
      * @param PlayerExhaustEvent $event
      */
     public function onHunger(PlayerExhaustEvent $event) {
