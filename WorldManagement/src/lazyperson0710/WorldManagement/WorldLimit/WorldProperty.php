@@ -49,31 +49,31 @@ class WorldProperty {
         return $this->worldName;
     }
 
-    /**
-     * @return int
-     */
-    public function getMaxX(): int {
-        return $this->maxX;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMinX(): int {
-        return $this->minX;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMaxZ(): int {
-        return $this->maxZ;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMinZ(): int {
-        return $this->minZ;
-    }
+    //    /**
+    //     * @return int
+    //     */
+    //    public function getMaxX(): int {
+    //        return $this->maxX;
+    //    }
+    //
+    //    /**
+    //     * @return int
+    //     */
+    //    public function getMinX(): int {
+    //        return $this->minX;
+    //    }
+    //
+    //    /**
+    //     * @return int
+    //     */
+    //    public function getMaxZ(): int {
+    //        return $this->maxZ;
+    //    }
+    //
+    //    /**
+    //     * @return int
+    //     */
+    //    public function getMinZ(): int {
+    //        return $this->minZ;
+    //    }*/
 }
