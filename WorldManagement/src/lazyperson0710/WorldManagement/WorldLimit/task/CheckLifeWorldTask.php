@@ -2,26 +2,21 @@
 
 namespace lazyperson0710\WorldManagement\WorldLimit\task;
 
-use lazyperson0710\WorldManagement\Main;
+use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
 use pocketmine\scheduler\Task;
-use pocketmine\scheduler\TaskScheduler;
 use pocketmine\Server;
 use pocketmine\world\World;
 
-class CheckPositionTask extends Task {
-
-    private TaskScheduler $scheduler;
+class CheckLifeWorldTask extends Task {
 
     /** @var WorldProperty[] */
     private array $properties;
 
     /**
-     * @param TaskScheduler $scheduler
      * @param WorldProperty[] $properties
      */
-    public function __construct(TaskScheduler $scheduler, array $properties) {
-        $this->scheduler = $scheduler;
+    public function __construct(array $properties) {
         $this->properties = $properties;
     }
 
@@ -35,9 +30,10 @@ class CheckPositionTask extends Task {
                 continue;
             }
             foreach ($world->getPlayers() as $player) {
+                if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::NatureOthers) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) return;
                 if (!$property->inSafeArea($player->getPosition())) {
-                    $player->sendMessage("§bWorldBorder §7>> §cワールドの上限を越えています。" . Main::TELEPORT_INTERVAL . "秒以内にセーフエリアに戻ってください\n§7>> §c戻らなかった場合、強制的にテレポートされます");
-                    $this->scheduler->scheduleDelayedTask(new PlayerTeleportTask($player, $property), Main::TELEPORT_INTERVAL * 20);
+                    Server::getInstance()->dispatchCommand($player, "warp lobby");
+                    $player->sendMessage("§bWorldBorder §7>> §c範囲外に行こうとする試みは許可されていません");
                 }
             }
         }
