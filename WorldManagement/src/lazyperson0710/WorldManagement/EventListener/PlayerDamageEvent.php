@@ -45,7 +45,7 @@ class PlayerDamageEvent implements Listener {
                 if (isset(self::$damageFlags[$entity->getName()])) {
                     $entity->sendTip("§bDamageProtect §7>> §cワープ直前のためダメージが無効化されました");
                     $event->cancel();
-                    $this->unset($entity->getName());
+                    $this->unset($entity);
                 }
                 break;
             case EntityDamageEvent::CAUSE_SUFFOCATION:
