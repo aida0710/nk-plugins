@@ -4,6 +4,7 @@ namespace Deceitya\Flytra;
 
 use Deceitya\Flytra\command\FlyCommand;
 use Deceitya\Flytra\task\FlyCheckTask;
+use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
@@ -37,7 +38,13 @@ class Main extends PluginBase {
                     $player->setAllowFlight(false);
                     $player->setFlying(false);
                 } else {
-                    $player->setAllowFlight(true);
+                    if ($player->getPosition()->getFloorY() > WorldManagementAPI::getInstance()->getFlyLimit($player->getWorld()->getFolderName())) {
+                        $player->setAllowFlight(false);
+                        $player->setFlying(false);
+                        $player->sendTip("§bFlyTask §7>> §c高さ制限に引っ掛かった為飛行が一時的に不可になりました");
+                    } else {
+                        $player->setAllowFlight(true);
+                    }
                 }
             } else {
                 $player->setAllowFlight(false);

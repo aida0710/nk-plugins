@@ -16,6 +16,7 @@ class FlyCheckTask extends Task {
 
     public function onRun(): void {
         foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {//エリトラの耐久を無限にする
+            Main::getInstance()->checkFly($onlinePlayer, $onlinePlayer->getWorld(), $onlinePlayer->getArmorInventory()->getChestplate());
             $chest = $onlinePlayer->getArmorInventory()->getChestplate();
             if ($chest->getId() === ItemIds::ELYTRA) {
                 if ($chest instanceof Durable) {
