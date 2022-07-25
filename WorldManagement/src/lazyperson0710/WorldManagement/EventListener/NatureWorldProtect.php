@@ -7,7 +7,6 @@ use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\Server;
 
 class NatureWorldProtect implements Listener {
@@ -61,29 +60,6 @@ class NatureWorldProtect implements Listener {
             ];
             if (in_array($event->getBlock()->getId(), $items)) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません");
-                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
-                    $event->cancel();
-                }
-            }
-        }
-    }
-
-    /**
-     * @param PlayerInteractEvent $event
-     * @return void
-     * @priority Low
-     */
-    public function onInteract(PlayerInteractEvent $event) {
-        if (in_array($event->getBlock()->getPosition()->getWorld()->getFolderName(), WorldCategory::Nature)) {
-            $items = [
-                VanillaBlocks::STONE_BRICKS()->getId(),
-                self::POLISHED_BLACKSTONE,
-                self::CHISELED_POLISHED_BLACKSTONE,
-                self::POLISHED_BLACKSTONE_BRICKS,
-                self::POLISHED_BLACKSTONE_BRICK_SLAB,
-            ];
-            if (in_array($event->getPlayer()->getInventory()->getItemInHand()->getId(), $items)) {
-                $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の使用は許可されていません");
                 if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                     $event->cancel();
                 }
