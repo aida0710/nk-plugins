@@ -5,7 +5,7 @@ namespace bbo51dog\announce\command;
 use bbo51dog\announce\form\PassForm;
 use bbo51dog\announce\MessageFormat;
 use bbo51dog\announce\service\AnnounceService;
-use lazyperson710\sff\form\WarpForm;
+use lazyperson0710\WorldManagement\form\WarpForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
