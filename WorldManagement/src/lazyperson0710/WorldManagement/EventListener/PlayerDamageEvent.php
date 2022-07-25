@@ -32,12 +32,15 @@ class PlayerDamageEvent implements Listener {
             case EntityDamageEvent::CAUSE_FALL:
                 if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PublicWorld)) {
                     $event->cancel();
+                    break;
                 }
                 if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PublicEventWorld)) {
                     $event->cancel();
+                    break;
                 }
                 if (in_array($entity->getWorld()->getFolderName(), WorldCategory::PVP)) {
                     $event->cancel();
+                    break;
                 }
                 if (isset(self::$damageFlags[$entity->getName()])) {
                     $entity->sendTip("§bDamageProtect §7>> §cワープ直前のためダメージが無効化されました");
