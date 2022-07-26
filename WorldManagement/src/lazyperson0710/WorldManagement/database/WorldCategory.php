@@ -63,6 +63,7 @@ class WorldCategory {
         "生物市-c",
         "船橋市-c",
         "横浜市-c",
+        "名古屋市-c",
     ];
 
     public const AgricultureWorld = [
