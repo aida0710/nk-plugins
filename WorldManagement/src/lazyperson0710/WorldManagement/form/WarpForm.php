@@ -30,6 +30,8 @@ class WarpForm extends SimpleForm {
             ->addElements(
                 $this->addButton($player, $worldM->getWorldByName("生物市-c"), "生物市", "warp 生物市", true),
                 $this->addButton($player, $worldM->getWorldByName("船橋市-c"), "船橋市", "warp 船橋市", true),
+                $this->addButton($player, $worldM->getWorldByName("名古屋市-c"), "名古屋市", "warp 名古屋市", true),
+                $this->addButton($player, $worldM->getWorldByName("横浜市-c"), "横浜市", "warp 横浜市", true),
                 $this->addButton($player, $worldM->getWorldByName("lobby"), "なんとか市", "warp なんとか市", false),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
@@ -37,7 +39,7 @@ class WarpForm extends SimpleForm {
             ->setTitle("World Select")
             ->addElements(
                 $this->addButton($player, $worldM->getWorldByName("浜松市-f"), "浜松市", "warp 浜松市", true),
-                $this->addButton($player, $worldM->getWorldByName("八街市-f"), "八街市", "warp 八街市", false),
+                $this->addButton($player, $worldM->getWorldByName("八街市-f"), "八街市", "warp 八街市", true),
                 $this->addButton($player, $worldM->getWorldByName("lobby"), "なんとか市", "warp なんとか市", false),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
