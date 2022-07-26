@@ -25,6 +25,12 @@ class WorldManagementAPI {
         $this->register("tos", 255, 0, 0, 260, 260, 200, 230);
         $this->register("athletic", 255, 10, 0);
         $this->register("pvp", 255, 30, 0, 330, 268, 224, 162);
+        #event
+        $this->register("event-1", 255, 0, 0);
+        $this->register("event-2", 255, 0, 0);
+        $this->register("event-3", 255, 0, 0);
+        $this->register("event-4", 255, 0, 0);
+        $this->register("event-5", 255, 0, 0);
         #nature
         $this->register("nature-1", 120, 0, 130, 15000, 15000, -15000, -15000);
         $this->register("nature-2", 120, 0, 130, 15000, 15000, -15000, -15000);
