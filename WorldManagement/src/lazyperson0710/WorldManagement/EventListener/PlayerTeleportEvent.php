@@ -49,6 +49,9 @@ class PlayerTeleportEvent implements Listener {
                 if ($event->getTo()->getWorld()->getDisplayName() === "船橋市-c") {
                     $player->sendMessage("§7>> §a船橋市は大きく景観を損なう行為を禁止させていただいております。例:露天掘りや大規模な整地など\n§7>> §aまた、購入範囲が明確にわかるようにしてください");
                 }
+                if ($event->getTo()->getWorld()->getDisplayName() === "横浜市-c") {
+                    $player->sendMessage("§7>> §a横浜市は土地を買う際必ず一区画購入するようにしてください\n§7>> §a半分だけなどの購入のされ方をした場合、無断で土地を削除させていただきます");
+                }
                 return;
             }
             if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::AgricultureWorld)) {
