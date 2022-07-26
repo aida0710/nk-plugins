@@ -19,6 +19,7 @@
 
 namespace onebone\economyland;
 
+use lazyperson0710\WorldManagement\database\WorldCategory;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyland\database\Database;
 use onebone\economyland\database\SQLiteDatabase;
@@ -176,12 +177,17 @@ class EconomyLand extends PluginBase implements Listener {
                     $sender->sendMessage($this->getMessage("run-cmd-in-game"));
                     return true;
                 }
-                $x = (int)floor($sender->getPosition()->getX());
-                $z = (int)floor($sender->getPosition()->getZ());
-                $level = $sender->getPosition()->getWorld()->getFolderName();
-                $this->start[$sender->getName()] = ["x" => $x, "z" => $z, "level" => $level];
-                $sender->sendMessage($this->getMessage("first-position-saved"));
-                return true;
+                $worldName = $sender->getPosition()->getWorld()->getFolderName();
+                if (in_array($worldName, WorldCategory::LifeWorld) || in_array($worldName, WorldCategory::AgricultureWorld)) {
+                    $x = (int)floor($sender->getPosition()->getX());
+                    $z = (int)floor($sender->getPosition()->getZ());
+                    $level = $sender->getPosition()->getWorld()->getFolderName();
+                    $this->start[$sender->getName()] = ["x" => $x, "z" => $z, "level" => $level];
+                    $sender->sendMessage($this->getMessage("first-position-saved"));
+                    return true;
+                } else {
+                    $sender->sendMessage("§bLand §7>> §cこのワールドでは使用できません。生活ワールドか農業ワールドで使用できます");
+                }
             case "e":
                 if (!$sender instanceof Player) {
                     $sender->sendMessage($this->getMessage("run-cmd-in-game"));
