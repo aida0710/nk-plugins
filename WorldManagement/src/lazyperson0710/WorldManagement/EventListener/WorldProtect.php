@@ -48,7 +48,9 @@ class WorldProtect implements Listener {
         if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
             $worldName = $event->getPlayer()->getPosition()->getWorld()->getFolderName();
             if (in_array($worldName, WorldCategory::PublicWorld) || in_array($worldName, WorldCategory::PublicEventWorld) || in_array($worldName, WorldCategory::PVP)) {
-                $event->cancel();
+                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    $event->cancel();
+                }
                 $event->getPlayer()->sendTip("§bProtect §7>> §cこのワールドは保護されています");
             }
         }
