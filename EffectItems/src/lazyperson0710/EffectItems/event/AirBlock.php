@@ -2,11 +2,13 @@
 
 namespace lazyperson0710\EffectItems\event;
 
+use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
+use pocketmine\Server;
 
 class AirBlock implements Listener {
 
@@ -29,6 +31,14 @@ class AirBlock implements Listener {
             }
             if ($pos->getFloorY() <= 0) {
                 $player->sendMessage("§bAirBlock §7>> §c0以下には設置できません");
+                return;
+            }
+            $heightLimit = WorldManagementAPI::getInstance()->getHeightLimit($event->getPlayer()->getWorld()->getFolderName());
+            if ($pos->getFloorY() >= $heightLimit) {
+                $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません");
+                if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    $event->cancel();
+                }
                 return;
             }
             $item = $inHand;
