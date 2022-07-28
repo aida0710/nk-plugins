@@ -34,7 +34,7 @@ class RangeConfirmForm extends SimpleForm {
                     break;
                 case 2:
                     $upgrade = "現在、範囲強化はRank.2[7x7]です\n\n強化効果 : 破壊範囲[7x7]->[9x9]\n\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
-                    $cost = "コストは" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
+                    $cost = "コストは" . self::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
                 case 3:
                     $upgrade = "最上位ランクの為アップグレードに対応していません";
