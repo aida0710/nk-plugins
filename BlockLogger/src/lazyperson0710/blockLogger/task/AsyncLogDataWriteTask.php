@@ -41,8 +41,8 @@ class AsyncLogDataWriteTask extends AsyncTask {
             $db->close();
             return;
         } catch (Exception $e) {
-            $db->exec('rollback');
             Server::getInstance()->getLogger()->error($e->getTraceAsString());
+            $db->exec('rollback');
             $db->close();
             return;
         }
