@@ -23,6 +23,10 @@ class OtherBlocks3 extends SimpleForm {
             VanillaBlocks::BLAST_FURNACE()->asItem(),
             VanillaBlocks::SMOKER()->asItem(),
             VanillaBlocks::LECTERN()->asItem(),
+            VanillaBlocks::RAIL()->asItem(),
+            VanillaBlocks::POWERED_RAIL()->asItem(),
+            VanillaBlocks::ACTIVATOR_RAIL()->asItem(),
+            VanillaBlocks::DETECTOR_RAIL()->asItem(),
         ];
         (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
