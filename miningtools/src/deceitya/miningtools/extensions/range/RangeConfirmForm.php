@@ -15,9 +15,13 @@ class RangeConfirmForm extends SimpleForm {
     public const Rank2_MoneyCost = 6000000;
     public const Rank3_MoneyCost = 25000000;
 
-    public const Rank1_ItemCost = 1;
-    public const Rank2_ItemCost = 15;
-    public const Rank3_ItemCost = 20;
+    public const Rank1_ItemCost = 5;
+    public const Rank2_ItemCost = 25;
+    public const Rank3_ItemCost = 45;
+
+    public const Rank1_MiningLevelLimit = 250;
+    public const Rank2_MiningLevelLimit = 450;
+    public const Rank3_MiningLevelLimit = 650;
 
     public const CostItemId = -302;
     public const CostItemNBT = "MiningToolsRangeCostItem";
