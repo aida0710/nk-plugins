@@ -14,9 +14,9 @@ class UnbreakingEnchantConfirmForm extends SimpleForm {
     public const Rank2_MoneyCost = 2500000;
     public const Rank3_MoneyCost = 15000000;
 
-    public const Rank1_ItemCost = 1;
-    public const Rank2_ItemCost = 8;
-    public const Rank3_ItemCost = 20;
+    public const Rank1_ItemCost = 3;
+    public const Rank2_ItemCost = 12;
+    public const Rank3_ItemCost = 25;
 
     public function __construct(Player $player) {
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
