@@ -4,12 +4,14 @@ namespace deceitya\miningtools\extensions\range;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use Deceitya\MiningLevel\MiningLevelAPI;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
 class RangeConfirmForm extends SimpleForm {
 
     private array $nbt = [];
+    private bool $judgement = true;
 
     public const Rank1_MoneyCost = 800000;
     public const Rank2_MoneyCost = 6000000;
@@ -29,14 +31,23 @@ class RangeConfirmForm extends SimpleForm {
     public function __construct(Player $player) {
         $cost = "";
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
+        $limit = null;
         if ($namedTag->getTag('MiningTools_Expansion_Range') !== null) {
             $this->nbt = ["MiningTools_Expansion_Range" => $namedTag->getInt("MiningTools_Expansion_Range")];
             switch ($namedTag->getInt('MiningTools_Expansion_Range')) {
                 case 1:
+                    if (MiningLevelAPI::getInstance()->getLevel($player) < self::Rank2_MiningLevelLimit) {
+                        $limit = "§cレベルが足りない為強化出来ません。\n要求レベル: " . self::Rank2_MiningLevelLimit . "\n現在のレベル: " . MiningLevelAPI::getInstance()->getLevel($player) . "§r\n\n";
+                        $this->judgement = false;
+                    }
                     $upgrade = "現在、範囲強化はRank.1[5x5]です\n\n強化効果 : 破壊範囲[5x5]->[7x7]\n\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
                     $cost = "コストは" . self::Rank2_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank2_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
                 case 2:
+                    if (MiningLevelAPI::getInstance()->getLevel($player) < self::Rank3_MiningLevelLimit) {
+                        $limit = "§cレベルが足りない為強化出来ません。\n要求レベル: " . self::Rank3_MiningLevelLimit . "\n現在のレベル: " . MiningLevelAPI::getInstance()->getLevel($player) . "§r\n\n";
+                        $this->judgement = false;
+                    }
                     $upgrade = "現在、範囲強化はRank.2[7x7]です\n\n強化効果 : 破壊範囲[7x7]->[9x9]\n\n以下のコストを支払ってMiningToolを強化しますか？\n\n";
                     $cost = "コストは" . self::Rank3_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank3_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
                     break;
@@ -50,6 +61,10 @@ class RangeConfirmForm extends SimpleForm {
             }
         } elseif ($namedTag->getTag('MiningTools_3') !== null) {
             $this->nbt = ["MiningTools_3" => $namedTag->getInt("MiningTools_3")];
+            if (MiningLevelAPI::getInstance()->getLevel($player) < self::Rank1_MiningLevelLimit) {
+                $limit = "§cレベルが足りない為強化出来ません。\n要求レベル: " . self::Rank1_MiningLevelLimit . "\n現在のレベル: " . MiningLevelAPI::getInstance()->getLevel($player) . "§r\n\n";
+                $this->judgement = false;
+            }
             $upgrade = "現在、範囲強化はされていません\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\n以下のコストを支払ってMiningToolを強化しますか？";
             $cost = "コストは" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         } else {
@@ -58,7 +73,7 @@ class RangeConfirmForm extends SimpleForm {
         }
         $this
             ->setTitle("Expansion Mining Tools")
-            ->setText("{$upgrade}\n\n{$cost}")
+            ->setText("{$limit}{$upgrade}{$cost}")
             ->addElements(new Button("アップデートする"));
     }
 
@@ -67,6 +82,7 @@ class RangeConfirmForm extends SimpleForm {
             Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
             return;
         }
+        if ($this->judgement === false) return;
         if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
             if ($player->getInventory()->getItemInHand()->getNamedTag()->getInt('MiningTools_Expansion_Range') === 3) {
                 return;
