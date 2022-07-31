@@ -45,8 +45,7 @@ class DeathEventListener implements Listener {
             case EntityDamageEvent::CAUSE_PROJECTILE:
                 $killer = $cause->getDamager();
                 if ($killer instanceof Player) {
-                    $bow = $killer->getInventory()->getItemInHand()->getName();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$bow->getName()}で殺害されました");
+                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって遠距離武器で殺害されました");
                 } else {
                     $event->setDeathMessage("§bDeath §7>> §e{$killer->getName()}は何かを殺害しました");
                 }
