@@ -20,10 +20,10 @@ class MiningToolsForm extends SimpleForm {
         } else {
             $level30 = "§c30レベル以上で開放されます";
         }
-        if (MiningLevelAPI::getInstance()->getLevel($player) >= 120) {//4
-            $level120 = "§a120レベルの為、開放済み";
+        if (MiningLevelAPI::getInstance()->getLevel($player) >= 250) {//4
+            $level250 = "§a250レベルの為、開放済み";
         } else {
-            $level120 = "§c120レベル以上で開放されます";
+            $level250 = "§c250レベル以上で開放されます";
         }
         $this
             ->setTitle("Mining Tools")
@@ -31,7 +31,7 @@ class MiningToolsForm extends SimpleForm {
             ->addElements(
                 new CommandDispatchButton("Diamond Tools - 範囲採掘ツール\n{$level15}", "mt1", null),
                 new CommandDispatchButton("Netherite Tools - 範囲採掘ツール\n{$level30}", "mt2", null),
-                new CommandDispatchButton("アップグレード - Ex範囲採掘ツール\n{$level120}", "mt3", null),
+                new CommandDispatchButton("アップグレード - Ex範囲採掘ツール\n{$level250}", "mt3", null),
             );
     }
 }
