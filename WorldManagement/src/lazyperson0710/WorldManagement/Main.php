@@ -58,7 +58,7 @@ class Main extends PluginBase {
             $worlds[] = new WorldProperty($world, $worldApi->getWorldLimitX_1($world), $worldApi->getWorldLimitX_2($world), $worldApi->getWorldLimitZ_1($world), $worldApi->getWorldLimitZ_2($world));
         }
         $this->getScheduler()->scheduleRepeatingTask(new CheckPositionTask($this->getScheduler(), $worlds), self::CHECK_INTERVAL * 20);
-        $this->getScheduler()->scheduleRepeatingTask(new CheckLifeWorldTask($worlds), 10);
+        $this->getScheduler()->scheduleRepeatingTask(new CheckLifeWorldTask($worlds), 20);
         $this->getScheduler()->scheduleRepeatingTask(new WorldLevelCheckTask(), 20);
     }
 
