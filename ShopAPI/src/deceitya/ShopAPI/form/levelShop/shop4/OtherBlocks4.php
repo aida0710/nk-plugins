@@ -12,16 +12,14 @@ class OtherBlocks4 extends SimpleForm {
     public function __construct(Player $player) {
         $shopNumber = basename(__DIR__);
         $contents = [
-            VanillaBlocks::SOUL_SAND()->asItem(),
-            -236,
-            -232,
-            -233,
-            VanillaBlocks::MAGMA()->asItem(),
-            -230,
-            VanillaBlocks::NETHER_WART_BLOCK()->asItem(),
-            -227,
-            -289,
-            -272,
+            VanillaBlocks::GRASS()->asItem(),
+            VanillaBlocks::PODZOL()->asItem(),
+            VanillaBlocks::MYCELIUM()->asItem(),
+            VanillaBlocks::MOSSY_COBBLESTONE()->asItem(),
+            VanillaBlocks::SMOOTH_STONE()->asItem(),
+            VanillaBlocks::SMOOTH_QUARTZ()->asItem(),
+            VanillaBlocks::SMOOTH_SANDSTONE()->asItem(),
+            VanillaBlocks::SMOOTH_RED_SANDSTONE()->asItem(),
         ];
         (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
