@@ -73,6 +73,10 @@ class RepairForm extends CustomForm {
                     break;
                 }
             }
+            if ($consumption === "error") {
+                $player->sendMessage("§bRepair §7>> §c修理費用を取得できませんでした");
+                return;
+            }
         } elseif ($player->getXpManager()->getXpLevel() < $this->level) {
             $player->sendMessage("§bRepair §7>> §cレベルが足りませんでした要求レベル->{$this->level}");
             return;
