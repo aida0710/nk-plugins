@@ -36,6 +36,7 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new listener\DirectInventory(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BlockInteractEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakSoundPacket(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\GeneralEventListener(), $this);
         /*Items*/
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
