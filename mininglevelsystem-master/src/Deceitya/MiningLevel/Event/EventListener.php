@@ -67,7 +67,7 @@ class EventListener implements Listener {
 
     public function getBreakEvent(BlockBreakEvent|MiningToolsBreakEvent $event, Player $player) {
         $player = $event->getPlayer();
-        if (!in_array($player->getPosition()->getWorld()->getFolderName(), $this->config['world'])) {
+        if (in_array($player->getPosition()->getWorld()->getFolderName(), $this->config['world'])) {
             return;
         }
         $api = MiningLevelAPI::getInstance();
