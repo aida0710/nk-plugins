@@ -1,16 +1,280 @@
 # デフォルトで得られる経験値
-default: 0
+default: 1
 
 # "ID:Damage": 経験値
-"1:0": 2
-"4:0": 1
-"56:0": 300
+"268:0": 0 #Wooden Sword
+"18:0": 0 #Oak Leaves
+"18:1": 0 #Spruce Leaves
+"18:2": 0 #Birch Leaves
+"18:3": 0 #Jungle Leaves
+"161:0": 0 #Acacia Leaves
+"161:1": 0 #Dark Oak Leaves
+"6:0": 0 #Oak Sapling
+"6:1": 0 #Spruce Sapling
+"6:2": 0 #Birch Sapling
+"6:3": 0 #Jungle Sapling
+"6:4": 0 #Acacia Sapling
+"6:5": 0 #Dark Oak Sapling
+"31:2": 0 #Fern
+"175:3": 0 #Large Fern
+"31:1": 0 #Tall Grass
+"175:2": 0 #Double Tallgrass
+"37:0": 0 #Dandelion
+"38:0": 0 #Poppy
+"38:1": 0 #Blue Orchid
+"38:2": 0 #Allium
+"38:3": 0 #Azure Bluet
+"38:4": 0 #Red Tulip
+"38:5": 0 #Orange Tulip
+"38:6": 0 #White Tulip
+"38:7": 0 #Pink Tulip
+"38:8": 0 #Oxeye Daisy
+"40:0": 0 #Red Mushroom
+"175:0": 0 #Sunflower
+"175:1": 0 #Sunflower
+"175:2": 0 #Sunflower
+"175:3": 0 #Sunflower
+"175:4": 0 #Sunflower
+"175:5": 0 #Sunflower
+"175:6": 0 #Sunflower
+"175:7": 0 #Sunflower
+"175:8": 0 #Sunflower
+"175:9": 0 #Sunflower
+"175:10": 0 #Sunflower
+"175:11": 0 #Sunflower
+"175:12": 0 #Sunflower
+"175:13": 0 #Sunflower
+"175:14": 0 #Sunflower
+"175:15": 0 #Sunflower
+"175:16": 0 #Sunflower
+"175:17": 0 #Sunflower
+"175:18": 0 #Sunflower
+"175:19": 0 #Sunflower
+"175:20": 0 #Sunflower
+"175:21": 0 #Sunflower
+"175:22": 0 #Sunflower
+"175:23": 0 #Sunflower
+"175:24": 0 #Sunflower
+"175:25": 0 #Sunflower
+"175:26": 0 #Sunflower
+"175:27": 0 #Sunflower
+"175:28": 0 #Sunflower
+"175:29": 0 #Sunflower
+"175:30": 0 #Sunflower
+"106:0": 0 #Vines
+"111:0": 0 #Lily Pad
+"32:0": 0 #Dead Bush
+"78:0": 0 #Snow Layer
+"39:0": 0 #Brown Mushroom
+"40:0": 0 #Red Mushroom
+"50:0": 0 #Torch
+"76:0": 0 #Redstone Torch
+"79:0": 0 #Ice
+"80:0": 0 #Snow Block
+"99:14": 0 #Brown Mushroom Block
+"100:14": 0 #Red Mushroom Block
+"99:15": 0 #Brown Mushroom Block
+"99:0": 0 #Brown Mushroom Block
+"18:3": 0 #Jungle Leaves
+"161:0": 0 #Acacia Leaves
+"161:1": 0 #Dark Oak Leaves
+"6:0": 0 #Oak Sapling
+"6:1": 0 #Spruce Sapling
+"6:2": 0 #Birch Sapling
+"6:3": 0 #Jungle Sapling
+"6:4": 0 #Acacia Sapling
+"6:5": 0 #Dark Oak Sapling
+"31:2": 0 #Fern
+"175:3": 0 #Large Fern
+"31:1": 0 #Tall Grass
+"175:2": 0 #Double Tallgrass
+"37:0": 0 #Dandelion
+"38:0": 0 #Poppy
+"38:1": 0 #Blue Orchid
+"38:2": 0 #Allium
+"38:3": 0 #Azure Bluet
+"38:4": 0 #Red Tulip
+"38:5": 0 #Orange Tulip
+"38:6": 0 #White Tulip
+"38:7": 0 #Pink Tulip
+"38:8": 0 #Oxeye Daisy
+"175:0": 0 #Sunflower
+"175:1": 0 #Lilac
+"175:4": 0 #Rose Bush
+"175:5": 0 #Peony
+"106:0": 0 #Vines
+"111:0": 0 #Lily Pad
+"32:0": 0 #Dead Bush
+"78:0": 0 #Snow Layer
+"39:0": 0 #Brown Mushroom
+"40:0": 0 #Red Mushroom
+"50:0": 0 #Torch
+"50:1": 0 #Torch
+"50:2": 0 #Torch
+"50:3": 0 #Torch
+"50:4": 0 #Torch
+"50:5": 0 #Torch
+"50:6": 0 #Torch
+"50:7": 0 #Torch
+"50:8": 0 #Torch
+"50:9": 0 #Torch
+"50:10": 0 #Torch
+"76:0": 0 #Redstone Torch
+"76:1": 0 #Redstone Torch
+"76:2": 0 #Redstone Torch
+"76:3": 0 #Redstone Torch
+"76:4": 0 #Redstone Torch
+"76:5": 0 #Redstone Torch
+"76:6": 0 #Redstone Torch
+"76:7": 0 #Redstone Torch
+"76:8": 0 #Redstone Torch
+"76:9": 0 #Redstone Torch
+"76:10": 0 #Redstone Torch
+"79:0": 0 #Ice
+"80:0": 0 #Snow Block
+"99:14": 0 #Brown Mushroom Block
+"100:14": 0 #Red Mushroom Block
+"99:15": 0 #Brown Mushroom Block
+"99:0": 0 #Brown Mushroom Block
+"241:0": 0 #White Stained Glass
+"241:8": 0 #Light Gray Stained Glass
+"241:7": 0 #Gray Stained Glass
+"241:15": 0 #Black Stained Glass
+"241:12": 0 #Brown Stained Glass
+"241:14": 0 #Red Stained Glass
+"241:1": 0 #Orange Stained Glass
+"241:4": 0 #Yellow Stained Glass
+"241:5": 0 #Lime Stained Glass
+"241:5": 0 #Lime Stained Glass
+"241:13": 0 #Green Stained Glass
+"241:9": 0 #Cyan Stained Glass
+"241:3": 0 #Light Blue Stained Glass
+"241:11": 0 #Blue Stained Glass
+"241:10": 0 #Purple Stained Glass
+"241:2": 0 #Magenta Stained Glass
+"241:6": 0 #Pink Stained Glass
+"101:0": 0 #Iron Bars
+"167:0": 0 #Iron Trapdoor
+"167:1": 0 #Iron Trapdoor
+"167:2": 0 #Iron Trapdoor
+"167:3": 0 #Iron Trapdoor
+"167:4": 0 #Iron Trapdoor
+"167:5": 0 #Iron Trapdoor
+"167:6": 0 #Iron Trapdoor
+"167:7": 0 #Iron Trapdoor
+"167:8": 0 #Iron Trapdoor
+"167:9": 0 #Iron Trapdoor
+"167:10": 0 #Iron Trapdoor
+"167:11": 0 #Iron Trapdoor
+"167:12": 0 #Iron Trapdoor
+"167:13": 0 #Iron Trapdoor
+"167:14": 0 #Iron Trapdoor
+"167:15": 0 #Iron Trapdoor
+"167:16": 0 #Iron Trapdoor
+"167:17": 0 #Iron Trapdoor
+"167:18": 0 #Iron Trapdoor
+"167:19": 0 #Iron Trapdoor
+"167:20": 0 #Iron Trapdoor
+"96:0": 0 #Wooden Trapdoor
+"96:1": 0 #Wooden Trapdoor
+"96:2": 0 #Wooden Trapdoor
+"96:3": 0 #Wooden Trapdoor
+"96:4": 0 #Wooden Trapdoor
+"96:5": 0 #Wooden Trapdoor
+"96:6": 0 #Wooden Trapdoor
+"96:7": 0 #Wooden Trapdoor
+"96:8": 0 #Wooden Trapdoor
+"96:9": 0 #Wooden Trapdoor
+"96:10": 0 #Wooden Trapdoor
+"96:11": 0 #Wooden Trapdoor
+"96:12": 0 #Wooden Trapdoor
+"96:13": 0 #Wooden Trapdoor
+"96:14": 0 #Wooden Trapdoor
+"96:15": 0 #Wooden Trapdoor
+"96:16": 0 #Wooden Trapdoor
+"96:17": 0 #Wooden Trapdoor
+"96:18": 0 #Wooden Trapdoor
+"96:19": 0 #Wooden Trapdoor
+"96:20": 0 #Wooden Trapdoor
+"102:0": 0 #Glass Pane
+"160:0": 0 #White Stained Glass Pane
+"160:8": 0 #Light Gray Stained Glass Pane
+"160:7": 0 #Gray Stained Glass Pane
+"160:15": 0 #Black Stained Glass Pane
+"160:12": 0 #Brown Stained Glass Pane
+"160:14": 0 #Red Stained Glass Pane
+"160:1": 0 #Orange Stained Glass Pane
+"160:4": 0 #Yellow Stained Glass Pane
+"160:5": 0 #Lime Stained Glass Pane
+"160:13": 0 #Green Stained Glass Pane
+"160:9": 0 #Cyan Stained Glass Pane
+"160:3": 0 #Light Blue Stained Glass Pane
+"160:11": 0 #Blue Stained Glass Pane
+"160:10": 0 #Purple Stained Glass Pane
+"160:2": 0 #Magenta Stained Glass Pane
+"160:6": 0 #Pink Stained Glass Pane
+"65:0": 0 #Ladder
+"65:1": 0 #Ladder
+"65:2": 0 #Ladder
+"65:3": 0 #Ladder
+"65:4": 0 #Ladder
+"65:5": 0 #Ladder
+"59:0": 0 #Wheat Block
+"59:1": 0 #Wheat Block
+"59:2": 0 #Wheat Block
+"59:3": 0 #Wheat Block
+"59:4": 0 #Wheat Block
+"59:5": 0 #Wheat Block
+"59:6": 0 #Wheat Block
+"141:0": 0 #Carrot Block
+"141:1": 0 #Carrot Block
+"141:2": 0 #Carrot Block
+"141:3": 0 #Carrot Block
+"141:4": 0 #Carrot Block
+"141:5": 0 #Carrot Block
+"141:6": 0 #Carrot Block
+"142:0": 0 #Potato Block
+"142:1": 0 #Potato Block
+"142:2": 0 #Potato Block
+"142:3": 0 #Potato Block
+"142:4": 0 #Potato Block
+"142:5": 0 #Potato Block
+"142:6": 0 #Potato Block
+"104:0": 0 #Pumpkin Stem
+"104:1": 0 #Pumpkin Stem
+"104:2": 0 #Pumpkin Stem
+"104:3": 0 #Pumpkin Stem
+"104:4": 0 #Pumpkin Stem
+"104:5": 0 #Pumpkin Stem
+"104:6": 0 #Pumpkin Stem
+"105:0": 0 #Melon Stem
+"105:1": 0 #Melon Stem
+"105:2": 0 #Melon Stem
+"105:3": 0 #Melon Stem
+"105:4": 0 #Melon Stem
+"105:5": 0 #Melon Stem
+"105:6": 0 #Melon Stem
+"244:0": 0 #Beetroot Block
+"244:1": 0 #Beetroot Block
+"244:2": 0 #Beetroot Block
+"244:3": 0 #Beetroot Block
+"244:4": 0 #Beetroot Block
+"244:5": 0 #Beetroot Block
+"244:6": 0 #Beetroot Block
+"83:0": 0 #Sugarcane
 
-# 経験値が得られるワールド
+# 経験値が得られないワールド
 world:
-  - nature
-  - resource
+  - nature-java
 
 item:
-  10: "5:0:64"
-  20: "16:0:64"
+  5: "364:0:8" #焼肉
+  10: "384:0:5" #焼肉
+  25: "52:0:1" #レベルブロック
+  50: "745:0:1" #ネザライトピッケル
+  180: "397:2:1"
+  230: "397:0:1"
+  280: "397:4:1"
+  300: "397:1:1"
+  325: "397:5:1"
+  350: "120:0:1"
