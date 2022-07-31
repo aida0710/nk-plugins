@@ -18,6 +18,13 @@ class OtherBlocks7 extends SimpleForm {
             VanillaBlocks::LOOM()->asItem(),
             VanillaBlocks::ELEMENT_CONSTRUCTOR()->asItem(),
             VanillaBlocks::LAB_TABLE()->asItem(),
+            VanillaBlocks::MATERIAL_REDUCER()->asItem(),
+            VanillaBlocks::BREWING_STAND()->asItem(),
+            VanillaBlocks::ENCHANTING_TABLE()->asItem(),
+            VanillaBlocks::BARREL()->asItem(),
+            VanillaBlocks::NOTE_BLOCK()->asItem(),
+            VanillaBlocks::JUKEBOX()->asItem(),
+            VanillaBlocks::EMERALD()->asItem(),
         ];
         (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
     }
