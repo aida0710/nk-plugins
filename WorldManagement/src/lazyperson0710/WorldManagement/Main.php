@@ -6,7 +6,6 @@ use lazyperson0710\WorldManagement\blocks\FarmlandBlock;
 use lazyperson0710\WorldManagement\command\WpCommand;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use lazyperson0710\WorldManagement\EventListener\CancelItemUseEvent;
-use lazyperson0710\WorldManagement\EventListener\NatureWorldProtect;
 use lazyperson0710\WorldManagement\EventListener\PlayerDamageEvent;
 use lazyperson0710\WorldManagement\EventListener\PlayerTeleportEvent;
 use lazyperson0710\WorldManagement\EventListener\ResourceWorldProtect;
@@ -39,7 +38,6 @@ class Main extends PluginBase {
         }
         WorldManagementAPI::getInstance()->init();
         $this->getServer()->getPluginManager()->registerEvents(new CancelItemUseEvent(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new NatureWorldProtect(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new PlayerDamageEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new PlayerTeleportEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new ResourceWorldProtect(), $this);
