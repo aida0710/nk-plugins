@@ -45,7 +45,7 @@ class PlayerTeleportEvent implements Listener {
                 return;
             }
             if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::LifeWorld)) {
-                $player->sendMessage("§bWorld §7>> §a建築ワールド\n§7>> §aこのワールドは建築が可能なワールドになります\n§7>> §a/landを実行して土地を購入してください");
+                $player->sendMessage("§bWorld §7>> §a建築ワールド\n§7>> §aこのワールドは建築が可能なワールドになります\n§7>> §a/landを実行して土地を購入してください\n§7>> §aまた、道路の購入は規約違反となりますのでご注意ください");
                 if ($event->getTo()->getWorld()->getDisplayName() === "船橋市-c") {
                     $player->sendMessage("§7>> §a船橋市は大きく景観を損なう行為を禁止させていただいております。例:露天掘りや大規模な整地など\n§7>> §aまた、購入範囲が明確にわかるようにしてください");
                 }
