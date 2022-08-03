@@ -3,7 +3,6 @@
 namespace bbo51dog\anticheat\chcker;
 
 use bbo51dog\anticheat\model\PlayerData;
-use pocketmine\network\mcpe\protocol\Packet;
 
 abstract class Checker {
 
@@ -30,7 +29,9 @@ abstract class Checker {
         $this->maxViolation = $maxViolation;
     }
 
-    abstract public function handlePacket(Packet $packet): void;
+    abstract public function blockBreak(): void;
+
+    abstract public function playerJump(): void;
 
     abstract public function getCheatingMessage(): string;
 

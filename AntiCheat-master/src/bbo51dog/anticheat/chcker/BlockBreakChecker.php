@@ -4,10 +4,8 @@ namespace bbo51dog\anticheat\chcker;
 
 use bbo51dog\anticheat\Logger;
 use bbo51dog\anticheat\model\PlayerData;
+use bbo51dog\mjolnir\service\BanService;
 use pocketmine\item\Tool;
-use pocketmine\network\mcpe\protocol\InventoryTransactionPacket;
-use pocketmine\network\mcpe\protocol\Packet;
-use pocketmine\network\mcpe\protocol\types\inventory\UseItemTransactionData;
 
 class BlockBreakChecker extends Checker {
 
@@ -17,28 +15,24 @@ class BlockBreakChecker extends Checker {
         parent::__construct($playerData, "AntiFastBreak", 4, 8);
     }
 
-    public function handlePacket(Packet $packet): void {
-        if ($packet instanceof InventoryTransactionPacket) {
-            $trData = $packet->trData;
-            if ($trData instanceof UseItemTransactionData) {
-                if ($trData->getActionType() === UseItemTransactionData::ACTION_BREAK_BLOCK) {
-                    $currentTime = microtime(true);
-                    $diff = $currentTime - $this->previousTime;
-                    if ($this->getPlayerData()->getPlayer()->getInventory()->getItemInHand() instanceof Tool) {
-                        if ($diff <= 0.003) {
-                            $this->increaseViolation();
-                        } else {
-                            $this->decreaseViolation();
-                        }
-                    } elseif ($diff <= 0.06) {
-                        $this->increaseViolation();
-                    } else {
-                        $this->decreaseViolation();
-                    }
-                    $this->previousTime = $currentTime;
-                }
+    public function blockBreak(): void {
+        $currentTime = microtime(true);
+        $diff = $currentTime - $this->previousTime;
+        if ($this->getPlayerData()->getPlayer()->getInventory()->getItemInHand() instanceof Tool) {
+            if ($diff <= 0.003) {
+                $this->increaseViolation();
+            } else {
+                $this->decreaseViolation();
             }
+        } elseif ($diff <= 0.06) {
+            $this->increaseViolation();
+        } else {
+            $this->decreaseViolation();
         }
+        $this->previousTime = $currentTime;
+    }
+
+    public function playerJump(): void {
     }
 
     public function checkViolation(): void {
@@ -49,7 +43,8 @@ class BlockBreakChecker extends Checker {
             }
             return;
         }
-        $this->getPlayerData()->getPlayer()->kick("チートの疑いでkickされました。通信状況を確認してください。");
+        $this->getPlayerData()->getPlayer()->kick("チートが検出されました");
+        BanService::banName($this->getPlayerData()->getPlayer()->getName(), "Banned by AntiCheat.");
         Logger::getInstance()->warnPunishment($this);
         $this->reset();
     }

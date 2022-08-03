@@ -5,9 +5,6 @@ namespace bbo51dog\anticheat\chcker;
 use bbo51dog\anticheat\Logger;
 use bbo51dog\anticheat\Main;
 use bbo51dog\anticheat\model\PlayerData;
-use pocketmine\network\mcpe\protocol\Packet;
-use pocketmine\network\mcpe\protocol\PlayerActionPacket;
-use pocketmine\network\mcpe\protocol\types\PlayerAction;
 use pocketmine\Server;
 
 class AirJumpChecker extends Checker {
@@ -16,14 +13,13 @@ class AirJumpChecker extends Checker {
         parent::__construct($playerData, "AntiAirJump", PHP_INT_MAX, 8);
     }
 
-    public function handlePacket(Packet $packet): void {
-        if ($packet instanceof PlayerActionPacket) {
-            if ($packet->action === PlayerAction::JUMP) {
-                if (!$this->getPlayerData()->getPlayer()->isOnGround()) {
-                    $this->increaseViolation();
-                }
-            }
+    public function playerJump(): void {
+        if (!$this->getPlayerData()->getPlayer()->isOnGround()) {
+            $this->increaseViolation();
         }
+    }
+
+    public function blockBreak(): void {
     }
 
     public function checkViolation(): void {

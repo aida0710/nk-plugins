@@ -5,7 +5,6 @@ namespace bbo51dog\anticheat\model;
 use bbo51dog\anticheat\chcker\AirJumpChecker;
 use bbo51dog\anticheat\chcker\BlockBreakChecker;
 use bbo51dog\anticheat\chcker\Checker;
-use pocketmine\network\mcpe\protocol\Packet;
 use pocketmine\player\Player;
 
 class PlayerData {
@@ -37,9 +36,15 @@ class PlayerData {
         $this->player = $player;
     }
 
-    public function handlePacket(Packet $packet) {
+    public function onBreakEvent(): void {
         foreach ($this->checkers as $checker) {
-            $checker->handlePacket($packet);
+            $checker->blockBreak();
+        }
+    }
+
+    public function onJumpEvent(): void {
+        foreach ($this->checkers as $checker) {
+            $checker->playerJump();
         }
     }
 }
