@@ -68,7 +68,7 @@ abstract class PlayerDataPool {
     }
 
     public static function getDataByName(string $name): ?PlayerDataArray {
-        return isset(self::$players_data[strtolower($name)]) ? self::$players_data[strtolower($name)] : null;
+        return self::$players_data[strtolower($name)] ?? null;
     }
 
     public static function onBlockPlace(Player $player, Block $block, World $world): void {
