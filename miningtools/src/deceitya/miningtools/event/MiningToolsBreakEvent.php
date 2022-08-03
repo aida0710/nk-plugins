@@ -12,8 +12,6 @@ class MiningToolsBreakEvent extends BlockEvent implements Cancellable {
 
     use CancellableTrait;
 
-    /** @var int[] intの配列 array(1, 1, 5, 6); */
-    public array $blockIds;
     private Player $player;
 
     /**

@@ -2,6 +2,7 @@
 
 namespace deceitya\luckyenchant;
 
+use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
@@ -41,7 +42,13 @@ class Main extends PluginBase implements Listener {
             return;
         }
         if (empty($event->getDrops())) return;
-        if (!in_array($event->getBlock()->getId(), [
+        $plus = $this->Calculation($event->getBlock(), $enchant->getLevel());
+        $item = $event->getDrops()[0];
+        $item->setCount($item->getCount() + $plus);
+    }
+
+    static function Calculation(Block $block, int $level): int {
+        if (!in_array($block->getId(), [
             BlockLegacyIds::DIAMOND_ORE,
             BlockLegacyIds::LAPIS_ORE,
             BlockLegacyIds::REDSTONE_ORE,
@@ -52,11 +59,11 @@ class Main extends PluginBase implements Listener {
             BlockLegacyIds::CARROT_BLOCK,
             BlockLegacyIds::POTATO_BLOCK,
         ])) {
-            return;
+            return 0;
         }
         $rand = mt_rand(0, 999);
         $plus = 0;
-        switch ($enchant->getLevel()) {
+        switch ($level) {
             case 1:
                 if (667 <= $rand) {
                     $plus = 1;
@@ -81,7 +88,6 @@ class Main extends PluginBase implements Listener {
             default:
                 break;
         }
-        $item = $event->getDrops()[0];
-        $item->setCount($item->getCount() + $plus);
+        return $plus;
     }
 }

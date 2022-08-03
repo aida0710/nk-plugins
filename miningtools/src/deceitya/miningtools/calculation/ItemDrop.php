@@ -2,10 +2,12 @@
 
 namespace deceitya\miningtools\calculation;
 
+use deceitya\luckyenchant\Main;
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\data\bedrock\EnchantmentIdMap;
+use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\event\block\BlockBreakEvent;
-use pocketmine\item\Item;
 use pocketmine\player\Player;
 
 class ItemDrop {
@@ -13,10 +15,17 @@ class ItemDrop {
     /**
      * @param Player $player
      * @param Block $block
-     * @return item[]
+     * @return array
      */
     public function getDrop(Player $player, Block $block): array {
         $item = $player->getInventory()->getItemInHand();
+        $enchant = $item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE));
+        if ($enchant !== null) {
+            $plus = Main::Calculation($block, $enchant->getLevel());
+            $drops = $block->getDrops($item);
+            $drops[0]->setCount($drops[0]->getCount() + $plus);
+            return $drops;
+        }
         return $block->getDrops($item);
     }
 
