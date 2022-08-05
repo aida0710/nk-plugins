@@ -5,7 +5,6 @@ namespace shock95x\auctionhouse\commands;
 
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use shock95x\auctionhouse\commands\subcommand\AdminCommand;
 use shock95x\auctionhouse\commands\subcommand\CategoryCommand;
 use shock95x\auctionhouse\commands\subcommand\ExpiredCommand;
 use shock95x\auctionhouse\commands\subcommand\FormCommand;
@@ -20,7 +19,6 @@ class AHCommand extends BaseCommand {
 
     protected function prepare(): void {
         $this->registerSubCommand(new ShopCommand("shop", "Shows AH shop menu"));
-        $this->registerSubCommand(new AdminCommand("admin", "Opens AH admin menu"));
         $this->registerSubCommand(new SellCommand("sell", "Sell item in hand to the AH"));
         $this->registerSubCommand(new CategoryCommand("category", "Opens category menu"));
         $this->registerSubCommand(new ListingsCommand("listings", "Shows player listings"));

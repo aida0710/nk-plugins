@@ -13,7 +13,6 @@ use pocketmine\utils\TextFormat;
 use shock95x\auctionhouse\AuctionHouse;
 use shock95x\auctionhouse\database\storage\DataStorage;
 use shock95x\auctionhouse\libs\SOFe\AwaitGenerator\Await;
-use shock95x\auctionhouse\menu\admin\AdminMenu;
 use shock95x\auctionhouse\menu\type\PagingMenu;
 use shock95x\auctionhouse\utils\Locale;
 use shock95x\auctionhouse\utils\Settings;
@@ -24,7 +23,6 @@ class ShopMenu extends PagingMenu {
     public const INDEX_STATS = 49;
     public const INDEX_LISTINGS = 45;
     public const INDEX_EXPIRED = 46;
-    public const INDEX_ADMIN = [47, 51];
 
     private int $selling = 0;
     private int $expired = 0;
@@ -87,10 +85,6 @@ class ShopMenu extends PagingMenu {
                 return false;
             case self::INDEX_EXPIRED:
                 self::open(new ExpiredMenu($this->player), false);
-                return false;
-            case 47:
-            case 51:
-                self::open(new AdminMenu($this->player), false);
                 return false;
         }
         $this->openListing($slot, $itemClicked);
