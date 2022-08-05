@@ -4,7 +4,6 @@ namespace bbo51dog\anticheat\chcker;
 
 use bbo51dog\anticheat\Logger;
 use bbo51dog\anticheat\model\PlayerData;
-use bbo51dog\mjolnir\service\BanService;
 use pocketmine\item\Tool;
 
 class BlockBreakChecker extends Checker {
@@ -44,7 +43,6 @@ class BlockBreakChecker extends Checker {
             return;
         }
         $this->getPlayerData()->getPlayer()->kick("チートが検出されました");
-        BanService::banName($this->getPlayerData()->getPlayer()->getName(), "Banned by AntiCheat.");
         Logger::getInstance()->warnPunishment($this);
         $this->reset();
     }
