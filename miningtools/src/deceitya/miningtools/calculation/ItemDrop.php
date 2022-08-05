@@ -21,8 +21,11 @@ class ItemDrop {
         $item = $player->getInventory()->getItemInHand();
         $enchant = $item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE));
         if ($enchant !== null) {
-            $plus = Main::Calculation($block, $enchant->getLevel());
             $drops = $block->getDrops($item);
+            if (empty($drops)) {
+                return $block->getDrops($item);
+            }
+            $plus = Main::Calculation($block, $enchant->getLevel());
             $drops[0]->setCount($drops[0]->getCount() + $plus);
             return $drops;
         }
