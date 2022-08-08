@@ -34,14 +34,14 @@ class EffectBuyForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $price = EffectShopAPI::getInstance()->getBuy($this->effectName) * $this->level;
+        $price = $this->time * EffectShopAPI::getInstance()->getBuy($this->effectName) + ($this->level * EffectShopAPI::getInstance()->getAmplifiedMoney($this->effectName));
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
             $player->sendMessage("§bEffect §7>> §c所持金が足りない為処理が中断されました。要求価格 -> {$price}円");
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
         $player->getEffects()->add(new EffectInstance($this->effect, $this->time * 20 * 60, $this->level - 1, false));
-        $player->sendMessage("§bEffect §7>> §a{$this->effectName}を{$this->level}レベルで{$this->time}分付与しました");
+        $player->sendMessage("§bEffect §7>> §a{$this->effectName}を{$this->level}レベルで{$this->time}分付与し、{$price}円消費しました");
     }
 
 }
