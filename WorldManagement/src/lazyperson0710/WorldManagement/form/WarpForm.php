@@ -19,68 +19,68 @@ class WarpForm extends SimpleForm {
         $facilities = (new SimpleForm())
             ->setTitle("World Select")
             ->addElements(
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "ロビー", "warp lobby", true),
-                $this->addButton($player, $worldM->getWorldByName("tos"), "ルールワールド", "warp tos", true),
-                $this->addButton($player, $worldM->getWorldByName("athletic"), "アスレチックワールド", "warp athletic", true),
-                $this->addButton($player, $worldM->getWorldByName("pvp"), "PVPワールド", "pvp", true),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "ロビー", "warp lobby", true),
+                $this->addButton($player, $this->checkLoadWorld("tos"), "ルールワールド", "warp tos", true),
+                $this->addButton($player, $this->checkLoadWorld("athletic"), "アスレチックワールド", "warp athletic", true),
+                $this->addButton($player, $this->checkLoadWorld("pvp"), "PVPワールド", "pvp", true),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
         $cities = (new SimpleForm())
             ->setTitle("World Select")
             ->addElements(
-                $this->addButton($player, $worldM->getWorldByName("生物市-c"), "生物市", "warp 生物市", true),
-                $this->addButton($player, $worldM->getWorldByName("船橋市-c"), "船橋市", "warp 船橋市", true),
-                $this->addButton($player, $worldM->getWorldByName("横浜市-c"), "横浜市", "warp 横浜市", true),
-                $this->addButton($player, $worldM->getWorldByName("名古屋市-c"), "名古屋市", "warp 名古屋市", false),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "なんとか市", "warp なんとか市", false),
+                $this->addButton($player, $this->checkLoadWorld("生物市-c"), "生物市", "warp 生物市", true),
+                $this->addButton($player, $this->checkLoadWorld("船橋市-c"), "船橋市", "warp 船橋市", true),
+                $this->addButton($player, $this->checkLoadWorld("横浜市-c"), "横浜市", "warp 横浜市", true),
+                $this->addButton($player, $this->checkLoadWorld("名古屋市-c"), "名古屋市", "warp 名古屋市", false),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "なんとか市", "warp なんとか市", false),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
         $farms = (new SimpleForm())
             ->setTitle("World Select")
             ->addElements(
-                $this->addButton($player, $worldM->getWorldByName("浜松市-f"), "浜松市", "warp 浜松市", true),
-                $this->addButton($player, $worldM->getWorldByName("八街市-f"), "八街市", "warp 八街市", true),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "なんとか市", "warp なんとか市", false),
+                $this->addButton($player, $this->checkLoadWorld("浜松市-f"), "浜松市", "warp 浜松市", true),
+                $this->addButton($player, $this->checkLoadWorld("八街市-f"), "八街市", "warp 八街市", true),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "なんとか市", "warp なんとか市", false),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
         $normal_resources = (new SimpleForm())
             ->setTitle("World Select")
             ->addElements(
-                $this->addButton($player, $worldM->getWorldByName("nature-1"), "オーバーワールド - 1", "warp nature-1", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-2"), "オーバーワールド - 2", "warp nature-2", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-3"), "オーバーワールド - 3", "warp nature-3", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-4"), "オーバーワールド - 4", "warp nature-4", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-java"), "オーバーワールド - java", "warp java", true),
-                $this->addButton($player, $worldM->getWorldByName("MiningWorld"), "マイニングワールド", "warp mining", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-5"), "オーバーワールド - 5", "warp nature-5", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-6"), "オーバーワールド - 6", "warp nature-6", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-7"), "オーバーワールド - 7", "warp nature-7", true),
-                $this->addButton($player, $worldM->getWorldByName("nature-8"), "オーバーワールド - 8", "warp nature-8", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-1"), "オーバーワールド - 1", "warp nature-1", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-2"), "オーバーワールド - 2", "warp nature-2", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-3"), "オーバーワールド - 3", "warp nature-3", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-4"), "オーバーワールド - 4", "warp nature-4", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-java"), "オーバーワールド - java", "warp java", true),
+                $this->addButton($player, $this->checkLoadWorld("MiningWorld"), "マイニングワールド", "warp mining", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-5"), "オーバーワールド - 5", "warp nature-5", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-6"), "オーバーワールド - 6", "warp nature-6", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-7"), "オーバーワールド - 7", "warp nature-7", true),
+                $this->addButton($player, $this->checkLoadWorld("nature-8"), "オーバーワールド - 8", "warp nature-8", true),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
         $resources = (new SimpleForm())
             ->setTitle("World Select")
             ->addElements(
-                $this->addButton($player, $worldM->getWorldByName("resource"), "人工資源", "warp resource", true),
-                $this->addButton($player, $worldM->getWorldByName("nether-1"), "ネザーディメンション - 1", "warp nether-1", true),
-                $this->addButton($player, $worldM->getWorldByName("nether-2"), "ネザーディメンション - 2", "warp nether-2", true),
-                $this->addButton($player, $worldM->getWorldByName("nether-3"), "ネザーディメンション - 3", "warp nether-3", true),
-                $this->addButton($player, $worldM->getWorldByName("end-1"), "エンドディメンション - 1", "warp end-1", true),
-                $this->addButton($player, $worldM->getWorldByName("end-2"), "エンドディメンション - 2", "warp end-2", true),
-                $this->addButton($player, $worldM->getWorldByName("end-3"), "エンドディメンション - 3", "warp end-3", true),
+                $this->addButton($player, $this->checkLoadWorld("resource"), "人工資源", "warp resource", true),
+                $this->addButton($player, $this->checkLoadWorld("nether-1"), "ネザーディメンション - 1", "warp nether-1", true),
+                $this->addButton($player, $this->checkLoadWorld("nether-2"), "ネザーディメンション - 2", "warp nether-2", true),
+                $this->addButton($player, $this->checkLoadWorld("nether-3"), "ネザーディメンション - 3", "warp nether-3", true),
+                $this->addButton($player, $this->checkLoadWorld("end-1"), "エンドディメンション - 1", "warp end-1", true),
+                $this->addButton($player, $this->checkLoadWorld("end-2"), "エンドディメンション - 2", "warp end-2", true),
+                $this->addButton($player, $this->checkLoadWorld("end-3"), "エンドディメンション - 3", "warp end-3", true),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
         $events = (new SimpleForm())
             ->setTitle("World Select")
             ->addElements(
-                $this->addButton($player, $worldM->getWorldByName("nether-1"), "旧ロビーに行く", "warp event1", true),
-                $this->addButton($player, $worldM->getWorldByName("nether-2"), "スキンコンテストイベント", "warp event2", true),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "イベント - 3", "warp event3", false),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "イベント - 4", "warp event4", false),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "イベント - 5", "warp event5", false),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "イベント - 6", "warp event6", false),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "イベント - 7", "warp event7", false),
-                $this->addButton($player, $worldM->getWorldByName("lobby"), "イベント - 8", "warp event8", false),
+                $this->addButton($player, $this->checkLoadWorld("nether-1"), "旧ロビーに行く", "warp event1", true),
+                $this->addButton($player, $this->checkLoadWorld("nether-2"), "スキンコンテストイベント", "warp event2", true),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "イベント - 3", "warp event3", false),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "イベント - 4", "warp event4", false),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "イベント - 5", "warp event5", false),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "イベント - 6", "warp event6", false),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "イベント - 7", "warp event7", false),
+                $this->addButton($player, $this->checkLoadWorld("lobby"), "イベント - 8", "warp event8", false),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
         $cityAndFarm = (new SimpleForm())
@@ -99,8 +99,15 @@ class WarpForm extends SimpleForm {
                 new SendFormButton($normal_resources, "オーバーワールド", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/icon_recipe_nature.png")),
                 new SendFormButton($resources, "特殊資源", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/realmsIcon.png")),
                 new SendFormButton($events, "イベント", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/purtle.png")),
-                $this->addButton($player, $worldM->getWorldByName("resource"), "オリジナルレシピ", "warp recipe", true, new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/smithing_icon.png")),
+                $this->addButton($player, $this->checkLoadWorld("resource"), "オリジナルレシピ", "warp recipe", true, new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/smithing_icon.png")),
             );
+    }
+
+    public function checkLoadWorld(string $worldName): World {
+        if (Server::getInstance()->getWorldManager()->getWorldByName($worldName) === null) {
+            return Server::getInstance()->getWorldManager()->getWorldByName("lobby");
+        }
+        return Server::getInstance()->getWorldManager()->getWorldByName($worldName);
     }
 
     private function addButton(Player $player, World $world, string $text, string $command, bool $permission, ?ButtonImage $buttonImage = null): CommandDispatchButton {
