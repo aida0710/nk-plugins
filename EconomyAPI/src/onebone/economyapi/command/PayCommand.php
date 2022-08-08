@@ -32,6 +32,10 @@ class PayCommand extends Command {
             $sender->sendMessage(TextFormat::RED . "Usage: " . $this->getUsage());
             return true;
         }
+        if (strpos($amount, '.')) {
+            $sender->sendMessage("§bEconomy §7>> §c振り込む金額に小数点を含めることはできません");
+            return true;
+        }
         if (($p = $this->plugin->getServer()->getPlayerByPrefix($player)) instanceof Player) {
             $player = $p->getName();
         }

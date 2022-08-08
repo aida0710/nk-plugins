@@ -47,6 +47,10 @@ class ActionForm implements Form {
                     $player->sendMessage(TextFormat::RED . "§bBank §7>> §cお金が足りません");
                     return;
                 }
+                if (mb_strpos($data[0], '.')) {
+                    $player->sendMessage("§bBank §7>> §c振り込む金額に小数点を含めることはできません");
+                    return;
+                }
                 EconomyAPI::getInstance()->reduceMoney($player, $data[0]);
                 BankHelper::getInstance()->addMoney($this->bank, $player->getName(), $data[0]);
                 $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a" . $data[0] . "円振り込みました");
@@ -54,6 +58,10 @@ class ActionForm implements Form {
             case self::BANK_OUT:
                 if ($data[0] > BankHelper::getInstance()->getMoney($this->bank)) {
                     $player->sendMessage(TextFormat::RED . "§bBank §7>> §cお金が足りません");
+                    return;
+                }
+                if (mb_strpos($data[0], '.')) {
+                    $player->sendMessage("§bBank §7>> §c引き出す金額に小数点を含めることはできません");
                     return;
                 }
                 BankHelper::getInstance()->removeMoney($this->bank, $player->getName(), $data[0]);
