@@ -1,0 +1,5 @@
+name: PlayerSetting
+api: [ 4.0.0 ]
+main: lazyperson0710\PlayerSetting\Main
+version: 1.0.0
+author: lazyperson710
