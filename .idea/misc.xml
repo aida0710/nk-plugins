@@ -3,4 +3,7 @@
   <component name="PWA">
     <option name="wasEnabledAtLeastOnce" value="true" />
   </component>
+  <component name="PhpEntryPointsManager">
+    <suppressed_annotations>@priority</suppressed_annotations>
+  </component>
 </project>
