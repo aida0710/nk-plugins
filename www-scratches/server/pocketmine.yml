@@ -6,9 +6,9 @@
 settings:
   #Whether to send all strings translated to server locale or let the device handle them
   force-language: false
-  shutdown-message: "Server closed"
+  shutdown-message: "サーバーが停止しました"
   #Allow listing plugins via Query
-  query-plugins: true
+  query-plugins: false
   #Enable plugin and core profiling by default
   enable-profiling: false
   #Will only add results when tick measurement is below or equal to given value (default 20)
@@ -33,7 +33,7 @@ memory:
 
   #Main thread hard memory limit in megabytes. Set to 0 to disable
   #This will stop the server when the limit is surpassed
-  main-hard-limit: 1024
+  main-hard-limit: 0
 
   #AsyncWorker threads' hard memory limit in megabytes. Set to 0 to disable
   #This will crash the task currently executing on the worker if the task exceeds the limit
@@ -44,7 +44,7 @@ memory:
   check-rate: 20
 
   #Continue firing low-memory-triggers and event while on low memory
-  continuous-trigger: true
+  continuous-trigger: false
 
   #Only if memory.continuous-trigger is enabled. Specifies the rate in memory.check-rate steps (default 30 seconds)
   continuous-trigger-rate: 30
@@ -67,7 +67,7 @@ memory:
 
   max-chunks:
     #Cap maximum render distance per player when low memory is triggered. Set to 0 to disable cap.
-    chunk-radius: 4
+    chunk-radius: 0
 
     #Do chunk garbage collection on trigger
     trigger-chunk-collect: true
@@ -122,7 +122,7 @@ chunk-ticking:
   #Max amount of chunks processed each tick
   per-tick: 40
   #Radius of chunks around a player to tick
-  tick-radius: 3
+  tick-radius: 8
   #Number of blocks inside ticking areas' subchunks that get ticked every tick. Higher values will accelerate events
   #like tree and plant growth, but at a higher performance cost.
   blocks-per-subchunk-per-tick: 3
@@ -134,18 +134,18 @@ chunk-ticking:
 
 chunk-generation:
   #Max. amount of chunks in the waiting queue to be populated
-  population-queue-size: 32
+  population-queue-size: 3200
 
 ticks-per:
   autosave: 6000
 
 auto-report:
   #Send crash reports for processing
-  enabled: true
-  send-code: true
-  send-settings: true
+  enabled: false
+  send-code: false
+  send-settings: false
   send-phpinfo: false
-  use-https: true
+  use-https: false
   host: crash.pmmp.io
 
 anonymous-statistics:

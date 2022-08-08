@@ -52,9 +52,9 @@ if [ "$DO_LOOP" == "yes" ]; then
 			echo "Restarted $LOOPS times"
 		fi
 		"$PHP_BINARY" "$POCKETMINE_FILE" $@
-		echo "To escape the loop, press CTRL+C now. Otherwise, wait 5 seconds for the server to restart."
-		echo ""
-		sleep 5
+		echo "サーバーの自動再起動を停止するにはctrl+Cと実行してください"
+		echo "2秒後に再起動されます"
+		sleep 2
 		((LOOPS++))
 	done
 else
