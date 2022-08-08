@@ -5,7 +5,6 @@ namespace lazyperson710\sff\form;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
-use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -39,13 +38,6 @@ class PlayerForm extends SimpleForm {
             }
             $date = date("Y/m/d - H:i:s");
             $life = "{$player->getHealth()}/{$player->getMaxHealth()}";
-            $gameMode = match ($player->getGamemode()) {
-                GameMode::SURVIVAL() => "Survival",
-                GameMode::CREATIVE() => "Creative",
-                GameMode::ADVENTURE() => "Adventure",
-                GameMode::SPECTATOR() => "Spectator",
-                default => "例外が発生しました",
-            };
             $miningLevel = MiningLevelAPI::getInstance()->getLevel($playerName);
             $miningExp = MiningLevelAPI::getInstance()->getExp($playerName);
             $miningLevelUpExp = MiningLevelAPI::getInstance()->getLevelUpExp($playerName);
@@ -57,7 +49,7 @@ class PlayerForm extends SimpleForm {
         }
         $this
             ->setTitle("Player info")
-            ->setText("§l{$player->getName()}の情報§r\n\nCoordinate : $playerPosition\n\nLife $life - Mode {$gameMode}\nMiningLevel Lv.{$miningLevel}, Exp.{$miningExp}, LevelUpExp.{$miningLevelUpExp} / Progress:{$progress}％\n\n現在付与されているエフェクト\n{$effectIds}\n\n最終更新時刻\n{$date}")
+            ->setText("§l{$player->getName()}の情報§r\n\nCoordinate : $playerPosition\n\nLife $life\nMiningLevel Lv.{$miningLevel}, Exp.{$miningExp}, LevelUpExp.{$miningLevelUpExp} / Progress:{$progress}％\n\n現在付与されているエフェクト\n{$effectIds}\n\n最終更新時刻\n{$date}")
             ->addElements(new Button("情報を更新"));
     }
 
