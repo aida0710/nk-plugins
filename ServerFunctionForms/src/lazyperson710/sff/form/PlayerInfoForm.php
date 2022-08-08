@@ -13,9 +13,9 @@ class PlayerInfoForm extends CustomForm {
 
     public function __construct(Player $player) {
         $names = null;
-        foreach (Server::getInstance()->getOnlinePlayers() as $player) {
-            $name = $player->getName();
-            if (Server::getInstance()->isOp($player->getName())) {
+        foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
+            $name = $onlinePlayer->getName();
+            if (Server::getInstance()->isOp($name)) {
                 continue;
             }
             if ($player->getName() === $name) {
