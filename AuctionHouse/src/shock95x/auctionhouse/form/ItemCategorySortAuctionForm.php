@@ -22,7 +22,7 @@ class ItemCategorySortAuctionForm extends CustomForm {
         ];
         $this->dropdown = new Dropdown("\n\n\nフィルターを掛けたいカテゴリーを選択して下さい", $category);
         $this
-            ->setTitle("Auction System")
+            ->setTitle("Bazaar System")
             ->addElements(
                 $this->dropdown,
             );
@@ -52,6 +52,6 @@ class ItemCategorySortAuctionForm extends CustomForm {
                 Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
                 return;
         }
-        Server::getInstance()->dispatchCommand($player, "ah category {$selectFilter}");
+        Server::getInstance()->dispatchCommand($player, "bazaar category {$selectFilter}");
     }
 }

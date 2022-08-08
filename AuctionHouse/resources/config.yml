@@ -3,7 +3,7 @@
 config-version: 5
 
 # Sets the prefix for this plugin.
-prefix: "&bAuction &7>> &a"
+prefix: "&bBazaar &7>> &a"
 # Minimum price required to create a listing
 min-price: 300
 # Maximum price a listing can have (-1 = No limit)

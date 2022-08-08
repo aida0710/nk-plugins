@@ -4,13 +4,10 @@ declare(strict_types = 1);
 namespace shock95x\auctionhouse\menu;
 
 use DateTime;
-use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\inventory\Inventory;
-use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
-use shock95x\auctionhouse\AuctionHouse;
 use shock95x\auctionhouse\database\storage\DataStorage;
 use shock95x\auctionhouse\libs\SOFe\AwaitGenerator\Await;
 use shock95x\auctionhouse\menu\type\PagingMenu;
@@ -57,11 +54,6 @@ class ShopMenu extends PagingMenu {
             52 => $howto,
             53 => $info,
         ];
-        if ($this->player->hasPermission("auctionhouse.command.admin")) {
-            $admin = Utils::getButtonItem($this->player, "admin_menu", "view-admin-menu");
-            $admin->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(AuctionHouse::FAKE_ENCH_ID)));
-            $items[47] = $items[51] = $admin;
-        }
         foreach ($items as $slot => $item) $this->getInventory()->setItem($slot, $item);
     }
 
