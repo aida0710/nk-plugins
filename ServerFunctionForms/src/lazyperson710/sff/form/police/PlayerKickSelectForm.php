@@ -54,7 +54,7 @@ class PlayerKickSelectForm extends CustomForm {
         $embed = (new Embed())
             ->setTitle("{$player->getName()}が{$playerName}をkickしました")
             ->setColor(13421619)
-            ->setAuthorName("Mode : Player Kick")
+            ->setAuthorName("Mode : Player Kick\n理由 : {$this->input}")
             ->setTime((new DateTime())->format(DateTimeInterface::ATOM));
         $embeds = new Embeds();
         $embeds->add($embed);

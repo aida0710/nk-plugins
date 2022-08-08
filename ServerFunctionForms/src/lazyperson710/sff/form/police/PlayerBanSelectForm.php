@@ -54,7 +54,7 @@ class PlayerBanSelectForm extends CustomForm {
         $embed = (new Embed())
             ->setTitle("{$player->getName()}が{$playerName}をmBanしました")
             ->setColor(255)
-            ->setAuthorName("Mode : Player Ban")
+            ->setAuthorName("Mode : Player Ban\n理由 : {$this->input}")
             ->setTime((new DateTime())->format(DateTimeInterface::ATOM));
         $embeds = new Embeds();
         $embeds->add($embed);
