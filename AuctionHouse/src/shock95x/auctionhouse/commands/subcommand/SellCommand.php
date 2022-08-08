@@ -89,7 +89,7 @@ class SellCommand extends BaseSubCommand {
             $count = $item->getCount();
             Utils::removeItem($sender, $item);
             $listing = yield DataStorage::getInstance()->createListing($sender, $item->setCount($count), (int)$price, yield) => Await::ONCE;
-            $sender->sendMessage(str_ireplace(["{PLAYER}", "{ITEM}", "{PRICE}", "{AMOUNT}"], [$sender->getName(), $item->getName(), $listing->getPrice(true, Settings::formatPrice()), $count], Locale::get($sender, "item-listed", true)));
+            Server::getInstance()->broadcastMessage("§bBazaar §7>> §a{$item->getName()}§r§aを{$count}個、{$listing->getPrice(true, Settings::formatPrice())}円で出品開始しました");
         });
     }
 
