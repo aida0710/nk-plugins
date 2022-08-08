@@ -15,7 +15,6 @@ use pocketmine\item\ItemIds;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class ItemListener implements Listener {
 
@@ -96,6 +95,15 @@ class ItemListener implements Listener {
         $this->onUse($event->getPlayer());
     }
 
+    /**
+     * @param PlayerItemUseEvent $event
+     * @return void
+     * @priority LOWEST
+     */
+    public function onItemUse(PlayerItemUseEvent $event): void {
+        $this->onUse($event->getPlayer());
+    }
+
     private function onUse(Player $player) {
         $item = $player->getInventory()->getItemInHand();
         $rootTag = $item->getNamedTag()->getTag(self::NBT_ROOT);
@@ -122,13 +130,4 @@ class ItemListener implements Listener {
         }
     }
 
-    public function onItemUse(PlayerItemUseEvent $event) {
-        $this->onUse($event->getPlayer());
-        $player = $event->getPlayer();
-        $inHand = $player->getInventory()->getItemInHand();
-        if ($inHand->getId() === -195) {
-            $event->cancel();
-            Server::getInstance()->dispatchCommand($player, "bonus");
-        }
-    }
 }
