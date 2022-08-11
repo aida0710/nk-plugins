@@ -1,13 +1,14 @@
 <?php
 
-namespace lazyperson710\sff\form;
+namespace lazyperson710\sff\form\police;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
+use pocketmine\world\Position;
 
-class PlayerInfoForm extends CustomForm {
+class PlayerTeleportSelectForm extends CustomForm {
 
     private Dropdown $dropdown;
 
@@ -26,18 +27,25 @@ class PlayerInfoForm extends CustomForm {
         if (is_null($names)) {//こんなことは存在しないけど一応条件分岐だけ(上記のコメントアウトを消したら必要になります)
             $names[] .= "表示可能なプレイヤーが存在しません";
         }
-        $this->dropdown = new Dropdown("情報を取得したいプレイヤーを選択してください", $names);
+        $this->dropdown = new Dropdown("テレポートしたいプレイヤーを選択してください\nテレポートにはスペクテイターモードである必要があります", $names);
         $this
-            ->setTitle("Player Info")
+            ->setTitle("Police System")
             ->addElement($this->dropdown);
     }
 
     public function handleSubmit(Player $player): void {
         $playerName = $this->dropdown->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-            $player->sendMessage("§bPlayerInfo §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
+            $player->sendMessage("§bPolice §7>> §cプレイヤーが存在しない為、正常に座標を取得できませんでした");
             return;
         }
-        $player->sendForm(new PlayerForm($player, $playerName));
+        if ($player->isSpectator()) {
+            $position = Server::getInstance()->getPlayerByPrefix($playerName)->getPosition();
+            $pos = new Position($position->getX(), $position->getY(), $position->getZ(), $position->getWorld());
+            Server::getInstance()->getLogger()->info("Police >> {$player->getName()}が{$playerName}にテレポートしました");
+            $player->teleport($pos);
+        } else {
+            $player->sendForm(new PoliceMainForm($player, "\n§cテレポートはスペクテイターモード時のみ使用可能です"));
+        }
     }
 }

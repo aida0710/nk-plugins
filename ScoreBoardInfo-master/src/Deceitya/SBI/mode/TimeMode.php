@@ -26,8 +26,8 @@ class TimeMode implements Mode {
         $date = date("Y年m月d日");
         $time = date("H時i分s秒");
         return [
-            "所持金 - " . $this->EconomyAPI->myMoney($player),
-            "チケット - " . TicketAPI::getInstance()->checkData($player) . "枚",
+            "所持金 - " . number_format($this->EconomyAPI->myMoney($player)) . "円",
+            "チケット - " . number_format(TicketAPI::getInstance()->checkData($player)) . "枚",
             "ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
             "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
             "  ",

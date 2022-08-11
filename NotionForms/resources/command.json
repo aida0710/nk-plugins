@@ -4,16 +4,16 @@
         "text": "最終更新 : 2022年07月10日"
     },
     {
-        "title": "/ah",
-        "text": "使い方/ah\n\nAuctionを利用することができます\nform操作だけではなくsubコマンドから操作することも可能となっており/ah category,shop,expired,from,listing,sellが使用できます"
-    },
-    {
         "title": "/announce",
         "text": "使い方/announce\n\n現在のアップデート、お知らせ情報などを見ることができます\nまた、過去に配信された情報も閲覧可能です"
     },
     {
         "title": "/bank",
         "text": "使い方/bank\n\nお金を預けたり引き出したりできます。\nまた、他人と銀行を共有することもできます。\n\n死亡ペナルティーで所持金が1/2になりますが銀行に入れることでペナルティーを避けることができます"
+    },
+    {
+        "title": "/bazaar",
+        "text": "使い方/ah\n\nバザーを利用することができます\nform操作だけではなくsubコマンドから操作することも可能となっており/bazaar category,shop,expired,from,listing,sellが使用できます"
     },
     {
         "title": "/bonus",

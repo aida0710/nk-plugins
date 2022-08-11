@@ -5,18 +5,18 @@ lang-version: 4
 # Refer to https://minecraft.gamepedia.com/Formatting_codes for formatting codes, you can replace the '§' symbol with a '
 
 # AH Menu titles
-menu-name: "Auction System"
-listings-menu-name: "Auction System"
-expired-menu-name: "Auction System"
-purchase-menu-name: "Auction System"
-admin-menu-name: "Auction System"
-category-menu-name: "Auction System"
-manage-listing-name: "Auction System"
-player-listing: "Auction System / {PLAYER}"
+menu-name: "Bazaar System"
+listings-menu-name: "Bazaar System"
+expired-menu-name: "Bazaar System"
+purchase-menu-name: "Bazaar System"
+admin-menu-name: "Bazaar System"
+category-menu-name: "Bazaar System"
+manage-listing-name: "Bazaar System"
+player-listing: "Bazaar System / {PLAYER}"
 
 # Chat messages
 item-listed: "{ITEM} (x{AMOUNT})を{PRICE}円で出品開始しました"
-cancelled-item: "§c出品を取り下げました。/ah expiredからアイテムを回収することができます"
+cancelled-item: "§c出品を取り下げました。/bazaar expiredからアイテムを回収することができます"
 cancelled-purchase: "§c出品されたアイテムの購入をキャンセルしました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
 purchased-item: "{ITEM} (x{AMOUNT})を{PRICE}円で購入しました"    #{PLAYER}, {ITEM}, {PRICE}, {AMOUNT}
 seller-message: "{ITEM} (x{AMOUNT})を{PRICE}円で{PLAYER}が購入しました"    #{ITEM}, {AMOUNT}
@@ -30,13 +30,13 @@ not-enough-space: "§cインベントリに購入しようとしたアイテム�
 self-purchase: "§c自身で出品したアイテムは購入できません"
 no-item: "§c出品したいアイテムを持ってください"
 cannot-afford: "§c所持金が足りませんでした"
-item-blacklisted: "§cこのアイテムはオークションには出品できません"
+item-blacklisted: "§cこのアイテムはバザーには出品できません"
 invalid-balance: "§c現在の所持金では出品手数料分が足りません"
 listing-gone: "§c選択したアイテムはもう出品されていません"
 price-range: "§c入力した値では出品することは出来ません。出品可能金額は{MIN}円から{MAX}円までとなります"    #{MIN}, {MAX}
 in-cooldown: "§c現在クールダウン中です。残り{M}分{S}秒"    #{M}, {S}
 player-not-found: "§cこのプレイヤーが出品しているアイテムは存在しません"
-player-listings-usage: "/ah shopで自分の出品中のアイテムリストを表示出来ます"
+player-listings-usage: "/bazaar shopで自分の出品中のアイテムリストを表示出来ます"
 inventory-full: "§c在庫がいっぱいなため出品できません。出品中のアイテムを削除してください"
 purchase-economy-error: "§cトランザクションに失敗しました"
 
@@ -126,7 +126,7 @@ duplicate-item: "インベントリにアイテムをコピー"
 listing-status:
   - "状態: {STATUS}"
   - "アイテムの状態を変更する"
-delete-item: "オークションからアイテムを削除する"
+delete-item: "バザーからアイテムを削除する"
 
 # Pagination items
 previous-page:
@@ -145,11 +145,11 @@ sell-description:
   name: "アイテムを出品するには？"
   lore:
     - "出品したいアイテムを持って"
-    - "/ah sell <出品価格>とコマンドを実行してください"
+    - "/bazaar sell <出品価格>とコマンドを実行してください"
 main-description:
-  name: "Auctionについて"
+  name: "Bazaarについて"
   lore:
-    - "オークションが見にくい場合は[設定>ビデオ>UIプロフィール]"
+    - "バザーが見にくい場合は[設定>ビデオ>UIプロフィール]"
     - "をクラシックに変更してみてください"
 main-stats:
   # {PAGE} = Current page
@@ -161,9 +161,9 @@ main-stats:
     - "{TOTAL}個のアイテムが出品されています"
     - "タップでリロード出来ます"
 listings-description:
-  name: "Auctionについて"
+  name: "Bazaarについて"
   lore:
-    - "オークションが見にくい場合は[設定>ビデオ>UIプロフィール]"
+    - "バザーが見にくい場合は[設定>ビデオ>UIプロフィール]"
     - "をクラシックに変更してみてください"
 listings-stats:
   # {PAGE} = Current page
@@ -174,9 +174,9 @@ listings-stats:
     - "現在のページ {PAGE}/{MAX}"
     - "{TOTAL}個のアイテムが出品されています"
 expired-description:
-  name: "Auctionについて"
+  name: "Bazaarについて"
   lore:
-    - "オークションが見にくい場合は[設定>ビデオ>UIプロフィール]"
+    - "バザーが見にくい場合は[設定>ビデオ>UIプロフィール]"
     - "をクラシックに変更してみてください"
 expired-stats:
   # {PAGE} = Current page

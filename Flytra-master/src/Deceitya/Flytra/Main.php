@@ -30,30 +30,36 @@ class Main extends PluginBase {
         ]);
     }
 
-    public function checkFly(Player $player, World $world, Item $item) {
+    public function checkFly(Player $player, World $world, Item $item): bool {
         if ($player->isSurvival()) {
             if ($item->getId() === ItemIds::ELYTRA || array_key_exists($player->getName(), FlyCheckTask::$flyTask)) {
                 if (Server::getInstance()->isOp($player->getName())) {
                     $player->setAllowFlight(true);
                     $this->addParticle($player);
+                    return true;
                 } elseif (in_array($world->getFolderName(), self::$worlds)) {
                     $player->setAllowFlight(false);
                     $player->setFlying(false);
+                    return false;
                 } else {
                     if ($player->getPosition()->getFloorY() > WorldManagementAPI::getInstance()->getFlyLimit($player->getWorld()->getFolderName())) {
                         $player->setAllowFlight(false);
                         $player->setFlying(false);
                         $player->sendTip("§bFlyTask §7>> §c高さ制限に引っ掛かった為飛行が一時的に不可になりました");
+                        return false;
                     } else {
                         $player->setAllowFlight(true);
                         $this->addParticle($player);
+                        return true;
                     }
                 }
             } else {
                 $player->setAllowFlight(false);
                 $player->setFlying(false);
+                return false;
             }
         }
+        return true;
     }
 
     public function addParticle(Player $player): void {

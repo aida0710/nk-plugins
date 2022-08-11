@@ -5,6 +5,7 @@ namespace Deceitya\SBI\mode;
 use pocketmine\utils\SingletonTrait;
 
 class ModeList {
+
     use SingletonTrait;
 
     /** @var Mode[] */
