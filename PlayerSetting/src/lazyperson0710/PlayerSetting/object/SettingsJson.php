@@ -17,12 +17,40 @@ class SettingsJson{
 		$this->config = new Config(self::FILE_NAME, Config::JSON);
 	}
 
-	public function save(PlayerSettingPool $pool):void{
+	public function input(PlayerSettingPool $pool):void{
 		$data_arr = [];
 
 		foreach($pool->getAll() as $player_setting){
 			$data_arr[$player_setting->getXuid()] = $player_setting->toArray();
 		}
 		$this->config->setAll($data_arr);
+	}
+
+	/**
+	 * @param PlayerSettingPool $pool
+	 * @return void
+	 */
+	public function output(PlayerSettingPool $pool):void{
+		$data_arr = $this->config->getAll();
+		$pool->clear();
+
+		foreach($data_arr as $xuid => $settings_arr){
+			$player_setting = new PlayerSetting($xuid);
+
+			foreach($settings_arr as $setting_class => $value){
+				$setting = new $setting_class;
+				$setting->setValue($value);
+				$player_setting->setSetting($setting);
+			}
+			$pool->register($player_setting);
+		}
+	}
+
+	/**
+	 * @return void
+	 * @throws \JsonException
+	 */
+	public function save():void{
+		$this->config->save();
 	}
 }
