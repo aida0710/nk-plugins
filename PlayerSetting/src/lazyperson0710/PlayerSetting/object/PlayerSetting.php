@@ -17,7 +17,7 @@ class PlayerSetting{
 	}
 
 	public function __construct(string $xuid){
-		if($xuid === '') throw new \InvalidArgumentException($xuid.' is not signed in xbox');
+		if($xuid === '') throw new \InvalidArgumentException('player is not signed in xbox');
 		$this->xuid = $xuid;
 		$this->init();
 	}
