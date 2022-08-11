@@ -23,8 +23,8 @@ class SimpleMode implements Mode {
 
     public function getLines(Player $player): ?array {
         return [
-            "所持金 - " . $this->EconomyAPI->myMoney($player),
-            "チケット - " . TicketAPI::getInstance()->checkData($player) . "枚",
+            "所持金 - " . number_format($this->EconomyAPI->myMoney($player)) . "円",
+            "チケット - " . number_format(TicketAPI::getInstance()->checkData($player)) . "枚",
             "オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
             "応答速度 - {$player->getNetworkSession()->getPing()}ms",
             "",

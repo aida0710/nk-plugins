@@ -75,7 +75,7 @@ class AuctionHouse extends PluginBase {
         if ($pluginManager->getPlugin("InvCrashFix") == null) {
             $this->getLogger()->warning("InvCrashFix is required to fix menu issues on PM4, download it here: https://poggit.pmmp.io/ci/Muqsit/InvCrashFix");
         }
-        $this->getServer()->getCommandMap()->register($this->getDescription()->getName(), new AHCommand($this, "ah", "オークションを開く"));
+        $this->getServer()->getCommandMap()->register($this->getDescription()->getName(), new AHCommand($this, "bazaar", "バザーを開く"));
         $this->getScheduler()->scheduleDelayedTask(new CheckLegacyTask($this), 1);
     }
 

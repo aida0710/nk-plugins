@@ -27,7 +27,7 @@ class ListingsCommand extends BaseSubCommand {
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void {
         assert($sender instanceof Player);
         if (!isset($args["player"])) {
-            $sender->sendMessage("§bAuction §7>> §c引数を省略することはできません");
+            $sender->sendMessage("§bBazaar §7>> §c引数を省略することはできません");
             return;
         }
         $player = strtolower($args["player"]);

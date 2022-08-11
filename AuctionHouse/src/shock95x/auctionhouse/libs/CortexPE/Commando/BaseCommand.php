@@ -57,10 +57,10 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 
     /** @var string[] */
     protected $errorMessages = [
-        self::ERR_INVALID_ARG_VALUE => TextFormat::RED . "§bAuction §7>> §c指定された引数{value}は無効です",
-        self::ERR_TOO_MANY_ARGUMENTS => TextFormat::RED . "§bAuction §7>> §c引数が多すぎます",
-        self::ERR_INSUFFICIENT_ARGUMENTS => TextFormat::RED . "§bAuction §7>> §c引数が不十分でした",
-        self::ERR_NO_ARGUMENTS => TextFormat::RED . "§bAuction §7>> §c指定された引数は無効です",
+        self::ERR_INVALID_ARG_VALUE => TextFormat::RED . "§bBazaar §7>> §c指定された引数{value}は無効です",
+        self::ERR_TOO_MANY_ARGUMENTS => TextFormat::RED . "§bBazaar §7>> §c引数が多すぎます",
+        self::ERR_INSUFFICIENT_ARGUMENTS => TextFormat::RED . "§bBazaar §7>> §c引数が不十分でした",
+        self::ERR_NO_ARGUMENTS => TextFormat::RED . "§bBazaar §7>> §c指定された引数は無効です",
     ];
 
     /** @var CommandSender */

@@ -11,10 +11,10 @@ use lazyperson710\sff\command\InvClearCommand;
 use lazyperson710\sff\command\LockCommand;
 use lazyperson710\sff\command\MiningToolsCommand;
 use lazyperson710\sff\command\PlayerCommand;
+use lazyperson710\sff\command\PoliceCommand;
 use lazyperson710\sff\command\RecipeCommand;
 use lazyperson710\sff\command\TosCommand;
 use lazyperson710\sff\listener\CmdListener;
-use lazyperson710\sff\listener\CommandStorageListener;
 use lazyperson710\sff\listener\ItemListener;
 use pocketmine\plugin\PluginBase;
 
@@ -32,7 +32,6 @@ class Main extends PluginBase {
         $this->loadTos();
         $this->getServer()->getPluginManager()->registerEvents(new ItemListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new CmdListener(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new CommandStorageListener(), $this);
         $this->getServer()->getCommandMap()->registerAll("sff", [
             new TosCommand(),
             new LockCommand(),
@@ -45,6 +44,7 @@ class Main extends PluginBase {
             new DonationCommand(),
             new InformationCommand(),
             new CmdExecutionCommand(),
+            new PoliceCommand(),
         ]);
     }
 

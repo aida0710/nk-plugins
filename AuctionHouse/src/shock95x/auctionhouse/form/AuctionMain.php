@@ -12,12 +12,12 @@ class AuctionMain extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
-            ->setTitle("Auction System")
+            ->setTitle("Bazaar System")
             ->setText("選択してください\nチェストGUIが開かない場合はお手数おかけしますがリログを推奨しています")
             ->addElements(
-                new CommandDispatchButton("AuctionGUIを開く", "ah shop", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/carrot_golden.png")),
+                new CommandDispatchButton("BazaarGUIを開く", "bazaar shop", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/carrot_golden.png")),
                 new SendFormButton(new SellItemAuctionForm($player), "アイテムを出品する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/diamond.png")),
-                new CommandDispatchButton("出品期限が切れたアイテム\nキャンセルされたアイテムを表示", "ah expired", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/potato_poisonous.png")),
+                new CommandDispatchButton("出品期限が切れたアイテム\nキャンセルされたアイテムを表示", "bazaar expired", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/potato_poisonous.png")),
                 new SendFormButton(new ItemCategorySortAuctionForm(), "カテゴリ指定で表示する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/hopper.png")),
                 new SendFormButton(new PlayerCategorySortAuctionForm($player), "プレイヤー指定で表示する", new ButtonImage(ButtonImage::TYPE_PATH, "textures/items/armor_stand.png")),
             );
