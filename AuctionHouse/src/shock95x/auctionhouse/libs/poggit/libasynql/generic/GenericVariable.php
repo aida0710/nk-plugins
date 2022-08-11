@@ -20,8 +20,8 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\libs\poggit\libasynql\generic;
 
+use Couchbase\InvalidStateException;
 use InvalidArgumentException;
-use InvalidStateException;
 use JsonSerializable;
 use function assert;
 use function in_array;
@@ -29,7 +29,6 @@ use function is_string;
 use function json_decode;
 use function stripos;
 use function strlen;
-use function strpos;
 use function strtoupper;
 use function substr;
 
@@ -47,16 +46,16 @@ class GenericVariable implements JsonSerializable {
     public const TIME_0 = "0";
     public const TIME_NOW = "NOW";
 
-    protected $name;
-    protected $list = false;
-    protected $canEmpty = false;
-    protected $nullable = false;
-    protected $type;
+    protected string $name;
+    protected bool $list = false;
+    protected bool $canEmpty = false;
+    protected bool $nullable = false;
+    protected string $type;
     /** @var string|int|float|bool|null */
-    protected $default = null;
+    protected string|int|bool|null|float $default = null;
 
     public function __construct(string $name, string $type, ?string $default) {
-        if (strpos($name, ":") !== false) {
+        if (str_contains($name, ":")) {
             throw new InvalidArgumentException("Colon is disallowed in a variable name");
         }
         $this->name = $name;
@@ -110,6 +109,9 @@ class GenericVariable implements JsonSerializable {
         }
     }
 
+    /**
+     * @throws InvalidStateException
+     */
     public function unlist(): GenericVariable {
         if (!$this->list) {
             throw new InvalidStateException("Cannot unlist a non-list variable");
@@ -156,9 +158,9 @@ class GenericVariable implements JsonSerializable {
     }
 
     /**
-     * @return mixed
+     * @return bool|float|int|string|null
      */
-    public function getDefault() {
+    public function getDefault(): float|bool|int|string|null {
         return $this->default;
     }
 

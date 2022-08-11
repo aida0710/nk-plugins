@@ -30,7 +30,7 @@ use function strpos;
 class ExtensionMissingException extends RuntimeException {
 
     public function __construct(string $extensionName) {
-        $instructions = "Please install PHP according to the instructions from http://pmmp.readthedocs.io/en/rtfd/installation.html which provides the $extensionName extension.";
+        $instructions = "Please install PHP according to the instructions from https://pmmp.readthedocs.io/en/rtfd/installation.html which provides the $extensionName extension.";
         $ini = php_ini_loaded_file();
         if ($ini && is_file($ini)) {
             foreach (file($ini) as $i => $line) {

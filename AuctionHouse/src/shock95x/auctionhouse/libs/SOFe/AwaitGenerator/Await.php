@@ -116,7 +116,6 @@ class Await extends PromiseState {
      * @return Await<T>
      */
     public static function g2c(Generator $generator, ?callable $onComplete = null, $catches = []): Await {
-        /** @var Await<T> $await */
         $await = new Await();
         $await->generator = $generator;
         $await->onComplete = $onComplete;

@@ -5,6 +5,7 @@ namespace shock95x\auctionhouse\libs\CortexPE\Commando\libs\muqsit\simplepacketh
 
 use Closure;
 use InvalidArgumentException;
+use ReflectionException;
 use ReflectionFunction;
 use ReflectionNamedType;
 
@@ -15,6 +16,7 @@ final class ClosureSignatureParser {
      * @param string[] $params
      * @param string $return_type
      * @return string[]
+     * @throws ReflectionException
      */
     public static function parse(Closure $closure, array $params, string $return_type): array {
         /** @noinspection PhpUnhandledExceptionInspection */
