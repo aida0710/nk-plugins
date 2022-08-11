@@ -72,11 +72,9 @@ class EconomyLand extends PluginBase implements Listener {
         }
         $this->placeQueue = [];
         $now = time();
-        if ($this->expire !== null) {
-            foreach ($this->expire as $landId => &$time) {
-                $time[1] = $now;
-                $this->getScheduler()->scheduleDelayedTask(new ExpireTask($this, $landId), ($time[0] * 20));
-            }
+        foreach ($this->expire as $landId => &$time) {
+            $time[1] = $now;
+            $this->getScheduler()->scheduleDelayedTask(new ExpireTask($this, $landId), ($time[0] * 20));
         }
         switch (strtolower($this->getConfig()->get("database-type", "yaml"))) {
             case "yaml":
@@ -188,6 +186,7 @@ class EconomyLand extends PluginBase implements Listener {
                 } else {
                     $sender->sendMessage("§bLand §7>> §cこのワールドでは使用できません。生活ワールドか農業ワールドで使用できます");
                 }
+                break;
             case "e":
                 if (!$sender instanceof Player) {
                     $sender->sendMessage($this->getMessage("run-cmd-in-game"));

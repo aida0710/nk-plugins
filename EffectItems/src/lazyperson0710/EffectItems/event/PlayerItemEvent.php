@@ -46,4 +46,5 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::init($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::init($event);
     }
+
 }
