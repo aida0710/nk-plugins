@@ -33,7 +33,6 @@
       <excludeFolder url="file://$MODULE_DIR$/INether-master" />
       <excludeFolder url="file://$MODULE_DIR$/myworld" />
       <excludeFolder url="file://$MODULE_DIR$/miningtools-debug" />
-      <excludeFolder url="file://$MODULE_DIR$/ScoreBoardInfo-master" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bbo51dog/bboform" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/snooze" />
@@ -56,12 +55,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/classloader" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-protocol" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/path-util" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/adhocore/json-comment" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/ScoreBoardInfo-master" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

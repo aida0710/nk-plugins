@@ -5,8 +5,7 @@
     "require": {
         "pocketmine/pocketmine-mp": "4.*",
         "bbo51dog/bboform": "2.*",
-        "ext-sqlite3": "*",
-        "ext-mbstring": "*"
+        "phpstan/phpstan": "1.*"
     },
     "repositories": [
         {

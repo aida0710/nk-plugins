@@ -6,9 +6,4 @@
   <component name="PhpEntryPointsManager">
     <suppressed_annotations>@priority</suppressed_annotations>
   </component>
-  <component name="SwUserDefinedSpecifications">
-    <option name="specTypeByUrl">
-      <map />
-    </option>
-  </component>
 </project>
