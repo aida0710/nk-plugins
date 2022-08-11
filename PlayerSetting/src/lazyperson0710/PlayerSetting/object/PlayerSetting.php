@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace lazyperson0710\PlayerSetting\object;
 
+use lazyperson0710\PlayerSetting\object\settings\TestSetting;
 use pocketmine\player\Player;
 
 class PlayerSetting{
@@ -13,7 +14,7 @@ class PlayerSetting{
 	protected string $xuid;
 
 	protected function init():void{
-
+		$this->register(new TestSetting);
 	}
 
 	public function __construct(string $xuid){
@@ -28,12 +29,12 @@ class PlayerSetting{
 
 	protected function register(Setting $setting):void{
 		if(isset($this->settings[$setting->getName()])) throw new \LogicException($setting->getName().' is already registered');
-		$this->settings[$setting::class] = $setting;
+		$this->settings[$setting->getName()] = $setting;
 	}
 
 	public function setSetting(Setting $setting):void{
 		if(!isset($this->settings[$setting->getName()])) throw new \LogicException($setting->getName().' is not registered');
-		$this->settings[$setting::class] = $setting;
+		$this->settings[$setting->getName()] = $setting;
 	}
 
 	public function getSetting(string $setting_name):?Setting{

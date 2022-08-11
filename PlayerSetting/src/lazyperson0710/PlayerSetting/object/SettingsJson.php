@@ -13,8 +13,8 @@ class SettingsJson{
 
 	protected Config $config;
 
-	public function __construct(){
-		$this->config = new Config(self::FILE_NAME, Config::JSON);
+	public function init(string $dir):void{
+		$this->config = new Config($dir.DIRECTORY_SEPARATOR.self::FILE_NAME, Config::JSON);
 	}
 
 	public function input(PlayerSettingPool $pool):void{
