@@ -11,8 +11,6 @@
 - skull
 - head
 - playerhead
-##Gatya
-- gatya
 ##WorldWarpSystem
 - wtp
 ##InvSee
@@ -66,4 +64,18 @@
 - /status
 - /cancel
 - /benchmark
+- /builderrod
+- /builderwand
+- /cmd
+- /commands
+- /drain
+- /fill
+- /h
+- /line
+- /overlay
+- /pastestates
+- /rod
+- /show
+- /view
+- /wand
 ...
