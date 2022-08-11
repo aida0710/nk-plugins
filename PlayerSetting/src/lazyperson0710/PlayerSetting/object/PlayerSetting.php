@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace lazyperson0710\PlayerSetting\object;
 
 use lazyperson0710\PlayerSetting\object\settings\TestSetting;
-use pocketmine\player\Player;
 
 class PlayerSetting{
 	/**
