@@ -37,14 +37,14 @@ class PlayerSettingPool{
 
 	public function create(Player $player):void{
 		if($this->exists($player)) throw new \LogicException($player->getXuid().' is already registered');
-		$this->players[$player->getXuid()] = new PlayerSetting($player);
+		$this->players[$player->getXuid()] = new PlayerSetting($player->getXuid());
+	}
+
+	public function clear():void{
+		$this->players = [];
 	}
 
 	public function getAll():array{
 		return $this->players;
-	}
-
-	public function setAll(PlayerSetting ...$player_settings):void{
-
 	}
 }
