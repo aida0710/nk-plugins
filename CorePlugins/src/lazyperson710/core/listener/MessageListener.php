@@ -21,6 +21,9 @@ class MessageListener implements Listener {
 
     public function join(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
+        $pk = new GameRulesChangedPacket();
+        $pk->gameRules = ["showcoordinates" => new BoolGameRule(true, false)];
+        $player->getNetworkSession()->sendDataPacket($pk);
         $name = $event->getPlayer()->getName();
         $level = MiningLevelAPI::getInstance()->getLevel($player);
         if (!$player->hasPlayedBefore()) {
