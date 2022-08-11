@@ -7,7 +7,7 @@ use pocketmine\player\Player;
 
 class PlayerSetting{
 	/**
-	 * @var array<ISetting>
+	 * @var array<Setting>
 	 */
 	protected array $settings = [];
 	protected string $xuid;
@@ -16,10 +16,8 @@ class PlayerSetting{
 
 	}
 
-	public function __construct(Player $player){
-		$xuid = $player->getXuid();
-
-		if($xuid === '') throw new \InvalidArgumentException($player->getName().' is not signed in xbox');
+	public function __construct(string $xuid){
+		if($xuid === '') throw new \InvalidArgumentException($xuid.' is not signed in xbox');
 		$this->xuid = $xuid;
 		$this->init();
 	}
@@ -28,16 +26,21 @@ class PlayerSetting{
 		return $this->xuid;
 	}
 
-	protected function register(ISetting $setting):void{
+	protected function register(Setting $setting):void{
 		if(isset($this->settings[$setting->getName()])) throw new \LogicException($setting->getName().' is already registered');
-		$this->settings[$setting->getName()] = $setting;
+		$this->settings[$setting::class] = $setting;
 	}
 
-	public function getSetting(string $setting_name):?ISetting{
+	public function setSetting(Setting $setting):void{
+		if(!isset($this->settings[$setting->getName()])) throw new \LogicException($setting->getName().' is not registered');
+		$this->settings[$setting::class] = $setting;
+	}
+
+	public function getSetting(string $setting_name):?Setting{
 		return $this->settings[$setting_name]?? null;
 	}
 
-	public function getSettingNonNull(string $setting_name):ISetting{
+	public function getSettingNonNull(string $setting_name):Setting{
 		if(!isset($this->settings[$setting_name])) throw new \RuntimeException($setting_name.' is not exists');
 		return $this->settings[$setting_name];
 	}
@@ -50,7 +53,7 @@ class PlayerSetting{
 		$settings_arr = [];
 
 		foreach($this->getAll() as $setting){
-			$settings_arr[$setting->getName()] = $setting->getValue();
+			$settings_arr[$setting::class] = $setting->getValue();
 		}
 		return $settings_arr;
 	}
