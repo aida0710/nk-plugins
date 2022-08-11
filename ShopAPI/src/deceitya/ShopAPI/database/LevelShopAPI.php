@@ -279,6 +279,7 @@ class LevelShopAPI {
      * @param int $sell
      * @param int $level
      * @param string $itemName
+     * @param bool|null $working
      * @return void
      */
     public function register(Item $item, int $buy, int $sell, int $level, string $itemName, ?bool $working = true): void {
@@ -297,6 +298,7 @@ class LevelShopAPI {
      * @param int $sell
      * @param int $level
      * @param string $itemName
+     * @param bool|null $working
      * @return void
      */
     protected function registerFromId(int $itemId, int $itemMeta, int $buy, int $sell, int $level, string $itemName, ?bool $working = true): void {

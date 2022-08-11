@@ -4,7 +4,6 @@ namespace lazyperson710\core\listener;
 
 use bbo51dog\announce\service\AnnounceService;
 use Deceitya\MiningLevel\MiningLevelAPI;
-use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -13,6 +12,8 @@ use pocketmine\event\player\PlayerKickEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
+use pocketmine\network\mcpe\protocol\GameRulesChangedPacket;
+use pocketmine\network\mcpe\protocol\types\BoolGameRule;
 use pocketmine\Server;
 use pocketmine\world\Position;
 
@@ -22,10 +23,6 @@ class MessageListener implements Listener {
         $player = $event->getPlayer();
         $name = $event->getPlayer()->getName();
         $level = MiningLevelAPI::getInstance()->getLevel($player);
-        $money = EconomyAPI::getInstance()->myMoney($player);
-        if (!is_int($money)) {
-            EconomyAPI::getInstance()->setMoney($player, floor($money));
-        }
         if (!$player->hasPlayedBefore()) {
             $pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName("tos"));
             $event->getPlayer()->teleport($pos);
@@ -89,8 +86,8 @@ class MessageListener implements Listener {
     public function kick(PlayerKickEvent $event) {
         $player = $event->getPlayer();
         $reason = $event->getReason();
-        if ($reason === 'Server is white-listed') {
-            $player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください\n\nまた、不自然に思った場合TwitterDmへお越しください @lazyperson0710", false);
+        if ($reason === 'Server is whitelisted') {
+            $player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください", false);
         }
     }
 
