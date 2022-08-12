@@ -20,9 +20,8 @@ class TestCommand extends Command {
             return;
         }
         var_dump($args[0]);
-
-	    $setting = PlayerSettingPool::getInstance()->getSettingNonNull($sender);
-		$setting->getSetting(TestSetting::getName())?->setValue($args[0]);
+        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($sender);
+        $setting->getSetting(TestSetting::getName())?->setValue($args[0]);
         $sender->sendMessage($args[0] . "に設定されました");
     }
 }

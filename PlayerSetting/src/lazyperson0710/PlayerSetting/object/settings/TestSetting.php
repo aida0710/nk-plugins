@@ -1,27 +1,27 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types = 1);
 namespace lazyperson0710\PlayerSetting\object\settings;
-
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class TestSetting extends Setting{
-	protected bool $value;
+class TestSetting extends Setting {
 
-	public static function getName():string{
-		return 'test';
-	}
+    protected bool $value;
 
-	public function setValue(mixed $value):void{
-		$this->value = $value;
-	}
+    public static function getName(): string {
+        return 'test';
+    }
 
-	public function getValue():bool{
-		return $this->value?? $this->getFallbackValue();
-	}
+    public function setValue(mixed $value): void {
+        $this->value = $value;
+    }
 
-	public function getFallbackValue():bool{
-		return false;
-	}
+    public function getValue(): bool {
+        return $this->value ?? $this->getFallbackValue();
+    }
+
+    public function getFallbackValue(): bool {
+        return false;
+    }
 }

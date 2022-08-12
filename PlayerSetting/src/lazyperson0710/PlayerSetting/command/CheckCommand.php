@@ -18,7 +18,7 @@ class CheckCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-		$setting = PlayerSettingPool::getInstance()->getSettingNonNull($sender);
-		var_dump($setting->toArray());
+        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($sender);
+        var_dump($setting->toArray());
     }
 }
