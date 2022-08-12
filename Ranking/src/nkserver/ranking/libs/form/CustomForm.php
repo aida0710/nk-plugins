@@ -33,7 +33,7 @@ class CustomForm extends BaseForm {
     }
 
     public function addSlider(string $id, string $text = '', int $min = 0, int $max = 0, ?int $default = null): void {
-        $default ?? $default = $min;
+            $default ?? $default = $min;
         $this->contents[$id] = [
             'type' => 'slider',
             'text' => $text,

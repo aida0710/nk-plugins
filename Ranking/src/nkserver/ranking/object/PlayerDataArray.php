@@ -18,11 +18,11 @@ class PlayerDataArray {
 
     public function __construct(?array $array = null) {
         $this->array = $array ?? [
-                self::BLOCK_BREAKS => [],
-                self::BLOCK_PLACES => [],
-                self::DEATH => 0,
-                self::CHAT => 0,
-            ];
+            self::BLOCK_BREAKS => [],
+            self::BLOCK_PLACES => [],
+            self::DEATH => 0,
+            self::CHAT => 0,
+        ];
     }
 
     public function getAll(): array {
