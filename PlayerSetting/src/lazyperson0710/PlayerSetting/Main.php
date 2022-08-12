@@ -4,27 +4,28 @@ namespace lazyperson0710\PlayerSetting;
 
 use lazyperson0710\PlayerSetting\command\CheckCommand;
 use lazyperson0710\PlayerSetting\command\TestCommand;
-use lazyperson0710\PlayerSetting\eventListener\JoinEventListener;
-use lazyperson0710\PlayerSetting\object\PlayerDataPool;
-use lazyperson0710\PlayerSetting\task\DataSaveScheduler;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\SettingsJson;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
-    protected static string $data_path;
-
-    public static function getDataPath(): string {
-        return self::$data_path;
-    }
-
-    public function onEnable(): void {
-        self::$data_path = $this->getDataFolder();
-        PlayerDataPool::init();
+	protected function onEnable(): void {
+		$setting_file = SettingsJson::getInstance();
+		$setting_file->init($this->getDataFolder());
+		$setting_file->output(PlayerSettingPool::getInstance());
         $this->getServer()->getCommandMap()->registerAll("playerSetting", [
             new TestCommand(),
             new CheckCommand(),
         ]);
-        $this->getScheduler()->scheduleRepeatingTask(new DataSaveScheduler(), 20);//取り合えずわかりやすいように、、、
-        $this->getServer()->getPluginManager()->registerEvents(new JoinEventListener(), $this);
     }
+
+	/**
+	 * @throws \JsonException
+	 */
+	protected function onDisable():void{
+		$setting_file = SettingsJson::getInstance();
+		$setting_file->input(PlayerSettingPool::getInstance());
+		$setting_file->save();
+	}
 }
