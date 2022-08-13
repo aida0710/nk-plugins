@@ -13,6 +13,6 @@ class GeneralEventListener implements Listener {
         if (!$rakNetInterface instanceof RakLibInterface) {
             return;
         }
-        $rakNetInterface->setPacketLimit(2 * 32 * 32 * 32);
+        $rakNetInterface->setPacketLimit(128 * 128 * 128 * 128);
     }
 }
