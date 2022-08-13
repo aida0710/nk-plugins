@@ -17,6 +17,6 @@ class Main extends PluginBase {
         $manager->registerEvents(new PlayerBlockPlaceEvent(), $this);
         $manager->registerEvents(new PlayerDamageEvent(), $this);
         $manager->registerEvents(new PlayerItemEvent(), $this);
-        $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 20);
+        $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 10);
     }
 }
