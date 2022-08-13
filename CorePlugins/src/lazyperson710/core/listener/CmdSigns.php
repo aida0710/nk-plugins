@@ -2,12 +2,21 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson710\core\Main;
 use pocketmine\block\BaseSign;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\player\Player;
+use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
 
-class Cmdsigns implements Listener {
+class CmdSigns implements Listener {
+
+    private static array $CmdSignsInterval;
+
+    public function __construct() {
+        self::$CmdSignsInterval = [];
+    }
 
     /**
      * @param PlayerInteractEvent $event
@@ -18,6 +27,17 @@ class Cmdsigns implements Listener {
         if ($block instanceof BaseSign) {
             if ($block->getText()->getLine(0) == "##cmd") {
                 if (!$event->getPlayer()->isSneaking()) {
+                    if (isset(self::$CmdSignsInterval[$event->getPlayer()->getName()])) {
+                        $event->getPlayer()->sendMessage("§bCmdSigns §7>> §cコマンド看板は1秒以内に再度使用することは出来ません");
+                        $event->cancel();
+                    } else {
+                        self::$CmdSignsInterval[$event->getPlayer()->getName()] = true;
+                        Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
+                            function () use ($event): void {
+                                $this->unset($event->getPlayer());
+                            }
+                        ), 20);
+                    }
                     $player = $event->getPlayer();
                     $world = $player->getWorld()->getFolderName();
                     $floor_x = floor($player->getPosition()->getX());
@@ -39,5 +59,9 @@ class Cmdsigns implements Listener {
                 }
             }
         }
+    }
+
+    public function unset(Player $player): void {
+        unset(self::$CmdSignsInterval[$player->getName()]);
     }
 }
