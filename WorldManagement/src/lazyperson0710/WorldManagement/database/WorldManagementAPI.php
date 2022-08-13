@@ -32,14 +32,9 @@ class WorldManagementAPI {
         $this->register("event-4", 255, 0, 0);
         $this->register("event-5", 255, 0, 0);
         #nature
-        $this->register("nature-1", 120, 0, 130, 15000, 15000, -15000, -15000);
-        $this->register("nature-2", 120, 0, 130, 15000, 15000, -15000, -15000);
-        $this->register("nature-3", 120, 0, 130, 15000, 15000, -15000, -15000);
-        $this->register("nature-4", 120, 15, 130, 25000, 25000, -25000, -25000);
-        $this->register("nature-5", 120, 50, 130, 25000, 25000, -25000, -25000);
-        $this->register("nature-6", 120, 150, 130, 45000, 45000, -45000, -45000);
-        $this->register("nature-7", 120, 250, 130, 45000, 45000, -45000, -45000);
-        $this->register("nature-8", 120, 350, 130, 65000, 65000, -65000, -65000);
+        $this->register("nature-1", 180, 0, 200, 8000, 8000, -8000, -8000);
+        $this->register("nature-2", 180, 150, 200, 35000, 35000, -35000, -35000);
+        $this->register("nature-3", 180, 350, 200, 85000, 85000, -85000, -85000);
         $this->register("nature-java", 180, 15, 255, 15000, 15000, -15000, -15000);
         $this->register("MiningWorld", 120, 30, 130, 8000, 8000, -8000, -8000);
         #nether

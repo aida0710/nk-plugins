@@ -27,11 +27,6 @@ class WorldCategory {
         "nature-1",
         "nature-2",
         "nature-3",
-        "nature-4",
-        "nature-5",
-        "nature-6",
-        "nature-7",
-        "nature-8",
     ];
 
     public const NatureOthers = [
