@@ -6,7 +6,6 @@ use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
-use pocketmine\world\World;
 
 class CheckLifeWorldTask extends Task {
 
@@ -26,9 +25,6 @@ class CheckLifeWorldTask extends Task {
     public function onRun(): void {
         foreach ($this->properties as $property) {
             $world = Server::getInstance()->getWorldManager()->getWorldByName($property->getWorldName());
-            if (!$world instanceof World) {
-                continue;
-            }
             foreach ($world->getPlayers() as $player) {
                 if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::NatureOthers) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) return;
                 if (!$property->inSafeArea($player->getPosition())) {

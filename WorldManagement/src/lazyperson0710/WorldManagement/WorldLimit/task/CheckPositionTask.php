@@ -8,7 +8,6 @@ use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
 use pocketmine\scheduler\Task;
 use pocketmine\scheduler\TaskScheduler;
 use pocketmine\Server;
-use pocketmine\world\World;
 
 class CheckPositionTask extends Task {
 
@@ -32,9 +31,6 @@ class CheckPositionTask extends Task {
     public function onRun(): void {
         foreach ($this->properties as $property) {
             $world = Server::getInstance()->getWorldManager()->getWorldByName($property->getWorldName());
-            if (!$world instanceof World) {
-                continue;
-            }
             if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::NatureOthers) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) {
                 foreach ($world->getPlayers() as $player) {
                     if (!$property->inSafeArea($player->getPosition())) {
