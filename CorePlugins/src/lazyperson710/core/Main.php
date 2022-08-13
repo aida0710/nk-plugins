@@ -27,7 +27,7 @@ class Main extends PluginBase {
         /*PlayerEventListener*/
         $this->getServer()->getPluginManager()->registerEvents(new listener\MessageListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakListener(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\Cmdsigns(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\CmdSigns(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\CancelEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\DeathEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Major(), $this);
