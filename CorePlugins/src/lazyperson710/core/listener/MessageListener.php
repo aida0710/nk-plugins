@@ -4,6 +4,9 @@ namespace lazyperson710\core\listener;
 
 use bbo51dog\announce\service\AnnounceService;
 use Deceitya\MiningLevel\MiningLevelAPI;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\CoordinateSetting;
+use lazyperson710\core\packet\CoordinatesPacket;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -12,8 +15,6 @@ use pocketmine\event\player\PlayerKickEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
-use pocketmine\network\mcpe\protocol\GameRulesChangedPacket;
-use pocketmine\network\mcpe\protocol\types\BoolGameRule;
 use pocketmine\Server;
 use pocketmine\world\Position;
 
@@ -21,11 +22,13 @@ class MessageListener implements Listener {
 
     public function join(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
-        $pk = new GameRulesChangedPacket();
-        $pk->gameRules = ["showcoordinates" => new BoolGameRule(true, false)];
-        $player->getNetworkSession()->sendDataPacket($pk);
         $name = $event->getPlayer()->getName();
         $level = MiningLevelAPI::getInstance()->getLevel($player);
+        if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(CoordinateSetting::getName())?->getValue() === true) {
+            CoordinatesPacket::CoordinatesPacket($player, true);
+        } else {
+            CoordinatesPacket::CoordinatesPacket($player, false);
+        }
         if (!$player->hasPlayedBefore()) {
             $pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName("tos"));
             $event->getPlayer()->teleport($pos);
