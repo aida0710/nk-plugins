@@ -22,6 +22,6 @@ class CoordinateSetting extends Setting {
     }
 
     public function getFallbackValue(): bool {
-        return false;
+        return true;
     }
 }

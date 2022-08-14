@@ -4,7 +4,16 @@ declare(strict_types = 1);
 namespace lazyperson0710\PlayerSetting\object;
 
 use InvalidArgumentException;
-use lazyperson0710\PlayerSetting\object\settings\TestSetting;
+use lazyperson0710\PlayerSetting\object\settings\CoordinateSetting;
+use lazyperson0710\PlayerSetting\object\settings\DestructionSoundSetting;
+use lazyperson0710\PlayerSetting\object\settings\DiceMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\DirectDropItemStorageSetting;
+use lazyperson0710\PlayerSetting\object\settings\EnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\JoinItemsSetting;
+use lazyperson0710\PlayerSetting\object\settings\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\OnlinePlayersEffectsSetting;
+use lazyperson0710\PlayerSetting\object\settings\PayCommandUseSetting;
 use LogicException;
 use RuntimeException;
 
@@ -17,7 +26,16 @@ class PlayerSetting {
     protected string $xuid;
 
     protected function init(): void {
-        $this->register(new TestSetting);
+        $this->register(new CoordinateSetting);
+        $this->register(new JoinItemsSetting);
+        $this->register(new DirectDropItemStorageSetting);
+        $this->register(new LevelUpTitleSetting);
+        $this->register(new EnduranceWarningSetting);
+        $this->register(new MiningToolsEnduranceWarningSetting());
+        $this->register(new DestructionSoundSetting);
+        $this->register(new DiceMessageSetting);
+        $this->register(new PayCommandUseSetting);
+        $this->register(new OnlinePlayersEffectsSetting);
     }
 
     public function __construct(string $xuid) {

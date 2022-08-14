@@ -2,15 +2,15 @@
 
 namespace lazyperson0710\PlayerSetting\command;
 
-use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\form\SettingListForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
-class CheckCommand extends Command {
+class SettingCommand extends Command {
 
     public function __construct() {
-        parent::__construct("check", "現状の確認");
+        parent::__construct("settings", "サーバーの個人用設定画面を開く");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -18,7 +18,6 @@ class CheckCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($sender);
-        var_dump($setting->toArray());
+        $sender->sendForm(new SettingListForm($sender));
     }
 }

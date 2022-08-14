@@ -3,8 +3,7 @@
 namespace lazyperson0710\PlayerSetting;
 
 use JsonException;
-use lazyperson0710\PlayerSetting\command\CheckCommand;
-use lazyperson0710\PlayerSetting\command\TestCommand;
+use lazyperson0710\PlayerSetting\command\SettingCommand;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\SettingsJson;
 use pocketmine\plugin\PluginBase;
@@ -16,8 +15,7 @@ class Main extends PluginBase {
         $setting_file->init($this->getDataFolder());
         $setting_file->output(PlayerSettingPool::getInstance());
         $this->getServer()->getCommandMap()->registerAll("playerSetting", [
-            new TestCommand(),
-            new CheckCommand(),
+            new SettingCommand(),
         ]);
     }
 

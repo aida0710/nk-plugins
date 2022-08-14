@@ -5,12 +5,12 @@ namespace lazyperson0710\PlayerSetting\object\settings;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class TestSetting extends Setting {
+class MiningToolsEnduranceWarningSetting extends Setting {
 
     protected bool $value;
 
     public static function getName(): string {
-        return 'test';
+        return 'MiningToolsEnduranceWarning';
     }
 
     public function setValue(mixed $value): void {
@@ -22,6 +22,6 @@ class TestSetting extends Setting {
     }
 
     public function getFallbackValue(): bool {
-        return false;
+        return true;
     }
 }

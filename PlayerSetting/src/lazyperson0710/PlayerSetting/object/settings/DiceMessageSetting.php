@@ -22,6 +22,6 @@ class DiceMessageSetting extends Setting {
     }
 
     public function getFallbackValue(): bool {
-        return false;
+        return true;
     }
 }
