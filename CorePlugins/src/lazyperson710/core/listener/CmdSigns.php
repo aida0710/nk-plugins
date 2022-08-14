@@ -28,8 +28,8 @@ class CmdSigns implements Listener {
             if ($block->getText()->getLine(0) == "##cmd") {
                 if (!$event->getPlayer()->isSneaking()) {
                     if (isset(self::$CmdSignsInterval[$event->getPlayer()->getName()])) {
-                        $event->getPlayer()->sendMessage("§bCmdSigns §7>> §cコマンド看板は1秒以内に再度使用することは出来ません");
-                        $event->cancel();
+                        $event->getPlayer()->sendTip("§bCmdSigns §7>> §cコマンド看板は1秒以内に再度使用することは出来ません");
+                        return;
                     } else {
                         self::$CmdSignsInterval[$event->getPlayer()->getName()] = true;
                         Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
