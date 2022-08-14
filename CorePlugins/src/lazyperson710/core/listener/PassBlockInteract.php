@@ -8,7 +8,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\Server;
 
-class BlockInteractEvent implements Listener {
+class PassBlockInteract implements Listener {
 
     /**
      * @param PlayerInteractEvent $event
@@ -24,10 +24,10 @@ class BlockInteractEvent implements Listener {
                 Server::getInstance()->dispatchCommand($player, "pass");
             }
             if ($x === 215 && $y === 105 && $z === 247) {//TosFormを送る
-                $player->sendForm(new TosForm($player));
+                $player->sendForm(new TosForm());
             }
             if ($x === 232 && $y === 105 && $z === 246) {//TosFormを送る
-                $player->sendForm(new TosForm($player));
+                $player->sendForm(new TosForm());
             }
         }
     }
