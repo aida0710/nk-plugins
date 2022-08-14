@@ -15,7 +15,6 @@ use lazyperson710\sff\command\PoliceCommand;
 use lazyperson710\sff\command\RecipeCommand;
 use lazyperson710\sff\command\TosCommand;
 use lazyperson710\sff\listener\CmdListener;
-use lazyperson710\sff\listener\ItemListener;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
@@ -30,7 +29,6 @@ class Main extends PluginBase {
 
     public function onEnable(): void {
         $this->loadTos();
-        $this->getServer()->getPluginManager()->registerEvents(new ItemListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new CmdListener(), $this);
         $this->getServer()->getCommandMap()->registerAll("sff", [
             new TosCommand(),
