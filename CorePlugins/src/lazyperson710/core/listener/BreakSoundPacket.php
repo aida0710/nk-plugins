@@ -2,9 +2,11 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\DestructionSoundSetting;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 
 class BreakSoundPacket implements Listener {
 
@@ -14,16 +16,10 @@ class BreakSoundPacket implements Listener {
      * @priority LOWEST
      */
     public function onBreak(BlockBreakEvent $event): void {
-        $player = $event->getPlayer();
-        $pk = new PlaySoundPacket();
-        $pk->x = $player->getPosition()->getX();
-        $pk->y = $player->getPosition()->getY();
-        $pk->z = $player->getPosition()->getZ();
-        $volume = mt_rand(1, 2);
-        $pitch = mt_rand(5, 10);
-        $pk->soundName = "random.orb";
-        $pk->volume = $volume / 10;
-        $pk->pitch = $pitch / 10;
-        $player->getNetworkSession()->sendDataPacket($pk);
+        if (PlayerSettingPool::getInstance()->getSettingNonNull($event->getPlayer())->getSetting(DestructionSoundSetting::getName())?->getValue() === true) {
+            $volume = mt_rand(1, 2) / 10;
+            $pitch = mt_rand(5, 10) / 10;
+            SoundPacket::init($event->getPlayer(), "random.orb", $volume, $pitch);
+        }
     }
 }
