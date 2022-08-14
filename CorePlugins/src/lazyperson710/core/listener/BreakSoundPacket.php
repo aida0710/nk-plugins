@@ -13,7 +13,6 @@ class BreakSoundPacket implements Listener {
     /**
      * @param BlockBreakEvent $event
      * @return void
-     * @priority LOWEST
      */
     public function onBreak(BlockBreakEvent $event): void {
         if (PlayerSettingPool::getInstance()->getSettingNonNull($event->getPlayer())->getSetting(DestructionSoundSetting::getName())?->getValue() === true) {
