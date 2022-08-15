@@ -4,6 +4,8 @@ namespace deceitya\miningtools\calculation;
 
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use deceitya\miningtools\Main;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
@@ -98,11 +100,13 @@ class PickaxeDestructionRange {
                     }
                     if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
                     if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
-                    /** @var Durable $handItem */
-                    $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
-                    if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-                        $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-                        continue;
+                    if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
+                        /** @var Durable $handItem */
+                        $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+                        if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
+                            $player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+                            continue;
+                        }
                     }
                     $dropItems = array_merge($dropItems ?? [], (new ItemDrop())->getDrop($player, $targetBlock));
                     if (!$player->isSneaking()) {

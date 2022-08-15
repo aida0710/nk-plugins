@@ -2,6 +2,8 @@
 
 namespace lazyperson710\core\task;
 
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\OnlinePlayersEffectsSetting;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
@@ -54,31 +56,39 @@ class EffectTaskScheduler extends Task {
             switch ($count) {
                 case 8:
                     $bonus = "{$color}同時ログイン数8以上の為\n暗視エフェクト付与&毎秒1円贈与中！";
-                    $this->is_NightVision($player);
+                    if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() === true) {
+                        $this->is_NightVision($player);
+                    }
                     EconomyAPI::getInstance()->addMoney($player, 1);
                     Server::getInstance()->broadcastPopup($bonus);
                     break;
                 case 9:
-                    $this->is_NightVision($player);
-                    $this->is_Saturation($player);
+                    if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() === true) {
+                        $this->is_NightVision($player);
+                        $this->is_Saturation($player);
+                    }
                     $bonus = "{$color}同時ログイン数9以上の為\n満腹&暗視エフェクト付与&毎秒1円贈与中！";
                     EconomyAPI::getInstance()->addMoney($player, 1);
                     Server::getInstance()->broadcastPopup($bonus);
                     break;
                 case 10:
                 case 11:
-                    $this->is_Haste($player);
-                    $this->is_NightVision($player);
-                    $this->is_Saturation($player);
+                    if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() === true) {
+                        $this->is_Haste($player);
+                        $this->is_NightVision($player);
+                        $this->is_Saturation($player);
+                    }
                     $bonus = "{$color}同時ログイン数10以上の為\n採掘上昇&満腹&暗視エフェクト付与&毎秒3円贈与中！";
                     EconomyAPI::getInstance()->addMoney($player, 3);
                     Server::getInstance()->broadcastPopup($bonus);
                     break;
             }
             if ($count >= 12) {
-                $this->is_Haste($player);
-                $this->is_NightVision($player);
-                $this->is_Saturation($player);
+                if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() === true) {
+                    $this->is_Haste($player);
+                    $this->is_NightVision($player);
+                    $this->is_Saturation($player);
+                }
                 $bonus = "{$color}同時ログイン数12以上の為\n採掘上昇&満腹&暗視エフェクト付与&毎秒5円贈与中！";
                 EconomyAPI::getInstance()->addMoney($player, 5);
                 Server::getInstance()->broadcastPopup($bonus);

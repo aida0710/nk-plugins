@@ -6,6 +6,8 @@ use deceitya\miningtools\calculation\AxeDestructionRange;
 use deceitya\miningtools\calculation\ItemDrop;
 use deceitya\miningtools\calculation\PickaxeDestructionRange;
 use deceitya\miningtools\Main;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
@@ -56,12 +58,14 @@ class BreakEventListener implements Listener {
             return;
         }
         $handItem = $player->getInventory()->getItemInHand();
-        $haveDurable = $handItem instanceof Durable;
-        /** @var Durable $handItem */
-        $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
-        if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-            $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-            return;
+        if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
+            $haveDurable = $handItem instanceof Durable;
+            /** @var Durable $handItem */
+            $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
+            if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
+                $player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+                return;
+            }
         }
         if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
             $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player);

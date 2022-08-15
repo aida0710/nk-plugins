@@ -3,6 +3,8 @@
 namespace deceitya\miningtools\calculation;
 
 use deceitya\miningtools\event\MiningToolsBreakEvent;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
@@ -59,9 +61,11 @@ class AxeDestructionRange {
                         $handItem->applyDamage(1);
                         $player->getInventory()->setItemInHand($handItem);
                     }
-                    if ($handItem->getDamage() >= $maxDurability - 15) {
-                        $player->sendTitle("§c耐久が残り少しの為範囲採掘が適用されません", "§cかなとこ等を使用して修繕してください");
-                        break 2;
+                    if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
+                        if ($handItem->getDamage() >= $maxDurability - 15) {
+                            $player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+                            break 2;
+                        }
                     }
                 }
                 $drops[] = (new ItemDrop())->getDrop($player, $targetBlock);

@@ -11,6 +11,8 @@ use Deceitya\MiningLevel\Form\MiningLevelUPForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use InfoSystem\InfoSystem;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\LevelUpTitleSetting;
 use lazyperson0710\ticket\TicketAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
@@ -117,7 +119,9 @@ class EventListener implements Listener {
                 $player->getServer()->broadcastMessage("§bLevel §7>> §e{$name}がLv.{$originalLevel}からLv.{$level}にレベルアップしました");
             } else {
                 $player->sendMessage("§bLevel §7>> §a{$name}がLv.{$originalLevel}からLv.{$level}にレベルアップしました");
-                $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}");
+                if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpTitleSetting::getName())?->getValue() === true) {
+                    $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}");
+                }
                 $msg = null;
                 switch ($level) {
                     case 2:

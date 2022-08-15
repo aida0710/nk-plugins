@@ -2,6 +2,8 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\EnduranceWarningSetting;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -23,8 +25,13 @@ class BreakListener implements Listener {
             $value = $item->getMaxDurability() - $item->getDamage();
             $value--;
             $player->sendPopup("§bMining §7>> §a残りの耐久値は{$value}です");
-            if ($value === 50) {
-                $player->sendTitle("§c所持しているアイテムの\n耐久が50を下回りました");
+            if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(EnduranceWarningSetting::getName())?->getValue() === true) {
+                if ($value === 50) {
+                    $player->sendTitle("§c所持しているアイテムの\n耐久が50を下回りました");
+                }
+                if ($value === 15) {
+                    $player->sendTitle("§c所持しているアイテムの\n耐久が15を下回りました");
+                }
             }
         }
     }
