@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -28,7 +29,7 @@ class DeleteCheckForm implements Form {
         if ($data) {
             BankHelper::getInstance()->remove($this->bank);
             $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a削除しました");
-        } else $player->sendForm(new BankForm());
+        } else SendForm::Send($player, (new BankForm()));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace lazyperson710\sff\form\land;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\LandForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -23,7 +24,7 @@ class SellForm extends CustomForm {
     }
 
     public function handleClosed(Player $player): void {
-        $player->sendForm(new LandForm($player));
+        SendForm::Send($player, (new LandForm($player)));
         return;
     }
 

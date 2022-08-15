@@ -2,6 +2,7 @@
 
 namespace Deceitya\NotionForm\Form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -24,11 +25,11 @@ class SearchContentForm implements Form {
             return;
         }
         if ($data === 0) {
-            $player->sendForm(new SearchResultForm($this->file, $this->heading, $this->searchdefault));
+            SendForm::Send($player, (new SearchResultForm($this->file, $this->heading, $this->searchdefault)));
             return;
         }
         if ($data === 1) {
-            $player->sendForm(new StartForm($this->file));
+            SendForm::Send($player, (new StartForm($this->file)));
         }
     }
 

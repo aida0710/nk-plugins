@@ -8,6 +8,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\ShopAPI\database\EnchantShopAPI;
 use deceitya\ShopAPI\form\enchantShop\EnchantConfirmationForm;
 use deceitya\ShopAPI\form\enchantShop\EnchantSelectForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\player\Player;
 
@@ -30,9 +31,9 @@ class EnchantSelectFormButton extends Button {
 
     public function handleSubmit(Player $player): void {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName)) {
-            $player->sendForm(new EnchantConfirmationForm($player, $this->enchantment));
+            SendForm::Send($player, (new EnchantConfirmationForm($player, $this->enchantment)));
         } else {
-            $player->sendForm(new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName) . "lv"));
+            SendForm::Send($player, (new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName) . "lv")));
         }
     }
 }

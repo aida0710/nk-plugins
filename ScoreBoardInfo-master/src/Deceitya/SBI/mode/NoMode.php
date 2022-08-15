@@ -3,6 +3,7 @@
 namespace Deceitya\SBI\mode;
 
 use pocketmine\player\Player;
+use lazyperson710\core\packet\SendForm;
 
 class NoMode implements Mode {
 

@@ -5,6 +5,7 @@ namespace deceitya\miningtools\command;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\ExtensionsMainForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -27,7 +28,7 @@ class ExpansionMiningToolCommand extends Command {
             return;
         }
         if ((new CheckPlayerData())->checkMiningToolsNBT($sender) === false) return;
-        $sender->sendForm(new ExtensionsMainForm($sender));
+        SendForm::Send($sender, (new ExtensionsMainForm($sender)));
     }
 
 }

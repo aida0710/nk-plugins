@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items;
 
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\CommandStorageForm;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
@@ -14,7 +15,7 @@ class CommandStorage {
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
         if ($player->isSneaking()) {
-            $player->sendForm(new CommandStorageForm);
+            SendForm::Send($player, (new CommandStorageForm));
         } elseif ($inHand->getName() === "コマンド記憶装置") {
             $player->sendMessage("§bCmdStorage §7>> §cスニークしながらタップすることでコマンドを設定することが出来ます");
         } else {

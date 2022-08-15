@@ -3,6 +3,7 @@
 namespace deceitya\ShopAPI\form\levelShop;
 
 use deceitya\ShopAPI\database\LevelShopAPI;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
@@ -45,10 +46,10 @@ class SellBuyForm implements Form {
             }
         }
         if ($data) {
-            $player->sendForm(new PurchaseForm($item, $this->buy, $count, $myMoney, $storage));
+            SendForm::Send($player, (new PurchaseForm($item, $this->buy, $count, $myMoney, $storage)));
             return;
         }
-        $player->sendForm(new SaleForm($item, $this->sell, $count, $myMoney, $storage));
+        SendForm::Send($player, (new SaleForm($item, $this->sell, $count, $myMoney, $storage)));
     }
 
     public function jsonSerialize() {

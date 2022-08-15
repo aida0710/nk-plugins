@@ -6,6 +6,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use lazyperson0710\WorldManagement\form\WarpForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\player\Player;
@@ -57,7 +58,7 @@ class PlayerTeleportEvent implements Listener {
                 return;
             }
             if ($event->getTo()->getWorld()->getDisplayName() === "lobby") {
-                $player->sendForm(new WarpForm($player));
+                SendForm::Send($player, (new WarpForm($player)));
                 return;
             }
         }

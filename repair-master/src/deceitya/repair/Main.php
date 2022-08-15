@@ -5,6 +5,7 @@ namespace deceitya\repair;
 use deceitya\repair\command\RepairCommand;
 use deceitya\repair\form\RepairForm;
 use Exception;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Durable;
@@ -75,6 +76,6 @@ class Main extends PluginBase implements Listener {
             $level += 8 + $enchant->getLevel();
         }
         $mode = "others";
-        $player->sendForm(new RepairForm($level, $item, $mode));
+        SendForm::Send($player, (new RepairForm($level, $item, $mode)));
     }
 }

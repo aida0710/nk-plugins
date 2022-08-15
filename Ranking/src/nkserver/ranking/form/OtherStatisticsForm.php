@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\object\PlayerDataPool;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -33,15 +34,15 @@ class OtherStatisticsForm extends BackableForm {
             $this->addButton('総死亡数' . PHP_EOL . number_format($data->getDeath()) . '回...');
             $this->addButton('戻る');
             $this->submit = function (Player $player, int $data) use ($receiver): void {
-                $player->sendForm(
-                    match ($data) {
-                        0, 2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKBREAK),
-                        1, 3 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE),
-                        4 => new RankingForm($this, $receiver, RankingForm::TYPE_CHAT),
-                        5 => new RankingForm($this, $receiver, RankingForm::TYPE_DEATH),
-                        6 => $this->before
-                    }
-                );
+                SendForm::Send($player, (
+                match ($data) {
+                    0, 2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKBREAK),
+                    1, 3 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE),
+                    4 => new RankingForm($this, $receiver, RankingForm::TYPE_CHAT),
+                    5 => new RankingForm($this, $receiver, RankingForm::TYPE_DEATH),
+                    6 => $this->before
+                }
+                ));
             };
         }
     }

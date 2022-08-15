@@ -4,6 +4,7 @@ namespace lazyperson710\sff\form;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -38,6 +39,6 @@ class PlayerInfoForm extends CustomForm {
             $player->sendMessage("§bPlayerInfo §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
-        $player->sendForm(new PlayerForm($player, $playerName));
+        SendForm::Send($player, (new PlayerForm($player, $playerName)));
     }
 }

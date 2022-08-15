@@ -2,6 +2,7 @@
 
 namespace lazyperson710\sff\command;
 
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\TosForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -18,6 +19,6 @@ class TosCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new TosForm());
+        SendForm::Send($sender, (new TosForm()));
     }
 }

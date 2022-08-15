@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\command;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
@@ -31,7 +32,7 @@ class BankCommand extends Command {
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if ($sender instanceof Player) {
             if ($this->testPermission($sender)) {
-                $sender->sendForm(new BankForm());
+                SendForm::Send($sender, (new BankForm()));
             }
         } else $sender->sendMessage(TextFormat::RED . "§bBank §7>> §cコマンドを実行出来ませんでした");
         return true;

@@ -5,6 +5,7 @@ namespace deceitya\ShopAPI\form\levelShop\other\InvSell;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\database\LevelShopAPI;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
@@ -47,6 +48,6 @@ class Confirmation extends SimpleForm {
         if (is_null($insufficientLevelAllItem)) {
             $insufficientLevelAllItem .= "none\n";
         }
-        $player->sendForm(new Result($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem));
+        SendForm::Send($player, (new Result($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem)));
     }
 }

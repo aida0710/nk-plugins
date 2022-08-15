@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\object\PlayerDataArray;
 use nkserver\ranking\object\PlayerDataPool;
 use pocketmine\form\Form;
@@ -30,7 +31,7 @@ class PlaceLevelsForm extends BackableForm {
                     $this->back($player);
                     return;
                 }
-                $player->sendForm(new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE, $levels[$data]));
+                SendForm::Send($player, (new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE, $levels[$data])));
             };
         }
     }

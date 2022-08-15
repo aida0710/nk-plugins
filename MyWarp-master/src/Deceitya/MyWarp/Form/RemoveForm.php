@@ -3,6 +3,7 @@
 namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MyWarp\Database;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -20,7 +21,7 @@ class RemoveForm implements Form {
         if ($data === null) {
             return;
         }
-        $player->sendForm(new ConfirmForm($player, $this->warps[$data]));
+        SendForm::Send($player, (new ConfirmForm($player, $this->warps[$data])));
     }
 
     public function jsonSerialize() {

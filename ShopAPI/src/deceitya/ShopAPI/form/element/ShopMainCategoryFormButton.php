@@ -16,6 +16,7 @@ use deceitya\ShopAPI\form\levelShop\shop4\Shop4Form;
 use deceitya\ShopAPI\form\levelShop\shop5\Shop5Form;
 use deceitya\ShopAPI\form\levelShop\shop6\Shop6Form;
 use deceitya\ShopAPI\form\levelShop\shop7\Shop7Form;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class ShopMainCategoryFormButton extends Button {
@@ -45,10 +46,10 @@ class ShopMainCategoryFormButton extends Button {
             default => 0,
         };
         if (MiningLevelAPI::getInstance()->getLevel($player) >= $level) {
-            $player->sendForm($this->class);
+            SendForm::Send($player, ($this->class));
         } else {
             $error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$level}";
-            $player->sendForm(new MainLevelShopForm($player, $error));
+            SendForm::Send($player, (new MainLevelShopForm($player, $error)));
         }
     }
 }

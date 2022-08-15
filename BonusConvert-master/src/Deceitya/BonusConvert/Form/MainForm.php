@@ -3,6 +3,7 @@
 namespace Deceitya\BonusConvert\Form;
 
 use Deceitya\BonusConvert\BonusConvertPlugin;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -13,7 +14,7 @@ class MainForm implements Form {
             return;
         }
         $convert = BonusConvertPlugin::getConverts()[$data];
-        $player->sendForm(new SubForm($convert));
+        SendForm::Send($player, (new SubForm($convert)));
     }
 
     public function jsonSerialize() {

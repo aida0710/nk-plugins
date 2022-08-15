@@ -5,6 +5,7 @@ namespace lazyperson710\sff\form;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -58,6 +59,6 @@ class PlayerForm extends SimpleForm {
             $player->sendMessage("§bPlayerInfo §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
             return;
         }
-        $player->sendForm(new PlayerForm($player, $this->playerName));
+        SendForm::Send($player, (new PlayerForm($player, $this->playerName)));
     }
 }

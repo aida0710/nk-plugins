@@ -4,6 +4,7 @@ namespace deceitya\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class ShopItemFormButton extends Button {
@@ -21,6 +22,6 @@ class ShopItemFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new $this->class($player));
+        SendForm::Send($player, (new $this->class($player)));
     }
 }

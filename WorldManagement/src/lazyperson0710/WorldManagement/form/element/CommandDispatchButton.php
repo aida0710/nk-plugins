@@ -5,6 +5,7 @@ namespace lazyperson0710\WorldManagement\form\element;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use lazyperson0710\WorldManagement\form\WarpForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -24,7 +25,7 @@ class CommandDispatchButton extends Button {
             Server::getInstance()->dispatchCommand($player, $this->command);
         } else {
             $error = "\n§c選択したワールドはレベルが足りないか解放されていません";
-            $player->sendForm(new WarpForm($player, $error));
+            SendForm::Send($player, (new WarpForm($player, $error)));
         }
     }
 }

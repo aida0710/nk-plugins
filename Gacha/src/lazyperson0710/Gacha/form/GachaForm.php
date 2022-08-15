@@ -9,6 +9,7 @@ use lazyperson0710\Gacha\Calculation\ItemRegister;
 use lazyperson0710\Gacha\Calculation\RankCalculation;
 use lazyperson0710\Gacha\Main;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
@@ -92,7 +93,7 @@ class GachaForm extends CustomForm {
                 TicketAPI::getInstance()->addTicket($player, 500);
             }
         }
-        $player->sendForm(new ResultForm($formMessage, $onDrop));
+        SendForm::Send($player, (new ResultForm($formMessage, $onDrop)));
     }
 
     public function addSound(Player $player, string $soundName) {

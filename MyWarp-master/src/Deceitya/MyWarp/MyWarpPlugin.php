@@ -3,6 +3,7 @@
 namespace Deceitya\MyWarp;
 
 use Deceitya\MyWarp\Form\MainForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -22,7 +23,7 @@ class MyWarpPlugin extends PluginBase {
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if ($sender instanceof Player) {
-            $sender->sendForm(new MainForm());
+            SendForm::Send($sender, (new MainForm()));
         } else {
             $sender->sendMessage('§bMyWarp §7>> §c鯖内でしかできません');
         }

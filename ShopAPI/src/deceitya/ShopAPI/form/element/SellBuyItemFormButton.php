@@ -9,6 +9,7 @@ use deceitya\ShopAPI\database\LevelShopAPI;
 use deceitya\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
 use deceitya\ShopAPI\form\levelShop\PurchaseForm;
 use deceitya\ShopAPI\form\levelShop\SellBuyForm;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
@@ -36,7 +37,7 @@ class SellBuyItemFormButton extends Button {
         $api = LevelShopAPI::getInstance();
         if (MiningLevelAPI::getInstance()->getLevel($player) < LevelShopAPI::getInstance()->getLevel($this->itemId, $this->itemMeta)) {
             $error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$api->getLevel($this->itemId, $this->itemMeta)}\n§r";
-            $player->sendForm(new InputItemForm($error));
+            SendForm::Send($player, (new InputItemForm($error)));
             return;
         }
         if (LevelShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta) == 0) {//売却値が0だった時選択がそもそもスキップされるように
@@ -48,7 +49,7 @@ class SellBuyItemFormButton extends Button {
             });
             return;
         }
-        $player->sendForm(new SellBuyForm($this->itemId, $this->itemMeta, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), LevelShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta)));
+        SendForm::Send($player, (new SellBuyForm($this->itemId, $this->itemMeta, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), LevelShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta))));
     }
 
     public function callback(Player $player, Item $item, int $strage): void {
@@ -59,6 +60,6 @@ class SellBuyItemFormButton extends Button {
                 $count += $v->getCount();
             }
         }
-        $player->sendForm(new PurchaseForm($item, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), $count, $mymoney, $strage));
+        SendForm::Send($player, (new PurchaseForm($item, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), $count, $mymoney, $strage)));
     }
 }

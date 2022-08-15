@@ -4,6 +4,7 @@ namespace deceitya\miningtools\extensions\enchant\unbreaking;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -56,6 +57,6 @@ class UnbreakingEnchantConfirmForm extends SimpleForm {
                 return;
             }
         }
-        $player->sendForm(new UnbreakingEnchantBuyForm($player, $this->nbt));
+        SendForm::Send($player, (new UnbreakingEnchantBuyForm($player, $this->nbt)));
     }
 }

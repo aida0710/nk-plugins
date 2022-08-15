@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\object\PlayerDataPool;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -23,14 +24,14 @@ class BlockBreakStatisticsForm extends BackableForm {
             $this->addButton('破壊数ランキング');
             $this->addButton('戻る');
             $this->submit = function (Player $player, int $data) use ($receiver): void {
-                $player->sendForm(
-                    match ($data) {
-                        0 => new BlockDetailForm($this, BlockDetailForm::TYPE_BLOCKBREAK, $receiver),
-                        1 => new BreakLevelsForm($this, $receiver),
-                        2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKBREAK),
-                        3 => $this->before
-                    }
-                );
+                SendForm::Send($player, (
+                match ($data) {
+                    0 => new BlockDetailForm($this, BlockDetailForm::TYPE_BLOCKBREAK, $receiver),
+                    1 => new BreakLevelsForm($this, $receiver),
+                    2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKBREAK),
+                    3 => $this->before
+                }
+                ));
             };
         }
     }

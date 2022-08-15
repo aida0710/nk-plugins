@@ -14,6 +14,7 @@ use InfoSystem\InfoSystem;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\LevelUpTitleSetting;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -197,7 +198,7 @@ class EventListener implements Listener {
                         break;
                 }
                 if (!is_null($msg)) {
-                    $player->sendForm(new MiningLevelUPForm($msg));
+                    SendForm::Send($player, (new MiningLevelUPForm($msg)));
                 }
             }
             (new MiningLevelUpEvent($player, $originalLevel, $level))->call();

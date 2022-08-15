@@ -5,6 +5,7 @@ namespace deceitya\miningtools\normal;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -48,6 +49,6 @@ class ConfirmForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new BuyForm($player, $this->mode, $this->cost, $this->toolType->getSelectedOption()));
+        SendForm::Send($player, (new BuyForm($player, $this->mode, $this->cost, $this->toolType->getSelectedOption())));
     }
 }

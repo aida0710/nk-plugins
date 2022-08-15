@@ -5,6 +5,7 @@ namespace deceitya\ShopAPI\form\element;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use deceitya\ShopAPI\form\effectShop\EffectConfirmationForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\entity\effect\Effect;
 use pocketmine\player\Player;
 
@@ -23,6 +24,6 @@ class EffectSelectFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new EffectConfirmationForm($player, $this->effect));
+        SendForm::Send($player, (new EffectConfirmationForm($player, $this->effect)));
     }
 }

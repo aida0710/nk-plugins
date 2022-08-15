@@ -4,6 +4,7 @@ namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\form\SettingListForm;
 use lazyperson0710\WorldManagement\form\WarpForm;
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\CommandExecutionForm;
 use lazyperson710\sff\form\InformationForm;
 use lazyperson710\sff\form\TosForm;
@@ -58,19 +59,19 @@ class JoinItemUseEvent implements Listener {
         }
         switch ($idTag->getValue()) {
             case JoinPlayerEvent::ID_TOS:
-                $player->sendForm(new TosForm());
+                SendForm::Send($player, (new TosForm()));
                 break;
             case JoinPlayerEvent::ID_INFORMATION:
-                $player->sendForm(new InformationForm());
+                SendForm::Send($player, (new InformationForm()));
                 break;
             case  JoinPlayerEvent::ID_COMMAND_EXECUTION:
-                $player->sendForm(new CommandExecutionForm());
+                SendForm::Send($player, (new CommandExecutionForm()));
                 break;
             case JoinPlayerEvent::ID_WARP:
-                $player->sendForm(new WarpForm($player));
+                SendForm::Send($player, (new WarpForm($player)));
                 break;
             case JoinPlayerEvent::ID_SETTINGS:
-                $player->sendForm(new SettingListForm($player));
+                SendForm::Send($player, (new SettingListForm($player)));
                 break;
         }
     }

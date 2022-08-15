@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\command\sub;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\form\SearchPlayerForm;
 use nkserver\ranking\libs\CortexPE\Commando\args\RawStringArgument;
 use nkserver\ranking\libs\CortexPE\Commando\BaseSubCommand;
@@ -28,11 +29,11 @@ class SearchSubCommand extends BaseSubCommand {
             return;
         }
         if (!Server::getInstance()->isOp((string)$sender)) return;
-        $sender->sendForm(
-            isset($args['target']) ?
-                SearchPlayerForm::getStatistics((string)$args['target']) :
-                new SearchPlayerForm
-        );
+        SendForm::Send($sender, (
+        isset($args['target']) ?
+            SearchPlayerForm::getStatistics((string)$args['target']) :
+            new SearchPlayerForm
+        ));
     }
 
     protected function prepare(): void {

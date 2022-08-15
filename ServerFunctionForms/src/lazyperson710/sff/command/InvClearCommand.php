@@ -2,6 +2,7 @@
 
 namespace lazyperson710\sff\command;
 
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\InvClearForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -18,6 +19,6 @@ class InvClearCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new InvClearForm($sender));
+        SendForm::Send($sender, (new InvClearForm($sender)));
     }
 }

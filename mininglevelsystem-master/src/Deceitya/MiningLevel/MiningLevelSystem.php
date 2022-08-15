@@ -4,6 +4,7 @@ namespace Deceitya\MiningLevel;
 
 use Deceitya\MiningLevel\Event\EventListener;
 use Deceitya\MiningLevel\Form\RankForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -91,7 +92,7 @@ class MiningLevelSystem extends PluginBase {
                     $sender->sendMessage('§bLevel §7>> §cサーバー内で使用してください。');
                     return true;
                 }
-                $sender->sendForm(new RankForm());
+                SendForm::Send($sender, (new RankForm()));
                 return true;
             case 'save':
                 if (!Server::getInstance()->isOp($sender->getName())) {

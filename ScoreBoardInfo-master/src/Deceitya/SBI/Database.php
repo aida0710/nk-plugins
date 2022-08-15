@@ -5,6 +5,7 @@ namespace Deceitya\SBI;
 use Deceitya\SBI\mode\Mode;
 use Deceitya\SBI\mode\ModeList;
 use pocketmine\player\Player;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\utils\Config;
 
 class Database {

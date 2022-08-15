@@ -4,6 +4,7 @@ namespace Deceitya\NotionForm\command;
 
 use Deceitya\NotionForm\Form\StartForm;
 use Deceitya\NotionForm\Main;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -19,7 +20,7 @@ class SpecificationCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new StartForm(Main::$specification));
+        SendForm::Send($sender, (new StartForm(Main::$specification)));
     }
 
 }

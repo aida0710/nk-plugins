@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\commands\subcommand;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use shock95x\auctionhouse\form\AuctionMain;
@@ -18,6 +19,6 @@ class FormCommand extends BaseSubCommand {
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void {
         assert($sender instanceof Player);
-        $sender->sendForm(new AuctionMain($sender));
+        SendForm::Send($sender, (new AuctionMain($sender)));
     }
 }

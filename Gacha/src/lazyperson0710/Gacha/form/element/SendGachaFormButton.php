@@ -5,6 +5,7 @@ namespace lazyperson0710\Gacha\form\element;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use lazyperson0710\Gacha\form\GachaForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class SendGachaFormButton extends Button {
@@ -24,6 +25,6 @@ class SendGachaFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new GachaForm($player, $this->text, $this->key));
+        SendForm::Send($player, (new GachaForm($player, $this->text, $this->key)));
     }
 }

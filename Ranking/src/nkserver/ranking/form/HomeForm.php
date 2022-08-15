@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
 use Deceitya\MiningLevel\Form\RankForm as MiningLevelRankinkForm;
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\libs\form\SimpleForm;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -17,13 +18,13 @@ class HomeForm extends SimpleForm {
         $this->addButton('銀行預金ランキング');
         $this->addButton('マイニングレベルランキング');
         $this->submit = function (Player $player, int $data): void {
-            $player->sendForm(
-                match ($data) {
-                    0 => new StatisticsForm($this, $player->getName()),
-                    1 => new BankRankingForm,
-                    2 => new MiningLevelRankinkForm
-                }
-            );
+            SendForm::Send($player, (
+            match ($data) {
+                0 => new StatisticsForm($this, $player->getName()),
+                1 => new BankRankingForm,
+                2 => new MiningLevelRankinkForm
+            }
+            ));
         };
     }
 }

@@ -2,6 +2,7 @@
 
 namespace deceitya\lbi;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -111,7 +112,7 @@ class Main extends PluginBase implements Listener {
         if ($label === "bonuscollect") {
             if (self::$lastBonusDateConfig->exists($sender->getName())) {
                 $form = new BonusViewForm($sender);
-                $sender->sendForm($form);
+                SendForm::Send($sender, ($form));
                 //self::check($sender);
                 return true;
             }

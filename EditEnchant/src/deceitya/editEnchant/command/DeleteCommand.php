@@ -4,6 +4,7 @@ namespace deceitya\editEnchant\command;
 
 use deceitya\editEnchant\form\DelForm;
 use deceitya\editEnchant\InspectionItem;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -19,7 +20,7 @@ class DeleteCommand extends Command {
             return true;
         }
         if (!(new InspectionItem())->inspectionItem($sender)) return true;
-        $sender->sendForm(new DelForm($sender));
+        SendForm::Send($sender, (new DelForm($sender)));
         return true;
     }
 

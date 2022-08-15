@@ -3,6 +3,7 @@
 namespace Deceitya\BonusConvert;
 
 use Deceitya\BonusConvert\Form\MainForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -48,7 +49,7 @@ class BonusConvertPlugin extends PluginBase {
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if ($sender instanceof Player) {
-            $sender->sendForm(new MainForm());
+            SendForm::Send($sender, (new MainForm()));
         }
         return true;
     }

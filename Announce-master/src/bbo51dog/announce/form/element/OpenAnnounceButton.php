@@ -4,6 +4,7 @@ namespace bbo51dog\announce\form\element;
 
 use bbo51dog\announce\form\AnnounceForm;
 use bbo51dog\bboform\element\Button;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class OpenAnnounceButton extends Button {
@@ -20,6 +21,6 @@ class OpenAnnounceButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new AnnounceForm($this->announceId));
+        SendForm::Send($player, (new AnnounceForm($this->announceId)));
     }
 }

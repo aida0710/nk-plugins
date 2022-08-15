@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace rib\tw\command;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\{Command, CommandSender,};
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -18,7 +19,7 @@ class TeleportCommand extends Command {
         if (!($sender instanceof Player) or !Server::getInstance()->isOp($sender->getName())) {
             return false;
         }
-        $sender->sendForm(new TeleportForm);
+        SendForm::Send($sender, (new TeleportForm));
         return true;
     }
 }

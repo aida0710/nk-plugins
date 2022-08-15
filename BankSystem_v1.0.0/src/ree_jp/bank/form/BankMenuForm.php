@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -29,16 +30,16 @@ class BankMenuForm implements Form {
         if ($data === null) return;
         switch ($data) {
             case 0:
-                $player->sendForm(new ActionForm($this->bank, $this->p, ActionForm::BANK_PUT));
+                SendForm::Send($player, (new ActionForm($this->bank, $this->p, ActionForm::BANK_PUT)));
                 break;
             case 1:
-                $player->sendForm(new ActionForm($this->bank, $this->p, ActionForm::BANK_OUT));
+                SendForm::Send($player, (new ActionForm($this->bank, $this->p, ActionForm::BANK_OUT)));
                 break;
             case 2:
-                $player->sendForm(new ShareSelectForm($this->bank));
+                SendForm::Send($player, (new ShareSelectForm($this->bank)));
                 break;
             case 3:
-                $player->sendForm(new LogForm($this->bank));
+                SendForm::Send($player, (new LogForm($this->bank)));
                 break;
             default:
                 $player->sendMessage(TextFormat::RED . "§bBank §7>> §cエラーが発生しました");

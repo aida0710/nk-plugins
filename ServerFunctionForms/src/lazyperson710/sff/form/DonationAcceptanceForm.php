@@ -4,6 +4,7 @@ namespace lazyperson710\sff\form;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class DonationAcceptanceForm extends CustomForm {
@@ -30,6 +31,6 @@ class DonationAcceptanceForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new DonationForm());
+        SendForm::Send($player, (new DonationForm()));
     }
 }

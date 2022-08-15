@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace deceitya\lbi\libs\jojoe77777\formapi;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form as IForm;
 use pocketmine\player\Player;
 
@@ -27,7 +28,7 @@ abstract class Form implements IForm {
      * @deprecated
      */
     public function sendToPlayer(Player $player): void {
-        $player->sendForm($this);
+        SendForm::Send($player, ($this));
     }
 
     public function handleResponse(Player $player, $data): void {

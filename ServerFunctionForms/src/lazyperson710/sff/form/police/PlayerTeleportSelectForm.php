@@ -4,6 +4,7 @@ namespace lazyperson710\sff\form\police;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\world\Position;
@@ -45,7 +46,7 @@ class PlayerTeleportSelectForm extends CustomForm {
             Server::getInstance()->getLogger()->info("Police >> {$player->getName()}が{$playerName}にテレポートしました");
             $player->teleport($pos);
         } else {
-            $player->sendForm(new PoliceMainForm($player, "\n§cテレポートはスペクテイターモード時のみ使用可能です"));
+            SendForm::Send($player, (new PoliceMainForm($player, "\n§cテレポートはスペクテイターモード時のみ使用可能です")));
         }
     }
 }

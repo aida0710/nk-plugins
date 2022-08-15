@@ -4,6 +4,7 @@ namespace Deceitya\SBI\mode;
 
 use lazyperson0710\ticket\TicketAPI;
 use pocketmine\player\Player;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;

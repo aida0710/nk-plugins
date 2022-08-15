@@ -5,6 +5,7 @@ namespace deceitya\editEnchant\form\element;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use deceitya\editEnchant\form\ReduceInputForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\player\Player;
 
@@ -26,6 +27,6 @@ class SendReduceInputFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new ReduceInputForm($player, $this->enchant, $this->type));
+        SendForm::Send($player, (new ReduceInputForm($player, $this->enchant, $this->type)));
     }
 }

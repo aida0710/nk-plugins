@@ -5,6 +5,7 @@ namespace deceitya\editEnchant\form;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\editEnchant\InspectionItem;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\player\Player;
 
@@ -42,6 +43,6 @@ class ReduceInputForm extends CustomForm {
             $player->sendMessage('§bEditEnchant §7>> §c削減したいレベルがエンチャントのレベルよりも大きいです');
             return;
         }
-        $player->sendForm(new ConfirmForm($player, $this->enchantmentInstance, $this->type, $this->reduceEnchantLevel->getValue()));
+        SendForm::Send($player, (new ConfirmForm($player, $this->enchantmentInstance, $this->type, $this->reduceEnchantLevel->getValue())));
     }
 }

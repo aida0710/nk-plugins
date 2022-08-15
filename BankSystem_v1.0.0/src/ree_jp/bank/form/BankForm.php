@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -17,13 +18,13 @@ class BankForm implements Form {
         }
         switch ($data) {
             case 0:
-                $player->sendForm(new SelectForm($player));
+                SendForm::Send($player, (new SelectForm($player)));
                 break;
             case 1:
-                $player->sendForm(new CreateForm());
+                SendForm::Send($player, (new CreateForm()));
                 break;
             case 2:
-                $player->sendForm(new DeleteForm($player));
+                SendForm::Send($player, (new DeleteForm($player)));
                 break;
             default:
                 $player->sendMessage(TextFormat::RED . "§bBank §7>> §cエラーが発生しました");

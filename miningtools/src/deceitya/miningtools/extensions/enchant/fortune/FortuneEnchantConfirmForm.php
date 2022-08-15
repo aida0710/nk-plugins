@@ -4,6 +4,7 @@ namespace deceitya\miningtools\extensions\enchant\fortune;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -56,6 +57,6 @@ class FortuneEnchantConfirmForm extends SimpleForm {
                 return;
             }
         }
-        $player->sendForm(new FortuneEnchantBuyForm($player, $this->nbt));
+        SendForm::Send($player, (new FortuneEnchantBuyForm($player, $this->nbt)));
     }
 }

@@ -4,7 +4,6 @@ namespace bbo51dog\anticheat;
 
 class Setting {
 
-
     private ?string $webhookUrl = null;
 
     private bool $enableDiscordLog = false;

@@ -4,6 +4,7 @@ namespace bbo51dog\announce\command;
 
 use bbo51dog\announce\form\AnnounceForm;
 use bbo51dog\announce\service\AnnounceService;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -22,7 +23,7 @@ class AnnounceCommand extends Command {
             return;
         }
         if (AnnounceService::canRead($sender->getName())) {
-            $sender->sendForm(new AnnounceForm(AnnounceService::getAnnounceIdByName($sender->getName())));
+            SendForm::Send($sender, (new AnnounceForm(AnnounceService::getAnnounceIdByName($sender->getName()))));
             AnnounceService::setAlreadyRead($sender->getName(), true);
         } else {
             $sender->sendMessage("§bNotice §7>> §c表示するアナウンスがありません");

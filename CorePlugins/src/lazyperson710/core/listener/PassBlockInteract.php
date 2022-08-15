@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\TosForm;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -24,10 +25,10 @@ class PassBlockInteract implements Listener {
                 Server::getInstance()->dispatchCommand($player, "pass");
             }
             if ($x === 215 && $y === 105 && $z === 247) {//TosFormを送る
-                $player->sendForm(new TosForm());
+                SendForm::Send($player, (new TosForm()));
             }
             if ($x === 232 && $y === 105 && $z === 246) {//TosFormを送る
-                $player->sendForm(new TosForm());
+                SendForm::Send($player, (new TosForm()));
             }
         }
     }

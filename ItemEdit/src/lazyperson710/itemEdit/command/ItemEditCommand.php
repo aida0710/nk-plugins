@@ -2,6 +2,7 @@
 
 namespace lazyperson710\itemEdit\command;
 
+use lazyperson710\core\packet\SendForm;
 use lazyperson710\itemEdit\form\NbtEditForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -18,6 +19,6 @@ class ItemEditCommand extends Command {
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if (!($sender instanceof Player)) return;
         if (!Server::getInstance()->isOp($sender->getName())) return;
-        $sender->sendForm(new NbtEditForm($sender));
+        SendForm::Send($sender, (new NbtEditForm($sender)));
     }
 }

@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\command;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\command\sub\SearchSubCommand;
 use nkserver\ranking\form\HomeForm;
 use nkserver\ranking\libs\CortexPE\Commando\BaseCommand;
@@ -26,7 +27,7 @@ class RankingCommand extends BaseCommand {
             $sender->sendMessage(TextFormat::RED . 'ゲーム内で実行してください');
             return;
         }
-        $sender->sendForm(new HomeForm);
+        SendForm::Send($sender, (new HomeForm));
     }
 
     protected function prepare(): void {

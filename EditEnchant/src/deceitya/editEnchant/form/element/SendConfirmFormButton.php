@@ -5,6 +5,7 @@ namespace deceitya\editEnchant\form\element;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use deceitya\editEnchant\form\ConfirmForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\player\Player;
 
@@ -29,6 +30,6 @@ class SendConfirmFormButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        $player->sendForm(new ConfirmForm($player, $this->enchant, $this->type, $this->level));
+        SendForm::Send($player, (new ConfirmForm($player, $this->enchant, $this->type, $this->level)));
     }
 }

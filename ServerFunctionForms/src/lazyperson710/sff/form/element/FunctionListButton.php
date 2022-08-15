@@ -4,6 +4,7 @@ namespace lazyperson710\sff\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class FunctionListButton extends Button {
@@ -22,6 +23,6 @@ class FunctionListButton extends Button {
             ->setTitle($this->title)
             ->setText($this->description)
             ->addElement(new Button("閉じる"));
-        $player->sendForm($form);
+        SendForm::Send($player, ($form));
     }
 }

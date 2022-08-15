@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\commands;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use shock95x\auctionhouse\commands\subcommand\CategoryCommand;
@@ -29,7 +30,7 @@ class AHCommand extends BaseCommand {
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void {
         if (count($args) == 0 && $sender instanceof Player) {
-            $sender->sendForm(new AuctionMain($sender));
+            SendForm::Send($sender, (new AuctionMain($sender)));
         }
     }
 }

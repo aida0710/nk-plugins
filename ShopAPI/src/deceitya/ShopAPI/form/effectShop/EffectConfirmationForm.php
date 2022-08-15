@@ -7,6 +7,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Slider;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\ShopAPI\database\EffectShopAPI;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\lang\Translatable;
@@ -60,6 +61,6 @@ class EffectConfirmationForm extends CustomForm {
             return;
         }
         $level = (int)$this->level->getValue();
-        $player->sendForm(new EffectBuyForm($player, $level, $this->effect, $this->effectName, $time));
+        SendForm::Send($player, (new EffectBuyForm($player, $level, $this->effect, $this->effectName, $time)));
     }
 }

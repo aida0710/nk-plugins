@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -22,8 +23,8 @@ class ShareSelectForm implements Form {
     public function handleResponse(Player $player, $data): void {
         if ($data === null) return;
         if ($data) {
-            $player->sendForm(new ShareForm($this->bank));
-        } else $player->sendForm(new ShareRemoveForm($this->bank));
+            SendForm::Send($player, (new ShareForm($this->bank)));
+        } else SendForm::Send($player, (new ShareRemoveForm($this->bank)));
     }
 
     /**

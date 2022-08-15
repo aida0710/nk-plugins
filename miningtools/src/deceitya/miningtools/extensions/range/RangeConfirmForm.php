@@ -5,6 +5,7 @@ namespace deceitya\miningtools\extensions\range;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -88,6 +89,6 @@ class RangeConfirmForm extends SimpleForm {
                 return;
             }
         }
-        $player->sendForm(new RangeBuyForm($player, $this->nbt));
+        SendForm::Send($player, (new RangeBuyForm($player, $this->nbt)));
     }
 }

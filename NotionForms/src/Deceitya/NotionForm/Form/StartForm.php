@@ -2,6 +2,7 @@
 
 namespace Deceitya\NotionForm\Form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -18,10 +19,10 @@ class StartForm implements Form {
             return;
         }
         if ($data === 0) {
-            $player->sendForm(new SearchForm($this->file));
+            SendForm::Send($player, (new SearchForm($this->file)));
             return;
         }
-        $player->sendForm(new ContentForm($this->file, $data - 1,));
+        SendForm::Send($player, (new ContentForm($this->file, $data - 1,)));
     }
 
     public function jsonSerialize() {

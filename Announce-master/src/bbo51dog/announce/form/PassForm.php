@@ -6,6 +6,7 @@ use bbo51dog\announce\MessageFormat;
 use bbo51dog\announce\service\AnnounceService;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -52,7 +53,7 @@ class PassForm extends CustomForm {
         if (!$player->getInventory()->contains($bonus) && $player->getInventory()->canAddItem($bonus)) {
             $player->getInventory()->addItem($bonus);
         }
-        $player->sendForm(new AnnounceForm(AnnounceService::getAnnounceIdByName($name)));
+        SendForm::Send($player, (new AnnounceForm(AnnounceService::getAnnounceIdByName($name))));
         AnnounceService::setAlreadyRead($name, true);
     }
 

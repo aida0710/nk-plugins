@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Slider;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\ShopAPI\database\EnchantShopAPI;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\lang\Translatable;
@@ -39,6 +40,6 @@ class EnchantConfirmationForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         $level = (int)$this->level->getValue();
-        $player->sendForm(new EnchantBuyForm($player, $level, $this->enchantment, $this->enchantName));
+        SendForm::Send($player, (new EnchantBuyForm($player, $level, $this->enchantment, $this->enchantName)));
     }
 }

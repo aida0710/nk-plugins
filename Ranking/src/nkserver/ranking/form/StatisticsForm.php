@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -24,7 +25,7 @@ class StatisticsForm extends BackableForm {
                 3 => $this->before
             };
             if ($form === null) return;
-            $player->sendForm($form);
+            SendForm::Send($player, ($form));
         };
     }
 }

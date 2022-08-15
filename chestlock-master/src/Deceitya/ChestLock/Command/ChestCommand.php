@@ -4,6 +4,7 @@ namespace Deceitya\ChestLock\Command;
 
 use Deceitya\ChestLock\Form\ModeForm;
 use Deceitya\ChestLock\Main;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -40,7 +41,7 @@ class ChestCommand extends Command {
                 return false;
             }
         } else {
-            $sender->sendForm($form);
+            SendForm::Send($sender, ($form));
             return true;
         }
     }

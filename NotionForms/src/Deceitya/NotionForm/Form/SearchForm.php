@@ -2,6 +2,7 @@
 
 namespace Deceitya\NotionForm\Form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -25,7 +26,7 @@ class SearchForm implements Form {
             return;
         }
         if ($data[4] === true) {
-            $player->sendForm(new StartForm($this->file));
+            SendForm::Send($player, (new StartForm($this->file)));
             return;
         }
         unset($data[0]);
@@ -49,10 +50,10 @@ class SearchForm implements Form {
         }
         if (count($this->heading) === 0) {
             $message = "§eはるか彼方まで検索したのですが、残念ながら見つかりませんでした§r\n";
-            $player->sendForm(new self($this->file, "\n" . $message, $data));
+            SendForm::Send($player, (new self($this->file, "\n" . $message, $data)));
             return;
         }
-        $player->sendForm(new SearchResultForm($this->file, $this->heading, $data));
+        SendForm::Send($player, (new SearchResultForm($this->file, $this->heading, $data)));
     }
 
     //https://paiza.io/projects/0xkeR4gN6pQvi4n5Eqh3qQ

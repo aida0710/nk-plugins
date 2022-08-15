@@ -2,6 +2,7 @@
 
 namespace Deceitya\NotionForm\Form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -23,7 +24,7 @@ class SearchResultForm implements Form {
             return;
         }
         if ($data === 0) {
-            $player->sendForm(new SearchForm($this->file, "", $this->searchdefault));
+            SendForm::Send($player, (new SearchForm($this->file, "", $this->searchdefault)));
             return;
         }
         if (!isset($this->index[$data - 1])) {
@@ -31,7 +32,7 @@ class SearchResultForm implements Form {
             return;
         }
         $id = $this->index[$data - 1];
-        $player->sendForm(new SearchContentForm($this->file, $id, $this->heading, $this->searchdefault));
+        SendForm::Send($player, (new SearchContentForm($this->file, $id, $this->heading, $this->searchdefault)));
     }
 
     public function jsonSerialize() {

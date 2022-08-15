@@ -12,6 +12,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
@@ -47,7 +48,7 @@ class Main extends PluginBase implements Listener {
                 $player->sendTip(TextFormat::AQUA . "MyStatus §7>> §a表示状態を『{$mode->getName()}』にしました");
             }));
         }
-        $sender->sendForm($form);
+        SendForm::Send($sender, ($form));
         return true;
     }
 }

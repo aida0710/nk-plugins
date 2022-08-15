@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\libs\form\SimpleForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -17,6 +18,6 @@ class BackableForm extends SimpleForm {
 
     public function back(Player $player): void {
         if ($this->before === null) return;
-        $player->sendForm($this->before);
+        SendForm::Send($player, ($this->before));
     }
 }

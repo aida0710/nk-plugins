@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace nkserver\ranking\form;
 
+use lazyperson710\core\packet\SendForm;
 use nkserver\ranking\object\PlayerDataPool;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -23,14 +24,14 @@ class BlockPlaceStatisticsForm extends BackableForm {
             $this->addButton('設置数ランキング');
             $this->addButton('戻る');
             $this->submit = function (Player $player, int $data) use ($receiver): void {
-                $player->sendForm(
-                    match ($data) {
-                        0 => new BlockDetailForm($this, BlockDetailForm::TYPE_BLOCKPLACE, $receiver),
-                        1 => new PlaceLevelsForm($this, $receiver),
-                        2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE),
-                        3 => $this->before
-                    }
-                );
+                SendForm::Send($player, (
+                match ($data) {
+                    0 => new BlockDetailForm($this, BlockDetailForm::TYPE_BLOCKPLACE, $receiver),
+                    1 => new PlaceLevelsForm($this, $receiver),
+                    2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE),
+                    3 => $this->before
+                }
+                ));
             };
         }
     }

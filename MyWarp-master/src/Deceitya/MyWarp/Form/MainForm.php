@@ -2,6 +2,7 @@
 
 namespace Deceitya\MyWarp\Form;
 
+use lazyperson710\core\packet\SendForm;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -12,7 +13,7 @@ class MainForm implements Form {
             return;
         }
         $next = [MakingForm::class, ListForm::class, RemoveForm::class, DetailForm::class];
-        $player->sendForm(new $next[$data]($player));
+        SendForm::Send($player, (new $next[$data]($player)));
     }
 
     public function jsonSerialize() {

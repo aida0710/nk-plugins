@@ -34,7 +34,7 @@ class Shop6Form extends SimpleForm {
     //            'Vegetation',
     //        ];
     //        $class = "\\deceitya\\ShopAPI\\form\\shop6\\" . $forms[$data];
-    //        $player->sendForm(new $class());
+    //        SendForm::Send($player, (new $class());
     //    }
     //
     //    public function jsonSerialize() {

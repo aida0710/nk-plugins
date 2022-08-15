@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\ShopAPI\database\EnchantShopAPI;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
@@ -44,11 +45,11 @@ class EnchantBuyForm extends CustomForm {
             return;
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) < EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName)) {
-            $player->sendForm(new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName) . "lv"));
+            SendForm::Send($player, (new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName) . "lv")));
             return;
         }
         if (!$player->getInventory()->getItemInHand() instanceof Durable) {
-            $player->sendForm(new EnchantSelectForm("§cアイテムが不正です\nアイテム -> " . $player->getInventory()->getItemInHand()->getName()));
+            SendForm::Send($player, (new EnchantSelectForm("§cアイテムが不正です\nアイテム -> " . $player->getInventory()->getItemInHand()->getName())));
             return;
         }
         if ($this->enchantment === VanillaEnchantments::SILK_TOUCH()) {

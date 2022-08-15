@@ -4,6 +4,7 @@ namespace bbo51dog\announce;
 
 use bbo51dog\announce\form\AnnounceForm;
 use bbo51dog\announce\service\AnnounceService;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\server\CommandEvent;
@@ -19,7 +20,7 @@ class EventListener implements Listener {
             AnnounceService::createUser($name);
         }
         if (AnnounceService::canRead($name) && !AnnounceService::hasAlreadyRead($name)) {
-            $player->sendForm(new AnnounceForm(AnnounceService::getAnnounceIdByName($name)));
+            SendForm::Send($player, (new AnnounceForm(AnnounceService::getAnnounceIdByName($name))));
             AnnounceService::setAlreadyRead($name, true);
         }
     }

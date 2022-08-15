@@ -3,6 +3,7 @@
 namespace Deceitya\Flytra\command;
 
 use Deceitya\Flytra\form\FlyForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -18,6 +19,6 @@ class FlyCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        $sender->sendForm(new FlyForm($sender));
+        SendForm::Send($sender, (new FlyForm($sender)));
     }
 }

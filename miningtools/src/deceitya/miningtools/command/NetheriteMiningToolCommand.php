@@ -4,6 +4,7 @@ namespace deceitya\miningtools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\miningtools\normal\ConfirmForm;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -25,7 +26,7 @@ class NetheriteMiningToolCommand extends Command {
             Server::getInstance()->dispatchCommand($sender, "mt");
             return;
         }
-        $sender->sendForm(new ConfirmForm($sender, "netherite"));
+        SendForm::Send($sender, (new ConfirmForm($sender, "netherite")));
     }
 
 }
