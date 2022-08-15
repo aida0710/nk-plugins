@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items;
 
-use lazyperson0710\EffectItems\packet\AddEffectPacket;
+use lazyperson710\core\packet\AddEffectPacket;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\player\PlayerInteractEvent;

@@ -4,7 +4,7 @@ namespace lazyperson710\core;
 
 use lazyperson710\core\command\BookCommand;
 use lazyperson710\core\command\DiceCommand;
-use lazyperson710\core\command\InvCommand;
+use lazyperson710\core\command\JoinItemCommand;
 use lazyperson710\core\command\MajorCommand;
 use lazyperson710\core\command\WarpPVPCommand;
 use lazyperson710\core\task\EffectTaskScheduler;
@@ -31,10 +31,11 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new listener\CancelEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\DeathEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Major(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\FertilizerParticles(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\Elevator(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\DirectInventory(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new listener\BlockInteractEvent(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\JoinPlayerEvent(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\JoinItemUseEvent(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new listener\PassBlockInteract(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakSoundPacket(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\GeneralEventListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\VanillaPickBlock(), $this);
@@ -46,7 +47,7 @@ class Main extends PluginBase {
         $this->getServer()->getCommandMap()->registerAll("core", [
             new MajorCommand(),
             new DiceCommand(),
-            new InvCommand(),
+            new JoinItemCommand(),
             new BookCommand(),
             new WarpPVPCommand(),
         ]);

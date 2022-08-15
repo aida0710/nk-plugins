@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items;
 
-use lazyperson0710\EffectItems\packet\SoundPacket;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\block\BlockBreakEvent;
 
 class OldTools {

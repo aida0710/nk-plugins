@@ -33,7 +33,6 @@ class PlayerItemEvent implements Listener {
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
         //todo 使用時のメッセージ表示
-        //todo https://seesaawiki.jp/theunusualskyblock/d/%C9%F0%B4%EF%A1%F5%CB%C9%B6%F1#content_2
         if ($inHand->getNamedTag()->getTag('AirBlock') !== null) AirBlock::init($event);
         if ($inHand->getNamedTag()->getTag('Churu') !== null) Churu::init($event);
         if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::init($event);

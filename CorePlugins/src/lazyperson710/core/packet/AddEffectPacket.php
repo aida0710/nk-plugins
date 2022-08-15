@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\packet;
+namespace lazyperson710\core\packet;
 
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;

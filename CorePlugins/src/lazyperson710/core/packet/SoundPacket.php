@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\packet;
+namespace lazyperson710\core\packet;
 
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;

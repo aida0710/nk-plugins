@@ -2,8 +2,8 @@
 
 namespace lazyperson0710\EffectItems\items;
 
-use lazyperson0710\EffectItems\packet\SoundPacket;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\player\PlayerInteractEvent;
