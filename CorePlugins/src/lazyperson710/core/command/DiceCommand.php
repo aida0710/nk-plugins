@@ -2,6 +2,8 @@
 
 namespace lazyperson710\core\command;
 
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\DiceMessageSetting;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -16,6 +18,11 @@ class DiceCommand extends Command {
     public function execute(CommandSender $sender, string $commandLabel, array $args): void {
         if (!($sender instanceof Player)) {
             $sender->sendMessage("Please use in server");
+            return;
+        }
+        if (PlayerSettingPool::getInstance()->getSettingNonNull($sender)->getSetting(DiceMessageSetting::getName())?->getValue() !== true) {
+            $sender->sendMessage("§bDice §7>> §cDiceMessageSettingがOFFになっている為、コマンドを実行できません");
+            $sender->sendMessage("§bDice §7>> §c/settingから設定を変更できます");
             return;
         }
         if (!isset($args[0])) {
@@ -58,7 +65,11 @@ class DiceCommand extends Command {
             if (!isset($args[3])) {//当たり番号が指定されてなかったら
                 for ($i = 1; $i <= $args[2]; $i++) {
                     $rand = mt_rand($args[0], $args[1]);
-                    Server::getInstance()->broadcastMessage("§bDice §7>> §e結果 -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $args[0] . "~" . $args[1]);
+                    foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+                        if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DiceMessageSetting::getName())?->getValue() === true) {
+                            $player->sendMessage("§bDice §7>> §a結果 -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $args[0] . "~" . $args[1]);
+                        }
+                    }
                 }
             } else {
                 $number = $args[2];
@@ -72,12 +83,20 @@ class DiceCommand extends Command {
                     foreach ($result as $lucky) {
                         if ((int)$lucky === $rand) {
                             $count++;
-                            Server::getInstance()->broadcastMessage("§bDice §7>> §e結果(当たりのみ) -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $min . "~" . $max);
+                            foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+                                if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DiceMessageSetting::getName())?->getValue() === true) {
+                                    $player->sendMessage("§bDice §7>> §e結果(当たりのみ) -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $min . "~" . $max);
+                                }
+                            }
                         }
                     }
                 }
                 if ($count === 1) {
-                    Server::getInstance()->broadcastMessage("§bDice §7>> §e結果(当たりのみ) -> 当たり無し - Player " . $user . " - 範囲 " . $min . "~" . $max);
+                    foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+                        if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DiceMessageSetting::getName())?->getValue() === true) {
+                            $player->sendMessage("§bDice §7>> §e結果(当たりのみ) -> 当たり無し - Player " . $user . " - 範囲 " . $min . "~" . $max);
+                        }
+                    }
                 }
             }
         }
