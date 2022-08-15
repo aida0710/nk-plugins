@@ -31,9 +31,6 @@ class BlockBreakChecker extends Checker {
         $this->previousTime = $currentTime;
     }
 
-    public function playerJump(): void {
-    }
-
     public function checkViolation(): void {
         $ping = $this->getPlayerData()->getPlayer()->getNetworkSession()->getPing();
         if ($this->getMaxViolation() > $this->getViolation()) {
@@ -42,7 +39,7 @@ class BlockBreakChecker extends Checker {
             }
             return;
         }
-        $this->getPlayerData()->getPlayer()->kick("チートが検出されました");
+        $this->getPlayerData()->getPlayer()->kick("チートが検出された為、サーバーからkickされました\nPing : {$ping}");
         Logger::getInstance()->warnPunishment($this);
         $this->reset();
     }

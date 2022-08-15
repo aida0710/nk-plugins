@@ -4,7 +4,6 @@ namespace bbo51dog\anticheat;
 
 class Setting {
 
-    private string $antiJumpCommand;
 
     private ?string $webhookUrl = null;
 
@@ -15,19 +14,11 @@ class Setting {
 
     public static function loadFromArray(array $data): self {
         $setting = new Setting();
-        $setting->antiJumpCommand = $data["AntiJumpCommand"];
         $setting->enableDiscordLog = (bool)$data["discord"]["enabled"];
         if ($setting->enableDiscordLog) {
             $setting->webhookUrl = $data["discord"]["url"];
         }
         return $setting;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAntiJumpCommand(): string {
-        return $this->antiJumpCommand;
     }
 
     /**

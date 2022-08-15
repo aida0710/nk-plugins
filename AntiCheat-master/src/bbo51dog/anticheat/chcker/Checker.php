@@ -31,8 +31,6 @@ abstract class Checker {
 
     abstract public function blockBreak(): void;
 
-    abstract public function playerJump(): void;
-
     abstract public function getCheatingMessage(): string;
 
     abstract public function getPunishmentMessage(): string;
