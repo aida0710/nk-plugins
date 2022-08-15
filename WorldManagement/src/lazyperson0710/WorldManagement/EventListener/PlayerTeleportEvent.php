@@ -17,7 +17,7 @@ class PlayerTeleportEvent implements Listener {
      * @return void
      * @priority HIGH
      */
-    public function PlayerTeleportEvent(EntityTeleportEvent $event) {
+    public function PlayerTeleportEvent(EntityTeleportEvent $event): void {
         $player = $event->getEntity();
         if (!$player instanceof Player) return;
         if ($event->getTo()->getWorld()->getDisplayName() === $event->getFrom()->getWorld()->getDisplayName()) {
@@ -27,11 +27,6 @@ class PlayerTeleportEvent implements Listener {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= $worldApi->getMiningLevelLimit($event->getTo()->getWorld()->getFolderName())) {
             if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::Nature)) {
                 $player->sendMessage("§bWorld §7>> §a天然資源ワールド\n§7>> §a自由に採掘が可能です\n§7>> §aたくさんの資源を集めてショップで売却してみよう！");
-                $player->sendMessage("§bWorldBorder §7>> §a移動可能範囲は{$worldApi->getWorldLimitX_1($event->getTo()->getWorld()->getFolderName())} x {$worldApi->getWorldLimitZ_1($event->getTo()->getWorld()->getFolderName())}になります");
-                return;
-            }
-            if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::NatureJava)) {
-                $player->sendMessage("§bWorld §7>> §aJava\n§7>> §aこのワールドはマイニングレベルが取得できない等の制限がありますが洞窟などが生成されます");
                 $player->sendMessage("§bWorldBorder §7>> §a移動可能範囲は{$worldApi->getWorldLimitX_1($event->getTo()->getWorld()->getFolderName())} x {$worldApi->getWorldLimitZ_1($event->getTo()->getWorld()->getFolderName())}になります");
                 return;
             }

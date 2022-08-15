@@ -29,15 +29,6 @@ class WorldCategory {
         "nature-3",
     ];
 
-    public const NatureOthers = [
-        "nature-java",
-        "MiningWorld",
-    ];
-
-    public const NatureJava = [
-        "nature-java",
-    ];
-
     public const MiningWorld = [
         "MiningWorld",
     ];

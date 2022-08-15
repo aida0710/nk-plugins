@@ -26,7 +26,7 @@ class CheckLifeWorldTask extends Task {
         foreach ($this->properties as $property) {
             $world = Server::getInstance()->getWorldManager()->getWorldByName($property->getWorldName());
             foreach ($world->getPlayers() as $player) {
-                if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::NatureOthers) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) return;
+                if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::MiningWorld) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) return;
                 if (!$property->inSafeArea($player->getPosition())) {
                     Server::getInstance()->dispatchCommand($player, "warp lobby");
                     $player->sendMessage("§bWorldBorder §7>> §c範囲外に行こうとする試みは許可されていません");

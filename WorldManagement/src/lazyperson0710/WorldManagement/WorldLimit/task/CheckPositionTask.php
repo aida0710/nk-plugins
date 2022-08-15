@@ -31,7 +31,7 @@ class CheckPositionTask extends Task {
     public function onRun(): void {
         foreach ($this->properties as $property) {
             $world = Server::getInstance()->getWorldManager()->getWorldByName($property->getWorldName());
-            if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::NatureOthers) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) {
+            if (in_array($world->getFolderName(), WorldCategory::Nature) || in_array($world->getFolderName(), WorldCategory::MiningWorld) || in_array($world->getFolderName(), WorldCategory::Nether) || in_array($world->getFolderName(), WorldCategory::End)) {
                 foreach ($world->getPlayers() as $player) {
                     if (!$property->inSafeArea($player->getPosition())) {
                         $player->sendMessage("§bWorldBorder §7>> §cワールドの上限を越えています。" . Main::TELEPORT_INTERVAL . "秒以内にセーフエリアに戻ってください\n§7>> §c戻らなかった場合、強制的にテレポートされます");
