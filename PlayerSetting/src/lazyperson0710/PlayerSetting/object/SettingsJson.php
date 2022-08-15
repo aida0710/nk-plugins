@@ -35,7 +35,7 @@ class SettingsJson {
         $data_arr = $this->config->getAll();
         $pool->clear();
         foreach ($data_arr as $xuid => $settings_arr) {
-            $player_setting = new PlayerSetting($xuid);
+            $player_setting = new PlayerSetting((string)$xuid);
             foreach ($settings_arr as $setting_class => $value) {
                 $setting = new $setting_class;
                 $setting->setValue($value);
