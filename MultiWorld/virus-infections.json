@@ -1,0 +1,64 @@
+{
+    "czechpmdevs\\multiworld\\libs\\CortexPE\\Commando": {
+        "name": "Commando",
+        "antigen": "CortexPE\\Commando",
+        "api": "4.0.0",
+        "version": "3.1.0",
+        "author": "CortexPE",
+        "build": {
+            "builder": "PoggitCI\/1.0-beta\/beta poggit-virion\/1.0",
+            "builderName": "poggit",
+            "buildTime": "2022-07-05T15:30:25+00:00",
+            "poggitBuildId": 139297,
+            "buildClass": "Dev",
+            "projectId": 11511,
+            "projectBuildNumber": 2,
+            "fromCommit": "a25149614617862931cadcb72e2f647e5419c35f",
+            "poggitResourceId": 184866
+        }
+    },
+    "czechpmdevs\\multiworld\\libs\\czechpmdevs\\libpmform": {
+        "name": "libpmform",
+        "api": "4.0.0",
+        "author": "CzechPMDevs",
+        "authors": ["VixikHD"],
+        "description": "Simple library for creating forms on pocketmine servers",
+        "version": "1.1.0",
+        "antigen": "czechpmdevs\\libpmform",
+        "php": [7.4, 8],
+        "build": {
+            "builder": "PoggitCI\/1.0-beta\/beta poggit-virion\/1.0",
+            "builderName": "poggit",
+            "buildTime": "2022-07-08T19:42:58+00:00",
+            "poggitBuildId": 139699,
+            "buildClass": "Dev",
+            "projectId": 9216,
+            "projectBuildNumber": 10,
+            "fromCommit": "eb0f7408ecf93a87977838ab80a868928429c7c9",
+            "poggitResourceId": 185345
+        }
+    },
+    "czechpmdevs\\multiworld\\libs\\muqsit\\vanillagenerator": {
+        "name": "VanillaGenerator",
+        "antigen": "muqsit\\vanillagenerator",
+        "api": "4.0.0",
+        "version": "0.0.5",
+        "author": "Muqsit",
+        "authors": ["VixikHD"],
+        "website": "https:\/\/github.com\/CzechPMDevs\/VanillaGenerator",
+        "github": "https:\/\/github.com\/Muqsit",
+        "twitter": "https:\/\/twitter.com\/muqsitrayyan",
+        "forum": "https:\/\/forums.pmmp.io\/members\/muqsit.25\/",
+        "build": {
+            "builder": "PoggitCI\/1.0-beta\/beta poggit-virion\/1.0",
+            "builderName": "poggit",
+            "buildTime": "2022-08-05T10:43:06+00:00",
+            "poggitBuildId": 142234,
+            "buildClass": "Dev",
+            "projectId": 11683,
+            "projectBuildNumber": 4,
+            "fromCommit": "af1ac2c235581ecf0b3ad20f69317047c0ba32b9",
+            "poggitResourceId": 188970
+        }
+    }
+}
