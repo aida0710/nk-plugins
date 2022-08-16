@@ -8,11 +8,11 @@ use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworld\biom
 class SavannaMountainsPopulator extends SavannaPopulator {
 
     protected function initPopulators(): void {
-        $this->tree_decorator->setAmount(2);
-        $this->tree_decorator->setTrees(...self::$TREES);
-        $this->flower_decorator->setAmount(2);
-        $this->flower_decorator->setFlowers(...self::$FLOWERS);
-        $this->tall_grass_decorator->setAmount(5);
+        $this->treeDecorator->setAmount(2);
+        $this->treeDecorator->setTrees(...self::$TREES);
+        $this->flowerDecorator->setAmount(2);
+        $this->flowerDecorator->setFlowers(...self::$FLOWERS);
+        $this->tallGrassDecorator->setAmount(5);
     }
 
     public function getBiomes(): ?array {

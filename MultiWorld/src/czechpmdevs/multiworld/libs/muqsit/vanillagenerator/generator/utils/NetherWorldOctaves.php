@@ -17,48 +17,32 @@ use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\bukkit\O
  */
 class NetherWorldOctaves extends WorldOctaves {
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var X
-     */
-    public OctaveGenerator $soul_sand;
+    /** @phpstan-var X */
+    public OctaveGenerator $soulSand;
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var Y
-     */
+    /** @phpstan-var Y */
     public OctaveGenerator $gravel;
 
     /**
-     * @param OctaveGenerator $height
-     * @param OctaveGenerator $roughness
-     * @param OctaveGenerator $roughness_2
-     * @param OctaveGenerator $detail
-     * @param OctaveGenerator $surface
-     * @param OctaveGenerator $soul_sand
-     * @param OctaveGenerator $gravel
-     *
      * @phpstan-param T $height
      * @phpstan-param U $roughness
-     * @phpstan-param U $roughness_2
+     * @phpstan-param U $roughness2
      * @phpstan-param V $detail
      * @phpstan-param W $surface
-     * @phpstan-param X $soul_sand
+     * @phpstan-param X $soulSand
      * @phpstan-param Y $gravel
      */
     public function __construct(
         OctaveGenerator $height,
         OctaveGenerator $roughness,
-        OctaveGenerator $roughness_2,
+        OctaveGenerator $roughness2,
         OctaveGenerator $detail,
         OctaveGenerator $surface,
-        OctaveGenerator $soul_sand,
+        OctaveGenerator $soulSand,
         OctaveGenerator $gravel
     ) {
-        parent::__construct($height, $roughness, $roughness_2, $detail, $surface);
-        $this->soul_sand = $soul_sand;
+        parent::__construct($height, $roughness, $roughness2, $detail, $surface);
+        $this->soulSand = $soulSand;
         $this->gravel = $gravel;
     }
 }

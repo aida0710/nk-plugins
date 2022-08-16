@@ -44,23 +44,15 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
         [2, 1, 0, 3], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [3, 1, 0, 2], [0, 0, 0, 0], [3, 2, 0, 1], [3, 2, 1, 0],
     ];
 
-    protected static float $offset_w;
+    protected static float $offsetW;
     private static ?SimplexNoiseGenerator $instance;
 
-    /**
-     * @return SimplexNoiseGenerator
-     */
     public static function getInstance(): SimplexNoiseGenerator {
         return self::$instance ??= new SimplexNoiseGenerator();
     }
 
     /**
      * @param int[]|float[] $g
-     * @param float $x
-     * @param float $y
-     * @param float $z
-     * @param float $w
-     * @return float
      */
     protected static function dot(array $g, float $x, float $y, float $z = 0.0, float $w = 0.0): float {
         $result = $g[0] * $x + $g[1] * $y;
@@ -76,7 +68,7 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
     public function __construct(?Random $rand = null) {
         parent::__construct($rand);
         if ($rand !== null) {
-            self::$offset_w = $rand->nextFloat() * 256;
+            self::$offsetW = $rand->nextFloat() * 256;
         }
     }
 
@@ -109,8 +101,8 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
 
     public function noise3d(float $xin, float $yin = 0.0, float $zin = 0.0): float {
         if ($zin === 0.0) {
-            $xin += $this->offset_x;
-            $yin += $this->offset_y;
+            $xin += $this->offsetX;
+            $yin += $this->offsetY;
             // n0, n1, n2 - Noise contributions from the three corners
             // Skew the input space to determine which simplex cell we're in
             $s = ($xin + $yin) * self::F2; // Hairy factor for 2D
@@ -119,7 +111,7 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
             $t = ($i + $j) * self::G2;
             $X0 = $i - $t; // Unskew the cell origin back to (x,y) space
             $Y0 = $j - $t;
-            $x0 = $xin - $X0; // The x,y distances from the cell origin
+            $x0 = $xin - $X0;           // The x,y distances from the cell origin
             $y0 = $yin - $Y0;
             // For the 2D case, the simplex shape is an equilateral triangle.
             // Determine which simplex we are in.
@@ -170,9 +162,9 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
             // The result is scaled to return values in the interval [-1,1].
             return 70.0 * ($n0 + $n1 + $n2);
         }
-        $xin += $this->offset_x;
-        $yin += $this->offset_y;
-        $zin += $this->offset_z;
+        $xin += $this->offsetX;
+        $yin += $this->offsetY;
+        $zin += $this->offsetZ;
         // n0, n1, n2, n3 - Noise contributions from the four corners
         // Skew the input space to determine which simplex cell we're in
         $s = ($xin + $yin + $zin) * self::F3; // Very nice and simple skew factor for 3D
@@ -303,10 +295,10 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
      * @return float noise at given location, from range -1 to 1
      */
     public function noise(float $x, float $y, float $z, float $w): float {
-        $x += $this->offset_x;
-        $y += $this->offset_y;
-        $z += $this->offset_z;
-        $w += self::$offset_w;
+        $x += $this->offsetX;
+        $y += $this->offsetY;
+        $z += $this->offsetZ;
+        $w += self::$offsetW;
         // n0, n1, n2, n3, n5 - Noise contributions from the five corners
         // Skew the (x,y,z,w) space to determine which cell of 24 simplices we're in
         $s = ($x + $y + $z + $w) * self::F4; // Factor for 4D skewing

@@ -9,23 +9,27 @@ use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\Liquid;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\block\Wood;
 use pocketmine\utils\Random;
 use pocketmine\world\ChunkManager;
 use pocketmine\world\format\Chunk;
 use function array_key_exists;
+use function intdiv;
 
 class Lake extends TerrainObject {
 
-    private const MAX_DIAMETER = 16.0;
-    private const MAX_HEIGHT = 8.0;
+    private const MAX_DIAMETER_INT = 16;
+    private const MAX_HEIGHT_INT = 8;
+    private const MAX_DIAMETER = self::MAX_DIAMETER_INT / 1.0;
+    private const MAX_HEIGHT = self::MAX_HEIGHT_INT / 1.0;
 
     /** @var int[] */
     private static array $MYCEL_BIOMES;
 
     public static function init(): void {
         self::$MYCEL_BIOMES = [];
-        foreach ([BiomeIds::MUSHROOM_ISLAND, BiomeIds::MUSHROOM_ISLAND_SHORE] as $block_id) {
-            self::$MYCEL_BIOMES[$block_id] = $block_id;
+        foreach ([BiomeIds::MUSHROOM_ISLAND, BiomeIds::MUSHROOM_ISLAND_SHORE] as $blockId) {
+            self::$MYCEL_BIOMES[$blockId] = $blockId;
         }
     }
 
@@ -35,83 +39,87 @@ class Lake extends TerrainObject {
         $this->type = $type;
     }
 
-    public function generate(ChunkManager $world, Random $random, int $source_x, int $source_y, int $source_z): bool {
+    public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ): bool {
+        $heightHalf = intdiv(self::MAX_HEIGHT_INT, 2);
+        $diameterHalf = intdiv(self::MAX_DIAMETER_INT, 2);
+        $dirt = VanillaBlocks::DIRT()->getFullId();
+        $ice = VanillaBlocks::ICE()->getFullId();
+        $packedIce = VanillaBlocks::PACKED_ICE()->getFullId();
+        $stillWater = VanillaBlocks::WATER()->setStill()->getFullId();
         $succeeded = false;
-        $source_y -= (int)self::MAX_HEIGHT / 2;
-        $lake_map = [];
+        $sourceY -= $heightHalf;
+        $lakeMap = [];
         for ($n = 0; $n < $random->nextBoundedInt(4) + 4; ++$n) {
-            $size_x = $random->nextFloat() * 6.0 + 3;
-            $size_y = $random->nextFloat() * 4.0 + 2;
-            $size_z = $random->nextFloat() * 6.0 + 3;
-            $dx = $random->nextFloat() * (self::MAX_DIAMETER - $size_x - 2) + 1 + $size_x / 2.0;
-            $dy = $random->nextFloat() * (self::MAX_HEIGHT - $size_y - 4) + 2 + $size_y / 2.0;
-            $dz = $random->nextFloat() * (self::MAX_DIAMETER - $size_z - 2) + 1 + $size_z / 2.0;
-            for ($x = 1; $x < (int)self::MAX_DIAMETER - 1; ++$x) {
-                for ($z = 1; $z < (int)self::MAX_DIAMETER - 1; ++$z) {
-                    for ($y = 1; $y < (int)self::MAX_HEIGHT - 1; ++$y) {
-                        $nx = ($x - $dx) / ($size_x / 2.0);
+            $sizeX = $random->nextFloat() * 6.0 + 3;
+            $sizeY = $random->nextFloat() * 4.0 + 2;
+            $sizeZ = $random->nextFloat() * 6.0 + 3;
+            $dx = $random->nextFloat() * (self::MAX_DIAMETER - $sizeX - 2) + 1 + $sizeX / 2.0;
+            $dy = $random->nextFloat() * (self::MAX_HEIGHT - $sizeY - 4) + 2 + $sizeY / 2.0;
+            $dz = $random->nextFloat() * (self::MAX_DIAMETER - $sizeZ - 2) + 1 + $sizeZ / 2.0;
+            for ($x = 1; $x < self::MAX_DIAMETER_INT - 1; ++$x) {
+                for ($z = 1; $z < self::MAX_DIAMETER_INT - 1; ++$z) {
+                    for ($y = 1; $y < self::MAX_HEIGHT_INT - 1; ++$y) {
+                        $nx = 2.0 * ($x - $dx) / $sizeX;
                         $nx *= $nx;
-                        $ny = ($y - $dy) / ($size_y / 2.0);
+                        $ny = 2.0 * ($y - $dy) / $sizeY;
                         $ny *= $ny;
-                        $nz = ($z - $dz) / ($size_z / 2.0);
+                        $nz = 2.0 * ($z - $dz) / $sizeZ;
                         $nz *= $nz;
                         if ($nx + $ny + $nz < 1.0) {
-                            $this->setLakeBlock($lake_map, $x, $y, $z);
+                            $this->setLakeBlock($lakeMap, $x, $y, $z);
                             $succeeded = true;
                         }
                     }
                 }
             }
         }
-        if (!$this->canPlace($lake_map, $world, $source_x, $source_y, $source_z)) {
+        if (!$this->canPlace($lakeMap, $world, $sourceX, $sourceY, $sourceZ)) {
             return $succeeded;
         }
         /** @var Chunk $chunk */
-        $chunk = $world->getChunk($source_x >> 4, $source_z >> 4);
-        $biome = $chunk->getBiomeId(($source_x + 8 + (int)self::MAX_DIAMETER / 2) & 0x0f, ($source_z + 8 + (int)self::MAX_DIAMETER / 2) & 0x0f);
-        $mycel_biome = array_key_exists($biome, self::$MYCEL_BIOMES);
-        $max_diameter = (int)self::MAX_DIAMETER;
-        for ($x = 0; $x < $max_diameter; ++$x) {
-            for ($z = 0; $z < $max_diameter; ++$z) {
-                for ($y = 0; $y < $max_diameter; ++$y) {
-                    if (!$this->isLakeBlock($lake_map, $x, $y, $z)) {
+        $chunk = $world->getChunk($sourceX >> 4, $sourceZ >> 4);
+        $biome = $chunk->getBiomeId(($sourceX + 8 + $diameterHalf) & 0x0f, ($sourceZ + 8 + $diameterHalf) & 0x0f);
+        $mycelBiome = array_key_exists($biome, self::$MYCEL_BIOMES);
+        for ($x = 0; $x < self::MAX_DIAMETER_INT; ++$x) {
+            for ($z = 0; $z < self::MAX_DIAMETER_INT; ++$z) {
+                for ($y = 0; $y < self::MAX_HEIGHT_INT; ++$y) {
+                    if (!$this->isLakeBlock($lakeMap, $x, $y, $z)) {
                         continue;
                     }
                     $type = $this->type;
-                    $block = $world->getBlockAt($source_x + $x, $source_y + $y, $source_z + $z);
-                    $block_above = $world->getBlockAt($source_x + $x, $source_y + $y + 1, $source_z + $z);
-                    $block_type = $block->getId();
-                    $block_above_type = $block_above->getId();
-                    if (($block_type === BlockLegacyIds::DIRT && ($block_above_type === BlockLegacyIds::LOG || $block_above_type === BlockLegacyIds::LOG2)) || $block_type === BlockLegacyIds::LOG || $block_type === BlockLegacyIds::LOG2) {
+                    $block = $world->getBlockAt($sourceX + $x, $sourceY + $y, $sourceZ + $z);
+                    $blockAbove = $world->getBlockAt($sourceX + $x, $sourceY + $y + 1, $sourceZ + $z);
+                    $blockType = $block->getFullId();
+                    if (($blockType === $dirt && $blockAbove instanceof Wood) || $block instanceof Wood) {
                         continue;
                     }
-                    if ($y >= (int)(self::MAX_HEIGHT / 2)) {
+                    if ($y >= $heightHalf) {
                         $type = VanillaBlocks::AIR();
-                        if (TerrainObject::killWeakBlocksAbove($world, $source_x + $x, $source_y + $y, $source_z + $z)) {
+                        if (TerrainObject::killWeakBlocksAbove($world, $sourceX + $x, $sourceY + $y, $sourceZ + $z)) {
                             break;
                         }
-                        if (($block_type === BlockLegacyIds::ICE || $block_type === BlockLegacyIds::PACKED_ICE) && $this->type->getId() === BlockLegacyIds::STILL_WATER) {
+                        if (($blockType === $ice || $blockType === $packedIce) && $this->type->getFullId() === $stillWater) {
                             $type = $block;
                         }
-                    } elseif ($y === (int)(self::MAX_HEIGHT / 2 - 1)) {
-                        if ($type->getId() === BlockLegacyIds::STILL_WATER && BiomeClimateManager::isCold($chunk->getBiomeId($x & 0x0f, $z & 0x0f), $source_x + $x, $y, $source_z + $z)) {
+                    } elseif ($y === $heightHalf - 1) {
+                        if ($type->getFullId() === $stillWater && BiomeClimateManager::isCold($chunk->getBiomeId($x & 0x0f, $z & 0x0f), $sourceX + $x, $y, $sourceZ + $z)) {
                             $type = VanillaBlocks::ICE();
                         }
                     }
-                    $world->setBlockAt($source_x + $x, $source_y + $y, $source_z + $z, $type);
+                    $world->setBlockAt($sourceX + $x, $sourceY + $y, $sourceZ + $z, $type);
                 }
             }
         }
-        for ($x = 0; $x < (int)self::MAX_DIAMETER; ++$x) {
-            for ($z = 0; $z < (int)self::MAX_DIAMETER; ++$z) {
-                for ($y = (int)self::MAX_HEIGHT / 2; $y < (int)self::MAX_HEIGHT; ++$y) {
-                    if (!$this->isLakeBlock($lake_map, $x, $y, $z)) {
+        for ($x = 0; $x < self::MAX_DIAMETER_INT; ++$x) {
+            for ($z = 0; $z < self::MAX_DIAMETER_INT; ++$z) {
+                for ($y = $heightHalf; $y < self::MAX_HEIGHT_INT; ++$y) {
+                    if (!$this->isLakeBlock($lakeMap, $x, $y, $z)) {
                         continue;
                     }
-                    $block = $world->getBlockAt($source_x + $x, $source_y + $y - 1, $source_z + $z);
-                    $block_above = $world->getBlockAt($source_x + $x, $source_y + $y, $source_z + $z);
-                    if ($block->getId() === BlockLegacyIds::DIRT && $block_above->isTransparent() && $block_above->getLightLevel() > 0) {
-                        $world->setBlockAt($source_x + $x, $source_y + $y - 1, $source_z + $z, $mycel_biome ? VanillaBlocks::MYCELIUM() : VanillaBlocks::GRASS());
+                    $block = $world->getBlockAt($sourceX + $x, $sourceY + $y - 1, $sourceZ + $z);
+                    $blockAbove = $world->getBlockAt($sourceX + $x, $sourceY + $y, $sourceZ + $z);
+                    if ($block->getId() === BlockLegacyIds::DIRT && $blockAbove->isTransparent() && $blockAbove->getLightLevel() > 0) {
+                        $world->setBlockAt($sourceX + $x, $sourceY + $y - 1, $sourceZ + $z, $mycelBiome ? VanillaBlocks::MYCELIUM() : VanillaBlocks::GRASS());
                     }
                 }
             }
@@ -120,28 +128,24 @@ class Lake extends TerrainObject {
     }
 
     /**
-     * @param int[] $lake_map
-     * @param ChunkManager $world
-     * @param int $sourceX
-     * @param int $sourceY
-     * @param int $sourceZ
-     * @return bool
+     * @param int[] $lakeMap
      */
-    private function canPlace(array $lake_map, ChunkManager $world, int $sourceX, int $sourceY, int $sourceZ): bool {
+    private function canPlace(array $lakeMap, ChunkManager $world, int $sourceX, int $sourceY, int $sourceZ): bool {
+        $ice = VanillaBlocks::ICE()->getFullId();
         for ($x = 0; $x < self::MAX_DIAMETER; ++$x) {
             for ($z = 0; $z < self::MAX_DIAMETER; ++$z) {
                 for ($y = 0; $y < self::MAX_HEIGHT; ++$y) {
-                    if ($this->isLakeBlock($lake_map, $x, $y, $z)
-                        || ((($x >= (self::MAX_DIAMETER - 1)) || !$this->isLakeBlock($lake_map, $x + 1, $y, $z))
-                            && (($x <= 0) || !$this->isLakeBlock($lake_map, $x - 1, $y, $z))
-                            && (($z >= (self::MAX_DIAMETER - 1)) || !$this->isLakeBlock($lake_map, $x, $y, $z + 1))
-                            && (($z <= 0) || !$this->isLakeBlock($lake_map, $x, $y, $z - 1))
-                            && (($z >= (self::MAX_HEIGHT - 1)) || !$this->isLakeBlock($lake_map, $x, $y + 1, $z))
-                            && (($z <= 0) || !$this->isLakeBlock($lake_map, $x, $y - 1, $z)))) {
+                    if ($this->isLakeBlock($lakeMap, $x, $y, $z)
+                        || ((($x >= (self::MAX_DIAMETER - 1)) || !$this->isLakeBlock($lakeMap, $x + 1, $y, $z))
+                            && (($x <= 0) || !$this->isLakeBlock($lakeMap, $x - 1, $y, $z))
+                            && (($z >= (self::MAX_DIAMETER - 1)) || !$this->isLakeBlock($lakeMap, $x, $y, $z + 1))
+                            && (($z <= 0) || !$this->isLakeBlock($lakeMap, $x, $y, $z - 1))
+                            && (($z >= (self::MAX_HEIGHT - 1)) || !$this->isLakeBlock($lakeMap, $x, $y + 1, $z))
+                            && (($z <= 0) || !$this->isLakeBlock($lakeMap, $x, $y - 1, $z)))) {
                         continue;
                     }
                     $block = $world->getBlockAt($sourceX + $x, $sourceY + $y, $sourceZ + $z);
-                    if ($y >= self::MAX_HEIGHT / 2 && (($block instanceof Liquid) || $block->getId() === BlockLegacyIds::ICE)) {
+                    if ($y >= self::MAX_HEIGHT / 2 && (($block instanceof Liquid) || $block->getFullId() === $ice)) {
                         return false; // there's already some liquids above
                     }
                     if ($y < self::MAX_HEIGHT / 2 && !$block->isSolid() && $block->getId() !== $this->type->getId()) {
@@ -155,24 +159,17 @@ class Lake extends TerrainObject {
     }
 
     /**
-     * @param int[] $lake_map
-     * @param int $x
-     * @param int $y
-     * @param int $z
-     * @return bool
+     * @param int[] $lakeMap
      */
-    private function isLakeBlock(array $lake_map, int $x, int $y, int $z): bool {
-        return ($lake_map[($x * (int)self::MAX_DIAMETER + $z) * (int)self::MAX_HEIGHT + $y] ?? 0) !== 0;
+    private function isLakeBlock(array $lakeMap, int $x, int $y, int $z): bool {
+        return ($lakeMap[($x * self::MAX_DIAMETER_INT + $z) * self::MAX_HEIGHT_INT + $y] ?? 0) !== 0;
     }
 
     /**
-     * @param int[] $lake_map
-     * @param int $x
-     * @param int $y
-     * @param int $z
+     * @param int[] $lakeMap
      */
-    private function setLakeBlock(array &$lake_map, int $x, int $y, int $z): void {
-        $lake_map[($x * (int)self::MAX_DIAMETER + $z) * (int)self::MAX_HEIGHT + $y] = 1;
+    private function setLakeBlock(array &$lakeMap, int $x, int $y, int $z): void {
+        $lakeMap[($x * self::MAX_DIAMETER_INT + $z) * self::MAX_HEIGHT_INT + $y] = 1;
     }
 }
 

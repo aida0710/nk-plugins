@@ -27,7 +27,7 @@ class MegaSpruceTaigaPopulator extends MegaTaigaPopulator {
     }
 
     protected function initPopulators(): void {
-        $this->tree_decorator->setTrees(...self::$TREES);
+        $this->treeDecorator->setTrees(...self::$TREES);
     }
 }
 

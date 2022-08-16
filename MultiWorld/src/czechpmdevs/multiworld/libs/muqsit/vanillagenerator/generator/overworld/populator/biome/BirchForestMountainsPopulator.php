@@ -23,7 +23,7 @@ class BirchForestMountainsPopulator extends ForestPopulator {
     }
 
     protected function initPopulators(): void {
-        $this->tree_decorator->setTrees(...self::$TREES);
+        $this->treeDecorator->setTrees(...self::$TREES);
     }
 
     public function getBiomes(): ?array {

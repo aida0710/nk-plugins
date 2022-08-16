@@ -11,8 +11,8 @@ use pocketmine\utils\Random;
 
 abstract class MapLayer {
 
-    public static function initialize(int $seed, int $environment, string $world_type): MapLayerPair {
-        if ($environment === Environment::OVERWORLD && $world_type === WorldType::FLAT) {
+    public static function initialize(int $seed, int $environment, string $worldType): MapLayerPair {
+        if ($environment === Environment::OVERWORLD && $worldType === WorldType::FLAT) {
             return new MapLayerPair(new ConstantBiomeMapLayer($seed, BiomeIds::PLAINS), null);
         }
         if ($environment === Environment::NETHER) {
@@ -22,7 +22,7 @@ abstract class MapLayer {
             return new MapLayerPair(new ConstantBiomeMapLayer($seed, BiomeIds::SKY), null);
         }
         $zoom = 2;
-        if ($world_type === WorldType::LARGE_BIOMES) {
+        if ($worldType === WorldType::LARGE_BIOMES) {
             $zoom = 4;
         }
         $layer = new NoiseMapLayer($seed); // this is initial land spread layer
@@ -36,16 +36,16 @@ abstract class MapLayer {
             $layer = new ErosionMapLayer($seed + 3 + $i, $layer);
         }
         $layer = new DeepOceanMapLayer($seed + 4, $layer);
-        $layer_mountains = new BiomeVariationMapLayer($seed + 200, $layer);
+        $layerMountains = new BiomeVariationMapLayer($seed + 200, $layer);
         for ($i = 0; $i < 2; ++$i) {
-            $layer_mountains = new ZoomMapLayer($seed + 200 + $i, $layer_mountains);
+            $layerMountains = new ZoomMapLayer($seed + 200 + $i, $layerMountains);
         }
         $layer = new BiomeMapLayer($seed + 5, $layer);
         for ($i = 0; $i < 2; ++$i) {
             $layer = new ZoomMapLayer($seed + 200 + $i, $layer);
         }
         $layer = new BiomeEdgeMapLayer($seed + 200, $layer);
-        $layer = new BiomeVariationMapLayer($seed + 200, $layer, $layer_mountains);
+        $layer = new BiomeVariationMapLayer($seed + 200, $layer, $layerMountains);
         $layer = new RarePlainsMapLayer($seed + 201, $layer);
         $layer = new ZoomMapLayer($seed + 300, $layer);
         $layer = new ErosionMapLayer($seed + 6, $layer);
@@ -55,20 +55,20 @@ abstract class MapLayer {
         for ($i = 0; $i < $zoom; ++$i) {
             $layer = new ZoomMapLayer($seed + 500 + $i, $layer);
         }
-        $layer_river = $layer_mountains;
-        $layer_river = new ZoomMapLayer($seed + 300, $layer_river);
-        $layer_river = new ZoomMapLayer($seed + 400, $layer_river);
+        $layerRiver = $layerMountains;
+        $layerRiver = new ZoomMapLayer($seed + 300, $layerRiver);
+        $layerRiver = new ZoomMapLayer($seed + 400, $layerRiver);
         for ($i = 0; $i < $zoom; ++$i) {
-            $layer_river = new ZoomMapLayer($seed + 500 + $i, $layer_river);
+            $layerRiver = new ZoomMapLayer($seed + 500 + $i, $layerRiver);
         }
-        $layer_river = new RiverMapLayer($seed + 10, $layer_river);
-        $layer = new RiverMapLayer($seed + 1000, $layer_river, $layer);
-        $layer_lower_res = $layer;
+        $layerRiver = new RiverMapLayer($seed + 10, $layerRiver);
+        $layer = new RiverMapLayer($seed + 1000, $layerRiver, $layer);
+        $layerLowerRes = $layer;
         for ($i = 0; $i < 2; ++$i) {
             $layer = new ZoomMapLayer($seed + 2000 + $i, $layer);
         }
         $layer = new SmoothMapLayer($seed + 1001, $layer);
-        return new MapLayerPair($layer, $layer_lower_res);
+        return new MapLayerPair($layer, $layerLowerRes);
     }
 
     private Random $random;
@@ -89,11 +89,7 @@ abstract class MapLayer {
     }
 
     /**
-     * @param int $x
-     * @param int $z
-     * @param int $size_x
-     * @param int $size_z
      * @return int[]
      */
-    abstract public function generateValues(int $x, int $z, int $size_x, int $size_z): array;
+    abstract public function generateValues(int $x, int $z, int $sizeX, int $sizeZ): array;
 }

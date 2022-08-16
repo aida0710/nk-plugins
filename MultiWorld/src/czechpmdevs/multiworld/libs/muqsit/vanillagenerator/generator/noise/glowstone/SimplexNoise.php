@@ -18,13 +18,13 @@ class SimplexNoise extends PerlinNoise {
     protected const G33 = self::G3 * 3.0 - 1.0;
 
     /** @var Grad[] */
-    private static array $grad_3;
+    private static array $grad3;
 
     /** @var int[] */
-    protected array $perm_mod_12 = [];
+    protected array $permMod12 = [];
 
     public static function init(): void {
-        self::$grad_3 = [
+        self::$grad3 = [
             new Grad(1, 1, 0), new Grad(-1, 1, 0), new Grad(1, -1, 0),
             new Grad(-1, -1, 0),
             new Grad(1, 0, 1), new Grad(-1, 0, 1), new Grad(1, 0, -1), new Grad(-1, 0, -1),
@@ -40,7 +40,7 @@ class SimplexNoise extends PerlinNoise {
     public function __construct(Random $rand) {
         parent::__construct($rand);
         for ($i = 0; $i < 512; ++$i) {
-            $this->perm_mod_12[$i] = $this->perm[$i] % 12;
+            $this->permMod12[$i] = $this->perm[$i] % 12;
         }
     }
 
@@ -54,21 +54,14 @@ class SimplexNoise extends PerlinNoise {
 
     /**
      * @param float[] $noise
-     * @param float $x
-     * @param float $z
-     * @param int $size_x
-     * @param int $size_y
-     * @param float $scale_x
-     * @param float $scale_y
-     * @param float $amplitude
      * @return float[]
      */
-    protected function get2dNoise(array &$noise, float $x, float $z, int $size_x, int $size_y, float $scale_x, float $scale_y, float $amplitude): array {
+    protected function get2dNoise(array &$noise, float $x, float $z, int $sizeX, int $sizeY, float $scaleX, float $scaleY, float $amplitude): array {
         $index = -1;
-        for ($i = 0; $i < $size_y; ++$i) {
-            $zin = $this->offset_y + ($z + $i) * $scale_y;
-            for ($j = 0; $j < $size_x; ++$j) {
-                $xin = $this->offset_x + ($x + $j) * $scale_x;
+        for ($i = 0; $i < $sizeY; ++$i) {
+            $zin = $this->offsetY + ($z + $i) * $scaleY;
+            for ($j = 0; $j < $sizeX; ++$j) {
+                $xin = $this->offsetX + ($x + $j) * $scaleX;
                 $noise[++$index] += $this->simplex2D($xin, $zin) * $amplitude;
             }
         }
@@ -77,26 +70,16 @@ class SimplexNoise extends PerlinNoise {
 
     /**
      * @param float[] $noise
-     * @param float $x
-     * @param float $y
-     * @param float $z
-     * @param int $size_x
-     * @param int $size_y
-     * @param int $sizeZ
-     * @param float $scale_x
-     * @param float $scale_y
-     * @param float $scale_z
-     * @param float $amplitude
      * @return float[]
      */
-    protected function get3dNoise(array &$noise, float $x, float $y, float $z, int $size_x, int $size_y, int $sizeZ, float $scale_x, float $scale_y, float $scale_z, float $amplitude): array {
+    protected function get3dNoise(array &$noise, float $x, float $y, float $z, int $sizeX, int $sizeY, int $sizeZ, float $scaleX, float $scaleY, float $scaleZ, float $amplitude): array {
         $index = -1;
         for ($i = 0; $i < $sizeZ; ++$i) {
-            $zin = $this->offset_z + ($z + $i) * $scale_z;
-            for ($j = 0; $j < $size_x; ++$j) {
-                $xin = $this->offset_x + ($x + $j) * $scale_x;
-                for ($k = 0; $k < $size_y; ++$k) {
-                    $yin = $this->offset_y + ($y + $k) * $scale_y;
+            $zin = $this->offsetZ + ($z + $i) * $scaleZ;
+            for ($j = 0; $j < $sizeX; ++$j) {
+                $xin = $this->offsetX + ($x + $j) * $scaleX;
+                for ($k = 0; $k < $sizeY; ++$k) {
+                    $yin = $this->offsetY + ($y + $k) * $scaleY;
                     $noise[++$index] += $this->simplex3D($xin, $yin, $zin) * $amplitude;
                 }
             }
@@ -108,12 +91,12 @@ class SimplexNoise extends PerlinNoise {
         if ($yin === 0.0) {
             return parent::noise3d($xin, $yin, $zin);
         }
-        $xin += $this->offset_x;
-        $yin += $this->offset_y;
+        $xin += $this->offsetX;
+        $yin += $this->offsetY;
         if ($xin === 0.0) {
             return $this->simplex2D($xin, $yin);
         }
-        $zin += $this->offset_z;
+        $zin += $this->offsetZ;
         return $this->simplex3D($xin, $yin, $zin);
     }
 
@@ -147,30 +130,30 @@ class SimplexNoise extends PerlinNoise {
         // Work out the hashed gradient indices of the three simplex corners
         $ii = $i & 255;
         $jj = $j & 255;
-        $gi0 = $this->perm_mod_12[$ii + $this->perm[$jj]];
-        $gi1 = $this->perm_mod_12[$ii + $i1 + $this->perm[$jj + $j1]];
-        $gi2 = $this->perm_mod_12[$ii + 1 + $this->perm[$jj + 1]];
+        $gi0 = $this->permMod12[$ii + $this->perm[$jj]];
+        $gi1 = $this->permMod12[$ii + $i1 + $this->perm[$jj + $j1]];
+        $gi2 = $this->permMod12[$ii + 1 + $this->perm[$jj + 1]];
         // Calculate the contribution from the three corners
         $t0 = 0.5 - $x0 * $x0 - $y0 * $y0;
         if ($t0 < 0) {
             $n0 = 0.0;
         } else {
             $t0 *= $t0;
-            $n0 = $t0 * $t0 * self::dot(self::$grad_3[$gi0], $x0, $y0); // (x,y) of grad_3 used for 2D gradient
+            $n0 = $t0 * $t0 * self::dot(self::$grad3[$gi0], $x0, $y0); // (x,y) of grad_3 used for 2D gradient
         }
         $t1 = 0.5 - $x1 * $x1 - $y1 * $y1;
         if ($t1 < 0) {
             $n1 = 0.0;
         } else {
             $t1 *= $t1;
-            $n1 = $t1 * $t1 * self::dot(self::$grad_3[$gi1], $x1, $y1);
+            $n1 = $t1 * $t1 * self::dot(self::$grad3[$gi1], $x1, $y1);
         }
         $t2 = 0.5 - $x2 * $x2 - $y2 * $y2;
         if ($t2 < 0) {
             $n2 = 0.0;
         } else {
             $t2 *= $t2;
-            $n2 = $t2 * $t2 * self::dot(self::$grad_3[$gi2], $x2, $y2);
+            $n2 = $t2 * $t2 * self::dot(self::$grad3[$gi2], $x2, $y2);
         }
         // Add contributions from each corner to get the final noise value.
         // The result is scaled to return values in the interval [-1,1].
@@ -184,7 +167,7 @@ class SimplexNoise extends PerlinNoise {
         $j = self::floor($yin + $s);
         $k = self::floor($zin + $s);
         $t = ($i + $j + $k) * self::G3;
-        $dx0 = $i - $t; // Unskew the cell origin back to (x,y,z) space
+        $dx0 = $i - $t;             // Unskew the cell origin back to (x,y,z) space
         $dy0 = $j - $t;
         $dz0 = $k - $t;
         // For the 3D case, the simplex shape is a slightly irregular tetrahedron.
@@ -255,10 +238,10 @@ class SimplexNoise extends PerlinNoise {
         $ii = $i & 255;
         $jj = $j & 255;
         $kk = $k & 255;
-        $gi0 = $this->perm_mod_12[$ii + $this->perm[$jj + $this->perm[$kk]]];
-        $gi1 = $this->perm_mod_12[$ii + $i1 + $this->perm[$jj + $j1 + $this->perm[$kk + $k1]]];
-        $gi2 = $this->perm_mod_12[$ii + $i2 + $this->perm[$jj + $j2 + $this->perm[$kk + $k2]]];
-        $gi3 = $this->perm_mod_12[$ii + 1 + $this->perm[$jj + 1 + $this->perm[$kk + 1]]];
+        $gi0 = $this->permMod12[$ii + $this->perm[$jj + $this->perm[$kk]]];
+        $gi1 = $this->permMod12[$ii + $i1 + $this->perm[$jj + $j1 + $this->perm[$kk + $k1]]];
+        $gi2 = $this->permMod12[$ii + $i2 + $this->perm[$jj + $j2 + $this->perm[$kk + $k2]]];
+        $gi3 = $this->permMod12[$ii + 1 + $this->perm[$jj + 1 + $this->perm[$kk + 1]]];
         // Calculate the contribution from the four corners
         $t0 = 0.5 - $x0 * $x0 - $y0 * $y0 - $z0 * $z0;
         // n0 - Noise contributions from the four corners
@@ -266,21 +249,21 @@ class SimplexNoise extends PerlinNoise {
             $n0 = 0.0;
         } else {
             $t0 *= $t0;
-            $n0 = $t0 * $t0 * self::dot(self::$grad_3[$gi0], $x0, $y0, $z0);
+            $n0 = $t0 * $t0 * self::dot(self::$grad3[$gi0], $x0, $y0, $z0);
         }
         $t1 = 0.5 - $x1 * $x1 - $y1 * $y1 - $z1 * $z1;
         if ($t1 < 0) {
             $n1 = 0.0;
         } else {
             $t1 *= $t1;
-            $n1 = $t1 * $t1 * self::dot(self::$grad_3[$gi1], $x1, $y1, $z1);
+            $n1 = $t1 * $t1 * self::dot(self::$grad3[$gi1], $x1, $y1, $z1);
         }
         $t2 = 0.5 - $x2 * $x2 - $y2 * $y2 - $z2 * $z2;
         if ($t2 < 0) {
             $n2 = 0.0;
         } else {
             $t2 *= $t2;
-            $n2 = $t2 * $t2 * self::dot(self::$grad_3[$gi2], $x2, $y2, $z2);
+            $n2 = $t2 * $t2 * self::dot(self::$grad3[$gi2], $x2, $y2, $z2);
         }
         $x3 = $x0 + self::G33; // Offsets for last corner in (x,y,z) coords
         $y3 = $y0 + self::G33;
@@ -290,7 +273,7 @@ class SimplexNoise extends PerlinNoise {
             $n3 = 0.0;
         } else {
             $t3 *= $t3;
-            $n3 = $t3 * $t3 * self::dot(self::$grad_3[$gi3], $x3, $y3, $z3);
+            $n3 = $t3 * $t3 * self::dot(self::$grad3[$gi3], $x3, $y3, $z3);
         }
         // Add contributions from each corner to get the final noise value.
         // The result is scaled to stay just inside [-1,1]

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator;
 
 use InvalidArgumentException;
+use function strtolower;
 
 final class Environment {
 

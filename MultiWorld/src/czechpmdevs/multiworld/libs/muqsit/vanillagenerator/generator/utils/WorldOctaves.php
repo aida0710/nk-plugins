@@ -13,64 +13,38 @@ use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\bukkit\O
  */
 class WorldOctaves {
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var T
-     */
+    /** @phpstan-var T */
     public OctaveGenerator $height;
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var U
-     */
+    /** @phpstan-var U */
     public OctaveGenerator $roughness;
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var U
-     */
-    public OctaveGenerator $roughness_2;
+    /** @phpstan-var U */
+    public OctaveGenerator $roughness2;
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var V
-     */
+    /** @phpstan-var V */
     public OctaveGenerator $detail;
 
-    /**
-     * @var OctaveGenerator
-     *
-     * @phpstan-var W
-     */
+    /** @phpstan-var W */
     public OctaveGenerator $surface;
 
     /**
-     * @param OctaveGenerator $height
-     * @param OctaveGenerator $roughness
-     * @param OctaveGenerator $roughness_2
-     * @param OctaveGenerator $detail
-     * @param OctaveGenerator $surface
-     *
      * @phpstan-param T $height
      * @phpstan-param U $roughness
-     * @phpstan-param U $roughness_2
+     * @phpstan-param U $roughness2
      * @phpstan-param V $detail
      * @phpstan-param W $surface
      */
     public function __construct(
         OctaveGenerator $height,
         OctaveGenerator $roughness,
-        OctaveGenerator $roughness_2,
+        OctaveGenerator $roughness2,
         OctaveGenerator $detail,
         OctaveGenerator $surface
     ) {
         $this->height = $height;
         $this->roughness = $roughness;
-        $this->roughness_2 = $roughness_2;
+        $this->roughness2 = $roughness2;
         $this->detail = $detail;
         $this->surface = $surface;
     }
