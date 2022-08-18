@@ -11,6 +11,7 @@ use Deceitya\MiningLevel\Form\MiningLevelUPForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use InfoSystem\InfoSystem;
+use InfoSystem\task\ChangeNameTask;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\LevelUpTitleSetting;
 use lazyperson0710\ticket\TicketAPI;
@@ -202,9 +203,7 @@ class EventListener implements Listener {
                 }
             }
             (new MiningLevelUpEvent($player, $originalLevel, $level))->call();
-            /** @var InfoSystem $plugin */
-            $plugin = $player->getServer()->getPluginManager()->getPlugin("InfoSystem");
-            $plugin->ChangeTag($player);
+            InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
         }
     }
 
