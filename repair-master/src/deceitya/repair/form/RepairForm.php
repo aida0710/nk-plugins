@@ -37,7 +37,7 @@ class RepairForm extends CustomForm {
             $probability = new Label("§l修理失敗確率§r\n10Lv未満->10％で破損\n10Lv以上20Lv未満->9％で破損\n20Lv以上30Lv未満->8％で破損\n30Lv以上40Lv未満->7％で破損\n40Lv以上50Lv未満->6％で破損\n50Lv以上60Lv未満->5％で破損\n60Lv以上70Lv未満->4％で破損\n70Lv以上80Lv未満->3％で破損\n80Lv以上90Lv未満->2％で破損\n90Lv以上100Lv未満->1％で破損\n§g100Lv以上は破損無し");
         }
         $this
-            ->setTitle("Mining Tools")
+            ->setTitle("Item Repair")
             ->addElements(
                 $warning,
                 $this->ticket,
