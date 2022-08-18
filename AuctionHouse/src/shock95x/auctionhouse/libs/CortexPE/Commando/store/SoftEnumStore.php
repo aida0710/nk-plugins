@@ -33,7 +33,7 @@ class SoftEnumStore {
         if (self::getEnumByName($enumName) === null) {
             throw new CommandoException("Unknown enum named " . $enumName);
         }
-        self::$enums[$enum->getName()] = $enum = new CommandEnum($enumName, $values);
+        self::$enums[$enumName] = $enum = new CommandEnum($enumName, $values);
         self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_SET);
     }
 
