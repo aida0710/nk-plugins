@@ -45,9 +45,6 @@ class RepairForm extends CustomForm {
             );
     }
 
-    public function handleClosed(Player $player): void {
-        $player->sendMessage('§bRepair §7>> §c修理をキャンセルしました');
-    }
 
     public function handleSubmit(Player $player): void {
         $consumption = "error";
