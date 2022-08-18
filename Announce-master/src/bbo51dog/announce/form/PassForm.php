@@ -29,10 +29,6 @@ class PassForm extends CustomForm {
             ->addElement($this->input);
     }
 
-    public function handleClosed(Player $player): void {
-        $player->sendMessage(self::MESSAGE_WRONG_PASS);
-    }
-
     public function handleSubmit(Player $player): void {
         if ($this->input->getValue() !== self::PASS) {
             $player->sendMessage(self::MESSAGE_WRONG_PASS);
