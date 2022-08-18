@@ -197,6 +197,38 @@ class EventListener implements Listener {
                     case 250:
                         $player->sendMessage("§bTutorial §7>> §gLevelShop7が解放されました！/shop");
                         break;
+                    case 300:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを300枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 300);
+                        break;
+                    case 400:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを400枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 400);
+                        break;
+                    case 500:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1500枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 1500);
+                        break;
+                    case 600:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1600枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 1600);
+                        break;
+                    case 700:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1700枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 1700);
+                        break;
+                    case 800:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1800枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 1800);
+                        break;
+                    case 900:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1900枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 1900);
+                        break;
+                    case 1000:
+                        $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを10000枚配布しました！/gachaで利用することができます");
+                        TicketAPI::getInstance()->addTicket($player, 10000);
+                        break;
                 }
                 if (!is_null($msg)) {
                     SendForm::Send($player, (new MiningLevelUPForm($msg)));
