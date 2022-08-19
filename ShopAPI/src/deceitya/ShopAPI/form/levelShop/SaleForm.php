@@ -55,35 +55,35 @@ class SaleForm implements Form {
     public function transaction(Player $player, array $data): void {
         $count = floor($data[1]);
         $this->item->setCount($count);
-        $inventory = $this->countItem($player, $this->item);
+        $inventoryItemCount = $this->countItem($player, $this->item);
         if ($data[2] === true && $this->storage !== 0) {
             if ($count <= $this->storage) {
-                $storageResult = $this->buyItemFromStackStorage($player, $this->item, $count);
-                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $count . "個アイテムが売却され、所持金が{$storageResult}円増えました");
+                $resultSalePrice = number_format($this->buyItemFromStackStorage($player, $this->item, $count));
+                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $count . "個アイテムが売却され、所持金が{$resultSalePrice}円増えました");
                 return;
             }
             $storageItemCount = $count - $this->storage;
-            if ($storageItemCount <= $inventory) {
-                $storageResult = $this->buyItemFromStackStorage($player, $this->item, $this->storage);
-                $inventoryResult = $this->buyItemFromInventory($player, $this->item, $storageItemCount);
-                $result = $inventoryResult + $storageResult;
-                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $this->storage . "個とインベントリから" . $storageItemCount . "個、計" . ($this->storage + $storageItemCount) . "アイテムが売却され、所持金が{$result}円増えました");
+            if ($storageItemCount <= $inventoryItemCount) {
+                $storageResultSalePrice = $this->buyItemFromStackStorage($player, $this->item, $this->storage);
+                $inventoryResultSalePrice = $this->buyItemFromInventory($player, $this->item, $storageItemCount);
+                $resultSalePrice = number_format($storageResultSalePrice + $inventoryResultSalePrice);
+                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . number_format($this->storage) . "個とインベントリから" . number_format($storageItemCount) . "個、計" . number_format($this->storage + $storageItemCount) . "アイテムが売却され、所持金が{$resultSalePrice}円増えました");
                 return;
             }
             $player->sendMessage('§bLevelShop §7>> §cアイテムがない、もしくは足りません');
             return;
         }
         if (!$player->getInventory()->contains($this->item)) {
-            $storageItemCount = $count - $inventory;
+            $storageItemCount = $count - $inventoryItemCount;
             if ($storageItemCount <= $this->storage) {
                 $storageResult = $this->buyItemFromStackStorage($player, $this->item, $storageItemCount); //$this->price * $storageItemCount;
-                if ($inventory === 0) {
-                    $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $storageItemCount . "個アイテムが売却され、所持金が{$storageResult}円増えました");
+                if ($inventoryItemCount === 0) {
+                    $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . number_format($storageItemCount) . "個アイテムが売却され、所持金が " . number_format($storageResult) . "円増えました");
                     return;
                 }
-                $inventoryResult = $this->buyItemFromInventory($player, $this->item, $inventory);
+                $inventoryResult = $this->buyItemFromInventory($player, $this->item, $inventoryItemCount);
                 $result = $inventoryResult + $storageResult;
-                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . $storageItemCount . "個とインベントリから" . $inventory . "個、計" . ($storageItemCount + $inventory) . "アイテムが売却され、所持金が{$result}円増えました");
+                $player->sendMessage("§bLevelShop §7>> §a仮想ストレージから" . number_format($storageItemCount) . "個とインベントリから" . number_format($inventoryItemCount) . "個、計" . number_format($storageItemCount + $inventoryItemCount) . "アイテムが売却され、所持金が" . number_format($result) . "円増えました");
                 return;
             }
             $player->sendMessage('§bLevelShop §7>> §cアイテムがない、もしくは足りません');
@@ -91,7 +91,7 @@ class SaleForm implements Form {
         }
         $this->buyItemFromInventory($player, $this->item, $count);
         $result = $this->price * $count;
-        $player->sendMessage("§bLevelShop §7>> §aアイテムが" . $count . "個売却され、所持金が{$result}円増えました");
+        $player->sendMessage("§bLevelShop §7>> §aアイテムが" . number_format($count) . "個売却され、所持金が" . number_format($result) . "円増えました");
     }
 
     public function countItem(Player $player, Item $targetItem): int {
@@ -128,7 +128,7 @@ class SaleForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "売却するアイテム/" . LevelShopAPI::getInstance()->getItemName($this->item->getId(), $this->item->getMeta()) . "\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}",
+                    'text' => "売却するアイテム/" . LevelShopAPI::getInstance()->getItemName($this->item->getId(), $this->item->getMeta()) . "\n1つあたりの値段/" . number_format($this->price) . "\n仮想ストレージにある量/" . number_format($this->storage) . "\nインベントリにある数/" . number_format($this->count) . "\n現在の所持金/" . number_format($this->myMoney),
                 ],
                 [
                     'type' => 'input',

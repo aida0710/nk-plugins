@@ -54,14 +54,16 @@ class SellBuyForm implements Form {
 
     public function jsonSerialize() {
         $api = LevelShopAPI::getInstance();
-        $text = null;
+        $notWorkingItem = null;
         if (LevelShopAPI::getInstance()->getWorkingBlock($this->itemId, $this->itemMeta) === false) {
-            $text = "\n§cこのアイテムは装飾品の為動作しません§r";
+            $notWorkingItem = "\n§cこのアイテムは装飾品の為動作しません§r";
         }
+        $buyPrice = number_format($this->buy);
+        $sellPrice = number_format($this->sell);
         return [
             'type' => 'modal',
             'title' => 'LevelShop',
-            'content' => "購入か売却かを選択してください\n選択したアイテム : {$api->getItemName($this->itemId, $this->itemMeta)}{$text}\n\n一つ当たりの購入値 : {$this->buy}円\n一つ当たりの売却値 : {$this->sell}円",
+            'content' => "購入か売却かを選択してください\n選択したアイテム : {$api->getItemName($this->itemId, $this->itemMeta)}{$notWorkingItem}\n\n一つ当たりの購入値 : {$buyPrice}円\n一つ当たりの売却値 : {$sellPrice}円",
             'button1' => '購入する',
             'button2' => '売却する',
         ];

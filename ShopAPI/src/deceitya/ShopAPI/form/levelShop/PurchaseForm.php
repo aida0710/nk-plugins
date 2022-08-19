@@ -40,7 +40,7 @@ class PurchaseForm implements Form {
         $totalPrice = $this->price * $count; //1 = 変数名、衝突対策...
         $result = $totalPrice - $this->myMoney;
         if ($this->myMoney < $totalPrice) {
-            $player->sendMessage("§bLevelShop §7>> §cお金が{$result}円足りませんでした。合計必要金額:{$totalPrice}円");
+            $player->sendMessage("§bLevelShop §7>> §cお金が" . number_format($result) . "円足りませんでした。合計必要金額:" . number_format($totalPrice) . "円");
             return;
         }
         $this->item->setCount($count);
@@ -48,7 +48,7 @@ class PurchaseForm implements Form {
             EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
             StackStorageAPI::$instance->add($player->getXuid(), $this->item);
             $totalPrice = $this->price * $count;
-            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を{$count}個購入し、仮想ストレージに転送しました。使用金額 : {$totalPrice}");
+            $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を" . number_format($count) . "個購入し、仮想ストレージに転送しました。使用金額 : " . number_format($totalPrice) . "円");
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item)) {
@@ -58,7 +58,7 @@ class PurchaseForm implements Form {
         $player->getInventory()->addItem($this->item);
         EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
         $totalPrice = $this->price * $count;
-        $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を{$count}個購入しました。使用金額 : {$totalPrice}");
+        $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を" . number_format($count) . "個購入しました。使用金額 : " . number_format($totalPrice) . "円");
     }
 
     private function isInteger($input): bool {
@@ -72,7 +72,7 @@ class PurchaseForm implements Form {
             'content' => [
                 [
                     'type' => 'label',
-                    'text' => "購入するアイテム/{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}\n1つあたりの値段/{$this->price}\n仮想ストレージにある量/{$this->storage}\nインベントリにある数/{$this->count}\n現在の所持金/{$this->myMoney}",
+                    'text' => "購入するアイテム/{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}\n1つあたりの値段/" . number_format($this->price) . "\n仮想ストレージにある量/" . number_format($this->storage) . "\nインベントリにある数/" . number_format($this->count) . "\n現在の所持金/" . number_format($this->myMoney),
                 ],
                 [
                     'type' => 'input',
