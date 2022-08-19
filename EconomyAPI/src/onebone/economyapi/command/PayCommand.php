@@ -2,18 +2,21 @@
 
 namespace onebone\economyapi\command;
 
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\PayCommandUseSetting;
+use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyapi\event\money\PayMoneyEvent;
+use onebone\economyapi\form\PayCommandConfirmation;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use pocketmine\utils\TextFormat;
+use pocketmine\Server;
 
 class PayCommand extends Command {
 
     public function __construct(private EconomyAPI $plugin) {
-        $desc = $plugin->getCommandMessage("pay");
-        parent::__construct("pay", $desc["description"], $desc["usage"]);
+        parent::__construct("pay", "他プレイヤーに送金する");
         $this->setPermission("economyapi.command.pay");
     }
 
@@ -23,45 +26,49 @@ class PayCommand extends Command {
             return false;
         }
         if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . "Please run this command in-game.");
+            $sender->sendMessage("Please run this command in-game.");
             return true;
         }
-        $player = array_shift($params);
+        $target = array_shift($params);
         $amount = array_shift($params);
         if (!is_numeric($amount)) {
-            $sender->sendMessage(TextFormat::RED . "Usage: " . $this->getUsage());
+            $sender->sendMessage("§bEconomy §7>> §c/pay <player> <amount>で使用することが可能です");
             return true;
         }
         if (strpos($amount, '.')) {
             $sender->sendMessage("§bEconomy §7>> §c振り込む金額に小数点を含めることはできません");
             return true;
         }
-        if (($p = $this->plugin->getServer()->getPlayerByPrefix($player)) instanceof Player) {
-            $player = $p->getName();
-        }
-        if (!$p instanceof Player and $this->plugin->getConfig()->get("allow-pay-offline", true) === false) {
-            $sender->sendMessage($this->plugin->getMessage("player-not-connected", [$player], $sender->getName()));
+        if (!Server::getInstance()->getPlayerByPrefix($target) instanceof Player) {
+            $sender->sendMessage("§bEconomy §7>> §c{$target->getName()}は現在オフラインの為送金できませんでした");
             return true;
         }
-        if (!$this->plugin->accountExists($player)) {
-            $sender->sendMessage($this->plugin->getMessage("player-never-connected", [$player], $sender->getName()));
+        $target = Server::getInstance()->getPlayerByPrefix($target);
+        if (!$this->plugin->accountExists($target)) {
+            $sender->sendMessage("§bEconomy §7>> §c{$target->getName()}はアカウントデータが存在しない為送金できませんでした");
             return true;
         }
-        $ev = new PayMoneyEvent($this->plugin, $sender->getName(), $player, $amount);
+        if (PlayerSettingPool::getInstance()->getSettingNonNull($sender)->getSetting(PayCommandUseSetting::getName())?->getValue() === true) {
+            SendForm::Send($sender, new PayCommandConfirmation($this->plugin, $target, $amount));
+        } else {
+            $this->Calculation($this->plugin, $sender, $target, $amount);
+        }
+        return true;
+    }
+
+    public function Calculation(EconomyAPI $plugin, Player $player, Player $target, int $amount) {
+        $ev = new PayMoneyEvent($plugin, $player->getName(), $target, $amount);
         $ev->call();
         $result = EconomyAPI::RET_CANCELLED;
         if (!$ev->isCancelled()) {
-            $result = $this->plugin->reduceMoney($sender, $amount, false, 'economyapi.command.pay');
+            $result = $plugin->reduceMoney($player, $amount, false, 'economyapi.command.pay');
         }
         if ($result === EconomyAPI::RET_SUCCESS) {
-            $this->plugin->addMoney($player, $amount, true, 'economyapi.command.pay');
-            $sender->sendMessage($this->plugin->getMessage("pay-success", [$amount, $player], $sender->getName()));
-            if ($p instanceof Player) {
-                $p->sendMessage($this->plugin->getMessage("money-paid", [$sender->getName(), $amount], $sender->getName()));
-            }
+            $plugin->addMoney($target, $amount, true, 'economyapi.command.pay');
+            $player->sendMessage("§bEconomy §7>> §a{$target->getName()}に{$amount}円を送金しました");
+            $target->sendMessage("§bEconomy §7>> §a{$player->getName()}から{$amount}円を受け取りました");
         } else {
-            $sender->sendMessage($this->plugin->getMessage("pay-failed", [$player, $amount], $sender->getName()));
+            $player->sendMessage("§bEconomy §7>> §c不明な原因により送金に失敗しました");
         }
-        return true;
     }
 }
