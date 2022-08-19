@@ -6,7 +6,6 @@ use Exception;
 use lazyperson0710\blockLogger\event\PlayerEvent;
 use lazyperson0710\blockLogger\Main;
 use pocketmine\scheduler\AsyncTask;
-use pocketmine\Server;
 use SQLite3;
 
 class AsyncLogDataWriteTask extends AsyncTask {
@@ -14,6 +13,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
     public string $cache;
     public string $dataBaseFile;
     public string $name;
+    public array $error = [];
 
     private $time;
 
@@ -27,6 +27,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
     public function onRun(): void {
         $cache = unserialize($this->cache);
         $dataBaseFile = $this->dataBaseFile;
+        $this->error = [];
         if (file_exists($dataBaseFile)) {
             $db = new SQLite3($dataBaseFile, SQLITE3_OPEN_READWRITE);
         } else {
@@ -41,7 +42,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
             $db->close();
             return;
         } catch (Exception $e) {
-            Server::getInstance()->getLogger()->error($e->getTraceAsString());
+            $this->error[] .= $e->getMessage();
             $db->exec('rollback');
             $db->close();
             return;
@@ -49,6 +50,11 @@ class AsyncLogDataWriteTask extends AsyncTask {
     }
 
     public function onCompletion(): void {
+        if (!empty($this->error)) {
+            foreach ($this->error as $error) {
+                Main::getInstance()->getLogger()->error("BlockLogger -> Log data save error: " . $error);
+            }
+        }
         $totalTime = microtime(true) - $this->time;
         $totalTime = sprintf("%.7f", $totalTime);
         //echo "合計出力時間 : {$totalTime}\n";
