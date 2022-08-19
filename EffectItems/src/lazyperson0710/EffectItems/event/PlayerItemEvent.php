@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\event;
 
+use lazyperson0710\EffectItems\form\ItemNameChangeForm;
 use lazyperson0710\EffectItems\items\AirBlock;
 use lazyperson0710\EffectItems\items\Churu;
 use lazyperson0710\EffectItems\items\CommandStorage;
@@ -13,6 +14,7 @@ use lazyperson0710\EffectItems\items\PlayerTeleportTicket;
 use lazyperson0710\EffectItems\items\RedBull;
 use lazyperson0710\EffectItems\items\Unknown;
 use lazyperson0710\EffectItems\items\ZONe;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
@@ -41,6 +43,7 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::init($event);
         if ($inHand->getNamedTag()->getTag('PlayerTeleportTicket') !== null) PlayerTeleportTicket::init($event);
         if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::init($event);
+        if ($inHand->getNamedTag()->getTag('ItemNameChangeIngot') !== null) SendForm::Send($player, new ItemNameChangeForm());
         if ($inHand->getId() === -195) LoginBonusItem::init($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::init($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::init($event);
