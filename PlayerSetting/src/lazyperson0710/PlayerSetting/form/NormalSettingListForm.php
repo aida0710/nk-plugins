@@ -5,31 +5,31 @@ namespace lazyperson0710\PlayerSetting\form;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\CoordinateSetting;
-use lazyperson0710\PlayerSetting\object\settings\DestructionSoundSetting;
-use lazyperson0710\PlayerSetting\object\settings\DiceMessageSetting;
-use lazyperson0710\PlayerSetting\object\settings\DirectDropItemStorageSetting;
-use lazyperson0710\PlayerSetting\object\settings\EnduranceWarningSetting;
-use lazyperson0710\PlayerSetting\object\settings\JoinItemsSetting;
-use lazyperson0710\PlayerSetting\object\settings\LevelUpTitleSetting;
-use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
-use lazyperson0710\PlayerSetting\object\settings\OnlinePlayersEffectsSetting;
-use lazyperson0710\PlayerSetting\object\settings\PayCommandUseSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
 use pocketmine\player\Player;
 
-class SettingListForm extends CustomForm {
+class NormalSettingListForm extends CustomForm {
 
-    private Toggle $coordinate;                 //fin
-    private Toggle $joinItems;                  //fin
-    private Toggle $directDropItemStorage;      //fin
-    private Toggle $levelUpTitle;               //fin
-    private Toggle $enduranceWarning;           //fin
-    private Toggle $miningToolsEnduranceWarning;//fin
-    private Toggle $destructionSound;           //fin
-    private Toggle $diceMessage;                //fin
+    private Toggle $coordinate;
+    private Toggle $joinItems;
+    private Toggle $directDropItemStorage;
+    private Toggle $levelUpTitle;
+    private Toggle $enduranceWarning;
+    private Toggle $miningToolsEnduranceWarning;
+    private Toggle $destructionSound;
+    private Toggle $diceMessage;
     private Toggle $payCommandUse;
-    private Toggle $onlinePlayersEffects;//fin
+    private Toggle $onlinePlayersEffects;
 
     public function __construct(Player $player) {
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);

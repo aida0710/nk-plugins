@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\PlayerSetting\command;
 
-use lazyperson0710\PlayerSetting\form\NormalSettingListForm;
+use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -19,6 +19,6 @@ class SettingCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        SendForm::Send($sender, (new NormalSettingListForm($sender)));
+        SendForm::Send($sender, (new SelectSettingForm($sender)));
     }
 }
