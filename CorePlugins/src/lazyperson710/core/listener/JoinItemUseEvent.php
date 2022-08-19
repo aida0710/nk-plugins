@@ -2,7 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
-use lazyperson0710\PlayerSetting\form\SettingListForm;
+use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson0710\WorldManagement\form\WarpForm;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\sff\form\CommandExecutionForm;
@@ -71,7 +71,7 @@ class JoinItemUseEvent implements Listener {
                 SendForm::Send($player, (new WarpForm($player)));
                 break;
             case JoinPlayerEvent::ID_SETTINGS:
-                SendForm::Send($player, (new SettingListForm($player)));
+                SendForm::Send($player, (new SelectSettingForm($player)));
                 break;
         }
     }
