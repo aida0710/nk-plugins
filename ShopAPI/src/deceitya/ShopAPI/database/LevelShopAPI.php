@@ -199,6 +199,7 @@ class LevelShopAPI {
         $this->registerFromId(-289, 0, 50, 0, 120, "泣く黒曜石");                                                               ## Crying_Obsidian
         $this->registerFromId(-272, 0, 50, 0, 120, "リスポーンアンカー");                                                               ## Respawn_Anchor
         #OtherItems
+        $this->register(VanillaItems::FLINT(), 25, 1, 120, "火打石");                                                          ## Flint
         $this->registerFromId(-228, 0, 50, 0, 120, "真紅のキノコ");                                                                ## Crimson_Fungus
         $this->registerFromId(-229, 0, 50, 0, 120, "歪んだキノコ");                                                                 ## Warped_Fungus
         $this->registerFromId(-231, 0, 50, 0, 120, "しだれツタ");                                                                   ## Weeping_Vines
