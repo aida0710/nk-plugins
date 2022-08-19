@@ -7,7 +7,7 @@ use deceitya\miningtools\calculation\ItemDrop;
 use deceitya\miningtools\calculation\PickaxeDestructionRange;
 use deceitya\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
