@@ -15,8 +15,6 @@ class AuctionEndEvent extends Event {
     public const EXPIRED = 1;
     public const PURCHASED = 2;
     public const EXPIRED_PURGED = 3;
-    public const ADMIN_PURGED = 4;
-    public const ADMIN_REMOVED = 5;
 
     public function __construct(
         private AHListing $listing,
