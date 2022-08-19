@@ -1,16 +1,16 @@
 <?php
 
 declare(strict_types = 1);
-namespace lazyperson0710\PlayerSetting\object\settings;
+namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class OnlinePlayersEffectsSetting extends Setting {
+class DirectDropItemStorageSetting extends Setting {
 
     protected bool $value;
 
     public static function getName(): string {
-        return 'OnlinePlayersEffects';
+        return 'DirectDropItemStorage';
     }
 
     public function setValue(mixed $value): void {
@@ -22,6 +22,6 @@ class OnlinePlayersEffectsSetting extends Setting {
     }
 
     public function getFallbackValue(): bool {
-        return true;
+        return false;
     }
 }

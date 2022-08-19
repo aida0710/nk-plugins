@@ -1,16 +1,16 @@
 <?php
 
 declare(strict_types = 1);
-namespace lazyperson0710\PlayerSetting\object\settings;
+namespace lazyperson0710\PlayerSetting\object\settings\miningTools;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class EnduranceWarningSetting extends Setting {
+class SandToGlassSetting extends Setting {
 
     protected bool $value;
 
     public static function getName(): string {
-        return 'EnduranceWarning';
+        return 'SandToGlass';
     }
 
     public function setValue(mixed $value): void {
@@ -22,6 +22,6 @@ class EnduranceWarningSetting extends Setting {
     }
 
     public function getFallbackValue(): bool {
-        return true;
+        return false;
     }
 }

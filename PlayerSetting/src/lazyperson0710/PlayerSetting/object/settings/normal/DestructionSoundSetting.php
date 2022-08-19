@@ -1,16 +1,16 @@
 <?php
 
 declare(strict_types = 1);
-namespace lazyperson0710\PlayerSetting\object\settings;
+namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class MiningToolsEnduranceWarningSetting extends Setting {
+class DestructionSoundSetting extends Setting {
 
     protected bool $value;
 
     public static function getName(): string {
-        return 'MiningToolsEnduranceWarning';
+        return 'DestructionSound';
     }
 
     public function setValue(mixed $value): void {

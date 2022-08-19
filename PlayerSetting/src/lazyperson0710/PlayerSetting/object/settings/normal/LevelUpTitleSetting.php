@@ -1,16 +1,16 @@
 <?php
 
 declare(strict_types = 1);
-namespace lazyperson0710\PlayerSetting\object\settings;
+namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class DirectDropItemStorageSetting extends Setting {
+class LevelUpTitleSetting extends Setting {
 
     protected bool $value;
 
     public static function getName(): string {
-        return 'DirectDropItemStorage';
+        return 'LevelUpTitle';
     }
 
     public function setValue(mixed $value): void {
@@ -22,6 +22,6 @@ class DirectDropItemStorageSetting extends Setting {
     }
 
     public function getFallbackValue(): bool {
-        return false;
+        return true;
     }
 }

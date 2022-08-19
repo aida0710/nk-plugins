@@ -4,16 +4,16 @@ declare(strict_types = 1);
 namespace lazyperson0710\PlayerSetting\object;
 
 use InvalidArgumentException;
-use lazyperson0710\PlayerSetting\object\settings\CoordinateSetting;
-use lazyperson0710\PlayerSetting\object\settings\DestructionSoundSetting;
-use lazyperson0710\PlayerSetting\object\settings\DiceMessageSetting;
-use lazyperson0710\PlayerSetting\object\settings\DirectDropItemStorageSetting;
-use lazyperson0710\PlayerSetting\object\settings\EnduranceWarningSetting;
-use lazyperson0710\PlayerSetting\object\settings\JoinItemsSetting;
-use lazyperson0710\PlayerSetting\object\settings\LevelUpTitleSetting;
-use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
-use lazyperson0710\PlayerSetting\object\settings\OnlinePlayersEffectsSetting;
-use lazyperson0710\PlayerSetting\object\settings\PayCommandUseSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use LogicException;
 use RuntimeException;
 
@@ -26,6 +26,7 @@ class PlayerSetting {
     protected string $xuid;
 
     protected function init(): void {
+        //normal
         $this->register(new CoordinateSetting);
         $this->register(new JoinItemsSetting);
         $this->register(new DirectDropItemStorageSetting);
@@ -36,6 +37,7 @@ class PlayerSetting {
         $this->register(new DiceMessageSetting);
         $this->register(new PayCommandUseSetting);
         $this->register(new OnlinePlayersEffectsSetting);
+        //miningTools
     }
 
     public function __construct(string $xuid) {
