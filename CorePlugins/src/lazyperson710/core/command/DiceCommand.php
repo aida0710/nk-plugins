@@ -70,6 +70,7 @@ class DiceCommand extends Command {
                             $player->sendMessage("§bDice §7>> §a結果 -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $args[0] . "~" . $args[1]);
                         }
                     }
+                    Server::getInstance()->getLogger()->notice("§bDice §7>> §a結果 -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $args[0] . "~" . $args[1]);
                 }
             } else {
                 $number = $args[2];
@@ -88,6 +89,7 @@ class DiceCommand extends Command {
                                     $player->sendMessage("§bDice §7>> §e結果(当たりのみ) -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $min . "~" . $max);
                                 }
                             }
+                            Server::getInstance()->getLogger()->notice("§bDice §7>> §e結果(当たりのみ) -> {$rand} - {$i}回 - Player " . $user . " - 範囲 " . $min . "~" . $max);
                         }
                     }
                 }
@@ -97,6 +99,7 @@ class DiceCommand extends Command {
                             $player->sendMessage("§bDice §7>> §e結果(当たりのみ) -> 当たり無し - Player " . $user . " - 範囲 " . $min . "~" . $max);
                         }
                     }
+                    Server::getInstance()->getLogger()->notice("§bDice §7>> §e結果(当たりのみ) -> 当たり無し - Player " . $user . " - 範囲 " . $min . "~" . $max);
                 }
             }
         }
