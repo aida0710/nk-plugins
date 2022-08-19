@@ -3,7 +3,7 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\DirectDropItemStorageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;

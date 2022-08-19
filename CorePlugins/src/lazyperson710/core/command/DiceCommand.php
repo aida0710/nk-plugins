@@ -3,7 +3,7 @@
 namespace lazyperson710\core\command;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\DiceMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

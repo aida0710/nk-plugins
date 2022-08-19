@@ -3,7 +3,7 @@
 namespace onebone\economyapi\command;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\PayCommandUseSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyapi\event\money\PayMoneyEvent;

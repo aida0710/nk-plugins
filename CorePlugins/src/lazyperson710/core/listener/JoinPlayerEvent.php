@@ -3,7 +3,7 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\JoinItemsSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;

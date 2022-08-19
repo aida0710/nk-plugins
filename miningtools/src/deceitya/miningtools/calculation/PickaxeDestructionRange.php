@@ -5,7 +5,7 @@ namespace deceitya\miningtools\calculation;
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use deceitya\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
