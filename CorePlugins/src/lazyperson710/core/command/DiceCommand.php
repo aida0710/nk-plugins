@@ -52,7 +52,12 @@ class DiceCommand extends Command {
             $sender->sendMessage("§bDice §7>> §c2つ目の引数を1つ目の引数より大きくすることはできません -> {$args[0]} > {$args[1]}");
         } elseif (!isset($args[2])) {//連続で回す数が指定されてなかったら
             $rand = mt_rand($args[0], $args[1]);
-            Server::getInstance()->broadcastMessage("§bDice §7>> §aダイス結果 | " . $rand . " - プレイヤー | " . $user . " - 範囲 | " . $args[0] . "~" . $args[1]);
+            foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+                if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DiceMessageSetting::getName())?->getValue() === true) {
+                    $player->sendMessage("§bDice §7>> §aダイス結果 | " . $rand . " - プレイヤー | " . $user . " - 範囲 | " . $args[0] . "~" . $args[1]);
+                }
+            }
+            Server::getInstance()->getLogger()->notice("§bDice §7>> §aダイス結果 | " . $rand . " - プレイヤー | " . $user . " - 範囲 | " . $args[0] . "~" . $args[1]);
         } else {//連続で回す数が指定されていたら
             if (!preg_match('/^[0-9]+$/', $args[2])) {
                 $sender->sendMessage("§bDice §7>> §c整数のみが使用可能です");
