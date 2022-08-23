@@ -7,6 +7,7 @@ use lazyperson0710\EffectItems\event\PlayerBlockPlaceEvent;
 use lazyperson0710\EffectItems\event\PlayerDamageEvent;
 use lazyperson0710\EffectItems\event\PlayerItemEvent;
 use lazyperson0710\EffectItems\task\RepetitionTask;
+use lazyperson0710\Gacha\command\ItemNameChangeCommand;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
@@ -18,5 +19,8 @@ class Main extends PluginBase {
         $manager->registerEvents(new PlayerDamageEvent(), $this);
         $manager->registerEvents(new PlayerItemEvent(), $this);
         $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 10);
+        $this->getServer()->getCommandMap()->registerAll("effectItems", [
+            new ItemNameChangeCommand(),
+        ]);
     }
 }
