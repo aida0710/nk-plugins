@@ -20,7 +20,6 @@ class Main extends PluginBase {
             $this->getLogger()->critical("確率が100%でないガチャが存在する為、プラグインを停止します");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        var_dump(GachaItemAPI::getInstance()->gachaItems);
     }
 
     public function checkChance(): bool {
