@@ -2,8 +2,7 @@
 
 namespace lazyperson0710\Gacha\Calculation;
 
-use JetBrains\PhpStorm\ArrayShape;
-use lazyperson0710\Gacha\Main;
+use lazyperson0710\Gacha\database\GachaItemAPI;
 use lazyperson0710\ticket\TicketAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
@@ -15,11 +14,12 @@ class RankCalculation {
     private array $rank;
     protected int $num;
 
-    private array $content;
+    private array $probability;
     private array $cost;
 
-    public function __construct() {
-        $this->content = Main::getInstance()->getAllData();
+    public function __construct(string $categoryName) {
+        $this->probability = GachaItemAPI::getInstance()->rankProbability[$categoryName][0];
+        $this->cost = GachaItemAPI::getInstance()->categoryCost[$categoryName][0];
         $this->tmp_table = $this->getTmpTable();
         $this->initTable();
     }
@@ -30,20 +30,17 @@ class RankCalculation {
     }
 
     /**
-     * @param $num
+     * @param        $num
      * @param Player $player
-     * @param $key
      * @return string|null
      */
-    public function run($num, Player $player, $key): string|null {
-        $this->cost = $this->content[$key]["cost"];
+    public function run($num, Player $player): string|null {
         $result = null;
         for ($i = 1; $i <= $num; $i++) {
             if ($this->checkMoney($player) !== true) continue;
             if ($this->checkTicket($player) !== true) continue;
-            if ($this->checkEventTicket($player) !== true) continue;//無条件でtrue
-            EconomyAPI::getInstance()->reduceMoney($player->getName(), $this->cost["money"]);
-            TicketAPI::getInstance()->reduceTicket($player, $this->cost["ticket"]);
+            EconomyAPI::getInstance()->reduceMoney($player->getName(), $this->cost["moneyCost"]);
+            TicketAPI::getInstance()->reduceTicket($player, $this->cost["ticketCost"]);
             $rand = mt_rand(1, $this->num);
             $count = 0;
             foreach ($this->rank as $table => $item) {
@@ -57,19 +54,19 @@ class RankCalculation {
         return $result;
     }
 
-    #[ArrayShape(["C" => "int", "UC" => "int", "R" => "int", "SR" => "float", "L" => "float"])] protected function getTmpTable(): array {
+    protected function getTmpTable(): array {
         return [
-            "C" => 80,
-            "UC" => 13,
-            "R" => 5,
-            "SR" => 1.7,
-            "L" => 0.3,
+            "C" => $this->probability["C"],
+            "UC" => $this->probability["UC"],
+            "R" => $this->probability["R"],
+            "SR" => $this->probability["SR"],
+            "L" => $this->probability["L"],
         ];
     }
 
     public function checkMoney(Player $player): bool {
-        if ($this->cost["money"] >= 0) {
-            if (EconomyAPI::getInstance()->myMoney($player->getName()) >= $this->cost["money"]) {
+        if ($this->cost["moneyCost"] >= 0) {
+            if (EconomyAPI::getInstance()->myMoney($player->getName()) >= $this->cost["moneyCost"]) {
                 return true;
             } else {
                 $player->sendMessage("§bGacha §7>> §c所持金が足りない為処理が中断されました");
@@ -80,20 +77,13 @@ class RankCalculation {
     }
 
     public function checkTicket(Player $player): bool {
-        if ($this->cost["ticket"] >= 0) {
-            if (TicketAPI::getInstance()->checkData($player) >= $this->cost["ticket"]) {
+        if ($this->cost["ticketCost"] >= 0) {
+            if (TicketAPI::getInstance()->checkData($player) >= $this->cost["ticketCost"]) {
                 return true;
             } else {
                 $player->sendMessage("§bGacha §7>> §c所持Ticketが足りない為処理が中断されました");
                 return false;
             }
-        }
-        return true;
-    }
-
-    public function checkEventTicket(Player $player): bool {
-        if ($this->cost["eventTicket"] >= 0) {
-            return true;
         }
         return true;
     }

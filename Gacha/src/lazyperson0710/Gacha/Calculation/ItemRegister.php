@@ -2,36 +2,33 @@
 
 namespace lazyperson0710\Gacha\Calculation;
 
-use lazyperson0710\Gacha\Main;
-use pocketmine\data\bedrock\EnchantmentIdMap;
+use lazyperson0710\Gacha\database\GachaItemAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
 
 class ItemRegister {
 
-    public function __construct($key, $rank) {
-        $this->Items($key, $rank);
+    private string $categoryName;
+
+    public function __construct($categoryName, $rank) {
+        $this->categoryName = $categoryName;
+        $this->Items($rank);
     }
 
-    public function Items($key, $rank): Item {
-        $count = count(Main::getInstance()->getAllData()[$key]["items"][$rank]);
+    public function Items(string $rank): Item {
+        $count = count(GachaItemAPI::getInstance()->gachaItems[$this->categoryName][$rank]);
         $count -= 1;
         $count = mt_rand(0, $count);
-        $data = Main::getInstance()->getAllData()[$key]["items"][$rank][$count];
-        $item = ItemFactory::getInstance()->get($data['id'], $data['meta'], $data['count']);
+        $data = GachaItemAPI::getInstance()->gachaItems[$this->categoryName][$rank][$count];
+        $item = $data['item'];
         if ($data['name'] !== null) {
             $item->setCustomName($data['name']);
         }
-        if ($data['description'] !== null) {
-            $item->setLore([$data['description']]);
+        if ($data['lore'] !== null) {
+            $item->setLore([$data["lore"]]);
         }
-        foreach ($data['enchants'] as $enchant) {
-            $item->addEnchantment(
-                new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId($enchant['id']),
-                    $enchant['level']
-                )
-            );
+        foreach ($data['enchants'] as $key => $enchant) {
+            $item->addEnchantment(new EnchantmentInstance($enchant, $data["level"][$key]));
         }
         if ($data['nbt'] !== null) {
             foreach ($data['nbt'] as $setNbt) {
