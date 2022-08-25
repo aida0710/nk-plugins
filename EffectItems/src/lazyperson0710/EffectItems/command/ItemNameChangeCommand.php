@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\Gacha\command;
+namespace lazyperson0710\EffectItems\command;
 
 use lazyperson0710\EffectItems\form\ItemNameChangeForm;
 use lazyperson710\core\packet\SendForm;
