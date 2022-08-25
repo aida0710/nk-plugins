@@ -2,12 +2,12 @@
 
 namespace lazyperson0710\EffectItems;
 
+use lazyperson0710\EffectItems\command\ItemNameChangeCommand;
 use lazyperson0710\EffectItems\event\PlayerBlockBreakEvent;
 use lazyperson0710\EffectItems\event\PlayerBlockPlaceEvent;
 use lazyperson0710\EffectItems\event\PlayerDamageEvent;
 use lazyperson0710\EffectItems\event\PlayerItemEvent;
 use lazyperson0710\EffectItems\task\RepetitionTask;
-use lazyperson0710\Gacha\command\ItemNameChangeCommand;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
