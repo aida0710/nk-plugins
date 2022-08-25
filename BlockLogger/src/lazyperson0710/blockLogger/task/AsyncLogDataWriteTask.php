@@ -13,12 +13,13 @@ class AsyncLogDataWriteTask extends AsyncTask {
     public string $cache;
     public string $dataBaseFile;
     public string $name;
-    public array $error = [];
+    public array $error;
 
     private $time;
 
     public function __construct($time) {
         $this->time = $time;
+        $this->error = [];
         $this->cache = serialize(PlayerEvent::getInstance()->getBlockLogTemp());
         PlayerEvent::getInstance()->refreshBlockLogTemp();
         $this->dataBaseFile = Main::getInstance()->getDataFolder() . 'log.db';
@@ -27,7 +28,6 @@ class AsyncLogDataWriteTask extends AsyncTask {
     public function onRun(): void {
         $cache = unserialize($this->cache);
         $dataBaseFile = $this->dataBaseFile;
-        $this->error = [];
         if (file_exists($dataBaseFile)) {
             $db = new SQLite3($dataBaseFile, SQLITE3_OPEN_READWRITE);
         } else {
@@ -42,7 +42,7 @@ class AsyncLogDataWriteTask extends AsyncTask {
             $db->close();
             return;
         } catch (Exception $e) {
-            $this->error[] .= $e->getMessage();
+            $this->error[] .= unserialize($e->getMessage());
             $db->exec('rollback');
             $db->close();
             return;
