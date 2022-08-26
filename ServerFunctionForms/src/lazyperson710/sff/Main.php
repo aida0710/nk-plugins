@@ -37,7 +37,6 @@ class Main extends PluginBase {
             new BonusCommand(),
             new RecipeCommand(),
             new InvClearCommand(),
-            new MiningToolsCommand(),
             new PlayerCommand(),
             new DonationCommand(),
             new InformationCommand(),
