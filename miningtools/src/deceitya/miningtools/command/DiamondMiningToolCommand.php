@@ -12,8 +12,10 @@ use pocketmine\Server;
 
 class DiamondMiningToolCommand extends Command {
 
+    public const DiamondMiningToolsLevelLimit = 15;
+
     public function __construct() {
-        parent::__construct("mt1", "DiamondMiningTool");
+        parent::__construct("dmt", "DiamondMiningTool");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -21,8 +23,8 @@ class DiamondMiningToolCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($sender) <= 14) {
-            $sender->sendMessage("§bMiningToolShop §7>> §cレベル15以上でないと開けません");
+        if (MiningLevelAPI::getInstance()->getLevel($sender) < self::DiamondMiningToolsLevelLimit) {
+            $sender->sendMessage("§bMiningToolShop §7>> §cレベル" . self::DiamondMiningToolsLevelLimit . "以上でないと開けません");
             Server::getInstance()->dispatchCommand($sender, "mt");
             return;
         }

@@ -14,16 +14,18 @@ use pocketmine\Server;
 class ExpansionMiningToolCommand extends Command {
 
     public function __construct() {
-        parent::__construct("mt3", "NetheriteMiningTool");
+        parent::__construct("emt", "NetheriteMiningTool");
     }
+
+    public const ExpansionMiningToolsLevelLimit = 250;
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if (!($sender instanceof Player)) {
             $sender->sendMessage("Please use in server");
             return;
         }
-        if (MiningLevelAPI::getInstance()->getLevel($sender) < 250) {
-            $sender->sendMessage("§bMiningToolShop §7>> §cレベル250以上でないと開けません");
+        if (MiningLevelAPI::getInstance()->getLevel($sender) < self::ExpansionMiningToolsLevelLimit) {
+            $sender->sendMessage("§bMiningToolShop §7>> §cレベル" . self::ExpansionMiningToolsLevelLimit . "以上でないと開けません");
             Server::getInstance()->dispatchCommand($sender, "mt");
             return;
         }
