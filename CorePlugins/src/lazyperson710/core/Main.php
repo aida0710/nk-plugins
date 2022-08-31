@@ -8,22 +8,44 @@ use lazyperson710\core\command\JoinItemCommand;
 use lazyperson710\core\command\MajorCommand;
 use lazyperson710\core\command\WarpPVPCommand;
 use lazyperson710\core\task\EffectTaskScheduler;
+use lazyperson710\core\task\EntityRemoveTask;
 use lazyperson710\core\task\MotdTask;
 use lazyperson710\core\task\ParticleTask;
+use pocketmine\block\BlockBreakInfo;
+use pocketmine\block\BlockFactory;
+use pocketmine\block\BlockIdentifier;
+use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\TNT;
+use pocketmine\data\bedrock\EnchantmentIdMap;
+use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\inventory\CreativeInventory;
+use pocketmine\item\CookedChicken;
+use pocketmine\item\CookedMutton;
+use pocketmine\item\CookedSalmon;
+use pocketmine\item\enchantment\Enchantment;
+use pocketmine\item\enchantment\ItemFlags;
+use pocketmine\item\enchantment\Rarity;
+use pocketmine\item\enchantment\StringToEnchantmentParser;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
+use pocketmine\item\VanillaItems;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
     public const ITEM_GRIND_STONE = -195;
+    public const EntityRemoveTaskInterval = 60;
+    public int $entityRemoveTimeLeft;
     private static Main $main;
 
     public function onEnable(): void {
         self::$main = $this;
+        $this->entityRemoveTimeLeft = self::EntityRemoveTaskInterval;
+        $enchant = new Enchantment('幸運', Rarity::RARE, ItemFlags::DIG, ItemFlags::SHEARS, 3);
+        EnchantmentIdMap::getInstance()->register(EnchantmentIds::FORTUNE, $enchant);
+        StringToEnchantmentParser::getInstance()->register("fortune", fn() => $enchant);
         /*PlayerEventListener*/
         $this->getServer()->getPluginManager()->registerEvents(new listener\MessageListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\BreakListener(), $this);
@@ -54,6 +76,7 @@ class Main extends PluginBase {
         /*Task*/
         $this->getScheduler()->scheduleRepeatingTask(new EffectTaskScheduler, 20);
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
+        $this->getScheduler()->scheduleRepeatingTask(new EntityRemoveTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 200);
     }
 

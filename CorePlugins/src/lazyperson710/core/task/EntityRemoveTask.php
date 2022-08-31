@@ -1,0 +1,33 @@
+<?php
+
+namespace lazyperson710\core\task;
+
+use lazyperson710\core\Main;
+use pocketmine\entity\object\ExperienceOrb;
+use pocketmine\scheduler\Task;
+
+class EntityRemoveTask extends Task {
+
+    public function onRun(): void {
+        if (Main::getInstance()->entityRemoveTimeLeft > 0) {
+            Main::getInstance()->entityRemoveTimeLeft -= 1;
+            if (Main::getInstance()->entityRemoveTimeLeft === 15) {
+                Main::getInstance()->getServer()->broadcastTip("§bEntityRemover §7>> §e残り15秒で落下している経験値オーブが消去されます");
+            }
+        } else {
+            $count = 0;
+            foreach (Main::getInstance()->getServer()->getWorldManager()->getWorlds() as $world) {
+                foreach ($world->getEntities() as $entity) {
+                    if ($entity instanceof ExperienceOrb) {
+                        $entity->close();
+                        $count++;
+                    }
+                }
+            }
+            if ($count >= 1) {
+                Main::getInstance()->getServer()->broadcastTip("§bEntityRemover §7>> §e経験値オーブを{$count}個削除しました");
+            }
+            Main::getInstance()->entityRemoveTimeLeft = Main::EntityRemoveTaskInterval - 1;
+        }
+    }
+}
