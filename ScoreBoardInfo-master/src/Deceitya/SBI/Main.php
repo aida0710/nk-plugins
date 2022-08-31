@@ -7,12 +7,12 @@ use bbo51dog\bboform\element\ClosureButton;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\SBI\mode\Mode;
 use Deceitya\SBI\mode\ModeList;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;
-use lazyperson710\core\packet\SendForm;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
@@ -45,6 +45,7 @@ class Main extends PluginBase implements Listener {
         foreach (ModeList::getInstance()->getAll() as $mode) {
             $form->addElement(new ClosureButton($mode->getName(), null, function (Player $player, Button $button) use ($mode) {
                 Database::getInstance()->setMode($player, $mode->getId());
+                Database::getInstance()->save();
                 $player->sendTip(TextFormat::AQUA . "MyStatus §7>> §a表示状態を『{$mode->getName()}』にしました");
             }));
         }
