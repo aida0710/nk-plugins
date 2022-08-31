@@ -1,6 +1,6 @@
 <?php
 
-namespace deceitya\luckyenchant;
+namespace lazyperson710\core\listener;
 
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
@@ -8,26 +8,8 @@ use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\item\enchantment\Enchantment;
-use pocketmine\item\enchantment\ItemFlags;
-use pocketmine\item\enchantment\Rarity;
-use pocketmine\item\enchantment\StringToEnchantmentParser;
-use pocketmine\plugin\PluginBase;
 
-class Main extends PluginBase implements Listener {
-
-    public function onEnable(): void {
-        $enchant = new Enchantment(
-            '幸運',
-            Rarity::RARE,
-            ItemFlags::DIG,
-            ItemFlags::SHEARS,
-            3
-        );
-        EnchantmentIdMap::getInstance()->register(EnchantmentIds::FORTUNE, $enchant);
-        StringToEnchantmentParser::getInstance()->register("fortune", fn() => $enchant);
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    }
+class FortuneListener implements Listener {
 
     /**
      * @priority LOW
