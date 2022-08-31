@@ -2,7 +2,7 @@
 
 namespace deceitya\miningtools\calculation;
 
-use deceitya\luckyenchant\Main;
+use lazyperson710\core\listener\FortuneListener;
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -25,7 +25,7 @@ class ItemDrop {
             if (empty($drops)) {
                 return $block->getDrops($item);
             }
-            $plus = Main::Calculation($block, $enchant->getLevel());
+            $plus = FortuneListener::Calculation($block, $enchant->getLevel());
             $drops[0]->setCount($drops[0]->getCount() + $plus);
             return $drops;
         }
