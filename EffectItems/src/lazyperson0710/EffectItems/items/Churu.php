@@ -15,11 +15,11 @@ class Churu {
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
-        $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 20 * 60 * 3, 3, false);
         $vanillaEffect = VanillaEffects::SLOWNESS();
+        $effect = new EffectInstance($vanillaEffect, 20 * 60 * 3, 3, false);
         AddEffectPacket::init($player, $effect, $vanillaEffect, true);
-        $effect = new EffectInstance(VanillaEffects::FIRE_RESISTANCE(), 20 * 60 * 5, 1, false);
         $vanillaEffect = VanillaEffects::FIRE_RESISTANCE();
+        $effect = new EffectInstance($vanillaEffect, 20 * 60 * 5, 1, false);
         AddEffectPacket::init($player, $effect, $vanillaEffect, true);
     }
 }
