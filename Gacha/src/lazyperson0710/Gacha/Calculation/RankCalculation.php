@@ -60,6 +60,7 @@ class RankCalculation {
             "UC" => $this->probability["UC"],
             "R" => $this->probability["R"],
             "SR" => $this->probability["SR"],
+            "SSR" => $this->probability["SSR"],
             "L" => $this->probability["L"],
         ];
     }

@@ -33,7 +33,7 @@ class GachaForm extends CustomForm {
             ->setTitle("Gacha System / {$categoryName}")
             ->addElements(
                 new Label("ガチャコスト / 所持数量\nMoney -> {$this->cost["moneyCost"]} / {$moneyApi->myMoney($player->getName())}円\nMiningTicket -> {$this->cost["ticketCost"]}枚 / {$ticket->checkData($player)}枚"),
-                new Label("ガチャの排出確率\nCommon -> {$this->probability["C"]}％\nUnCommon -> {$this->probability["UC"]}％\nRare -> {$this->probability["R"]}％\nSuperRare -> {$this->probability["SR"]}％\nLegendary -> {$this->probability["L"]}％"),
+                new Label("ガチャの排出確率\nCommon -> {$this->probability["C"]}％\nUnCommon -> {$this->probability["UC"]}％\nRare -> {$this->probability["R"]}％\nSuperRare -> {$this->probability["SR"]}％\nSpecialSuperRare -> {$this->probability["SSR"]}％\nLegendary -> {$this->probability["L"]}％"),
                 new Label("inventoryが満タンの場合アイテムはドロップする為アイテム削除には十分にお気を付けください"),
                 $this->quantity,
             );
@@ -64,8 +64,11 @@ class GachaForm extends CustomForm {
             $item = (new ItemRegister($this->categoryName, $rank))->Items($rank);
             switch ($rank) {
                 case "SR":
-                    SoundPacket::init($player, "mob.wither.spawn");
                     $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
+                    break;
+                case "SSR":
+                    SoundPacket::init($player, "mob.wither.spawn");
+                    $player->sendMessage("§bGacha §7>> §aSpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
                     break;
                 case "L":
                     SoundPacket::init($player, "mob.enderdragon.death");
@@ -77,6 +80,7 @@ class GachaForm extends CustomForm {
                 "UC" => "§aUnCommon§r",
                 "R" => "§bRare§r",
                 "SR" => "§dSuperRare§r",
+                "SSR" => "§6SpecialSuperRare§r",
                 "L" => "§cLegendary§r",
             };
             $formMessage .= "{$formDisplayRank} > {$item->getCustomName()}§rを{$this->probability[$rank]}％で当てました\n";

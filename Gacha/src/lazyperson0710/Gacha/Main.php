@@ -17,17 +17,20 @@ class Main extends PluginBase {
             new GachaCommand(),
         ]);
         if ($this->checkChance() === false) {
-            $this->getLogger()->critical("確率が100%でないガチャが存在する為、プラグインを停止します");
+            $this->getLogger()->critical("Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
     }
 
     public function checkChance(): bool {
         foreach (GachaItemAPI::Category as $category) {
+            $result = 0;
             $probability = GachaItemAPI::getInstance()->rankProbability[$category][0];
-            $result = $probability["C"] + $probability["UC"] + $probability["R"] + $probability["SR"] + $probability["L"];
+            foreach ($probability as $value) {
+                $result = bcadd($result, $value, 2);
+            }
             if ((float)$result !== 100.0) {
-                $this->getLogger()->critical("{$category}の確率が合計{$result}%になっています");
+                $this->getLogger()->critical("{$category}の確率が合計" . $result . "%になっています");
                 return false;
             }
         }
