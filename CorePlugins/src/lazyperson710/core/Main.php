@@ -64,6 +64,7 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new listener\DropItemSetDeleteTime(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new listener\FortuneListener(), $this);
         /*Items*/
+        $this->defaultItemNameChange();
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         StringToItemParser::getInstance()->register('grindstone', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
@@ -80,6 +81,16 @@ class Main extends PluginBase {
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new EntityRemoveTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 200);
+    }
+
+    private function defaultItemNameChange(): void {
+        $blockFactory = BlockFactory::getInstance();
+        $stringToItemParser = StringToItemParser::getInstance();
+        ItemFactory::getInstance()->register(new CookedMutton(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), '猫用チュール'), true);
+        ItemFactory::getInstance()->register(new CookedChicken(new ItemIdentifier(VanillaItems::COOKED_CHICKEN()->getId(), 0), '犬用チュール'), true);
+        ItemFactory::getInstance()->register(new CookedSalmon(new ItemIdentifier(VanillaItems::COOKED_SALMON()->getId(), 0), 'かき氷'), true);
+        $blockFactory->register(new TNT(new BlockIdentifier(BlockLegacyIds::TNT, 0), "爆発物", BlockBreakInfo::instant()), true);
+        $stringToItemParser->register("爆発物", fn() => (new TNT(new BlockIdentifier(BlockLegacyIds::TNT, 0), "爆発物", BlockBreakInfo::instant()))->asItem());
     }
 
     public static function getInstance(): Main {
