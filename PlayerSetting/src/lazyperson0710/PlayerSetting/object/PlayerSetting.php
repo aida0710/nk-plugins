@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace lazyperson0710\PlayerSetting\object;
 
 use InvalidArgumentException;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\AndesiteToStoneSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
@@ -38,6 +39,7 @@ class PlayerSetting {
         $this->register(new PayCommandUseSetting);
         $this->register(new OnlinePlayersEffectsSetting);
         //miningTools
+        $this->register(new AndesiteToStoneSetting());
     }
 
     public function __construct(string $xuid) {
