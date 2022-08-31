@@ -23,6 +23,7 @@ class DirectInventory implements Listener {
         $drops = $event->getDrops();
         $player = $event->getPlayer();
         $event->setDrops([]);
+        var_dump("要デバック対象 : core\directInventory");
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DirectDropItemStorageSetting::getName())?->getValue() === true) {
             foreach ($drops as $item) {
                 if ($this->notStorageItem($player, $item) === false) continue;
@@ -44,11 +45,9 @@ class DirectInventory implements Listener {
 
     public function notStorageItem(Player $player, Item $item): bool {
         if ($item->getVanillaName() == VanillaItems::AIR()->getVanillaName()) {
-            var_dump("airの為キャンセル");
             return false;
         }
         if ($item->getVanillaName() == VanillaBlocks::DYED_SHULKER_BOX()->getName()) {
-            var_dump("DYED_SHULKER_BOXの為キャンセル");
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
             } else {
@@ -57,7 +56,6 @@ class DirectInventory implements Listener {
             }
         }
         if ($item->getVanillaName() == VanillaBlocks::SHULKER_BOX()->getName()) {
-            var_dump("SHULKER_BOXの為キャンセル");
             if ($player->getInventory()->canAddItem($item)) {
                 $player->getInventory()->addItem($item);
             } else {
