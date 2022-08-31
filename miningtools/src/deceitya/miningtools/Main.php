@@ -4,11 +4,10 @@ namespace deceitya\miningtools;
 
 use deceitya\miningtools\command\DiamondMiningToolCommand;
 use deceitya\miningtools\command\ExpansionMiningToolCommand;
+use deceitya\miningtools\command\MiningToolsCommand;
 use deceitya\miningtools\command\NetheriteMiningToolCommand;
 use deceitya\miningtools\eventListener\BreakEventListener;
 use deceitya\miningtools\eventListener\JoinEventListener;
-use deceitya\miningtools\setting\MiningToolSettings;
-use deceitya\miningtools\task\SettingDataSaveTask;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 
@@ -43,15 +42,11 @@ class Main extends PluginBase implements Listener {
             new DiamondMiningToolCommand(),
             new NetheriteMiningToolCommand(),
             new ExpansionMiningToolCommand(),
+            new MiningToolsCommand(),
         ]);
         $this->allData = json_decode(file_get_contents($this->getDataFolder() . "config.json"), true);
         self::$diamond = Main::getInstance()->dataAcquisition("diamond");
         self::$netherite = Main::getInstance()->dataAcquisition("netherite");
-        if (!file_exists($this->getDataFolder())) {
-            mkdir($this->getDataFolder() . "SettingData.yml");
-        }
-        $this->getScheduler()->scheduleRepeatingTask(new SettingDataSaveTask(), 20 * 60);
-        MiningToolSettings::getInstance()->setCache($this->getDataFolder() . "SettingData.yml");
     }
 
     /**
