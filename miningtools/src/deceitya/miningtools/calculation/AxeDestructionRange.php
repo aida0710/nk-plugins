@@ -17,7 +17,7 @@ use pocketmine\world\World;
 class AxeDestructionRange {
 
     /**
-     * @param Block $block
+     * @param Block  $block
      * @param Player $player
      * @return array
      */

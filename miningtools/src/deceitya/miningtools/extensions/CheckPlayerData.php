@@ -11,7 +11,7 @@ class CheckPlayerData {
 
     /**
      * @param Player $player
-     * @param int $subtraction
+     * @param int    $subtraction
      * @return bool
      */
     public function CheckReduceMoney(Player $player, int $subtraction): bool {
@@ -24,8 +24,8 @@ class CheckPlayerData {
 
     /**
      * @param Player $player
-     * @param int $count
-     * @param int $checkBlock
+     * @param int    $count
+     * @param int    $checkItem
      * @param string $tagName
      * @return bool
      */

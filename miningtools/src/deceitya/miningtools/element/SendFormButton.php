@@ -14,8 +14,8 @@ class SendFormButton extends Button {
     private Form $form;
 
     /**
-     * @param Form $form
-     * @param string $text
+     * @param Form             $form
+     * @param string           $text
      * @param ButtonImage|null $image
      */
     public function __construct(Form $form, string $text, ?ButtonImage $image = null) {

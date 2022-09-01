@@ -14,7 +14,7 @@ class ItemDrop {
 
     /**
      * @param Player $player
-     * @param Block $block
+     * @param Block  $block
      * @return array
      */
     public function getDrop(Player $player, Block $block): array {
@@ -33,10 +33,10 @@ class ItemDrop {
     }
 
     /**
-     * @param Player $player
+     * @param Player          $player
      * @param BlockBreakEvent $event
-     * @param array $dropItems
-     * @param Block $startBlock
+     * @param array           $dropItems
+     * @param Block           $startBlock
      * @return void
      */
     public function DropItem(Player $player, BlockBreakEvent $event, array $dropItems, Block $startBlock): void {

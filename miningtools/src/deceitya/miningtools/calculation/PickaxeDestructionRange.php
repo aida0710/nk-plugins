@@ -19,12 +19,12 @@ class PickaxeDestructionRange {
 
     /**
      * @param Player $player
-     * @param Block $block
-     * @param Item $item
-     * @param bool $haveDurable
-     * @param Item $handItem
-     * @param array $set
-     * @param array $dropItems
+     * @param Block  $block
+     * @param Item   $item
+     * @param bool   $haveDurable
+     * @param Item   $handItem
+     * @param array  $set
+     * @param array  $dropItems
      * @return array
      */
     public function PickaxeDestructionRange(Player $player, Block $block, Item $item, bool $haveDurable, Item $handItem, array $set, array $dropItems): array {
@@ -133,7 +133,7 @@ class PickaxeDestructionRange {
 
     /**
      * @param Player $player
-     * @param $handItem
+     * @param        $handItem
      * @return void
      */
     public function toolDamageProcessing(Player $player, $handItem): void {

@@ -80,7 +80,7 @@ class BreakEventListener implements Listener {
 
     /**
      * @param Player $player
-     * @param Item $item
+     * @param Item   $item
      * @return void
      */
     public function itemNbtConversion(Player $player, Item $item): void {

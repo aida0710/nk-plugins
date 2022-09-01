@@ -16,7 +16,7 @@ class MiningToolsBreakEvent extends BlockEvent implements Cancellable {
 
     /**
      * @param Player $player
-     * @param Block $block
+     * @param Block  $block
      */
     public function __construct(Player $player, Block $block) {
         parent::__construct($block);
