@@ -139,6 +139,10 @@ class CancelItemUseEvent implements Listener {
             $event->cancel();
             $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
         }
+        if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag('EnablingMiningSettingItem') !== null) {
+            $event->cancel();
+            $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
+        }
     }
 
     public function onBreak(BlockBreakEvent $event) {
