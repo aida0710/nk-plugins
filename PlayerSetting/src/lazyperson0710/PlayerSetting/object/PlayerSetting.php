@@ -5,6 +5,21 @@ namespace lazyperson0710\PlayerSetting\object;
 
 use InvalidArgumentException;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\AndesiteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\CobblestoneToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\DioriteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\GoldIngotSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\GraniteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\GrassToDirtSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\IronIngotSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningTools\SandToGlassSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingAndesiteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingCobblestoneToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingDioriteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGoldIngotSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGraniteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGrassToDirtSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingIronIngotSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingSandToGlassSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
@@ -40,6 +55,22 @@ class PlayerSetting {
         $this->register(new OnlinePlayersEffectsSetting);
         //miningTools
         $this->register(new AndesiteToStoneSetting());
+        $this->register(new CobblestoneToStoneSetting());
+        $this->register(new DioriteToStoneSetting());
+        $this->register(new GoldIngotSetting());
+        $this->register(new GraniteToStoneSetting());
+        $this->register(new GrassToDirtSetting());
+        $this->register(new IronIngotSetting());
+        $this->register(new SandToGlassSetting());
+        //miningToolsEnablingSetting
+        $this->register(new EnablingAndesiteToStoneSetting());
+        $this->register(new EnablingCobblestoneToStoneSetting());
+        $this->register(new EnablingDioriteToStoneSetting());
+        $this->register(new EnablingGoldIngotSetting());
+        $this->register(new EnablingGraniteToStoneSetting());
+        $this->register(new EnablingGrassToDirtSetting());
+        $this->register(new EnablingIronIngotSetting());
+        $this->register(new EnablingSandToGlassSetting());
     }
 
     public function __construct(string $xuid) {
