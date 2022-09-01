@@ -52,6 +52,8 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EGG(), 1, "温泉卵", "温まってるので中身はない", [], [], []);
         //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "EffectCleaner", "現在付与されているエフェクトを全て削除します", [], [], []);
         ## R Rank
+        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_FISH(), 1, "ラムネ", "美味しいよね", [], [], []);
+        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_RABBIT(), 1, "モンスター", "カフェイン摂取キモチエェェェ！", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::STONE_SHOVEL(), 1, "鋭利なシャベル", "ゾンビを倒すために使うものではない", [VanillaEnchantments::SHARPNESS()], [5], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::PAPER(), 1, "バスタオル", "常時濡れてるので叩かれると若干痛い", [VanillaEnchantments::SHARPNESS()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::IRON_PICKAXE(), 1, "溶鉱炉付きのつるはし", "一部のブロックを採掘時に焼いちゃうぞ！うおうお！", [VanillaEnchantments::SILK_TOUCH(), VanillaEnchantments::PUNCH()], [1, 1], ["BlastFurnacePickaxe"]);
