@@ -29,11 +29,11 @@ class CheckPlayerData {
      * @param string $tagName
      * @return bool
      */
-    public function CheckReduceCostItem(Player $player, int $count, int $checkBlock, string $tagName): bool {
+    public function CheckAndReduceCostItem(Player $player, int $count, int $checkItem, string $tagName): bool {
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
-            if ($item->getId() !== $checkBlock) continue;
+            if ($item->getId() !== $checkItem) continue;
             if ($item->getNamedTag()->getTag($tagName) !== null) {
                 if ($count <= $item->getCount()) {
                     $player->getInventory()->removeItem($item->setCount($count));
