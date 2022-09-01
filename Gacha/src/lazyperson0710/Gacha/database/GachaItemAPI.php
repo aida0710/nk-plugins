@@ -46,21 +46,19 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_MUTTON(), 1, "猫用チュール", "人間用ではない", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_CHICKEN(), 1, "犬用チュール", "人間用ではない", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_PORKCHOP(), 1, "アメリカンドック", "アメリカンドッグはソーセージに串を刺し、小麦粉などで作った衣をつけて油で揚げた食品。 アメリカで普及しているコーンミールの生地を使ったコーン・ドッグを改良したものであり、名称は和製英語である。\n\n引用 Wiki", [], [], []);
-        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::IRON_BOOTS(), 1, "落下ダメージ完全防御ブーツ", "Rank.1のブーツ\n着用していると落下ダメージから自分を守ってくれる\n革製なのですぐ壊れる", [], [], ["DefensiveStone"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::GLASS()->asItem(), 1, "エンジェルブロック", "自分の下にブロックを設置する", [], [], ["AirBlock"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EXPERIENCE_BOTTLE(), 16, "魔剤セット", "ちょっとずつ飲もう。。。", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::TNT()->asItem(), 1, "爆発物", "設置すると爆発します", [], [], ["ExplosionBlock"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EGG(), 1, "温泉卵", "温まってるので中身はない", [], [], []);
         //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "EffectCleaner", "現在付与されているエフェクトを全て削除します", [], [], []);
         ## R Rank
-        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::DIAMOND_BOOTS(), 1, "落下ダメージ完全防御ブーツ-Rank.2", "Rank.2のブーツ\n着用していると落下ダメージから自分を守ってくれる", [], [], ["DefensiveStone"]);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::STONE_SHOVEL(), 1, "鋭利なシャベル", "ゾンビを倒すために使うものではない", [VanillaEnchantments::SHARPNESS()], [5], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::PAPER(), 1, "バスタオル", "常時濡れてるので叩かれると若干痛い", [VanillaEnchantments::SHARPNESS()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::IRON_PICKAXE(), 1, "溶鉱炉付きのつるはし", "一部のブロックを採掘時に焼いちゃうぞ！うおうお！", [VanillaEnchantments::SILK_TOUCH(), VanillaEnchantments::PUNCH()], [1, 1], ["BlastFurnacePickaxe"]);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaBlocks::POPPY()->asItem(), 1, "§cﾌｧｲﾔｰﾌﾗﾜｰ", "ふぁいやー！！！", [VanillaEnchantments::FIRE_ASPECT()], [1], []);
+        $this->dischargeItemRegister("常駐ガチャ", "R", ItemFactory::getInstance()->get(751), 1, "落下ダメージ完全防御ブーツ", "着用していると落下ダメージから自分を守ってくれる", [], [], ["DefensiveStone"]);
         //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "金のリンゴ", "少しだけ掘る気になるリンゴ", [], [], []);
         ## SR Rank
-        $this->dischargeItemRegister("常駐ガチャ", "SR", ItemFactory::getInstance()->get(751), 1, "落下ダメージ完全防御ブーツ-Rank.3", "[最上位]Rank.3のブーツ\n着用していると落下ダメージから自分を守ってくれる", [], [], ["DefensiveStone"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::MONSTER_SPAWNER()->asItem(), 1, "レベルブロック", "れぇべぇるぅ\n破壊するとバニラ経験値がもらえます", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_PICKAXE(), 1, "黒曜石ブレイカー", "黒曜石だけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["ObsidianBreaker"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_HOE(), 1, "グロウストーンブレイカー", "グロウストーンだけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["GlowstoneBreaker"]);
@@ -73,9 +71,9 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::DIAMOND_PICKAXE(), 1, "§a[Gacha]DiamondMiningPickaxe", "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です", [], [], ["MiningTools_3", "gacha_mining"]);
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::DIAMOND_AXE(), 1, "§a[Gacha]DiamondMiningAxe", "がちゃ仕様の特殊範囲破壊アックス\n\n自由にエンチャントしたり修繕することが可能です", [], [], ["MiningTools_3", "gacha_mining"]);
         ## L Rank
-        $this->dischargeItemRegister("常駐ガチャ", "L", ItemFactory::getInstance()->get(-302), 1, "MiningToolRangeExpansion", "Netherite MiningToolsの範囲を強化できます", [], [], ["MiningToolsRangeCostItem"]);
-        $this->dischargeItemRegister("常駐ガチャ", "L", ItemFactory::getInstance()->get(174), 1, "MiningToolEnchantExpansion", "Netherite MiningToolsのエンチャントを強化できます", [], [], ["MiningToolsEnchantCostItem"]);
-        $this->dischargeItemRegister("常駐ガチャ", "L", VanillaItems::BLAZE_POWDER(), 1, "MiningToolSettingExpansion", "MiningToolsの設定機能を強化できます", [], [], ["MiningToolsSettingCostItem"]);
+        $this->dischargeItemRegister("常駐ガチャ", "L", ItemFactory::getInstance()->get(-302), 1, "MiningToolRangeExpansion", "Netherite MiningToolsの範囲を強化できます/mt", [], [], ["MiningToolsRangeCostItem"]);
+        $this->dischargeItemRegister("常駐ガチャ", "L", ItemFactory::getInstance()->get(174), 1, "MiningToolEnchantExpansion", "Netherite MiningToolsのエンチャントを強化できます/mt", [], [], ["MiningToolsEnchantCostItem"]);
+        $this->dischargeItemRegister("常駐ガチャ", "L", VanillaBlocks::LAPIS_LAZULI()->asItem(), 1, "EnablingMiningSettingExpansion", "MiningToolsの設定機能を強化できます/mt", [], [], ["EnablingMiningSettingItem"]);
     }
 
     private function categorySettingRegister(string $category, int $moneyCost, int $ticketCost, float $C, float $UC, float $R, float $SR, float $SSR, float $L): void {
