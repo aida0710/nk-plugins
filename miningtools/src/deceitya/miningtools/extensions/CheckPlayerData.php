@@ -47,6 +47,27 @@ class CheckPlayerData {
 
     /**
      * @param Player $player
+     * @param int    $count
+     * @param int    $checkItem
+     * @param string $tagName
+     * @return bool
+     */
+    public function CheckCostItem(Player $player, int $count, int $checkItem, string $tagName): bool {
+        for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
+            $item = clone $player->getInventory()->getItem($i);
+            if ($item->getId() == ItemIds::AIR) continue;
+            if ($item->getId() !== $checkItem) continue;
+            if ($item->getNamedTag()->getTag($tagName) !== null) {
+                if ($count <= $item->getCount()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param Player $player
      * @return bool
      */
     public function checkMining4(Player $player): bool {
