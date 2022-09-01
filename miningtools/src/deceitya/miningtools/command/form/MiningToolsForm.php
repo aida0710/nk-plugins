@@ -8,6 +8,8 @@ use deceitya\miningtools\command\DiamondMiningToolCommand;
 use deceitya\miningtools\command\ExpansionMiningToolCommand;
 use deceitya\miningtools\command\NetheriteMiningToolCommand;
 use deceitya\miningtools\element\CommandDispatchButton;
+use deceitya\miningtools\element\SendFormButton;
+use deceitya\miningtools\EnablingSetting\SelectEnablingSettings;
 use pocketmine\player\Player;
 
 class MiningToolsForm extends SimpleForm {
@@ -35,6 +37,7 @@ class MiningToolsForm extends SimpleForm {
                 new CommandDispatchButton("Diamond Tools - 範囲採掘ツール\n{$diamondLimit}", "dmt", null),
                 new CommandDispatchButton("Netherite Tools - 範囲採掘ツール\n{$netheriteLimit}", "nmt", null),
                 new CommandDispatchButton("アップグレード - Ex範囲採掘ツール\n{$expansionLimit}", "emt", null),
+                new SendFormButton(new SelectEnablingSettings($player), "設定機能を有効化"),
             );
     }
 }
