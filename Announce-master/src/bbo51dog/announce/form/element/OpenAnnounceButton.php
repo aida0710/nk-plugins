@@ -13,7 +13,7 @@ class OpenAnnounceButton extends Button {
 
     /**
      * @param string $text
-     * @param int $announceId
+     * @param int    $announceId
      */
     public function __construct(string $text, int $announceId) {
         parent::__construct($text);

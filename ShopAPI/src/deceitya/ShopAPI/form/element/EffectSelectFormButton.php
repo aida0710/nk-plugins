@@ -14,8 +14,8 @@ class EffectSelectFormButton extends Button {
     private Effect $effect;
 
     /**
-     * @param string $text
-     * @param Effect $effect
+     * @param string           $text
+     * @param Effect           $effect
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, Effect $effect, ?ButtonImage $image = null) {

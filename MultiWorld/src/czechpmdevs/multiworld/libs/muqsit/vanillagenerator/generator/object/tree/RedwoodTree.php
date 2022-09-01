@@ -22,7 +22,7 @@ class RedwoodTree extends GenericTree {
         parent::__construct($random, $transaction);
         $this->setOverridables(
             BlockLegacyIds::AIR,
-            BlockLegacyIds::LEAVES
+            BlockLegacyIds::LEAVES,
         );
         $this->setHeight($random->nextBoundedInt(4) + 6);
         $this->setLeavesHeight($random->nextBoundedInt(2) + 1);

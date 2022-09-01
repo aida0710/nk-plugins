@@ -63,7 +63,7 @@ class GenericStatementFileParser {
 
     /**
      * @param string|null $fileName
-     * @param resource $fh
+     * @param resource    $fh
      */
     public function __construct(?string $fileName, $fh) {
         $this->fileName = $fileName;

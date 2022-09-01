@@ -10,7 +10,7 @@ final class InvMenuTransactionResult {
     private ?Closure $post_transaction_callback = null;
 
     public function __construct(
-        private bool $cancelled
+        private bool $cancelled,
     ) {
     }
 

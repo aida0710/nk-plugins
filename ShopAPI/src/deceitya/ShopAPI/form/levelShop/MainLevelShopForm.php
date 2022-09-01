@@ -50,7 +50,7 @@ class MainLevelShopForm extends SimpleForm {
                 $restrictionLevelMessage = "§c{$restrictionLevel}レベル以上で開放されます";
             }
             $this->addElements(
-                new ShopMainCategoryFormButton("{$content}\n{$restrictionLevelMessage}", $levelShop)
+                new ShopMainCategoryFormButton("{$content}\n{$restrictionLevelMessage}", $levelShop),
             );
         }
     }

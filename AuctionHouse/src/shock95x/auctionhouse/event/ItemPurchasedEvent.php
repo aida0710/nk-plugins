@@ -15,7 +15,7 @@ class ItemPurchasedEvent extends Event implements Cancellable {
 
     public function __construct(
         private Player    $player,
-        private AHListing $listing
+        private AHListing $listing,
     ) {
     }
 

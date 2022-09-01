@@ -12,8 +12,8 @@ class ShopItemFormButton extends Button {
     private string $class;
 
     /**
-     * @param string $text
-     * @param string $class
+     * @param string           $text
+     * @param string           $class
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, string $class, ?ButtonImage $image = null) {

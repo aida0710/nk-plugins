@@ -12,7 +12,7 @@ final class ClosurePlayerNetworkHandler implements PlayerNetworkHandler {
      * @param Closure(Closure) : NetworkStackLatencyEntry $creator
      */
     public function __construct(
-        private Closure $creator
+        private Closure $creator,
     ) {
     }
 

@@ -22,7 +22,7 @@ final class BiomeClimateManager {
         self::register(new BiomeClimate(0.8, 0.4, true),
             BiomeIds::PLAINS,
             BiomeIds::SUNFLOWER_PLAINS,
-            BiomeIds::BEACH
+            BiomeIds::BEACH,
         );
         self::register(new BiomeClimate(2.0, 0.0, false),
             BiomeIds::DESERT,
@@ -34,7 +34,7 @@ final class BiomeClimateManager {
             BiomeIds::MESA_PLATEAU_STONE,
             BiomeIds::MESA_PLATEAU_MUTATED,
             BiomeIds::MESA_PLATEAU_STONE_MUTATED,
-            BiomeIds::HELL
+            BiomeIds::HELL,
         );
         self::register(new BiomeClimate(0.2, 0.3, true),
             BiomeIds::EXTREME_HILLS,
@@ -42,38 +42,38 @@ final class BiomeClimateManager {
             BiomeIds::EXTREME_HILLS_MUTATED,
             BiomeIds::EXTREME_HILLS_PLUS_TREES_MUTATED,
             BiomeIds::STONE_BEACH,
-            BiomeIds::EXTREME_HILLS_EDGE
+            BiomeIds::EXTREME_HILLS_EDGE,
         );
         self::register(new BiomeClimate(0.7, 0.8, true),
             BiomeIds::FOREST,
             BiomeIds::FOREST_HILLS,
             BiomeIds::FLOWER_FOREST,
             BiomeIds::ROOFED_FOREST,
-            BiomeIds::ROOFED_FOREST_MUTATED
+            BiomeIds::ROOFED_FOREST_MUTATED,
         );
         self::register(new BiomeClimate(0.6, 0.6, true),
             BiomeIds::BIRCH_FOREST,
             BiomeIds::BIRCH_FOREST_HILLS,
             BiomeIds::BIRCH_FOREST_MUTATED,
-            BiomeIds::BIRCH_FOREST_HILLS_MUTATED
+            BiomeIds::BIRCH_FOREST_HILLS_MUTATED,
         );
         self::register(new BiomeClimate(0.25, 0.8, true),
             BiomeIds::TAIGA,
             BiomeIds::TAIGA_HILLS,
             BiomeIds::TAIGA_MUTATED,
             BiomeIds::REDWOOD_TAIGA_MUTATED,
-            BiomeIds::REDWOOD_TAIGA_HILLS_MUTATED
+            BiomeIds::REDWOOD_TAIGA_HILLS_MUTATED,
         );
         self::register(new BiomeClimate(0.8, 0.9, true),
             BiomeIds::SWAMPLAND,
-            BiomeIds::SWAMPLAND_MUTATED
+            BiomeIds::SWAMPLAND_MUTATED,
         );
         self::register(new BiomeClimate(0.0, 0.5, true),
             BiomeIds::ICE_PLAINS,
             BiomeIds::ICE_MOUNTAINS,
             BiomeIds::ICE_PLAINS_SPIKES,
             BiomeIds::FROZEN_RIVER,
-            BiomeIds::FROZEN_OCEAN
+            BiomeIds::FROZEN_OCEAN,
         );
         self::register(new BiomeClimate(0.9, 1.0, true), BiomeIds::MUSHROOM_ISLAND, BiomeIds::MUSHROOM_ISLAND_SHORE);
         self::register(new BiomeClimate(0.05, 0.3, true), BiomeIds::COLD_BEACH);

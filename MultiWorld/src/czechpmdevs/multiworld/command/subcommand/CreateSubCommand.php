@@ -61,7 +61,7 @@ class CreateSubCommand extends BaseSubCommand {
         }
         Server::getInstance()->getWorldManager()->generateWorld($name, WorldCreationOptions::create()
             ->setSeed($seed)
-            ->setGeneratorClass($generator->getGeneratorClass())
+            ->setGeneratorClass($generator->getGeneratorClass()),
         );
         $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "create-done", [$name, (string)$seed, $generatorName]));
     }

@@ -13,7 +13,7 @@ final class MultiInvMenuGraphicNetworkTranslator implements InvMenuGraphicNetwor
      * @param InvMenuGraphicNetworkTranslator[] $translators
      */
     public function __construct(
-        private array $translators
+        private array $translators,
     ) {
     }
 

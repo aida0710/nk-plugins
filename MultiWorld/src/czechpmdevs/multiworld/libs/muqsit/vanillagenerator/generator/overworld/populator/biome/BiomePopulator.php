@@ -123,7 +123,7 @@ class BiomePopulator implements Populator {
             $this->orePopulator,
             $this->sandPatchDecorator,
             $this->clayPatchDecorator,
-            $this->gravelPatchDecorator
+            $this->gravelPatchDecorator,
         );
         array_push($this->onGroundPopulators,
             $this->doublePlantDecorator,
@@ -135,7 +135,7 @@ class BiomePopulator implements Populator {
             $this->redMushroomDecorator,
             $this->sugarCaneDecorator,
             $this->pumpkinDecorator,
-            $this->cactusDecorator
+            $this->cactusDecorator,
         );
         $this->initPopulators();
     }

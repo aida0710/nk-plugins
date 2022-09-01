@@ -52,7 +52,7 @@ class MysqlCredentials implements JsonSerializable {
      * socket: ""
      * </pre>
      *
-     * @param array $array
+     * @param array       $array
      * @param string|null $defaultSchema default null
      * @return MysqlCredentials
      * @throws ConfigException If <code>schema</code> is missing and <code>$defaultSchema</code> is null/not passed
@@ -72,7 +72,7 @@ class MysqlCredentials implements JsonSerializable {
      * @param string $username
      * @param string $password
      * @param string $schema
-     * @param int $port
+     * @param int    $port
      * @param string $socket
      */
     public function __construct(string $host, string $username, string $password, string $schema, int $port = 3306, string $socket = "") {

@@ -11,7 +11,7 @@ final class SharedInventoryNotifier implements InventoryListener {
 
     public function __construct(
         private Inventory                   $inventory,
-        private SharedInventorySynchronizer $synchronizer
+        private SharedInventorySynchronizer $synchronizer,
     ) {
     }
 

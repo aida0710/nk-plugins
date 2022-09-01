@@ -17,7 +17,7 @@ class OreVein extends TerrainObject {
      *
      * @param float $origin the center of the spheroid
      * @param float $radius the spheroid's radius on this axis
-     * @param int $x the raw coordinate
+     * @param int   $x      the raw coordinate
      * @return float the square of the normalized coordinate
      */
     protected static function normalizedSquaredCoordinate(float $origin, float $radius, int $x): float {

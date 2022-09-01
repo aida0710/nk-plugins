@@ -16,7 +16,7 @@ use shock95x\auctionhouse\libs\muqsit\invmenu\session\PlayerManager;
 final class InvMenuEventHandler implements Listener {
 
     public function __construct(
-        private PlayerManager $player_manager
+        private PlayerManager $player_manager,
     ) {
     }
 

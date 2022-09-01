@@ -14,7 +14,7 @@ class Announce {
 
     /**
      * @param string $content
-     * @param int $type
+     * @param int    $type
      * @param string $timestamp
      */
     public function __construct(string $content, int $type, string $timestamp) {

@@ -11,9 +11,9 @@ class Ban {
     private string $reason;
 
     /**
-     * @param string $literal
+     * @param string  $literal
      * @param BanType $type
-     * @param string $reason
+     * @param string  $reason
      */
     public function __construct(string $literal, BanType $type, string $reason) {
         $this->literal = $literal;

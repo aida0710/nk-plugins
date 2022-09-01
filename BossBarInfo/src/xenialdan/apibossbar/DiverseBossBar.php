@@ -143,7 +143,7 @@ class DiverseBossBar extends BossBar {
 
     /**
      * @param Player[] $players
-     * @param string $title
+     * @param string   $title
      * @return DiverseBossBar
      */
     public function setTitleFor(array $players, string $title = ""): DiverseBossBar {
@@ -175,7 +175,7 @@ class DiverseBossBar extends BossBar {
 
     /**
      * @param Player[] $players
-     * @param string $subTitle
+     * @param string   $subTitle
      * @return DiverseBossBar
      */
     public function setSubTitleFor(array $players, string $subTitle = ""): DiverseBossBar {
@@ -188,7 +188,7 @@ class DiverseBossBar extends BossBar {
 
     /**
      * @param Player[] $players
-     * @param float $percentage 0-1
+     * @param float    $percentage 0-1
      * @return DiverseBossBar
      */
     public function setPercentageFor(array $players, float $percentage): DiverseBossBar {

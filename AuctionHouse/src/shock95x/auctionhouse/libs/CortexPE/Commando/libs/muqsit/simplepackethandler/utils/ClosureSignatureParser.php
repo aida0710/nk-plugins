@@ -12,9 +12,9 @@ use ReflectionNamedType;
 final class ClosureSignatureParser {
 
     /**
-     * @param Closure $closure
+     * @param Closure  $closure
      * @param string[] $params
-     * @param string $return_type
+     * @param string   $return_type
      * @return string[]
      * @throws ReflectionException
      */

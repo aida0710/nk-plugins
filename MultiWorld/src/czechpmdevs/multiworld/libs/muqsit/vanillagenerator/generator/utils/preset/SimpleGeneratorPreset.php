@@ -49,12 +49,12 @@ final class SimpleGeneratorPreset implements GeneratorPreset {
     }
 
     /**
-     * @param mixed[] $data
+     * @param mixed[]                      $data
      *
      * @phpstan-param array<string, mixed> $data
      */
     public function __construct(
-        private array $data
+        private array $data,
     ) {
     }
 

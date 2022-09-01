@@ -46,7 +46,7 @@ class BlockDetailForm extends BackableForm {
                         match ($type) {
                             self::TYPE_BLOCKPLACE => $data->getBlockPlaces(null, $id),
                             self::TYPE_BLOCKBREAK => $data->getBlockBreaks(null, $id)
-                        }
+                        },
                     ) . TextFormat::RESET . '回' . PHP_EOL . PHP_EOL;
             }
             if ($unknown !== 0) $this->label .= TextFormat::BOLD . '[UNKNOWN]' . PHP_EOL . TextFormat::RED . number_format($unknown) . TextFormat::RESET . '回' . PHP_EOL . PHP_EOL;

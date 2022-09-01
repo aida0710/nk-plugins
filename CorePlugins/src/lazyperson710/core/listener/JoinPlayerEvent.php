@@ -48,7 +48,7 @@ class JoinPlayerEvent implements Listener {
         $item->getNamedTag()->setTag(
             self::NBT_ROOT,
             (new CompoundTag())
-                ->setInt(self::NBT_ID, $id)
+                ->setInt(self::NBT_ID, $id),
         );
         if (!$player->getInventory()->contains($item) && $player->getInventory()->canAddItem($item)) {
             $player->getInventory()->addItem($item);

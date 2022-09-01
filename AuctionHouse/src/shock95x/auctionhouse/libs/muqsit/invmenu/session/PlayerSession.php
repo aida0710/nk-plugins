@@ -13,7 +13,7 @@ final class PlayerSession {
 
     public function __construct(
         private Player        $player,
-        private PlayerNetwork $network
+        private PlayerNetwork $network,
     ) {
     }
 
@@ -33,7 +33,7 @@ final class PlayerSession {
     }
 
     /**
-     * @param InvMenuInfo|null $current
+     * @param InvMenuInfo|null            $current
      * @param (Closure(bool) : bool)|null $callback
      * @internal use InvMenu::send() instead.
      *

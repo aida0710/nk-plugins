@@ -54,7 +54,7 @@ class MiningLevelSystem extends PluginBase {
                         "§bLevel §7>> §a{$name}のステータス\n" .
                         "§aレベル: {$data[1]}\n" .
                         "§a経験値: {$data[2]}\n" .
-                        "§aレベルアップに必要な経験値: {$data[3]}"
+                        "§aレベルアップに必要な経験値: {$data[3]}",
                     );
                 } else {
                     $sender->sendMessage("§bLevel §7>> §c{$name}のデータは存在しません。");

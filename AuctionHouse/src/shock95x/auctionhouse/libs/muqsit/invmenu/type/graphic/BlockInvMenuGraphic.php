@@ -20,7 +20,7 @@ final class BlockInvMenuGraphic implements PositionedInvMenuGraphic {
         private Block                            $block,
         private Vector3                          $position,
         private ?InvMenuGraphicNetworkTranslator $network_translator = null,
-        private int                              $animation_duration = 0
+        private int                              $animation_duration = 0,
     ) {
     }
 

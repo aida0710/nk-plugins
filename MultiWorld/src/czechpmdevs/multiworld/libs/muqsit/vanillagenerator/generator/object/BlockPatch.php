@@ -22,10 +22,10 @@ class BlockPatch extends TerrainObject {
     /**
      * Creates a patch.
      *
-     * @param Block $type the ground cover block type
-     * @param int $horizRadius the maximum radius on the horizontal plane
-     * @param int $vertRadius the depth above and below the center
-     * @param int ...$overridablesFullId
+     * @param Block $type        the ground cover block type
+     * @param int   $horizRadius the maximum radius on the horizontal plane
+     * @param int   $vertRadius  the depth above and below the center
+     * @param int   ...$overridablesFullId
      */
     public function __construct(Block $type, int $horizRadius, int $vertRadius, int ...$overridablesFullId) {
         $this->type = $type;

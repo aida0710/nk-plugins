@@ -22,7 +22,7 @@ final class BiomeHeightManager {
             BiomeIds::EXTREME_HILLS,
             BiomeIds::EXTREME_HILLS_PLUS_TREES,
             BiomeIds::EXTREME_HILLS_MUTATED,
-            BiomeIds::EXTREME_HILLS_PLUS_TREES_MUTATED
+            BiomeIds::EXTREME_HILLS_PLUS_TREES_MUTATED,
         );
         self::register(new BiomeHeight(0.2, 0.2), BiomeIds::TAIGA, BiomeIds::COLD_TAIGA, BiomeIds::MEGA_TAIGA);
         self::register(new BiomeHeight(-0.2, 0.1), BiomeIds::SWAMPLAND);
@@ -38,7 +38,7 @@ final class BiomeHeightManager {
             BiomeIds::COLD_TAIGA_HILLS,
             BiomeIds::MEGA_TAIGA_HILLS,
             BiomeIds::MESA_PLATEAU_STONE_MUTATED,
-            BiomeIds::MESA_PLATEAU_MUTATED
+            BiomeIds::MESA_PLATEAU_MUTATED,
         );
         self::register(new BiomeHeight(1.5, 0.025), BiomeIds::SAVANNA_PLATEAU, BiomeIds::MESA_PLATEAU_STONE, BiomeIds::MESA_PLATEAU);
         self::register(new BiomeHeight(0.275, 0.25), BiomeIds::DESERT_MUTATED);

@@ -10,7 +10,7 @@ use shock95x\auctionhouse\libs\muqsit\invmenu\session\PlayerSession;
 final class WindowTypeInvMenuGraphicNetworkTranslator implements InvMenuGraphicNetworkTranslator {
 
     public function __construct(
-        private int $window_type
+        private int $window_type,
     ) {
     }
 

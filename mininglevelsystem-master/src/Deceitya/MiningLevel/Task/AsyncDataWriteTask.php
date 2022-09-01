@@ -37,7 +37,7 @@ class AsyncDataWriteTask extends AsyncTask {
             'level INTEGER NOT NULL,' .
             'exp INTEGER NOT NULL,' .
             'upexp INTEGER NOT NULL' .
-            ')'
+            ')',
         );
         foreach ($cache as $name => $data) {
             $stmt = $db->prepare("UPDATE mining SET level = :level, exp = :exp, upexp = :upexp WHERE name = :name");

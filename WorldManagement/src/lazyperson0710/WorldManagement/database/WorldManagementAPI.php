@@ -57,9 +57,9 @@ class WorldManagementAPI {
     }
 
     /**
-     * @param string $worldName
-     * @param int $heightLimit
-     * @param int $miningLevelLimit
+     * @param string   $worldName
+     * @param int      $heightLimit
+     * @param int      $miningLevelLimit
      * @param int|null $flyLimit
      * @param int|null $x1
      * @param int|null $z1

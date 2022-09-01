@@ -17,7 +17,7 @@ class Account {
     /**
      * @param string $name
      * @param string $ip
-     * @param int $cid
+     * @param int    $cid
      * @param string $xuid
      */
     public function __construct(string $name, string $ip, int $cid, string $xuid) {

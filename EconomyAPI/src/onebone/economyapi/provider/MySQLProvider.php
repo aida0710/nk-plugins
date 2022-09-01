@@ -55,7 +55,7 @@ class MySQLProvider implements Provider {
 
     /**
      * @param Player|string $player
-     * @param float $defaultMoney
+     * @param float         $defaultMoney
      * @return bool
      */
     public function createAccount($player, $defaultMoney = 1000.0): bool {
@@ -120,7 +120,7 @@ class MySQLProvider implements Provider {
 
     /**
      * @param Player|string $player
-     * @param float $amount
+     * @param float         $amount
      * @return bool
      */
     public function setMoney($player, $amount): bool {
@@ -134,7 +134,7 @@ class MySQLProvider implements Provider {
 
     /**
      * @param Player|string $player
-     * @param float $amount
+     * @param float         $amount
      * @return bool
      */
     public function addMoney($player, $amount): bool {
@@ -148,7 +148,7 @@ class MySQLProvider implements Provider {
 
     /**
      * @param Player|string $player
-     * @param float $amount
+     * @param float         $amount
      * @return bool
      */
     public function reduceMoney($player, $amount): bool {

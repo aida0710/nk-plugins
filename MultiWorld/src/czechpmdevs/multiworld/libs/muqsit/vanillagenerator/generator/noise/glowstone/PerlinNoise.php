@@ -48,17 +48,17 @@ class PerlinNoise extends BasePerlinNoiseGenerator {
     /**
      * Generates a rectangular section of this generator's noise.
      *
-     * @param float[] $noise the output of the previous noise layer
-     * @param float $x the X offset
-     * @param float $y the Y offset
-     * @param float $z the Z offset
-     * @param int $sizeX the size on the X axis
-     * @param int $sizeY the size on the Y axis
-     * @param int $sizeZ the size on the Z axis
-     * @param float $scaleX the X scale parameter
-     * @param float $scaleY the Y scale parameter
-     * @param float $scaleZ the Z scale parameter
-     * @param float $amplitude the amplitude parameter
+     * @param float[] $noise     the output of the previous noise layer
+     * @param float   $x         the X offset
+     * @param float   $y         the Y offset
+     * @param float   $z         the Z offset
+     * @param int     $sizeX     the size on the X axis
+     * @param int     $sizeY     the size on the Y axis
+     * @param int     $sizeZ     the size on the Z axis
+     * @param float   $scaleX    the X scale parameter
+     * @param float   $scaleY    the Y scale parameter
+     * @param float   $scaleZ    the Z scale parameter
+     * @param float   $amplitude the amplitude parameter
      * @return float[] noise with this layer of noise added
      */
     public function getNoise(array &$noise, float $x, float $y, float $z, int $sizeX, int $sizeY, int $sizeZ, float $scaleX, float $scaleY, float $scaleZ, float $amplitude): array {

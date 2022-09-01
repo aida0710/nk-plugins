@@ -22,9 +22,9 @@ class SellBuyItemFormButton extends Button {
     private int $itemMeta;
 
     /**
-     * @param string $text
-     * @param int $itemId
-     * @param int $itemMeta
+     * @param string           $text
+     * @param int              $itemId
+     * @param int              $itemMeta
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, int $itemId, int $itemMeta, ?ButtonImage $image = null) {

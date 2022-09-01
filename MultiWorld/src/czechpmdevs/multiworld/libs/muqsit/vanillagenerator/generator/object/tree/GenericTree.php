@@ -30,7 +30,7 @@ class GenericTree extends TerrainObject {
     /**
      * Initializes this tree with a random height, preparing it to attempt to generate.
      *
-     * @param Random $random the PRNG
+     * @param Random           $random      the PRNG
      * @param BlockTransaction $transaction the BlockTransaction used to check for space and to fill in wood and leaves
      */
     public function __construct(Random $random, BlockTransaction $transaction) {
@@ -43,7 +43,7 @@ class GenericTree extends TerrainObject {
             BlockLegacyIds::LOG,
             BlockLegacyIds::LOG2,
             BlockLegacyIds::SAPLING,
-            BlockLegacyIds::VINE
+            BlockLegacyIds::VINE,
         );
         $this->setHeight($random->nextBoundedInt(3) + 4);
         $this->setType(TreeType::OAK());
@@ -92,9 +92,9 @@ class GenericTree extends TerrainObject {
     /**
      * Checks whether this tree has enough space to grow.
      *
-     * @param int $baseX the X coordinate of the base of the trunk
-     * @param int $baseY the Y coordinate of the base of the trunk
-     * @param int $baseZ the Z coordinate of the base of the trunk
+     * @param int          $baseX the X coordinate of the base of the trunk
+     * @param int          $baseY the Y coordinate of the base of the trunk
+     * @param int          $baseZ the Z coordinate of the base of the trunk
      * @param ChunkManager $world the world to grow in
      * @return bool whether this tree has space to grow
      */
@@ -164,9 +164,9 @@ class GenericTree extends TerrainObject {
      * Returns whether any of {@link #canHeightFit(int)}, {@link #canPlace(int, int, int, World)} or
      * {@link #canPlaceOn(BlockState)} prevent this tree from generating.
      *
-     * @param int $baseX the X coordinate of the base of the trunk
-     * @param int $baseY the Y coordinate of the base of the trunk
-     * @param int $baseZ the Z coordinate of the base of the trunk
+     * @param int          $baseX the X coordinate of the base of the trunk
+     * @param int          $baseY the Y coordinate of the base of the trunk
+     * @param int          $baseZ the Z coordinate of the base of the trunk
      * @param ChunkManager $world the world to grow in
      * @return bool whether any of the checks prevent us from generating, false otherwise
      */
@@ -179,11 +179,11 @@ class GenericTree extends TerrainObject {
     /**
      * Replaces the block at a location with the given new one, if it is air or leaves.
      *
-     * @param int $x the x coordinate
-     * @param int $y the y coordinate
-     * @param int $z the z coordinate
-     * @param Block $newMaterial the new block type
-     * @param ChunkManager $world the world we are generating in
+     * @param int          $x           the x coordinate
+     * @param int          $y           the y coordinate
+     * @param int          $z           the z coordinate
+     * @param Block        $newMaterial the new block type
+     * @param ChunkManager $world       the world we are generating in
      */
     protected function replaceIfAirOrLeaves(int $x, int $y, int $z, Block $newMaterial, ChunkManager $world): void {
         $oldMaterial = $world->getBlockAt($x, $y, $z)->getId();

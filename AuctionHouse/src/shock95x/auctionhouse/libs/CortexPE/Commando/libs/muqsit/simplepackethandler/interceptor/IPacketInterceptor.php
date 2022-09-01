@@ -9,7 +9,7 @@ use pocketmine\network\mcpe\NetworkSession;
 interface IPacketInterceptor {
 
     /**
-     * @param Closure $handler
+     * @param Closure                                                    $handler
      * @return IPacketInterceptor
      *
      * @phpstan-template TServerboundPacket of ServerboundPacket
@@ -18,7 +18,7 @@ interface IPacketInterceptor {
     public function interceptIncoming(Closure $handler): IPacketInterceptor;
 
     /**
-     * @param Closure $handler
+     * @param Closure                                                    $handler
      * @return IPacketInterceptor
      *
      * @phpstan-template TClientboundPacket of ClientboundPacket

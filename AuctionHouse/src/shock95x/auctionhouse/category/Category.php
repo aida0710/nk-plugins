@@ -36,7 +36,7 @@ class Category {
 
     public static function getAll(): array {
         /**
-         * @var ICategory[] $result
+         * @var ICategory[]                      $result
          * @phpstan-var array<string, ICategory> $result
          */
         $result = self::_registryGetAll();

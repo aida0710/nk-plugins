@@ -79,13 +79,13 @@ abstract class GenericStatementImpl implements GenericStatement, JsonSerializabl
     }
 
     /**
-     * @param string $dialect
-     * @param string $name
-     * @param string $query
-     * @param string $doc
+     * @param string            $dialect
+     * @param string            $name
+     * @param string            $query
+     * @param string            $doc
      * @param GenericVariable[] $variables
-     * @param string|null $file
-     * @param int $lineNo
+     * @param string|null       $file
+     * @param int               $lineNo
      * @return GenericStatementImpl
      */
     public static function forDialect(string $dialect, string $name, string $query, string $doc, array $variables, ?string $file, int $lineNo): GenericStatementImpl {

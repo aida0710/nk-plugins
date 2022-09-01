@@ -28,7 +28,7 @@ class GeneratorUtil {
     /**
      * Returns a generator that yields nothing and returns $ret
      *
-     * @param mixed $ret
+     * @param mixed     $ret
      * @return Generator
      *
      * @template T

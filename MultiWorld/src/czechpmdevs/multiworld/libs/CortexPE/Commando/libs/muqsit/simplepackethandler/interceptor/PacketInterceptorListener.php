@@ -21,7 +21,7 @@ final class PacketInterceptorListener implements IPacketInterceptor, Listener {
      * @template TPacket of \pocketmine\network\mcpe\protocol\Packet
      * @template UPacket of TPacket
      * @param Closure(UPacket, NetworkSession) : bool $handler
-     * @param class-string<TPacket> $class
+     * @param class-string<TPacket>                   $class
      * @return int
      */
     private static function getPidFromHandler(Closure $handler, string $class): int {
@@ -45,7 +45,7 @@ final class PacketInterceptorListener implements IPacketInterceptor, Listener {
     public function __construct(
         private Plugin $register,
         private int    $priority,
-        private bool   $handleCancelled
+        private bool   $handleCancelled,
     ) {
     }
 

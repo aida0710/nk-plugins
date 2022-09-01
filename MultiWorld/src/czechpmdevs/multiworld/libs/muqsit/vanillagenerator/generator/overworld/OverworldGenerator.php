@@ -123,7 +123,7 @@ class OverworldGenerator extends VanillaGenerator {
             $seed,
             $preset->exists("environment") ? Environment::fromString($preset->getString("environment")) : Environment::OVERWORLD,
             $preset->exists("worldtype") ? WorldType::fromString($preset->getString("worldtype")) : null,
-            $preset
+            $preset,
         );
         $this->groundGen = new GroundGenerator();
         $this->addPopulators(new OverworldPopulator(), new SnowPopulator());

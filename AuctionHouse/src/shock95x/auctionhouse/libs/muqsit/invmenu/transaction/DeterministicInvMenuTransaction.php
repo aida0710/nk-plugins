@@ -14,7 +14,7 @@ final class DeterministicInvMenuTransaction implements InvMenuTransaction {
 
     public function __construct(
         private InvMenuTransaction       $inner,
-        private InvMenuTransactionResult $result
+        private InvMenuTransactionResult $result,
     ) {
     }
 

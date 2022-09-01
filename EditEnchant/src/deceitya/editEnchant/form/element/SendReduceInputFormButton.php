@@ -15,10 +15,10 @@ class SendReduceInputFormButton extends Button {
     private string $type;
 
     /**
-     * @param string $text
+     * @param string              $text
      * @param EnchantmentInstance $enchant
-     * @param string $type
-     * @param ButtonImage|null $image
+     * @param string              $type
+     * @param ButtonImage|null    $image
      */
     public function __construct(string $text, EnchantmentInstance $enchant, string $type, ?ButtonImage $image = null) {
         parent::__construct($text, $image);

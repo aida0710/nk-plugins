@@ -50,7 +50,7 @@ class NetherGenerator extends VanillaGenerator {
             $seed,
             $preset->exists("environment") ? Environment::fromString($preset->getString("environment")) : Environment::NETHER,
             $preset->exists("worldtype") ? WorldType::fromString($preset->getString("worldtype")) : null,
-            $preset
+            $preset,
         );
         $this->addPopulators(new NetherPopulator($this->getMaxY())); // This isn't faithful to original code. Was $world->getWorldHeight()
     }

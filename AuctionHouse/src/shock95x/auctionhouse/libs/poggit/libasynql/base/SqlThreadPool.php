@@ -55,8 +55,8 @@ class SqlThreadPool implements SqlThread {
      * SqlThreadPool constructor.
      *
      * @param callable $workerFactory create a child worker: <code>function(?Threaded $bufferSend = null, ?Threaded
-     *     $bufferRecv = null) : {@link BaseSqlThread}{}</code>
-     * @param int $workerLimit the maximum number of workers to create. Workers are created lazily.
+     *                                $bufferRecv = null) : {@link BaseSqlThread}{}</code>
+     * @param int      $workerLimit   the maximum number of workers to create. Workers are created lazily.
      */
     public function __construct(callable $workerFactory, int $workerLimit) {
         $this->notifier = new SleeperNotifier();

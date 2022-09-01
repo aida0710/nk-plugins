@@ -12,8 +12,8 @@ class SecondBackFormButton extends Button {
     private int $shopNumber;
 
     /**
-     * @param string $text
-     * @param int $shopNumber
+     * @param string           $text
+     * @param int              $shopNumber
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, int $shopNumber, ?ButtonImage $image = null) {

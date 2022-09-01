@@ -43,7 +43,7 @@ class NetherPopulator implements Populator {
             $this->glowstoneDecorator2,
             $this->fireDecorator,
             $this->brownMushroomDecorator,
-            $this->redMushroomDecorator
+            $this->redMushroomDecorator,
         );
         $this->fireDecorator->setAmount(1);
         $this->glowstoneDecorator1->setAmount(1);

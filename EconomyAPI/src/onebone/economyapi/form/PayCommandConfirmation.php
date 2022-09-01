@@ -28,7 +28,7 @@ class PayCommandConfirmation extends CustomForm {
                 new Label("振り込み金額: §e{$amount}"),
                 new Label("振り込み先: §e{$target->getName()}\n"),
                 $this->toggle,
-                new Label("送金をしない場合はトグルを押さずにformを閉じてください\nまた、この確認画面を表示しないには/settingから設定できます")
+                new Label("送金をしない場合はトグルを押さずにformを閉じてください\nまた、この確認画面を表示しないには/settingから設定できます"),
             );
     }
 

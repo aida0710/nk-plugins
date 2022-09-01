@@ -608,12 +608,12 @@ class EconomyLand extends PluginBase implements Listener {
      * Adds land to the EconomyLand database
      *
      * @return int
-     * @var int $startX
-     * @var int $startZ
-     * @var int $endX
-     * @var int $endZ
-     * @var World|string $level
-     * @var float $expires
+     * @var int           $startX
+     * @var int           $startZ
+     * @var int           $endX
+     * @var int           $endZ
+     * @var World|string  $level
+     * @var float         $expires
      *
      * @var Player|string $player
      */

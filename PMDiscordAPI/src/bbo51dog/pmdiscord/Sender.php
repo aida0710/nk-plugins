@@ -16,7 +16,7 @@ class Sender {
      * Send Message to Discord
      *
      * @param Webhook $webhook
-     * @param bool $async
+     * @param bool    $async
      * @throws PMDiscordAPIException
      */
     public static function send(Webhook $webhook, bool $async = true): void {

@@ -23,7 +23,7 @@ final class DoublePairableBlockActorFixedInvMenuType implements FixedInvMenuType
         private int                              $size,
         private string                           $tile_id,
         private ?InvMenuGraphicNetworkTranslator $network_translator = null,
-        private int                              $animation_duration = 0
+        private int                              $animation_duration = 0,
     ) {
     }
 

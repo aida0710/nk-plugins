@@ -22,12 +22,12 @@ class SQLiteDatabase {
             'level INTEGER NOT NULL,' .
             'exp INTEGER NOT NULL,' .
             'upexp INTEGER NOT NULL' .
-            ')'
+            ')',
         );
     }
 
     /**
-     * @param string $name
+     * @param string  $name
      * @param integer $level
      * @param integer $exp
      * @param integer $upexp
@@ -57,7 +57,7 @@ class SQLiteDatabase {
     }
 
     /**
-     * @param string $name
+     * @param string  $name
      * @param integer $level
      * @return void
      */
@@ -83,7 +83,7 @@ class SQLiteDatabase {
     }
 
     /**
-     * @param string $name
+     * @param string  $name
      * @param integer $exp
      * @return void
      */
@@ -109,7 +109,7 @@ class SQLiteDatabase {
     }
 
     /**
-     * @param string $name
+     * @param string  $name
      * @param integer $upexp
      * @return void
      */

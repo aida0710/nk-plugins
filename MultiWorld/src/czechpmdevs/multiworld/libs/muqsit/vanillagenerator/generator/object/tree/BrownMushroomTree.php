@@ -23,7 +23,7 @@ class BrownMushroomTree extends GenericTree {
         $this->setOverridables(
             BlockLegacyIds::AIR,
             BlockLegacyIds::LEAVES,
-            BlockLegacyIds::LEAVES2
+            BlockLegacyIds::LEAVES2,
         );
         $this->setHeight($random->nextBoundedInt(3) + 4);
     }

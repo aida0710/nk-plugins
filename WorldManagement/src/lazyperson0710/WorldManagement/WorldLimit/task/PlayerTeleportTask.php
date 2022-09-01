@@ -14,7 +14,7 @@ class PlayerTeleportTask extends Task {
     private WorldProperty $property;
 
     /**
-     * @param Player $player
+     * @param Player        $player
      * @param WorldProperty $property
      */
     public function __construct(Player $player, WorldProperty $property) {

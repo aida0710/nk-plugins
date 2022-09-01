@@ -24,8 +24,8 @@ class ShopMainCategoryFormButton extends Button {
     private FormBase $class;
 
     /**
-     * @param string $text
-     * @param FormBase $class
+     * @param string           $text
+     * @param FormBase         $class
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, FormBase $class, ?ButtonImage $image = null) {

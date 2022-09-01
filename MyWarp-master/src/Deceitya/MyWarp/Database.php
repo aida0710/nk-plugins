@@ -27,7 +27,7 @@ class Database {
                 world TEXT NOT NULL,
                 created_at TEXT NOT NULL,
                 created_by TEXT NOT NULL
-            );"
+            );",
         );
     }
 
@@ -73,7 +73,7 @@ class Database {
                 name, x, y, z, world, created_at, created_by
             ) VALUES (
                 :name, :x, :y, :z, :world, :created_at, :created_by
-            );"
+            );",
         );
         $stmt->bindValue(':name', $name, SQLITE3_TEXT);
         $stmt->bindValue(':x', $pos->getFloorX(), SQLITE3_INTEGER);

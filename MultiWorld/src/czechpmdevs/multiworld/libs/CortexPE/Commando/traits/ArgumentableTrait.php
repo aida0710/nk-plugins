@@ -52,7 +52,7 @@ trait ArgumentableTrait {
     abstract protected function prepare(): void;
 
     /**
-     * @param int $position
+     * @param int          $position
      * @param BaseArgument $argument
      *
      * @throws ArgumentOrderException

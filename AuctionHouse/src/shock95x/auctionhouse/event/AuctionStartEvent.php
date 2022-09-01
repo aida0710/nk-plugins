@@ -11,7 +11,7 @@ use shock95x\auctionhouse\AHListing;
 class AuctionStartEvent extends Event {
 
     public function __construct(
-        private AHListing $listing
+        private AHListing $listing,
     ) {
     }
 

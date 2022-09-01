@@ -63,11 +63,12 @@ class DataConnectorImpl implements DataConnector {
     private $placeHolder;
 
     /**
-     * @param Plugin $plugin
-     * @param SqlThread $thread the backend SqlThread to connect with
+     * @param Plugin      $plugin
+     * @param SqlThread   $thread      the backend SqlThread to connect with
      * @param null|string $placeHolder the backend-implementation-dependent placeholder. <code>"?"</code> for
-     *     mysqli-based backends, <code>null</code> for PDO-based and SQLite3-based backends.
-     * @param bool $logQueries
+     *                                 mysqli-based backends, <code>null</code> for PDO-based and SQLite3-based
+     *                                 backends.
+     * @param bool        $logQueries
      */
     public function __construct(Plugin $plugin, SqlThread $thread, ?string $placeHolder, bool $logQueries = false) {
         $this->plugin = $plugin;

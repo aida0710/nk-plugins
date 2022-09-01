@@ -23,7 +23,7 @@ class InvMenu implements InvMenuTypeIds {
 
     /**
      * @param string $identifier
-     * @param mixed ...$args
+     * @param mixed  ...$args
      * @return InvMenu
      */
     public static function create(string $identifier, ...$args): InvMenu {
@@ -92,8 +92,8 @@ class InvMenu implements InvMenuTypeIds {
     }
 
     /**
-     * @param Player $player
-     * @param string|null $name
+     * @param Player                      $player
+     * @param string|null                 $name
      * @param (Closure(bool) : void)|null $callback
      */
     final public function send(Player $player, ?string $name = null, ?Closure $callback = null): void {

@@ -18,9 +18,9 @@ class EnchantSelectFormButton extends Button {
     private string $enchantName;
 
     /**
-     * @param string $text
-     * @param Enchantment $enchantment
-     * @param string $enchantName
+     * @param string           $text
+     * @param Enchantment      $enchantment
+     * @param string           $enchantName
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, Enchantment $enchantment, string $enchantName, ?ButtonImage $image = null) {

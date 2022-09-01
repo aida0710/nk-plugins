@@ -96,7 +96,7 @@ final class Channel {
      * Waits for a sender if there is currently no sender waiting.
      *
      * @return Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
-     *     mixed, T>
+     *                          mixed, T>
      */
     public function receive(): Generator {
         if ($this->state instanceof SendingChannelState) {

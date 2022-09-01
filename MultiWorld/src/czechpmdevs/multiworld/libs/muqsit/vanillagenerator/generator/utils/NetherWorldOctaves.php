@@ -39,7 +39,7 @@ class NetherWorldOctaves extends WorldOctaves {
         OctaveGenerator $detail,
         OctaveGenerator $surface,
         OctaveGenerator $soulSand,
-        OctaveGenerator $gravel
+        OctaveGenerator $gravel,
     ) {
         parent::__construct($height, $roughness, $roughness2, $detail, $surface);
         $this->soulSand = $soulSand;

@@ -63,8 +63,8 @@ class BiomeVariationMapLayer extends MapLayer {
      * Generates a rectangle, replacing all the positive values in the previous layer with random
      * values from 2 to 31 while leaving zero and negative values unchanged.
      *
-     * @param int $x the lowest x coordinate
-     * @param int $z the lowest z coordinate
+     * @param int $x     the lowest x coordinate
+     * @param int $z     the lowest z coordinate
      * @param int $sizeX the x coordinate range
      * @param int $sizeZ the z coordinate range
      * @return int[] a flattened array of generated values
@@ -88,8 +88,8 @@ class BiomeVariationMapLayer extends MapLayer {
     /**
      * Generates a rectangle using the previous layer and the variation layer.
      *
-     * @param int $x the lowest x coordinate
-     * @param int $z the lowest z coordinate
+     * @param int $x     the lowest x coordinate
+     * @param int $z     the lowest z coordinate
      * @param int $sizeX the x coordinate range
      * @param int $sizeZ the z coordinate range
      * @return int[] a flattened array of generated values

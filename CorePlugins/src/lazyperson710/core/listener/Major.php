@@ -54,7 +54,7 @@ class Major implements Listener {
     /**
      * @param Vector3 $start
      * @param Vector3 $end
-     * @param float $percent
+     * @param float   $percent
      * @return Vector3
      */
     public function lerp(Vector3 $start, Vector3 $end, float $percent): Vector3 {

@@ -121,7 +121,7 @@ class SqlError extends RuntimeException {
                 $value = sprintf(
                     '(Closure at %s:%s)',
                     $closureReflection->getFileName(),
-                    $closureReflection->getStartLine()
+                    $closureReflection->getStartLine(),
                 );
             } elseif (is_object($value)) {
                 $value = sprintf('object(%s)', get_class($value));

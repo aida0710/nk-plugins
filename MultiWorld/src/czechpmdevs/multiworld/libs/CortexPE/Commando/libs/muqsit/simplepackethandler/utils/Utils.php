@@ -12,9 +12,9 @@ use ReflectionNamedType;
 final class Utils {
 
     /**
-     * @param Closure $closure
+     * @param Closure  $closure
      * @param string[] $params
-     * @param string $return_type
+     * @param string   $return_type
      * @return string[]
      */
     public static function parseClosureSignature(Closure $closure, array $params, string $return_type): array {
@@ -46,9 +46,9 @@ final class Utils {
 
     /**
      * @template TEvent of \pocketmine\event\Event
-     * @param class-string<TEvent> $event
+     * @param class-string<TEvent>   $event
      * @param Closure(TEvent) : void $handler
-     * @param int $priority
+     * @param int                    $priority
      * @return bool
      */
     public static function unregisterEventByHandler(string $event, Closure $handler, int $priority): bool {

@@ -93,7 +93,7 @@ class PacketHooker implements Listener {
 
     /**
      * @param CommandSender $cs
-     * @param BaseCommand $command
+     * @param BaseCommand   $command
      *
      * @return CommandParameter[][]
      */

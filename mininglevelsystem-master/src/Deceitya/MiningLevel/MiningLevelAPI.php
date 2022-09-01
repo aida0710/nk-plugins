@@ -104,7 +104,7 @@ class MiningLevelAPI {
 
     /**
      * @param string|Player $player
-     * @param integer $level
+     * @param integer       $level
      * @return void
      */
     public function setLevel(string|Player $player, int $level) {
@@ -128,7 +128,7 @@ class MiningLevelAPI {
 
     /**
      * @param string|Player $player
-     * @param integer $exp
+     * @param integer       $exp
      * @return void
      */
     public function setExp(string|Player $player, int $exp) {
@@ -152,7 +152,7 @@ class MiningLevelAPI {
 
     /**
      * @param string|Player $player
-     * @param integer $upexp
+     * @param integer       $upexp
      * @return void
      */
     public function setLevelUpExp(string|Player $player, int $upexp) {

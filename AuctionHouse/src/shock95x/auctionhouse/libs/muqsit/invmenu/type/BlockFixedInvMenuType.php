@@ -19,7 +19,7 @@ final class BlockFixedInvMenuType implements FixedInvMenuType {
     public function __construct(
         private Block                            $block,
         private int                              $size,
-        private ?InvMenuGraphicNetworkTranslator $network_translator = null
+        private ?InvMenuGraphicNetworkTranslator $network_translator = null,
     ) {
     }
 

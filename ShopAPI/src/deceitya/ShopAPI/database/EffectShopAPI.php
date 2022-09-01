@@ -30,10 +30,10 @@ class EffectShopAPI {
 
     /**
      * @param Effect $effect
-     * @param int $buy
-     * @param int $levelLimit
-     * @param int $amplifiedMoney
-     * @param int $timeRestriction
+     * @param int    $buy
+     * @param int    $levelLimit
+     * @param int    $amplifiedMoney
+     * @param int    $timeRestriction
      * @return void
      */
     public function register(Effect $effect, int $buy, int $levelLimit, int $amplifiedMoney, int $timeRestriction): void {

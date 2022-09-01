@@ -9,7 +9,7 @@ use pocketmine\network\mcpe\NetworkSession;
 interface IPacketMonitor {
 
     /**
-     * @param Closure $handler
+     * @param Closure                                                    $handler
      * @return IPacketMonitor
      *
      * @phpstan-template TServerboundPacket of ServerboundPacket
@@ -18,7 +18,7 @@ interface IPacketMonitor {
     public function monitorIncoming(Closure $handler): IPacketMonitor;
 
     /**
-     * @param Closure $handler
+     * @param Closure                                                    $handler
      * @return IPacketMonitor
      *
      * @phpstan-template TClientboundPacket of ClientboundPacket

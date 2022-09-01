@@ -14,9 +14,9 @@ class AnnounceDto {
 
     /**
      * @param string $content
-     * @param int $type
+     * @param int    $type
      * @param string $timestamp
-     * @param int $id
+     * @param int    $id
      */
     public function __construct(string $content, int $type, string $timestamp, int $id = -1) {
         $this->content = $content;

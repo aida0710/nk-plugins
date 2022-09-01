@@ -154,7 +154,7 @@ class Embed {
      *
      * @param string $name
      * @param string $value
-     * @param bool $inline
+     * @param bool   $inline
      * @return self
      */
     public function addField(string $name, string $value, bool $inline = false): self {

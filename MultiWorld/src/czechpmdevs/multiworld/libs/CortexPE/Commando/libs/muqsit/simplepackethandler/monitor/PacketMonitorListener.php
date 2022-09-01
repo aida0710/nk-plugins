@@ -22,7 +22,7 @@ final class PacketMonitorListener implements IPacketMonitor, Listener {
      * @template TPacket of \pocketmine\network\mcpe\protocol\Packet
      * @template UPacket of TPacket
      * @param Closure(UPacket, NetworkSession) : void $handler
-     * @param class-string<TPacket> $class
+     * @param class-string<TPacket>                   $class
      * @return int
      */
     private static function getPidFromHandler(Closure $handler, string $class): int {
@@ -45,7 +45,7 @@ final class PacketMonitorListener implements IPacketMonitor, Listener {
 
     public function __construct(
         private Plugin $register,
-        private bool   $handleCancelled
+        private bool   $handleCancelled,
     ) {
     }
 

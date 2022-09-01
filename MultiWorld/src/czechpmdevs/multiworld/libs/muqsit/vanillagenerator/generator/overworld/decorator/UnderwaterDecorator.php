@@ -30,7 +30,7 @@ class UnderwaterDecorator extends Decorator {
      * Updates the size of this decorator.
      *
      * @param int $horizRadius the maximum radius on the horizontal plane
-     * @param int $vertRadius the depth above and below the center
+     * @param int $vertRadius  the depth above and below the center
      * @return UnderwaterDecorator this, updated
      */
     final public function setRadii(int $horizRadius, int $vertRadius): UnderwaterDecorator {

@@ -54,7 +54,7 @@ abstract class BaseArgument {
     abstract public function getNetworkType(): int;
 
     /**
-     * @param string $testString
+     * @param string        $testString
      * @param CommandSender $sender
      *
      * @return bool
@@ -62,7 +62,7 @@ abstract class BaseArgument {
     abstract public function canParse(string $testString, CommandSender $sender): bool;
 
     /**
-     * @param string $argument
+     * @param string        $argument
      * @param CommandSender $sender
      *
      * @return mixed

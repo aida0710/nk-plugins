@@ -68,14 +68,14 @@ interface IBankHelper {
     /**
      * @param string $bank
      * @param string $name
-     * @param int $money
+     * @param int    $money
      */
     public function addMoney(string $bank, string $name, int $money): void;
 
     /**
      * @param string $bank
      * @param string $name
-     * @param int $money
+     * @param int    $money
      */
     public function removeMoney(string $bank, string $name, int $money): void;
 
@@ -94,7 +94,7 @@ interface IBankHelper {
     /**
      * @param string $bank
      * @param string $name
-     * @param int $money
+     * @param int    $money
      * @param string $target
      * @return bool
      */

@@ -17,7 +17,7 @@ class CheckPositionTask extends Task {
     private array $properties;
 
     /**
-     * @param TaskScheduler $scheduler
+     * @param TaskScheduler   $scheduler
      * @param WorldProperty[] $properties
      */
     public function __construct(TaskScheduler $scheduler, array $properties) {

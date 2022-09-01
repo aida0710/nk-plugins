@@ -18,9 +18,9 @@ abstract class Checker {
 
     /**
      * @param PlayerData $playerData
-     * @param string $name
-     * @param int $warningViolation
-     * @param int $maxViolation
+     * @param string     $name
+     * @param int        $warningViolation
+     * @param int        $maxViolation
      */
     public function __construct(PlayerData $playerData, string $name, int $warningViolation, int $maxViolation) {
         $this->playerData = $playerData;

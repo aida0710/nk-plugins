@@ -79,7 +79,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         Plugin $plugin,
         string $name,
         string $description = "",
-        array  $aliases = []
+        array  $aliases = [],
     ) {
         $this->plugin = $plugin;
         parent::__construct($name, $description, null, $aliases);
@@ -114,8 +114,8 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
                     if ($msg === null) {
                         $sender->sendMessage(
                             $sender->getServer()->getLanguage()->translateString(
-                                TextFormat::RED . "%commands.generic.permission"
-                            )
+                                TextFormat::RED . "%commands.generic.permission",
+                            ),
                         );
                     } elseif (empty($msg)) {
                         $sender->sendMessage(str_replace("<permission>", $cmd->getPermission(), $msg));
@@ -141,7 +141,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 
     /**
      * @param ArgumentableTrait $ctx
-     * @param array $args
+     * @param array             $args
      *
      * @return array|null
      */
@@ -157,8 +157,8 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
     }
 
     /**
-     * @param CommandSender $sender
-     * @param string $aliasUsed
+     * @param CommandSender                          $sender
+     * @param string                                 $aliasUsed
      * @param array|array<string,mixed|array<mixed>> $args
      */
     abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args): void;

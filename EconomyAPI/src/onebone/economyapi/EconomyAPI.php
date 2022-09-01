@@ -65,7 +65,7 @@ class EconomyAPI extends PluginBase implements Listener {
     }
 
     /**
-     * @param string $command
+     * @param string      $command
      * @param string|bool $lang
      *
      * @return array
@@ -84,7 +84,7 @@ class EconomyAPI extends PluginBase implements Listener {
 
     /**
      * @param string $key
-     * @param array $params
+     * @param array  $params
      * @param string $player
      *
      * @return string
@@ -148,9 +148,9 @@ class EconomyAPI extends PluginBase implements Listener {
 
     /**
      * @param string|Player $player
-     * @param float $amount
-     * @param bool $force
-     * @param string $issuer
+     * @param float         $amount
+     * @param bool          $force
+     * @param string        $issuer
      *
      * @return int
      */
@@ -193,9 +193,9 @@ class EconomyAPI extends PluginBase implements Listener {
 
     /**
      * @param string|Player $player
-     * @param float $amount
-     * @param bool $force
-     * @param string $issuer
+     * @param float         $amount
+     * @param bool          $force
+     * @param string        $issuer
      *
      * @return int
      */
@@ -227,9 +227,9 @@ class EconomyAPI extends PluginBase implements Listener {
 
     /**
      * @param string|Player $player
-     * @param float $amount
-     * @param bool $force
-     * @param string $issuer
+     * @param float         $amount
+     * @param bool          $force
+     * @param string        $issuer
      *
      * @return int
      */
@@ -386,8 +386,8 @@ class EconomyAPI extends PluginBase implements Listener {
 
     /**
      * @param string|Player $player
-     * @param float $defaultMoney
-     * @param bool $force
+     * @param float         $defaultMoney
+     * @param bool          $force
      *
      * @return bool
      */

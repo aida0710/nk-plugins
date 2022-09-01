@@ -1,3 +1,2 @@
 # ScoreBoardInfo
-
 スコアボードに表示するやつ

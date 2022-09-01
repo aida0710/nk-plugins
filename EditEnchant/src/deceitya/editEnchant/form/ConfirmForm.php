@@ -41,7 +41,7 @@ class ConfirmForm extends CustomForm {
             ->setTitle("Edit Enchant")
             ->addElements(
                 new Label("本当に{$enchantName}(Lv{$enchant->getLevel()})を{$mode}しますか？\n\n削除は削除したいエンチャントのレベルにつき3000円\n削減は削減したいエンチャントのレベルにつき1500円となります"),
-                new Label("コスト -> {$cost}円")
+                new Label("コスト -> {$cost}円"),
             );
     }
 

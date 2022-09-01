@@ -50,7 +50,7 @@ trait ArgumentableTrait {
     private $requiredArgumentCount = [];
 
     /**
-     * @param int $position
+     * @param int          $position
      * @param BaseArgument $argument
      *
      * @throws ArgumentOrderException

@@ -133,9 +133,9 @@ abstract class SqlSlaveThread extends Thread implements SqlThread {
     protected abstract function createConn(&$resource): ?string;
 
     /**
-     * @param mixed $resource
-     * @param int $mode
-     * @param string $query
+     * @param mixed   $resource
+     * @param int     $mode
+     * @param string  $query
      * @param mixed[] $params
      *
      * @return SqlResult

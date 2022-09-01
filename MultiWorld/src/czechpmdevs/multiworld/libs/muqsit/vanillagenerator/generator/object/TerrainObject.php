@@ -31,11 +31,11 @@ abstract class TerrainObject {
     /**
      * Generates this feature.
      *
-     * @param ChunkManager $world the world to generate in
-     * @param Random $random the PRNG that will choose the size and a few details of the shape
-     * @param int $sourceX the base X coordinate
-     * @param int $sourceY the base Y coordinate
-     * @param int $sourceZ the base Z coordinate
+     * @param ChunkManager $world   the world to generate in
+     * @param Random       $random  the PRNG that will choose the size and a few details of the shape
+     * @param int          $sourceX the base X coordinate
+     * @param int          $sourceY the base Y coordinate
+     * @param int          $sourceZ the base Z coordinate
      * @return bool if successfully generated
      */
     abstract public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ): bool;

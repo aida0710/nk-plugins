@@ -22,7 +22,7 @@ class TallRedwoodTree extends RedwoodTree {
             BlockLegacyIds::LOG,
             BlockLegacyIds::LOG2,
             BlockLegacyIds::SAPLING,
-            BlockLegacyIds::VINE
+            BlockLegacyIds::VINE,
         );
         $this->setHeight($random->nextBoundedInt(5) + 7);
         $this->setLeavesHeight($this->height - $random->nextBoundedInt(2) - 3);

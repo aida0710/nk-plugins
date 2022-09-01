@@ -45,7 +45,7 @@ class Locale {
     /**
      * @param Player $player
      * @param string $key
-     * @param bool $prefix
+     * @param bool   $prefix
      */
     public static function sendMessage(Player $player, string $key, bool $prefix = true): void {
         $player->sendMessage((string)self::get($player, $key, $prefix));
@@ -54,7 +54,7 @@ class Locale {
     /**
      * @param Player $player
      * @param string $key
-     * @param bool $prefix
+     * @param bool   $prefix
      * @return string|string[]
      */
     public static function get(Player $player, string $key, bool $prefix = false) {

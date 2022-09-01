@@ -267,12 +267,12 @@ class PlayerEvent implements Listener {
     }
 
     /**
-     * @param string $player
-     * @param string $type
-     * @param World|null $world
-     * @param Position|null $position
+     * @param string          $player
+     * @param string          $type
+     * @param World|null      $world
+     * @param Position|null   $position
      * @param Item|Block|null $item
-     * @param string|null $others
+     * @param string|null     $others
      * @return void
      */
     public function othersLog(string $player, string $type, ?World $world = null, ?Position $position = null, Item|Block|null $item = null, ?string $others = null): void {

@@ -32,7 +32,7 @@ class RankingForm extends BackableForm {
             $receiver,
             30,
             $level,
-            $id
+            $id,
         );
         $this->addButton('戻る');
         $this->submit = fn(Player $player, int $data) => $this->back($player);

@@ -58,7 +58,7 @@ class SimpleForm extends Form {
 
     /**
      * @param string $text
-     * @param int $imageType
+     * @param int    $imageType
      * @param string $imagePath
      * @param string $label
      */

@@ -43,12 +43,12 @@ class GroundGenerator {
     /**
      * Generates a terrain column.
      *
-     * @param ChunkManager $world the affected world
-     * @param Random $random the PRNG to use
-     * @param int $x the chunk X coordinate
-     * @param int $z the chunk Z coordinate
-     * @param int $biome the biome this column is in
-     * @param float $surfaceNoise the amplitude of random variation in surface height
+     * @param ChunkManager $world        the affected world
+     * @param Random       $random       the PRNG to use
+     * @param int          $x            the chunk X coordinate
+     * @param int          $z            the chunk Z coordinate
+     * @param int          $biome        the biome this column is in
+     * @param float        $surfaceNoise the amplitude of random variation in surface height
      */
     public function generateTerrainColumn(ChunkManager $world, Random $random, int $x, int $z, int $biome, float $surfaceNoise): void {
         $seaLevel = 64;

@@ -10,7 +10,7 @@ use pocketmine\item\Item;
 final class SharedInventorySynchronizer implements InventoryListener {
 
     public function __construct(
-        private Inventory $inventory
+        private Inventory $inventory,
     ) {
     }
 

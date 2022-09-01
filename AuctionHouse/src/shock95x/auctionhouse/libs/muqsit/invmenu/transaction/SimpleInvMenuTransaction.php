@@ -15,7 +15,7 @@ final class SimpleInvMenuTransaction implements InvMenuTransaction {
         private Item                 $out,
         private Item                 $in,
         private SlotChangeAction     $action,
-        private InventoryTransaction $transaction
+        private InventoryTransaction $transaction,
     ) {
     }
 

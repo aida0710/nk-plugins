@@ -10,7 +10,7 @@ class PasswordDto {
 
     /**
      * @param string $name
-     * @param bool $isConfirmed
+     * @param bool   $isConfirmed
      */
     public function __construct(string $name, bool $isConfirmed) {
         $this->name = $name;

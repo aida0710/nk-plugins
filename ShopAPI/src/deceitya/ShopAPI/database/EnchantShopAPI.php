@@ -33,9 +33,9 @@ class EnchantShopAPI {
 
     /**
      * @param Enchantment $enchantment
-     * @param int $buy
-     * @param int $limit
-     * @param int $miningLevel
+     * @param int         $buy
+     * @param int         $limit
+     * @param int         $miningLevel
      * @return void
      */
     public function register(Enchantment $enchantment, int $buy, int $limit, int $miningLevel): void {

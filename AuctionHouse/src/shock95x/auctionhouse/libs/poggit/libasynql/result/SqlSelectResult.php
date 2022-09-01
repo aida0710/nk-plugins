@@ -31,7 +31,7 @@ class SqlSelectResult extends SqlResult {
      * SqlSelectResult constructor.
      *
      * @param SqlColumnInfo[] $columnInfo
-     * @param array[] $rows
+     * @param array[]         $rows
      */
     public function __construct(array $columnInfo, array $rows) {
         $this->columnInfo = $columnInfo;

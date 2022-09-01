@@ -22,7 +22,7 @@ final class PlayerNetwork {
 
     public function __construct(
         private NetworkSession       $session,
-        private PlayerNetworkHandler $handler
+        private PlayerNetworkHandler $handler,
     ) {
         $this->queue = new SplQueue();
     }
@@ -71,7 +71,7 @@ final class PlayerNetwork {
     /**
      * Waits at least $wait_ms before calling $then(true).
      *
-     * @param int $wait_ms
+     * @param int                  $wait_ms
      * @param Closure(bool) : bool $then
      */
     public function waitUntil(int $wait_ms, Closure $then): void {

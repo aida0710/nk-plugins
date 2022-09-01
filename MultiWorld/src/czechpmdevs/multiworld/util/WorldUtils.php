@@ -163,7 +163,7 @@ class WorldUtils {
         // however, due to compatibility with plugins such as NativeDimensions it's needed to keep this.
         $files = array_unique(array_merge(
             array_map(fn(World $world) => $world->getFolderName(), Server::getInstance()->getWorldManager()->getWorlds()),
-            $files
+            $files,
         ));
         return array_values(array_filter($files, function (string $fileName): bool {
             return Server::getInstance()->getWorldManager()->isWorldGenerated($fileName) &&

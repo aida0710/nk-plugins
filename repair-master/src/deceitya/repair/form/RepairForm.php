@@ -45,7 +45,6 @@ class RepairForm extends CustomForm {
             );
     }
 
-
     public function handleSubmit(Player $player): void {
         $consumption = "error";
         try {

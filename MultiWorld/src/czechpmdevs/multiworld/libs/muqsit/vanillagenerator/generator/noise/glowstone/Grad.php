@@ -10,7 +10,7 @@ final class Grad {
     public function __construct(
         public float $x,
         public float $y,
-        public float $z
+        public float $z,
     ) {
     }
 }

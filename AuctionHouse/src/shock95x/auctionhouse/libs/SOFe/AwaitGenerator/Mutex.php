@@ -90,9 +90,9 @@ final class Mutex {
     /**
      * @template T
      * @param Closure(): Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
-     *     mixed, T> $generatorClosure
+     *                                    mixed, T> $generatorClosure
      * @return Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
-     *     mixed, T>
+     *                          mixed, T>
      */
     public function runClosure(Closure $generatorClosure): Generator {
         return yield from $this->run($generatorClosure());
@@ -101,9 +101,10 @@ final class Mutex {
     /**
      * @template T
      * @param Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator, mixed,
-     *     T> $generator
+     *                                                                                                                              T>
+     *                                                                                                                              $generator
      * @return Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
-     *     mixed, T>
+     *                          mixed, T>
      */
     public function run(Generator $generator): Generator {
         yield from $this->acquire();

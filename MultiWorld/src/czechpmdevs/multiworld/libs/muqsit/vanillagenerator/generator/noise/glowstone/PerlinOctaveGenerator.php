@@ -43,9 +43,9 @@ class PerlinOctaveGenerator extends OctaveGenerator {
      * Creates a generator for multiple layers of Perlin noise.
      *
      * @param NoiseGenerator[] $octaves the noise generators
-     * @param int $sizeX the size on the X axis
-     * @param int $sizeY the size on the Y axis
-     * @param int $sizeZ the size on the Z axis
+     * @param int              $sizeX   the size on the X axis
+     * @param int              $sizeY   the size on the Y axis
+     * @param int              $sizeZ   the size on the Z axis
      */
     public function __construct(array $octaves, int $sizeX, int $sizeY, int $sizeZ) {
         parent::__construct($octaves);
@@ -82,10 +82,10 @@ class PerlinOctaveGenerator extends OctaveGenerator {
     /**
      * Generates multiple layers of noise.
      *
-     * @param float $x the starting X coordinate
-     * @param float $y the starting Y coordinate
-     * @param float $z the starting Z coordinate
-     * @param float $lacunarity layer n's frequency as a fraction of layer {@code n - 1}'s frequency
+     * @param float $x           the starting X coordinate
+     * @param float $y           the starting Y coordinate
+     * @param float $z           the starting Z coordinate
+     * @param float $lacunarity  layer n's frequency as a fraction of layer {@code n - 1}'s frequency
      * @param float $persistence layer n's amplitude as a multiple of layer {@code n - 1}'s amplitude
      * @return float[] the noise array
      */

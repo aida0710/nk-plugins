@@ -40,7 +40,7 @@ final class Loading {
 
     /**
      * @param Closure(): Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
-     *     mixed, T> $loader
+     *                                    mixed, T> $loader
      */
     public function __construct(Closure $loader) {
         Await::f2c(function () use ($loader) {
@@ -58,7 +58,7 @@ final class Loading {
 
     /**
      * @return Generator<mixed, Await::RESOLVE|null|Await::RESOLVE_MULTI|Await::REJECT|Await::ONCE|Await::ALL|Await::RACE|Generator,
-     *     mixed, T>
+     *                          mixed, T>
      */
     public function get(): Generator {
         if ($this->onLoaded !== null) {

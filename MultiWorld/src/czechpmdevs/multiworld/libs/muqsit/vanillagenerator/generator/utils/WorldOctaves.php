@@ -40,7 +40,7 @@ class WorldOctaves {
         OctaveGenerator $roughness,
         OctaveGenerator $roughness2,
         OctaveGenerator $detail,
-        OctaveGenerator $surface
+        OctaveGenerator $surface,
     ) {
         $this->height = $height;
         $this->roughness = $roughness;

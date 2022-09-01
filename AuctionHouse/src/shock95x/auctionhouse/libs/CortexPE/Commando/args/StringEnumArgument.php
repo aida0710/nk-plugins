@@ -53,7 +53,7 @@ abstract class StringEnumArgument extends BaseArgument {
     public function canParse(string $testString, CommandSender $sender): bool {
         return (bool)preg_match(
             "/^(" . implode("|", array_map("\\strtolower", $this->getEnumValues())) . ")$/iu",
-            $testString
+            $testString,
         );
     }
 

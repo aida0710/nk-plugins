@@ -15,10 +15,10 @@ class WorldProperty {
 
     /**
      * @param string $worldName
-     * @param int $maxX
-     * @param int $minX
-     * @param int $maxZ
-     * @param int $minZ
+     * @param int    $maxX
+     * @param int    $minX
+     * @param int    $maxZ
+     * @param int    $minZ
      */
     public function __construct(string $worldName, int $maxX, int $minX, int $maxZ, int $minZ) {
         $this->worldName = $worldName;

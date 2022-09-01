@@ -16,11 +16,11 @@ class SendConfirmFormButton extends Button {
     private int $level;
 
     /**
-     * @param string $text
+     * @param string              $text
      * @param EnchantmentInstance $enchant
-     * @param string $type
-     * @param int|null $level
-     * @param ButtonImage|null $image
+     * @param string              $type
+     * @param int|null            $level
+     * @param ButtonImage|null    $image
      */
     public function __construct(string $text, EnchantmentInstance $enchant, string $type, ?int $level = 0, ?ButtonImage $image = null) {
         parent::__construct($text, $image);

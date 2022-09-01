@@ -26,7 +26,7 @@ class DarkOakTree extends GenericTree {
             BlockLegacyIds::LOG,
             BlockLegacyIds::LOG2,
             BlockLegacyIds::SAPLING,
-            BlockLegacyIds::VINE
+            BlockLegacyIds::VINE,
         );
         $this->setHeight($random->nextBoundedInt(2) + $random->nextBoundedInt(3) + 6);
         $this->setType(TreeType::DARK_OAK());

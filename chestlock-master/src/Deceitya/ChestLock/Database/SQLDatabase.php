@@ -14,7 +14,7 @@ class SQLDatabase {
             'CREATE TABLE IF NOT EXISTS lock (' .
             'pos TEXT NOT NULL PRIMARY KEY,' .
             'time INTEGER NOT NULL,' .
-            'player TEXT NOT NULL)'
+            'player TEXT NOT NULL)',
         );
     }
 

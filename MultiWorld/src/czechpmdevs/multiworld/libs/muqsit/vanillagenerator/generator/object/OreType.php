@@ -20,11 +20,11 @@ class OreType {
      * 0 to {@code min_y}*2, with greatest density around {@code min_y}. Otherwise, density is uniform
      * over the height range.
      *
-     * @param Block $type the block type
-     * @param int $minY the minimum height
-     * @param int $maxY the maximum height
-     * @param int $amount the size of a vein
-     * @param int $targetType the block this can replace
+     * @param Block $type       the block type
+     * @param int   $minY       the minimum height
+     * @param int   $maxY       the maximum height
+     * @param int   $amount     the size of a vein
+     * @param int   $targetType the block this can replace
      */
     public function __construct(Block $type, int $minY, int $maxY, int $amount, int $targetType = BlockLegacyIds::STONE) {
         $this->type = $type;

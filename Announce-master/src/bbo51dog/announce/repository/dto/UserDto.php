@@ -14,9 +14,9 @@ class UserDto {
 
     /**
      * @param string $name
-     * @param bool $confirmed
-     * @param int $announceId
-     * @param bool $hasRead
+     * @param bool   $confirmed
+     * @param int    $announceId
+     * @param bool   $hasRead
      */
     public function __construct(string $name, bool $confirmed, int $announceId, bool $hasRead = false) {
         $this->name = $name;

@@ -11,7 +11,7 @@ use pocketmine\player\Player;
 class FirstBackFormButton extends Button {
 
     /**
-     * @param string $text
+     * @param string           $text
      * @param ButtonImage|null $image
      */
     public function __construct(string $text, ?ButtonImage $image = null) {

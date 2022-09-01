@@ -19,7 +19,7 @@ class AuctionEndEvent extends Event {
     public function __construct(
         private AHListing $listing,
         private int       $type,
-        private ?Player   $purchaser = null
+        private ?Player   $purchaser = null,
     ) {
     }
 

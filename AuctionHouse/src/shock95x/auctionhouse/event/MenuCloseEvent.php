@@ -11,7 +11,7 @@ class MenuCloseEvent extends Event {
 
     public function __construct(
         private Player $player,
-        private AHMenu $menu
+        private AHMenu $menu,
     ) {
     }
 
