@@ -2,7 +2,6 @@
 
 namespace lazyperson0710\PlayerSetting;
 
-use JsonException;
 use lazyperson0710\PlayerSetting\command\SettingCommand;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\SettingsJson;
@@ -19,9 +18,6 @@ class Main extends PluginBase {
         ]);
     }
 
-    /**
-     * @throws JsonException
-     */
     protected function onDisable(): void {
         $setting_file = SettingsJson::getInstance();
         $setting_file->input(PlayerSettingPool::getInstance());

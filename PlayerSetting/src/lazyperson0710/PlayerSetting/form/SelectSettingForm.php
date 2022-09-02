@@ -12,7 +12,7 @@ class SelectSettingForm extends SimpleForm {
 
     public const LevelLimit = 280;
 
-    public function __construct(Player $player, ?string $error = null) {
+    public function __construct(Player $player, ?string $text = null) {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= SelectSettingForm::LevelLimit) {
             $levelMessage = "§a解放済み / 要求レベル -> lv. " . SelectSettingForm::LevelLimit;
         } else {
@@ -20,7 +20,7 @@ class SelectSettingForm extends SimpleForm {
         }
         $this
             ->setTitle("PlayerSettings")
-            ->setText("設定したい項目を選択してください{$error}")
+            ->setText("設定したい項目を選択してください{$text}")
             ->addElements(
                 new SendNormalSettingFormButton(new NormalSettingListForm($player), "Normal Setting"),
                 new SendMiningToolsSettingFormButton(new MiningToolsSettingListForm($player), "Mining Tools Setting\n{$levelMessage}"),

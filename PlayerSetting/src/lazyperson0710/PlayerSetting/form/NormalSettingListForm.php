@@ -16,6 +16,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarn
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class NormalSettingListForm extends CustomForm {
@@ -49,7 +50,7 @@ class NormalSettingListForm extends CustomForm {
     }
 
     public function handleClosed(Player $player): void {
-        $player->sendMessage("§bPlayerSettings §7>> §c設定の保存をキャンセルしました");
+        SendForm::Send($player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
     }
 
     public function handleSubmit(Player $player): void {
@@ -85,7 +86,7 @@ class NormalSettingListForm extends CustomForm {
         if ($setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() !== $this->onlinePlayersEffects->getValue()) {
             $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->setValue($this->onlinePlayersEffects->getValue());
         }
-        $player->sendMessage("§bPlayerSettings §7>> §a設定を保存しました");
+        SendForm::Send($player, new SelectSettingForm($player, "\n§a設定を保存しました"));
     }
 
 }

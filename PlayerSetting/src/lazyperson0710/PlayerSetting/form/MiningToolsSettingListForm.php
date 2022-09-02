@@ -5,7 +5,6 @@ namespace lazyperson0710\PlayerSetting\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
-use deceitya\miningtools\setting\MiningToolSettings;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\AndesiteToStoneSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\CobblestoneToStoneSetting;
@@ -15,6 +14,15 @@ use lazyperson0710\PlayerSetting\object\settings\miningTools\GraniteToStoneSetti
 use lazyperson0710\PlayerSetting\object\settings\miningTools\GrassToDirtSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\IronIngotSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\SandToGlassSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingAndesiteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingCobblestoneToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingDioriteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGoldIngotSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGraniteToStoneSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGrassToDirtSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingIronIngotSetting;
+use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingSandToGlassSetting;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class MiningToolsSettingListForm extends CustomForm {
@@ -43,58 +51,80 @@ class MiningToolsSettingListForm extends CustomForm {
         $this->setTitle("PlayerSettings");
         $empty = true;
         foreach ($this->settings as $value) {
-            if (MiningToolSettings::getInstance()->checkData($player, $value)) {
+            $settingName = match ($value) {
+                '草ブロックを土にする' => EnablingGrassToDirtSetting::getName(),
+                '丸石を石にする' => EnablingCobblestoneToStoneSetting::getName(),
+                '花崗岩を石にする' => EnablingGraniteToStoneSetting::getName(),
+                '閃緑岩を石にする' => EnablingDioriteToStoneSetting::getName(),
+                '安山岩を石にする' => EnablingAndesiteToStoneSetting::getName(),
+                '鉄の自動精錬' => EnablingIronIngotSetting::getName(),
+                '金の自動精錬' => EnablingGoldIngotSetting::getName(),
+                '砂をガラスにする' => EnablingSandToGlassSetting::getName(),
+            };
+            if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting($settingName)->getValue()) {
                 $empty = false;
-                $this->addElement(
-                    match ($value) {
-                        '草ブロックを土にする' => $this->grassToDirt = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(GrassToDirtSetting::getName())?->getValue()),
-                        '丸石を石にする' => $this->cobblestoneToStone = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(CobblestoneToStoneSetting::getName())?->getValue()),
-                        '花崗岩を石にする' => $this->graniteToStone = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(GraniteToStoneSetting::getName())?->getValue()),
-                        '閃緑岩を石にする' => $this->dioriteToStone = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(DioriteToStoneSetting::getName())?->getValue()),
-                        '安山岩を石にする' => $this->andesiteToStone = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(AndesiteToStoneSetting::getName())?->getValue()),
-                        '鉄の自動精錬' => $this->sandToGlass = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(SandToGlassSetting::getName())?->getValue()),
-                        '金の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(IronIngotSetting::getName())?->getValue()),
-                        '砂をガラスにする' => $this->goldIngot = new Toggle("§l> {$value}\n§r機能のon/off", $setting->getSetting(GoldIngotSetting::getName())?->getValue())
-                    },
-                );
+                match ($value) {
+                    '草ブロックを土にする' => $this->grassToDirt = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(GrassToDirtSetting::getName())?->getValue()),
+                    '丸石を石にする' => $this->cobblestoneToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(CobblestoneToStoneSetting::getName())?->getValue()),
+                    '花崗岩を石にする' => $this->graniteToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(GraniteToStoneSetting::getName())?->getValue()),
+                    '閃緑岩を石にする' => $this->dioriteToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(DioriteToStoneSetting::getName())?->getValue()),
+                    '安山岩を石にする' => $this->andesiteToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(AndesiteToStoneSetting::getName())?->getValue()),
+                    '鉄の自動精錬' => $this->sandToGlass = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(SandToGlassSetting::getName())?->getValue()),
+                    '金の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(IronIngotSetting::getName())?->getValue()),
+                    '砂をガラスにする' => $this->goldIngot = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(GoldIngotSetting::getName())?->getValue()),
+                };
+            } else {
+                match ($value) {
+                    '草ブロックを土にする' => $this->grassToDirt = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '丸石を石にする' => $this->cobblestoneToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '花崗岩を石にする' => $this->graniteToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '閃緑岩を石にする' => $this->dioriteToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '安山岩を石にする' => $this->andesiteToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '鉄の自動精錬' => $this->sandToGlass = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '金の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '砂をガラスにする' => $this->goldIngot = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                };
             }
         }
         if ($empty) {
             $this->addElement(new Label("§l> 現在解放されている設定項目が存在しません\n§r/mtから設定を解放してください"));
         }
+        $this->addElements(
+            $this->grassToDirt,
+            $this->cobblestoneToStone,
+            $this->graniteToStone,
+            $this->dioriteToStone,
+            $this->andesiteToStone,
+            $this->sandToGlass,
+            $this->ironIngot,
+            $this->goldIngot,
+        );
     }
 
     public function handleClosed(Player $player): void {
-        $player->sendMessage("§bPlayerSettings §7>> §c設定の保存をキャンセルしました");
+        SendForm::Send($player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
     }
 
     public function handleSubmit(Player $player): void {
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
-        if ($setting->getSetting(GrassToDirtSetting::getName())?->getValue() !== $this->grassToDirt->getValue()) {
-            $setting->getSetting(GrassToDirtSetting::getName())?->setValue($this->grassToDirt->getValue());
+        $settingNames = [
+            GrassToDirtSetting::getName() => $this->grassToDirt,
+            CobblestoneToStoneSetting::getName() => $this->cobblestoneToStone,
+            GraniteToStoneSetting::getName() => $this->graniteToStone,
+            DioriteToStoneSetting::getName() => $this->dioriteToStone,
+            AndesiteToStoneSetting::getName() => $this->andesiteToStone,
+            SandToGlassSetting::getName() => $this->sandToGlass,
+            IronIngotSetting::getName() => $this->ironIngot,
+            GoldIngotSetting::getName() => $this->goldIngot,
+        ];
+        foreach ($settingNames as $name => $toggle) {
+            if ($setting->getSetting($name)?->getValue() === true) {
+                if ($setting->getSetting($name)?->getValue() !== $toggle->getValue()) {
+                    $setting->getSetting($name)?->setValue($toggle->getValue());
+                }
+            }
         }
-        if ($setting->getSetting(CobblestoneToStoneSetting::getName())?->getValue() !== $this->cobblestoneToStone->getValue()) {
-            $setting->getSetting(CobblestoneToStoneSetting::getName())?->setValue($this->cobblestoneToStone->getValue());
-        }
-        if ($setting->getSetting(GraniteToStoneSetting::getName())?->getValue() !== $this->graniteToStone->getValue()) {
-            $setting->getSetting(GraniteToStoneSetting::getName())?->setValue($this->graniteToStone->getValue());
-        }
-        if ($setting->getSetting(DioriteToStoneSetting::getName())?->getValue() !== $this->dioriteToStone->getValue()) {
-            $setting->getSetting(DioriteToStoneSetting::getName())?->setValue($this->dioriteToStone->getValue());
-        }
-        if ($setting->getSetting(AndesiteToStoneSetting::getName())?->getValue() !== $this->andesiteToStone->getValue()) {
-            $setting->getSetting(AndesiteToStoneSetting::getName())?->setValue($this->andesiteToStone->getValue());
-        }
-        if ($setting->getSetting(SandToGlassSetting::getName())?->getValue() !== $this->sandToGlass->getValue()) {
-            $setting->getSetting(SandToGlassSetting::getName())?->setValue($this->sandToGlass->getValue());
-        }
-        if ($setting->getSetting(IronIngotSetting::getName())?->getValue() !== $this->ironIngot->getValue()) {
-            $setting->getSetting(IronIngotSetting::getName())?->setValue($this->ironIngot->getValue());
-        }
-        if ($setting->getSetting(GoldIngotSetting::getName())?->getValue() !== $this->goldIngot->getValue()) {
-            $setting->getSetting(GoldIngotSetting::getName())?->setValue($this->goldIngot->getValue());
-        }
-        $player->sendMessage("§bPlayerSettings §7>> §a設定を保存しました");
+        SendForm::Send($player, new SelectSettingForm($player, "\n§a設定を保存しました"));
     }
 
 }
