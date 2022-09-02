@@ -62,15 +62,14 @@ class WeakeningSpiny extends Spiny {
 echo (new WeakeningSpiny())->name();
 echo (bool)(new WeakeningSpiny())->isAlive();*/
 
-//$test = bcadd(1.7, 0.3, 2);
-//var_dump($test);
-//$test = bcadd($test, 5.9,2);
-//var_dump($test);
-//
-//echo $test;
-class test {
+/*$test = bcadd(1.7, 0.3, 2);
+var_dump($test);
+$test = bcadd($test, 5.9,2);
+var_dump($test);
 
-    /** @var array<string, float|int> */
+echo $test;*/
+/*class test {
+
     private array $tmp_table;
     private array $rank;
     protected int $num;
@@ -131,4 +130,23 @@ const SCALE = 10;
 foreach ($result as $table => $item) {
     //bcmul(bcdiv($item,$count,SCALE), 100,SCALE)
     echo "\n{$table}の数{$item},	", $item / $count * 100, "%";
+}*/
+/*class Main {
+
+    private string $name;
+
+    public function __construct(string $name) {
+        if (mt_rand(0, 1) === 0) {
+            $this->name = $name;
+        }
+    }
+
+    public function getName(): string {
+        if (!isset($this->name)) {
+            return "メンバ変数が定義されてないよ！";
+        }
+        return $this->name;
+    }
 }
+
+echo (new Main("0が選ばれました"))->getName();*/
