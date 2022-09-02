@@ -19,6 +19,6 @@ class InvClearCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        SendForm::Send($sender, (new InvClearForm($sender)));
+        SendForm::Send($sender, (new InvClearForm()));
     }
 }
