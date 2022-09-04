@@ -107,21 +107,44 @@ class MiningToolsSettingListForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
-        $settingNames = [
-            GrassToDirtSetting::getName() => $this->grassToDirt,
-            CobblestoneToStoneSetting::getName() => $this->cobblestoneToStone,
-            GraniteToStoneSetting::getName() => $this->graniteToStone,
-            DioriteToStoneSetting::getName() => $this->dioriteToStone,
-            AndesiteToStoneSetting::getName() => $this->andesiteToStone,
-            SandToGlassSetting::getName() => $this->sandToGlass,
-            IronIngotSetting::getName() => $this->ironIngot,
-            GoldIngotSetting::getName() => $this->goldIngot,
-        ];
-        foreach ($settingNames as $name => $toggle) {
-            if ($setting->getSetting($name)?->getValue() === true) {
-                if ($setting->getSetting($name)?->getValue() !== $toggle->getValue()) {
-                    $setting->getSetting($name)?->setValue($toggle->getValue());
-                }
+        if ($setting->getSetting(EnablingGrassToDirtSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(GrassToDirtSetting::getName())?->getValue() !== $this->grassToDirt->getValue()) {
+                $setting->getSetting(GrassToDirtSetting::getName())?->setValue($this->grassToDirt->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingCobblestoneToStoneSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(CobblestoneToStoneSetting::getName())?->getValue() !== $this->cobblestoneToStone->getValue()) {
+                $setting->getSetting(CobblestoneToStoneSetting::getName())?->setValue($this->cobblestoneToStone->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingGraniteToStoneSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(GraniteToStoneSetting::getName())?->getValue() !== $this->graniteToStone->getValue()) {
+                $setting->getSetting(GraniteToStoneSetting::getName())?->setValue($this->graniteToStone->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingDioriteToStoneSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(DioriteToStoneSetting::getName())?->getValue() !== $this->dioriteToStone->getValue()) {
+                $setting->getSetting(DioriteToStoneSetting::getName())?->setValue($this->dioriteToStone->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingAndesiteToStoneSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(AndesiteToStoneSetting::getName())?->getValue() !== $this->andesiteToStone->getValue()) {
+                $setting->getSetting(AndesiteToStoneSetting::getName())?->setValue($this->andesiteToStone->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingSandToGlassSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(SandToGlassSetting::getName())?->getValue() !== $this->sandToGlass->getValue()) {
+                $setting->getSetting(SandToGlassSetting::getName())?->setValue($this->sandToGlass->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingIronIngotSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(IronIngotSetting::getName())?->getValue() !== $this->ironIngot->getValue()) {
+                $setting->getSetting(IronIngotSetting::getName())?->setValue($this->ironIngot->getValue());
+            }
+        }
+        if ($setting->getSetting(EnablingGoldIngotSetting::getName())?->getValue() === true) {
+            if ($setting->getSetting(GoldIngotSetting::getName())?->getValue() !== $this->goldIngot->getValue()) {
+                $setting->getSetting(GoldIngotSetting::getName())?->setValue($this->goldIngot->getValue());
             }
         }
         SendForm::Send($player, new SelectSettingForm($player, "\n§a設定を保存しました"));
