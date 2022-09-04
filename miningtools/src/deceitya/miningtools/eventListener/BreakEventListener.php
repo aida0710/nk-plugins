@@ -58,8 +58,8 @@ class BreakEventListener implements Listener {
             return;
         }
         $handItem = $player->getInventory()->getItemInHand();
+        $haveDurable = $handItem instanceof Durable;
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
-            $haveDurable = $handItem instanceof Durable;
             /** @var Durable $handItem */
             $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
             if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
