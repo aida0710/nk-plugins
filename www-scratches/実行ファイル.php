@@ -61,7 +61,6 @@ class WeakeningSpiny extends Spiny {
 
 echo (new WeakeningSpiny())->name();
 echo (bool)(new WeakeningSpiny())->isAlive();*/
-
 /*$test = bcadd(1.7, 0.3, 2);
 var_dump($test);
 $test = bcadd($test, 5.9,2);
@@ -150,3 +149,21 @@ foreach ($result as $table => $item) {
 }
 
 echo (new Main("0が選ばれました"))->getName();*/
+/*$array = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+];
+
+foreach ($array as $key => $value) echo $key, ":", $value, "\n";*/
+/*foreach (["a", "b", "c", "d", "e"] as $key => $value) {
+    if ($key <= 2) {
+        for ($i = 0; $i < 3; $i++) {
+            while ($i < 5) {
+                echo $value, $i++, "\n";
+            }
+        }
+    }
+}*/
