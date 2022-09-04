@@ -118,6 +118,7 @@ class ConfirmationSettingForm extends CustomForm {
         if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["enchantItem"], EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) Server::getInstance()->getLogger()->error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/111");
         if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["settingItem"], self::CostItemId, self::CostItemNBT) === false) Server::getInstance()->getLogger()->error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/112");
         PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting($settingName)->setValue(true);
+        SendForm::Send($player, new SelectEnablingSettings($player, "§a{$settingName}を有効化しました"));
     }
 
 }
