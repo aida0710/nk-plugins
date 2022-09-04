@@ -19,13 +19,12 @@ class ItemDrop {
      */
     public function getDrop(Player $player, Block $block): array {
         $item = $player->getInventory()->getItemInHand();
-        $enchant = $item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE));
-        if ($enchant !== null) {
+        if ($item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE)) !== null) {
             $drops = $block->getDrops($item);
             if (empty($drops)) {
                 return $block->getDrops($item);
             }
-            $plus = FortuneListener::Calculation($block, $enchant->getLevel());
+            $plus = FortuneListener::Calculation($block, $item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE))->getLevel());
             $drops[0]->setCount($drops[0]->getCount() + $plus);
             return $drops;
         }
