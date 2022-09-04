@@ -30,6 +30,7 @@ class CheckPlayerData {
      * @return bool
      */
     public function CheckAndReduceCostItem(Player $player, int $count, int $checkItem, string $tagName): bool {
+        if ($count === 0) return true;
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
@@ -53,6 +54,7 @@ class CheckPlayerData {
      * @return bool
      */
     public function CheckCostItem(Player $player, int $count, int $checkItem, string $tagName): bool {
+        if ($count === 0) return true;
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
