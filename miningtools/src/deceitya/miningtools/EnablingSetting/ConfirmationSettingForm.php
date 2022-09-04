@@ -22,51 +22,51 @@ class ConfirmationSettingForm extends CustomForm {
 
     private const EnablingGrassToDirt = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingCobblestoneToStone = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingGraniteToStone = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingDioriteToStone = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingAndesiteToStone = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingIronIngot = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingGoldIngot = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
     private const EnablingSandToGlass = [
         "money" => 10,
-        "rangeItem" => 1,
-        "enchantItem" => 1,
-        "settingItem" => 1,
+        "rangeItem" => 0,
+        "enchantItem" => 0,
+        "settingItem" => 0,
     ];
 
     public function __construct(string $settingName, string $settingJaName) {
