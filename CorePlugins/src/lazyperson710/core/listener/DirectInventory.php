@@ -46,23 +46,17 @@ class DirectInventory implements Listener {
         }
     }
 
-    public function notStorageItem(Player $player, Item $item): bool {
-        if ($item->getVanillaName() == VanillaItems::AIR()->getVanillaName()) {
-            return false;
-        }
-        if ($item->getVanillaName() == VanillaBlocks::DYED_SHULKER_BOX()->getName()) {
-            if ($player->getInventory()->canAddItem($item)) {
-                $player->getInventory()->addItem($item);
-            } else {
-                $player->dropItem($item);
-                return false;
-            }
-        }
-        if ($item->getVanillaName() == VanillaBlocks::SHULKER_BOX()->getName()) {
-            if ($player->getInventory()->canAddItem($item)) {
-                $player->getInventory()->addItem($item);
-            } else {
-                $player->dropItem($item);
+    private function notStorageItem(Player $player, Item $item): bool {
+        if ($item->getId() === BlockLegacyIds::AIR) return false;
+        switch (true) {
+            case $item->getId() === VanillaBlocks::SHULKER_BOX()->asItem()->getId():
+            case $item->getId() === VanillaBlocks::DYED_SHULKER_BOX()->asItem()->getId():
+                if ($player->getInventory()->canAddItem($item)) {
+                    $player->getInventory()->addItem($item);
+                } else {
+                    $player->dropItem($item);
+                    $player->sendMessage("§bStorage §7>> §c" . $item->getName() . "を直接ストレージに格納することは出来ない為ドロップされました");
+                }
                 return false;
         }
         return true;
