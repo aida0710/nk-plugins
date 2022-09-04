@@ -7,7 +7,11 @@ use lazyperson0710\EffectItems\event\PlayerBlockBreakEvent;
 use lazyperson0710\EffectItems\event\PlayerBlockPlaceEvent;
 use lazyperson0710\EffectItems\event\PlayerDamageEvent;
 use lazyperson0710\EffectItems\event\PlayerItemEvent;
+use lazyperson0710\EffectItems\items\Churu;
 use lazyperson0710\EffectItems\task\RepetitionTask;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIdentifier;
+use pocketmine\item\VanillaItems;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
@@ -18,6 +22,7 @@ class Main extends PluginBase {
         $manager->registerEvents(new PlayerBlockPlaceEvent(), $this);
         $manager->registerEvents(new PlayerDamageEvent(), $this);
         $manager->registerEvents(new PlayerItemEvent(), $this);
+        ItemFactory::getInstance()->register(new Churu(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), "Churu"), true);
         $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 10);
         $this->getServer()->getCommandMap()->registerAll("effectItems", [
             new ItemNameChangeCommand(),
