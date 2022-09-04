@@ -43,9 +43,9 @@ class ItemDrop {
         if (empty($dropItems)) {
             return;
         }
-        $dropItems = array_diff($dropItems, [$startBlock]);
-        $dropItems = array_values($dropItems);
-        $dropItems = $player->getInventory()->addItem(...$dropItems);
+        //$dropItems = array_diff($dropItems, [$startBlock]);
+        //$dropItems = array_values($dropItems);
+        //$dropItems = $player->getInventory()->addItem(...$dropItems);
         if (count($dropItems) === 0) {
             $event->setDropsVariadic(VanillaBlocks::AIR()->asItem());
         } else {
