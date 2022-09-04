@@ -69,9 +69,9 @@ class MiningToolsSettingListForm extends CustomForm {
                     '花崗岩を石にする' => $this->graniteToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(GraniteToStoneSetting::getName())?->getValue()),
                     '閃緑岩を石にする' => $this->dioriteToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(DioriteToStoneSetting::getName())?->getValue()),
                     '安山岩を石にする' => $this->andesiteToStone = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(AndesiteToStoneSetting::getName())?->getValue()),
-                    '鉄の自動精錬' => $this->sandToGlass = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(SandToGlassSetting::getName())?->getValue()),
-                    '金の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(IronIngotSetting::getName())?->getValue()),
-                    '砂をガラスにする' => $this->goldIngot = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(GoldIngotSetting::getName())?->getValue()),
+                    '砂をガラスにする' => $this->sandToGlass = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(SandToGlassSetting::getName())?->getValue()),
+                    '鉄の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(IronIngotSetting::getName())?->getValue()),
+                    '金の自動精錬' => $this->goldIngot = new Toggle("§l> {$value}\n§r§a機能は[オフ | オン]で設定出来ます", $setting->getSetting(GoldIngotSetting::getName())?->getValue()),
                 };
             } else {
                 match ($value) {
@@ -80,9 +80,9 @@ class MiningToolsSettingListForm extends CustomForm {
                     '花崗岩を石にする' => $this->graniteToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
                     '閃緑岩を石にする' => $this->dioriteToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
                     '安山岩を石にする' => $this->andesiteToStone = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
-                    '鉄の自動精錬' => $this->sandToGlass = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
-                    '金の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
-                    '砂をガラスにする' => $this->goldIngot = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '砂をガラスにする' => $this->sandToGlass = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '鉄の自動精錬' => $this->ironIngot = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
+                    '金の自動精錬' => $this->goldIngot = new Toggle("§l> {$value}\n§r§cこの機能は有効化されていません", false),
                 };
             }
         }
