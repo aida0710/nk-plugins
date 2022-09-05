@@ -27,9 +27,6 @@ class BreakEventListener implements Listener {
         }
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
-        //mining4を変換
-        //$this->itemNbtConversion($player, $item);不要だと思われるため削除
-        //所持しているアイテムがMiningToolsかどうかを確認
         if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) return;
         $id = $item->getId();
         if (!Main::$flag[$player->getName()]) {
@@ -77,20 +74,4 @@ class BreakEventListener implements Listener {
         Main::$flag[$player->getName()] = false;
     }
 
-    ///**
-    // * @param Player $player
-    // * @param Item   $item
-    // * @return void
-    // */
-    //public function itemNbtConversion(Player $player, Item $item): void {
-    //    if ($item->getNamedTag()->getTag('4mining') !== null) {
-    //        $nbt = $item->getNamedTag();
-    //        $tag = "4mining";
-    //        $nbt->removeTag($tag);
-    //        $nbt->setInt('MiningTools_3', 1);
-    //        $item->setNamedTag($nbt);
-    //        $player->getInventory()->setItemInHand($item);
-    //        $player->sendMessage("§bMiningTools §7>> §a所持しているマイニングツールの変換に成功しました");
-    //    }
-    //}
 }
