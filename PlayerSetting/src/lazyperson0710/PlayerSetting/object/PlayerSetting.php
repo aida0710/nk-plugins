@@ -27,6 +27,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSet
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
@@ -53,6 +54,7 @@ class PlayerSetting {
         $this->register(new DiceMessageSetting);
         $this->register(new PayCommandUseSetting);
         $this->register(new OnlinePlayersEffectsSetting);
+        $this->register(new MiningToolsDestructionEnabledWorldsSetting());
         //miningTools
         $this->register(new AndesiteToStoneSetting());
         $this->register(new CobblestoneToStoneSetting());

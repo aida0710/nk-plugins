@@ -5,19 +5,19 @@ namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class LevelUpTitleSetting extends Setting {
+class MiningToolsDestructionEnabledWorldsSetting extends Setting {
 
     protected string $value;
 
     public static function getName(): string {
-        return 'LevelUpTitle';
+        return 'MiningToolsDestructionEnabledWorlds';
     }
 
     /**
      * 入力可能な値
-     * #title
-     * #toast
-     * #chat
+     * #all
+     * #life
+     * #nature
      * #none
      */
     public function setValue(mixed $value): void {
@@ -29,6 +29,6 @@ class LevelUpTitleSetting extends Setting {
     }
 
     public function getFallbackValue(): string {
-        return "title";
+        return "all";
     }
 }

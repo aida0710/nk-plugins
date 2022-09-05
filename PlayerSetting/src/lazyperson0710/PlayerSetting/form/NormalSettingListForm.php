@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\PlayerSetting\form;
 
+use bbo51dog\bboform\element\StepSlider;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
@@ -12,6 +13,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSet
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
@@ -24,13 +26,14 @@ class NormalSettingListForm extends CustomForm {
     private Toggle $coordinate;
     private Toggle $joinItems;
     private Toggle $directDropItemStorage;
-    private Toggle $levelUpTitle;
     private Toggle $enduranceWarning;
     private Toggle $miningToolsEnduranceWarning;
     private Toggle $destructionSound;
     private Toggle $diceMessage;
     private Toggle $payCommandUse;
     private Toggle $onlinePlayersEffects;
+    private StepSlider $levelUpTitle;
+    private StepSlider $miningToolsDestructionEnabledWorlds;
 
     public function __construct(Player $player) {
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
@@ -39,13 +42,26 @@ class NormalSettingListForm extends CustomForm {
             $this->coordinate = new Toggle("§l> Coordinate§r\n座標を表示するか否か", $setting->getSetting(CoordinateSetting::getName())?->getValue()),
             $this->joinItems = new Toggle("§l> JoinItems§r\n参加時にアイテムを渡すか否か", $setting->getSetting(JoinItemsSetting::getName())?->getValue()),
             $this->directDropItemStorage = new Toggle("§l> DirectDropItemStorage§r\nInventoryが空でもストレージにアイテムを入れるか否か", $setting->getSetting(DirectDropItemStorageSetting::getName())?->getValue()),
-            $this->levelUpTitle = new Toggle("§l> LevelUpTitle§r\nレベルアップ時にtitleを表示するか否か", $setting->getSetting(LevelUpTitleSetting::getName())?->getValue()),
             $this->enduranceWarning = new Toggle("§l> EnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(EnduranceWarningSetting::getName())?->getValue()),
             $this->miningToolsEnduranceWarning = new Toggle("§l> MiningToolsEnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue()),
             $this->destructionSound = new Toggle("§l> DestructionSound§r\n破壊時に経験値の音を鳴らすか否か", $setting->getSetting(DestructionSoundSetting::getName())?->getValue()),
             $this->diceMessage = new Toggle("§l> DiceMessage§r\nDiceのメッセージを表示するか否か", $setting->getSetting(DiceMessageSetting::getName())?->getValue()),
             $this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
             $this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
+            $this->levelUpTitle = new StepSlider("§l> LevelUpTitle§r\nレベルアップ時にtitleを表示するか否か", ["タイトル表示", "実績表示", "チャット表示", "表示無し"],
+                match ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
+                    "toast" => 1,
+                    "chat" => 2,
+                    "none" => 3,
+                    default => 0
+                }),
+            $this->miningToolsDestructionEnabledWorlds = new StepSlider("§l> MiningToolsDestructionEnabledWorlds§r\nマイニングツールで破壊出来るワールドを制限", ["全てのワールドで有効", "生活ワールドでのみ有効", "天然資源系ワールドでのみ有効", "全てのワールドで無効"],
+                match ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
+                    "life" => 1,
+                    "nature" => 2,
+                    "none" => 3,
+                    default => 0
+                }),
         );
     }
 
@@ -65,9 +81,6 @@ class NormalSettingListForm extends CustomForm {
         if ($setting->getSetting(DirectDropItemStorageSetting::getName())?->getValue() !== $this->directDropItemStorage->getValue()) {
             $setting->getSetting(DirectDropItemStorageSetting::getName())?->setValue($this->directDropItemStorage->getValue());
         }
-        if ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue() !== $this->levelUpTitle->getValue()) {
-            $setting->getSetting(LevelUpTitleSetting::getName())?->setValue($this->levelUpTitle->getValue());
-        }
         if ($setting->getSetting(EnduranceWarningSetting::getName())?->getValue() !== $this->enduranceWarning->getValue()) {
             $setting->getSetting(EnduranceWarningSetting::getName())?->setValue($this->enduranceWarning->getValue());
         }
@@ -85,6 +98,24 @@ class NormalSettingListForm extends CustomForm {
         }
         if ($setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() !== $this->onlinePlayersEffects->getValue()) {
             $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->setValue($this->onlinePlayersEffects->getValue());
+        }
+        $levelUpTitle = match ($this->levelUpTitle->getValue()) {
+            1 => "toast",
+            2 => "chat",
+            3 => "none",
+            default => "title"
+        };
+        if ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue() !== $levelUpTitle) {
+            $setting->getSetting(LevelUpTitleSetting::getName())?->setValue($levelUpTitle);
+        }
+        $miningToolsDestructionEnabledWorlds = match ($this->miningToolsDestructionEnabledWorlds->getValue()) {
+            1 => "life",
+            2 => "nature",
+            3 => "none",
+            default => "all"
+        };
+        if ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue() !== $miningToolsDestructionEnabledWorlds) {
+            $setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
         }
         SendForm::Send($player, new SelectSettingForm($player, "\n§a設定を保存しました"));
     }
