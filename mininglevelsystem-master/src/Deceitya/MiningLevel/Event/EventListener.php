@@ -16,6 +16,7 @@ use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendToastPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -82,7 +83,17 @@ class EventListener implements Listener {
             $exp -= $upExp;
             $upExp += $level;
             $level++;
-            $this->LevelUpFunction($player, $originalLevel, $level);
+            (function (Player $player, int $originalLevel, int $level) {
+                (new MiningLevelUpEvent($player, $originalLevel, $level))->call();
+                $this->LevelUpBonus($player, $originalLevel, $level);
+                $this->DiscordWebHook($player, $originalLevel, $level);
+                InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
+                match (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
+                    "title" => $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}"),
+                    "toast" => SendToastPacket::init($player, "§bMining Level UP Message", "§aLv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
+                    default => null,
+                };
+            })($player, $originalLevel, $level);
         }
         $api->setLevel($player, $level);
         $api->setExp($player, $exp);
@@ -97,13 +108,6 @@ class EventListener implements Listener {
         $block = $event->getBlock();
         $exp = ($this->config[$block->getId() . ':' . $block->getMeta()] ?? $this->config['default'] ?? 0) + $api->getExp($player);
         $this->LevelCalculation($player, $exp);
-    }
-
-    private function LevelUpFunction($player, $originalLevel, $level) {
-        (new MiningLevelUpEvent($player, $originalLevel, $level))->call();
-        $this->LevelUpBonus($player, $originalLevel, $level);
-        $this->DiscordWebHook($player, $originalLevel, $level);
-        InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
     }
 
     private function DiscordWebHook(Player $player, int $originalLevel, int $level) {
@@ -141,9 +145,6 @@ class EventListener implements Listener {
             $player->getServer()->broadcastMessage("§bLevel §7>> §e{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました");
         } else {
             $player->sendMessage("§bLevel §7>> §a{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました");
-            if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpTitleSetting::getName())?->getValue() === true) {
-                $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}");
-            }
         }
         $msg = null;
         switch ($level) {
