@@ -61,4 +61,22 @@ class WorldCategory {
         "八街市-f",
     ];
 
+    public const PublicWorldAll = [
+        ...self::PublicWorld,
+        ...self::PVP,
+        ...self::PublicEventWorld,
+    ];
+
+    public const NatureAll = [
+        ...self::Nature,
+        ...self::Nether,
+        ...self::End,
+        ...self::MiningWorld,
+    ];
+
+    public const LifeWorldAll = [
+        ...self::LifeWorld,
+        ...self::AgricultureWorld,
+    ];
+
 }
