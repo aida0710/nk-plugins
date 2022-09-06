@@ -48,11 +48,10 @@ class NormalSettingListForm extends CustomForm {
             $this->diceMessage = new Toggle("§l> DiceMessage§r\nDiceのメッセージを表示するか否か", $setting->getSetting(DiceMessageSetting::getName())?->getValue()),
             $this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
             $this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
-            $this->levelUpTitle = new StepSlider("§l> LevelUpTitle§r\nレベルアップ時にtitleを表示するか否か", ["タイトル表示", "実績表示", "チャット表示", "表示無し"],
+            $this->levelUpTitle = new StepSlider("§l> LevelUpTitle§r\nレベルアップ時にtitleを表示するか否か", ["タイトル表示", "実績表示", "表示無し"],
                 match ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
                     "toast" => 1,
-                    "chat" => 2,
-                    "none" => 3,
+                    "none" => 2,
                     default => 0
                 }),
             $this->miningToolsDestructionEnabledWorlds = new StepSlider("§l> MiningToolsDestructionEnabledWorlds§r\nマイニングツールで破壊出来るワールドを制限", ["全てのワールドで有効", "生活ワールドでのみ有効", "天然資源系ワールドでのみ有効", "全てのワールドで無効"],
@@ -101,8 +100,7 @@ class NormalSettingListForm extends CustomForm {
         }
         $levelUpTitle = match ($this->levelUpTitle->getValue()) {
             1 => "toast",
-            2 => "chat",
-            3 => "none",
+            2 => "none",
             default => "title"
         };
         if ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue() !== $levelUpTitle) {

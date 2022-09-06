@@ -17,7 +17,6 @@ class LevelUpTitleSetting extends Setting {
      * 入力可能な値
      * #title
      * #toast
-     * #chat
      * #none
      */
     public function setValue(mixed $value): void {
