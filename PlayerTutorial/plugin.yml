@@ -1,0 +1,5 @@
+name: PlayerTutorial
+api: [ 4.0.0 ]
+main: lazyperson0710\PlayerTutorial\Main
+version: 1.0.0
+author: lazyperson710
