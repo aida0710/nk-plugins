@@ -2,7 +2,6 @@
 
 namespace bbo51dog\anticheat\model;
 
-use bbo51dog\anticheat\chcker\AirJumpChecker;
 use bbo51dog\anticheat\chcker\BlockBreakChecker;
 use bbo51dog\anticheat\chcker\Checker;
 use pocketmine\player\Player;
@@ -20,7 +19,6 @@ class PlayerData {
     public function __construct(Player $player) {
         $this->player = $player;
         $this->checkers = [
-            new AirJumpChecker($this),
             new BlockBreakChecker($this),
         ];
     }
@@ -39,12 +37,6 @@ class PlayerData {
     public function onBreakEvent(): void {
         foreach ($this->checkers as $checker) {
             $checker->blockBreak();
-        }
-    }
-
-    public function onJumpEvent(): void {
-        foreach ($this->checkers as $checker) {
-            $checker->playerJump();
         }
     }
 }
