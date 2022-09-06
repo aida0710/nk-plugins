@@ -7,7 +7,9 @@ use deceitya\miningtools\calculation\ItemDrop;
 use deceitya\miningtools\calculation\PickaxeDestructionRange;
 use deceitya\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\WorldManagement\database\WorldCategory;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
@@ -52,8 +54,27 @@ class BreakEventListener implements Listener {
             $player->sendTip("§bMiningTools §7>> §c現在のワールドでは範囲破壊は行われません");
             return;
         }
+        switch ($t = PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
+            case "all":
+                break;
+            case "life":
+                if (!in_array($player->getWorld()->getFolderName(), WorldCategory::LifeWorldAll)) {
+                    $player->sendTip("§bMiningTools §7>> §c現在のワールドでは設定により範囲破壊が無効化されています/settings");
+                    return;
+                }
+                break;
+            case "nature":
+                if (!in_array($player->getWorld()->getFolderName(), WorldCategory::NatureAll)) {
+                    $player->sendTip("§bMiningTools §7>> §c現在のワールドでは設定により範囲破壊が無効化されています/settings");
+                    return;
+                }
+                break;
+            case "none":
+                $player->sendTip("§bMiningTools §7>> §c現在のワールドでは設定により範囲破壊が無効化されています/settings");
+                return;
+        }
         $handItem = $player->getInventory()->getItemInHand();
-        $haveDurable = $handItem instanceof Durable;
+        $haveDurable = $item instanceof Durable;
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
             /** @var Durable $handItem */
             $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
@@ -62,12 +83,22 @@ class BreakEventListener implements Listener {
                 return;
             }
         }
-        $event->cancel();
         if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
             $dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player);
             (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
             Main::$flag[$player->getName()] = false;
             return;
+        }
+        if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
+            if ($item->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
+                if ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
+                    $event->cancel();
+                }
+            }
+        } else {
+            if ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
+                $event->cancel();
+            }
         }
         $dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $item, $haveDurable, $handItem, $set, $dropItems = []);
         (new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
