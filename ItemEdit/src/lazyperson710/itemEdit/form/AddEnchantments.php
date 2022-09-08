@@ -4,6 +4,7 @@ namespace lazyperson710\itemEdit\form;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;
+use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -17,7 +18,7 @@ class AddEnchantments extends CustomForm {
     private Dropdown $enchantmentsSelect;
     private Input $enchantmentsLevel;
 
-    public function __construct() {
+    public function __construct(?string $message = "選択してください") {
         $enchantments = [
             "Protection",
             "FireProtection",
@@ -42,8 +43,9 @@ class AddEnchantments extends CustomForm {
         $this->enchantmentsSelect = new Dropdown("付与したいエンチャントを選択してください", $enchantments);
         $this->enchantmentsLevel = new Input("エンチャントのレベルを入力してください", "1");
         $this
-            ->setTitle("")
+            ->setTitle("Item Edit")
             ->addElements(
+                new Label($message),
                 $this->enchantmentsSelect,
                 $this->enchantmentsLevel,
             );
@@ -53,13 +55,11 @@ class AddEnchantments extends CustomForm {
         $enchantments = $this->enchantmentsSelect->getSelectedOption();
         $enchantmentsLevel = $this->enchantmentsLevel->getValue();
         if ($enchantmentsLevel < 1) {
-            $player->sendMessage("エンチャントのレベルは1以上で入力してください");
-            SendForm::Send($player, new AddEnchantments());
+            SendForm::Send($player, new AddEnchantments("エンチャントのレベルは1以上で入力してください"));
             return;
         }
         if ($enchantmentsLevel > 32767) {
-            $player->sendMessage("エンチャントのレベルは32767以下で入力してください");
-            SendForm::Send($player, new AddEnchantments());
+            SendForm::Send($player, new AddEnchantments("エンチャントのレベルは32767以下で入力してください"));
             return;
         }
         $item = $player->getInventory()->getItemInHand();
@@ -85,8 +85,8 @@ class AddEnchantments extends CustomForm {
             "Mending" => VanillaEnchantments::MENDING(),
         };
         $item->addEnchantment(new EnchantmentInstance($vanillaEnchantments, $enchantmentsLevel));
-        $player->sendMessage("{$enchantments}を{$enchantmentsLevel}にしました");
-        SendForm::Send($player, new AddEnchantments());
+        $player->getInventory()->setItemInHand($item);
+        SendForm::Send($player, new AddEnchantments("{$enchantments}を{$enchantmentsLevel}レベルで付与しました"));
     }
 
 }
