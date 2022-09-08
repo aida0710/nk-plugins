@@ -1,6 +1,0 @@
-name: CraftCancel
-api: [ 4.0.0 ]
-main: craftcancel\Main
-version: 1.0.0
-description: Craft Cancel Plugin for Namakemono
-author: bboyyu51
