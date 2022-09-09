@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\EffectItems;
 
-use lazyperson0710\EffectItems\command\ItemNameChangeCommand;
+use lazyperson0710\EffectItems\command\ItemsCommand;
 use lazyperson0710\EffectItems\event\PlayerBlockBreakEvent;
 use lazyperson0710\EffectItems\event\PlayerBlockPlaceEvent;
 use lazyperson0710\EffectItems\event\PlayerDamageEvent;
@@ -25,7 +25,7 @@ class Main extends PluginBase {
         ItemFactory::getInstance()->register(new Churu(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), "Churu"), true);
         $this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 10);
         $this->getServer()->getCommandMap()->registerAll("effectItems", [
-            new ItemNameChangeCommand(),
+            new ItemsCommand(),
         ]);
     }
 }
