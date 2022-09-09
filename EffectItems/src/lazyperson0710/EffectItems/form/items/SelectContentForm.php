@@ -11,10 +11,10 @@ class SelectContentForm  extends SimpleForm {
     public function __construct() {
         $this
             ->setTitle("Item Edit")
-            ->setText("編集したい項目を選択してください")
+            ->setText("選択してください")
             ->addElements(
                 new SendFormButton(new ItemNameChangeForm(), "アイテム名変更"),
-                new SendFormButton(new ItemLoreChangeForm(), "アイテム説明変更"),
+                new SendFormButton(new AddMendingEnchantments(), "修繕エンチャントを付与"),
             );
     }
 
