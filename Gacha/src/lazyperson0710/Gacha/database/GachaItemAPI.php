@@ -70,7 +70,7 @@ class GachaItemAPI {
         //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "エンチャント金のリンゴ", "とても掘る気になるリンゴ", [], [], []);
         ## SSR Rank
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::FISHING_ROD(), 1, "SuperRod", "どこまでも走れる気がする", [VanillaEnchantments::PUNCH()], [1], []);
-        $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::GOLD_INGOT(), 1, "道具名チェンジャー", "道具、装備の名前を変更することが可能です\n名前を変更したいアイテムを持った状態で/ncコマンドを実行してください", [VanillaEnchantments::PROJECTILE_PROTECTION()], [5], ["ItemNameChangeIngot"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::GOLD_INGOT(), 1, "道具名チェンジャー", "道具、装備の名前を変更することが可能です\n名前を変更したいアイテムを持った状態で/itemsコマンドを実行してください", [VanillaEnchantments::PROJECTILE_PROTECTION()], [5], ["ItemNameChangeIngot"]);
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::IRON_INGOT(), 1, "修繕費用代替インゴット", "アイテムの修繕費用(ExpLevel)を代替します", [VanillaEnchantments::MENDING()], [1], ["repairIngot"]);
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::DIAMOND_SHOVEL(), 1, "§a[Gacha]DiamondMiningShovel", "がちゃ仕様の特殊範囲破壊シャベル\n\n自由にエンチャントしたり修繕することが可能です", [], [], ["MiningTools_3", "gacha_mining"]);
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::DIAMOND_PICKAXE(), 1, "§a[Gacha]DiamondMiningPickaxe", "がちゃ仕様の特殊範囲破壊ピッケル\n\n自由にエンチャントしたり修繕することが可能です", [], [], ["MiningTools_3", "gacha_mining"]);
@@ -79,6 +79,7 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "L", ItemFactory::getInstance()->get(-302), 1, "MiningToolRangeExpansion", "Netherite MiningToolsの範囲を強化できます/mt", [], [], ["MiningToolsRangeCostItem"]);
         $this->dischargeItemRegister("常駐ガチャ", "L", ItemFactory::getInstance()->get(174), 1, "MiningToolEnchantExpansion", "Netherite MiningToolsのエンチャントを強化できます/mt", [], [], ["MiningToolsEnchantCostItem"]);
         $this->dischargeItemRegister("常駐ガチャ", "L", VanillaBlocks::LAPIS_LAZULI()->asItem(), 1, "EnablingMiningSettingExpansion", "MiningToolsの設定機能を強化できます/mt", [], [], ["EnablingMiningSettingItem"]);
+        $this->dischargeItemRegister("常駐ガチャ", "L", VanillaItems::BOOK(), 1, "修繕エンチャントブック", "/itemsから道具と装備に修繕エンチャントを付与することが可能です\nまた、MiningToolsには付与出来ませんのでご注意ください\n\nMiningToolsに付与する場合はネザライトMiningToolsの耐久項目を最大強化する必要があります", [VanillaEnchantments::MENDING()], [1], ["AddMendingEnchantmentItem"]);
     }
 
     /**
