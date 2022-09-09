@@ -3,6 +3,7 @@
 namespace deceitya\miningtools\eventListener;
 
 use deceitya\miningtools\calculation\AxeDestructionRange;
+use deceitya\miningtools\calculation\CheckItem;
 use deceitya\miningtools\calculation\ItemDrop;
 use deceitya\miningtools\calculation\PickaxeDestructionRange;
 use deceitya\miningtools\Main;
@@ -29,7 +30,7 @@ class BreakEventListener implements Listener {
         }
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
-        if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) return;
+        if (!(new CheckItem())->isMiningTools($item)) return;
         $id = $item->getId();
         if (!Main::$flag[$player->getName()]) {
             $set = match ($id) {
