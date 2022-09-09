@@ -4,11 +4,10 @@ namespace lazyperson0710\LoginBonus\dataBase;
 
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
-use pocketmine\utils\SingletonTrait;
 
 class ItemRegister {
-    private static ItemRegister $instance;
 
+    private static ItemRegister $instance;
 
     private array $items;
     /**ticketは別枠で表示
@@ -22,7 +21,6 @@ class ItemRegister {
     private array $cost;
 
     /**
-     * アイテムの検索方法的にアイテム、コスト、配布数が同じアイテムは二つ以上追加不可
      * @return void
      */
     public function init(): void {
@@ -33,9 +31,14 @@ class ItemRegister {
     }
 
     private function itemRegister(Item $item, int $quantity, int $cost, ?string $customName = null, ?array $lore = [], ?string $formExplanation = null): void {
-        $items[] = [$item, $quantity, $cost, $customName, $lore, $formExplanation];
-        ///$item[$item->getVanillaName()][$quantity][$cost] =
-
+        $this->items[] = [
+            "item" => $item,
+            "quantity" => $quantity,
+            "cost" => $cost,
+            "customName" => $customName,
+            "lore" => $lore,
+            "formExplanation" => $formExplanation,
+        ];
     }
 
     private function ticketRegister(int $ticketQuantity, int $cost): void {
