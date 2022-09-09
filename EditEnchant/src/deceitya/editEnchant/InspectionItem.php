@@ -10,6 +10,10 @@ use pocketmine\player\Player;
 
 class InspectionItem {
 
+    /**
+     * @param Player $player
+     * @return bool
+     */
     public function inspectionItem(Player $player): bool {
         $item = $player->getInventory()->getItemInHand();
         if (!$item instanceof Durable) {

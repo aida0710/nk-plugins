@@ -8,6 +8,9 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
+    /**
+     * @return void
+     */
     public function onEnable(): void {
         $this->getServer()->getCommandMap()->registerAll("editen", [
             new ReductionCommand(),

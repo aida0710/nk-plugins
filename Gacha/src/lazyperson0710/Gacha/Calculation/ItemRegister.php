@@ -15,6 +15,10 @@ class ItemRegister {
         $this->Items($rank);
     }
 
+    /**
+     * @param string $rank
+     * @return Item
+     */
     public function Items(string $rank): Item {
         $count = count(GachaItemAPI::getInstance()->gachaItems[$this->categoryName][$rank]);
         $count -= 1;

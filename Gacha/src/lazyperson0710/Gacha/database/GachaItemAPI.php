@@ -21,6 +21,9 @@ class GachaItemAPI {
     public array $rankProbability = [];
     public array $gachaItems = [];
 
+    /**
+     * @return void
+     */
     public function init(): void {
         ## Gacha Category
         $this->categorySettingRegister("常駐ガチャ", 0, 1, 60, 33, 5, 1.6, 0.3, 0.1);
@@ -78,16 +81,47 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "L", VanillaBlocks::LAPIS_LAZULI()->asItem(), 1, "EnablingMiningSettingExpansion", "MiningToolsの設定機能を強化できます/mt", [], [], ["EnablingMiningSettingItem"]);
     }
 
+    /**
+     * @param string $category
+     * @param int    $moneyCost
+     * @param int    $ticketCost
+     * @param float  $C
+     * @param float  $UC
+     * @param float  $R
+     * @param float  $SR
+     * @param float  $SSR
+     * @param float  $L
+     * @return void
+     */
     private function categorySettingRegister(string $category, int $moneyCost, int $ticketCost, float $C, float $UC, float $R, float $SR, float $SSR, float $L): void {
         $this->categoryCost[$category][] = ["moneyCost" => $moneyCost, "ticketCost" => $ticketCost];
         $this->rankProbability[$category][] = ["C" => $C, "UC" => $UC, "R" => $R, "SR" => $SR, "SSR" => $SSR, "L" => $L];
     }
 
+    /**
+     * @param string $category
+     * @param string $rank
+     * @param Item   $item
+     * @param int    $count
+     * @param string $name
+     * @param string $lore
+     * @param array  $enchants
+     * @param array  $level
+     * @param array  $nbt
+     * @return void
+     */
     private function dischargeItemRegister(string $category, string $rank, Item $item, int $count, string $name, string $lore, array $enchants, array $level, array $nbt): void {
         if (!$this->checkFunctionArgument($category, $rank, $enchants, $level)) Main::getInstance()->getServer()->getPluginManager()->disablePlugin(Main::getInstance());
         $this->gachaItems[$category][$rank][] = ["item" => $item, "count" => $count, "name" => $name, "lore" => $lore, "enchants" => $enchants, "level" => $level, "nbt" => $nbt];
     }
 
+    /**
+     * @param string $category
+     * @param string $rank
+     * @param array  $enchants
+     * @param array  $level
+     * @return bool
+     */
     private function checkFunctionArgument(string $category, string $rank, array $enchants, array $level): bool {
         if (!in_array($category, self::Category)) {
             Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にカテゴリーに登録されていないガチャが入力された為プラグインを停止します");
