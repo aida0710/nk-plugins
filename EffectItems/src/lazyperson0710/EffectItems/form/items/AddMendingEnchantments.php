@@ -2,10 +2,8 @@
 
 namespace lazyperson0710\EffectItems\form\items;
 
-use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
-use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\calculation\CheckItem;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\EnchantmentInstance;
@@ -19,8 +17,8 @@ class AddMendingEnchantments extends CustomForm {
         $this
             ->setTitle("Item Edit")
             ->addElements(
-                //todo 確認画面
-                new Label("")
+            //todo 確認画面
+                new Label(""),
             );
     }
 

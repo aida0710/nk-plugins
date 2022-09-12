@@ -29,7 +29,7 @@ class gacha {
                     continue 2;
                 }
             }
-            throw new \RuntimeException("test");
+            throw new RuntimeException("test");
         }
         return $result;
     }

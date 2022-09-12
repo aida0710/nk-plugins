@@ -2,7 +2,6 @@
 
 namespace lazyperson0710\LoginBonus\form;
 
-
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\LoginBonus\dataBase\ItemRegister;
 
@@ -16,7 +15,6 @@ class ItemSelectForm extends SimpleForm {
         foreach ($items as $item) {
             $this->addElement(new );
         }
-
     }
 
 }
