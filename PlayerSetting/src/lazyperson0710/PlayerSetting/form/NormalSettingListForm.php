@@ -15,6 +15,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MoveWorldMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
@@ -32,6 +33,7 @@ class NormalSettingListForm extends CustomForm {
     private Toggle $diceMessage;
     private Toggle $payCommandUse;
     private Toggle $onlinePlayersEffects;
+    private Toggle $moveWorldMessage;
     private StepSlider $levelUpTitle;
     private StepSlider $miningToolsDestructionEnabledWorlds;
 
@@ -48,6 +50,7 @@ class NormalSettingListForm extends CustomForm {
             $this->diceMessage = new Toggle("§l> DiceMessage§r\nDiceのメッセージを表示するか否か", $setting->getSetting(DiceMessageSetting::getName())?->getValue()),
             $this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
             $this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
+            $this->moveWorldMessage = new Toggle("§l> MoveWorldMessage§r\nワールド移動時に送信されるメッセージを表示するか否か(§l§c非表示は非推奨です§r)", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
             $this->levelUpTitle = new StepSlider("§l> LevelUpTitle§r\nレベルアップ時にtitleを表示するか否か", ["タイトル表示", "実績表示", "表示無し"],
                 match ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
                     "toast" => 1,
@@ -97,6 +100,9 @@ class NormalSettingListForm extends CustomForm {
         }
         if ($setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() !== $this->onlinePlayersEffects->getValue()) {
             $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->setValue($this->onlinePlayersEffects->getValue());
+        }
+        if ($setting->getSetting(MoveWorldMessageSetting::getName())?->getValue() !== $this->moveWorldMessage->getValue()) {
+            $setting->getSetting(MoveWorldMessageSetting::getName())?->setValue($this->moveWorldMessage->getValue());
         }
         $levelUpTitle = match ($this->levelUpTitle->getValue()) {
             1 => "toast",
