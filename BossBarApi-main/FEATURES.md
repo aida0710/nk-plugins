@@ -1,2 +1,0 @@
-# Finished & Planned Features
-# Unfinished
