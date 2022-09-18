@@ -2,14 +2,12 @@
 
 namespace lazyperson710\sff;
 
-use lazyperson710\sff\command\BonusCommand;
 use lazyperson710\sff\command\CmdExecutionCommand;
 use lazyperson710\sff\command\DonationCommand;
 use lazyperson710\sff\command\EnchantCommand;
 use lazyperson710\sff\command\InformationCommand;
 use lazyperson710\sff\command\InvClearCommand;
 use lazyperson710\sff\command\LockCommand;
-use lazyperson710\sff\command\MiningToolsCommand;
 use lazyperson710\sff\command\PlayerCommand;
 use lazyperson710\sff\command\PoliceCommand;
 use lazyperson710\sff\command\RecipeCommand;
@@ -34,7 +32,6 @@ class Main extends PluginBase {
             new TosCommand(),
             new LockCommand(),
             new EnchantCommand(),
-            new BonusCommand(),
             new RecipeCommand(),
             new InvClearCommand(),
             new PlayerCommand(),
