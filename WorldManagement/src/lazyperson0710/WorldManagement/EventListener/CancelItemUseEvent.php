@@ -73,7 +73,7 @@ class CancelItemUseEvent implements Listener {
         }
     }
 
-    public function banItems(BlockPlaceEvent|PlayerItemUseEvent|PlayerInteractEvent $event) {
+    private function banItems(BlockPlaceEvent|PlayerItemUseEvent|PlayerInteractEvent $event) {
         switch ($event->getPlayer()->getInventory()->getItemInHand()->getId()) {
             case BlockLegacyIds::INFO_UPDATE;
             case BlockLegacyIds::INFO_UPDATE2;
