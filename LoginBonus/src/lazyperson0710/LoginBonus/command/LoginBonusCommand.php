@@ -1,17 +1,17 @@
 <?php
 
-namespace lazyperson710\sff\command;
+namespace lazyperson0710\LoginBonus\command;
 
+use lazyperson0710\LoginBonus\form\ItemSelectForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\sff\form\BonusForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
-class BonusCommand extends Command {
+class LoginBonusCommand extends Command {
 
     public function __construct() {
-        parent::__construct("bonus", "ログインボーナス関係の操作ができます");
+        parent::__construct("bonus", "ログインボーナス関係のformを開きます");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -19,6 +19,6 @@ class BonusCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        SendForm::Send($sender, (new BonusForm($sender)));
+        SendForm::Send($sender, (new ItemSelectForm()));
     }
 }
