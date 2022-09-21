@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\sff\form;
+namespace lazyperson0710\LoginBonus\form\convert;
 
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson710\sff\form\element\CommandDispatchButton;

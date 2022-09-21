@@ -1,35 +1,23 @@
 <?php
 
-namespace lazyperson710\sff\form\element;
+namespace lazyperson0710\LoginBonus\form\element;
 
 use bbo51dog\bboform\element\Button;
-use bbo51dog\bboform\form\SimpleForm;
+use lazyperson0710\LoginBonus\dataBase\LoginBonusItemInfo;
+use lazyperson0710\LoginBonus\form\convert\ItemConvertConfirmationForm;
 use lazyperson710\core\packet\SendForm;
-use pocketmine\item\Item;
 use pocketmine\player\Player;
 
 class SelectLoginBonusItemButton extends Button {
 
-    private string $title;
-    private string $description;
-    //item＠$item,
-    //quantity＠$quantity,
-    //cost＠$cost,
-    //customName＠$customName,
-    //lore＠$lore,
-    //formExplanation＠$formExplanation,
-    //todo 作業してない
-    public function __construct(Item $item, $quantity, $cost, $customName, $lore, $formExplanation) {
+    private LoginBonusItemInfo $itemInfo;
+
+    public function __construct(string $text, LoginBonusItemInfo $itemInfo) {
         parent::__construct($text);
-        $this->title = $title;
-        $this->description = $description;
+        $this->itemInfo = $itemInfo;
     }
 
     public function handleSubmit(Player $player): void {
-        $form = (new SimpleForm())
-            ->setTitle($this->title)
-            ->setText($this->description)
-            ->addElement(new Button("閉じる"));
-        SendForm::Send($player, ($form));
+        SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
     }
 }
