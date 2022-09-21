@@ -10,15 +10,6 @@ class ItemRegister {
     private static ItemRegister $instance;
 
     private array $items;
-    /**ticketは別枠で表示
-     * [ticketと交換]
-     * 下にアイテムのリスト表示
-     * stone
-     * wood
-     * etc...
-     */
-    private array $tickets;
-    private array $cost;
 
     /**
      * @return void
@@ -26,11 +17,17 @@ class ItemRegister {
     public function init(): void {
         ##Item交換
         $this->itemRegister(VanillaItems::APPLE(), 30, 1, "赤いリンゴ");
-        ##Ticket交換
-        $this->ticketRegister(1, 1);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 1, "いリゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いンゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "いリンゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "ンゴ", null, "赤いリンゴじゃないです");
     }
 
-    private function itemRegister(Item $item, int $quantity, int $cost, ?string $customName = null, ?array $lore = [], ?string $formExplanation = null): void {
+    //エンチャントとnbtタグを追加できるように
+    private function itemRegister(Item $item, int $quantity, int $cost, string $customName, ?array $lore = [], ?string $formExplanation = null): void {
         $this->items[] = [
             "item" => $item,
             "quantity" => $quantity,
@@ -39,9 +36,6 @@ class ItemRegister {
             "lore" => $lore,
             "formExplanation" => $formExplanation,
         ];
-    }
-
-    private function ticketRegister(int $ticketQuantity, int $cost): void {
     }
 
     /**
