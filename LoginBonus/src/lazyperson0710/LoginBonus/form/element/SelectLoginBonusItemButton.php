@@ -3,6 +3,7 @@
 namespace lazyperson0710\LoginBonus\form\element;
 
 use bbo51dog\bboform\element\Button;
+use lazyperson0710\LoginBonus\calculation\checkInventoryItem;
 use lazyperson0710\LoginBonus\dataBase\LoginBonusItemInfo;
 use lazyperson0710\LoginBonus\form\convert\ItemConvertConfirmationForm;
 use lazyperson710\core\packet\SendForm;
@@ -18,6 +19,10 @@ class SelectLoginBonusItemButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
+        if (checkInventoryItem::init($player, $this->itemInfo->getCost())) {
+            SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
+        } else {
+            $player->sendMessage("§cインベントリ内にあるログインボーナス数が足りません");
+        }
     }
 }
