@@ -10,16 +10,22 @@ class LoginBonusItemInfo {
     private int $quantity;
     private int $cost;
     private string $customName;
-    private array|null $lore;
+    private array $lore;
     private string|null $formExplanation;
+    private array $enchants;
+    private array $level;
+    private array $nbt;
 
-    public function __construct(Item $item, int $quantity, int $cost, string $customName, ?array $lore = null, ?string $formExplanation = null) {
+    public function __construct(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt) {
         $this->item = $item;
         $this->quantity = $quantity;
         $this->cost = $cost;
         $this->customName = $customName;
         $this->lore = $lore;
         $this->formExplanation = $formExplanation;
+        $this->enchants = $enchants;
+        $this->level = $level;
+        $this->nbt = $nbt;
     }
 
     public function getItem(): Item {
@@ -38,12 +44,24 @@ class LoginBonusItemInfo {
         return $this->customName;
     }
 
-    public function getLore(): array|null {
+    public function getLore(): array {
         return $this->lore;
     }
 
     public function getFormExplanation(): string|null {
         return $this->formExplanation;
+    }
+
+    public function getEnchants(): array {
+        return $this->enchants;
+    }
+
+    public function getLevel(): array {
+        return $this->level;
+    }
+
+    public function getNbt(): array {
+        return $this->nbt;
     }
 
 }
