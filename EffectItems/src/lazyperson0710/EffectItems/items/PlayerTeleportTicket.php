@@ -11,6 +11,7 @@ class PlayerTeleportTicket {
     public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         //todo teleport to player
+        // 実装予定なし
         SendForm::Send($player,);
     }
 }
