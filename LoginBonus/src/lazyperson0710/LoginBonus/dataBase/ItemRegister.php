@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\LoginBonus\dataBase;
 
+use lazyperson0710\Gacha\Main;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
 
@@ -16,7 +17,7 @@ class ItemRegister {
      */
     public function init(): void {
         ##Item交換
-        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "赤いリンゴ");
+        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "赤いリンゴ", [], null, [],);
         $this->itemRegister(VanillaItems::APPLE(), 40, 1, "いリゴ");
         $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いンゴ");
         $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ");
@@ -27,7 +28,12 @@ class ItemRegister {
     }
 
     //エンチャントとnbtタグを追加できるように
-    private function itemRegister(Item $item, int $quantity, int $cost, string $customName, ?array $lore = [], ?string $formExplanation = null): void {
+    private function itemRegister(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt): void {
+        if (count($enchants) !== count($level)) {
+            Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
+            Main::getInstance()->getServer()->getPluginManager()->disablePlugin(Main::getInstance());
+            return;
+        }
         $this->items[] = [
             "item" => $item,
             "quantity" => $quantity,
@@ -35,6 +41,9 @@ class ItemRegister {
             "customName" => $customName,
             "lore" => $lore,
             "formExplanation" => $formExplanation,
+            "enchants" => $enchants,
+            "level" => $level,
+            "nbt" => $nbt,
         ];
     }
 
