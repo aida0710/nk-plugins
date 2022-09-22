@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\LoginBonus\command;
 
+use lazyperson0710\LoginBonus\form\BonusForm;
 use lazyperson0710\LoginBonus\form\convert\ItemSelectForm;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
@@ -19,6 +20,6 @@ class LoginBonusCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        SendForm::Send($sender, (new ItemSelectForm()));
+        SendForm::Send($sender, (new BonusForm($sender)));
     }
 }
