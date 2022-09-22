@@ -1,2 +1,0 @@
-# BonusConvert
-ボーナス変換
