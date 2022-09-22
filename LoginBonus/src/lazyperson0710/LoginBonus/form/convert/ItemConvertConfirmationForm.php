@@ -30,7 +30,10 @@ class ItemConvertConfirmationForm extends CustomForm {
         $item->setLore($this->item->getLore());
         //enchants
         //nbtTags
-        //インベントリに空きがあるかどうかの確認
+        if (!$player->getInventory()->canAddItem($item)){
+            $player->sendMessage("インベントリに空きがないため処理が中断されました");
+            return;
+        }
         if (checkInventoryItem::init($player, $this->item->getCost())) {
             $player->getInventory()->addItem($item);
             $player->sendMessage("§aログインボーナスを" . $this->item->getCost() . "個消費してチケット" . $this->item->getQuantity() . "枚に交換しました");
