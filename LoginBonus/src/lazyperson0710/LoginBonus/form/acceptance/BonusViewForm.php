@@ -2,40 +2,35 @@
 
 namespace lazyperson0710\LoginBonus\form\acceptance;
 
+use bbo51dog\bboform\element\Label;
+use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson0710\LoginBonus\event\JoinPlayerEvent;
+use lazyperson0710\LoginBonus\form\BonusForm;
+use lazyperson0710\LoginBonus\Main;
+use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
 class BonusViewForm extends CustomForm {
 
+    private Toggle $toggle;
+
     public function __construct(Player $player) {
-        //todo toggleで貰うかどうかを判定する形に
-        // parent::__construct(null);
-        // /** @var array<int, int> $data id => item count */
-        // $data = Main::$lastBonusDateConfig->get($player->getName());
-        // $itemdata = Main::getInstance()->getConfig()->getAll();
-        // $items = [];
-        // foreach ($data as $id => $count) {
-        //     $item = Main::decodeItem($itemdata[$id]);
-        //     $name = "アイテムid: " . $item->getId();
-        //     if ($item->getMeta() !== 0) {
-        //         $name .= ", ダメージ値: " . $item->getMeta();
-        //     }
-        //     $items[$name] = ($items[$name] ?? 0) + $count;//念の為
-        // }
-        // $result = "現在、受け取り可能なボーナスは下記の通りです。\n";
-        // foreach ($items as $name => $count) {
-        //     $result .= $name . ", 個数: " . $count . "\n";
-        // }
-        // $this->setContent($result);
-        // $this->setButton1("受け取る");
-        // $this->setButton2("受け取らない");
+        $this->toggle = new Toggle("ログインボーナスを受け取る", false);
+        $this
+            ->setTitle("ログインボーナス")
+            ->addElements(
+                new Label("現在保留しているログインボーナス数 : ". Main::getInstance()->lastBonusDateConfig->get($player->getName())),
+                new Label("ログインボーナスを受け取りますか？\n受け取りたい場合は下にあるトグルをタップし「送信」ボタンを押してください"),
+                $this->toggle,
+            );
     }
 
-    //public function handleResponse(Player $player, $data): void {
-    //    if ($data === null || $data === false) {
-    //        $player->sendMessage("§bLogin §7>> §aキャンセルしました！");
-    //        return;
-    //    }
-    //    Main::check($player);
-    //}
+    public function handleSubmit(Player $player): void {
+        if ($this->toggle->getValue()) {
+            JoinPlayerEvent::check($player);
+        } else{
+            SendForm::Send($player, new BonusForm($player, "\n§aログインボーナスを受け取りませんでした"));
+        }
+    }
 }
