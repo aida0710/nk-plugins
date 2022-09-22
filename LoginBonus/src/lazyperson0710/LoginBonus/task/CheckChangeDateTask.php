@@ -1,15 +1,16 @@
 <?php
 
-namespace deceitya\lbi;
+namespace lazyperson0710\LoginBonus\task;
 
+use lazyperson0710\LoginBonus\event\JoinPlayerEvent;
 use lazyperson0710\LoginBonus\Main;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\Task;
 
 class CheckChangeDateTask extends Task {
 
-    public $plugin;
-    public $date;
+    private PluginBase $plugin;
+    private string $date;
 
     public function __construct(PluginBase $plugin) {
         $this->plugin = $plugin;
@@ -21,7 +22,7 @@ class CheckChangeDateTask extends Task {
             $this->date = date("Y/m/d");
             Main::getInstance()->lastBonusDateConfig->setAll([]);
             foreach ($this->plugin->getServer()->getOnlinePlayers() as $player) {
-                $this->plugin->check($player, false, true);
+                JoinPlayerEvent::check($player, true);
             }
             Main::getInstance()->lastBonusDateConfig->save();
         }
