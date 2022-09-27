@@ -28,7 +28,6 @@ class ItemRegister {
         $this->itemRegister(VanillaItems::APPLE(), 30, 1, "ンゴ", [], "赤いリンゴじゃないです", [], [], []);
     }
 
-    //エンチャントとnbtタグを追加できるように
     private function itemRegister(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt): void {
         if (count($enchants) !== count($level)) {
             Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
