@@ -11,7 +11,7 @@ class LoginBonusItemInfo {
     private int $cost;
     private string $customName;
     private array $lore;
-    private string|null $formExplanation;
+    private ?string $formExplanation;
     private array $enchants;
     private array $level;
     private array $nbt;
@@ -48,7 +48,7 @@ class LoginBonusItemInfo {
         return $this->lore;
     }
 
-    public function getFormExplanation(): string|null {
+    public function getFormExplanation(): ?string {
         return $this->formExplanation;
     }
 
