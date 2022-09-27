@@ -5,7 +5,6 @@ namespace lazyperson0710\LoginBonus\form;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\LoginBonus\form\acceptance\BonusViewForm;
 use lazyperson0710\LoginBonus\form\convert\ItemSelectForm;
-use lazyperson710\sff\form\element\CommandDispatchButton;
 use lazyperson710\sff\form\element\SendFormButton;
 use pocketmine\player\Player;
 
