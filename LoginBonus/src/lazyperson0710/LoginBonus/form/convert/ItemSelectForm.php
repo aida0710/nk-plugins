@@ -3,9 +3,9 @@
 namespace lazyperson0710\LoginBonus\form\convert;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\LoginBonus\dataBase\ItemRegister;
-use lazyperson0710\LoginBonus\dataBase\LoginBonusItemInfo;
 use lazyperson0710\LoginBonus\form\element\SelectLoginBonusItemButton;
+use lazyperson0710\LoginBonus\item\ItemRegister;
+use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
 use lazyperson710\sff\form\element\SendFormButton;
 
 class ItemSelectForm extends SimpleForm {
@@ -17,8 +17,12 @@ class ItemSelectForm extends SimpleForm {
             ->addElement(new SendFormButton(new TicketSelectForm(), "Ticketと交換する"));
         $items = ItemRegister::getInstance()->getItems();
         foreach ($items as $item) {
-            $itemInfo = (new LoginBonusItemInfo($item["item"], $item["quantity"], $item["cost"], $item["customName"], $item["lore"], $item["formExplanation"]));
-            $this->addElement(new SelectLoginBonusItemButton($itemInfo->getCustomName() . "x" . $itemInfo->getQuantity() . " / Cost : " . $itemInfo->getCost() . "\n" . $itemInfo->getFormExplanation(), $itemInfo));
+            if ($item instanceof LoginBonusItemInfo) {
+                $this->addElement(new SelectLoginBonusItemButton($item->getCustomName() . "x" . $item->getQuantity() . " / Cost : " . $item->getCost() . "\n" . $item->getFormExplanation(), $item));
+            } else {
+                //todo サーバー停止させる
+                return;
+            }
         }
     }
 
