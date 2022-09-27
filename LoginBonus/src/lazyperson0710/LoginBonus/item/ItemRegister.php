@@ -18,14 +18,14 @@ class ItemRegister {
      */
     public function init(): void {
         ##Item交換
-        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "赤いリンゴ", [], null, [],);
-        $this->itemRegister(VanillaItems::APPLE(), 40, 1, "いリゴ");
-        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いンゴ");
-        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ");
-        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いゴ");
-        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ");
-        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "いリンゴ");
-        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "ンゴ", null, "赤いリンゴじゃないです");
+        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "赤いリンゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 1, "いリゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いンゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 40, 3, "いリンゴ", [], null, [], [], []);
+        $this->itemRegister(VanillaItems::APPLE(), 30, 1, "ンゴ", [], "赤いリンゴじゃないです", [], [], []);
     }
 
     //エンチャントとnbtタグを追加できるように
