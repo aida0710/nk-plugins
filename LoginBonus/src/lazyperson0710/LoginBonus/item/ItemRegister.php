@@ -35,15 +35,7 @@ class ItemRegister {
             return;
         }
         $this->items[] = [
-            "item" => $item,
-            "quantity" => $quantity,
-            "cost" => $cost,
-            "customName" => $customName,
-            "lore" => $lore,
-            "formExplanation" => $formExplanation,
-            "enchants" => $enchants,
-            "level" => $level,
-            "nbt" => $nbt,
+            (new LoginBonusItemInfo($item, $quantity, $cost, $customName, $lore, $formExplanation, $enchants, $level, $nbt)),
         ];
     }
 
