@@ -34,9 +34,7 @@ class ItemRegister {
             Main::getInstance()->getServer()->getPluginManager()->disablePlugin(Main::getInstance());
             return;
         }
-        $this->items[] = [
-            (new LoginBonusItemInfo($item, $quantity, $cost, $customName, $lore, $formExplanation, $enchants, $level, $nbt)),
-        ];
+        $this->items[] = (new LoginBonusItemInfo($item, $quantity, $cost, $customName, $lore, $formExplanation, $enchants, $level, $nbt));
     }
 
     /**
