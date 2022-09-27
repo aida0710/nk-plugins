@@ -3,10 +3,10 @@
 namespace lazyperson0710\LoginBonus\form\element;
 
 use bbo51dog\bboform\element\Button;
-use lazyperson0710\LoginBonus\calculation\checkInventoryItem;
-use lazyperson0710\LoginBonus\dataBase\LoginBonusItemInfo;
+use lazyperson0710\LoginBonus\calculation\CheckInventoryCalculation;
 use lazyperson0710\LoginBonus\form\BonusForm;
 use lazyperson0710\LoginBonus\form\convert\ItemConvertConfirmationForm;
+use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
@@ -20,7 +20,7 @@ class SelectLoginBonusItemButton extends Button {
     }
 
     public function handleSubmit(Player $player): void {
-        if (checkInventoryItem::init($player, $this->itemInfo->getCost())) {
+        if (CheckInventoryCalculation::check($player, $this->itemInfo->getCost())) {
             SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
         } else {
             SendForm::Send($player, new BonusForm($player, "\n§cインベントリ内にあるログインボーナス数が足りません"));

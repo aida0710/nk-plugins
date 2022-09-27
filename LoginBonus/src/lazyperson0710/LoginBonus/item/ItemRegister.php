@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\LoginBonus\dataBase;
+namespace lazyperson0710\LoginBonus\item;
 
 use lazyperson0710\Gacha\Main;
 use pocketmine\item\Item;

@@ -3,8 +3,8 @@
 namespace lazyperson0710\LoginBonus;
 
 use lazyperson0710\LoginBonus\command\LoginBonusCommand;
-use lazyperson0710\LoginBonus\dataBase\ItemRegister;
 use lazyperson0710\LoginBonus\event\JoinPlayerEvent;
+use lazyperson0710\LoginBonus\item\ItemRegister;
 use lazyperson0710\LoginBonus\task\CheckChangeDateTask;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\item\enchantment\EnchantmentInstance;
