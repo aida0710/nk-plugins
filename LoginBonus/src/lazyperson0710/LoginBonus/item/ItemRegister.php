@@ -5,10 +5,11 @@ namespace lazyperson0710\LoginBonus\item;
 use lazyperson0710\Gacha\Main;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
+use pocketmine\utils\SingletonTrait;
 
 class ItemRegister {
 
-    private static ItemRegister $instance;
+    use SingletonTrait;
 
     private array $items;
 
@@ -44,13 +45,6 @@ class ItemRegister {
      */
     public function getItems(): array {
         return $this->items;
-    }
-
-    public static function getInstance(): ItemRegister {
-        if (!isset(self::$instance)) {
-            self::$instance = new ItemRegister();
-        }
-        return self::$instance;
     }
 
 }
