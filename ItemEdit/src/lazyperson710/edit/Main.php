@@ -1,8 +1,8 @@
 <?php
 
-namespace lazyperson710\itemEdit;
+namespace lazyperson710\edit;
 
-use lazyperson710\itemEdit\command\ItemEditCommand;
+use lazyperson710\edit\command\ItemEditCommand;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 

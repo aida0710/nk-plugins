@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\itemEdit\form;
+namespace lazyperson710\edit\form\item;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;

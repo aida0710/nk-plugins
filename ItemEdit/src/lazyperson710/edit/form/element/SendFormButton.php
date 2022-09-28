@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\itemEdit\form\element;
+namespace lazyperson710\edit\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;

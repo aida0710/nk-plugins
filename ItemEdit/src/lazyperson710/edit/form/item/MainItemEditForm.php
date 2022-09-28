@@ -1,12 +1,12 @@
 <?php
 
-namespace lazyperson710\itemEdit\form;
+namespace lazyperson710\edit\form\item;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson710\itemEdit\form\element\SendFormButton;
+use lazyperson710\edit\form\element\SendFormButton;
 use pocketmine\player\Player;
 
-class NbtEditForm extends SimpleForm {
+class MainItemEditForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
