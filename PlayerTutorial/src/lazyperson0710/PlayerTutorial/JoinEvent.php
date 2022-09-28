@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\PlayerSetting;
+namespace lazyperson0710\PlayerTutorial;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
