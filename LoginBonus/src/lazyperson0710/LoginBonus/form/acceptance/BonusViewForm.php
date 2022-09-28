@@ -20,7 +20,7 @@ class BonusViewForm extends CustomForm {
         $this
             ->setTitle("ログインボーナス")
             ->addElements(
-                new Label("現在保留しているログインボーナス数 : ". Main::getInstance()->lastBonusDateConfig->get($player->getName())),
+                new Label("現在保留しているログインボーナス数 : " . Main::getInstance()->lastBonusDateConfig->get($player->getName()) . "個"),
                 new Label("ログインボーナスを受け取りますか？\n受け取りたい場合は下にあるトグルをタップし「送信」ボタンを押してください"),
                 $this->toggle,
             );
