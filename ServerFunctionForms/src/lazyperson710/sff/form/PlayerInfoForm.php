@@ -24,7 +24,7 @@ class PlayerInfoForm extends CustomForm {
             }
             $names[] .= $name;
         }
-        if (is_null($names)) {//こんなことは存在しないけど一応条件分岐だけ(上記のコメントアウトを消したら必要になります)
+        if (is_null($names)) {
             $names[] .= "表示可能なプレイヤーが存在しません";
         }
         $this->dropdown = new Dropdown("情報を取得したいプレイヤーを選択してください", $names);

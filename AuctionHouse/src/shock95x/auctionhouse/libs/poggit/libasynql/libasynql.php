@@ -98,7 +98,6 @@ final class libasynql {
                 }
                 $fileName = self::resolvePath($plugin->getDataFolder(), $configData["sqlite"]["file"] ?? "data.sqlite");
                 if ($pdo) {
-                    // TODO add PDO support
                 } else {
                     $factory = Sqlite3Thread::createFactory($fileName);
                 }
@@ -114,7 +113,6 @@ final class libasynql {
                 }
                 $cred = MysqlCredentials::fromArray($configData["mysql"], strtolower($plugin->getName()));
                 if ($pdo) {
-                    // TODO add PDO support
                 } else {
                     $factory = MysqliThread::createFactory($cred);
                     $placeHolder = "?";
