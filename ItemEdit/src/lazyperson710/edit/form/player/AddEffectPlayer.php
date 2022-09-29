@@ -1,3 +1,4 @@
+
 <?php
 
 namespace lazyperson710\edit\form\player;
@@ -8,10 +9,11 @@ use bbo51dog\bboform\form\CustomForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
-class AddExpPlayer extends CustomForm {
+class AddEffectPlayer extends CustomForm {
 
     private Dropdown $players;
-    private Input $expLevel;
+    private Input $level;
+
 
     public function __construct(Player $player) {
         $names = null;
@@ -20,23 +22,24 @@ class AddExpPlayer extends CustomForm {
             $names[] .= $name;
         }
         $this->players = new Dropdown("プレイヤーを選択してください", $names);
-        $this->expLevel = new Input("増加させたい経験値量を入力してください", "1");
+        $this->level = new Input("設定したいレベル値を入力してください", "1");
+
         $this
             ->setTitle("Player Edit")
             ->addElements(
                 $this->players,
-                $this->expLevel,
+                $this->level,
             );
     }
 
     public function handleSubmit(Player $player): void {
-        $target = $this->players->getSelectedOption();
-        $expLevel = $this->expLevel->getValue();
-        if (!Server::getInstance()->getPlayerByPrefix($target)) {
+        $players = $this->players->getSelectedOption();
+        $expLevel = $this->level->getValue();
+        if (!Server::getInstance()->getPlayerByPrefix($players)) {
             $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
             return;
         }
-        $target = Server::getInstance()->getPlayerByPrefix($target);
+        $target = Server::getInstance()->getPlayerByPrefix($players);
         if (!is_numeric($expLevel)) {
             $player->sendMessage("§bPlayerEdit §7>> §c経験値量は数値で入力してください");
             return;
