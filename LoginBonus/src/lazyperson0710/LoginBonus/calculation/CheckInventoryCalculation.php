@@ -13,7 +13,6 @@ class CheckInventoryCalculation {
             $item = clone $player->getInventory()->getItem($i);
             if (Main::getInstance()->loginBonusItem === $item) {
                 if ($requiredCount <= $item->getCount()) {
-                    $player->getInventory()->removeItem($item->setCount($requiredCount));
                     return true;
                 }
             }
