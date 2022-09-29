@@ -60,33 +60,33 @@ class MiningLevelSystem extends PluginBase {
                     $sender->sendMessage("§bLevel §7>> §c{$name}のデータは存在しません。");
                 }
                 return true;
-            case 'set':
-                if (!Server::getInstance()->isOp($sender->getName())) {
-                    return true;
-                }
-                if (isset($args[1]) && isset($args[2])) {
-                    $player = $args[1];
-                    $level = $args[2];
-                    if (Server::getInstance()->getPlayerByPrefix($player)) {
-                        if (!is_int($level)) {
-                            MiningLevelAPI::getInstance()->setLevel($player, $level);
-                            $sender->sendMessage("§bLevel §7>> §c{$player}のレベルを{$level}にしました。");
+            /* case 'set':
+                            if (!Server::getInstance()->isOp($sender->getName())) {
+                                return true;
+                            }
+                            if (isset($args[1]) && isset($args[2])) {
+                                $player = $args[1];
+                                $level = $args[2];
+                                if (Server::getInstance()->getPlayerByPrefix($player)) {
+                                    if (!is_int($level)) {
+                                        MiningLevelAPI::getInstance()->setLevel($player, $level);
+                                        $sender->sendMessage("§bLevel §7>> §c{$player}のレベルを{$level}にしました。");
+                                        return true;
+                                    } else {
+                                        $sender->sendMessage("intじゃないんですけど");
+                                    }
+                                } else {
+                                    $sender->sendMessage("そんなぷれいやーいねぇよカス");
+                                }
+                            } else {
+                                $sender->sendMessage("§bLevel §7>> §c/set player level");
+                            }
                             return true;
-                        } else {
-                            $sender->sendMessage("intじゃないんですけど");
-                        }
-                    } else {
-                        $sender->sendMessage("そんなぷれいやーいねぇよカス");
-                    }
-                } else {
-                    $sender->sendMessage("§bLevel §7>> §c/set player level");
-                }
-                return true;
-            case 'reset':
-                $name = $sender->getName();
-                MiningLevelAPI::getInstance()->setData($name, 0, 0, 80);
-                $sender->sendMessage("§bLevel §7>> §cレベルをリセットしました");
-                return true;
+                        case 'reset':
+                            $name = $sender->getName();
+                            MiningLevelAPI::getInstance()->setData($name, 0, 0, 80);
+                            $sender->sendMessage("§bLevel §7>> §cレベルをリセットしました");
+                            return true;*/
             case 'ranking':
                 if (!($sender instanceof Player)) {
                     $sender->sendMessage('§bLevel §7>> §cサーバー内で使用してください。');
