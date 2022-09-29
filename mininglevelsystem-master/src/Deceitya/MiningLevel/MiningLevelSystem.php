@@ -30,6 +30,7 @@ class MiningLevelSystem extends PluginBase {
         MiningLevelAPI::getInstance()->deinit();
     }
 
+    //todo コマンドの存在意義が消えてるので削除予定
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if (!isset($args[0])) {
             return false;
