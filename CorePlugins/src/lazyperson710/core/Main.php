@@ -51,6 +51,7 @@ use pocketmine\plugin\PluginBase;
 class Main extends PluginBase {
 
     public const ITEM_GRIND_STONE = -195;
+    public const ITEM_COMMAND_BLOCK = 137;
     public const ITEM_CHISELED_NETHER_BRICKS = -302;
     public const EntityRemoveTaskInterval = 60;
     public int $entityRemoveTimeLeft;
@@ -101,6 +102,9 @@ class Main extends PluginBase {
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
         StringToItemParser::getInstance()->register('grindstone', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_GRIND_STONE, 0), 'Login Bonus'));
+        ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_COMMAND_BLOCK, 0), 'コマンドブロック'));
+        CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_COMMAND_BLOCK, 0), 'コマンドブロック'));
+        StringToItemParser::getInstance()->register('command_block', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_COMMAND_BLOCK, 0), 'コマンドブロック'));
         ItemFactory::getInstance()->register(new Item(new ItemIdentifier(self::ITEM_CHISELED_NETHER_BRICKS, 0), 'MiningToolsRangeCostItem'));
         CreativeInventory::getInstance()->add(new Item(new ItemIdentifier(self::ITEM_CHISELED_NETHER_BRICKS, 0), 'MiningToolsRangeCostItem'));
         StringToItemParser::getInstance()->register('MiningToolsRangeCostItem', fn(string $input) => new Item(new ItemIdentifier(self::ITEM_CHISELED_NETHER_BRICKS, 0), 'MiningToolsRangeCostItem'));
