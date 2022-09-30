@@ -38,6 +38,7 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::init($event);
         if ($inHand->getNamedTag()->getTag('PlayerTeleportTicket') !== null) PlayerTeleportTicket::init($event);
         if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::init($event);
+        if ($inHand->getNamedTag()->getTag('CommandStorage') !== null) CommandStorage::init($event);
         //if ($inHand->getNamedTag()->getTag('ega') !== null) EnchantedGoldApple::init($event);
         //if ($inHand->getNamedTag()->getTag('ga') !== null) GoldApple::init($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::init($event);
