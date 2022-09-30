@@ -3,12 +3,10 @@
 namespace lazyperson0710\EffectItems\event;
 
 use lazyperson0710\EffectItems\items\AirBlock;
-use lazyperson0710\EffectItems\items\Churu;
 use lazyperson0710\EffectItems\items\CommandStorage;
 use lazyperson0710\EffectItems\items\EffectCleaner;
 use lazyperson0710\EffectItems\items\HasteItem;
 use lazyperson0710\EffectItems\items\HeavenGrass;
-use lazyperson0710\EffectItems\items\LoginBonusItem;
 use lazyperson0710\EffectItems\items\PlayerTeleportTicket;
 use lazyperson0710\EffectItems\items\RedBull;
 use lazyperson0710\EffectItems\items\Unknown;
@@ -43,7 +41,6 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::init($event);
         //if ($inHand->getNamedTag()->getTag('ega') !== null) EnchantedGoldApple::init($event);
         //if ($inHand->getNamedTag()->getTag('ga') !== null) GoldApple::init($event);
-        if ($inHand->getId() === -195) LoginBonusItem::init($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::init($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::init($event);
     }
