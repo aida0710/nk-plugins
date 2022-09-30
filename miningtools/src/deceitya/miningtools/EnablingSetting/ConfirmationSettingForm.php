@@ -20,7 +20,7 @@ class ConfirmationSettingForm extends CustomForm {
     public const CostItemId = BlockLegacyIds::LAPIS_BLOCK;
     public const CostItemNBT = "EnablingMiningSettingItem";
 
-    //todo 値を設定しないとだめ！！！！！
+    //comeback 値を設定しないとだめ！！！！！
     private const EnablingGrassToDirt = [
         "money" => 10,
         "rangeItem" => 0,
