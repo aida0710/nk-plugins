@@ -32,7 +32,6 @@ class PlayerItemEvent implements Listener {
         $inHand = $player->getInventory()->getItemInHand();
         //todo 使用時のメッセージ表示
         if ($inHand->getNamedTag()->getTag('AirBlock') !== null) AirBlock::init($event);
-        if ($inHand->getNamedTag()->getTag('Churu') !== null) Churu::init($event);
         if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::init($event);
         if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::init($event);
         if ($inHand->getNamedTag()->getTag('ZONe') !== null) ZONe::init($event);
