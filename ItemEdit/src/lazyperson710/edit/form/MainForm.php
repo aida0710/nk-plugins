@@ -12,7 +12,7 @@ class MainForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
-            ->setTitle("Item Edit")
+            ->setTitle("Edit Form")
             ->setText("選択してください")
             ->addElements(
                 new SendFormButton(new MainPlayerEditForm($player), "プレイヤーに関する情報を変更する"),

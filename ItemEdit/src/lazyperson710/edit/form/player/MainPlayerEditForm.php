@@ -10,7 +10,7 @@ class MainPlayerEditForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
-            ->setTitle("Item Edit")
+            ->setTitle("Player Edit")
             ->setText("選択してください")
             ->addElements(
                 new SendFormButton(new AddExpPlayer($player), "経験値レベルを編集"),

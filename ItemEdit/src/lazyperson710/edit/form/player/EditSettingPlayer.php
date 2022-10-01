@@ -1,3 +1,4 @@
+
 <?php
 
 namespace lazyperson710\edit\form\player;
@@ -8,7 +9,7 @@ use bbo51dog\bboform\form\CustomForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
-class AddExpPlayer extends CustomForm {
+class EditSettingPlayer extends CustomForm {
 
     private Dropdown $players;
     private Input $expLevel;
@@ -30,13 +31,13 @@ class AddExpPlayer extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $target = $this->players->getSelectedOption();
+        $players = $this->players->getSelectedOption();
         $expLevel = $this->expLevel->getValue();
-        if (!Server::getInstance()->getPlayerByPrefix($target)) {
+        if (!Server::getInstance()->getPlayerByPrefix($players)) {
             $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
             return;
         }
-        $target = Server::getInstance()->getPlayerByPrefix($target);
+        $target = Server::getInstance()->getPlayerByPrefix($players);
         if (!is_numeric($expLevel)) {
             $player->sendMessage("§bPlayerEdit §7>> §c経験値量は数値で入力してください");
             return;
