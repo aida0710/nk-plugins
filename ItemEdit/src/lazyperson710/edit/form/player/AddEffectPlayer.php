@@ -1,6 +1,4 @@
-
 <?php
-
 namespace lazyperson710\edit\form\player;
 
 use bbo51dog\bboform\element\Dropdown;
@@ -14,7 +12,6 @@ class AddEffectPlayer extends CustomForm {
     private Dropdown $players;
     private Input $level;
 
-
     public function __construct(Player $player) {
         $names = null;
         foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
@@ -23,7 +20,6 @@ class AddEffectPlayer extends CustomForm {
         }
         $this->players = new Dropdown("プレイヤーを選択してください", $names);
         $this->level = new Input("設定したいレベル値を入力してください", "1");
-
         $this
             ->setTitle("Player Edit")
             ->addElements(

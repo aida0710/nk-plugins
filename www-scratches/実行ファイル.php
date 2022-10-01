@@ -15,7 +15,7 @@ $value = [
 foreach ($value as $v) {
     if (is_numeric($v)) {
         $v = (int)$v;
-        var_dump("num". $v);
+        var_dump("num" . $v);
     }
     //if (!is_int($v)) {
     //    var_dump($v);

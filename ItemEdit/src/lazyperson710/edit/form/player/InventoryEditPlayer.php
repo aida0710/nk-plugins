@@ -1,6 +1,4 @@
-
 <?php
-
 namespace lazyperson710\edit\form\player;
 
 use bbo51dog\bboform\element\Dropdown;
