@@ -20,64 +20,65 @@ class ConfirmationSettingForm extends CustomForm {
     public const CostItemId = BlockLegacyIds::LAPIS_BLOCK;
     public const CostItemNBT = "EnablingMiningSettingItem";
 
-    //todo 値を設定しないとだめ！！！！！
+    //temp 値は設定したけどテストが必要
     private const EnablingGrassToDirt = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 3000000,
+        "rangeItem" => 8,
+        "enchantItem" => 8,
+        "settingItem" => 3,
     ];
     private const EnablingCobblestoneToStone = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 15000000,
+        "rangeItem" => 16,
+        "enchantItem" => 16,
+        "settingItem" => 8,
     ];
     private const EnablingGraniteToStone = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 3000000,
+        "rangeItem" => 8,
+        "enchantItem" => 8,
+        "settingItem" => 3,
     ];
     private const EnablingDioriteToStone = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 3000000,
+        "rangeItem" => 8,
+        "enchantItem" => 8,
+        "settingItem" => 3,
     ];
     private const EnablingAndesiteToStone = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 3000000,
+        "rangeItem" => 8,
+        "enchantItem" => 8,
+        "settingItem" => 3,
     ];
     private const EnablingIronIngot = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 30000000,
+        "rangeItem" => 25,
+        "enchantItem" => 25,
+        "settingItem" => 32,
     ];
     private const EnablingGoldIngot = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 30000000,
+        "rangeItem" => 32,
+        "enchantItem" => 32,
+        "settingItem" => 48,
     ];
     private const EnablingSandToGlass = [
-        "money" => 10,
-        "rangeItem" => 0,
-        "enchantItem" => 0,
-        "settingItem" => 0,
+        "money" => 8000000,
+        "rangeItem" => 15,
+        "enchantItem" => 15,
+        "settingItem" => 8,
     ];
 
     public function __construct(string $settingName, string $settingJaName) {
         $this->settingName = $settingName;
         $cost = $this->checkCost($settingName);
+        $money = number_format($cost["money"]);
         $this
             ->setTitle("Mining Tools")
             ->addElements(
                 new Label("本当に解放しますか？\n\n解放する機能 : {$settingJaName}\n\n解放するには以下のコストを消費します"),
-                new Label("金額 : {$cost["money"]}円\nMiningToolsRangeCostItem : {$cost["rangeItem"]}個\nMiningToolsEnchantCostItem : {$cost["enchantItem"]}個\nMiningSettingItem : {$cost["settingItem"]}個"),
+                new Label("金額 : {$money}円\nMiningToolsRangeCostItem : {$cost["rangeItem"]}個\nMiningToolsEnchantCostItem : {$cost["enchantItem"]}個\nMiningSettingItem : {$cost["settingItem"]}個"),
                 new Label("また、コストアイテムはインベントリに持っておく必要があります"),
             );
     }
@@ -98,6 +99,7 @@ class ConfirmationSettingForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         $settingName = $this->settingName;
         $cost = $this->checkCost($settingName);
+        $money = number_format($cost["money"]);
         $approval = 0;
         if ((new CheckPlayerData())->CheckReduceMoney($player, $cost["money"]) === false) $approval = 1;
         if ((new CheckPlayerData())->CheckCostItem($player, $cost["rangeItem"], RangeConfirmForm::CostItemId, RangeConfirmForm::CostItemNBT) === false) $approval = 2;
@@ -105,7 +107,7 @@ class ConfirmationSettingForm extends CustomForm {
         if ((new CheckPlayerData())->CheckCostItem($player, $cost["settingItem"], self::CostItemId, self::CostItemNBT) === false) $approval = 4;
         $errorMessage = match ($approval) {
             0 => "正常に処理通過",
-            1 => "所持金が足りません。要求金額 : {$cost["money"]}",
+            1 => "所持金が足りません。要求金額 : {$money}",
             2 => "MiningToolsRangeCostItemが足りません。要求個数 : {$cost["rangeItem"]}",
             3 => "MiningToolsEnchantCostItemが足りません。要求個数 : {$cost["enchantItem"]}",
             4 => "EnablingMiningSettingItemが足りません。要求個数 : {$cost["settingItem"]}",
