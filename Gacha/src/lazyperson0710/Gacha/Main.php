@@ -5,13 +5,13 @@ namespace lazyperson0710\Gacha;
 use lazyperson0710\Gacha\command\GachaCommand;
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\SingletonTrait;
 
 class Main extends PluginBase {
 
-    private static Main $main;
+    use SingletonTrait;
 
     public function onEnable(): void {
-        self::$main = $this;
         GachaItemAPI::getInstance()->init();
         $this->getServer()->getCommandMap()->registerAll("Gacha", [
             new GachaCommand(),
@@ -36,10 +36,6 @@ class Main extends PluginBase {
         }
         $this->getLogger()->info("正常に確率が計算されました");
         return true;
-    }
-
-    public static function getInstance(): Main {
-        return self::$main;
     }
 
 }
