@@ -13,11 +13,10 @@ class MainPlayerEditForm extends SimpleForm {
             ->setTitle("Player Edit")
             ->setText("選択してください")
             ->addElements(
-                new SendFormButton(new AddExpPlayer($player), "経験値レベルを編集"),
-            //todo MiningLevelを編集
-            //todo インベントリを開く
-            //todo エフェクト付与
-            //todo 設定の強制変更
+                new SendFormButton(new SetExpPlayer($player), "バニラ経験値を設定"),
+                new SendFormButton(new SetMiningLevelPlayer(), "マイニングレベルを設定"),
+                new SendFormButton(new EditSettingPlayer(), "プレイヤーの設定項目を変更"),
+                new SendFormButton(new InventoryEditPlayer(), "プレイヤーのインベントリを編集"),
             );
     }
 
