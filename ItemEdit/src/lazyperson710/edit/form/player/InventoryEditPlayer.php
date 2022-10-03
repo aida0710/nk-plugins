@@ -1,4 +1,5 @@
 <?php
+
 namespace lazyperson710\edit\form\player;
 
 use bbo51dog\bboform\element\Dropdown;
@@ -10,49 +11,30 @@ use pocketmine\Server;
 class InventoryEditPlayer extends CustomForm {
 
     private Dropdown $players;
-    private Input $expLevel;
+    private Input $input;
 
-    public function __construct(Player $player) {
+    public function __construct() {
         $names = null;
         foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
             $name = $onlinePlayer->getName();
             $names[] .= $name;
         }
-        $this->players = new Dropdown("プレイヤーを選択してください", $names);
-        $this->expLevel = new Input("増加させたい経験値量を入力してください", "1");
+        $this->players = new Dropdown("設定を変更したいプレイヤーを選択してください", $names);
+        $this->input = new Input("オフラインのプレイヤーを指定したい場合はこちらを入力してください", "lazyperson710");
         $this
             ->setTitle("Player Edit")
             ->addElements(
                 $this->players,
-                $this->expLevel,
+                $this->input,
             );
     }
 
     public function handleSubmit(Player $player): void {
-        $players = $this->players->getSelectedOption();
-        $expLevel = $this->expLevel->getValue();
-        if (!Server::getInstance()->getPlayerByPrefix($players)) {
-            $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
-            return;
-        }
-        $target = Server::getInstance()->getPlayerByPrefix($players);
-        if (!is_numeric($expLevel)) {
-            $player->sendMessage("§bPlayerEdit §7>> §c経験値量は数値で入力してください");
-            return;
-        }
-        if ($expLevel < 0) {
-            $player->sendMessage("§bPlayerEdit §7>> §c経験値レベルは0以上の数値で入力してください");
-            return;
-        }
-        if ($expLevel > 1241258) {
-            $player->sendMessage("§bPlayerEdit §7>> §c経験値レベルは1241258以下の数値で入力してください");
-            return;
-        }
-        $target->getXpManager()->setXpLevel($expLevel);
-        if ($player->getName() === $target->getName()) {
-            $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$expLevel}に設定しました");
+        $targetName = $this->players->getSelectedOption();
+        if (empty($this->input->getValue())) {
+            Server::getInstance()->dispatchCommand($player, "invsee " . $targetName);
         } else {
-            $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$player->getName()}が{$expLevel}に設定しました");
+            Server::getInstance()->dispatchCommand($player, "invsee " . $this->input->getValue());
         }
     }
 
