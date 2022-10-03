@@ -8,7 +8,7 @@ use bbo51dog\bboform\form\CustomForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
-class AddExpPlayer extends CustomForm {
+class SetExpPlayer extends CustomForm {
 
     private Dropdown $players;
     private Input $expLevel;
@@ -53,7 +53,8 @@ class AddExpPlayer extends CustomForm {
         if ($player->getName() === $target->getName()) {
             $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$expLevel}に設定しました");
         } else {
-            $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$player->getName()}が{$expLevel}に設定しました");
+            $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$expLevel}に設定しました");
+            $target->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$player->getName()}が{$expLevel}に設定しました");
         }
     }
 
