@@ -13,22 +13,25 @@ use pocketmine\player\Player;
 class SendMiningToolsSettingFormButton extends Button {
 
     private Form $form;
+    private Player $player;
 
     /**
+     * @param Player           $player
      * @param Form             $form
      * @param string           $text
      * @param ButtonImage|null $image
      */
-    public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
+    public function __construct(Player $player, Form $form, string $text, ?ButtonImage $image = null) {
         parent::__construct($text, $image);
+        $this->player = $player;
         $this->form = $form;
     }
 
     public function handleSubmit(Player $player): void {
-        if (MiningLevelAPI::getInstance()->getLevel($player) >= SelectSettingForm::LevelLimit) {
+        if (MiningLevelAPI::getInstance()->getLevel($this->player) >= SelectSettingForm::LevelLimit) {
             SendForm::Send($player, $this->form);
         } else {
-            SendForm::Send($player, new SelectSettingForm($player, "\n§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv. " . SelectSettingForm::LevelLimit));
+            SendForm::Send($player, new SelectSettingForm($this->player, "\n§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv. " . SelectSettingForm::LevelLimit));
         }
     }
 }

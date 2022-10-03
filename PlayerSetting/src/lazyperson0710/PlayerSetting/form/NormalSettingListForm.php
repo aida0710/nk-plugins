@@ -37,7 +37,10 @@ class NormalSettingListForm extends CustomForm {
     private StepSlider $levelUpTitle;
     private StepSlider $miningToolsDestructionEnabledWorlds;
 
+    private Player $player;
+
     public function __construct(Player $player) {
+        $this->player = $player;
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
         $this->setTitle("PlayerSettings");
         $this->addElements(
@@ -68,14 +71,14 @@ class NormalSettingListForm extends CustomForm {
     }
 
     public function handleClosed(Player $player): void {
-        SendForm::Send($player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
+        SendForm::Send($this->player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
     }
 
     public function handleSubmit(Player $player): void {
-        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
+        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
         if ($setting->getSetting(CoordinateSetting::getName())?->getValue() !== $this->coordinate->getValue()) {
             $setting->getSetting(CoordinateSetting::getName())?->setValue($this->coordinate->getValue());
-            CoordinatesPacket::CoordinatesPacket($player, $this->coordinate->getValue());
+            CoordinatesPacket::CoordinatesPacket($this->player, $this->coordinate->getValue());
         }
         if ($setting->getSetting(JoinItemsSetting::getName())?->getValue() !== $this->joinItems->getValue()) {
             $setting->getSetting(JoinItemsSetting::getName())?->setValue($this->joinItems->getValue());
@@ -121,7 +124,7 @@ class NormalSettingListForm extends CustomForm {
         if ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue() !== $miningToolsDestructionEnabledWorlds) {
             $setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
         }
-        SendForm::Send($player, new SelectSettingForm($player, "\n§a設定を保存しました"));
+        SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
     }
 
 }

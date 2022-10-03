@@ -45,8 +45,10 @@ class MiningToolsSettingListForm extends CustomForm {
         '金の自動精錬', //IronIngot
         '砂をガラスにする',   //GoldIngot
     ];
+    private Player $player;
 
     public function __construct(Player $player) {
+        $this->player = $player;
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
         $this->setTitle("PlayerSettings");
         $empty = true;
@@ -102,11 +104,11 @@ class MiningToolsSettingListForm extends CustomForm {
     }
 
     public function handleClosed(Player $player): void {
-        SendForm::Send($player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
+        SendForm::Send($this->player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
     }
 
     public function handleSubmit(Player $player): void {
-        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
+        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
         if ($setting->getSetting(EnablingGrassToDirtSetting::getName())?->getValue() === true) {
             if ($setting->getSetting(GrassToDirtSetting::getName())?->getValue() !== $this->grassToDirt->getValue()) {
                 $setting->getSetting(GrassToDirtSetting::getName())?->setValue($this->grassToDirt->getValue());
@@ -147,7 +149,7 @@ class MiningToolsSettingListForm extends CustomForm {
                 $setting->getSetting(GoldIngotSetting::getName())?->setValue($this->goldIngot->getValue());
             }
         }
-        SendForm::Send($player, new SelectSettingForm($player, "\n§a設定を保存しました"));
+        SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
     }
 
 }

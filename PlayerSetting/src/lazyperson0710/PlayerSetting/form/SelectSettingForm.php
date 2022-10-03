@@ -23,7 +23,7 @@ class SelectSettingForm extends SimpleForm {
             ->setText("設定したい項目を選択してください{$text}")
             ->addElements(
                 new SendNormalSettingFormButton(new NormalSettingListForm($player), "Normal Setting"),
-                new SendMiningToolsSettingFormButton(new MiningToolsSettingListForm($player), "Mining Tools Setting\n{$levelMessage}"),
+                new SendMiningToolsSettingFormButton($player, new MiningToolsSettingListForm($player), "Mining Tools Setting\n{$levelMessage}"),
             );
     }
 }
