@@ -1,6 +1,6 @@
 ---
 name: ItemEditor
-main: lazyperson710\itemEdit\Main
+main: lazyperson710\edit\Main
 version: 1.0.0
 api: 4.0.0
 author: lazyperson710
