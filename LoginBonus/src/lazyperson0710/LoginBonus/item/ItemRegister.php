@@ -30,7 +30,7 @@ class ItemRegister {
         $this->itemRegister(ItemFactory::getInstance()->get(\lazyperson710\core\Main::ITEM_COMMAND_BLOCK), 1, 1, "コマンド記憶装置", ["使用方法\n\nスニークしないでタップすると指定されたコマンドを実行\nスニークしながらタップで実行するコマンドを指定"], "設定したコマンドを即座に実行可能に", [], [], []);
         ##Cost - 3
         //食べ物とか
-        $this->itemRegister(VanillaItems::DIAMOND_PICKAXE(), 1, 8, "<神器>ダイヤのつるはし[効率lv.8]", ["過去実装された当時に強かったもの"], "当時は強かったもの", [VanillaEnchantments::EFFICIENCY()], [], []);
+        $this->itemRegister(VanillaItems::DIAMOND_PICKAXE(), 1, 8, "<神器>ダイヤのつるはし[効率lv.8]", ["過去実装された当時に強かったもの"], "当時は強かったもの", [VanillaEnchantments::EFFICIENCY()], [8], []);
         $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤いゴ", [], null, [], [], []);
         $this->itemRegister(VanillaItems::APPLE(), 40, 3, "赤リンゴ", [], null, [], [], []);
         $this->itemRegister(VanillaItems::APPLE(), 40, 3, "いリンゴ", [], null, [], [], []);
@@ -39,7 +39,7 @@ class ItemRegister {
 
     private function itemRegister(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt): void {
         if (count($enchants) !== count($level)) {
-            Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
+            Main::getInstance()->getLogger()->critical("LoginBonus : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
             Main::getInstance()->getServer()->getPluginManager()->disablePlugin(Main::getInstance());
             return;
         }
