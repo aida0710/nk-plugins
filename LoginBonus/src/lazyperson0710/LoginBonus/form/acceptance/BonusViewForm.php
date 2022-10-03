@@ -29,7 +29,7 @@ class BonusViewForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         if ($this->toggle->getValue()) {
             JoinPlayerEvent::check($player);
-        } else{
+        } else {
             SendForm::Send($player, new BonusForm($player, "\n§aログインボーナスを受け取りませんでした"));
         }
     }
