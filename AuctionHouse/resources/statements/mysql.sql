@@ -2,38 +2,59 @@
 -- #{ auctionhouse
 
 -- #  { init
-CREATE TABLE IF NOT EXISTS listings(
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    uuid CHAR(36),
-    username VARCHAR(36),
+CREATE TABLE IF NOT EXISTS listings
+(
+    id
+    INTEGER
+    PRIMARY
+    KEY
+    AUTO_INCREMENT,
+    uuid
+    CHAR
+(
+    36
+),
+    username VARCHAR
+(
+    36
+),
     price INT,
     item JSON,
     created INT,
     end_time INT,
     expired BOOLEAN DEFAULT FALSE
-);
+    );
 -- #  }
 
 -- # { count
 
 -- #    { all
-SELECT COUNT(*) FROM listings;
+SELECT COUNT(*)
+FROM listings;
 -- #    }
 
 -- #    { active
 
 -- #        { all
-SELECT COUNT(*) FROM listings WHERE expired = FALSE;
+SELECT COUNT(*)
+FROM listings
+WHERE expired = FALSE;
 -- #        }
 
 -- #        { uuid
 -- #          :uuid string
-SELECT COUNT(*) FROM listings WHERE uuid = :uuid AND expired = FALSE;
+SELECT COUNT(*)
+FROM listings
+WHERE uuid = :uuid
+  AND expired = FALSE;
 -- #        }
 
 -- #        { username
 -- #          :username string
-SELECT COUNT(*) FROM listings WHERE username = :username AND expired = FALSE;
+SELECT COUNT(*)
+FROM listings
+WHERE username = :username
+  AND expired = FALSE;
 -- #        }
 
 -- #    }
@@ -41,12 +62,17 @@ SELECT COUNT(*) FROM listings WHERE username = :username AND expired = FALSE;
 -- #    { expired
 
 -- #        { all
-SELECT COUNT(*) FROM listings WHERE expired = TRUE;
+SELECT COUNT(*)
+FROM listings
+WHERE expired = TRUE;
 -- #        }
 
 -- #        { uuid
 -- #          :uuid string
-SELECT COUNT(*) FROM listings WHERE uuid = :uuid AND expired = TRUE;
+SELECT COUNT(*)
+FROM listings
+WHERE uuid = :uuid
+  AND expired = TRUE;
 -- #        }
 
 -- #    }
@@ -58,12 +84,15 @@ SELECT COUNT(*) FROM listings WHERE uuid = :uuid AND expired = TRUE;
 -- #    { all
 -- #    :id int
 -- #    :limit int
-SELECT * FROM listings LIMIT :id, :limit;
+SELECT *
+FROM listings LIMIT :id, :limit;
 -- #    }
 
 -- #    { id
 -- #    :id int
-SELECT * FROM listings WHERE id = :id;
+SELECT *
+FROM listings
+WHERE id = :id;
 -- #    }
 
 -- #    { active
@@ -71,21 +100,29 @@ SELECT * FROM listings WHERE id = :id;
 -- #        { next
 -- #        :id int
 -- #        :limit int
-SELECT * FROM listings WHERE expired = FALSE LIMIT :id, :limit;
+SELECT *
+FROM listings
+WHERE expired = FALSE LIMIT :id, :limit;
 -- #        }
 
 -- #        { uuid
 -- #        :id int
 -- #        :limit int
 -- #        :uuid string
-SELECT * FROM listings WHERE uuid = :uuid AND expired = FALSE LIMIT :id, :limit;
+SELECT *
+FROM listings
+WHERE uuid = :uuid
+  AND expired = FALSE LIMIT :id, :limit;
 -- #        }
 
 -- #        { username
 -- #        :id int
 -- #        :limit int
 -- #        :username string
-SELECT * FROM listings WHERE username = :username AND expired = FALSE LIMIT :id, :limit;
+SELECT *
+FROM listings
+WHERE username = :username
+  AND expired = FALSE LIMIT :id, :limit;
 -- #        }
 
 -- #    }
@@ -95,14 +132,19 @@ SELECT * FROM listings WHERE username = :username AND expired = FALSE LIMIT :id,
 -- #        { next
 -- #        :id int
 -- #        :limit int
-SELECT * FROM listings WHERE expired = TRUE LIMIT :id, :limit;
+SELECT *
+FROM listings
+WHERE expired = TRUE LIMIT :id, :limit;
 -- #        }
 
 -- #        { uuid
 -- #        :id int
 -- #        :limit int
 -- #        :uuid string
-SELECT * FROM listings WHERE uuid = :uuid AND expired = TRUE LIMIT :id, :limit;
+SELECT *
+FROM listings
+WHERE uuid = :uuid
+  AND expired = TRUE LIMIT :id, :limit;
 -- #        }
 
 -- #    }
@@ -111,13 +153,17 @@ SELECT * FROM listings WHERE uuid = :uuid AND expired = TRUE LIMIT :id, :limit;
 
 -- # { delete
 -- #    :id int
-DELETE FROM listings WHERE id = :id;
+DELETE
+FROM listings
+WHERE id = :id;
 -- # }
 
 -- # { expired
 -- #    :id int
 -- #    :expired bool
-UPDATE listings SET expired = :expired WHERE id = :id;
+UPDATE listings
+SET expired = :expired
+WHERE id = :id;
 -- # }
 
 -- # { insert
@@ -128,7 +174,8 @@ UPDATE listings SET expired = :expired WHERE id = :id;
 -- #    :created int
 -- #    :end_time int
 -- #    :expired bool
-INSERT INTO listings(id, uuid, username, price, item, created, end_time, expired) VALUES (NULL, :uuid, :username, :price, :item, :created, :end_time, :expired);
+INSERT INTO listings(id, uuid, username, price, item, created, end_time, expired)
+VALUES (NULL, :uuid, :username, :price, :item, :created, :end_time, :expired);
 -- # }
 
 -- # }
