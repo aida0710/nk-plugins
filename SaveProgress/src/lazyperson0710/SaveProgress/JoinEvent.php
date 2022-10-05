@@ -14,9 +14,10 @@ class JoinEvent implements Listener {
      */
     public function onJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
-        Main::getInstance()->data[$player->getName()][] = SettingData::DefaultData;
-        Main::getInstance()->data[$name] = new Config(Main::getInstance()->getDataFolder() . str_replace([" ", "　"], "_", $player->getName()), Config::YAML, SettingData::DefaultData
-        Main::getInstance()->data[$name]->save();
+        if (!file_exists(Main::getInstance()->getDataFolder())) {
+            mkdir(Main::getInstance()->getDataFolder() . $player->getName().".yml");
+        }
+        ProgressDataAPI::getInstance()->setCache(Main::getInstance()->getDataFolder() . $player->getName() . ".yml", $player);
     }
 
 }
