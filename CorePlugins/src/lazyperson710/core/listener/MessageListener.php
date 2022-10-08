@@ -52,7 +52,7 @@ class MessageListener implements Listener {
             }
             $event->setJoinMessage("§l§bNewPlayer §7>> §e{$name}さんが初めてサーバーに参加しました！");
         } elseif ($player->getName() === "hakokokku") {
-            $event->setJoinMessage("§bHakokokkuLogin §7>> §e飴玉さんがログインしました！！！はこんって言ってみよう！MiningLv.{$level}");
+            $event->setJoinMessage("§bHakokokkuLogin §7>> §eわん、つー、すりー！はこさんがきたぞー！MiningLv.{$level}");
         } else {
             if (AnnounceService::isConfirmed($player->getName())) {
                 $event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
@@ -83,7 +83,7 @@ class MessageListener implements Listener {
         }
     }
 
-    public function onplace(BlockPlaceEvent $event) {
+    public function onPlace(BlockPlaceEvent $event) {
         if ($event->getBlock()->getId() === 449) {//書見台
             $event->getPlayer()->sendMessage("§bBook §7>> §c本は土地保護されていても取れるので注意してください");
         }
