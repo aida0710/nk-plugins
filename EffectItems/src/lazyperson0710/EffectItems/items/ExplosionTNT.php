@@ -7,7 +7,7 @@ use pocketmine\world\Explosion;
 
 class ExplosionTNT {
 
-    public static function init(BlockPlaceEvent $event): void {
+    public static function execution(BlockPlaceEvent $event): void {
         $event->cancel();
         $inHand = $event->getPlayer()->getInventory()->getItemInHand();
         $event->getPlayer()->getInventory()->removeItem($inHand->setCount(1));

@@ -10,7 +10,7 @@ use pocketmine\Server;
 
 class CommandStorage {
 
-    public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();

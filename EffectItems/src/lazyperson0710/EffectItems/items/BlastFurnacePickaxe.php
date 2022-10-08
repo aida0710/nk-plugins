@@ -9,7 +9,7 @@ use pocketmine\item\VanillaItems;
 
 class BlastFurnacePickaxe {
 
-    public static function init(BlockBreakEvent $event): void {
+    public static function execution(BlockBreakEvent $event): void {
         foreach ($event->getDrops() as $item) {
             switch ($item->getId()) {
                 case BlockLegacyIds::COBBLESTONE:

@@ -13,7 +13,7 @@ class PlayerDamageEvent implements Listener {
         if ($event->isCancelled()) return;
         $player = $event->getEntity();
         if (!$player instanceof Player) return;
-        DamageEventListener::init($event, $player);
+        DamageEventListener::execution($event, $player);
         if ($event->getCause() == EntityDamageEvent::CAUSE_BLOCK_EXPLOSION) {
             $player->sendTip("§bExplosion §7>> §a爆発ダメージが無効化されました");
             $event->cancel();

@@ -9,7 +9,7 @@ use pocketmine\player\Player;
 
 class DamageEventListener {
 
-    public static function init(EntityDamageEvent $event, Player $player): void {
+    public static function execution(EntityDamageEvent $event, Player $player): void {
         if (Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate()) === true) return;
         if (($event->getCause() === EntityDamageEvent::CAUSE_FALL)) {
             $armorInventory = $player->getArmorInventory();

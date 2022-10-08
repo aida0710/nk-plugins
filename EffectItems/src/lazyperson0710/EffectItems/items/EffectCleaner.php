@@ -7,7 +7,7 @@ use pocketmine\event\player\PlayerItemUseEvent;
 
 class EffectCleaner {
 
-    public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();

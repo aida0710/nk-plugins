@@ -11,7 +11,7 @@ use pocketmine\event\player\PlayerItemUseEvent;
 
 class AirBlock {
 
-    public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         $player = $event->getPlayer();
         $world_search = mb_substr($event->getPlayer()->getWorld()->getDisplayName(), 0, null, 'utf-8');

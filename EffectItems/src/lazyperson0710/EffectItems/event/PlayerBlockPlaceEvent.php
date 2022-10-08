@@ -12,6 +12,6 @@ class PlayerBlockPlaceEvent implements Listener {
         if ($event->isCancelled()) return;
         $player = $event->getPlayer();
         $NamedTag = $player->getInventory()->getItemInHand()->getNamedTag();
-        if ($NamedTag->getTag('ExplosionBlock') !== null) ExplosionTNT::init($event);
+        if ($NamedTag->getTag('ExplosionBlock') !== null) ExplosionTNT::execution($event);
     }
 }
