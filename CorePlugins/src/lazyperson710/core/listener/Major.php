@@ -33,7 +33,7 @@ class Major implements Listener {
                     if (isset($this->data[$name])) {
                         $particle = new RedstoneParticle(15);
                         for ($i = 0; $i <= 10; $i += 0.5) {
-                            $pos = $this->lerp($this->data[$name]->add(0, 1, 0), $block->getPosition()->add(0, 1, 0), $i * 0.1);
+                            $pos = $this->coordinateCalculation($this->data[$name]->add(0, 1, 0), $block->getPosition()->add(0, 1, 0), $i * 0.1);
                             $player->getWorld()->addParticle($pos, $particle);
                         }
                         $distance = $this->data[$name]->distance($block->getPosition());
@@ -57,7 +57,7 @@ class Major implements Listener {
      * @param float   $percent
      * @return Vector3
      */
-    public function lerp(Vector3 $start, Vector3 $end, float $percent): Vector3 {
+    public static function coordinateCalculation(Vector3 $start, Vector3 $end, float $percent): Vector3 {
         if (0 > $percent or $percent > 1) {
             throw new InvalidArgumentException("percentage $percent should have a value of 0 to 1");
         }
