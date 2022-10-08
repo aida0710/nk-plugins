@@ -19,7 +19,7 @@ class ItemsCommand extends Command {
             $sender->sendMessage("Please use in server");
             return;
         }
-        SendForm::Send($sender, (new SelectContentForm()));
+        SendForm::Send($sender, (new SelectContentForm($sender)));
     }
 
 }
