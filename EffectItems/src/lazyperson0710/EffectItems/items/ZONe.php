@@ -10,16 +10,14 @@ use pocketmine\event\player\PlayerItemUseEvent;
 
 class ZONe {
 
-    public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::RESISTANCE(), 20 * 60 * 5, 3, false);
-        $vanillaEffect = VanillaEffects::RESISTANCE();
-        AddEffectPacket::init($player, $effect, $vanillaEffect, true);
+        AddEffectPacket::init($player, $effect, VanillaEffects::RESISTANCE(), true);
         $effect = new EffectInstance(VanillaEffects::STRENGTH(), 20 * 60 * 5, 8, false);
-        $vanillaEffect = VanillaEffects::STRENGTH();
-        AddEffectPacket::init($player, $effect, $vanillaEffect, true);
+        AddEffectPacket::init($player, $effect, VanillaEffects::STRENGTH(), true);
     }
 }

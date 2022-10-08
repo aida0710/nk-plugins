@@ -10,16 +10,14 @@ use pocketmine\event\player\PlayerItemUseEvent;
 
 class HeavenGrass {
 
-    public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::REGENERATION(), 20 * 60 * 10, 255, false);
-        $vanillaEffect = VanillaEffects::REGENERATION();
-        AddEffectPacket::init($player, $effect, $vanillaEffect, true);
+        AddEffectPacket::init($player, $effect, VanillaEffects::REGENERATION(), true);
         $effect = new EffectInstance(VanillaEffects::MINING_FATIGUE(), 20 * 60 * 10, 1, false);
-        $vanillaEffect = VanillaEffects::MINING_FATIGUE();
-        AddEffectPacket::init($player, $effect, $vanillaEffect, true);
+        AddEffectPacket::init($player, $effect, VanillaEffects::MINING_FATIGUE(), true);
     }
 }

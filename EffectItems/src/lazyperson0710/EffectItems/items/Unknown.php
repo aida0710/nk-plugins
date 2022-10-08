@@ -10,16 +10,14 @@ use pocketmine\event\player\PlayerItemUseEvent;
 
 class Unknown {
 
-    public static function init(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $event->cancel();
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60 * 5, 5, false);
-        $vanillaEffect = VanillaEffects::HASTE();
-        AddEffectPacket::init($player, $effect, $vanillaEffect, true);
+        AddEffectPacket::init($player, $effect, VanillaEffects::HASTE(), true);
         $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 20 * 60 * 5, 1, false);
-        $vanillaEffect = VanillaEffects::NIGHT_VISION();
-        AddEffectPacket::init($player, $effect, $vanillaEffect, true);
+        AddEffectPacket::init($player, $effect, VanillaEffects::NIGHT_VISION(), true);
     }
 }
