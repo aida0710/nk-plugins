@@ -3,6 +3,7 @@
 namespace lazyperson0710\EffectItems\event;
 
 use lazyperson0710\EffectItems\items\AirBlock;
+use lazyperson0710\EffectItems\items\Churu;
 use lazyperson0710\EffectItems\items\CommandStorage;
 use lazyperson0710\EffectItems\items\EffectCleaner;
 use lazyperson0710\EffectItems\items\HasteItem;
@@ -35,6 +36,7 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::execution($event);
         if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::execution($event);
         if ($inHand->getNamedTag()->getTag('ZONe') !== null) ZONe::execution($event);
+        if ($inHand->getNamedTag()->getTag('Churu') !== null) Churu::execution($event);
         if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::execution($event);
         if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::execution($event);
         if ($inHand->getNamedTag()->getTag('CommandStorage') !== null) CommandStorage::execution($event);
