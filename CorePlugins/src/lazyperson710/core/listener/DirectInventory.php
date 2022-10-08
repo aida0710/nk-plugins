@@ -46,7 +46,7 @@ class DirectInventory implements Listener {
         }
     }
 
-//todo ここら辺の処理は不安定な可能性があるためデバッグしてください
+    //debug ここら辺の処理は不安定な可能性があるためデバッグしてください
     private function notStorageItem(Player $player, Item $item): bool {
         if ($item->getId() === BlockLegacyIds::AIR) return false;
         switch (true) {
