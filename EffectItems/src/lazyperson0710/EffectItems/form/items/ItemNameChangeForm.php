@@ -23,7 +23,7 @@ class ItemNameChangeForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (!$player->getInventory()->getItemInHand() instanceof Durable) {
-            $player->sendMessage("§bItemNameChange §7>> §c道具や装備以外のアイテムは名前を変更することができません");
+            $player->sendMessage("§bItemEdit §7>> §c道具や装備以外のアイテムは名前を変更することができません");
             return;
         }
         $approval = false;
@@ -37,7 +37,7 @@ class ItemNameChangeForm extends CustomForm {
             }
         }
         if ($approval === false) {
-            $player->sendMessage("§bItemNameChange §7>> §cアイテム名変更アイテムを取得することができませんでした");
+            $player->sendMessage("§bItemEdit §7>> §cアイテム名変更アイテムを取得することができませんでした");
             return;
         }
         $inHandItem = $player->getInventory()->getItemInHand();
