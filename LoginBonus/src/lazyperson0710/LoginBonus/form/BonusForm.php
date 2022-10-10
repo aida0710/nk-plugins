@@ -18,7 +18,7 @@ class BonusForm extends SimpleForm {
             ->addElements(
                 new SendFormButton(new ItemSelectForm(), "ログインボーナスをアイテムと交換"),
                 new SendBonusViewFormButton(new BonusViewForm($player), "保留しているログインボーナスを回収"),
-            //todo op用に好きな数生成するシステムが欲しい
+                //todo op用に好きな数生成するシステムが欲しい
             );
     }
 }
