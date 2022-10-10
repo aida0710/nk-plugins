@@ -17,8 +17,7 @@ class Main extends PluginBase {
             new GachaCommand(),
         ]);
         if ($this->checkChance() === false) {
-            $this->getLogger()->critical("Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します");
-            $this->getServer()->getPluginManager()->disablePlugin($this);
+            throw new \Error("Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します");
         }
     }
 
