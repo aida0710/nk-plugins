@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace lazyperson0710\Gacha\database;
 
 use lazyperson0710\Gacha\Main;
+use pocketmine\block\utils\CoralType;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\Item;
@@ -53,7 +54,7 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EXPERIENCE_BOTTLE(), 16, "魔剤セット", "ちょっとずつ飲もう。。。", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::TNT()->asItem(), 1, "爆発物", "設置すると爆発します", [], [], ["ExplosionBlock"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EGG(), 1, "温泉卵", "温まってるので中身はない", [], [], []);
-        //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "EffectCleaner", "現在付与されているエフェクトを全て削除します", [], [], []);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::GLASS_BOTTLE(), 1, "エフェクトクリーナー", "現在付与されているエフェクトを全て削除します", [VanillaEnchantments::PUNCH()], [1], ["EffectCleaner"]);
         ## R Rank
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_FISH(), 1, "ラムネ", "美味しいよね", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_RABBIT(), 1, "モンスター", "カフェイン摂取キモチエェェェ！", [], [], []);
@@ -64,9 +65,15 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "R", ItemFactory::getInstance()->get(751), 1, "落下ダメージ完全防御ブーツ", "着用していると落下ダメージから自分を守ってくれる", [], [], ["DefensiveStone"]);
         //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "金のリンゴ", "少しだけ掘る気になるリンゴ", [], [], []);
         ## SR Rank
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::CORAL_FAN()->setCoralType(CoralType::FIRE())->asItem(), 1, "天国草", "天国で群生してる草", [], [], ["HeavenGrass"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "驛｢譎｢?ｽ?｢驛｢譎｢?ｽ?ｳ驛｢?ｧ??ｹ驛｢?ｧ??ｿ驛｢譎｢?ｽ?ｼ", [], [], ["UnknownItem"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //$this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "core", [], [], ["UnknownItem"]);
+        //$this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "core", [], [], ["UnknownItem"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::MONSTER_SPAWNER()->asItem(), 1, "レベルブロック", "れぇべぇるぅ\n破壊するとバニラ経験値がもらえます", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_PICKAXE(), 1, "黒曜石ブレイカー", "黒曜石だけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["ObsidianBreaker"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_HOE(), 1, "グロウストーンブレイカー", "グロウストーンだけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["GlowstoneBreaker"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COMPASS(), 1, "プレイヤー追跡機", "同じワールドにいる他プレイヤーの居場所から自身の座標まで直線状のパーティクルを出現させる", [VanillaEnchantments::PUNCH()], [1], ["PlayersGetLocation"]);
         //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "エンチャント金のリンゴ", "とても掘る気になるリンゴ", [], [], []);
         ## SSR Rank
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::FISHING_ROD(), 1, "SuperRod", "どこまでも走れる気がする", [VanillaEnchantments::PUNCH()], [1], []);
