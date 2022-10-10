@@ -7,6 +7,7 @@ use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use Exception;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\VanillaEnchantments;
@@ -14,6 +15,7 @@ use pocketmine\item\ItemIds;
 use pocketmine\item\TieredTool;
 use pocketmine\item\ToolTier;
 use pocketmine\player\Player;
+use pocketmine\Server;
 use pocketmine\world\sound\AnvilBreakSound;
 use pocketmine\world\sound\AnvilUseSound;
 
@@ -192,9 +194,11 @@ class RepairForm extends CustomForm {
                 $player->sendMessage("§bRepair §7>> §aLevelを{$this->level}消費してアイテムを修理しました");
                 break;
             default:
-                $player->sendMessage("§bRepair §7>> §c何かを消費してアイテムを修理しました");
+                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
+                Server::getInstance()->shutdown();
                 break;
         }
+        SoundPacket::Send($player, "smithing_table.use");
     }
 
     /**
