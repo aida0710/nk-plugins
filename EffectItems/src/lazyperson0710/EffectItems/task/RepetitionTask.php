@@ -17,20 +17,20 @@ class RepetitionTask extends Task {
             if ($getNameTag->getTag('ObsidianBreaker') !== null) {//ObsidianBreaker
                 $effect = new EffectInstance(VanillaEffects::HASTE(), 12, 255, false);
                 $vanillaEffect = VanillaEffects::HASTE();
-                AddEffectPacket::init($player, $effect, $vanillaEffect);
+                AddEffectPacket::Add($player, $effect, $vanillaEffect);
                 return;
             }
             if ($getNameTag->getTag('GlowstoneBreaker') !== null) {//GlowstoneBreaker
                 $effect = new EffectInstance(VanillaEffects::HASTE(), 12, 255, false);
                 $vanillaEffect = VanillaEffects::HASTE();
-                AddEffectPacket::init($player, $effect, $vanillaEffect);
+                AddEffectPacket::Add($player, $effect, $vanillaEffect);
                 return;
             }
             ##その他
             if ($getNameTag->getTag('SpeedRod') !== null) {//SpeedRod
                 $effect = new EffectInstance(VanillaEffects::SPEED(), 12, 30, false);
                 $vanillaEffect = VanillaEffects::SPEED();
-                AddEffectPacket::init($player, $effect, $vanillaEffect);
+                AddEffectPacket::Add($player, $effect, $vanillaEffect);
             }
         }
     }

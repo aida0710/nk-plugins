@@ -16,8 +16,8 @@ class Unknown {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60 * 5, 5, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::HASTE(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::HASTE(), true);
         $effect = new EffectInstance(VanillaEffects::NIGHT_VISION(), 20 * 60 * 5, 1, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::NIGHT_VISION(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::NIGHT_VISION(), true);
     }
 }

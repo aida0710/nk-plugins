@@ -90,7 +90,7 @@ class EventListener implements Listener {
                 InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
                 match (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
                     "title" => $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}"),
-                    "toast" => SendToastPacket::init($player, "§bMining Level UP Message", "§aLv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
+                    "toast" => SendToastPacket::Send($player, "§bMining Level UP Message", "§aLv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
                     default => null,
                 };
             })($player, $originalLevel, $level);

@@ -16,8 +16,8 @@ class HeavenGrass {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::REGENERATION(), 20 * 60 * 10, 255, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::REGENERATION(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::REGENERATION(), true);
         $effect = new EffectInstance(VanillaEffects::MINING_FATIGUE(), 20 * 60 * 10, 1, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::MINING_FATIGUE(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::MINING_FATIGUE(), true);
     }
 }

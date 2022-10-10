@@ -67,11 +67,11 @@ class GachaForm extends CustomForm {
                     $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
                     break;
                 case "SSR":
-                    SoundPacket::init($player, "mob.wither.spawn");
+                    SoundPacket::Send($player, "mob.wither.spawn");
                     $player->sendMessage("§bGacha §7>> §aSpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
                     break;
                 case "L":
-                    SoundPacket::init($player, "mob.enderdragon.death");
+                    SoundPacket::Send($player, "mob.enderdragon.death");
                     Server::getInstance()->broadcastMessage("§bGacha §7>> §eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました");
                     break;
             }

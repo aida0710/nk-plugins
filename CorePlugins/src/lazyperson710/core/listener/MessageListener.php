@@ -25,9 +25,9 @@ class MessageListener implements Listener {
         $name = $event->getPlayer()->getName();
         $level = MiningLevelAPI::getInstance()->getLevel($player);
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(CoordinateSetting::getName())?->getValue() === true) {
-            CoordinatesPacket::CoordinatesPacket($player, true);
+            CoordinatesPacket::Send($player, true);
         } else {
-            CoordinatesPacket::CoordinatesPacket($player, false);
+            CoordinatesPacket::Send($player, false);
         }
         if (!$player->hasPlayedBefore()) {
             $pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName("tos"));

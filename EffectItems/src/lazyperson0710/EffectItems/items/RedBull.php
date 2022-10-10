@@ -16,6 +16,6 @@ class RedBull {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::LEVITATION(), 3, 30, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::LEVITATION(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::LEVITATION(), true);
     }
 }

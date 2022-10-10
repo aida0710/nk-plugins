@@ -7,7 +7,7 @@ use pocketmine\player\Player;
 
 class SoundPacket {
 
-    public static function init(Player $player, string $soundName, ?int $volume = 1, ?int $pitch = 1, ?bool $division = false, ?int $value = 1): void {
+    public static function Send(Player $player, string $soundName, ?int $volume = 1, ?int $pitch = 1, ?bool $division = false, ?int $value = 1): void {
         $sound = new PlaySoundPacket();
         $sound->soundName = $soundName;
         $sound->x = $player->getPosition()->getX();

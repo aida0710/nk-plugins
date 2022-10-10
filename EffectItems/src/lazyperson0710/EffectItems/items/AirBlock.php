@@ -37,6 +37,6 @@ class AirBlock {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $player->getPosition()->getWorld()->setBlock($pos, $item->getBlock());
-        SoundPacket::init($player, "dig.stone");
+        SoundPacket::Send($player, "dig.stone");
     }
 }

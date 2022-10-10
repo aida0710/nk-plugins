@@ -18,7 +18,7 @@ class BreakSoundPacket implements Listener {
         if (PlayerSettingPool::getInstance()->getSettingNonNull($event->getPlayer())->getSetting(DestructionSoundSetting::getName())?->getValue() === true) {
             $volume = mt_rand(1, 2);
             $pitch = mt_rand(5, 10);
-            SoundPacket::init($event->getPlayer(), 'random.orb', $volume, $pitch, true, 10);
+            SoundPacket::Send($event->getPlayer(), 'random.orb', $volume, $pitch, true, 10);
         }
     }
 }

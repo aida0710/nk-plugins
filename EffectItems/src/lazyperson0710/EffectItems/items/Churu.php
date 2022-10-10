@@ -17,8 +17,8 @@ class Churu extends CookedMutton {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 20 * 60 * 3, 3, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::SLOWNESS(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::SLOWNESS(), true);
         $effect = new EffectInstance(VanillaEffects::FIRE_RESISTANCE(), 20 * 60 * 5, 1, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::FIRE_RESISTANCE(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::FIRE_RESISTANCE(), true);
     }
 }

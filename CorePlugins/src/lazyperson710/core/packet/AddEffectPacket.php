@@ -8,7 +8,7 @@ use pocketmine\player\Player;
 
 class AddEffectPacket {
 
-    public static function init(Player $player, EffectInstance $effect, Effect $vanillaEffects, ?bool $force = false): void {
+    public static function Add(Player $player, EffectInstance $effect, Effect $vanillaEffects, ?bool $force = false): void {
         $effectInstance = $player->getEffects()->get($vanillaEffects);
         if ($force === true || $effectInstance === null) {
             $player->getEffects()->add($effect);

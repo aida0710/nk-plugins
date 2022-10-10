@@ -78,7 +78,7 @@ class NormalSettingListForm extends CustomForm {
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
         if ($setting->getSetting(CoordinateSetting::getName())?->getValue() !== $this->coordinate->getValue()) {
             $setting->getSetting(CoordinateSetting::getName())?->setValue($this->coordinate->getValue());
-            CoordinatesPacket::CoordinatesPacket($this->player, $this->coordinate->getValue());
+            CoordinatesPacket::Send($this->player, $this->coordinate->getValue());
         }
         if ($setting->getSetting(JoinItemsSetting::getName())?->getValue() !== $this->joinItems->getValue()) {
             $setting->getSetting(JoinItemsSetting::getName())?->setValue($this->joinItems->getValue());

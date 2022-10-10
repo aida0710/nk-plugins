@@ -16,8 +16,8 @@ class ZONe {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::RESISTANCE(), 20 * 60 * 5, 3, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::RESISTANCE(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::RESISTANCE(), true);
         $effect = new EffectInstance(VanillaEffects::STRENGTH(), 20 * 60 * 5, 8, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::STRENGTH(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::STRENGTH(), true);
     }
 }

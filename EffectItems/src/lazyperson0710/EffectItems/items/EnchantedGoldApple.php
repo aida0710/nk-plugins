@@ -17,7 +17,7 @@ class EnchantedGoldApple {
         $item = $player->getInventory()->getItemInHand();
         $player->getInventory()->removeItem($item->setCount(1));
         $effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60 * 5, 14, false);
-        AddEffectPacket::init($player, $effect, VanillaEffects::HASTE(), true);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::HASTE(), true);
         EventListener::getInstance()->LevelCalculation($player, 5000);
     }
 }
