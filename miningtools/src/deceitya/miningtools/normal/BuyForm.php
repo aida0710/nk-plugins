@@ -30,17 +30,11 @@ class BuyForm extends CustomForm {
         $this->netherite = Main::getInstance()->dataAcquisition("netherite");
         $diamondCost = ConfirmForm::DIAMOND_COST;
         $netheriteCost = ConfirmForm::NETHERITE_COST;
-        switch ($mode) {
-            case 'diamond':
-                $explanation = new Label("DiamondMiningTools\nType : {$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない");
+        $explanation = match ($mode) {
+            'diamond' => new Label("DiamondMiningTools\nType : {$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない"),
+            'netherite' => new Label("NetheriteMiningTools\nType : {$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10"),
             default => throw new \Error("不正なモードが指定されました"),
-            case 'netherite':
-                $explanation = new Label("NetheriteMiningTools\nType : {$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10");
-                break;
-            default:
-                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                return;
-        }
+        };
         $this
             ->setTitle("Mining Tools")
             ->addElements($explanation);
