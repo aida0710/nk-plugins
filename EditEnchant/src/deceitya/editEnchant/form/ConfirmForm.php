@@ -47,7 +47,7 @@ class ConfirmForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (!(new InspectionItem())->inspectionItem($player)) {
-            $player->sendMessage("§bEditEnchant §7>> §c想定されたエラーが発生しました");
+            $player->sendMessage("§bEditEnchant §7>> §c所持しているアイテムが変更された可能性がある為処理を中断しました");
             return;
         }
         $inv = $player->getInventory();
