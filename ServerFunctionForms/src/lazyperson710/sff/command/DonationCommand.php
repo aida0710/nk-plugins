@@ -16,7 +16,7 @@ class DonationCommand extends Command {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         if (!($sender instanceof Player)) {
-            $sender->sendMessage("Please use in server");
+            $sender->sendMessage("サーバー内で実行してください");
             return;
         }
         SendForm::Send($sender, (new DonationForm()));

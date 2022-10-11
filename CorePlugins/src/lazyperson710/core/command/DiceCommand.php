@@ -17,7 +17,7 @@ class DiceCommand extends Command {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void {
         if (!($sender instanceof Player)) {
-            $sender->sendMessage("Please use in server");
+            $sender->sendMessage("サーバー内で実行してください");
             return;
         }
         if (PlayerSettingPool::getInstance()->getSettingNonNull($sender)->getSetting(DiceMessageSetting::getName())?->getValue() !== true) {
