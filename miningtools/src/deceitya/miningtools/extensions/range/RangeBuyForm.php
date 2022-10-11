@@ -18,7 +18,7 @@ class RangeBuyForm extends SimpleForm {
 
     public function __construct(Player $player, array $nbt) {
         $this->nbt = $nbt;
-        $upgrade = "未定義のエラー";
+        $upgrade = null;
         $namedTag = $player->getInventory()->getItemInHand()->getNamedTag();
         if ($namedTag->getTag('MiningTools_Expansion_Range') !== null) {
             $upgrade = match ($namedTag->getInt("MiningTools_Expansion_Range")) {
@@ -28,6 +28,7 @@ class RangeBuyForm extends SimpleForm {
         } elseif ($namedTag->getTag('MiningTools_3') !== null) {
             $upgrade = "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\nコストは" . UnbreakingEnchantConfirmForm::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         }
+        if (is_null($upgrade)) throw new \Error("値が代入されませんでした");
         $this
             ->setTitle("Expansion Mining Tools")
             ->setText($upgrade)
@@ -66,8 +67,7 @@ class RangeBuyForm extends SimpleForm {
                         EconomyAPI::getInstance()->reduceMoney($player, $price);
                         break;
                     default:
-                        Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                        return;
+                        throw new \Error("rank3以上の値が入力されました");
                 }
                 $tag = "MiningTools_Expansion_Range";
                 $nbt->removeTag($tag);

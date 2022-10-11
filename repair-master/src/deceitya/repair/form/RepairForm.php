@@ -15,7 +15,6 @@ use pocketmine\item\ItemIds;
 use pocketmine\item\TieredTool;
 use pocketmine\item\ToolTier;
 use pocketmine\player\Player;
-use pocketmine\Server;
 use pocketmine\world\sound\AnvilBreakSound;
 use pocketmine\world\sound\AnvilUseSound;
 
@@ -194,9 +193,7 @@ class RepairForm extends CustomForm {
                 $player->sendMessage("§bRepair §7>> §aLevelを{$this->level}消費してアイテムを修理しました");
                 break;
             default:
-                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                Server::getInstance()->shutdown();
-                break;
+                throw new \Error("不正な状態が保存された変数が処理されました");
         }
         SoundPacket::Send($player, "smithing_table.use");
     }

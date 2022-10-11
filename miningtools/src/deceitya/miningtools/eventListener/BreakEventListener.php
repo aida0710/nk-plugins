@@ -44,8 +44,7 @@ class BreakEventListener implements Listener {
             };
         }
         if (empty($set)) {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-            return;
+            throw new \Error('$setに何も代入されませんでした');
         }
         $block = $event->getBlock();
         $world_name = $event->getPlayer()->getWorld()->getDisplayName();

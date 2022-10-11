@@ -29,8 +29,7 @@ class Main extends PluginBase {
                 $result = bcadd($result, $value, 2);
             }
             if ((float)$result !== 100.0) {
-                $this->getLogger()->critical("{$category}の確率が合計" . $result . "%になっています");
-                return false;
+                throw new \Error($category . "の確率が合計" . $result . "%になっています");
             }
         }
         $this->getLogger()->info("正常に確率が計算されました");

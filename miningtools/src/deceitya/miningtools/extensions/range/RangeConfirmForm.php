@@ -7,7 +7,6 @@ use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class RangeConfirmForm extends SimpleForm {
 
@@ -56,9 +55,7 @@ class RangeConfirmForm extends SimpleForm {
                     $upgrade = "最上位ランクの為アップグレードに対応していません";
                     break;
                 default:
-                    $upgrade = "Errorが発生しました";
-                    Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                    break;
+                    throw new \Error("rank4以上の値が入力されました");
             }
         } elseif ($namedTag->getTag('MiningTools_3') !== null) {
             $this->nbt = ["MiningTools_3" => $namedTag->getInt("MiningTools_3")];
@@ -69,8 +66,7 @@ class RangeConfirmForm extends SimpleForm {
             $upgrade = "現在、範囲強化はされていません\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\n以下のコストを支払ってMiningToolを強化しますか？";
             $cost = "コストは" . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
         } else {
-            $upgrade = "Errorが発生しました";
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
+            throw new \Error("nbtタグが存在しない為不正な挙動として処理しました");
         }
         $this
             ->setTitle("Expansion Mining Tools")
@@ -80,8 +76,7 @@ class RangeConfirmForm extends SimpleForm {
 
     public function handleSubmit(Player $player): void {
         if (empty($this->nbt)) {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-            return;
+            throw new \Error("nbtタグが存在しない為不正な挙動として処理しました");
         }
         if ($this->judgement === false) return;
         if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {

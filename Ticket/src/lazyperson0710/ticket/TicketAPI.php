@@ -6,7 +6,6 @@ use JetBrains\PhpStorm\Pure;
 use JsonException;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
-use pocketmine\Server;
 use pocketmine\utils\Config;
 use ree_jp\stackstorage\api\StackStorageAPI;
 
@@ -32,8 +31,7 @@ class TicketAPI {
             $this->config->save();
             return true;
         } catch (JsonException $e) {
-            Server::getInstance()->getLogger()->warning($e->getMessage());
-            return false;
+            throw new \Error($e->getMessage());
         }
     }
 

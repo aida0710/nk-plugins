@@ -3,7 +3,6 @@
 declare(strict_types = 1);
 namespace lazyperson0710\Gacha\database;
 
-use lazyperson0710\Gacha\Main;
 use pocketmine\block\utils\CoralType;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\enchantment\VanillaEnchantments;
@@ -119,7 +118,7 @@ class GachaItemAPI {
      * @return void
      */
     private function dischargeItemRegister(string $category, string $rank, Item $item, int $count, string $name, string $lore, array $enchants, array $level, array $nbt): void {
-        if (!$this->checkFunctionArgument($category, $rank, $enchants, $level)) Main::getInstance()->getServer()->getPluginManager()->disablePlugin(Main::getInstance());
+        $this->checkFunctionArgument($category, $rank, $enchants, $level);
         $this->gachaItems[$category][$rank][] = ["item" => $item, "count" => $count, "name" => $name, "lore" => $lore, "enchants" => $enchants, "level" => $level, "nbt" => $nbt];
     }
 
@@ -132,16 +131,13 @@ class GachaItemAPI {
      */
     private function checkFunctionArgument(string $category, string $rank, array $enchants, array $level): bool {
         if (!in_array($category, self::Category)) {
-            Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にカテゴリーに登録されていないガチャが入力された為プラグインを停止します");
-            return false;
+            throw new \Error("Gacha : アイテム登録時にカテゴリーに登録されていないガチャが入力された為プラグインを停止します");
         }
         if (!in_array($rank, ["C", "UC", "R", "SR", "SSR", "L"])) {
-            Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にランクに不正の値が入力されていた為プラグインを停止します");
-            return false;
+            throw new \Error("Gacha : アイテム登録時にランクに不正の値が入力されていた為プラグインを停止します");
         }
         if (count($enchants) !== count($level)) {
-            Main::getInstance()->getLogger()->critical("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
-            return false;
+            throw new \Error("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
         }
         return true;
     }

@@ -6,7 +6,6 @@ use lazyperson0710\LoginBonus\Main;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class JoinPlayerEvent implements Listener {
 
@@ -36,8 +35,7 @@ class JoinPlayerEvent implements Listener {
             $lastBonus = 1;
         }
         if ($lastBonus === 0) {
-            Server::getInstance()->getLogger()->critical("ログインBonusのチェック処理の際に0が入力されました");
-            return;
+            throw new \Error("ログインBonusのチェック処理の際に0が入力されました");
         }
         $item = Main::getInstance()->loginBonusItem;
         $item->setCount($lastBonus);

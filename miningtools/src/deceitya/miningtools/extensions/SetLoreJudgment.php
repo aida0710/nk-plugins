@@ -4,7 +4,6 @@ namespace deceitya\miningtools\extensions;
 
 use pocketmine\item\Item;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class SetLoreJudgment {
 
@@ -36,8 +35,7 @@ class SetLoreJudgment {
             }
         }
         if ($lore === "このMiningToolは最上位ツールの為修繕が可能です\n\n現在付与されている特殊効果") {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-            $lore .= "\n例外エラーが発生したようです。なまけものに報告してください";
+            throw new \Error("値が何もない為不明な挙動として処理しました");
         }
         return [0 => $lore];
     }

@@ -29,29 +29,15 @@ class ItemCategorySortAuctionForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        switch ($this->dropdown->getSelectedOption()) {
-            case "ブロック":
-                $selectFilter = "blocks";
-                break;
-            case "ツール":
-                $selectFilter = "tools";
-                break;
-            case "エンチャント済みアイテム":
-                $selectFilter = "enchanted";
-                break;
-            case "食べ物":
-                $selectFilter = "food";
-                break;
-            case "装備":
-                $selectFilter = "armor";
-                break;
-            case "ポーション":
-                $selectFilter = "potions";
-                break;
-            default:
-                Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                return;
-        }
+        $selectFilter = match ($this->dropdown->getSelectedOption()) {
+            "ブロック" => "blocks",
+            "ツール" => "tools",
+            "エンチャント済みアイテム" => "enchanted",
+            "食べ物" => "food",
+            "装備" => "armor",
+            "ポーション" => "potions",
+            default => throw new \Error("不正な値が代入されました" . $this->dropdown->getSelectedOption()),
+        };
         Server::getInstance()->dispatchCommand($player, "bazaar category {$selectFilter}");
     }
 }

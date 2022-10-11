@@ -33,7 +33,7 @@ class BuyForm extends CustomForm {
         switch ($mode) {
             case 'diamond':
                 $explanation = new Label("DiamondMiningTools\nType : {$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない");
-                break;
+            default => throw new \Error("不正なモードが指定されました"),
             case 'netherite':
                 $explanation = new Label("NetheriteMiningTools\nType : {$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10");
                 break;
@@ -53,8 +53,7 @@ class BuyForm extends CustomForm {
         }
         $item = $this->itemRegister();
         if (empty($item)) {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-            return;
+            throw new \Error('$item変数の中身が存在しない為不正な挙動として処理しました');
         }
         if (!$player->getInventory()->canAddItem($item)) {
             $player->sendMessage(Main::PrefixRed . 'インベントリに空きが無い為処理が中断されました');
@@ -69,6 +68,8 @@ class BuyForm extends CustomForm {
             case "netherite":
                 Server::getInstance()->broadcastMessage(Main::PrefixYellow . $player->getName() . 'がNetheriteMiningToolsを購入しました');
                 break;
+            default:
+                throw new \Error("不正なモードが指定されました");
         }
     }
 

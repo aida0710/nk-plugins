@@ -89,14 +89,12 @@ class FortuneEnchantBuyForm extends SimpleForm {
                         $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE), 3));
                         break;
                     default:
-                        Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-                        return;
+                        throw new \Error("rank3以上の値が入力されました");
                 }
             }
         }
         if (is_null($rank)) {
-            Server::getInstance()->getLogger()->error("[" . $player->getName() . "]" . __DIR__ . "ディレクトリに存在する" . __CLASS__ . "クラスの" . __LINE__ . "行目でエラーが発生しました");
-            return;
+            throw new \Error("rankがnullの為不明な挙動として処理しました");
         }
         $nbt = $item->getNamedTag();
         $nbt->removeTag('MiningTools_Expansion_FortuneEnchant');
