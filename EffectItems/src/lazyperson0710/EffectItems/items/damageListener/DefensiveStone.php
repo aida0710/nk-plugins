@@ -1,13 +1,13 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items;
+namespace lazyperson0710\EffectItems\items\damageListener;
 
 use Deceitya\Flytra\Main;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\item\Durable;
 use pocketmine\player\Player;
 
-class DamageEventListener {
+class DefensiveStone {
 
     public static function execution(EntityDamageEvent $event, Player $player): void {
         if (Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate()) === true) return;
@@ -20,7 +20,7 @@ class DamageEventListener {
                         $damage = $event->getBaseDamage() * 2;
                         $item->applyDamage($damage);
                         $armorInventory->setItem($i, $item);
-                        $player->sendTip("§bDurable §7>> §a落下ダメージが無効化されました！耐久 -{$damage}");
+                        $player->sendTip("§bDurable §7>> §a落下ダメージが無効化されました！耐久 -" . $damage);
                         $event->cancel();
                     }
                     return;

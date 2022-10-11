@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items;
+namespace lazyperson0710\EffectItems\items\interactListener;
 
 use Deceitya\MiningLevel\Event\EventListener;
 use lazyperson710\core\packet\AddEffectPacket;

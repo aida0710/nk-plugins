@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items;
+namespace lazyperson0710\EffectItems\items\interactListener;
 
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;

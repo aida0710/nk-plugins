@@ -2,10 +2,10 @@
 
 namespace lazyperson0710\EffectItems\event;
 
-use lazyperson0710\EffectItems\items\BlastFurnacePickaxe;
-use lazyperson0710\EffectItems\items\GlowstoneBreaker;
-use lazyperson0710\EffectItems\items\ObsidianBreaker;
-use lazyperson0710\EffectItems\items\OldTools;
+use lazyperson0710\EffectItems\items\breakListener\BlastFurnacePickaxe;
+use lazyperson0710\EffectItems\items\breakListener\GlowstoneBreaker;
+use lazyperson0710\EffectItems\items\breakListener\ObsidianBreaker;
+use lazyperson0710\EffectItems\items\breakListener\OldTools;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 

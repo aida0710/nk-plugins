@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\EffectItems\event;
 
-use lazyperson0710\EffectItems\items\ExplosionTNT;
+use lazyperson0710\EffectItems\items\breakListener\ExplosionTNT;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
 

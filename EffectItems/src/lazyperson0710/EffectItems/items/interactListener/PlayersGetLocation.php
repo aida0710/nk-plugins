@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items;
+namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\listener\Major;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -11,6 +11,7 @@ use pocketmine\world\particle\RedstoneParticle;
 class PlayersGetLocation {
 
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+        $event->cancel();
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
         $particle = new RedstoneParticle(50);

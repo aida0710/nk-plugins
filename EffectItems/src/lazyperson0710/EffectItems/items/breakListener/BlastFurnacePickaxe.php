@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items;
+namespace lazyperson0710\EffectItems\items\breakListener;
 
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;

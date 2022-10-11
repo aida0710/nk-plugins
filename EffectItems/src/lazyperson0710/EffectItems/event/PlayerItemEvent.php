@@ -2,16 +2,16 @@
 
 namespace lazyperson0710\EffectItems\event;
 
-use lazyperson0710\EffectItems\items\AirBlock;
-use lazyperson0710\EffectItems\items\Churu;
-use lazyperson0710\EffectItems\items\CommandStorage;
-use lazyperson0710\EffectItems\items\EffectCleaner;
-use lazyperson0710\EffectItems\items\HasteItem;
-use lazyperson0710\EffectItems\items\HeavenGrass;
-use lazyperson0710\EffectItems\items\PlayersGetLocation;
-use lazyperson0710\EffectItems\items\RedBull;
-use lazyperson0710\EffectItems\items\Unknown;
-use lazyperson0710\EffectItems\items\ZONe;
+use lazyperson0710\EffectItems\items\interactListener\AirBlock;
+use lazyperson0710\EffectItems\items\interactListener\Churu;
+use lazyperson0710\EffectItems\items\interactListener\CommandStorage;
+use lazyperson0710\EffectItems\items\interactListener\EffectCleaner;
+use lazyperson0710\EffectItems\items\interactListener\HasteItem;
+use lazyperson0710\EffectItems\items\interactListener\HeavenGrass;
+use lazyperson0710\EffectItems\items\interactListener\PlayersGetLocation;
+use lazyperson0710\EffectItems\items\interactListener\RedBull;
+use lazyperson0710\EffectItems\items\interactListener\Unknown;
+use lazyperson0710\EffectItems\items\interactListener\ZONe;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
