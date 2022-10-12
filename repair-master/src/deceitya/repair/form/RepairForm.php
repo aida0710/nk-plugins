@@ -231,13 +231,15 @@ class RepairForm extends CustomForm {
         }
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
             if ($item->getTier() === ToolTier::DIAMOND()) {
-                $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕が出来なくなりました');
+                $player->sendMessage('§bRepair §7>> §cネザライトマイニングツールのみ修繕が可能です');
+                SoundPacket::Send($player, 'note.bass');
                 return false;
             }
         }
         if ($item->getNamedTag()->getTag('4mining') !== null) {
             if ($item->getTier() === ToolTier::DIAMOND()) {
-                $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕が出来なくなりました');
+                $player->sendMessage('§bRepair §7>> §cネザライトマイニングツールのみ修繕が可能です');
+                SoundPacket::Send($player, 'note.bass');
                 return false;
             }
         }
