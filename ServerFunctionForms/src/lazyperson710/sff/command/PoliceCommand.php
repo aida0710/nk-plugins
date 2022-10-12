@@ -21,7 +21,10 @@ class PoliceCommand extends Command {
             return;
         }
         $players = [
-            "lazyperson710",
+            'lazyperson710',
+            'Oasobiyou',
+            'ichigoame lili',
+            'toppo0118',
         ];
         if (in_array($sender->getName(), $players)) {
             SendForm::Send($sender, (new PoliceMainForm($sender)));
