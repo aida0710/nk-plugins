@@ -3,10 +3,12 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\packet\AddEffectPacket;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\player\GameMode;
 
 class HeavenGrass {
 
@@ -14,10 +16,13 @@ class HeavenGrass {
         $event->cancel();
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
-        $player->getInventory()->removeItem($item->setCount(1));
-        $effect = new EffectInstance(VanillaEffects::REGENERATION(), 20 * 60 * 10, 255, false);
+        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+            $player->getInventory()->removeItem($item->setCount(1));
+        }
+        $effect = new EffectInstance(VanillaEffects::REGENERATION(), 20, 255, false);
         AddEffectPacket::Add($player, $effect, VanillaEffects::REGENERATION(), true);
-        $effect = new EffectInstance(VanillaEffects::MINING_FATIGUE(), 20 * 60 * 10, 1, false);
+        $effect = new EffectInstance(VanillaEffects::MINING_FATIGUE(), 20 * 60, 1, false);
         AddEffectPacket::Add($player, $effect, VanillaEffects::MINING_FATIGUE(), true);
+        SoundPacket::Send($player, 'item.trident.return');
     }
 }

@@ -2,8 +2,10 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\player\GameMode;
 
 class EffectCleaner {
 
@@ -11,7 +13,10 @@ class EffectCleaner {
         $event->cancel();
         $player = $event->getPlayer();
         $item = $player->getInventory()->getItemInHand();
-        $player->getInventory()->removeItem($item->setCount(1));
+        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+            $player->getInventory()->removeItem($item->setCount(1));
+        }
         $player->getEffects()->clear();
+        SoundPacket::Send($player, 'item.trident.return');
     }
 }

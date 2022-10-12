@@ -19,9 +19,11 @@ class DefensiveStone {
                 $item = clone $armorInventory->getItem($i);
                 if ($item->getNamedTag()->getTag('DefensiveStone') !== null) {//DefensiveStone
                     if ($item instanceof Durable) {
-                        $damage = $event->getBaseDamage() * 2;
-                        $item->applyDamage($damage);
-                        $armorInventory->setItem($i, $item);
+                        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+                            $damage = $event->getBaseDamage() * 2;
+                            $item->applyDamage($damage);
+                            $armorInventory->setItem($i, $item);
+                        } else $damage = "0";
                         $player->sendTip("§bDurable §7>> §a落下ダメージが無効化されました！耐久 -" . $damage);
                         SoundPacket::Send($player, 'block.lantern.break');
                         $event->cancel();
