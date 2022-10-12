@@ -5,6 +5,10 @@ namespace deceitya\ShopAPI\form\levelShop\shop6;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\element\FirstBackFormButton;
 use deceitya\ShopAPI\form\element\ShopItemFormButton;
+use deceitya\ShopAPI\form\levelShop\MainLevelShopForm;
+use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
+use pocketmine\player\Player;
 
 class Shop6Form extends SimpleForm {
 
@@ -23,31 +27,10 @@ class Shop6Form extends SimpleForm {
         }
         $this->addElements(new FirstBackFormButton("ホームに戻る"));
     }
-    //
-    //    public function handleResponse(Player $player, $data): void {
-    //        if ($data === null) {
-    //            return;
-    //        }
-    //        $forms = [
-    //            'DecorativeBlock',
-    //            'Heads',
-    //            'Vegetation',
-    //        ];
-    //        $class = "\\deceitya\\ShopAPI\\form\\shop6\\" . $forms[$data];
-    //        SendForm::Send($player, (new $class());
-    //    }
-    //
-    //    public function jsonSerialize() {
-    //        $shopNumber = basename(__DIR__);
-    //        return [
-    //            'type' => 'form',
-    //            'title' => 'LevelShop',
-    //            'content' => "§7選択してください",
-    //            'buttons' => [
-    //                ['text' => 'DecorativeBlock'],
-    //                ['text' => 'Heads'],
-    //                ['text' => 'Vegetation'],
-    //            ]
-    //        ];
-    //    }
+
+    public function handleClosed(Player $player): void {
+        SoundPacket::Send($player, 'mob.shulker.close');
+        SendForm::Send($player, (new MainLevelShopForm($player)));
+    }
+
 }

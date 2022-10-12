@@ -4,14 +4,19 @@ namespace deceitya\ShopAPI\form\levelShop\shop6;
 
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\form\levelShop\Calculation;
+use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
 class Heads extends SimpleForm {
 
+    private string $shopNumber;
+    private array $contents;
+
     public function __construct(Player $player) {
-        $shopNumber = basename(__DIR__);
-        $contents = [
+        $this->shopNumber = basename(__DIR__);
+        $this->contents = [
             VanillaItems::PLAYER_HEAD(),
             VanillaItems::ZOMBIE_HEAD(),
             VanillaItems::SKELETON_SKULL(),
@@ -19,7 +24,12 @@ class Heads extends SimpleForm {
             VanillaItems::WITHER_SKELETON_SKULL(),
             VanillaItems::DRAGON_HEAD(),
         ];
-        (new Calculation())->sendButton($player, $shopNumber, $contents, $this);
+        Calculation::getInstance()->sendButton($player, $this->shopNumber, $this->contents, $this);
+    }
+
+    public function handleClosed(Player $player): void {
+        SoundPacket::Send($player, 'mob.shulker.close');
+        SendForm::Send($player, Calculation::getInstance()->secondBackFormClass($this->shopNumber));
     }
 }
 

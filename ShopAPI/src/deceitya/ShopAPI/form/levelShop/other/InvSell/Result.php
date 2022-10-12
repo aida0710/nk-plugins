@@ -5,6 +5,7 @@ namespace deceitya\ShopAPI\form\levelShop\other\InvSell;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use deceitya\ShopAPI\database\LevelShopAPI;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
@@ -38,5 +39,6 @@ class Result extends SimpleForm {
         }
         EconomyAPI::getInstance()->addMoney($player->getName(), $allSellMoney);
         $player->sendMessage("§bLevelShop §7>> §a{$allSellMoney}円で{$allCount}個のアイテムが売却されました");
+        SoundPacket::Send($player, 'break.amethyst_block');
     }
 }

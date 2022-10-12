@@ -7,6 +7,10 @@ use deceitya\ShopAPI\database\LevelShopAPI;
 use deceitya\ShopAPI\form\element\FirstBackFormButton;
 use deceitya\ShopAPI\form\element\SellBuyItemFormButton;
 use deceitya\ShopAPI\form\element\ShopItemFormButton;
+use deceitya\ShopAPI\form\levelShop\MainLevelShopForm;
+use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
+use pocketmine\player\Player;
 
 class Shop4Form extends SimpleForm {
 
@@ -33,5 +37,10 @@ class Shop4Form extends SimpleForm {
             $this->addElements(new ShopItemFormButton($key, $class));
         }
         $this->addElements(new FirstBackFormButton("ホームに戻る"));
+    }
+
+    public function handleClosed(Player $player): void {
+        SoundPacket::Send($player, 'mob.shulker.close');
+        SendForm::Send($player, (new MainLevelShopForm($player)));
     }
 }

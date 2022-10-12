@@ -8,10 +8,14 @@ use deceitya\ShopAPI\form\element\SecondBackFormButton;
 use deceitya\ShopAPI\form\element\SellBuyItemFormButton;
 use deceitya\ShopAPI\form\element\ShopMainCategoryFormButton;
 use deceitya\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
+use pocketmine\form\Form;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
+use pocketmine\utils\SingletonTrait;
 
 class Calculation {
+
+    use SingletonTrait;
 
     public function sendButton(Player $player, string $shopNumber, array $items, $class): void {
         $api = LevelShopAPI::getInstance();
@@ -37,8 +41,14 @@ class Calculation {
             $class->addElements(new ShopMainCategoryFormButton("検索画面に戻る", new InputItemForm()));
             return;
         }
+        $shopClass = self::getInstance()->secondBackFormClass($shopNumber);
+        $class->addElements(new SecondBackFormButton("一つ戻る", $shopClass));
+    }
+
+    public function secondBackFormClass(string $shopNumber): Form {
         $shopNumber = str_replace("shop", "", $shopNumber);
         $shopNumber = (int)$shopNumber;
-        $class->addElements(new SecondBackFormButton("一つ戻る", $shopNumber));
+        $class = '\deceitya\ShopAPI\form\levelShop\shop' . $shopNumber . '\Shop' . $shopNumber . 'Form';
+        return new $class();
     }
 }

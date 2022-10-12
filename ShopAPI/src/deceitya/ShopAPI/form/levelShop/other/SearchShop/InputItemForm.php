@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\ShopAPI\database\LevelShopAPI;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class InputItemForm extends CustomForm {
@@ -25,6 +26,7 @@ class InputItemForm extends CustomForm {
         $items = [];
         if (!preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $this->itemName->getValue())) {
             SendForm::Send($player, (new InputItemForm("§c例外が発生しました\nitemNameの入力欄には日本語(ひらがな/カタカナ/漢字)を含める必要があります\n")));
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         foreach (LevelShopAPI::getInstance()->getItemNameVariable() as $itemArray) {

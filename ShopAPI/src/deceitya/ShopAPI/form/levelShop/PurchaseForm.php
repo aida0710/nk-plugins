@@ -3,6 +3,7 @@
 namespace deceitya\ShopAPI\form\levelShop;
 
 use deceitya\ShopAPI\database\LevelShopAPI;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
@@ -30,10 +31,12 @@ class PurchaseForm implements Form {
     public function handleResponse(Player $player, $data): void {
         if ($data === null || $data[1] === null) {
             $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}の購入をキャンセルしました");
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         if ($data[1] === '' || !$this->isInteger($data[1]) || (int)floor($data[1]) <= 0) {
             $player->sendMessage('§bLevelShop §7>> §c1以上の整数を入力してください');
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         $count = (int)floor($data[1]);
@@ -41,6 +44,7 @@ class PurchaseForm implements Form {
         $result = $totalPrice - $this->myMoney;
         if ($this->myMoney < $totalPrice) {
             $player->sendMessage("§bLevelShop §7>> §cお金が" . number_format($result) . "円足りませんでした。合計必要金額:" . number_format($totalPrice) . "円");
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         $this->item->setCount($count);
@@ -49,16 +53,19 @@ class PurchaseForm implements Form {
             StackStorageAPI::$instance->add($player->getXuid(), $this->item);
             $totalPrice = $this->price * $count;
             $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を" . number_format($count) . "個購入し、仮想ストレージに転送しました。使用金額 : " . number_format($totalPrice) . "円");
+            SoundPacket::Send($player, 'break.amethyst_block');
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item)) {
             $player->sendMessage('§bLevelShop §7>> §cインベントリに空きはありません');
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         $player->getInventory()->addItem($this->item);
         EconomyAPI::getInstance()->reduceMoney($player, $this->price * $count);
         $totalPrice = $this->price * $count;
         $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getId(), $this->item->getMeta())}を" . number_format($count) . "個購入しました。使用金額 : " . number_format($totalPrice) . "円");
+        SoundPacket::Send($player, 'break.amethyst_block');
     }
 
     private function isInteger($input): bool {
