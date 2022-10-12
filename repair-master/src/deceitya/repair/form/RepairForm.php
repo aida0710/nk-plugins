@@ -47,11 +47,8 @@ class RepairForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         $consumption = "error";
-        try {
-            if ($this->checkItem($player) === false) {
-                return;
-            }
-        } catch (Exception $e) {
+        if ($this->checkItem($player) === false) {
+            return;
         }
         if ($this->mode === "command") {
             if (EconomyAPI::getInstance()->myMoney($player->getName()) < 3500) {
