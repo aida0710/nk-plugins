@@ -48,7 +48,7 @@ class GachaItemAPI {
         ## UC Rank
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_MUTTON(), 1, "猫用チュール", "人間用ではない", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_CHICKEN(), 1, "犬用チュール", "人間用ではない", [], [], []);
-        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_PORKCHOP(), 1, "アメリカンドック", "アメリカンドッグはソーセージに串を刺し、小麦粉などで作った衣をつけて油で揚げた食品。 アメリカで普及しているコーンミールの生地を使ったコーン・ドッグを改良したものであり、名称は和製英語である。\n\n引用 Wiki", [], [], []);
+        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_PORKCHOP(), 1, "アメリカンドック", "アメリカンドッグはソーセージに串を刺し、\n小麦粉などで作った衣をつけて油で揚げた食品。\nアメリカで普及しているコーンミールの生地を使った\nコーン・ドッグを改良したものであり、\n名称は和製英語である。\n\n引用 Wiki", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::GLASS()->asItem(), 1, "エンジェルブロック", "自分の下にブロックを設置する", [], [], ["AirBlock"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EXPERIENCE_BOTTLE(), 16, "魔剤セット", "ちょっとずつ飲もう。。。", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::TNT()->asItem(), 1, "爆発物", "設置すると爆発します", [], [], ["ExplosionBlock"]);
