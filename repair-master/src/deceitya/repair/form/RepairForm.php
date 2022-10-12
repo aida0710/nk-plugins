@@ -203,7 +203,7 @@ class RepairForm extends CustomForm {
     /**
      * @throws Exception
      */
-    public function checkItem(Player $player): bool {
+    public static function checkItem(Player $player): bool {
         $item = $player->getInventory()->getItemInHand();
         if ($item->getId() === ItemIds::ELYTRA) {
             if (!($item instanceof Durable)) {
