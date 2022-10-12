@@ -55,10 +55,10 @@ class Main extends PluginBase {
     public const ITEM_CHISELED_NETHER_BRICKS = -302;
     public const EntityRemoveTaskInterval = 60;
     public int $entityRemoveTimeLeft;
-    private static Main $main;
+    private static Main $instance;
 
     public function onEnable(): void {
-        self::$main = $this;
+        self::$instance = $this;
         $this->entityRemoveTimeLeft = self::EntityRemoveTaskInterval;
         $enchant = new Enchantment('幸運', Rarity::RARE, ItemFlags::DIG, ItemFlags::SHEARS, 3);
         EnchantmentIdMap::getInstance()->register(EnchantmentIds::FORTUNE, $enchant);
@@ -124,7 +124,7 @@ class Main extends PluginBase {
     }
 
     public static function getInstance(): Main {
-        return self::$main;
+        return self::$instance;
     }
 
 }
