@@ -31,7 +31,6 @@ class PlayerItemEvent implements Listener {
     public function onItemEvents(PlayerItemUseEvent|PlayerInteractEvent $event) {
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
-        //todo 使用時のSoundを付けたい
         if ($inHand->getNamedTag()->getTag('AirBlock') !== null) AirBlock::execution($event);
         if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::execution($event);
         if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::execution($event);
