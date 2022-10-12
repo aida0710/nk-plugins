@@ -8,6 +8,7 @@ use lazyperson0710\EffectItems\items\interactListener\CommandStorage;
 use lazyperson0710\EffectItems\items\interactListener\EffectCleaner;
 use lazyperson0710\EffectItems\items\interactListener\HasteItem;
 use lazyperson0710\EffectItems\items\interactListener\HeavenGrass;
+use lazyperson0710\EffectItems\items\interactListener\LoginBonusItem;
 use lazyperson0710\EffectItems\items\interactListener\PlayersGetLocation;
 use lazyperson0710\EffectItems\items\interactListener\RedBull;
 use lazyperson0710\EffectItems\items\interactListener\Unknown;
@@ -40,8 +41,7 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::execution($event);
         if ($inHand->getNamedTag()->getTag('CommandStorage') !== null) CommandStorage::execution($event);
         if ($inHand->getNamedTag()->getTag('PlayersGetLocation') !== null) PlayersGetLocation::execution($event);
-        //if ($inHand->getNamedTag()->getTag('ega') !== null) EnchantedGoldApple::init($event);
-        //if ($inHand->getNamedTag()->getTag('ga') !== null) GoldApple::init($event);
+        if ($inHand->getId() === -199) LoginBonusItem::execution($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::execution($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::execution($event);
     }
