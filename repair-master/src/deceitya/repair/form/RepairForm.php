@@ -203,8 +203,10 @@ class RepairForm extends CustomForm {
     public static function checkItem(Player $player): bool {
         $item = $player->getInventory()->getItemInHand();
         if ($item->getId() === ItemIds::ELYTRA) {
-            if (!($item instanceof Durable)) {
-                throw new Exception();
+            if (!$item instanceof Durable) {
+                $player->sendMessage("§bRepair §7>> §c持っているアイテムは修繕することが出来ません");
+                SoundPacket::Send($player, 'note.bass');
+                return false;
             }
             if ($item->getDamage() <= 0) {
                 $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
