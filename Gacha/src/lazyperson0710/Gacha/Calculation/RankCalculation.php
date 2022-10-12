@@ -41,8 +41,8 @@ class RankCalculation {
     public function run($num, Player $player): string|null {
         $result = null;
         for ($i = 1; $i <= $num; $i++) {
-            if ($this->checkMoney($player) !== true) continue;
-            if ($this->checkTicket($player) !== true) continue;
+            if ($this->checkMoney($player) !== true) return $result;
+            if ($this->checkTicket($player) !== true) return $result;
             EconomyAPI::getInstance()->reduceMoney($player->getName(), $this->cost["moneyCost"]);
             TicketAPI::getInstance()->reduceTicket($player, $this->cost["ticketCost"]);
             $rand = mt_rand(1, $this->num);
