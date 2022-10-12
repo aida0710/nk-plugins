@@ -22,7 +22,11 @@ class AirBlock {
             return;
         }
         $pos = $player->getPosition()->add(0, -1, 0);
-        if ($player->getPosition()->getWorld()->getBlock($pos)->getId() != BlockLegacyIds::AIR) return;
+        if ($player->getPosition()->getWorld()->getBlock($pos)->getId() != BlockLegacyIds::AIR) {
+            $player->sendMessage("§bAirBlock §7>> §c下のブロックが空気ブロックの場合のみ設置できます");
+            SoundPacket::Send($player, 'note.bass');
+            return;
+        }
         if (EconomyLand::getInstance()->posCheck($pos, $player) === false) {
             $player->sendMessage("§bAirBlock §7>> §c他人の土地には設置できません");
             SoundPacket::Send($player, 'note.bass');
