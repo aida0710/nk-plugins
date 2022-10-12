@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -21,6 +22,7 @@ class FortuneListener implements Listener {
         }
         if ($event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::SILK_TOUCH)) !== null) {
             $event->getPlayer()->sendMessage("§bEnchant §7>> §cシルクタッチと幸運が同時付与されているツールは使用することができません");
+            SoundPacket::Send($event->getPlayer(), 'note.bass');
             return;
         }
         if (empty($event->getDrops())) return;

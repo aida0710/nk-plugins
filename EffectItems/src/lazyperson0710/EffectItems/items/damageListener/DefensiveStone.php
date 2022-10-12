@@ -3,8 +3,10 @@
 namespace lazyperson0710\EffectItems\items\damageListener;
 
 use Deceitya\Flytra\Main;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\item\Durable;
+use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 
 class DefensiveStone {
@@ -21,6 +23,7 @@ class DefensiveStone {
                         $item->applyDamage($damage);
                         $armorInventory->setItem($i, $item);
                         $player->sendTip("§bDurable §7>> §a落下ダメージが無効化されました！耐久 -" . $damage);
+                        SoundPacket::Send($player, 'block.lantern.break');
                         $event->cancel();
                     }
                     return;

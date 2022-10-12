@@ -3,6 +3,7 @@
 namespace Deceitya\ChestLock\Form;
 
 use Deceitya\ChestLock\Main;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -24,6 +25,7 @@ class ModeForm implements Form {
         }
         $this->plugin->setStat($player, $data);
         $player->sendMessage('§bChestLock §7>> §aチェストをタップして下さい。');
+        SoundPacket::Send($player, 'note.harp');
     }
 
     public function jsonSerialize() {

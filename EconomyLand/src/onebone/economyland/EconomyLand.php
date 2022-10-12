@@ -20,6 +20,7 @@
 namespace onebone\economyland;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyland\database\Database;
 use onebone\economyland\database\SQLiteDatabase;
@@ -185,6 +186,7 @@ class EconomyLand extends PluginBase implements Listener {
                     return true;
                 } else {
                     $sender->sendMessage("§bLand §7>> §cこのワールドでは使用できません。生活ワールドか農業ワールドで使用できます");
+                    SoundPacket::Send($sender, 'note.bass');
                 }
                 break;
             case "e":

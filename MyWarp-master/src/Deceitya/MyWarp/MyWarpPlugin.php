@@ -14,8 +14,10 @@ class MyWarpPlugin extends PluginBase {
 
     public static Config $cost;
     public static Config $count;
+    private static MyWarpPlugin $instance;
 
     public function onEnable(): void {
+        self::$instance = $this;
         self::$cost = new Config($this->getDataFolder() . 'cost.yml');
         self::$count = new Config($this->getDataFolder() . 'count.yml');
         Database::getInstance()->open($this);
@@ -28,5 +30,9 @@ class MyWarpPlugin extends PluginBase {
             $sender->sendMessage('§bMyWarp §7>> §c鯖内でしかできません');
         }
         return true;
+    }
+
+    public static function getInstance(): MyWarpPlugin {
+        return self::$instance;
     }
 }

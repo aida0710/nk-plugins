@@ -4,6 +4,7 @@ namespace lazyperson0710\Gacha\Calculation;
 
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 
@@ -74,6 +75,7 @@ class RankCalculation {
                 return true;
             } else {
                 $player->sendMessage("§bGacha §7>> §c所持金が足りない為処理が中断されました");
+                SoundPacket::Send($player, 'note.bass');
                 return false;
             }
         }
@@ -86,6 +88,7 @@ class RankCalculation {
                 return true;
             } else {
                 $player->sendMessage("§bGacha §7>> §c所持Ticketが足りない為処理が中断されました");
+                SoundPacket::Send($player, 'note.bass');
                 return false;
             }
         }

@@ -9,6 +9,7 @@ use lazyperson0710\LoginBonus\event\JoinPlayerEvent;
 use lazyperson0710\LoginBonus\form\BonusForm;
 use lazyperson0710\LoginBonus\Main;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class BonusViewForm extends CustomForm {
@@ -31,6 +32,7 @@ class BonusViewForm extends CustomForm {
             JoinPlayerEvent::check($player);
         } else {
             SendForm::Send($player, new BonusForm($player, "\n§aログインボーナスを受け取りませんでした"));
+            SoundPacket::Send($player, 'note.harp');
         }
     }
 }

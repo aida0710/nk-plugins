@@ -16,7 +16,6 @@ use pocketmine\item\TieredTool;
 use pocketmine\item\ToolTier;
 use pocketmine\player\Player;
 use pocketmine\world\sound\AnvilBreakSound;
-use pocketmine\world\sound\AnvilUseSound;
 
 class RepairForm extends CustomForm {
 
@@ -57,6 +56,7 @@ class RepairForm extends CustomForm {
         if ($this->mode === "command") {
             if (EconomyAPI::getInstance()->myMoney($player->getName()) < 3500) {
                 $player->sendMessage("§bRepair §7>> §c手数料分を取得できませんでした。手数料3500円");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
         }
@@ -72,10 +72,12 @@ class RepairForm extends CustomForm {
             }
             if ($consumption === "error") {
                 $player->sendMessage("§bRepair §7>> §c修理費用を取得できませんでした");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
         } elseif ($player->getXpManager()->getXpLevel() < $this->level) {
             $player->sendMessage("§bRepair §7>> §cレベルが足りませんでした要求レベル->{$this->level}");
+            SoundPacket::Send($player, 'note.bass');
             return;
         } else {
             $consumption = "level";
@@ -184,18 +186,18 @@ class RepairForm extends CustomForm {
     public function itemRepair(Player $player, $consumption) {
         $this->item->setDamage(0);
         $player->getInventory()->setItemInHand($this->item);
-        $player->getWorld()->addSound($player->getPosition(), new AnvilUseSound());
         switch ($consumption) {
             case "ingot":
                 $player->sendMessage("§bRepair §7>> §aインゴットを一個消費してアイテムを修理しました");
+                SoundPacket::Send($player, 'random.anvil_use');
                 break;
             case "level":
                 $player->sendMessage("§bRepair §7>> §aLevelを{$this->level}消費してアイテムを修理しました");
+                SoundPacket::Send($player, 'random.anvil_use');
                 break;
             default:
                 throw new \Error("不正な状態が保存された変数が処理されました");
         }
-        SoundPacket::Send($player, "smithing_table.use");
     }
 
     /**
@@ -209,19 +211,23 @@ class RepairForm extends CustomForm {
             }
             if ($item->getDamage() <= 0) {
                 $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
+                SoundPacket::Send($player, 'note.bass');
                 return false;
             }
         }
         if (!$item instanceof TieredTool) {
             $player->sendMessage("§bRepair §7>> §c持っているアイテムは修繕することが出来ません");
+            SoundPacket::Send($player, 'note.bass');
             return false;
         }
         if ($item->getDamage() <= 0) {
             $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
+            SoundPacket::Send($player, 'note.bass');
             return false;
         }
         if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
             $player->sendMessage('§bRepair §7>> §c衝撃エンチャントが付与されている為、修繕することが出来ません');
+            SoundPacket::Send($player, 'note.bass');
             return false;
         }
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
@@ -239,6 +245,7 @@ class RepairForm extends CustomForm {
         $itemIds = $item->getId();
         if ($itemIds >= 1000) {
             $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕することが出来ません');
+            SoundPacket::Send($player, 'note.bass');
             return false;
         }
         return true;

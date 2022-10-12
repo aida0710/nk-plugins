@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -39,37 +40,45 @@ class ActionForm implements Form {
         if ($data === null) return;
         if (!is_numeric($data[0]) or $data[0] <= 0) {
             $player->sendMessage("§bBank §7>> §cエラーが発生しました");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         switch ($this->type) {
             case self::BANK_PUT:
                 if ($data[0] > EconomyAPI::getInstance()->myMoney($player)) {
                     $player->sendMessage(TextFormat::RED . "§bBank §7>> §cお金が足りません");
+                    SoundPacket::Send($player, 'note.bass');
                     return;
                 }
                 if (mb_strpos($data[0], '.')) {
                     $player->sendMessage("§bBank §7>> §c振り込む金額に小数点を含めることはできません");
+                    SoundPacket::Send($player, 'note.bass');
                     return;
                 }
                 EconomyAPI::getInstance()->reduceMoney($player, $data[0]);
                 BankHelper::getInstance()->addMoney($this->bank, $player->getName(), $data[0]);
                 $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a" . $data[0] . "円振り込みました");
+                SoundPacket::Send($player, 'note.harp');
                 return;
             case self::BANK_OUT:
                 if ($data[0] > BankHelper::getInstance()->getMoney($this->bank)) {
                     $player->sendMessage(TextFormat::RED . "§bBank §7>> §cお金が足りません");
+                    SoundPacket::Send($player, 'note.bass');
                     return;
                 }
                 if (mb_strpos($data[0], '.')) {
                     $player->sendMessage("§bBank §7>> §c引き出す金額に小数点を含めることはできません");
+                    SoundPacket::Send($player, 'note.bass');
                     return;
                 }
                 BankHelper::getInstance()->removeMoney($this->bank, $player->getName(), $data[0]);
                 EconomyAPI::getInstance()->addMoney($player, $data[0]);
                 $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a" . $data[0] . "円引き出しました");
+                SoundPacket::Send($player, 'note.harp');
                 return;
             default:
                 $player->sendMessage(TextFormat::RED . "§bBank §7>> §cエラーが発生しました");
+                SoundPacket::Send($player, 'note.bass');
         }
     }
 

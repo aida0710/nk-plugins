@@ -7,6 +7,7 @@ use bbo51dog\bboform\element\ButtonImage;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -32,6 +33,7 @@ class SendMiningToolsSettingFormButton extends Button {
             SendForm::Send($player, $this->form);
         } else {
             SendForm::Send($player, new SelectSettingForm($this->player, "\n§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv. " . SelectSettingForm::LevelLimit));
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 }

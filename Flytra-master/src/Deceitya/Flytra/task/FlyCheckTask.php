@@ -3,6 +3,7 @@
 namespace Deceitya\Flytra\task;
 
 use Deceitya\Flytra\Main;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Durable;
 use pocketmine\item\ItemIds;
@@ -57,6 +58,7 @@ class FlyCheckTask extends Task {
             unset(self::$flyTask[$player->getName()]);
             Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
             $player->sendMessage("§bFlyTask §7>> §cお金が足りないためfly機能が自動的に停止しました");
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 
@@ -79,6 +81,7 @@ class FlyCheckTask extends Task {
                 Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
                 $player->sendActionBarMessage("§bFlyTask §7>> §a正常に処理されました");
                 $player->sendMessage("§bFlyTask §7>> §aFlyTaskが終了しました");
+                SoundPacket::Send($player, 'note.harp');
                 return;
             default:
                 $this->checkTimeLeft($player);

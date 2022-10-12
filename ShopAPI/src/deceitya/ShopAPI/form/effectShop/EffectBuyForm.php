@@ -5,6 +5,7 @@ namespace deceitya\ShopAPI\form\effectShop;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\ShopAPI\database\effectShopAPI;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
@@ -37,11 +38,13 @@ class EffectBuyForm extends CustomForm {
         $price = $this->time * EffectShopAPI::getInstance()->getBuy($this->effectName) + ($this->level * EffectShopAPI::getInstance()->getAmplifiedMoney($this->effectName));
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
             $player->sendMessage("§bEffect §7>> §c所持金が足りない為処理が中断されました。要求価格 -> {$price}円");
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
         $player->getEffects()->add(new EffectInstance($this->effect, $this->time * 20 * 60, $this->level - 1, false));
         $player->sendMessage("§bEffect §7>> §a{$this->effectName}を{$this->level}レベルで{$this->time}分付与し、{$price}円消費しました");
+        SoundPacket::Send($player, 'break.amethyst_block');
     }
 
 }

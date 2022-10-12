@@ -10,6 +10,7 @@ use bbo51dog\pmdiscord\element\Embed;
 use bbo51dog\pmdiscord\element\Embeds;
 use DateTime;
 use DateTimeInterface;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -47,6 +48,7 @@ class PlayerKickSelectForm extends CustomForm {
         $playerName = $this->dropdown->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
             $player->sendMessage("§bPolice §7>> §cプレイヤーが存在しない為、正常に情報を取得できませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         Server::getInstance()->getPlayerByPrefix($playerName)->kick($this->input->getText());

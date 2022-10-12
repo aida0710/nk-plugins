@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -37,20 +38,25 @@ class ReduceTicketForm extends CustomForm {
         $playerName = $this->playerList->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ($this->int->getValue() === "") {
-            $player->sendMessage("§bTicket §7>> §a減算分を入力してください");
+            $player->sendMessage("§bTicket §7>> §c減算分を入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (is_numeric($this->int->getValue()) === false) {
-            $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
+            $player->sendMessage("§bTicket §7>> §c整数のみ入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue()) === false) {
             $player->sendMessage("§bTicket §7>> §c{$playerName}のTicketを減らせませんでした");
+            SoundPacket::Send($player, 'note.bass');
         } else {
             $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$this->int->getValue()}枚減らしました");
+            SoundPacket::Send($player, 'note.harp');
         }
     }
 }

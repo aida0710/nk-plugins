@@ -5,6 +5,7 @@ namespace shock95x\auctionhouse\form;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -40,12 +41,14 @@ class PlayerCategorySortAuctionForm extends CustomForm {
             $value = $this->dropdown->getSelectedOption();
             if ($value === "現在オンラインのプレイヤーは自身以外に存在しません") {
                 $player->sendMessage("§bBazaar §7>> §c現在オンラインのプレイヤーは自身以外に存在しない為、表示したいプレイヤーの名前をInputに直接入力してください");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
         } else {
             $value = $this->offlinePlayer->getValue();
             if ($value === $player->getName()) {
                 $player->sendMessage("§bBazaar §7>> §c自身のアイテムを確認する場合は/ah shopから表示することが可能です");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
         }

@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -31,6 +32,7 @@ class EditSettingPlayer extends CustomForm {
         $targetName = $this->players->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($targetName)) {
             $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $target = Server::getInstance()->getPlayerByPrefix($targetName);

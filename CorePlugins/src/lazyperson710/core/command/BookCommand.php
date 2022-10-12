@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\command;
 
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -23,11 +24,13 @@ class BookCommand extends Command {
         $ids = $item->getID();
         if (387 !== $ids) {
             $sender->sendMessage("§bBook §7>> §c手に持っているアイテムは署名済みの本ではありません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $cname = $item->getTitle();
         if ($item->getNamedTag()->getTag('duplicate') !== null) {
             $sender->sendMessage("§bBook §7>> §c複製された本を更に複製することはできません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         } else {
             $nbt = $item->getNamedTag();
@@ -38,6 +41,7 @@ class BookCommand extends Command {
         }
         if (!$sender->getInventory()->canAddItem($item)) {
             $sender->sendMessage("§bBook §7>> §cインベントリに空きがないためアイテムを付与することができませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $name = $sender->getName();
@@ -45,12 +49,14 @@ class BookCommand extends Command {
         $money = 50;
         if ($money > $mymoney) {
             $sender->sendMessage("§bBook §7>> §cお金が足りませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($name, $money);
         $item->setCount(1);
         $player->getInventory()->addItem($item);
         $sender->sendMessage("§bBook §7>> §a50円を消費して本を複製しました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
 }

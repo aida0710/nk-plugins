@@ -8,6 +8,7 @@ use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\Flytra\Main;
 use Deceitya\Flytra\task\FlyCheckTask;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class FlyForm extends CustomForm {
@@ -49,6 +50,7 @@ class FlyForm extends CustomForm {
             unset(FlyCheckTask::$flyTask[$player->getName()]);
             Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
             $player->sendMessage("§bFlyTask §7>> §aFlyTaskを停止させました");
+            SoundPacket::Send($player, 'note.harp');
             return;
         }
         if ($this->infinity->getValue() === true) {
@@ -63,14 +65,17 @@ class FlyForm extends CustomForm {
         }
         if ($this->count->getValue() === "") {
             $player->sendMessage("§bFlyMode §7>> §c持続時間(分)を入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (is_numeric($this->count->getValue()) === false) {
             $player->sendMessage("§bFlyMode §7>> §c持続時間は数字で入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ($this->count->getValue() <= 0) {
             $player->sendMessage("§bFlyTask §7>> §c持続時間は1分以上で入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $timeLeft = $this->count->getValue() * 60;

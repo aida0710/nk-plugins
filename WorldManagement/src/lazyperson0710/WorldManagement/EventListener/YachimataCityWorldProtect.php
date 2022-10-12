@@ -3,6 +3,7 @@
 namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -27,6 +28,7 @@ class YachimataCityWorldProtect implements Listener {
             ];
             if (!in_array($event->getBlock()->getId(), $blocks)) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             }
         }
@@ -47,6 +49,7 @@ class YachimataCityWorldProtect implements Listener {
             ];
             if (!in_array($event->getPlayer()->getInventory()->getItemInHand()->getId(), $items)) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の設置は許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             }
         }
@@ -62,6 +65,7 @@ class YachimataCityWorldProtect implements Listener {
             ];
             if (!in_array($event->getPlayer()->getInventory()->getItemInHand()->getId(), $items)) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の使用は許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             }
         }

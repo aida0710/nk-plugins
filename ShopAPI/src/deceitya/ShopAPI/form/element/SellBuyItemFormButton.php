@@ -10,6 +10,7 @@ use deceitya\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
 use deceitya\ShopAPI\form\levelShop\PurchaseForm;
 use deceitya\ShopAPI\form\levelShop\SellBuyForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
@@ -38,6 +39,7 @@ class SellBuyItemFormButton extends Button {
         if (MiningLevelAPI::getInstance()->getLevel($player) < LevelShopAPI::getInstance()->getLevel($this->itemId, $this->itemMeta)) {
             $error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$api->getLevel($this->itemId, $this->itemMeta)}\n§r";
             SendForm::Send($player, (new InputItemForm($error)));
+            SoundPacket::Send($player, 'dig.chain');
             return;
         }
         if (LevelShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta) == 0) {//売却値が0だった時選択がそもそもスキップされるように

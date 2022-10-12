@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -25,10 +26,12 @@ class ShareForm implements Form {
         if ($data === null) return;
         if (BankHelper::getInstance()->isShare($this->bank, $data[0])) {
             $player->sendMessage(TextFormat::RED . "§bBank §7>> §cその人はすでに共有されています");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         BankHelper::getInstance()->share($this->bank, $data[0], $player->getName());
         $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a{$data[0]}さんを共有しました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
     /**

@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\commands\subcommand;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use shock95x\auctionhouse\commands\arguments\PlayerArgument;
@@ -28,6 +29,7 @@ class ListingsCommand extends BaseSubCommand {
         assert($sender instanceof Player);
         if (!isset($args["player"])) {
             $sender->sendMessage("§bBazaar §7>> §c引数を省略することはできません");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         }
         $player = strtolower($args["player"]);

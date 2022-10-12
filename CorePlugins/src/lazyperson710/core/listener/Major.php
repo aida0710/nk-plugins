@@ -3,6 +3,7 @@
 namespace lazyperson710\core\listener;
 
 use InvalidArgumentException;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -38,14 +39,17 @@ class Major implements Listener {
                         }
                         $distance = $this->data[$name]->distance($block->getPosition());
                         $player->sendActionBarMessage("§bMajor §7>> §a" . (round($distance, 2) + 1) . " mです");
+                        SoundPacket::Send($player, 'note.harp');
                     } else {
                         $this->data[$name] = $block->getPosition();
                         $player->sendMessage("§bMajor §7>> §a始点のブロック座標を記録しました。 {$block->getPosition()->getX()}, {$block->getPosition()->getY()}, {$block->getPosition()->getZ()}");
                         $player->sendTip("§bMajor §7>> §aスニークしながらタップすることで座標を再設定出来ます");
+                        SoundPacket::Send($player, 'note.harp');
                     }
                 } else {
                     unset($this->data[$name]);
                     $player->sendTip("§bMajor §7>> §a記録した座標のデータを削除しました");
+                    SoundPacket::Send($player, 'note.bass');
                 }
             }
         }

@@ -3,6 +3,7 @@
 namespace deceitya\spamstopper;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -27,6 +28,7 @@ class Main extends PluginBase implements Listener {
         if (MiningLevelAPI::getInstance()->getLevel($event->getPlayer()) >= 30) {
             if (isset(self::$interval[$event->getPlayer()->getName()])) {
                 $event->getPlayer()->sendMessage("§bSpamBlock §7>> §cチャットは1秒以内に再度送信することは出来ません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             } else {
                 self::$interval[$event->getPlayer()->getName()] = true;
@@ -40,10 +42,12 @@ class Main extends PluginBase implements Listener {
             if (isset($this->spam[$name]) && $this->spam[$name] == $msg) {
                 $event->cancel();
                 $event->getPlayer()->sendMessage("§bSpamBlock §7>> §c30レベル未満のプレイヤーは連続して同じメッセージは送信できません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 return;
             }
             if (isset(self::$interval[$event->getPlayer()->getName()])) {
                 $event->getPlayer()->sendMessage("§bSpamBlock §7>> §c30レベル未満のプレイヤーはチャット後5秒以内は連続してメッセージを送信できません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             } else {
                 self::$interval[$event->getPlayer()->getName()] = true;

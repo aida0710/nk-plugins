@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -14,7 +15,7 @@ class addTicketForm extends CustomForm {
     private Dropdown $playerList;
     private Input $int;
 
-    public function __construct(Player $player) {
+    public function __construct() {
         $names = null;
         foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
             $name = $playerName->getName();
@@ -37,17 +38,21 @@ class addTicketForm extends CustomForm {
         $playerName = $this->playerList->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ($this->int->getValue() === "") {
-            $player->sendMessage("§bTicket §7>> §a増加分を入力してください");
+            $player->sendMessage("§bTicket §7>> §c増加分を入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (is_numeric($this->int->getValue()) === false) {
-            $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
+            $player->sendMessage("§bTicket §7>> §c整数のみ入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $int = TicketAPI::getInstance()->addTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
         $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketを{$int}枚に増やしました");
+        SoundPacket::Send($player, 'note.harp');
     }
 }

@@ -5,6 +5,7 @@ namespace Deceitya\Flytra;
 use Deceitya\Flytra\command\FlyCommand;
 use Deceitya\Flytra\task\FlyCheckTask;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
@@ -46,6 +47,7 @@ class Main extends PluginBase {
                         $player->setAllowFlight(false);
                         $player->setFlying(false);
                         $player->sendTip("§bFlyTask §7>> §c高さ制限に引っ掛かった為飛行が一時的に不可になりました");
+                        SoundPacket::Send($player, 'note.bass');
                         return false;
                     } else {
                         $player->setAllowFlight(true);

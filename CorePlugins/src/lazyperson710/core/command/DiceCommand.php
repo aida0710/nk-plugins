@@ -4,6 +4,7 @@ namespace lazyperson710\core\command;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -23,34 +24,43 @@ class DiceCommand extends Command {
         if (PlayerSettingPool::getInstance()->getSettingNonNull($sender)->getSetting(DiceMessageSetting::getName())?->getValue() !== true) {
             $sender->sendMessage("§bDice §7>> §cDiceMessageSettingがOFFになっている為、コマンドを実行できません");
             $sender->sendMessage("§bDice §7>> §c/settingから設定を変更できます");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         }
         if (!isset($args[0])) {
             $sender->sendMessage("§bDice §7>> §c使い方：/dice <範囲の最小値> <範囲の最大値> <連続で回す回数指定> <当たりを指定(無制限)>");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         }
         if (!isset($args[1])) {
             $sender->sendMessage("§bDice §7>> §c使い方：/dice <範囲の最小値> <範囲の最大値> <連続で回す回数指定> <当たりを指定(無制限)>");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         }
         if (!preg_match('/^[0-9]+$/', $args[0])) {
             $sender->sendMessage("§bDice §7>> §c整数のみが使用可能です");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         } elseif ($args[0] >= 10000) {
             $sender->sendMessage("§bDice §7>> §c10,000以上の数字は使用することが出来ません");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         }
         if (!preg_match('/^[0-9]+$/', $args[1])) {
             $sender->sendMessage("§bDice §7>> §c整数のみが使用可能です");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         } elseif ($args[1] >= 10000) {
             $sender->sendMessage("§bDice §7>> §c10,000以上の数字は使用することが出来ません");
+            SoundPacket::Send($sender, 'note.bass');
             return;
         }
         $user = $sender->getName();
         if ($args[0] > $args[1]) {
             $sender->sendMessage("§bDice §7>> §c2つ目の引数を1つ目の引数より大きくすることはできません -> {$args[0]} > {$args[1]}");
+            SoundPacket::Send($sender, 'note.bass');
         } elseif (!isset($args[2])) {//連続で回す数が指定されてなかったら
+            SoundPacket::Send($sender, 'note.harp');
             $rand = mt_rand($args[0], $args[1]);
             foreach (Server::getInstance()->getOnlinePlayers() as $player) {
                 if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DiceMessageSetting::getName())?->getValue() === true) {
@@ -61,13 +71,16 @@ class DiceCommand extends Command {
         } else {//連続で回す数が指定されていたら
             if (!preg_match('/^[0-9]+$/', $args[2])) {
                 $sender->sendMessage("§bDice §7>> §c整数のみが使用可能です");
+                SoundPacket::Send($sender, 'note.bass');
                 return;
             }
             if ($args[2] >= 10) {
                 $sender->sendMessage("§bDice §7>> §c10以上の数字は引数3では使用することが出来ません");
+                SoundPacket::Send($sender, 'note.bass');
                 return;
             }
             if (!isset($args[3])) {//当たり番号が指定されてなかったら
+                SoundPacket::Send($sender, 'note.harp');
                 for ($i = 1; $i <= $args[2]; $i++) {
                     $rand = mt_rand($args[0], $args[1]);
                     foreach (Server::getInstance()->getOnlinePlayers() as $player) {
@@ -84,6 +97,7 @@ class DiceCommand extends Command {
                 $count = 1;
                 unset($args[0], $args[1], $args[2]);
                 $result = array_unique($args);
+                SoundPacket::Send($sender, 'note.harp');
                 for ($i = 1; $i <= $number; $i++) {
                     $rand = mt_rand($min, $max);
                     foreach ($result as $lucky) {

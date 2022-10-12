@@ -6,6 +6,7 @@ use deceitya\miningtools\event\MiningToolsBreakEvent;
 use deceitya\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
@@ -105,6 +106,7 @@ class PickaxeDestructionRange {
                         $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
                         if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
                             $player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+                            SoundPacket::Send($player, 'respawn_anchor.deplete');
                             continue;
                         }
                     }

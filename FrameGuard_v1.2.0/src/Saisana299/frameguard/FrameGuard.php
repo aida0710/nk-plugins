@@ -2,6 +2,7 @@
 
 namespace Saisana299\frameguard;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -37,6 +38,7 @@ class FrameGuard extends PluginBase {
                     unset($this->frame[$name]);
                     $sender->sendMessage("§bFrameLock §7>> §a保護モードを無効にしました");
                 }
+                SoundPacket::Send($sender, 'note.harp');
                 break;
             case "unlockfr":
                 $name = $sender->getName();
@@ -51,6 +53,7 @@ class FrameGuard extends PluginBase {
                     $sender->sendMessage("§bFrameLock §7>> §a保護解除モードを無効にしました");
                     break;
                 }
+                SoundPacket::Send($sender, 'note.harp');
         }
         return true;
     }

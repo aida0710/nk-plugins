@@ -3,6 +3,7 @@
 namespace ree_jp\bank\form;
 
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -43,6 +44,7 @@ class BankMenuForm implements Form {
                 break;
             default:
                 $player->sendMessage(TextFormat::RED . "§bBank §7>> §cエラーが発生しました");
+                SoundPacket::Send($player, 'note.bass');
         }
     }
 

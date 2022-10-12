@@ -5,6 +5,7 @@ namespace lazyperson710\sff\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
@@ -50,16 +51,20 @@ class InvClearForm extends CustomForm {
         }
         if (($count + $armorCount) == 0) {
             $player->sendMessage("§bInvClear §7>> §cインベントリからは何も消去されませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (($armorCount) == 0) {
             $player->sendMessage("§bInvClear §7>> §aインベントリから{$count}個のアイテムが削除されました");
+            SoundPacket::Send($player, 'note.harp');
             return;
         }
         if (($count) == 0) {
             $player->sendMessage("§bInvClear §7>> §aArmorインベントリから{$armorCount}個のアイテムが削除されました");
+            SoundPacket::Send($player, 'note.harp');
             return;
         }
         $player->sendMessage("§bInvClear §7>> §aインベントリから{$count}個、Armorインベントリからは{$armorCount}個のアイテムが削除されました");
+        SoundPacket::Send($player, 'note.harp');
     }
 }

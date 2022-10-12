@@ -5,6 +5,7 @@ namespace lazyperson710\sff\form\land;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\sff\form\LandForm;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -25,15 +26,18 @@ class LandInviteeForm extends CustomForm {
 
     public function handleClosed(Player $player): void {
         SendForm::Send($player, (new LandForm($player)));
+        SoundPacket::Send($player, 'note.bass');
         return;
     }
 
     public function handleSubmit(Player $player): void {
         if ($this->input1->getValue() === "") {
             $player->sendMessage("§bLand §7>> §c土地番号を入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         } elseif (!preg_match('/^[0-9]+$/', $this->input1->getValue())) {
             $player->sendMessage("§bLand §7>> §c土地番号は数字で入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         Server::getInstance()->dispatchCommand($player, "land invitee {$this->input1->getValue()}");

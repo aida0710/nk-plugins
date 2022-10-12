@@ -5,6 +5,7 @@ namespace lazyperson710\core\listener;
 use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson0710\WorldManagement\form\WarpForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\sff\form\CommandExecutionForm;
 use lazyperson710\sff\form\InformationForm;
 use lazyperson710\sff\form\TosForm;
@@ -74,5 +75,6 @@ class JoinItemUseEvent implements Listener {
                 SendForm::Send($player, (new SelectSettingForm($player)));
                 break;
         }
+        SoundPacket::Send($player, 'sign.dye.use');
     }
 }

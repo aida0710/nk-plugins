@@ -7,6 +7,7 @@ use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -42,23 +43,29 @@ class TransferTicketForm extends CustomForm {
         $playerName = $this->playerList->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $playerInstance = Server::getInstance()->getPlayerByPrefix($playerName);
         if ($this->int->getValue() === "") {
-            $player->sendMessage("§bTicket §7>> §a譲渡したいTicketの枚数を入力してください");
+            $player->sendMessage("§bTicket §7>> §c譲渡したいTicketの枚数を入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (is_numeric($this->int->getValue()) === false) {
-            $player->sendMessage("§bTicket §7>> §a整数のみ入力してください");
+            $player->sendMessage("§bTicket §7>> §c整数のみ入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (TicketAPI::getInstance()->reduceTicket($player, $this->int->getValue()) === false) {
             $player->sendMessage("§bTicket §7>> §c{$playerName}のTicketの枚数が足らないかエラーが発生しました");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         TicketAPI::getInstance()->addTicket($playerInstance, $this->int->getValue());
         $player->sendMessage("§bTicket §7>> §a{$playerName}さんにTicketを{$this->int->getValue()}枚譲渡しました");
         $playerInstance->sendMessage("§bTicket §7>> §a{$player->getName()}さんからTicketを{$this->int->getValue()}枚プレゼントされました");
+        SoundPacket::Send($player, 'note.harp');
+        SoundPacket::Send($playerInstance, 'note.harp');
     }
 }

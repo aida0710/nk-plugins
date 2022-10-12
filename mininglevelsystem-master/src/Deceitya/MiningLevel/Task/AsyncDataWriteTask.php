@@ -2,6 +2,7 @@
 
 namespace Deceitya\MiningLevel\Task;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\scheduler\AsyncTask;
 use pocketmine\Server;
@@ -60,6 +61,7 @@ class AsyncDataWriteTask extends AsyncTask {
             $player = Server::getInstance()->getOfflinePlayer($name);
             if ($player instanceof Player) {
                 $player->sendMessage("§bLevel §7>> §a保存は完了致しました。");
+                SoundPacket::Send($player, 'note.harp');
             }
         }
     }

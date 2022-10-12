@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -31,10 +32,12 @@ class ShareRemoveForm implements Form {
         $name = $this->option[$data[0]];
         if (BankHelper::getInstance()->getLeader($this->bank) === strtolower($name)) {
             $player->sendMessage(TextFormat::RED . "§bBank §7>> §cリーダーは共有を外すことが出来ません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         BankHelper::getInstance()->removeShare($this->bank, $data[0], $player->getName());
         $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a" . $data[0] . "さんの共有を外しました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
     /**

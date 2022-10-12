@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\WorldManagement\EventListener;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -51,6 +52,7 @@ class CancelItemUseEvent implements Listener {
                         $event->cancel();
                     }
                     $event->getPlayer()->sendTip("§bFarming §7>> §c農業ワールドでのみ使用可能です");
+                    SoundPacket::Send($event->getPlayer(), 'note.bass');
                     break;
             }
         }
@@ -68,6 +70,7 @@ class CancelItemUseEvent implements Listener {
                         $event->cancel();
                     }
                     $event->getPlayer()->sendTip("§bWater §7>> §c{$event->getPlayer()->getInventory()->getItemInHand()->getName()}は生活ワールドと農業ワールドでのみ使用可能です");
+                    SoundPacket::Send($event->getPlayer(), 'note.bass');
                     break;
             }
         }
@@ -121,6 +124,7 @@ class CancelItemUseEvent implements Listener {
                     $event->cancel();
                 }
                 $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 break;
         }
         if ($event->getPlayer()->getInventory()->getItemInHand()->getId() === 325) {
@@ -129,19 +133,23 @@ class CancelItemUseEvent implements Listener {
                     $event->cancel();
                 }
                 $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムは使用できません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
             }
         }
         if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningToolsRangeCostItem') !== null) {
             $event->cancel();
             $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
+            SoundPacket::Send($event->getPlayer(), 'note.bass');
         }
         if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningToolsEnchantCostItem') !== null) {
             $event->cancel();
             $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
+            SoundPacket::Send($event->getPlayer(), 'note.bass');
         }
         if ($event->getPlayer()->getInventory()->getItemInHand()->getNamedTag()->getTag('EnablingMiningSettingItem') !== null) {
             $event->cancel();
             $event->getPlayer()->sendTip("§bCancel §7>> §cこのアイテムはMiningToolsの強化にのみ使用可能です/mt");
+            SoundPacket::Send($event->getPlayer(), 'note.bass');
         }
     }
 

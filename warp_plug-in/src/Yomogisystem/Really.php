@@ -3,11 +3,13 @@
 namespace Yomogisystem;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
 use pocketmine\utils\Config;
 use pocketmine\world\Position;
@@ -30,6 +32,7 @@ class Really extends PluginBase implements Listener {
             case "warp":
                 if (!isset($args[0])) {
                     $sender->sendMessage("§bWarp §7>> §cpointを設定してください");
+                    SoundPacket::Send($sender, 'note.harp');
                     return true;
                 }
                 $name = $this->ad($args[0]);
@@ -45,30 +48,41 @@ class Really extends PluginBase implements Listener {
                             $pos = new Position($x, $y, $z, $world);
                             $sender->teleport($pos);
                             $sender->sendTip("§bWarp §7>> §a{$name}にワープしました");
+                            $this->getScheduler()->scheduleDelayedTask(new ClosureTask(
+                                function () use ($sender): void {
+                                    SoundPacket::Send($sender, 'mob.endermen.portal');
+                                }
+                            ), 8);
                         } else {
                             $sender->sendMessage("§bWarp §7>> §c{$point}にはレベルが足りないため移動できませんでした。要求レベル->{$mining}");
+                            SoundPacket::Send($sender, 'note.bass');
                             return true;
                         }
                     } else {
                         $sender->sendMessage("§bWarp §7>> §c{$point}には移動出来ませんでした");
+                        SoundPacket::Send($sender, 'note.bass');
                         return true;
                     }
                 } else {
                     $sender->sendMessage("§bWarp §7>> §c{$args[0]}という名前のワープ地点は存在しない、あるいは権限が不足しています");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 break;
             case "warpset":
                 if (!Server::getInstance()->isOp($sender->getName())) {
                     $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 if (!isset($args[0])) {
                     $sender->sendMessage("§bWarp §7>> §cpointを設定してください");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 if (!isset($args[1])) {
                     $sender->sendMessage("§bWarp §7>> §clevelを指定してください");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 if (stripos($args[0], "§") === false) {
@@ -81,22 +95,27 @@ class Really extends PluginBase implements Listener {
                         $this->warp->set($args[0], ["X" => $x, "Y" => $y, "Z" => $z, "world" => $wname, "mining" => $args[1]]);
                         $this->warp->save();
                         $sender->sendMessage("§bWarp §7>> §a{$args[0]}という名前の地点を新しく作成しました");
+                        SoundPacket::Send($sender, 'note.harp');
                         return true;
                     } else {
                         $sender->sendMessage("§bWarp §7>> §c{$args[0]}という名前の地点は既に存在します");
+                        SoundPacket::Send($sender, 'note.bass');
                         return true;
                     }
                 } else {
                     $sender->sendMessage("§bWarp §7>> §cPoint名に色文字は使えません");
+                    SoundPacket::Send($sender, 'note.bass');
                 }
                 break;
             case "warpdel":
                 if (!Server::getInstance()->isOp($sender->getName())) {
                     $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 if (!isset($args[0])) {
                     $sender->sendMessage("§bWarp §7>> §cpointを設定してください");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 $name = $this->ad($args[0]);
@@ -104,19 +123,23 @@ class Really extends PluginBase implements Listener {
                     $this->warp->remove($name);
                     $this->warp->save();
                     $sender->sendMessage("§bWarp §7>> §a" . $args[0] . "という名前の地点を削除しました");
+                    SoundPacket::Send($sender, 'note.harp');
                     return true;
                 } else {
                     $sender->sendMessage("§bWarp §7>> §a§c" . $args[0] . "という名前の地点は存在しません");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
             case "warplist":
                 if (!Server::getInstance()->isOp($sender->getName())) {
                     $sender->sendMessage("§bWarp §7>> §c権限が不足している為、実行できませんでした");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 $wl = $this->warp->getAll();
                 if (count($wl) == 0) {
                     $sender->sendMessage("§bWarp §7>> §cpointが存在しません");
+                    SoundPacket::Send($sender, 'note.bass');
                     return true;
                 }
                 $j = 0;

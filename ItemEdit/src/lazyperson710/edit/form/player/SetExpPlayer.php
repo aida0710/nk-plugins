@@ -5,6 +5,7 @@ namespace lazyperson710\edit\form\player;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -34,19 +35,23 @@ class SetExpPlayer extends CustomForm {
         $expLevel = $this->expLevel->getValue();
         if (!Server::getInstance()->getPlayerByPrefix($target)) {
             $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $target = Server::getInstance()->getPlayerByPrefix($target);
         if (!is_numeric($expLevel)) {
             $player->sendMessage("§bPlayerEdit §7>> §c経験値量は数値で入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ($expLevel < 0) {
             $player->sendMessage("§bPlayerEdit §7>> §c経験値レベルは0以上の数値で入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ($expLevel > 1241258) {
             $player->sendMessage("§bPlayerEdit §7>> §c経験値レベルは1241258以下の数値で入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $target->getXpManager()->setXpLevel($expLevel);
@@ -55,7 +60,9 @@ class SetExpPlayer extends CustomForm {
         } else {
             $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$expLevel}に設定しました");
             $target->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$player->getName()}が{$expLevel}に設定しました");
+            SoundPacket::Send($target, 'note.harp');
         }
+        SoundPacket::Send($player, 'note.harp');
     }
 
 }

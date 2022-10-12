@@ -42,15 +42,18 @@ class GachaForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         if ($this->quantity->getValue() == "") {
             $player->sendMessage("§bGacha §7>> §c回数を入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (!preg_match('/^[0-9]+$/', $this->quantity->getValue())) {
             $player->sendMessage("§bGacha §7>> §c整数のみで入力してください");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (!Server::getInstance()->isOp($player->getName())) {
             if ($this->quantity->getValue() >= 301) {
                 $player->sendMessage("§bGacha §7>> §c301回以上は連続で回すことはできません");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
         }
@@ -67,7 +70,7 @@ class GachaForm extends CustomForm {
                     $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
                     break;
                 case "SSR":
-                    SoundPacket::Send($player, "mob.wither.spawn");
+                    SoundPacket::Send($player, "item.trident.thunder");
                     $player->sendMessage("§bGacha §7>> §aSpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
                     break;
                 case "L":

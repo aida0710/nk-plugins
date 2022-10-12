@@ -20,6 +20,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSett
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class NormalSettingListForm extends CustomForm {
@@ -72,6 +73,7 @@ class NormalSettingListForm extends CustomForm {
 
     public function handleClosed(Player $player): void {
         SendForm::Send($this->player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
+        SoundPacket::Send($player, 'dig.chain');
     }
 
     public function handleSubmit(Player $player): void {
@@ -125,6 +127,7 @@ class NormalSettingListForm extends CustomForm {
             $setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
         }
         SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
+        SoundPacket::Send($player, "item.spyglass.use");
     }
 
 }

@@ -3,6 +3,7 @@
 namespace Deceitya\NotionForm\Form;
 
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -29,6 +30,7 @@ class SearchResultForm implements Form {
         }
         if (!isset($this->index[$data - 1])) {
             $player->sendMessage("§bNotionForm §7>> §cエラーが発生しました");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $id = $this->index[$data - 1];

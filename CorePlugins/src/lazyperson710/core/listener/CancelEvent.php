@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\inventory\AnvilInventory;
 use pocketmine\block\inventory\BrewingStandInventory;
 use pocketmine\block\inventory\EnchantInventory;
@@ -23,10 +24,12 @@ class CancelEvent implements Listener {
         $player = $event->getPlayer();
         if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory) {
             $player->sendTip("§bInventory §7>> §cこのブロックのインベントリは開くことが出来ません");
+            SoundPacket::Send($player, 'note.bass');
             $event->cancel();
         }
         if ($inventory instanceof AnvilInventory) {
             $player->sendTip("§bRepair §7>> §cスニークしながらタップするとアイテムの修繕が可能です");
+            SoundPacket::Send($player, 'note.bass');
             $event->cancel();
         }
     }

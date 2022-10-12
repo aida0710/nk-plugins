@@ -3,6 +3,7 @@
 namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -32,11 +33,13 @@ class ResourceWorldProtect implements Listener {
             $heightLimit = WorldManagementAPI::getInstance()->getHeightLimit("resource");
             if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドではY.{$heightLimit}以上のブロックを破壊することは許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
                 return;
             }
             if (!in_array($event->getBlock()->getName(), $blocks)) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             }
         }
@@ -64,11 +67,13 @@ class ResourceWorldProtect implements Listener {
             ];
             if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
                 return;
             }
             if (!in_array($event->getBlock()->getName(), $blocks)) {
                 $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません");
+                SoundPacket::Send($event->getPlayer(), 'note.bass');
                 $event->cancel();
             }
         }

@@ -3,6 +3,7 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByBlockEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -128,5 +129,6 @@ class DeathEventListener implements Listener {
         $player = $event->getPlayer();
         $name = $player->getName();
         Server::getInstance()->broadcastTip("§bReSpawn §7>> §e{$name}がリスポーンしました");
+        SoundPacket::Send($player, "respawn_anchor.set_spawn");
     }
 }

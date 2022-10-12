@@ -34,7 +34,9 @@ class BankCommand extends Command {
             if ($this->testPermission($sender)) {
                 SendForm::Send($sender, (new BankForm()));
             }
-        } else $sender->sendMessage(TextFormat::RED . "§bBank §7>> §cコマンドを実行出来ませんでした");
+        } else {
+            $sender->sendMessage(TextFormat::RED . "§bBank §7>> §cコマンドを実行出来ませんでした");
+        }
         return true;
     }
 }

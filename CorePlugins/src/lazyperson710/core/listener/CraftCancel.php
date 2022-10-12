@@ -2,6 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\inventory\CraftItemEvent;
 use pocketmine\event\Listener;
@@ -122,25 +123,31 @@ class CraftCancel implements Listener {
             -270, //ネザライトブロック
         ];
         foreach ($event->getOutputs() as $item) {
+            $player = $event->getPlayer();
             if ($item instanceof Food) {
                 $event->cancel();
                 $event->getPlayer()->sendMessage('§bCraftCancel §7>> §c食べ物をクラフトすることは出来ません。一部を除いてショップから購入が可能です');
+                SoundPacket::Send($player, 'note.bass');
             }
             if ($item instanceof Durable) {
                 $event->cancel();
                 $event->getPlayer()->sendMessage('§bCraftCancel §7>> §c道具をクラフトすることは出来ません。一部を除いてショップから購入が可能です');
+                SoundPacket::Send($player, 'note.bass');
             }
             if (in_array($item->getVanillaName(), $blocks)) {
                 $event->cancel();
                 $event->getPlayer()->sendMessage('§bCraftCancel §7>> §cこのアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です');
+                SoundPacket::Send($player, 'note.bass');
             }
             if (in_array($item->getVanillaName(), $items)) {
                 $event->cancel();
                 $event->getPlayer()->sendMessage('§bCraftCancel §7>> §cこのアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です');
+                SoundPacket::Send($player, 'note.bass');
             }
             if (in_array($item->getId(), $ids)) {
                 $event->cancel();
                 $event->getPlayer()->sendMessage('§bCraftCancel §7>> §cこのアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です');
+                SoundPacket::Send($player, 'note.bass');
             }
             return;
         }

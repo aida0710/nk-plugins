@@ -3,6 +3,7 @@
 namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MyWarp\Database;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -22,6 +23,7 @@ class ConfirmForm implements Form {
         }
         Database::getInstance()->removeWarpPosition($player, $this->target);
         $player->sendMessage("§bMyWarp §7>> §aワープ地点を削除しました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
     public function jsonSerialize() {

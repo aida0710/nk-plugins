@@ -3,6 +3,7 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\sff\form\TosForm;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -26,9 +27,11 @@ class PassBlockInteract implements Listener {
             }
             if ($x === 215 && $y === 105 && $z === 247) {//TosFormを送る
                 SendForm::Send($player, (new TosForm()));
+                SoundPacket::Send($player, 'note.harp');
             }
             if ($x === 232 && $y === 105 && $z === 246) {//TosFormを送る
                 SendForm::Send($player, (new TosForm()));
+                SoundPacket::Send($player, 'note.harp');
             }
         }
     }

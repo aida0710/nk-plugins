@@ -17,6 +17,7 @@ use deceitya\ShopAPI\form\levelShop\shop5\Shop5Form;
 use deceitya\ShopAPI\form\levelShop\shop6\Shop6Form;
 use deceitya\ShopAPI\form\levelShop\shop7\Shop7Form;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class ShopMainCategoryFormButton extends Button {
@@ -50,6 +51,7 @@ class ShopMainCategoryFormButton extends Button {
         } else {
             $error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$level}";
             SendForm::Send($player, (new MainLevelShopForm($player, $error)));
+            SoundPacket::Send($player, 'dig.chain');
         }
     }
 }

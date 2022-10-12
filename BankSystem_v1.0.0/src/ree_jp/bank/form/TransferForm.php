@@ -2,6 +2,7 @@
 
 namespace ree_jp\bank\form;
 
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -27,21 +28,31 @@ class TransferForm implements Form {
         if ($data === null) return;
         if (!is_numeric($data[1])) {
             $player->sendMessage(TextFormat::RED . "§bBank §7>> §cエラーが発生しました");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (!is_float(EconomyAPI::getInstance()->myMoney($data[0]))) {
             $player->sendMessage(TextFormat::RED . "§bBank §7>> §cプレイヤーが見つかりません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ($data[1] > BankHelper::getInstance()->getMoney($this->bank)) {
             $player->sendMessage(TextFormat::RED . "§bBank §7>> §cお金が足りません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (BankHelper::getInstance()->transferMoney($this->bank, $player->getName(), $data[1], $data[0])) {
             $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a" . $data[0] . "さんに" . $data[1] . "円送金しました");
+            SoundPacket::Send($player, 'note.harp');
             $receiveP = Server::getInstance()->getOfflinePlayer($data[0]);
-            if (!is_null($receiveP)) $receiveP->sendMessage($data[1] . "円おくられたよ");
-        } else $player->sendMessage(TextFormat::RED . "§bBank §7>> §c送金出来ませんでした");
+            if (!is_null($receiveP)) {
+                $receiveP->sendMessage($data[1] . "円おくられたよ");
+                SoundPacket::Send($player, 'note.harp');
+            }
+        } else {
+            $player->sendMessage(TextFormat::RED . "§bBank §7>> §c送金出来ませんでした");
+            SoundPacket::Send($player, 'note.bass');
+        }
     }
 
     /**

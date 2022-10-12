@@ -23,6 +23,7 @@ use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\Enab
 use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingIronIngotSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingSandToGlassSetting;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class MiningToolsSettingListForm extends CustomForm {
@@ -105,6 +106,7 @@ class MiningToolsSettingListForm extends CustomForm {
 
     public function handleClosed(Player $player): void {
         SendForm::Send($this->player, new SelectSettingForm($player, "\n§cFormを閉じたため、設定は保存されませんでした"));
+        SoundPacket::Send($player, 'dig.chain');
     }
 
     public function handleSubmit(Player $player): void {
@@ -150,6 +152,7 @@ class MiningToolsSettingListForm extends CustomForm {
             }
         }
         SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
+        SoundPacket::Send($player, "item.spyglass.use");
     }
 
 }

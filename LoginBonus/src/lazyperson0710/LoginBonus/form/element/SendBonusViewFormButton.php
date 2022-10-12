@@ -7,6 +7,7 @@ use bbo51dog\bboform\element\ButtonImage;
 use lazyperson0710\LoginBonus\form\BonusForm;
 use lazyperson0710\LoginBonus\Main;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
@@ -27,6 +28,7 @@ class SendBonusViewFormButton extends Button {
     public function handleSubmit(Player $player): void {
         if (Main::getInstance()->lastBonusDateConfig->get($player->getName()) === false) {
             SendForm::Send($player, new BonusForm($player, "\n§c現在保留中のログインボーナスが存在しない為、受け取ることはできません"));
+            SoundPacket::Send($player, 'note.bass');
         }
         SendForm::Send($player, $this->form);
     }

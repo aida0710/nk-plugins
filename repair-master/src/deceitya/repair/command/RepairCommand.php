@@ -6,13 +6,10 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\repair\form\RepairForm;
 use Exception;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Durable;
-use pocketmine\item\enchantment\VanillaEnchantments;
-use pocketmine\item\ItemIds;
-use pocketmine\item\TieredTool;
-use pocketmine\item\ToolTier;
 use pocketmine\player\Player;
 
 class RepairCommand extends Command {
@@ -78,6 +75,7 @@ class RepairCommand extends Command {
             SendForm::Send($player, (new RepairForm($level, $item, $mode)));
         } else {
             $sender->sendMessage("§bRepair §7>> §cRepairコマンドは80レベル以上でないと開くことが出来ません。通常はかなとこをスニークタップすることで修繕出来ます");
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 }

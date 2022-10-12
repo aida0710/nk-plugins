@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -39,6 +40,7 @@ class ReplaceTicketForm extends CustomForm {
             $playerName = $this->playerList->getSelectedOption();
             if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
                 $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
             $playerInstance = Server::getInstance()->getPlayerByPrefix($playerName);
@@ -49,15 +51,19 @@ class ReplaceTicketForm extends CustomForm {
         $count += TicketAPI::getInstance()->replaceStackStorageTicket($playerInstance);
         if ($count >= 1) {
             $playerInstance->sendMessage("§bTicket §7>> §aチケットの変換処理を実行し、{$count}枚のチケットを取得しました");
+            SoundPacket::Send($player, 'note.harp');
             if (!isset($playerName)) return;
             if ($playerName != $player->getName()) {
                 $player->sendMessage("§bTicket §7>> §aチケットの変換処理を実行し、{$count}枚のチケットを取得しました");
+                SoundPacket::Send($player, 'note.harp');
             }
         } else {
-            $playerInstance->sendMessage("§bTicket §7>> §a変換するアイテムが存在しませんでした");
+            $playerInstance->sendMessage("§bTicket §7>> §c変換するアイテムが存在しませんでした");
+            SoundPacket::Send($playerInstance, 'note.bass');
             if (!isset($playerName)) return;
             if ($playerName != $player->getName())
-                $player->sendMessage("§bTicket §7>> §a変換するアイテムが存在しませんでした");
+                $player->sendMessage("§bTicket §7>> §c変換するアイテムが存在しませんでした");
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 }

@@ -5,6 +5,7 @@ namespace onebone\economyapi\command;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyapi\event\money\PayMoneyEvent;
 use onebone\economyapi\form\PayCommandConfirmation;
@@ -33,19 +34,23 @@ class PayCommand extends Command {
         $amount = array_shift($params);
         if (!is_numeric($amount)) {
             $sender->sendMessage("§bEconomy §7>> §c/pay <player> <amount>で使用することが可能です");
+            SoundPacket::Send($sender, 'note.harp');
             return true;
         }
         if (strpos($amount, '.')) {
             $sender->sendMessage("§bEconomy §7>> §c振り込む金額に小数点を含めることはできません");
+            SoundPacket::Send($sender, 'note.harp');
             return true;
         }
         if (!Server::getInstance()->getPlayerByPrefix($target) instanceof Player) {
             $sender->sendMessage("§bEconomy §7>> §c{$target->getName()}は現在オフラインの為送金できませんでした");
+            SoundPacket::Send($sender, 'note.harp');
             return true;
         }
         $target = Server::getInstance()->getPlayerByPrefix($target);
         if (!$this->plugin->accountExists($target)) {
             $sender->sendMessage("§bEconomy §7>> §c{$target->getName()}はアカウントデータが存在しない為送金できませんでした");
+            SoundPacket::Send($sender, 'note.harp');
             return true;
         }
         if (PlayerSettingPool::getInstance()->getSettingNonNull($sender)->getSetting(PayCommandUseSetting::getName())?->getValue() === true) {
@@ -66,9 +71,12 @@ class PayCommand extends Command {
         if ($result === EconomyAPI::RET_SUCCESS) {
             $plugin->addMoney($target, $amount, true, 'economyapi.command.pay');
             $player->sendMessage("§bEconomy §7>> §a{$target->getName()}に{$amount}円を送金しました");
+            SoundPacket::Send($player, 'note.harp');
             $target->sendMessage("§bEconomy §7>> §a{$player->getName()}から{$amount}円を受け取りました");
+            SoundPacket::Send($target, 'note.harp');
         } else {
             $player->sendMessage("§bEconomy §7>> §c不明な原因により送金に失敗しました");
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 }

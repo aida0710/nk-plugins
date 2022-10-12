@@ -9,6 +9,7 @@ use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\range\RangeConfirmForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\player\Player;
@@ -113,6 +114,7 @@ class ConfirmationSettingForm extends CustomForm {
         };
         if ($approval !== 0) {
             SendForm::Send($player, new SelectEnablingSettings($player, "要求されたコストを所持していない為設定の有効化が出来ませんでした\n§c{$errorMessage}"));
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $cost["money"]);
@@ -121,6 +123,7 @@ class ConfirmationSettingForm extends CustomForm {
         if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["settingItem"], self::CostItemId, self::CostItemNBT) === false) throw new \Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/112");
         PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting($settingName)->setValue(true);
         SendForm::Send($player, new SelectEnablingSettings($player, "§a{$settingName}を有効化しました"));
+        SoundPacket::Send($player, 'note.harp');
     }
 
 }

@@ -8,6 +8,7 @@ use lazyperson0710\LoginBonus\form\BonusForm;
 use lazyperson0710\LoginBonus\form\convert\ItemConvertConfirmationForm;
 use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
 class SelectLoginBonusItemButton extends Button {
@@ -24,6 +25,7 @@ class SelectLoginBonusItemButton extends Button {
             SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
         } else {
             SendForm::Send($player, new BonusForm($player, "\n§cインベントリ内にあるログインボーナス数が足りません"));
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 }

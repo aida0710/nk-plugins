@@ -7,6 +7,7 @@ use bbo51dog\bboform\element\ClosureButton;
 use bbo51dog\bboform\form\ModalForm;
 use lazyperson0710\WorldManagement\form\WarpForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\sff\form\LandForm;
 use pocketmine\event\Listener;
 use pocketmine\event\server\CommandEvent;
@@ -54,9 +55,11 @@ class CmdListener implements Listener {
         if ($event->getCommand() === "w") {
             $event->cancel();
             $event->getSender()->sendMessage("§bCommand §7>> §cwコマンドは実行できません。tellかmsgコマンドを実行してください");
+            SoundPacket::Send($sender, 'note.bass');
         } elseif ($cmdPrefix === "w ") {
             $event->cancel();
             $event->getSender()->sendMessage("§bCommand §7>> §cwコマンドは実行できません。tellかmsgコマンドを実行してください");
+            SoundPacket::Send($sender, 'note.bass');
         }
     }
 }

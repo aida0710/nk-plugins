@@ -6,6 +6,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\miningtools\calculation\CheckItem;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
@@ -34,14 +35,17 @@ class AddMendingEnchantments extends CustomForm {
         $inHandItem = $player->getInventory()->getItemInHand();
         if (!$this->enable->getValue()) {
             $player->sendMessage("§bItemEdit §7>> §a機能の有効化のボタンをオンにしていない為処理を中断しました");
+            SoundPacket::Send($player, 'note.harp');
             return;
         }
         if (!$inHandItem instanceof Durable) {
             $player->sendMessage("§bItemEdit §7>> §c道具や装備以外のアイテムは修繕エンチャントを付与することが出来ません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if ((new CheckItem())->isMiningTools($inHandItem)) {
             $player->sendMessage("§bItemEdit §7>> §cMiningToolsに修繕を付与することはできません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $approval = false;
@@ -56,11 +60,13 @@ class AddMendingEnchantments extends CustomForm {
         }
         if ($approval === false) {
             $player->sendMessage("§bItemEdit §7>> §c修繕付与アイテムを取得することができませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $inHandItem->addEnchantment(new EnchantmentInstance(VanillaEnchantments::MENDING()), 1);
         $player->getInventory()->setItemInHand($inHandItem);
         $player->sendMessage("§bItemEdit §7>> §a修繕を付与しました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
 }

@@ -17,6 +17,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendToastPacket;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
@@ -93,6 +94,7 @@ class EventListener implements Listener {
                     "toast" => SendToastPacket::Send($player, "§bMining Level UP Message", "§aLv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
                     default => null,
                 };
+                SoundPacket::Send($player, 'random.levelup');
             })($player, $originalLevel, $level);
         }
         $api->setLevel($player, $level);

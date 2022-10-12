@@ -5,6 +5,7 @@ namespace lazyperson0710\ticket\command\form;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -33,13 +34,16 @@ class CheckTicketForm extends CustomForm {
         $playerName = $this->playerList->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
             $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         if (TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName)) !== false) {
             $int = TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName));
             $player->sendMessage("§bTicket §7>> §a{$playerName}のTicketの所持数は{$int}です");
+            SoundPacket::Send($player, 'note.harp');
         } else {
             $player->sendMessage("§bTicket §7>> §c{$playerName}のTicketデータは存在しません");
+            SoundPacket::Send($player, 'note.bass');
         }
     }
 }

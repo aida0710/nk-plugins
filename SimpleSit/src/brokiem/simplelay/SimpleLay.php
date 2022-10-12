@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace brokiem\simplelay;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\Block;
 use pocketmine\block\Opaque;
 use pocketmine\block\Slab;
@@ -51,12 +52,16 @@ class SimpleLay extends PluginBase {
                         if ($this->isSitting($player)) {
                             $this->unsetSit($player);
                             $sender->sendMessage("§bSit §7>> §a{$player->getName()}の待機状態を解除しました");
-                            $player->sendMessage("§bSit §7>> §a待機状態を強制的に解除されました");
+                            $player->sendMessage("§bSit §7>> §c待機状態を強制的に解除されました");
+                            SoundPacket::Send($sender, 'note.harp');
+                            SoundPacket::Send($player, 'note.bass');
                         } else {
                             $sender->sendMessage("§bSit §7>> §c{$player->getName()}は座っていません");
+                            SoundPacket::Send($sender, 'note.bass');
                         }
                     } else {
                         $sender->sendMessage("§bSit §7>> §c{$args[0]}は存在しません");
+                        SoundPacket::Send($sender, 'note.bass');
                     }
                 } else {
                     return false;
@@ -72,11 +77,13 @@ class SimpleLay extends PluginBase {
     public function unsetToggleSit(Player $player): void {
         unset($this->toggleSit[strtolower($player->getName())]);
         $player->sendMessage("§bSit §7>> §aタップで座れるようになりました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
     public function setToggleSit(Player $player): void {
         $this->toggleSit[] = strtolower($player->getName());
         $player->sendMessage("§bSit §7>> §aタップで座らないようになりました");
+        SoundPacket::Send($player, 'note.harp');
     }
 
     public function isSitting(Player $player): bool {
@@ -100,21 +107,25 @@ class SimpleLay extends PluginBase {
             $pos = $block->getPosition()->add(0.5, 2.1, 0.5);
         } else {
             $player->sendTip("§bSit §7>> §cこのブロックには座ることはできません");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         foreach ($this->sittingData as $playerName => $data) {
             if ($pos->equals($data['pos'])) {
                 if ($player->getName() === $playerName) return;
                 $player->sendTip("§bSit §7>> §cこのブロックには他プレイヤーが既に存在します");
+                SoundPacket::Send($player, 'note.bass');
                 return;
             }
         }
         if ($this->isSitting($player)) {
             $player->sendTip("§bSit §7>> §c既に待機状態です");
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $this->setSit($player, $this->getServer()->getOnlinePlayers(), new Position($pos->x, $pos->y, $pos->z, $this->getServer()->getWorldManager()->getWorldByName($player->getWorld()->getFolderName())));
         $player->sendTip("§bSit §7>> §c現在待機状態です\n状態を解除するにはスニーク状態にしてください");
+        SoundPacket::Send($player, 'note.bass');
     }
 
     public function setSit(Player $player, array $viewers, Position $pos, ?int $eid = null): void {
