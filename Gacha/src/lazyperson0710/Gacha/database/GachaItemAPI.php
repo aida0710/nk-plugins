@@ -41,7 +41,7 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::STEAK(), 1, "ステーキ", "食料です！！！！！！！！！！！！", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::PUMPKIN_PIE(), 1, "かぼちゃのパイ", "とっても甘いかぼちゃのパイ", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::LIGHT_BLUE_DYE(), 1, "水色のごみ", "これが本当のごみ", [], [], []);
-        $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::BONE(), 1, "たたの骨", "成人した人間の骨って206本もあるんだって！", [], [], []);
+        $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::BONE(), 1, "ただの骨", "成人した人間の骨って206本もあるんだって！", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::BONE(), 1, "びーぼの骨", "びーぼがいつも握りしめてるお気に入りの骨", [VanillaEnchantments::PUNCH(), VanillaEnchantments::MENDING()], [1, 1], []);
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::NETHER_QUARTZ(), 1, "ぴかぴかした石", "きれいですね", [VanillaEnchantments::UNBREAKING()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::COOKED_SALMON(), 1, "かき氷", "イチゴ味！", [], [], []);
