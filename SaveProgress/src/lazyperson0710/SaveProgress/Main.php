@@ -12,7 +12,7 @@ class Main extends PluginBase {
     protected function onEnable(): void {
         self::$DataFolder = $this->getDataFolder();
         $this->getServer()->getPluginManager()->registerEvents(new QuitEventListener(), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new JoinEvent($this->getDataFolder()), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new JoinEvent(), $this);
         $this->getServer()->getCommandMap()->registerAll("SaveProgress", [
             //コマンドを追加
         ]);
