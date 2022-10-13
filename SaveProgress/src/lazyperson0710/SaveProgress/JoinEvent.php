@@ -13,7 +13,8 @@ class JoinEvent implements Listener {
      */
     public function onJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
-        if (ProgressDataAPI::getInstance()->dataExists($player) === false) {
+        //初ログイン時(鯖が起動してから初めてのログイン)の処理
+        if (!ProgressDataAPI::getInstance()->dataExists($player)) {
             ProgressDataAPI::getInstance()->createData($player);
         }
     }
