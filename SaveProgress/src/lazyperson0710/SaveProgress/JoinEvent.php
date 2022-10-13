@@ -4,7 +4,6 @@ namespace lazyperson0710\SaveProgress;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\utils\Config;
 
 class JoinEvent implements Listener {
 
@@ -14,10 +13,9 @@ class JoinEvent implements Listener {
      */
     public function onJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
-        if (!file_exists(Main::getInstance()->getDataFolder())) {
-            mkdir(Main::getInstance()->getDataFolder() . $player->getName().".yml");
+        if (ProgressDataAPI::getInstance()->dataExists($player) === false) {
+            ProgressDataAPI::getInstance()->createData($player);
         }
-        ProgressDataAPI::getInstance()->setCache(Main::getInstance()->getDataFolder() . $player->getName() . ".yml", $player);
     }
 
 }

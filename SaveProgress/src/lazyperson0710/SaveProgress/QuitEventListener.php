@@ -13,7 +13,10 @@ class QuitEventListener implements Listener {
      */
     public function onQuit(PlayerQuitEvent $event): void {
         $player = $event->getPlayer();
-        //todo データの保存
+        if (ProgressDataAPI::getInstance()->dataExists($player) === false) {
+            throw new \Error("データが存在しません");
+        }
+        ProgressDataAPI::getInstance()->dataSave($player);
     }
 
 }
