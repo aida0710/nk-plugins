@@ -14,9 +14,18 @@ class ProgressDataAPI {
 
     public function createData(Player $player): bool {
         if ($this->dataExists($player) === false) {
-            $this->setCache($player);
-            $this->cache[$player->getName()][] = SettingData::DefaultData;
-            var_dump($this->cache);
+            $this->cache[$player->getName()] = ['config' => new Config(Main::$DataFolder . $player->getName() . ".yml", Config::YAML)];
+            $playerCache = $this->cache[$player->getName()];
+            var_dump($playerCache["config"]->getAll());
+            if (!empty($playerCache["config"]->getAll())) {
+                var_dump("not empty");
+                $playerCache[] = $playerCache["config"]->getAll();
+            } else {
+                var_dump("empty");
+                $playerCache[] = SettingData::DefaultData;
+                $this->dataSave($player);
+            }
+            var_dump($playerCache);
             return true;
         } else return false;
     }
@@ -31,11 +40,6 @@ class ProgressDataAPI {
             return true;
         }
         return false;
-    }
-
-    public function setCache(Player $player): void {
-        var_dump(Main::$DataFolder);
-        $this->cache[$player->getName()] = ['config' => new Config(Main::$DataFolder . $player->getName() . ".yml", Config::YAML)];
     }
 
     public function dataExists(Player $player): bool {
