@@ -18,13 +18,14 @@ class Calculation {
     use SingletonTrait;
 
     public function sendButton(Player $player, string $shopNumber, array $items, $class): void {
-        $api = LevelShopAPI::getInstance();
         if (empty($items)) {
             $text = "§c検索した値ではアイテムは検出されませんでした";
-        } else $text = "§7選択してください";
-        $class
-            ->setTitle("Level Shop")
-            ->setText($text);
+        } else {
+            $text = "§7選択してください";
+        }
+        $class->setTitle("Level Shop");
+        $class->setText($text);
+        $api = LevelShopAPI::getInstance();
         foreach ($items as $item) {
             $id = $item;
             $meta = 0;
@@ -32,9 +33,11 @@ class Calculation {
                 $id = $item->getId();
                 $meta = $item->getMeta();
             }
-            if (MiningLevelAPI::getInstance()->getLevel($player) < LevelShopAPI::getInstance()->getLevel($id, $meta)) {
+            if (MiningLevelAPI::getInstance()->getLevel($player) < $api->getLevel($id, $meta)) {
                 $error = "§c{$api->getItemName($id ,$meta)} - レベル不足/lv.{$api->getLevel($id, $meta)}§r";
-            } else $error = "{$api->getItemName($id ,$meta)}";
+            } else {
+                $error = "{$api->getItemName($id ,$meta)}";
+            }
             $class->addElements(new SellBuyItemFormButton("{$error}\n購入:{$api->getBuy($id ,$meta)} / 売却:{$api->getSell($id ,$meta)}", $id, $meta));
         }
         if ($shopNumber === "search") {

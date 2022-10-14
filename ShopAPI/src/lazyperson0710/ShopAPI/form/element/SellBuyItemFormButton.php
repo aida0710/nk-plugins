@@ -9,6 +9,7 @@ use lazyperson0710\ShopAPI\database\LevelShopAPI;
 use lazyperson0710\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
 use lazyperson0710\ShopAPI\form\levelShop\PurchaseForm;
 use lazyperson0710\ShopAPI\form\levelShop\SellBuyForm;
+use lazyperson0710\ShopAPI\object\LevelShopItem;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
@@ -54,14 +55,14 @@ class SellBuyItemFormButton extends Button {
         SendForm::Send($player, (new SellBuyForm($this->itemId, $this->itemMeta, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), LevelShopAPI::getInstance()->getSell($this->itemId, $this->itemMeta))));
     }
 
-    public function callback(Player $player, Item $item, int $strage): void {
+    public function callback(Player $player, Item $item, int $storage): void {
         $count = 0;
-        $mymoney = EconomyAPI::getInstance()->mymoney($player);
-        foreach ($player->getInventory()->getContents() as $v) {
-            if ($item->getId() === $v->getId() && $item->getMeta() === $v->getMeta()) {
-                $count += $v->getCount();
+        $myMoney = EconomyAPI::getInstance()->mymoney($player);
+        foreach ($player->getInventory()->getContents() as $inventoryItem) {
+            if ($item->getId() === $inventoryItem->getId() && $item->getMeta() === $inventoryItem->getMeta()) {
+                $count += $inventoryItem->getCount();
             }
         }
-        SendForm::Send($player, (new PurchaseForm($item, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), $count, $mymoney, $strage)));
+        SendForm::Send($player, (new PurchaseForm(new LevelShopItem($item, LevelShopAPI::getInstance()->getBuy($this->itemId, $this->itemMeta), $count, $myMoney, $storage))));
     }
 }

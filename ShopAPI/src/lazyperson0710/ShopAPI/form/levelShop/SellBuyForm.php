@@ -3,6 +3,7 @@
 namespace lazyperson0710\ShopAPI\form\levelShop;
 
 use lazyperson0710\ShopAPI\database\LevelShopAPI;
+use lazyperson0710\ShopAPI\object\LevelShopItem;
 use lazyperson710\core\packet\SendForm;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
@@ -46,10 +47,10 @@ class SellBuyForm implements Form {
             }
         }
         if ($data) {
-            SendForm::Send($player, (new PurchaseForm($item, $this->buy, $count, $myMoney, $storage)));
+            SendForm::Send($player, (new PurchaseForm(new LevelShopItem($item, $this->buy, $count, $myMoney, $storage))));
             return;
         }
-        SendForm::Send($player, (new SaleForm($item, $this->sell, $count, $myMoney, $storage)));
+        SendForm::Send($player, (new SaleForm(new LevelShopItem($item, $this->sell, $count, $myMoney, $storage))));
     }
 
     public function jsonSerialize() {
