@@ -96,6 +96,7 @@ class SaleForm implements Form {
         $result = $this->item->getPrice() * $count;
         $player->sendMessage("§bLevelShop §7>> §aアイテムが" . number_format($count) . "個売却され、所持金が" . number_format($result) . "円増えました");
         SoundPacket::Send($player, 'break.amethyst_block');
+        (new LevelShopClosingEvent($player, $this->item))->call();
     }
 
     public function countItem(Player $player, Item $targetItem): int {
