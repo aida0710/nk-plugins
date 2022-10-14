@@ -1,8 +1,6 @@
 name: LevelShop
-main: deceitya\ShopAPI\Main
+main: lazyperson0710\ShopAPI\Main
 version: 1.0.0
 api: 4.0.0
-
 load: POSTWORLD
-author: deceitya
-description: form shop
+author: lazyperson0710
