@@ -11,7 +11,11 @@ class LevelShopClosingEvent extends Event {
     public function __construct(
         private Player        $player,
         private LevelShopItem $item,
+        private string        $type,
     ) {
+        if (($this->type === "buy" || $this->type === "sell") === false) {
+            throw new \Error("不明なタイプが指定されました -> " . $this->type);
+        }
     }
 
     public function getPlayer(): Player {
@@ -20,6 +24,10 @@ class LevelShopClosingEvent extends Event {
 
     public function getItem(): LevelShopItem {
         return $this->item;
+    }
+
+    public function getType(): bool {
+        return $this->type;
     }
 
 }

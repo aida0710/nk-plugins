@@ -59,7 +59,7 @@ class PurchaseForm implements Form {
         $totalPrice = $this->item->getPrice() * $count;
         $player->sendMessage("§bLevelShop §7>> §a{$this->api->getItemName($this->item->getItem()->getId(), $this->item->getItem()->getMeta())}を" . number_format($count) . "個購入しました。使用金額 : " . number_format($totalPrice) . "円");
         SoundPacket::Send($player, 'break.amethyst_block');
-        (new LevelShopClosingEvent($player, $this->item))->call();
+        (new LevelShopClosingEvent($player, $this->item, "buy"))->call();
     }
 
     private function isInteger($input): bool {
