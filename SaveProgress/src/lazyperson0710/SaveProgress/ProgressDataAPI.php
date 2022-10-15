@@ -16,16 +16,12 @@ class ProgressDataAPI {
         if ($this->dataExists($player) === false) {
             $this->cache[$player->getName()] = ['config' => new Config(Main::$DataFolder . $player->getName() . ".yml", Config::YAML)];
             $playerCache = $this->cache[$player->getName()];
-            var_dump($playerCache["config"]->getAll());
             if (!empty($playerCache["config"]->getAll())) {
-                var_dump("not empty");
                 $playerCache[] = $playerCache["config"]->getAll();
             } else {
-                var_dump("empty");
                 $playerCache[] = SettingData::DefaultData;
                 $this->dataSave($player);
             }
-            var_dump($playerCache);
             return true;
         } else return false;
     }
