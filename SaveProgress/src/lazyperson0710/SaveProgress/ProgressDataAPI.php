@@ -15,13 +15,12 @@ class ProgressDataAPI {
     public function createData(Player $player): bool {
         if ($this->dataExists($player) === false) {
             $this->cache[$player->getName()] = ['config' => new Config(Main::$DataFolder . $player->getName() . ".yml", Config::YAML)];
-            $playerCache = $this->cache[$player->getName()];
-            if (!empty($playerCache["config"]->getAll())) {
-                $playerCache[] = $playerCache["config"]->getAll();
+            if (!empty($this->cache[$player->getName()]["config"]->getAll())) {
+                $this->cache[$player->getName()][] = $this->cache[$player->getName()]["config"]->getAll();
             } else {
-                $playerCache[] = SettingData::DefaultData;
-                $this->dataSave($player);
+                $this->cache[$player->getName()][] = SettingData::DefaultData;
             }
+            $this->dataSave($player);
             return true;
         } else return false;
     }
@@ -40,5 +39,22 @@ class ProgressDataAPI {
 
     public function dataExists(Player $player): bool {
         return array_key_exists($player->getName(), $this->cache);
+    }
+
+    private function dataUpdate(Player $player, Config $config) {
+        $temp = $config->getAll();
+        //keyを階層ごとにないのがないか確認していく
+        foreach (SettingData::DefaultData as $key => $value) {
+            if (array_key_exists($key, $temp) === false) {
+                $temp[$key] = $value;
+            } else {
+                foreach ($value as $key2 => $value2) {
+                    if (array_key_exists($key2, $temp[$key]) === false) {
+                        $temp[$key][$key2] = $value2;
+                    }
+                }
+            }
+        }
+        $this->cache[$player->getName()][] = $temp;
     }
 }
