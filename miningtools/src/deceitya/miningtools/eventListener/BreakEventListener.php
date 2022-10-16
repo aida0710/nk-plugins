@@ -12,6 +12,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEn
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson710\core\packet\SoundPacket;
+use pocketmine\block\BlockToolType;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
@@ -45,7 +46,17 @@ class BreakEventListener implements Listener {
             };
         }
         if (empty($set)) {
-            throw new \Error('$setに何も代入されませんでした');
+            if (Server::getInstance()->isOp($player->getName())) {
+                if (($item->getBlockToolType() === BlockToolType::PICKAXE) || ($item->getBlockToolType() === BlockToolType::SHOVEL)) {
+                    $set = Main::$netherite['pickaxe'];
+                } elseif ($item->getBlockToolType() === BlockToolType::AXE) {
+                    $set = Main::$netherite['axe'];
+                } else {
+                    $set = Main::$netherite['pickaxe'];
+                }
+            } else {
+                throw new \Error('$setに何も代入されませんでした');
+            }
         }
         $block = $event->getBlock();
         $world_name = $event->getPlayer()->getWorld()->getDisplayName();
