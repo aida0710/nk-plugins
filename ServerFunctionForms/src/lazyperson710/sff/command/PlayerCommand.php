@@ -3,7 +3,7 @@
 namespace lazyperson710\sff\command;
 
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\sff\form\PlayerInfoForm;
+use lazyperson710\sff\form\playerInfo\PlayerInfoForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
