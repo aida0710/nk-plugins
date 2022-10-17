@@ -6,7 +6,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\LoginBonus\form\element\SelectLoginBonusItemButton;
 use lazyperson0710\LoginBonus\item\ItemRegister;
 use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
-use lazyperson710\sff\form\element\SendFormButton;
+use lazyperson710\sff\element\SendFormButton;
 
 class ItemSelectForm extends SimpleForm {
 

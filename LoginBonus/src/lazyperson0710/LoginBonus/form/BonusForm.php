@@ -6,7 +6,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\LoginBonus\form\acceptance\BonusViewForm;
 use lazyperson0710\LoginBonus\form\convert\ItemSelectForm;
 use lazyperson0710\LoginBonus\form\element\SendBonusViewFormButton;
-use lazyperson710\sff\form\element\SendFormButton;
+use lazyperson710\sff\element\SendFormButton;
 use pocketmine\player\Player;
 
 class BonusForm extends SimpleForm {

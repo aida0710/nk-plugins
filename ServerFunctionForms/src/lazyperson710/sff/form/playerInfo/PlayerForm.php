@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\sff\form;
+namespace lazyperson710\sff\form\playerInfo;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;

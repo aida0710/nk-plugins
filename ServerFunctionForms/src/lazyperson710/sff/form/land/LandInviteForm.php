@@ -3,7 +3,7 @@
 namespace lazyperson710\sff\form\land;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson710\sff\form\element\SendFormButton;
+use lazyperson710\sff\element\SendFormButton;
 use pocketmine\player\Player;
 
 class LandInviteForm extends SimpleForm {

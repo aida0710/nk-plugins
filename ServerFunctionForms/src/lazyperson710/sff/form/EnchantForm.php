@@ -3,7 +3,7 @@
 namespace lazyperson710\sff\form;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson710\sff\form\element\CommandDispatchButton;
+use lazyperson710\sff\element\CommandDispatchButton;
 use pocketmine\player\Player;
 
 class EnchantForm extends SimpleForm {
