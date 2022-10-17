@@ -1,6 +1,5 @@
 <?php
 
-namespace lazyperson0710\SaveProgress;
 
 class SettingData {
 
