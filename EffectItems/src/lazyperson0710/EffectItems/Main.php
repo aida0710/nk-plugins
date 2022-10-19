@@ -12,7 +12,10 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
+    public static Main $instance;
+
     public function onEnable(): void {
+        self::$instance = $this;
         $manager = $this->getServer()->getPluginManager();
         $manager->registerEvents(new PlayerBlockBreakEvent(), $this);
         $manager->registerEvents(new PlayerBlockPlaceEvent(), $this);
@@ -23,5 +26,9 @@ class Main extends PluginBase {
         $this->getServer()->getCommandMap()->registerAll("effectItems", [
             new ItemsCommand(),
         ]);
+    }
+
+    public static function getInstance(): Main {
+        return self::$instance;
     }
 }
