@@ -3,7 +3,7 @@
 namespace lazyperson710\core\task;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\OnlinePlayersEffectsSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
