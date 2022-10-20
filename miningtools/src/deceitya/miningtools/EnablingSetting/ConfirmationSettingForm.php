@@ -20,7 +20,6 @@ class ConfirmationSettingForm extends CustomForm {
     public const CostItemId = BlockLegacyIds::LAPIS_BLOCK;
     public const CostItemNBT = "EnablingMiningSettingItem";
 
-    //temp 値は設定したけどテストが必要
     private const EnablingGrassToDirt = [
         "money" => 3000000,
         "rangeItem" => 8,
@@ -53,15 +52,15 @@ class ConfirmationSettingForm extends CustomForm {
     ];
     private const EnablingIronIngot = [
         "money" => 30000000,
-        "rangeItem" => 25,
-        "enchantItem" => 25,
+        "rangeItem" => 16,
+        "enchantItem" => 16,
         "settingItem" => 32,
     ];
     private const EnablingGoldIngot = [
         "money" => 30000000,
-        "rangeItem" => 32,
-        "enchantItem" => 32,
-        "settingItem" => 48,
+        "rangeItem" => 16,
+        "enchantItem" => 16,
+        "settingItem" => 32,
     ];
     private const EnablingSandToGlass = [
         "money" => 8000000,
