@@ -5,6 +5,7 @@ namespace deceitya\miningtools\normal;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\miningtools\Main;
+use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\item\enchantment\EnchantmentInstance;
@@ -43,6 +44,7 @@ class BuyForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         if (EconomyAPI::getInstance()->myMoney($player) <= $this->cost) {
             $player->sendMessage(Main::PrefixRed . '所持金が足りない為処理が中断されました');
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         $item = $this->itemRegister();
@@ -51,6 +53,7 @@ class BuyForm extends CustomForm {
         }
         if (!$player->getInventory()->canAddItem($item)) {
             $player->sendMessage(Main::PrefixRed . 'インベントリに空きが無い為処理が中断されました');
+            SoundPacket::Send($player, 'note.bass');
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $this->cost);
@@ -58,9 +61,11 @@ class BuyForm extends CustomForm {
         switch ($this->mode) {
             case "diamond":
                 $player->sendMessage(Main::PrefixGreen . 'DiamondMiningToolsを購入しました');
+                SoundPacket::Send($player, 'note.harp');
                 break;
             case "netherite":
                 Server::getInstance()->broadcastMessage(Main::PrefixYellow . $player->getName() . 'がNetheriteMiningToolsを購入しました');
+                SoundPacket::Send($player, 'note.harp');
                 break;
             default:
                 throw new \Error("不正なモードが指定されました");
