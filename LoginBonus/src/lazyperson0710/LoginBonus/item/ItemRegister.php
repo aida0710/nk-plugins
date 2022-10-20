@@ -28,10 +28,10 @@ class ItemRegister {
         $this->itemRegister(VanillaItems::BREAD(), 32, 3, "パン", ["パンはパンでも食べたいパン"], "パンはパンでも食べたいパン", [], [], []);
         $this->itemRegister(VanillaItems::STEAK(), 32, 3, "焼き牛肉", ["牛肉は焼いたほうが美味しい"], "牛肉は焼いたほうが美味しい", [], [], []);
         $this->itemRegister(VanillaItems::EXPERIENCE_BOTTLE(), 64, 3, "魔剤", [], "ただの経験値瓶", [], [], []);
-        #cost - 5
-        $this->itemRegister(VanillaItems::DIAMOND_PICKAXE(), 1, 5, "<神器>ダイヤのつるはし[効率lv.8]", ["過去実装された当時は強かったもの"], "当時は強かったもの", [VanillaEnchantments::EFFICIENCY()], [8], []);
-        //マイニングツール
         #cost - 8
+        $this->itemRegister(VanillaItems::DIAMOND_PICKAXE(), 1, 8, "§a[Gacha]DiamondMiningPickaxe", ["通常仕様の特殊範囲破壊ピッケル\n\nログインボーナスから交換"], "ダイアモンド範囲破壊つるはし/mtと同じアイテム", [VanillaEnchantments::SILK_TOUCH(), VanillaEnchantments::PUNCH(), VanillaEnchantments::UNBREAKING()], [1, 1, 5], ["MiningTools_3"]);
+        $this->itemRegister(VanillaItems::DIAMOND_PICKAXE(), 1, 8, "<神器>ダイヤのつるはし[効率lv.8]", ["過去実装された当時は強かったもの"], "当時は強かったもの", [VanillaEnchantments::EFFICIENCY()], [8], []);
+        //12
         //修繕無料のアイテム
         //道具の名前変更
     }
