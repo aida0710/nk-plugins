@@ -29,16 +29,6 @@ class EffectTaskScheduler extends Task {
         }
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
             if ($player->getPosition()->getWorld()->getFolderName() !== "pvp") {
-                if ($player->getHungerManager()->getFood() === $player->getHungerManager()->getMaxFood()) {
-                    $effect = new EffectInstance(VanillaEffects::REGENERATION(), 60, 1, false);
-                    $vanillaEffect = VanillaEffects::REGENERATION();
-                    $this->addEffect($player, $effect, $vanillaEffect);
-                }
-                if ($player->getHungerManager()->getFood() >= 10) {
-                    $effect = new EffectInstance(VanillaEffects::SPEED(), 60, 0, false);
-                    $vanillaEffect = VanillaEffects::SPEED();
-                    $this->addEffect($player, $effect, $vanillaEffect);
-                }
                 if ($player->getHungerManager()->getFood() <= 6) {
                     $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 40, 0, false);
                     $vanillaEffect = VanillaEffects::SLOWNESS();
