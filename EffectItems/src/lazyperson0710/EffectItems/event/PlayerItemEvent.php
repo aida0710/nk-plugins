@@ -9,6 +9,8 @@ use lazyperson0710\EffectItems\items\interactListener\EffectCleaner;
 use lazyperson0710\EffectItems\items\interactListener\HasteItem;
 use lazyperson0710\EffectItems\items\interactListener\HeavenGrass;
 use lazyperson0710\EffectItems\items\interactListener\LoginBonusItem;
+use lazyperson0710\EffectItems\items\interactListener\LuckyExpCoin;
+use lazyperson0710\EffectItems\items\interactListener\LuckyMoneyCoin;
 use lazyperson0710\EffectItems\items\interactListener\PlayersGetLocation;
 use lazyperson0710\EffectItems\items\interactListener\RedBull;
 use lazyperson0710\EffectItems\items\interactListener\Unknown;
@@ -32,18 +34,21 @@ class PlayerItemEvent implements Listener {
     public function onItemEvents(PlayerItemUseEvent|PlayerInteractEvent $event) {
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
-        if ($inHand->getNamedTag()->getTag('AirBlock') !== null) AirBlock::execution($event);
-        if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::execution($event);
-        if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::execution($event);
-        if ($inHand->getNamedTag()->getTag('ZONe') !== null) ZONe::execution($event);
-        if ($inHand->getNamedTag()->getTag('Churu') !== null) Churu::execution($event);
-        if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::execution($event);
-        if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::execution($event);
-        if ($inHand->getNamedTag()->getTag('CommandStorage') !== null) CommandStorage::execution($event);
-        if ($inHand->getNamedTag()->getTag('PlayersGetLocation') !== null) PlayersGetLocation::execution($event);
+        if ($inHand->getNamedTag()->getTag('AirBlock') !== null) AirBlock::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('Churu') !== null) Churu::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('CommandStorage') !== null) CommandStorage::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::execution($event, $inHand);
+        //enchantApple
+        if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('LuckyExpCoin') !== null) LuckyExpCoin::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('LuckyMoneyCoin') !== null) LuckyMoneyCoin::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('PlayersGetLocation') !== null) PlayersGetLocation::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('ZONe') !== null) ZONe::execution($event, $inHand);
         if ($inHand->getId() === -199) LoginBonusItem::execution($event);
-        if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::execution($event);
-        if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::execution($event);
+        if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::execution($event, $inHand);
+        if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::execution($event, $inHand);
     }
 
 }
