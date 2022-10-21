@@ -8,11 +8,12 @@ use onebone\economyland\EconomyLand;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\item\Item;
 use pocketmine\player\GameMode;
 
 class AirBlock {
 
-    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event): void {
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
         $world_search = mb_substr($event->getPlayer()->getWorld()->getDisplayName(), 0, null, 'utf-8');
@@ -43,7 +44,6 @@ class AirBlock {
             SoundPacket::Send($player, 'note.bass');
             return;
         }
-        $item = $player->getInventory()->getItemInHand();
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }
