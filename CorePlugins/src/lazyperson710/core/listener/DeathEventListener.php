@@ -7,7 +7,6 @@ use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByBlockEvent;
 use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\Event;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
@@ -22,7 +21,7 @@ class DeathEventListener implements Listener {
         $this->deathPenalty($event);
     }
 
-    public function deathMessage(Event $event) {
+    public function deathMessage(PlayerDeathEvent $event) {
         $player = $event->getPlayer();
         $cause = $player->getLastDamageCause();
         switch ($cause->getCause()) {
@@ -86,7 +85,7 @@ class DeathEventListener implements Listener {
         }
     }
 
-    public function deathPenalty(Event $event) {
+    public function deathPenalty(PlayerDeathEvent $event) {
         $player = $event->getPlayer();
         $see = EconomyAPI::getInstance()->myMoney($player);
         $world = $player->getWorld()->getFolderName();
