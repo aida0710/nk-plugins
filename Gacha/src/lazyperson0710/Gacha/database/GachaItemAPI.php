@@ -46,6 +46,7 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::NETHER_QUARTZ(), 1, "ぴかぴかした石", "きれいですね", [VanillaEnchantments::UNBREAKING()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "C", VanillaItems::COOKED_SALMON(), 1, "かき氷", "イチゴ味！", [], [], []);
         ## UC Rank
+        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::FURNACE()->setLit(true)->asItem(), 1, "§c熱を帯びた竈", "大変熱いため叩くと相手が燃える", [VanillaEnchantments::FIRE_ASPECT()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_MUTTON(), 1, "猫用チュール", "人間用ではない", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_CHICKEN(), 1, "犬用チュール", "人間用ではない", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_PORKCHOP(), 1, "アメリカンドック", "アメリカンドッグはソーセージに串を刺し、\n小麦粉などで作った衣をつけて油で揚げた食品。\nアメリカで普及しているコーンミールの生地を使った\nコーン・ドッグを改良したものであり、\n名称は和製英語である。\n\n引用 Wiki", [], [], []);
@@ -53,10 +54,11 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EXPERIENCE_BOTTLE(), 16, "魔剤セット", "ちょっとずつ飲もう。。。", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::TNT()->asItem(), 1, "爆発物", "設置すると爆発します", [], [], ["ExplosionBlock"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EGG(), 1, "温泉卵", "温まってるので中身はない", [], [], []);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::GLASS_BOTTLE(), 1, "エフェクトクリーナー", "現在付与されているエフェクトを全て削除します", [VanillaEnchantments::PUNCH()], [1], ["EffectCleaner"]);
+        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::GLASS_BOTTLE(), 1, "エフェクトクリーナー", "現在付与されているエフェクトを全て削除します", [VanillaEnchantments::PUNCH()], [1], ["EffectCleaner"]);
         ## R Rank
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_FISH(), 1, "ラムネ", "美味しいよね", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_RABBIT(), 1, "モンスター", "カフェイン摂取キモチエェェェ！", [], [], []);
+        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaBlocks::COBBLESTONE_STAIRS()->asItem(), 1, "鈍器", "殴られたら痛いじゃ済まないだろう", [VanillaEnchantments::SHARPNESS()], [50], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::STONE_SHOVEL(), 1, "鋭利なシャベル", "ゾンビを倒すために使うものではない", [VanillaEnchantments::SHARPNESS()], [5], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::PAPER(), 1, "バスタオル", "常時濡れてるので叩かれると若干痛い", [VanillaEnchantments::SHARPNESS()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::IRON_PICKAXE(), 1, "溶鉱炉付きのつるはし", "一部のブロックを採掘時に焼いちゃうぞ！うおうお！", [VanillaEnchantments::SILK_TOUCH(), VanillaEnchantments::PUNCH()], [1, 1], ["BlastFurnacePickaxe"]);
