@@ -18,6 +18,7 @@ use lazyperson710\core\listener\DropItemSetDeleteTime;
 use lazyperson710\core\listener\Elevator;
 use lazyperson710\core\listener\FortuneListener;
 use lazyperson710\core\listener\GeneralEventListener;
+use lazyperson710\core\listener\HitEntityDelete;
 use lazyperson710\core\listener\JoinItemUseEvent;
 use lazyperson710\core\listener\JoinPlayerEvent;
 use lazyperson710\core\listener\Major;
@@ -81,6 +82,7 @@ class Main extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new DropItemSetDeleteTime(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new FortuneListener(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new CraftCancel(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new HitEntityDelete(), $this);
         /*Items*/
         $this->defaultItemNameChange();
         /*Command*/
