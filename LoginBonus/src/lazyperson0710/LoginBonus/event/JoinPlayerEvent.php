@@ -3,6 +3,7 @@
 namespace lazyperson0710\LoginBonus\event;
 
 use lazyperson0710\LoginBonus\Main;
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;
@@ -47,6 +48,7 @@ class JoinPlayerEvent implements Listener {
             Main::getInstance()->lastBonusDateConfig->set($player->getName(), $lastBonus);
             $player->sendMessage("§bLogin §7>> §aインベントリに空きがないため、ログインボーナスを受け取れませんでした。/bonusから保留になっているログインボーナスアイテムを受け取ろう");
         }
+        SoundPacket::Send($player, 'note.harp');
         Main::getInstance()->lastBonusDateConfig->save();
     }
 

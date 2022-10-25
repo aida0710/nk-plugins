@@ -5,9 +5,11 @@ namespace lazyperson0710\LoginBonus\form;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\LoginBonus\form\acceptance\BonusViewForm;
 use lazyperson0710\LoginBonus\form\convert\ItemSelectForm;
+use lazyperson0710\LoginBonus\form\create\CreateLoginBonusForm;
 use lazyperson0710\LoginBonus\form\element\SendBonusViewFormButton;
 use lazyperson710\sff\element\SendFormButton;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class BonusForm extends SimpleForm {
 
@@ -18,7 +20,9 @@ class BonusForm extends SimpleForm {
             ->addElements(
                 new SendFormButton(new ItemSelectForm(), "ログインボーナスをアイテムと交換"),
                 new SendBonusViewFormButton(new BonusViewForm($player), "保留しているログインボーナスを回収"),
-            //todo op用に好きな数生成するシステムが欲しい
             );
+        if (Server::getInstance()->isOp($player->getName())) {
+            $this->addElements(new SendFormButton(new CreateLoginBonusForm(), "ログインボーナスを錬金"));
+        }
     }
 }
