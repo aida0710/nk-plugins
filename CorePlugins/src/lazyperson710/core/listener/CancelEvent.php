@@ -7,15 +7,12 @@ use pocketmine\block\inventory\AnvilInventory;
 use pocketmine\block\inventory\BrewingStandInventory;
 use pocketmine\block\inventory\EnchantInventory;
 use pocketmine\block\inventory\LoomInventory;
-use pocketmine\color\Color;
 use pocketmine\event\block\BlockFormEvent;
 use pocketmine\event\block\BlockTeleportEvent;
 use pocketmine\event\block\BrewItemEvent;
 use pocketmine\event\entity\EntityExplodeEvent;
-use pocketmine\event\entity\ProjectileHitEvent;
 use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\Listener;
-use pocketmine\world\particle\DustParticle;
 
 class CancelEvent implements Listener {
 
@@ -32,17 +29,6 @@ class CancelEvent implements Listener {
             SoundPacket::Send($player, 'note.bass');
             $event->cancel();
         }
-    }
-
-    public function Hit(ProjectileHitEvent $event) {
-        for ($i = 0; $i <= 0.6; $i += 0.2) {
-            $event->getEntity()->getPosition()->getWorld()->addParticle($event->getEntity()->getPosition()->add(0, $i, 0), new DustParticle(new Color(255, 255, 255)));
-        }
-        if ($event->getEntity()->getWorld()->getFolderName() === "pvp") {
-            return;
-        }
-        $entity = $event->getEntity();
-        $entity->kill();
     }
 
     public function onBlockForm(BlockFormEvent $event) {
