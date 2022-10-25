@@ -8,9 +8,11 @@ use lazyperson0710\EffectItems\items\interactListener\CommandStorage;
 use lazyperson0710\EffectItems\items\interactListener\EffectCleaner;
 use lazyperson0710\EffectItems\items\interactListener\HasteItem;
 use lazyperson0710\EffectItems\items\interactListener\HeavenGrass;
+use lazyperson0710\EffectItems\items\interactListener\LightMushroom;
 use lazyperson0710\EffectItems\items\interactListener\LoginBonusItem;
 use lazyperson0710\EffectItems\items\interactListener\LuckyExpCoin;
 use lazyperson0710\EffectItems\items\interactListener\LuckyMoneyCoin;
+use lazyperson0710\EffectItems\items\interactListener\LuckyTreeCoin;
 use lazyperson0710\EffectItems\items\interactListener\PlayersGetLocation;
 use lazyperson0710\EffectItems\items\interactListener\RedBull;
 use lazyperson0710\EffectItems\items\interactListener\Unknown;
@@ -40,8 +42,10 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('EffectCleaner') !== null) EffectCleaner::execution($event, $inHand);
         //enchantApple
         if ($inHand->getNamedTag()->getTag('HeavenGrass') !== null) HeavenGrass::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('LightMushroom') !== null) LightMushroom::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('LuckyExpCoin') !== null) LuckyExpCoin::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('LuckyMoneyCoin') !== null) LuckyMoneyCoin::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('LuckyTreeCoin') !== null) LuckyTreeCoin::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('PlayersGetLocation') !== null) PlayersGetLocation::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::execution($event, $inHand);
