@@ -27,7 +27,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
@@ -48,7 +48,7 @@ class PlayerSetting {
         $this->register(new CoordinateSetting);
         $this->register(new JoinItemsSetting);
         $this->register(new DirectDropItemStorageSetting);
-        $this->register(new LevelUpTitleSetting);
+        $this->register(new LevelUpDisplaySetting);
         $this->register(new EnduranceWarningSetting);
         $this->register(new MiningToolsEnduranceWarningSetting());
         $this->register(new DestructionSoundSetting);

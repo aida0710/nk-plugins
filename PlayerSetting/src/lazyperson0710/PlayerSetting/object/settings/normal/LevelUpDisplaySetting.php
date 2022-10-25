@@ -5,12 +5,12 @@ namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class LevelUpTitleSetting extends Setting {
+class LevelUpDisplaySetting extends Setting {
 
     protected string $value;
 
     public static function getName(): string {
-        return 'LevelUpTitle';
+        return 'LevelUpDisplay';
     }
 
     /**

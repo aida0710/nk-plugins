@@ -13,7 +13,7 @@ use deceitya\miningtools\event\MiningToolsBreakEvent;
 use InfoSystem\InfoSystem;
 use InfoSystem\task\ChangeNameTask;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendToastPacket;
@@ -89,7 +89,7 @@ class EventListener implements Listener {
                 $this->LevelUpBonus($player, $originalLevel, $level);
                 $this->DiscordWebHook($player, $originalLevel, $level);
                 InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
-                match (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
+                match (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpDisplaySetting::getName())?->getValue()) {
                     "title" => $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}"),
                     "toast" => SendToastPacket::Send($player, "§bMining Level UP Message", "§aLv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
                     default => null,

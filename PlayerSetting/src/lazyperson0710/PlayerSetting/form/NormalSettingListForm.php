@@ -12,7 +12,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpTitleSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MoveWorldMessageSetting;
@@ -35,7 +35,7 @@ class NormalSettingListForm extends CustomForm {
     private Toggle $payCommandUse;
     private Toggle $onlinePlayersEffects;
     private Toggle $moveWorldMessage;
-    private StepSlider $levelUpTitle;
+    private StepSlider $levelUpDisplay;
     private StepSlider $miningToolsDestructionEnabledWorlds;
 
     private Player $player;
@@ -55,8 +55,8 @@ class NormalSettingListForm extends CustomForm {
             $this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
             $this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
             $this->moveWorldMessage = new Toggle("§l> MoveWorldMessage§r\nワールド移動時に送信されるメッセージを表示するか否か(§l§c非表示は非推奨です§r)", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
-            $this->levelUpTitle = new StepSlider("§l> LevelUpTitle§r\nレベルアップ時にtitleを表示するか否か", ["タイトル表示", "実績表示", "表示無し"],
-                match ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue()) {
+            $this->levelUpDisplay = new StepSlider("§l> LevelUpDisplay§r\nレベルアップ時に何を表示するか", ["タイトル表示", "実績表示", "表示無し"],
+                match ($setting->getSetting(LevelUpDisplaySetting::getName())?->getValue()) {
                     "toast" => 1,
                     "none" => 2,
                     default => 0
@@ -109,13 +109,13 @@ class NormalSettingListForm extends CustomForm {
         if ($setting->getSetting(MoveWorldMessageSetting::getName())?->getValue() !== $this->moveWorldMessage->getValue()) {
             $setting->getSetting(MoveWorldMessageSetting::getName())?->setValue($this->moveWorldMessage->getValue());
         }
-        $levelUpTitle = match ($this->levelUpTitle->getValue()) {
+        $levelUpTitle = match ($this->levelUpDisplay->getValue()) {
             1 => "toast",
             2 => "none",
             default => "title"
         };
-        if ($setting->getSetting(LevelUpTitleSetting::getName())?->getValue() !== $levelUpTitle) {
-            $setting->getSetting(LevelUpTitleSetting::getName())?->setValue($levelUpTitle);
+        if ($setting->getSetting(LevelUpDisplaySetting::getName())?->getValue() !== $levelUpTitle) {
+            $setting->getSetting(LevelUpDisplaySetting::getName())?->setValue($levelUpTitle);
         }
         $miningToolsDestructionEnabledWorlds = match ($this->miningToolsDestructionEnabledWorlds->getValue()) {
             1 => "life",
