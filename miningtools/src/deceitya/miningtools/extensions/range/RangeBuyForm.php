@@ -7,11 +7,8 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\unbreaking\UnbreakingEnchantConfirmForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
-use deceitya\miningtools\Main;
-use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class RangeBuyForm extends SimpleForm {
 
@@ -45,8 +42,7 @@ class RangeBuyForm extends SimpleForm {
         if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (array_key_exists("MiningTools_Expansion_Range", $this->nbt)) {
             if ($this->nbt["MiningTools_Expansion_Range"] !== $namedTag->getInt("MiningTools_Expansion_Range")) {
-                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました", "MiningTools", false);
                 return;
             }
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
@@ -85,8 +81,7 @@ class RangeBuyForm extends SimpleForm {
         }
         if (array_key_exists("MiningTools_3", $this->nbt)) {
             if ($this->nbt["MiningTools_3"] !== $namedTag->getInt("MiningTools_3")) {
-                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました", "MiningTools", false);
                 return;
             }
             if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
@@ -107,8 +102,7 @@ class RangeBuyForm extends SimpleForm {
         }
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
-        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がMiningToolsを採掘範囲強化 - Rank{$radius}にアップグレードしました");
-        SoundPacket::Send($player, 'note.harp');
+        SendBroadcastMessage::Send("{$player->getName()}がMiningToolsを採掘範囲強化 - Rank{$radius}にアップグレードしました", "MiningTools");
     }
 
 }

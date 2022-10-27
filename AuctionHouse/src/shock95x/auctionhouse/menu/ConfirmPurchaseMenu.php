@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\menu;
 
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
@@ -58,7 +59,7 @@ class ConfirmPurchaseMenu extends AHMenu {
     public function handle(Player $player, Item $itemClicked, Inventory $inventory, int $slot): bool {
         if (in_array($slot, self::INDEX_CANCEL)) {
             $player->removeCurrentWindow();
-            Locale::sendMessage($player, "cancelled-purchase");
+            SendMessage::Send($player, "出品されたアイテムの購入をキャンセルしました", "Bazaar", false);
             return false;
         }
         if (!in_array($slot, self::INDEX_CONFIRM)) return false;
@@ -67,25 +68,25 @@ class ConfirmPurchaseMenu extends AHMenu {
             /** @var ?AHListing $listing */
             $listing = yield $storage->getListingById($this->getListings()[0]?->getId(), yield) => Await::ONCE;
             if ($listing == null || $listing->isExpired()) {
-                Locale::sendMessage($player, "listing-gone");
+                SendMessage::Send($player, "選択したアイテムはもう出品されていません", "Bazaar", false);
                 return;
             }
             if ($listing->getSellerUUID() == $player->getUniqueId()) {
                 $player->removeCurrentWindow();
-                Locale::sendMessage($player, "self-purchase");
+                SendMessage::Send($player, "自身で出品したアイテムは購入できません", "Bazaar", false);
                 return;
             }
             $economy = AuctionHouse::getInstance()->getEconomyProvider();
             $balance = yield $economy->getMoney($player, yield) => Await::ONCE;
             if ($balance < $listing->getPrice()) {
                 $player->removeCurrentWindow();
-                Locale::sendMessage($player, "cannot-afford");
+                SendMessage::Send($player, "所持金が足りませんでした", "Bazaar", false);
                 return;
             }
             $item = $listing->getItem();
             if (!$player->getInventory()->canAddItem($item)) {
                 $player->removeCurrentWindow();
-                Locale::sendMessage($player, "not-enough-space");
+                SendMessage::Send($player, "インベントリに購入しようとしたアイテムが入らない為キャンセルされました", "Bazaar", false);
                 return;
             }
             $event = new ItemPurchasedEvent($player, $listing);
@@ -94,21 +95,21 @@ class ConfirmPurchaseMenu extends AHMenu {
             $storage->removeListing($listing);
             $res = yield $economy->subtractMoney($player, $listing->getPrice(), yield) => Await::ONCE;
             if (!$res) {
-                Locale::sendMessage($player, "purchase-economy-error");
+                SendMessage::Send($player, "トランザクションに失敗しました", "Bazaar", false);
                 return;
             }
             $res = yield $economy->addMoney($listing->getSeller(), $listing->getPrice(), yield) => Await::ONCE;
             if (!$res) {
                 $economy->addMoney($player, $listing->getPrice());
-                Locale::sendMessage($player, "purchase-economy-error");
+                SendMessage::Send($player, "トランザクションに失敗しました", "Bazaar", false);
                 return;
             }
             $player->removeCurrentWindow();
             $player->getInventory()->addItem($item);
-            $player->sendMessage(str_ireplace(["{PLAYER}", "{ITEM}", "{PRICE}", "{AMOUNT}"], [$player->getName(), $item->getName(), $listing->getPrice(true, Settings::formatPrice()), $item->getCount()], Locale::get($player, "purchased-item", true)));
+            SendMessage::Send($player, $item->getName() . "(x" . $item->getCount() . ")を" . $listing->getPrice(true, Settings::formatPrice()) . "円で購入しました", "Bazaar", true);
             $seller = AuctionHouse::getInstance()->getServer()->getPlayerByUUID(Uuid::fromString($listing->getSellerUUID()));
             $seller?->getWorld()->addSound($seller?->getPosition(), new FizzSound(), [$seller]);
-            $seller?->sendMessage(str_ireplace(["{PLAYER}", "{ITEM}", "{PRICE}", "{AMOUNT}"], [$player->getName(), $item->getName(), $listing->getPrice(true, Settings::formatPrice()), $item->getCount()], Locale::get($player, "seller-message", true)));
+            if (!is_null($seller)) SendMessage::Send($seller, $item->getName() . "(x" . $item->getCount() . ")を" . $listing->getPrice(true, Settings::formatPrice()) . "円で" . $player->getName() . "が購入しました", "Bazaar", true);
             (new AuctionEndEvent($listing, AuctionEndEvent::PURCHASED, $player))->call();
         });
         return true;

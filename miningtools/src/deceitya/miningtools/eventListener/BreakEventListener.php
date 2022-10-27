@@ -11,6 +11,7 @@ use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\WorldManagement\database\WorldCategory;
+use lazyperson710\core\packet\SendTip;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\BlockToolType;
 use pocketmine\event\block\BlockBreakEvent;
@@ -63,8 +64,7 @@ class BreakEventListener implements Listener {
         $world_search = mb_substr($world_name, 0, null, 'utf-8');
         $startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
         if (!(str_contains($world_search, "-c") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($player->getName()))) {
-            $player->sendTip("§bMiningTools §7>> §c現在のワールドでは範囲破壊は行われません");
-            SoundPacket::Send($player, 'note.bass');
+            SendTip::Send($player, "現在のワールドでは範囲破壊は行われません", "MiningTools", false);
             return;
         }
         switch ($t = PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
@@ -72,21 +72,18 @@ class BreakEventListener implements Listener {
                 break;
             case "life":
                 if (!in_array($player->getWorld()->getFolderName(), WorldCategory::LifeWorldAll)) {
-                    $player->sendTip("§bMiningTools §7>> §c現在のワールドでは設定により範囲破壊が無効化されています/settings");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendTip::Send($player, "現在のワールドでは設定により範囲破壊が無効化されています/settings", "MiningTools", false);
                     return;
                 }
                 break;
             case "nature":
                 if (!in_array($player->getWorld()->getFolderName(), WorldCategory::NatureAll)) {
-                    $player->sendTip("§bMiningTools §7>> §c現在のワールドでは設定により範囲破壊が無効化されています/settings");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendTip::Send($player, "現在のワールドでは設定により範囲破壊が無効化されています/settings", "MiningTools", false);
                     return;
                 }
                 break;
             case "none":
-                $player->sendTip("§bMiningTools §7>> §c現在のワールドでは設定により範囲破壊が無効化されています/settings");
-                SoundPacket::Send($player, 'note.bass');
+                SendTip::Send($player, "現在のワールドでは設定により範囲破壊が無効化されています/settings", "MiningTools", false);
                 return;
         }
         $handItem = $player->getInventory()->getItemInHand();

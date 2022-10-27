@@ -5,7 +5,7 @@ namespace Deceitya\MyWarp\Form;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use Deceitya\MyWarp\Database;
 use Deceitya\MyWarp\MyWarpPlugin;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -37,22 +37,18 @@ class MakingForm implements Form {
         if (count(Database::getInstance()->getWarpPositions($player)) < $climit) {
             foreach (Database::getInstance()->getWarpPositions($player) as $warp) {
                 if ($warp['name'] === $data[0]) {
-                    $player->sendMessage("§bMyWarp §7>> §c同じ名前のワープ地点があるため作成できませんでした");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendMessage::Send($player, "同じ名前のワープ地点があるため作成できませんでした", "MyWarp", false);
                     return;
                 }
             }
             if (EconomyAPI::getInstance()->reduceMoney($player, $cost) === EconomyAPI::RET_SUCCESS) {
                 Database::getInstance()->createWarpPosition($player, $data[0]);
-                $player->sendMessage("§bMyWarp §7>> §aワープ地点を作成しました");
-                SoundPacket::Send($player, 'note.harp');
+                SendMessage::Send($player, "§aワープ地点を作成しました", "MyWarp", true);
             } else {
-                $player->sendMessage("§bMyWarp §7>> §cお金が足りません");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "お金が足りません", "MyWarp", false);
             }
         } else {
-            $player->sendMessage("§bMyWarp §7>> §cワープ地点は {$climit}個までしか作成できません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "ワープ地点は {$climit}個までしか作成できません", "MyWarp", false);
         }
     }
 

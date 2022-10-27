@@ -2,7 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\inventory\CraftItemEvent;
 use pocketmine\event\Listener;
@@ -126,28 +126,23 @@ class CraftCancel implements Listener {
             $player = $event->getPlayer();
             if ($item instanceof Food) {
                 $event->cancel();
-                $event->getPlayer()->sendMessage('§bCraftCancel §7>> §c食べ物をクラフトすることは出来ません。一部を除いてショップから購入が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($event->getPlayer(), "食べ物をクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
             }
             if ($item instanceof Durable) {
                 $event->cancel();
-                $event->getPlayer()->sendMessage('§bCraftCancel §7>> §c道具をクラフトすることは出来ません。一部を除いてショップから購入が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($event->getPlayer(), "道具をクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
             }
             if (in_array($item->getVanillaName(), $blocks)) {
                 $event->cancel();
-                $event->getPlayer()->sendMessage('§bCraftCancel §7>> §cこのアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($event->getPlayer(), "このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
             }
             if (in_array($item->getVanillaName(), $items)) {
                 $event->cancel();
-                $event->getPlayer()->sendMessage('§bCraftCancel §7>> §cこのアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($event->getPlayer(), "このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
             }
             if (in_array($item->getId(), $ids)) {
                 $event->cancel();
-                $event->getPlayer()->sendMessage('§bCraftCancel §7>> §cこのアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($event->getPlayer(), "このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
             }
             return;
         }

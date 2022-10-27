@@ -15,7 +15,10 @@ use InfoSystem\task\ChangeNameTask;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SendBroadcastMessage;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendNoSoundActionBarMessage;
 use lazyperson710\core\packet\SendToastPacket;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
@@ -26,6 +29,7 @@ use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
+use pocketmine\utils\TextFormat;
 use ree_jp\stackStorage\api\StackStorageAPI;
 
 class EventListener implements Listener {
@@ -90,8 +94,8 @@ class EventListener implements Listener {
                 $this->DiscordWebHook($player, $originalLevel, $level);
                 InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
                 match (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpDisplaySetting::getName())?->getValue()) {
-                    "title" => $player->sendtitle("§bMining Level UP", "§aLv.{$originalLevel} -> Lv.{$level}"),
-                    "toast" => SendToastPacket::Send($player, "§bMining Level UP Message", "§aLv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
+                    "title" => $player->sendtitle("Mining Level UP", "Lv.{$originalLevel} -> Lv.{$level}"),
+                    "toast" => SendToastPacket::Send($player, "Mining Level UP Message", "Lv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
                     default => null,
                 };
                 SoundPacket::Send($player, 'random.levelup');
@@ -136,121 +140,120 @@ class EventListener implements Listener {
                 $player->getInventory()->addItem($item);
             } else {
                 StackStorageAPI::$instance->add($player->getXuid(), $item);
-                $player->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました");
+                SendNoSoundActionBarMessage::Send($player, "インベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました", "Storage", true);
             }
-            $player->sendMessage("§bLevel §7>> §aレベルアップボーナスとして{$item->getName()}が付与されました");
+            SendMessage::Send($player, "レベルアップボーナスとして{$item->getName()}が付与されました", "Level", true);
         } elseif ($level % 5 == 0) {
             EconomyAPI::getInstance()->addMoney($player, 8000);
-            $player->sendMessage("§bLevel §7>> §aレベルアップボーナスとして8000円が付与されました");
+            SendMessage::Send($player, "レベルアップボーナスとして8000円が付与されました", "Level", true);
         }
         if ($level % 50 == 0) {
-            $player->getServer()->broadcastMessage("§bLevel §7>> §e{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました");
+            SendBroadcastMessage::Send("{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました", "Level");
         } else {
-            $player->sendMessage("§bLevel §7>> §a{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました");
+            SendMessage::Send($player, "{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました", "Level", true);
         }
         $msg = null;
         switch ($level) {
             case 2:
-                $player->sendMessage("§bTutorial §7>> §g/shopでアイテムを売買できます！");
+                SendMessage::Send($player, TextFormat::GOLD . "/shopでアイテムを売買できます！", "Tutorial", true);
                 break;
             case 3:
-                $player->sendMessage("§bTutorial §7>> §gアイテムを修繕するにはかなとこをスニークしてタップしてみて！");
-                $player->sendMessage("ガチャTicketを3枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "アイテムを修繕するにはかなとこをスニークしてタップしてみて！", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを3枚配布しました！/gachaで利用することができます", "Tutorial", true);
                 TicketAPI::getInstance()->addTicket($player, 3);
                 break;
             case 5:
-                $player->sendMessage("§bTutorial §7>> §gストレージは/stを活用してみよう");
-                $player->sendMessage("§bTutorial §7>> §gネザーディメンション1が解放されました！");
+                SendMessage::Send($player, TextFormat::GOLD . "ストレージは/stを活用してみよう", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "ネザーディメンション1が解放されました！", "Tutorial", true);
                 break;
             case 8:
-                $player->sendMessage("§bTutorial §7>> §gエンチャントなどをしたいときは/en、エフェクトは/efでできるよ！");
+                SendMessage::Send($player, TextFormat::GOLD . "エンチャントなどをしたいときは/en、エフェクトは/efでできるよ！", "Tutorial", true);
                 break;
             case 10:
-                $player->sendMessage("§bTutorial §7>> §g死ぬと所持金の半分がなくなります。。。銀行を活用してみよう！銀行に預けると死んでもアイテムは消えません！/bank");
+                SendMessage::Send($player, TextFormat::GOLD . "死ぬと所持金の半分がなくなります。。。銀行を活用してみよう！銀行に預けると死んでも預けた分の残高は消えません！/bank", "Tutorial", true);
                 break;
             case 15:
-                $msg .= "インベントリの物を一気にストレージに入れたいときは/stall !!\n";
-                $msg .= "オーバーワールド4&javaが解放されました！通常よりも鉱石の量が多いのが特徴です。ただし、javaのワールドはmininglevel経験値が取得できないため注意が必要です！\n";
-                $msg .= "DiamondMiningToolsが解放されました！範囲破壊が可能ですがDiamondグレードでは修繕ができないためご注意ください。。。\n";
+                SendMessage::Send($player, TextFormat::GOLD . "オーバーワールド4&javaが解放されました！通常よりも鉱石の量が多いのが特徴です。ただし、javaのワールドはmininglevel経験値が取得できないため注意が必要です！", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "DiamondMiningToolsが解放されました！範囲破壊が可能ですがDiamondグレードでは修繕ができないためご注意ください。。。", "Tutorial", true);
                 break;
             case 18:
-                $player->sendMessage("§bTutorial §7>> §gログインボーナスをアイテムと交換するには/bonusでできます！");
+                SendMessage::Send($player, TextFormat::GOLD . "ログインボーナスをアイテムと交換するには/bonusでできます！", "Tutorial", true);
                 break;
             case 20:
-                $player->sendMessage("§bTutorial §7>> §g浜松市が解放されました！25レベルでshop2が解放されます！");
-                $player->sendMessage("§bTutorial §7>> §gネザーディメンション2,3が解放されました！");
-                $player->sendMessage("§bTutorial §7>> §gガチャTicketを15枚配布しました！");
+                SendMessage::Send($player, TextFormat::GOLD . "浜松市が解放されました！25レベルでshop2が解放されます！", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "ネザーディメンション2,3が解放されました！", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを15枚配布しました！", "Tutorial", true);
                 TicketAPI::getInstance()->addTicket($player, 15);
                 break;
             case 25:
-                $player->sendMessage("LevelShop2が解放されました！浜松市に行って農業をやってみよう！\n");
-                $player->sendMessage("MyWarpでのワープ地点上限が5 -> 10になりました！/mw\n");
+                SendMessage::Send($player, TextFormat::GOLD . "LevelShop2が解放されました！浜松市に行って農業をやってみよう！", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "MyWarpでのワープ地点上限が5 -> 10になりました！/mw", "Tutorial", true);
                 break;
             case 30:
-                $msg .= "サーバーオリジナルレシピが存在します！/recipeから見れるよ！\n";
-                $msg .= "PVPワールドが解放されました！/pvp\n";
-                $msg .= "連続で同じメッセージを発言できるようになりました\n";
-                $msg .= "インベントリからアイテムを一括売却できる機能が解放されました！/shop\n";
-                $msg .= "shopにてアイテムを検索する機能が解放されました/shop\n";
-                $msg .= "MiningWorldが解放されました！一週間に一度リセットされる特殊なワールドです！\n";
+                SendMessage::Send($player, TextFormat::GOLD . "サーバーオリジナルレシピが存在します！/recipeから見れるよ！", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "PVPワールドが解放されました！/pvp", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "連続で同じメッセージを発言できるようになりました", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "インベントリからアイテムを一括売却できる機能が解放されました！/shop", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "shopにてアイテムを検索する機能が解放されました/shop", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "MiningWorldが解放されました！一週間に一度リセットされる特殊なワールドです！", "Tutorial", true);
                 break;
             case 45:
-                $player->sendMessage("§bTutorial §7>> §gショップ2が解放されました！/shopから確認してみよう！");
+                SendMessage::Send($player, TextFormat::GOLD . "ショップ2が解放されました！/shopから確認してみよう！", "Tutorial", true);
                 break;
             case 50:
-                $msg .= "LevelShop3が解放されました！/shop";
-                $msg .= "MyWarpでのワープ地点上限が10 -> 15になりました！/mw";
+                SendMessage::Send($player, TextFormat::GOLD . "LevelShop3が解放されました！/shop", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "MyWarpでのワープ地点上限が10 -> 15になりました！/mw", "Tutorial", true);
                 break;
             case 80:
-                $msg .= "Shop4が解放されました！/shop";
-                $msg .= "コマンドから道具の修繕が可能になりました！/repair";
+                SendMessage::Send($player, TextFormat::GOLD . "Shop4が解放されました！/shop", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "コマンドから道具の修繕が可能になりました！/repair", "Tutorial", true);
                 break;
             case 100:
-                $player->sendMessage("§bTutorial §7>> §gアイテムの修繕で失敗しないようになりました！/repair");
+                SendMessage::Send($player, TextFormat::GOLD . "アイテムの修繕で失敗しないようになりました！/repair", "Tutorial", true);
                 break;
             case 120:
-                $msg .= "LevelShop5が解放されました！/shop";
-                $msg .= "NetheriteMiningTools機能強化が解放されました！Gachaで手に入るアイテムを使って強化しよう！範囲拡張や耐久強化などが出来ます！/mt";
+                SendMessage::Send($player, TextFormat::GOLD . "LevelShop5が解放されました！/shop", "Tutorial", true);
+                SendMessage::Send($player, TextFormat::GOLD . "NetheriteMiningTools機能強化が解放されました！Gachaで手に入るアイテムを使って強化しよう！範囲拡張や耐久強化などが出来ます！/mt", "Tutorial", true);
                 break;
             case 180:
-                $player->sendMessage("§bTutorial §7>> §gLevelShop6が解放されました！/shop");
+                SendMessage::Send($player, TextFormat::GOLD . "LevelShop6が解放されました！/shop", "Tutorial", true);
                 break;
             case 200:
-                $player->sendMessage("§bTutorial §7>> §gエンドディメンション1~3が解放されました！");
+                SendMessage::Send($player, TextFormat::GOLD . "エンドディメンション1~3が解放されました！", "Tutorial", true);
                 break;
             case 250:
-                $player->sendMessage("§bTutorial §7>> §gLevelShop7が解放されました！/shop");
+                SendMessage::Send($player, TextFormat::GOLD . "LevelShop7が解放されました！/shop", "Tutorial", true);
                 break;
             case 300:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを3000枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを3000枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 3000);
                 break;
             case 400:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを4000枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを4000枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 4000);
                 break;
             case 500:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1.5万枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを1.5万枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 15000);
                 break;
             case 600:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1.6万枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを1.6万枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 16000);
                 break;
             case 700:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1.7万枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを1.7万枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 17000);
                 break;
             case 800:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1.8万枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを1.8万枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 18000);
                 break;
             case 900:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを1.9万枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを1.9万枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 19000);
                 break;
             case 1000:
-                $player->sendMessage("§bLevelUpBonus §7>> §gガチャTicketを10万枚配布しました！/gachaで利用することができます");
+                SendMessage::Send($player, TextFormat::GOLD . "ガチャTicketを10万枚配布しました！", "LevelUpBonus", true);
                 TicketAPI::getInstance()->addTicket($player, 100000);
                 break;
         }

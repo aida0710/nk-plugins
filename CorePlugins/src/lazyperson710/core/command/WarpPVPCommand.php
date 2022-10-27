@@ -3,6 +3,7 @@
 namespace lazyperson710\core\command;
 
 use lazyperson710\core\Main;
+use lazyperson710\core\packet\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -57,7 +58,7 @@ class WarpPVPCommand extends Command {
     public function teleportPlayer(Player $player, Vector3 $pos) {
         $world = Server::getInstance()->getWorldManager()->getWorldByName("pvp");
         $player->teleport(new Position($pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ(), $world));
-        $player->sendTip("§bPVP §7>> §aTeleportしました！");
+        SendNoSoundTip::Send($player, "Teleportしました！", "PVP", true);
         Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
             function () use ($player): void {
                 SoundPacket::Send($player, 'mob.endermen.portal');

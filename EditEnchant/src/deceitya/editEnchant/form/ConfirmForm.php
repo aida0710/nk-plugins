@@ -5,7 +5,7 @@ namespace deceitya\editEnchant\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\editEnchant\InspectionItem;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\lang\Translatable;
@@ -48,8 +48,7 @@ class ConfirmForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (!(new InspectionItem())->inspectionItem($player)) {
-            $player->sendMessage("§bEditEnchant §7>> §c所持しているアイテムが変更された可能性がある為処理を中断しました");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "所持しているアイテムが変更された可能性がある為処理を中断しました", "EditEnchant", false);
             return;
         }
         $inv = $player->getInventory();
@@ -63,8 +62,7 @@ class ConfirmForm extends CustomForm {
                 $cost = $this->level * 1500;
                 if ($cost <= EconomyAPI::getInstance()->myMoney($player)) {
                     if ($this->enchant->getLevel() - $this->level < 1) {
-                        $player->sendMessage('§bEditEnchant §7>> §cエンチャントレベルが0以下になってしまうため実行出来ませんでした');
-                        SoundPacket::Send($player, 'note.bass');
+                        SendMessage::Send($player, "エンチャントレベルが0以下になってしまうため実行出来ませんでした", "EditEnchant", false);
                         return;
                     }
                     $inv->removeItem($item);
@@ -72,11 +70,9 @@ class ConfirmForm extends CustomForm {
                     $item->addEnchantment(new EnchantmentInstance($this->enchant->getType(), $this->enchant->getLevel() - $this->level));
                     $inv->addItem($item);
                     EconomyAPI::getInstance()->reduceMoney($player, $cost);
-                    $player->sendMessage("§bEditEnchant §7>> §a{$enchantName}(Lv{$this->enchant->getLevel()})を{$cost}円で{$this->level}レベル削減しました");
-                    SoundPacket::Send($player, 'note.harp');
+                    SendMessage::Send($player, "{$enchantName}(Lv{$this->enchant->getLevel()})を{$cost}円で{$this->level}レベル削減しました", "EditEnchant", true);
                 } else {
-                    $player->sendMessage('§bEditEnchant §7>> §cお金が足りないため実行出来ませんでした');
-                    SoundPacket::Send($player, 'note.bass');
+                    SendMessage::Send($player, "お金が足りないため実行出来ませんでした", "EditEnchant", false);
                 }
                 break;
             case "del":
@@ -89,11 +85,9 @@ class ConfirmForm extends CustomForm {
                     }
                     $inv->addItem($item);
                     EconomyAPI::getInstance()->reduceMoney($player, $cost);
-                    $player->sendMessage("§bEditEnchant §7>> §a{$enchantName}(Lv{$this->enchant->getLevel()})を{$cost}円で削除しました");
-                    SoundPacket::Send($player, 'note.harp');
+                    SendMessage::Send($player, "{$enchantName}(Lv{$this->enchant->getLevel()})を{$cost}円で削除しました", "EditEnchant", true);
                 } else {
-                    $player->sendMessage('§bEditEnchant §7>> §cお金が足りないため実行出来ませんでした');
-                    SoundPacket::Send($player, 'note.bass');
+                    SendMessage::Send($player, "お金が足りないため実行出来ませんでした", "EditEnchant", false);
                 }
         }
     }

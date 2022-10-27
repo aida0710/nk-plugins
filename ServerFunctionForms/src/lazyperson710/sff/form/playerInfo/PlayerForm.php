@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -46,8 +46,7 @@ class PlayerForm extends SimpleForm {
             $progress = ($miningExp / $miningLevelUpExp) * 100;
             $progress = floor($progress);
         } else {
-            $player->sendMessage("§bPlayerInfo §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "PlayerInfo", false);
             return;
         }
         $this
@@ -58,8 +57,7 @@ class PlayerForm extends SimpleForm {
 
     public function handleSubmit(Player $player): void {
         if (!Server::getInstance()->getPlayerByPrefix($this->playerName)) {
-            $player->sendMessage("§bPlayerInfo §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "PlayerInfo", false);
             return;
         }
         SendForm::Send($player, (new PlayerForm($player, $this->playerName)));

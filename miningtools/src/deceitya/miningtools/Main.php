@@ -17,10 +17,6 @@ class Main extends PluginBase implements Listener {
     public const NETHERITE_PICKAXE = 745;
     public const NETHERITE_AXE = 746;
 
-    public const PrefixGreen = "§bMiningTools §7>> §a";
-    public const PrefixRed = "§bMiningTools §7>> §c";
-    public const PrefixYellow = "§bMiningTools §7>> §e";
-
     private static self $instance;
 
     public array $config;

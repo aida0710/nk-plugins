@@ -5,7 +5,6 @@ namespace deceitya\miningtools\normal;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\miningtools\Main;
-use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\item\enchantment\EnchantmentInstance;
@@ -13,7 +12,6 @@ use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class BuyForm extends CustomForm {
 
@@ -43,8 +41,7 @@ class BuyForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (EconomyAPI::getInstance()->myMoney($player) <= $this->cost) {
-            $player->sendMessage(Main::PrefixRed . '所持金が足りない為処理が中断されました');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "所持金が足りない為処理が中断されました", "MiningTools", false);
             return;
         }
         $item = $this->itemRegister();
@@ -52,20 +49,17 @@ class BuyForm extends CustomForm {
             throw new \Error('$item変数の中身が存在しない為不正な挙動として処理しました');
         }
         if (!$player->getInventory()->canAddItem($item)) {
-            $player->sendMessage(Main::PrefixRed . 'インベントリに空きが無い為処理が中断されました');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "インベントリに空きが無い為処理が中断されました", "MiningTools", false);
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $this->cost);
         $player->getInventory()->addItem($item);
         switch ($this->mode) {
             case "diamond":
-                $player->sendMessage(Main::PrefixGreen . 'DiamondMiningToolsを購入しました');
-                SoundPacket::Send($player, 'note.harp');
+                SendMessage::Send($player, "DiamondMiningToolsを購入しました", "MiningTools", true);
                 break;
             case "netherite":
-                Server::getInstance()->broadcastMessage(Main::PrefixYellow . $player->getName() . 'がNetheriteMiningToolsを購入しました');
-                SoundPacket::Send($player, 'note.harp');
+                SendBroadcastMessage::Send("{$player->getName()}がNetheriteMiningToolsを購入しました", "MiningTools");
                 break;
             default:
                 throw new \Error("不正なモードが指定されました");

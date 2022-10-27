@@ -3,7 +3,9 @@
 namespace lazyperson710\core\listener;
 
 use InvalidArgumentException;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendActionBarMessage;
+use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -38,18 +40,15 @@ class Major implements Listener {
                             $player->getWorld()->addParticle($pos, $particle);
                         }
                         $distance = $this->data[$name]->distance($block->getPosition());
-                        $player->sendActionBarMessage("§bMajor §7>> §a" . (round($distance, 2) + 1) . " mです");
-                        SoundPacket::Send($player, 'note.harp');
+                        SendActionBarMessage::Send($player, (round($distance, 2) + 1) . " mです", "Major", true);
                     } else {
                         $this->data[$name] = $block->getPosition();
-                        $player->sendMessage("§bMajor §7>> §a始点のブロック座標を記録しました。 {$block->getPosition()->getX()}, {$block->getPosition()->getY()}, {$block->getPosition()->getZ()}");
-                        $player->sendTip("§bMajor §7>> §aスニークしながらタップすることで座標を再設定出来ます");
-                        SoundPacket::Send($player, 'note.harp');
+                        SendMessage::Send($player, "始点のブロック座標を記録しました。 {$block->getPosition()->getX()}, {$block->getPosition()->getY()}, {$block->getPosition()->getZ()}", "Major", true);
+                        SendTip::Send($player, "スニークしながらタップすることで座標を再設定出来ます", "Major", true);
                     }
                 } else {
                     unset($this->data[$name]);
-                    $player->sendTip("§bMajor §7>> §a記録した座標のデータを削除しました");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendTip::Send($player, "記録した座標のデータを削除しました", "Major", true);
                 }
             }
         }

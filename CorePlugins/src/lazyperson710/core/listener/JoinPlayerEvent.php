@@ -4,6 +4,7 @@ namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -31,7 +32,7 @@ class JoinPlayerEvent implements Listener {
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(JoinItemsSetting::getName())?->getValue() === true) {
             $this->sendJoinItem($player);
         } else {
-            $player->sendMessage("§bJoinSetting §7>> §a設定されている為アイテムが付与されませんでした。アイテムは/joinitemから取得可能です");
+            SendMessage::Send($player, "設定されている為アイテムが付与されませんでした。アイテムは/joinitemから取得可能です", "JoinSetting", true);
         }
     }
 

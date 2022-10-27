@@ -5,7 +5,7 @@ namespace lazyperson710\core\packet;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
-class SendMessage {
+class SendActionBarMessage {
 
     public static function Send(Player $player, string $message, string $prefix, bool $success, ?string $sound = null): void {
         if ($success === true) {
@@ -20,6 +20,6 @@ class SendMessage {
             $type = TextFormat::RED;
         }
         SoundPacket::Send($player, $sound);
-        $player->sendMessage(TextFormat::BLUE . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+        $player->sendActionBarMessage(TextFormat::BLUE . $prefix . TextFormat::GRAY . " >> " . $type . $message);
     }
 }

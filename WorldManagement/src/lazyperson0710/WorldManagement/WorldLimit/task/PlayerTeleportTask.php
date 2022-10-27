@@ -3,6 +3,7 @@
 namespace lazyperson0710\WorldManagement\WorldLimit\task;
 
 use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
@@ -31,7 +32,7 @@ class PlayerTeleportTask extends Task {
         }
         if (!$this->property->inSafeArea($this->player->getPosition())) {
             Server::getInstance()->dispatchCommand($this->player, "warp lobby");
-            $this->player->sendMessage("§bWorldBorder §7>> §cセーフエリアに戻らなかったため、ロビーにテレポートしました");
+            SendMessage::Send($this->player, "セーフエリアに戻らなかったため、ロビーにテレポートしました", "WorldBorder", false);
         }
     }
 }

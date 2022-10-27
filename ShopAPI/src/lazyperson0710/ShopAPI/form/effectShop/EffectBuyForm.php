@@ -5,7 +5,7 @@ namespace lazyperson0710\ShopAPI\form\effectShop;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ShopAPI\database\effectShopAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;
@@ -37,14 +37,12 @@ class EffectBuyForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         $price = $this->time * EffectShopAPI::getInstance()->getBuy($this->effectName) + ($this->level * EffectShopAPI::getInstance()->getAmplifiedMoney($this->effectName));
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
-            $player->sendMessage("§bEffect §7>> §c所持金が足りない為処理が中断されました。要求価格 -> {$price}円");
-            SoundPacket::Send($player, 'dig.chain');
+            SendMessage::Send($player, "所持金が足りない為処理が中断されました。要求価格 -> {$price}円", "Effect", false, 'dig.chain');
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
         $player->getEffects()->add(new EffectInstance($this->effect, $this->time * 20 * 60, $this->level - 1, false));
-        $player->sendMessage("§bEffect §7>> §a{$this->effectName}を{$this->level}レベルで{$this->time}分付与し、{$price}円消費しました");
-        SoundPacket::Send($player, 'break.amethyst_block');
+        SendMessage::Send($player, "{$this->effectName}を{$this->level}レベルで{$this->time}分付与し、{$price}円消費しました", "Effect", true, 'break.amethyst_block');
     }
 
 }

@@ -8,14 +8,13 @@ use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\SBI\mode\Mode;
 use Deceitya\SBI\mode\ModeList;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendTip;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 
 class Main extends PluginBase implements Listener {
 
@@ -47,8 +46,7 @@ class Main extends PluginBase implements Listener {
             $form->addElement(new ClosureButton($mode->getName(), null, function (Player $player, Button $button) use ($mode) {
                 Database::getInstance()->setMode($player, $mode->getId());
                 Database::getInstance()->save();
-                $player->sendTip(TextFormat::AQUA . "MyStatus §7>> §a表示状態を『{$mode->getName()}』にしました");
-                SoundPacket::Send($player, 'note.harp');
+                SendTip::Send($player, "表示状態を『{$mode->getName()}』にしました", "MyStatus", true);
             }));
         }
         SendForm::Send($sender, ($form));

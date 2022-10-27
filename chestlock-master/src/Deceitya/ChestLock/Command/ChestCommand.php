@@ -5,6 +5,7 @@ namespace Deceitya\ChestLock\Command;
 use Deceitya\ChestLock\Form\ModeForm;
 use Deceitya\ChestLock\Main;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -27,7 +28,7 @@ class ChestCommand extends Command {
             return false;
         }
         if (!($sender instanceof Player)) {
-            $sender->sendMessage('§bLock §7>> §cサーバー内で使用してください。');
+            $sender->sendMessage("サーバー内で実行してください");
             return true;
         }
         $form = new ModeForm($this->plugin);
@@ -37,7 +38,7 @@ class ChestCommand extends Command {
                 $form->handleResponse($sender, $stat[$args[0]]);
                 return true;
             } else {
-                $sender->sendMessage($this->getDescription());
+                SendMessage::Send($sender, "サブコマンドはlock|unlock|infoのみ使用可能です", "ChestLock", false);
                 return false;
             }
         } else {

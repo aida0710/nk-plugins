@@ -5,7 +5,7 @@ namespace lazyperson710\edit\form\player;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -34,35 +34,29 @@ class SetExpPlayer extends CustomForm {
         $target = $this->players->getSelectedOption();
         $expLevel = $this->expLevel->getValue();
         if (!Server::getInstance()->getPlayerByPrefix($target)) {
-            $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーが存在しない為、処理を中断しました", "PlayerEdit", false);
             return;
         }
         $target = Server::getInstance()->getPlayerByPrefix($target);
         if (!is_numeric($expLevel)) {
-            $player->sendMessage("§bPlayerEdit §7>> §c経験値量は数値で入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "経験値量は数値で入力してください", "PlayerEdit", false);
             return;
         }
         if ($expLevel < 0) {
-            $player->sendMessage("§bPlayerEdit §7>> §c経験値レベルは0以上の数値で入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "経験値レベルは0以上の数値で入力してください", "PlayerEdit", false);
             return;
         }
         if ($expLevel > 1241258) {
-            $player->sendMessage("§bPlayerEdit §7>> §c経験値レベルは1241258以下の数値で入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "経験値レベルは1241258以下の数値で入力してください", "PlayerEdit", false);
             return;
         }
         $target->getXpManager()->setXpLevel($expLevel);
         if ($player->getName() === $target->getName()) {
-            $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$expLevel}に設定しました");
+            SendMessage::Send($player, "経験値レベルを{$expLevel}に設定しました", "PlayerEdit", true);
         } else {
-            $player->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$expLevel}に設定しました");
-            $target->sendMessage("§bPlayerEdit §7>> §a経験値レベルを{$player->getName()}が{$expLevel}に設定しました");
-            SoundPacket::Send($target, 'note.harp');
+            SendMessage::Send($player, "経験値レベルを{$expLevel}に設定しました", "PlayerEdit", true);
+            SendMessage::Send($target, "経験値レベルを{$player->getName()}が{$expLevel}に設定しました", "PlayerEdit", true);
         }
-        SoundPacket::Send($player, 'note.harp');
     }
 
 }

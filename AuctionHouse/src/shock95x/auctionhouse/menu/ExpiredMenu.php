@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\menu;
 
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
@@ -68,12 +69,12 @@ class ExpiredMenu extends PagingMenu {
                     $storage->removeListing($listing);
                     $inventory->setItem($slot, VanillaItems::AIR());
                     $player->getInventory()->addItem($item);
-                    $player->sendMessage(str_ireplace(["{ITEM}", "{AMOUNT}"], [$item->getName(), $item->getCount()], Locale::get($player, "returned-item", true)));
+                    SendMessage::Send($player, $item->getName() . " (x" . $item->getCount() . ") が返却されました", "Bazaar", false);
                 }
             }
             if ($slot == self::INDEX_RETURN_ALL) {
                 if (Utils::getEmptySlotCount($player->getInventory()) < $this->total) {
-                    Locale::sendMessage($player, "inventory-full");
+                    SendMessage::Send($player, "在庫がいっぱいなため出品できません。出品中のアイテムを削除してください", "Bazaar", false);
                     return;
                 }
                 foreach ($this->getListings() as $index => $expired) {

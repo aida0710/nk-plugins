@@ -4,7 +4,6 @@ namespace lazyperson0710\EffectItems\form\items;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SoundPacket;
 use pocketmine\item\Durable;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
@@ -24,8 +23,7 @@ class ItemNameChangeForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (!$player->getInventory()->getItemInHand() instanceof Durable) {
-            $player->sendMessage("§bItemEdit §7>> §c道具や装備以外のアイテムは名前を変更することができません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "道具や装備以外のアイテムは名前を変更することができません", "ItemEdit", false);
             return;
         }
         $approval = false;
@@ -39,13 +37,12 @@ class ItemNameChangeForm extends CustomForm {
             }
         }
         if ($approval === false) {
-            $player->sendMessage("§bItemEdit §7>> §cアイテム名変更アイテムを取得することができませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "アイテム名変更アイテムを取得することができませんでした", "ItemEdit", false);
             return;
         }
         $inHandItem = $player->getInventory()->getItemInHand();
         $inHandItem->setCustomName($this->itemName->getValue());
         $player->getInventory()->setItemInHand($inHandItem);
-        $player->sendMessage("§bItemEdit §7>> §aアイテム名を{$this->itemName->getValue()}§r§aに変更しました");
+        SendMessage::Send($player, "アイテム名を{$this->itemName->getValue()}§r§aに変更しました", "ItemEdit", true);
     }
 }

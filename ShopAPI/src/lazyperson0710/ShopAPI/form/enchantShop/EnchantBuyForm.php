@@ -7,6 +7,7 @@ use bbo51dog\bboform\form\CustomForm;
 use deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\ShopAPI\database\EnchantShopAPI;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
@@ -42,8 +43,7 @@ class EnchantBuyForm extends CustomForm {
         $price = EnchantShopAPI::getInstance()->getBuy($this->enchantName) * $this->level;
         $item = $player->getInventory()->getItemInHand();
         if (EconomyAPI::getInstance()->myMoney($player) <= $price) {
-            $player->sendMessage("§bEnchant §7>> §c所持金が足りない為処理が中断されました。要求価格 -> {$price}円");
-            SoundPacket::Send($player, 'dig.chain');
+            SendMessage::Send($player, "§c所持金が足りない為処理が中断されました。要求価格 -> {$price}円", "Enchant", true, 'dig.chain');
             return;
         }
         if (MiningLevelAPI::getInstance()->getLevel($player) < EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName)) {
@@ -58,28 +58,24 @@ class EnchantBuyForm extends CustomForm {
         }
         if ($this->enchantment === VanillaEnchantments::SILK_TOUCH()) {
             if ($item->hasEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE))) {
-                $player->sendMessage('§bEnchant §7>> §c幸運がついているため、シルクタッチはつけられません');
-                SoundPacket::Send($player, 'dig.chain');
+                SendMessage::Send($player, "§c幸運がついているため、シルクタッチはつけられません", "§bEnchant", true, 'dig.chain');
                 return;
             }
         }
         if ($this->enchantment === EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE)) {
             if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
-                $player->sendMessage('§bEnchant §7>> §cシルクタッチを幸運に変化されたMiningToolsはエンチャントから不正に強化することはできません');
-                SoundPacket::Send($player, 'dig.chain');
+                SendMessage::Send($player, "§cシルクタッチを幸運に変化されたMiningToolsはエンチャントから不正に強化することはできません", "§bEnchant", true, 'dig.chain');
                 return;
             }
             if ($item->hasEnchantment(VanillaEnchantments::SILK_TOUCH())) {
-                $player->sendMessage('§bEnchant §7>> §cシルクタッチエンチャントがついているため、幸運はつけられません');
-                SoundPacket::Send($player, 'dig.chain');
+                SendMessage::Send($player, "§cシルクタッチエンチャントがついているため、幸運はつけられません", "§bEnchant", true, 'dig.chain');
                 return;
             }
         }
         EconomyAPI::getInstance()->reduceMoney($player, $price);
         $item->addEnchantment(new EnchantmentInstance($this->enchantment, $this->level));
         $player->getInventory()->setItemInHand($item);
-        $player->sendMessage("§bEnchant §7>> §a{$this->enchantName}を{$this->level}レベルで付与しました");
-        SoundPacket::Send($player, 'break.amethyst_block');
+        SendMessage::Send($player, "§a{$this->enchantName}を{$this->level}レベルで付与しました", "§bEnchant", true, 'break.amethyst_block');
     }
 
 }

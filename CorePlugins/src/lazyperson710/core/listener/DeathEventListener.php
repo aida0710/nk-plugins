@@ -3,6 +3,8 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
+use lazyperson710\core\packet\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByBlockEvent;
@@ -92,9 +94,9 @@ class DeathEventListener implements Listener {
         $floor_x = floor($player->getPosition()->getX());
         $floor_y = floor($player->getPosition()->getY());
         $floor_z = floor($player->getPosition()->getZ());
-        $player->sendMessage("§bDeath §7>> §a死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です");
+        SendMessage::Send($player, "死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です", "Death", true);
         if (in_array($player->getWorld()->getFolderName(), WorldCategory::PublicWorld) || in_array($player->getWorld()->getFolderName(), WorldCategory::PublicEventWorld) || in_array($player->getWorld()->getFolderName(), WorldCategory::PVP)) {
-            $player->sendMessage("§bDeath §7>> §a死亡ペナルティーは死亡ワールドが公共ワールド&PVPワールドでは適用されません");
+            SendMessage::Send($player, "死亡ペナルティーは死亡ワールドが公共ワールド&PVPワールドでは適用されません", "Death", true);
             return;
         }
         if ($see >= 2000) {
@@ -102,9 +104,9 @@ class DeathEventListener implements Listener {
                 $floor_money1000000 = floor($see / 2);
                 EconomyAPI::getInstance()->reduceMoney($player, $floor_money1000000);
                 if (Server::getInstance()->isOp($player->getName())) {
-                    $player->sendMessage("§bDeath §7>> §a{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました");
+                    SendMessage::Send($player, "{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました", "Death", true);
                 } else {
-                    Server::getInstance()->broadcastMessage("§bDeath §7>> §e{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました");
+                    SendBroadcastMessage::Send("{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました", "Death");
                 }
                 return;
             }
@@ -115,12 +117,12 @@ class DeathEventListener implements Listener {
             $result = -$result;
             if ($myMoney <= 1999) {
                 EconomyAPI::getInstance()->setMoney($player, 2000);
-                $player->sendMessage("§bDeath §7>> §a死亡ペナルティーが適用されたため、所持金が{$see}円から5割徴収される予定でしたが2000円以下になってしまう為{$result}円だけ徴収されました");
+                SendMessage::Send($player, "死亡ペナルティーが適用されたため、所持金が{$see}円から5割徴収される予定でしたが2000円以下になってしまう為{$result}円だけ徴収されました", "Death", true);
             } else {
-                $player->sendMessage("§bDeath §7>> §a死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money}円が徴収されました");
+                SendMessage::Send($player, "死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money}円が徴収されました", "Death", true);
             }
         } else {
-            $player->sendMessage("§bDeath §7>> §a所持金が2000円以下の{$see}円だっため死亡ペナルティーは経験値のみとなりました");
+            SendMessage::Send($player, "所持金が2000円以下の{$see}円だっため死亡ペナルティーは経験値のみとなりました", "Death", true);
         }
     }
 

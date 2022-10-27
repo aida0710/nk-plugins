@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
+use lazyperson710\core\packet\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -30,7 +31,7 @@ class LuckyMoneyCoin {
             10 => 35000,
         };
         EconomyAPI::getInstance()->addMoney($player, $addMoney);
-        $player->sendMessage("§bLuckyMoneyCoin §7>> §a{$addMoney}円のお金が当たりました！");
+        SendNoSoundMessage::Send($player, "{$addMoney}円のお金が当たりました！", "LuckyMoneyCoin", true);
         SoundPacket::Send($player, 'item.trident.return');
     }
 }

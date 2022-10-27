@@ -7,7 +7,7 @@ use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use Exception;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\VanillaEnchantments;
@@ -52,8 +52,7 @@ class RepairForm extends CustomForm {
         }
         if ($this->mode === "command") {
             if (EconomyAPI::getInstance()->myMoney($player->getName()) < 3500) {
-                $player->sendMessage("§bRepair §7>> §c手数料分を取得できませんでした。手数料3500円");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "手数料分を取得できませんでした。手数料3500円", "Repair", false);
                 return;
             }
         }
@@ -68,13 +67,11 @@ class RepairForm extends CustomForm {
                 }
             }
             if ($consumption === "error") {
-                $player->sendMessage("§bRepair §7>> §c修理費用を取得できませんでした");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "修理費用を取得できませんでした", "Repair", false);
                 return;
             }
         } elseif ($player->getXpManager()->getXpLevel() < $this->level) {
-            $player->sendMessage("§bRepair §7>> §cレベルが足りませんでした要求レベル->{$this->level}");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "レベルが足りませんでした要求レベル->{$this->level}", "Repair", false);
             return;
         } else {
             $consumption = "level";
@@ -90,7 +87,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 90) {
             if (mt_rand(1, 100) <= 1) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c1%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "1%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -99,7 +96,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 80) {
             if (mt_rand(1, 100) <= 2) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c2%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "2%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -108,7 +105,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 70) {
             if (mt_rand(1, 100) <= 3) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c3%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "3%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -117,7 +114,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 60) {
             if (mt_rand(1, 100) <= 4) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c4%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "4%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -126,7 +123,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 50) {
             if (mt_rand(1, 100) <= 5) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c5%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "5%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -135,7 +132,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 40) {
             if (mt_rand(1, 100) <= 6) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c6%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "6%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -144,7 +141,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 30) {
             if (mt_rand(1, 100) <= 7) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c7%の確率で修理に修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "7%の確率で修理に修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -153,7 +150,7 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 20) {
             if (mt_rand(1, 100) <= 8) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c8%の確率で修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "8%の確率で修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
@@ -162,13 +159,13 @@ class RepairForm extends CustomForm {
         if (MiningLevelAPI::getInstance()->getLevel($player) >= 10) {
             if (mt_rand(1, 100) <= 9) {
                 $this->itemDisappearance($player);
-                $player->sendMessage('§bRepair §7>> §c9%の確率で修理に失敗したためアイテムが消滅しました');
+                SendMessage::Send($player, "9%の確率で修理に失敗したためアイテムが消滅しました", "Repair", false);
             } else {
                 $this->itemRepair($player, $consumption);
             }
         } elseif (mt_rand(1, 100) <= 10) {
             $this->itemDisappearance($player);
-            $player->sendMessage('§bRepair §7>> §c10%の確率で修理に失敗したためアイテムが消滅しました');
+            SendMessage::Send($player, "10%の確率で修理に失敗したためアイテムが消滅しました", "Repair", false);
         } else {
             $this->itemRepair($player, $consumption);
         }
@@ -185,12 +182,10 @@ class RepairForm extends CustomForm {
         $player->getInventory()->setItemInHand($this->item);
         switch ($consumption) {
             case "ingot":
-                $player->sendMessage("§bRepair §7>> §aインゴットを一個消費してアイテムを修理しました");
-                SoundPacket::Send($player, 'random.anvil_use');
+                SendMessage::Send($player, "インゴットを一個消費してアイテムを修理しました", "Repair", true, "random.anvil_use");
                 break;
             case "level":
-                $player->sendMessage("§bRepair §7>> §aLevelを{$this->level}消費してアイテムを修理しました");
-                SoundPacket::Send($player, 'random.anvil_use');
+                SendMessage::Send($player, "Levelを{$this->level}消費してアイテムを修理しました", "Repair", true, "random.anvil_use");
                 break;
             default:
                 throw new \Error("不正な状態が保存された変数が処理されました");
@@ -204,49 +199,41 @@ class RepairForm extends CustomForm {
         $item = $player->getInventory()->getItemInHand();
         if ($item->getId() === ItemIds::ELYTRA) {
             if (!$item instanceof Durable) {
-                $player->sendMessage("§bRepair §7>> §c持っているアイテムは修繕することが出来ません");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "持っているアイテムは修繕することが出来ません", "Repair", false);
                 return false;
             }
             if ($item->getDamage() <= 0) {
-                $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "耐久力が減っていない為、修繕することができません", "Repair", false);
                 return false;
             }
         }
         if (!$item instanceof TieredTool) {
-            $player->sendMessage("§bRepair §7>> §c持っているアイテムは修繕することが出来ません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "持っているアイテムは修繕することが出来ません", "Repair", false);
             return false;
         }
         if ($item->getDamage() <= 0) {
-            $player->sendMessage('§bRepair §7>> §c耐久力が減っていない為、修繕することができません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "耐久力が減っていない為、修繕することができません", "Repair", false);
             return false;
         }
         if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
-            $player->sendMessage('§bRepair §7>> §c衝撃エンチャントが付与されている為、修繕することが出来ません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "衝撃エンチャントが付与されている為、修繕することが出来ません", "Repair", false);
             return false;
         }
         if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
             if ($item->getTier() === ToolTier::DIAMOND()) {
-                $player->sendMessage('§bRepair §7>> §cネザライトマイニングツールのみ修繕が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "ネザライトマイニングツールのみ修繕が可能です", "Repair", false);
                 return false;
             }
         }
         if ($item->getNamedTag()->getTag('4mining') !== null) {
             if ($item->getTier() === ToolTier::DIAMOND()) {
-                $player->sendMessage('§bRepair §7>> §cネザライトマイニングツールのみ修繕が可能です');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "ネザライトマイニングツールのみ修繕が可能です", "Repair", false);
                 return false;
             }
         }
         $itemIds = $item->getId();
         if ($itemIds >= 1000) {
-            $player->sendMessage('§bRepair §7>> §cこのアイテムは修繕することが出来ません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "このアイテムは修繕することが出来ません", "Repair", false);
             return false;
         }
         return true;

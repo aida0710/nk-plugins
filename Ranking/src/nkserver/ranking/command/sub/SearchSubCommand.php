@@ -11,7 +11,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
-use pocketmine\utils\TextFormat;
 
 class SearchSubCommand extends BaseSubCommand {
 
@@ -25,7 +24,7 @@ class SearchSubCommand extends BaseSubCommand {
 
     public function onRun(CommandSender $sender, string $command, array $args): void {
         if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . 'ゲーム内で実行してください');
+            $sender->sendMessage("サーバー内で実行してください");
             return;
         }
         if (!Server::getInstance()->isOp((string)$sender)) return;

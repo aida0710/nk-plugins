@@ -7,7 +7,7 @@ use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\LoginBonus\calculation\CheckInventoryCalculation;
 use lazyperson0710\LoginBonus\Main;
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 
 class TicketConvertConfirmationForm extends CustomForm {
@@ -31,11 +31,9 @@ class TicketConvertConfirmationForm extends CustomForm {
         if (CheckInventoryCalculation::check($player, $this->cost)) {
             $player->getInventory()->removeItem(Main::getInstance()->loginBonusItem->setCount($this->cost));
             TicketAPI::getInstance()->addTicket($player, $this->quantity);
-            $player->sendMessage("§aログインボーナスを" . $this->cost . "個消費してチケット" . $this->quantity . "枚に交換しました");
-            SoundPacket::Send($player, 'break.amethyst_block');
+            SendMessage::Send($player, "ログインボーナスを" . $this->cost . "個消費してチケット" . $this->quantity . "枚に交換しました", "LoginBonus", false, 'break.amethyst_block');
         } else {
-            $player->sendMessage("コストアイテムの所持数量が必要個数より少ない為処理を中断しました");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "コストアイテムの所持数量が必要個数より少ない為処理を中断しました", "LoginBonus", false);
         }
     }
 

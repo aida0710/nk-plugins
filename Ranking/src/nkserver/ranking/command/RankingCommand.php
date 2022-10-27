@@ -10,7 +10,6 @@ use nkserver\ranking\libs\CortexPE\Commando\BaseCommand;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 
 class RankingCommand extends BaseCommand {
 
@@ -24,7 +23,7 @@ class RankingCommand extends BaseCommand {
 
     public function onRun(CommandSender $sender, string $command, array $args): void {
         if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . 'ゲーム内で実行してください');
+            $sender->sendMessage("サーバー内で実行してください");
             return;
         }
         SendForm::Send($sender, (new HomeForm));

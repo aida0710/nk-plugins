@@ -3,10 +3,10 @@
 namespace bbo51dog\announce\command;
 
 use bbo51dog\announce\form\PassForm;
-use bbo51dog\announce\MessageFormat;
 use bbo51dog\announce\service\AnnounceService;
 use lazyperson0710\WorldManagement\form\WarpForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -28,7 +28,7 @@ class PassCommand extends Command {
             return;
         }
         if (AnnounceService::isConfirmed($sender->getName())) {
-            $sender->sendMessage(MessageFormat::PREFIX_PASS . TextFormat::RED . "既にアクティベートされています");
+            SendMessage::Send($sender, "既にアクティベートされています", "Pass", false);
             SendForm::Send($sender, (new WarpForm($sender)));
             return;
         }

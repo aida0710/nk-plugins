@@ -2,7 +2,7 @@
 
 namespace lazyperson710\core\command;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -23,14 +23,12 @@ class BookCommand extends Command {
         $item = $player->getInventory()->getItemInHand();
         $ids = $item->getID();
         if (387 !== $ids) {
-            $sender->sendMessage("§bBook §7>> §c手に持っているアイテムは署名済みの本ではありません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "手に持っているアイテムは署名済みの本ではありません", "Book", false);
             return;
         }
         $cname = $item->getTitle();
         if ($item->getNamedTag()->getTag('duplicate') !== null) {
-            $sender->sendMessage("§bBook §7>> §c複製された本を更に複製することはできません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($sender, "複製された本を更に複製することはできません", "Book", false);
             return;
         } else {
             $nbt = $item->getNamedTag();
@@ -40,23 +38,20 @@ class BookCommand extends Command {
             $item->setNamedTag($nbt);
         }
         if (!$sender->getInventory()->canAddItem($item)) {
-            $sender->sendMessage("§bBook §7>> §cインベントリに空きがないためアイテムを付与することができませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($sender, "インベントリに空きがないためアイテムを付与することができませんでした", "Book", false);
             return;
         }
         $name = $sender->getName();
         $mymoney = EconomyAPI::getInstance()->myMoney($name);
         $money = 50;
         if ($money > $mymoney) {
-            $sender->sendMessage("§bBook §7>> §cお金が足りませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($sender, "お金が足りませんでした", "Book", false);
             return;
         }
         EconomyAPI::getInstance()->reduceMoney($name, $money);
         $item->setCount(1);
         $player->getInventory()->addItem($item);
-        $sender->sendMessage("§bBook §7>> §a50円を消費して本を複製しました");
-        SoundPacket::Send($player, 'note.harp');
+        SendMessage::Send($sender, "50円を消費して本を複製しました", "Book", true);
     }
 
 }

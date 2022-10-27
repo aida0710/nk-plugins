@@ -7,7 +7,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -86,8 +86,7 @@ class MessageListener implements Listener {
 
     public function onPlace(BlockPlaceEvent $event) {
         if ($event->getBlock()->getId() === 449) {//書見台
-            $event->getPlayer()->sendMessage("§bBook §7>> §c本は土地保護されていても取れるので注意してください");
-            SoundPacket::Send($event->getPlayer(), 'note.bass');
+            SendMessage::Send($event->getPlayer(), "本は土地保護されていても取れるので注意してください", "Lectern", false);
         }
     }
 

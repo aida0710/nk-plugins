@@ -3,10 +3,9 @@
 namespace ree_jp\bank\form;
 
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
-use pocketmine\utils\TextFormat;
 use ree_jp\bank\sqlite\BankHelper;
 
 class DeleteCheckForm implements Form {
@@ -29,8 +28,7 @@ class DeleteCheckForm implements Form {
         }
         if ($data) {
             BankHelper::getInstance()->remove($this->bank);
-            $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a削除しました");
-            SoundPacket::Send($player, 'note.harp');
+            SendMessage::Send($player, "削除しました", "Bank", true);
         } else SendForm::Send($player, (new BankForm()));
     }
 

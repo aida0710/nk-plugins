@@ -9,7 +9,10 @@ use lazyperson0710\Gacha\Calculation\ItemRegister;
 use lazyperson0710\Gacha\Calculation\RankCalculation;
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SendBroadcastMessage;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
@@ -41,19 +44,16 @@ class GachaForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if ($this->quantity->getValue() == "") {
-            $player->sendMessage("§bGacha §7>> §c回数を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "回数を入力してください", "Gacha", false);
             return;
         }
         if (!preg_match('/^[0-9]+$/', $this->quantity->getValue())) {
-            $player->sendMessage("§bGacha §7>> §c整数のみで入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "整数のみで入力してください", "Gacha", false);
             return;
         }
         if (!Server::getInstance()->isOp($player->getName())) {
             if ($this->quantity->getValue() >= 301) {
-                $player->sendMessage("§bGacha §7>> §c301回以上は連続で回すことはできません");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "301回以上は連続で回すことはできません", "Gacha", false);
                 return;
             }
         }
@@ -67,15 +67,14 @@ class GachaForm extends CustomForm {
             $item = (new ItemRegister($this->categoryName, $rank))->Items($rank);
             switch ($rank) {
                 case "SR":
-                    $player->sendMessage("§bGacha §7>> §aSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
+                    SendNoSoundMessage::Send($player, "SuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました", "§bGacha", true);
                     break;
                 case "SSR":
-                    SoundPacket::Send($player, "item.trident.thunder");
-                    $player->sendMessage("§bGacha §7>> §aSpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました");
+                    SendMessage::Send($player, "SpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました", "§bGacha", true, "item.trident.thunder");
                     break;
                 case "L":
                     SoundPacket::Send($player, "mob.enderdragon.death");
-                    Server::getInstance()->broadcastMessage("§bGacha §7>> §eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました");
+                    SendBroadcastMessage::Send("Legendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました", "Gacha");
                     break;
             }
             $formDisplayRank = match ($rank) {
@@ -94,7 +93,7 @@ class GachaForm extends CustomForm {
                 $onDrop = true;
             }
             if (mt_rand(1, 1000000) === 15000) {
-                Server::getInstance()->broadcastMessage("§bGacha §7>> §e{$player->getName()}が0.001％の確率を当てました！Ticketを500枚プレゼントされました！");
+                SendBroadcastMessage::Send("{$player->getName()}が0.001％の確率を当てました！Ticketを500枚プレゼントされました！", "Gacha");
                 TicketAPI::getInstance()->addTicket($player, 500);
             }
         }

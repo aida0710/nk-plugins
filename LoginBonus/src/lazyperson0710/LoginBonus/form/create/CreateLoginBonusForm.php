@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\LoginBonus\Main;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 
 class CreateLoginBonusForm extends CustomForm {
@@ -29,13 +29,11 @@ class CreateLoginBonusForm extends CustomForm {
         $amount = $this->amount->getValue();
         $onHoliday = $this->onHolidayToggle->getValue();
         if (!is_numeric($amount)) {
-            $player->sendMessage("§bLogin §7>> §c数字を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "数字を入力してください", "Login", false);
             return;
         }
         if ($amount < 1) {
-            $player->sendMessage("§bLogin §7>> §c1以上の数字を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "1以上の数字を入力してください", "Login", false);
             return;
         }
         $amount = (int)$amount;
@@ -51,17 +49,14 @@ class CreateLoginBonusForm extends CustomForm {
             if ($player->getInventory()->canAddItem($item)) {
                 Main::getInstance()->lastBonusDateConfig->remove($player->getName());
                 $player->getInventory()->addItem($item);
-                $player->sendMessage("§bLogin §7>> §a{$currentBonus}個のログインボーナスを生成、付与しました");
-                SoundPacket::Send($player, 'note.harp');
+                SendMessage::Send($player, "{$currentBonus}個のログインボーナスを生成、付与しました", "Login", true);
             } else {
                 Main::getInstance()->lastBonusDateConfig->set($player->getName(), $currentBonus);
-                $player->sendMessage("§bLogin §7>> §cインベントリに空きがないため、ログインボーナスを受け取れませんでした。/bonusから保留になっているログインボーナスアイテムを受け取ろう");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "インベントリに空きがないため、ログインボーナスを受け取れませんでした。/bonusから保留になっているログインボーナスアイテムを受け取ろう", "Login", false);
             }
         } else {
             Main::getInstance()->lastBonusDateConfig->set($player->getName(), $currentBonus);
-            $player->sendMessage("§bLogin §7>> §a保留リストに{$currentBonus}個のログインボーナスを追加しました");
-            SoundPacket::Send($player, 'note.harp');
+            SendMessage::Send($player, "保留リストに{$currentBonus}個のログインボーナスを追加しました", "Login", true);
         }
         Main::getInstance()->lastBonusDateConfig->save();
     }

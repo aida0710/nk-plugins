@@ -4,7 +4,7 @@ namespace lazyperson710\sff\form;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 
 class CommandStorageForm extends CustomForm {
@@ -23,29 +23,24 @@ class CommandStorageForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if ($this->input1->getValue() === "") {
-            $player->sendMessage("§bCmdStorage §7>> §c実行させたいコマンドを入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "実行させたいコマンドを入力してください", "CmdStorage", false);
             return;
         }
         if (str_contains($this->input1->getValue(), 'tell')) {
-            $player->sendMessage("§bCmdStorage §7>> §ctellコマンドは追加できません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "tellコマンドは追加できません", "CmdStorage", false);
             return;
         }
         if (str_contains($this->input1->getValue(), 'msg')) {
-            $player->sendMessage("§bCmdStorage §7>> §cmsgコマンドは追加できません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "msgコマンドは追加できません", "CmdStorage", false);
             return;
         }
         if (str_contains($this->input1->getValue(), 'me')) {
-            $player->sendMessage("§bCmdStorage §7>> §cmeコマンドは追加できません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "meコマンドは追加できません", "CmdStorage", false);
             return;
         }
         //$player->getInventory()->getItemInHand()->setCustomName($this->input1->getValue());
         $item = $player->getInventory()->getItemInHand()->setCustomName($this->input1->getValue());
         $player->getInventory()->setItemInHand($item);
-        $player->sendMessage("§bCmdStorage §7>> §a{$this->input1->getValue()}に設定されました");
-        SoundPacket::Send($player, 'note.harp');
+        SendMessage::Send($player, "{$this->input1->getValue()}に設定されました", "CmdStorage", true);
     }
 }

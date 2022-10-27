@@ -4,6 +4,8 @@ namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MyWarp\Database;
 use Deceitya\MyWarp\MyWarpPlugin;
+use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
@@ -26,7 +28,7 @@ class ListForm implements Form {
         $pos = Database::getInstance()->getWarpPMMPPosition($player, $this->warps[$data]);
         if ($pos !== null) {
             $player->teleport($pos);
-            $player->sendMessage('§bMyWarp §7>> §aワープ地点にテレポートしました！');
+            SendNoSoundMessage::Send($player, "ワープ地点にテレポートしました！", "MyWarp", true);
             MyWarpPlugin::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
                 function () use ($player): void {
                     SoundPacket::Send($player, 'mob.endermen.portal');
@@ -34,8 +36,7 @@ class ListForm implements Form {
             ), 8);
             SoundPacket::Send($player, 'mob.endermen.portal');
         } else {
-            $player->sendMessage('§bMyWarp §7>> §cワープ地点が見つかりませんでした');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "ワープ地点が見つかりませんでした", "MyWarp", false);
         }
     }
 

@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopAPI\database\LevelShopAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
@@ -43,8 +43,7 @@ class Confirmation extends SimpleForm {
             $allItem .= $item->getName() . " x{$count}\n";
         }
         if (is_null($allItem)) {
-            $player->sendMessage("§bLevelShop §7>> §c売却できるアイテムが存在しません");
-            SoundPacket::Send($player, 'dig.chain');
+            SendMessage::Send($player, "売却できるアイテムが存在しません", "LevelShop", true, 'dig.chain');
             return;
         }
         if (is_null($insufficientLevelAllItem)) {

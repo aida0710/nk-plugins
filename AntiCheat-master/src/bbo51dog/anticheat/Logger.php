@@ -8,9 +8,9 @@ use bbo51dog\pmdiscord\element\Embed;
 use bbo51dog\pmdiscord\element\Embeds;
 use DateTime;
 use DateTimeInterface;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
-use pocketmine\utils\TextFormat;
 
 class Logger {
 
@@ -71,7 +71,7 @@ class Logger {
             if (!Server::getInstance()->isOp($player->getName())) {
                 continue;
             }
-            $player->sendMessage(TextFormat::RED . "Warning: " . $message);
+            SendMessage::Send($player, $message, "Warning", false);
         }
         Server::getInstance()->getLogger()->warning($message);
     }

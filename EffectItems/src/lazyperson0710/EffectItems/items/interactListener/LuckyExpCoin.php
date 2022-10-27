@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
+use lazyperson710\core\packet\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
@@ -29,7 +30,7 @@ class LuckyExpCoin {
             10 => 5000,
         };
         $player->getXpManager()->addXp($addXp);
-        $player->sendMessage("§bLuckyExpCoin §7>> §a{$addXp}xpが当たりました！");
+        SendNoSoundMessage::Send($player, "{$addXp}xpが当たりました！", "LuckyExpCoin", true);
         SoundPacket::Send($player, 'item.trident.return');
     }
 }

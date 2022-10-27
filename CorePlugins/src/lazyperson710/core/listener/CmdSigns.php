@@ -3,6 +3,8 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson710\core\Main;
+use lazyperson710\core\packet\SendActionBarMessage;
+use lazyperson710\core\packet\SendNoSoundTip;
 use pocketmine\block\BaseSign;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -28,7 +30,7 @@ class CmdSigns implements Listener {
             if ($block->getText()->getLine(0) == "##cmd") {
                 if (!$event->getPlayer()->isSneaking()) {
                     if (isset(self::$CmdSignsInterval[$event->getPlayer()->getName()])) {
-                        $event->getPlayer()->sendTip("§bCmdSigns §7>> §cコマンド看板は1秒以内に再度使用することは出来ません");
+                        SendNoSoundTip::Send($event->getPlayer(), "コマンド看板は1秒以内に再度使用することは出来ません", "CmdSigns", true);
                         return;
                     } else {
                         self::$CmdSignsInterval[$event->getPlayer()->getName()] = true;
@@ -55,7 +57,7 @@ class CmdSigns implements Listener {
                     $cmd = $block->getText()->getLine(2);
                     Server::getInstance()->dispatchCommand($event->getPlayer(), str_replace($search, $replace, $cmd));
                 } else {
-                    $event->getPlayer()->sendActionBarMessage("§bCmdSigns §7>> §aスニーク中はコマンド看板は実行されず破壊が可能です");
+                    SendActionBarMessage::Send($event->getPlayer(), "スニーク中はコマンド看板は実行されず破壊が可能です", "CmdSigns", true);
                 }
             }
         }

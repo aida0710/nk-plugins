@@ -4,7 +4,7 @@ namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
@@ -19,8 +19,7 @@ class WorldProtect implements Listener {
         }
         $heightLimit = WorldManagementAPI::getInstance()->getHeightLimit($event->getPlayer()->getWorld()->getFolderName());
         if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
-            $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません");
-            SoundPacket::Send($event->getPlayer(), 'note.bass');
+            SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", "Protect", false);
             if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                 $event->cancel();
             }
@@ -53,8 +52,7 @@ class WorldProtect implements Listener {
                 if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                     $event->cancel();
                 }
-                SoundPacket::Send($event->getPlayer(), 'note.bass');
-                $event->getPlayer()->sendTip("§bProtect §7>> §cこのワールドは保護されています");
+                SendTip::Send($event->getPlayer(), "このワールドは保護されています", "Protect", false);
             }
         }
     }

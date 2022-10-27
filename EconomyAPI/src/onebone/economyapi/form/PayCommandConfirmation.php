@@ -5,7 +5,7 @@ namespace onebone\economyapi\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\command\PayCommand;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
@@ -37,8 +37,7 @@ class PayCommandConfirmation extends CustomForm {
         if ($this->toggle->getValue() === true) {
             (new PayCommand($this->plugin))->Calculation($this->plugin, $player, $this->target, $this->amount);
         } else {
-            $player->sendMessage("§bEconomy §7>> §aトグルをtrueにしないでformを送信したため送金は行われませんでした");
-            SoundPacket::Send($player, 'note.harp');
+            SendMessage::Send($player, "トグルをtrueにしないでformを送信したため送金は行われませんでした", "Economy", true);
         }
     }
 }

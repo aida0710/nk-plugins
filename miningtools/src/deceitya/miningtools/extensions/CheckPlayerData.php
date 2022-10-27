@@ -16,7 +16,7 @@ class CheckPlayerData {
      */
     public function CheckReduceMoney(Player $player, int $subtraction): bool {
         if (EconomyAPI::getInstance()->myMoney($player) <= $subtraction) {
-            $player->sendMessage(Main::PrefixRed . '所持金が足りないため処理を中断しました');
+            SendMessage::Send($player, "所持金が足りないため処理を中断しました", "MiningTools", false);
             return false;
         }
         return true;
@@ -42,7 +42,7 @@ class CheckPlayerData {
                 }
             }
         }
-        $player->sendMessage(Main::PrefixRed . 'コストアイテムの所持数量が必要個数より少ない為処理を中断しました');
+        SendMessage::Send($player, "コストアイテムの所持数量が必要個数より少ない為処理を中断しました", "MiningTools", false);
         return false;
     }
 
@@ -74,7 +74,7 @@ class CheckPlayerData {
      */
     public function checkMining4(Player $player): bool {
         if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('4mining') !== null) {
-            $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは旧バージョンのアイテムの為更新が必要です。更新はブロックを破壊することで可能です");
+            SendMessage::Send($player, "現在所持しているアイテムは旧バージョンのアイテムの為更新が必要です。更新はブロックを破壊することで可能です", "MiningTools", false);
             return false;
         }
         return true;
@@ -87,15 +87,15 @@ class CheckPlayerData {
     public function checkMiningToolsNBT(Player $player): bool {
         $item = $player->getInventory()->getItemInHand();
         if (!($item->getNamedTag()->getTag('MiningTools_3') !== null || $item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null)) {
-            $player->sendMessage(Main::PrefixRed . "現在選択された機能はMiningTools専用機能の為所持しているアイテムでは使用できません");
+            SendMessage::Send($player, "現在選択された機能はMiningTools専用機能の為所持しているアイテムでは使用できません", "MiningTools", false);
             return false;
         }
         if ($item->getId() === ItemIds::DIAMOND_PICKAXE || $player->getInventory()->getItemInHand()->getId() === ItemIds::DIAMOND_SHOVEL) {
-            $player->sendMessage(Main::PrefixRed . "DiamondMiningToolsはアップグレードに対応していません");
+            SendMessage::Send($player, "DiamondMiningToolsはアップグレードに対応していません", "MiningTools", false);
             return false;
         }
         if ($item->getId() === ItemIds::DIAMOND_AXE || $player->getInventory()->getItemInHand()->getId() === Main::NETHERITE_AXE) {
-            $player->sendMessage(Main::PrefixRed . "MiningTools Axeはアップグレードに対応していません");
+            SendMessage::Send($player, "MiningTools Axeはアップグレードに対応していません", "MiningTools", false);
             return false;
         }
         return true;

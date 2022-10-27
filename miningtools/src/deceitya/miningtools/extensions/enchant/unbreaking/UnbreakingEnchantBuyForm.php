@@ -7,12 +7,11 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
-use deceitya\miningtools\Main;
+use lazyperson710\core\packet\SendBroadcastMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class UnbreakingEnchantBuyForm extends SimpleForm {
 
@@ -44,7 +43,7 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (empty($this->nbt)) {
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_UnbreakingEnchant') !== null) {
-                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
+                SendMessage::Send($player, "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました", "MiningTools", false);
                 return;
             }
             $rank = 1;
@@ -57,7 +56,7 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         }
         if (array_key_exists("MiningTools_Expansion_UnbreakingEnchant", $this->nbt)) {
             if ($this->nbt["MiningTools_Expansion_UnbreakingEnchant"] !== $namedTag->getInt("MiningTools_Expansion_UnbreakingEnchant")) {
-                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
+                SendMessage::Send($player, "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました", "MiningTools", false);
                 return;
             }
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_UnbreakingEnchant') !== null) {
@@ -88,7 +87,6 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         }
         if (is_null($rank)) {
             throw new \Error("rankがnullの為不明な挙動として処理しました");
-            return;
         }
         $nbt = $item->getNamedTag();
         $nbt->removeTag('MiningTools_Expansion_UnbreakingEnchant');
@@ -96,6 +94,6 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
         $item->setNamedTag($nbt);
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
-        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がMiningToolsを耐久エンチャント強化 - Rank{$rank}にアップグレードしました");
+        SendBroadcastMessage::Send("{$player->getName()}がMiningToolsを耐久エンチャント強化 - Rank{$rank}にアップグレードしました", "MiningTools");
     }
 }

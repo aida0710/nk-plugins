@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -39,8 +39,7 @@ class ReplaceTicketForm extends CustomForm {
         if (Server::getInstance()->isOp($player->getName())) {
             $playerName = $this->playerList->getSelectedOption();
             if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-                $player->sendMessage("§bTicket §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "§bTicket", false);
                 return;
             }
             $playerInstance = Server::getInstance()->getPlayerByPrefix($playerName);
@@ -50,20 +49,16 @@ class ReplaceTicketForm extends CustomForm {
         $count = TicketAPI::getInstance()->replaceInventoryTicket($playerInstance);
         $count += TicketAPI::getInstance()->replaceStackStorageTicket($playerInstance);
         if ($count >= 1) {
-            $playerInstance->sendMessage("§bTicket §7>> §aチケットの変換処理を実行し、{$count}枚のチケットを取得しました");
-            SoundPacket::Send($player, 'note.harp');
+            SendMessage::Send($playerInstance, "チケットの変換処理を実行し、{$count}枚のチケットを取得しました", "§bTicket", true);
             if (!isset($playerName)) return;
             if ($playerName != $player->getName()) {
-                $player->sendMessage("§bTicket §7>> §aチケットの変換処理を実行し、{$count}枚のチケットを取得しました");
-                SoundPacket::Send($player, 'note.harp');
+                SendMessage::Send($player, "チケットの変換処理を実行し、{$count}枚のチケットを取得しました", "§bTicket", true);
             }
         } else {
-            $playerInstance->sendMessage("§bTicket §7>> §c変換するアイテムが存在しませんでした");
-            SoundPacket::Send($playerInstance, 'note.bass');
+            SendMessage::Send($playerInstance, "変換するアイテムが存在しませんでした", "§bTicket", false);
             if (!isset($playerName)) return;
             if ($playerName != $player->getName())
-                $player->sendMessage("§bTicket §7>> §c変換するアイテムが存在しませんでした");
-            SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "変換するアイテムが存在しませんでした", "§bTicket", false);
         }
     }
 }

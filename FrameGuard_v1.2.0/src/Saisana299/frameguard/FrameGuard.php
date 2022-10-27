@@ -2,7 +2,7 @@
 
 namespace Saisana299\frameguard;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -22,7 +22,7 @@ class FrameGuard extends PluginBase {
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if (!$sender instanceof Player) {
-            $sender->sendMessage("§bFrameLock §7>> §aゲーム内で実行してください");
+            $sender->sendMessage("サーバー内で実行してください");
             return true;
         }
         switch (strtolower($label)) {
@@ -30,30 +30,28 @@ class FrameGuard extends PluginBase {
                 $name = $sender->getName();
                 if (!isset($this->frame[$name])) {
                     $this->frame[$name]["type"] = "add";
-                    $sender->sendMessage("§bFrameLock §7>> §a保護モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護モードを無効にできます");
+                    SendMessage::Send($sender, "保護モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護モードを無効にできます", "FrameLock", true);
                 } elseif ($this->frame[$name]["type"] === "delete") {
                     $this->frame[$name]["type"] = "add";
-                    $sender->sendMessage("§bFrameLock §7>> §a保護モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護モードを無効にできます");
+                    SendMessage::Send($sender, "保護モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護モードを無効にできます", "FrameLock", true);
                 } else {
                     unset($this->frame[$name]);
-                    $sender->sendMessage("§bFrameLock §7>> §a保護モードを無効にしました");
+                    SendMessage::Send($sender, "保護モードを無効にしました", "FrameLock", true);
                 }
-                SoundPacket::Send($sender, 'note.harp');
                 break;
             case "unlockfr":
                 $name = $sender->getName();
                 if (!isset($this->frame[$name])) {
                     $this->frame[$name]["type"] = "delete";
-                    $sender->sendMessage("§bFrameLock §7>> §a保護解除モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護解除モードを無効にできます");
+                    SendMessage::Send($sender, "保護解除モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護解除モードを無効にできます", "FrameLock", true);
                 } elseif ($this->frame[$name]["type"] === "add") {
                     $this->frame[$name]["type"] = "delete";
-                    $sender->sendMessage("§bFrameLock §7>> §a保護解除モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護解除モードを無効にできます");
+                    SendMessage::Send($sender, "保護解除モードを有効にしました\n額縁をタップしてください\n再度コマンドを使うと保護解除モードを無効にできます", "FrameLock", true);
                 } else {
                     unset($this->frame[$name]);
-                    $sender->sendMessage("§bFrameLock §7>> §a保護解除モードを無効にしました");
+                    SendMessage::Send($sender, "保護解除モードを無効にしました", "FrameLock", true);
                     break;
                 }
-                SoundPacket::Send($sender, 'note.harp');
         }
         return true;
     }

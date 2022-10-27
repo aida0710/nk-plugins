@@ -8,7 +8,7 @@ use bbo51dog\bboform\element\Slider;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ShopAPI\database\EffectShopAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\lang\Translatable;
@@ -50,18 +50,15 @@ class EffectConfirmationForm extends CustomForm {
         if (is_numeric($this->time->getValue())) {
             $time = (int)$this->time->getValue();
         } else {
-            $player->sendMessage("§bEffect §7>> §c時間は数字で入力してください");
-            SoundPacket::Send($player, 'dig.chain');
+            SendMessage::Send($player, "時間は数字で入力してください", "Effect", false, 'dig.chain');
             return;
         }
         if ($time > EffectShopAPI::getInstance()->getTimeRestriction($this->effectName)) {
-            $player->sendMessage("§bEffect §7>> §c付与時間が上限を超えているため処理が中断されました");
-            SoundPacket::Send($player, 'dig.chain');
+            SendMessage::Send($player, "付与時間が上限を超えているため処理が中断されました", "Effect", false, 'dig.chain');
             return;
         }
         if ($time < 1) {
-            $player->sendMessage("§bEffect §7>> §c付与時間が1分未満です");
-            SoundPacket::Send($player, 'dig.chain');
+            SendMessage::Send($player, "付与時間が1分未満です", "Effect", false, 'dig.chain');
             return;
         }
         $level = (int)$this->level->getValue();

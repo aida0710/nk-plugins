@@ -20,7 +20,7 @@
 namespace onebone\economyland;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyland\database\Database;
 use onebone\economyland\database\SQLiteDatabase;
@@ -185,8 +185,7 @@ class EconomyLand extends PluginBase implements Listener {
                     $sender->sendMessage($this->getMessage("first-position-saved"));
                     return true;
                 } else {
-                    $sender->sendMessage("§bLand §7>> §cこのワールドでは使用できません。生活ワールドか農業ワールドで使用できます");
-                    SoundPacket::Send($sender, 'note.bass');
+                    SendMessage::Send($sender, "このワールドでは使用できません。生活ワールドか農業ワールドで使用できます", "Land", false);
                 }
                 break;
             case "e":
@@ -349,11 +348,11 @@ class EconomyLand extends PluginBase implements Listener {
                         }
                         $num = array_shift($param);
                         if (trim($num) == "") {
-                            $sender->sendMessage("§bLandHelp §7>> §a/land move 土地番号");
+                            SendMessage::Send($sender, "/land move 土地番号", "Land", true);
                             return true;
                         }
                         if (!is_numeric($num)) {
-                            $sender->sendMessage("§bLandHelp §7>> §a/land move 土地番号");
+                            SendMessage::Send($sender, "/land move 土地番号", "Land", true);
                             return true;
                         }
                         $info = $this->db->getLandById($num);
@@ -408,7 +407,7 @@ class EconomyLand extends PluginBase implements Listener {
                         $player = str_replace("_", " ", $prePlayer);
                         $landnum = array_shift($param);
                         if (trim($player) == "" or trim($landnum) == "" or !is_numeric($landnum)) {
-                            $sender->sendMessage("§bLandHelp §7>> §a/land give プレイヤー 土地番号");
+                            SendMessage::Send($sender, "/land give プレイヤー 土地番号", "Land", true);
                             return true;
                         }
                         $username = $player;
@@ -442,6 +441,10 @@ class EconomyLand extends PluginBase implements Listener {
                         }
                         return true;
                     case "invite":
+                        if (!$sender instanceof Player) {
+                            $sender->sendMessage($this->getMessage("run-cmd-in-game"));
+                            return true;
+                        }
                         if (!$sender->hasPermission("economyland.command.land.invite")) {
                             $sender->sendMessage($this->getMessage("no-permission-command"));
                             return true;
@@ -450,7 +453,7 @@ class EconomyLand extends PluginBase implements Listener {
                         $prePlayer = array_shift($param);
                         $player = str_replace("_", " ", $prePlayer);
                         if (trim($player) == "" or trim($landnum) == "") {
-                            $sender->sendMessage("§bLandHelp §7>> §a/land invite 土地番号 プレイヤー");
+                            SendMessage::Send($sender, "/land invite 土地番号 プレイヤー", "Land", true);
                             return true;
                         }
                         if (!is_numeric($landnum)) {
@@ -478,6 +481,10 @@ class EconomyLand extends PluginBase implements Listener {
                         }
                         return true;
                     case "kick":
+                        if (!$sender instanceof Player) {
+                            $sender->sendMessage($this->getMessage("run-cmd-in-game"));
+                            return true;
+                        }
                         if (!$sender->hasPermission("economyland.command.land.invite.remove")) {
                             $sender->sendMessage($this->getMessage("no-permission-command"));
                             return true;
@@ -486,7 +493,7 @@ class EconomyLand extends PluginBase implements Listener {
                         $prePlayer = array_shift($param);
                         $player = str_replace("_", " ", $prePlayer);
                         if (trim($player) === "") {
-                            $sender->sendMessage("§bLandHelp §7>> §a/land kick 土地番号 プレイヤー");
+                            SendMessage::Send($sender, "/land kick 土地番号 プレイヤー", "Land", true);
                             return true;
                         }
                         if (!is_numeric($landnum)) {
@@ -509,9 +516,13 @@ class EconomyLand extends PluginBase implements Listener {
                         }
                         return true;
                     case "invitee":
+                        if (!$sender instanceof Player) {
+                            $sender->sendMessage($this->getMessage("run-cmd-in-game"));
+                            return true;
+                        }
                         $landnum = array_shift($param);
                         if (trim($landnum) == "" or !is_numeric($landnum)) {
-                            $sender->sendMessage("§bLandHelp §7>> §a/land invitee 土地番号");
+                            SendMessage::Send($sender, "/land invitee 土地番号", "LandHelp", true);
                             return true;
                         }
                         $info = $this->db->getInviteeById($landnum);
@@ -541,13 +552,13 @@ class EconomyLand extends PluginBase implements Listener {
                 }
                 return true;
             case "landsell":
+                if (!$sender instanceof Player) {
+                    $sender->sendMessage($this->getMessage("run-cmd-in-game"));
+                    return true;
+                }
                 $id = array_shift($param);
                 switch ($id) {
                     case "here":
-                        if (!$sender instanceof Player) {
-                            $sender->sendMessage($this->getMessage("run-cmd-in-game"));
-                            return true;
-                        }
                         $x = $sender->getPosition()->getX();
                         $z = $sender->getPosition()->getZ();
                         $info = $this->db->getByCoord($x, $z, $sender->getWorld()->getFolderName());
@@ -580,7 +591,7 @@ class EconomyLand extends PluginBase implements Listener {
                                 $sender->sendMessage($this->getMessage("not-your-land", [$p, $info["owner"], "%3"]));
                             }
                         } else {
-                            $sender->sendMessage("§bLandHelp §7>> §a/landsell 土地番号|here");
+                            SendMessage::Send($sender, "/landsell 土地番号|here", "Land", true);
                         }
                 }
                 return true;

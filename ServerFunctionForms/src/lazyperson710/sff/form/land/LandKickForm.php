@@ -5,6 +5,7 @@ namespace lazyperson710\sff\form\land;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\sff\form\LandForm;
 use pocketmine\player\Player;
@@ -40,22 +41,18 @@ class LandKickForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if ($this->input1->getValue() === "") {
-            $player->sendMessage("§bLand §7>> §c土地番号を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "土地番号を入力してください", "Land", false);
             return;
         } elseif (!preg_match('/^[0-9]+$/', $this->input1->getValue())) {
-            $player->sendMessage("§bLand §7>> §c土地番号は数字で入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "土地番号は数字で入力してください", "Land", false);
             return;
         }
         if ($this->input2->getValue() === "") {
-            $player->sendMessage("§bLand §7>> §cプレイヤーidを入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーidを入力してください", "Land", false);
             return;
         }
         if (!Server::getInstance()->getPlayerExact($this->input2->getValue())) {
-            $player->sendMessage("§bLand §7>> §cオンラインのプレイヤーを入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "オンラインのプレイヤーを入力してください", "Land", false);
             return;
         }
         Server::getInstance()->dispatchCommand($player, "land kick {$this->input1->getValue()} {$this->input2->getValue()}");

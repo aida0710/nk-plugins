@@ -5,11 +5,11 @@ namespace bbo51dog\announce;
 use bbo51dog\announce\form\AnnounceForm;
 use bbo51dog\announce\service\AnnounceService;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\server\CommandEvent;
 use pocketmine\player\Player;
-use pocketmine\utils\TextFormat;
 
 class EventListener implements Listener {
 
@@ -36,7 +36,7 @@ class EventListener implements Listener {
         }
         if (!AnnounceService::isConfirmed($sender->getName())) {
             $event->cancel();
-            $sender->sendPopup(MessageFormat::PREFIX_PASS . TextFormat::GREEN . "コマンドを使うには/passで機能をアクティブにする必要があります");
+            SendMessage::Send($sender, "コマンドを使うには/passで機能をアクティブにする必要があります", "Pass", false);
         }
     }
 }

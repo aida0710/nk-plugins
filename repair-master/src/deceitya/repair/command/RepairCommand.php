@@ -6,7 +6,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\repair\form\RepairForm;
 use Exception;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Durable;
@@ -40,8 +40,7 @@ class RepairCommand extends Command {
             if (!$item instanceof Durable) throw new \Error("道具以外のアイテムが指定されました");
             SendForm::Send($player, (new RepairForm($level, $item, $mode)));
         } else {
-            $sender->sendMessage("§bRepair §7>> §cRepairコマンドは80レベル以上でないと開くことが出来ません。通常はかなとこをスニークタップすることで修繕出来ます");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($sender, "Repairコマンドは80レベル以上でないと開くことが出来ません。通常はかなとこをスニークタップすることで修繕出来ます", "Repair", false);
         }
     }
 }

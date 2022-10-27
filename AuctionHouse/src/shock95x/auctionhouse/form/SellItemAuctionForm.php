@@ -5,7 +5,7 @@ namespace shock95x\auctionhouse\form;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -27,15 +27,14 @@ class SellItemAuctionForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if ($this->SellingPrice->getValue() === "") {
-            $player->sendMessage("§bBazaar §7>> §c出品価格を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "出品価格を入力してください", "Bazaar", false);
             return;
         }
         if (!is_numeric($this->SellingPrice->getValue())) {
-            $player->sendMessage("§bBazaar §7>> §c整数を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "整数を入力してください", "Bazaar", false);
             return;
         }
-        Server::getInstance()->dispatchCommand($player, "bazaar sell {$this->SellingPrice->getValue()}");
+        $value = (int)$this->SellingPrice->getValue();
+        Server::getInstance()->dispatchCommand($player, "bazaar sell {$value}");
     }
 }

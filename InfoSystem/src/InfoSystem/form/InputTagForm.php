@@ -7,7 +7,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use InfoSystem\InfoSystem;
 use InfoSystem\task\ChangeNameTask;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -29,22 +29,19 @@ class InputTagForm extends CustomForm {
         $name = strtolower($player->getName());
         $result = $this->input->getValue();
         if ($result === "") {
-            $player->sendMessage("§bTag §7>> §c未記入です");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "付けたい称号名を入力してください", "Tag", false);
             return;
         }
         if (str_contains($result, "l")) {
             if (!Server::getInstance()->isOp($player->getName())) {
-                $player->sendMessage("§bTag §7>> §c太文字を使用することはできません");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "入力された称号名に太文字が入力されていた為処理が中断されました", "Tag", false);
                 return;
             }
         }
         if (Server::getInstance()->isOp($player->getName())) {
             InfoSystem::getInstance()->data[$name]->set("tag", $result);
             InfoSystem::getInstance()->data[$name]->save();
-            $player->sendMessage("§bTag §7>> §a称号を " . $result . " §r§aに変更しました");
-            SoundPacket::Send($player, 'note.harp');
+            SendMessage::Send($player, "称号を " . $result . " §r§aに変更しました", "Tag", true);
             InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
         } else {
             $Section = mb_substr_count($result, "§");
@@ -52,13 +49,11 @@ class InputTagForm extends CustomForm {
             $count = $Section * 2;
             $count1 = $check - $count;
             if ($count1 >= 16) {
-                $player->sendMessage("§bTag §7>> §c称号の文字数は最大でも15文字となっています");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "称号名の最大文字数は15文字の為処理が中断されました。入力文字数 -> {$count1}", "Tag", false);
             } else {
                 InfoSystem::getInstance()->data[$name]->set("tag", $result);
                 InfoSystem::getInstance()->data[$name]->save();
-                $player->sendMessage("§bTag §7>> §a称号を " . $result . " §r§aに変更しました");
-                SoundPacket::Send($player, 'note.harp');
+                SendMessage::Send($player, "称号を " . $result . " §r§aに変更しました", "Tag", true);
                 InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
             }
         }

@@ -3,7 +3,7 @@
 namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendTip;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -32,14 +32,12 @@ class ResourceWorldProtect implements Listener {
             ];
             $heightLimit = WorldManagementAPI::getInstance()->getHeightLimit("resource");
             if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
-                $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドではY.{$heightLimit}以上のブロックを破壊することは許可されていません");
-                SoundPacket::Send($event->getPlayer(), 'note.bass');
+                SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上のブロックを破壊することは許可されていません", "Protect", false);
                 $event->cancel();
                 return;
             }
             if (!in_array($event->getBlock()->getName(), $blocks)) {
-                $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません");
-                SoundPacket::Send($event->getPlayer(), 'note.bass');
+                SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません", "Protect", false);
                 $event->cancel();
             }
         }
@@ -66,14 +64,12 @@ class ResourceWorldProtect implements Listener {
                 VanillaBlocks::DARK_OAK_LOG()->getName(),
             ];
             if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
-                $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません");
-                SoundPacket::Send($event->getPlayer(), 'note.bass');
+                SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", "Protect", false);
                 $event->cancel();
                 return;
             }
             if (!in_array($event->getBlock()->getName(), $blocks)) {
-                $event->getPlayer()->sendTip("§bProtect §7>> §c現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません");
-                SoundPacket::Send($event->getPlayer(), 'note.bass');
+                SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません", "Protect", false);
                 $event->cancel();
             }
         }

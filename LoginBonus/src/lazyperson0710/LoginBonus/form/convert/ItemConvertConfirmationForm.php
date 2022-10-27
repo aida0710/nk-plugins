@@ -7,7 +7,7 @@ use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\LoginBonus\calculation\CheckInventoryCalculation;
 use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
 use lazyperson0710\LoginBonus\Main;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 
 class ItemConvertConfirmationForm extends CustomForm {
@@ -39,18 +39,15 @@ class ItemConvertConfirmationForm extends CustomForm {
             }
         }
         if (!$player->getInventory()->canAddItem($item)) {
-            $player->sendMessage("インベントリに空きがないため処理が中断されました");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "インベントリに空きがないため処理が中断されました", "LoginBonus", false);
             return;
         }
         if (CheckInventoryCalculation::check($player, $this->item->getCost())) {
             $player->getInventory()->addItem($item);
             $player->getInventory()->removeItem(Main::getInstance()->loginBonusItem->setCount($this->item->getCost()));
-            $player->sendMessage("§aログインボーナスを" . $this->item->getCost() . "個消費してチケット" . $this->item->getQuantity() . "枚に交換しました");
-            SoundPacket::Send($player, 'break.amethyst_block');
+            SendMessage::Send($player, "ログインボーナスを" . $this->item->getCost() . "個消費してチケット" . $this->item->getQuantity() . "枚に交換しました", "LoginBonus", true, 'break.amethyst_block');
         } else {
-            $player->sendMessage("インベントリ内にあるログインボーナス数が足りません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "インベントリ内にあるログインボーナス数が足りません", "LoginBonus", false);
         }
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 class SettingData {
 
     public const DefaultData = [

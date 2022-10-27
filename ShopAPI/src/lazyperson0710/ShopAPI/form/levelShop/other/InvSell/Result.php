@@ -5,7 +5,7 @@ namespace lazyperson0710\ShopAPI\form\levelShop\other\InvSell;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
@@ -38,7 +38,6 @@ class Result extends SimpleForm {
             $inventory->removeItem($item);
         }
         EconomyAPI::getInstance()->addMoney($player->getName(), $allSellMoney);
-        $player->sendMessage("§bLevelShop §7>> §a{$allSellMoney}円で{$allCount}個のアイテムが売却されました");
-        SoundPacket::Send($player, 'break.amethyst_block');
+        SendMessage::Send($player, "{$allSellMoney}円で{$allCount}個のアイテムが売却されました", "LevelShop", true, 'break.amethyst_block');
     }
 }

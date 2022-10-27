@@ -3,7 +3,7 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\listener\Major;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendTip;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\item\Item;
@@ -26,19 +26,16 @@ class PlayersGetLocation {
                 $player->getWorld()->addParticle($pos, $particle);
             }
             $count++;
-            $onlinePlayer->sendTip("§bLocation §7>> §c{$player->getName()}さんがあなたのいる場所を特定しました！");
-            SoundPacket::Send($onlinePlayer, "item.spyglass.use");
+            SendTip::Send($onlinePlayer, "{$player->getName()}さんがあなたのいる場所を特定しました！", "Location", true, "item.spyglass.use");
         }
         if ($count === 0) {
-            $player->sendTip("§bLocation §7>> §c現在同じワールドにいるプレイヤーが一人もいない為処理が中断されました");
-            SoundPacket::Send($player, 'note.bass');
+            SendTip::Send($player, "現在同じワールドにいるプレイヤーが一人もいない為処理が中断されました", "Location", false);
             return;
         }
-        $player->sendTip("§bLocation §7>> §cプレイヤーの場所を特定しました");
+        SendTip::Send($player, "プレイヤーの場所を特定しました", "Location", true, "item.spyglass.use");
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }
-        SoundPacket::Send($player, "item.spyglass.use");
     }
 
 }

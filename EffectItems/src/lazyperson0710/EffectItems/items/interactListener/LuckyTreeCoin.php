@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
+use lazyperson710\core\packet\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -30,7 +31,7 @@ class LuckyTreeCoin {
         } else {
             $player->dropItem($addItem);
         }
-        $player->sendMessage("§bLuckyTreeSaplingCoin §7>> §a{$addItem->getName()}の苗が手に入りました！！");
+        SendNoSoundMessage::Send($player, "{$addItem->getName()}の苗が手に入りました！！", "LuckyTreeSaplingCoin", true);
         SoundPacket::Send($player, 'item.trident.return');
     }
 }

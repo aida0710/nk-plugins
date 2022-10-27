@@ -27,7 +27,7 @@ class MyWarpPlugin extends PluginBase {
         if ($sender instanceof Player) {
             SendForm::Send($sender, (new MainForm()));
         } else {
-            $sender->sendMessage('§bMyWarp §7>> §c鯖内でしかできません');
+            $sender->sendMessage("サーバー内で実行してください");
         }
         return true;
     }

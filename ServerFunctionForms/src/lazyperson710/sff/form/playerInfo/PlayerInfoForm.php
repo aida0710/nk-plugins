@@ -5,7 +5,7 @@ namespace lazyperson710\sff\form\playerInfo;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -37,8 +37,7 @@ class PlayerInfoForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         $playerName = $this->dropdown->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-            $player->sendMessage("§bPlayerInfo §7>> §cプレイヤーが存在しない為、正常にformを送信できませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "PlayerInfo", false);
             return;
         }
         SendForm::Send($player, (new PlayerForm($player, $playerName)));

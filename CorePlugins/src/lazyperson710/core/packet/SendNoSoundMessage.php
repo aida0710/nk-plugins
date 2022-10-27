@@ -7,11 +7,11 @@ use pocketmine\utils\TextFormat;
 
 class SendNoSoundMessage {
 
-    public static function Send(Player $player, string $message, string $prefix, bool $error): void {
-        if ($error === true) {
-            $type = TextFormat::RED;
-        } else {
+    public static function Send(Player $player, string $message, string $prefix, bool $success): void {
+        if ($success === true) {
             $type = TextFormat::GREEN;
+        } else {
+            $type = TextFormat::RED;
         }
         $player->sendMessage(TextFormat::BLUE . $prefix . TextFormat::GRAY . " >> " . $type . $message);
     }

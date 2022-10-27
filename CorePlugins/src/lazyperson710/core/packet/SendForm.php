@@ -13,7 +13,7 @@ class SendForm {
 
     public static function Send(Player $player, Form $form): void {
         if (isset(self::$formInterval[$player->getName()])) {
-            $player->sendTip("§bSendForm §7>> §c0.3秒以内連続でFormを送信することは出来ません");
+            SendNoSoundTip::Send($player, "0.3秒以内連続でFormを送信することは出来ません", "SendForm", true);
             return;
         } else {
             self::$formInterval[$player->getName()] = true;

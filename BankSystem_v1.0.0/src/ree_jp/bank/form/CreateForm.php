@@ -2,11 +2,10 @@
 
 namespace ree_jp\bank\form;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
-use pocketmine\utils\TextFormat;
 use ree_jp\bank\sqlite\BankHelper;
 
 class CreateForm implements Form {
@@ -28,19 +27,15 @@ class CreateForm implements Form {
                 if (!BankHelper::getInstance()->isExists($string)) {
                     BankHelper::getInstance()->create($string, $player->getName());
                     EconomyAPI::getInstance()->reduceMoney($player, self::MONEY);
-                    $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a銀行を作成しました");
-                    SoundPacket::Send($player, 'note.harp');
+                    SendMessage::Send($player, "銀行を作成しました", "Bank", true);
                 } else {
-                    $player->sendMessage(TextFormat::RED . "§bBank §7>> §cすでにその名前の銀行が存在しています");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendMessage::Send($player, "すでにその名前の銀行が存在しています", "Bank", false);
                 }
             } else {
-                $player->sendMessage("§bBank §7>> §c銀行名にセクションを含めることは出来ません");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "銀行名にセクションを含めることは出来ません", "Bank", false);
             }
         } else {
-            $player->sendMessage(TextFormat::RED . "§bBank §7>> §cお金が足りません");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "お金が足りません", "Bank", false);
         }
     }
 

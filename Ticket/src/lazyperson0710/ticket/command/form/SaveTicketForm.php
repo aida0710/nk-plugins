@@ -5,6 +5,7 @@ namespace lazyperson0710\ticket\command\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 
 class SaveTicketForm extends CustomForm {
@@ -19,9 +20,9 @@ class SaveTicketForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (TicketAPI::getInstance()->dataSave() === true) {
-            $player->sendMessage("Ticketデータをセーブしました");
+            SendMessage::Send($player, "Ticketデータをセーブしました", "Ticket", true);
         } else {
-            $player->sendMessage("Ticketデータのセーブに失敗しました");
+            SendMessage::Send($player, "Ticketデータのセーブに失敗しました", "Ticket", true);
         }
     }
 }

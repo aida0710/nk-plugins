@@ -9,7 +9,6 @@ use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
 use pocketmine\network\mcpe\protocol\types\command\CommandEnum;
 use pocketmine\network\mcpe\protocol\types\command\CommandParameter;
 use pocketmine\player\Player;
-use pocketmine\utils\TextFormat;
 use ree_jp\bank\form\BankForm;
 
 class BankCommand extends Command {
@@ -35,7 +34,7 @@ class BankCommand extends Command {
                 SendForm::Send($sender, (new BankForm()));
             }
         } else {
-            $sender->sendMessage(TextFormat::RED . "§bBank §7>> §cコマンドを実行出来ませんでした");
+            $sender->sendMessage("サーバー内で実行してください");
         }
         return true;
     }

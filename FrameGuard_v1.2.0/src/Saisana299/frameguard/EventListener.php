@@ -2,7 +2,8 @@
 
 namespace Saisana299\frameguard;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -30,13 +31,11 @@ class EventListener implements Listener {
                 $ownerf = $this->FrameGuard->config->get($xyzl);
                 if (!Server::getInstance()->isOp($player->getName())) {
                     if ($ownerf != $name) {
-                        $player->sendTip("§bFrameLock §7>> §cこの額縁は" . $ownerf . "によって保護されています");
-                        SoundPacket::Send($player, 'note.bass');
+                        SendTip::Send($player, "この額縁は" . $ownerf . "によって保護されています", "FrameLock", false);
                         $event->cancel();
                     }
                 } else {
-                    $player->sendTip("§bFrameLock §7>> §cこの額縁は" . $ownerf . "によって保護されています");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendTip::Send($player, "この額縁は" . $ownerf . "によって保護されています", "FrameLock", false);
                 }
             }
         }
@@ -52,8 +51,7 @@ class EventListener implements Listener {
                 $ownerf = $this->FrameGuard->config->get($block->getPosition()->getX() . "," . $block->getPosition()->getY() . "," . $block->getPosition()->getZ() . "," . $player->getPosition()->getWorld()->getFolderName());
                 if (!Server::getInstance()->isOp($player->getName())) {
                     if ($ownerf != $name) {
-                        $player->sendTip("§bFrameLock §7>> §cこの額縁は" . $ownerf . "によって保護されています");
-                        SoundPacket::Send($player, 'note.bass');
+                        SendTip::Send($player, "この額縁は" . $ownerf . "によって保護されています", "FrameLock", false);
                         $event->cancel();
                         return;
                     }
@@ -64,25 +62,21 @@ class EventListener implements Listener {
             switch ($this->FrameGuard->frame[$name]["type"]) {
                 case 'add':
                     if (!($block->getId() === 199)) {
-                        $player->sendMessage("§bFrameLock §7>> §a額縁をタップしてください");
-                        SoundPacket::Send($player, 'note.harp');
+                        SendMessage::Send($player, "額縁をタップしてください", "FrameLock", true);
                         return;
                     }
                     $event->cancel();
                     $xyzl = $block->getPosition()->getX() . "," . $block->getPosition()->getY() . "," . $block->getPosition()->getZ() . "," . $block->getPosition()->getWorld()->getFolderName();
                     if (!$this->FrameGuard->config->exists($xyzl)) {
                         $this->FrameGuard->config->set($xyzl, $name);
-                        $player->sendMessage("§bFrameLock §7>> §a額縁を保護しました");
-                        SoundPacket::Send($player, 'note.harp');
+                        SendMessage::Send($player, "額縁を保護しました", "FrameLock", true);
                     } else {
-                        $player->sendTip("§bFrameLock §7>> §c既に保護されています");
-                        SoundPacket::Send($player, 'note.bass');
+                        SendMessage::Send($player, "既に保護されています", "FrameLock", false);
                     }
                     break;
                 case 'delete':
                     if (!($block->getId() === 199)) {
-                        $player->sendMessage("§bFrameLock §7>> §a額縁をタップしてください");
-                        SoundPacket::Send($player, 'note.harp');
+                        SendMessage::Send($player, "額縁をタップしてください", "FrameLock", true);
                         return;
                     }
                     $place = $block->getPosition()->getX() . "," . $block->getPosition()->getY() . "," . $block->getPosition()->getZ() . "," . $block->getPosition()->getWorld()->getFolderName();
@@ -90,18 +84,15 @@ class EventListener implements Listener {
                         $ownerf = $this->FrameGuard->config->get($block->getPosition()->getX() . "," . $block->getPosition()->getY() . "," . $block->getPosition()->getZ() . "," . $block->getPosition()->getWorld()->getFolderName());
                         if ($ownerf === $name) {
                             $this->FrameGuard->config->remove($place);
-                            $player->sendMessage("§bFrameLock §7>> §a額縁の保護を解除しました");
-                            SoundPacket::Send($player, 'note.harp');
+                            SendMessage::Send($player, "額縁の保護を解除しました", "FrameLock", true);
                         } else {
                             if (Server::getInstance()->isOp($player->getName())) {
                                 $this->FrameGuard->config->remove($place);
-                                $player->sendMessage("§bFrameLock §7>> §a額縁の保護を解除しました");
-                                SoundPacket::Send($player, 'note.harp');
+                                SendMessage::Send($player, "額縁の保護を解除しました", "FrameLock", true);
                             }
                         }
                     } else {
-                        $player->sendMessage("§bFrameLock §7>> §cこの額縁は保護されていません");
-                        SoundPacket::Send($player, 'note.bass');
+                        SendTip::Send($player, "この額縁は保護されていません", "FrameLock", false);
                     }
                     break;
             }
@@ -117,18 +108,15 @@ class EventListener implements Listener {
             $ownerf = $this->FrameGuard->config->get($block->getPosition()->getX() . "," . $block->getPosition()->getY() . "," . $block->getPosition()->getZ() . "," . $block->getPosition()->getWorld()->getFolderName());
             if (!Server::getInstance()->isOp($player->getName())) {
                 if ($ownerf != $name) {
-                    $player->sendTip("§bFrameLock §7>> §aこの額縁は" . $ownerf . "によって保護されています");
-                    SoundPacket::Send($player, 'note.bass');
+                    SendTip::Send($player, "この額縁は" . $ownerf . "によって保護されています", "FrameLock", false);
                     $event->cancel();
                 } else {
                     $this->FrameGuard->config->remove($xyzl);
-                    $player->sendMessage("§bFrameLock §7>> §a額縁の保護を解除しました");
-                    SoundPacket::Send($player, 'note.harp');
+                    SendMessage::Send($player, "額縁の保護を解除しました", "FrameLock", true);
                 }
             } else {
                 $this->FrameGuard->config->remove($xyzl);
-                $player->sendMessage("§bFrameLock §7>> §a額縁の保護を解除しました");
-                SoundPacket::Send($player, 'note.harp');
+                SendMessage::Send($player, "額縁の保護を解除しました", "FrameLock", true);
             }
         } else {
             foreach ($block->getHorizontalSides() as $sideBlock) {
@@ -162,18 +150,15 @@ class EventListener implements Listener {
                     $ownerf = $this->FrameGuard->config->get($new_pos);
                     if (!Server::getInstance()->isOp($player->getName())) {
                         if ($ownerf != $name) {
-                            $player->sendTip("§bFrameLock §7>> §c" . $ownerf . "によって保護されている額縁があるため壊せません");
-                            SoundPacket::Send($player, 'note.bass');
+                            SendTip::Send($player, $ownerf . "によって保護されている額縁があるため壊せません", "FrameLock", false);
                             $event->cancel();
                         } else {
                             $this->FrameGuard->config->remove($new_pos);
-                            $player->sendMessage("§bFrameLock §7>> §cブロックが破壊されたため強制的にロックが解除されました");
-                            SoundPacket::Send($player, 'note.bass');
+                            SendMessage::Send($player, "ブロックが破壊されたため強制的にロックが解除されました", "FrameLock", true);
                         }
                     } else {
                         $this->FrameGuard->config->remove($new_pos);
-                        $player->sendMessage("§bFrameLock §7>> §cブロックが破壊されたため強制的にロックが解除されました");
-                        SoundPacket::Send($player, 'note.bass');
+                        SendMessage::Send($player, "ブロックが破壊されたため強制的にロックが解除されました", "FrameLock", true);
                     }
                 }
             }

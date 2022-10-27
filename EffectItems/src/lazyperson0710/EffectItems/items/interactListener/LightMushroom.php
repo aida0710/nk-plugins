@@ -3,6 +3,7 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\packet\AddEffectPacket;
+use lazyperson710\core\packet\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
@@ -25,8 +26,8 @@ class LightMushroom {
             $effect = new EffectInstance(VanillaEffects::POISON(), 20 * 15, 3, false);
             AddEffectPacket::Add($player, $effect, VanillaEffects::POISON(), true);
             //todo なんかデメリットっぽい音出したいよね
-            SoundPacket::Send($player, 'entity.generic.drown');
-            $player->sendMessage("§bLightMushroom §7>> §cキノコの毒に侵されてしまった");
+            //SoundPacket::Send($player, 'entity.generic.drown');
+            SendNoSoundMessage::Send($player, "キノコの毒に侵されてしまった!", "LightMushroom", false);
         }
         SoundPacket::Send($player, 'item.trident.return');
     }

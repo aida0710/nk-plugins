@@ -4,6 +4,7 @@ namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
+use lazyperson710\core\packet\SendNoSoundActionBarMessage;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
@@ -31,7 +32,7 @@ class DirectInventory implements Listener {
             foreach ($drops as $item) {
                 if ((new DirectInventory())->notStorageItem($player, $item) === false) continue;
                 StackStorageAPI::$instance->add($player->getXuid(), $item);
-                $player->sendActionBarMessage("§bStorage §7>> §a" . $item->getName() . "が倉庫にしまわれました");
+                SendNoSoundActionBarMessage::Send($player, $item->getName() . "が倉庫にしまわれました", "Storage", true);
             }
         } else {
             foreach ($drops as $item) {
@@ -40,7 +41,7 @@ class DirectInventory implements Listener {
                     $player->getInventory()->addItem($item);
                 } else {
                     StackStorageAPI::$instance->add($player->getXuid(), $item);
-                    $player->sendActionBarMessage("§bStorage §7>> §aインベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました");
+                    SendNoSoundActionBarMessage::Send($player, "インベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました", "Storage", true);
                 }
             }
         }
@@ -56,7 +57,7 @@ class DirectInventory implements Listener {
                     $player->getInventory()->addItem($item);
                 } else {
                     $player->dropItem($item);
-                    $player->sendMessage("§bStorage §7>> §c" . $item->getName() . "を直接ストレージに格納することは出来ない為ドロップされました");
+                    SendNoSoundActionBarMessage::Send($player, $item->getName() . "を直接ストレージに格納することは出来ない為ドロップされました", "Storage", false);
                 }
                 return false;
         }

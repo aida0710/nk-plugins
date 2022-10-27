@@ -2,10 +2,9 @@
 
 namespace ree_jp\bank\form;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
-use pocketmine\utils\TextFormat;
 use ree_jp\bank\sqlite\BankHelper;
 
 class ShareForm implements Form {
@@ -25,13 +24,11 @@ class ShareForm implements Form {
     public function handleResponse(Player $player, $data): void {
         if ($data === null) return;
         if (BankHelper::getInstance()->isShare($this->bank, $data[0])) {
-            $player->sendMessage(TextFormat::RED . "§bBank §7>> §cその人はすでに共有されています");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "その人はすでに共有されています", "Bank", false);
             return;
         }
         BankHelper::getInstance()->share($this->bank, $data[0], $player->getName());
-        $player->sendMessage(TextFormat::GREEN . "§bBank §7>> §a{$data[0]}さんを共有しました");
-        SoundPacket::Send($player, 'note.harp');
+        SendMessage::Send($player, "{$data[0]}さんを共有しました", "Bank", true);
     }
 
     /**

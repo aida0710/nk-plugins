@@ -3,9 +3,9 @@
 namespace deceitya\sersto;
 
 use DateTimeImmutable;
+use lazyperson710\core\packet\SendBroadcastMessage;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\Task;
-use pocketmine\Server;
 use pocketmine\utils\Config;
 use pocketmine\world\generator\GeneratorManager;
 use pocketmine\world\World;
@@ -88,22 +88,22 @@ class ShutdownTask extends Task {
             $this->plugin->setCurrent($this->plugin->getCurrent() - 1);
             switch ($this->plugin->getCurrent()) {
                 case 900:
-                    Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り15分になりました");
+                    SendBroadcastMessage::Send("サーバー再起動まで残り15分になりました", "Server");
                     break;
                 case 300:
-                    Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り5分になりました");
+                    SendBroadcastMessage::Send("サーバー再起動まで残り5分になりました", "Server");
                     break;
                 case 15:
-                    Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り15秒になりました");
+                    SendBroadcastMessage::Send("サーバー再起動まで残り15秒になりました", "Server");
                     break;
                 case 3:
-                    Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り3秒になりました");
+                    SendBroadcastMessage::Send("サーバー再起動まで残り3秒になりました", "Server");
                     break;
                 case 2:
-                    Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り2秒になりました");
+                    SendBroadcastMessage::Send("サーバー再起動まで残り2秒になりました", "Server");
                     break;
                 case 1:
-                    Server::getInstance()->broadcastMessage("§bServer §7>> §cサーバー再起動まで残り1秒になりました");
+                    SendBroadcastMessage::Send("サーバー再起動まで残り1秒になりました", "Server");
                     break;
             }
         } else {

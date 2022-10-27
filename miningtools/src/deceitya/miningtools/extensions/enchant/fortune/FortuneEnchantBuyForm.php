@@ -7,14 +7,14 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
-use deceitya\miningtools\Main;
+use lazyperson710\core\packet\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\player\Player;
-use pocketmine\Server;
 
 class FortuneEnchantBuyForm extends SimpleForm {
 
@@ -46,7 +46,7 @@ class FortuneEnchantBuyForm extends SimpleForm {
         if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
         if (empty($this->nbt)) {
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
-                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
+                SendMessage::Send($player, "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました", "MiningTools", false);
                 return;
             }
             $rank = 1;
@@ -61,11 +61,11 @@ class FortuneEnchantBuyForm extends SimpleForm {
         if (array_key_exists("MiningTools_Expansion_FortuneEnchant", $this->nbt)) {
             if ($item->hasEnchantment(VanillaEnchantments::SILK_TOUCH())) {
                 $item->removeEnchantment(VanillaEnchantments::SILK_TOUCH());
-                $player->sendMessage(Main::PrefixRed . '現在所持しているアイテムはシルクタッチエンチャントが付与されているため不正防止やエラー対策の観点からエンチャントが削除されました');
+                SendMessage::Send($player, "現在所持しているアイテムはシルクタッチエンチャントが付与されているため不正防止やエラー対策の観点からエンチャントが削除されました", "MiningTools", false);
                 //エンチャントだけ消してそのまま処理続行
             }
             if ($this->nbt["MiningTools_Expansion_FortuneEnchant"] !== $namedTag->getInt("MiningTools_Expansion_FortuneEnchant")) {
-                $player->sendMessage(Main::PrefixRed . "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました");
+                SendMessage::Send($player, "現在所持しているアイテムは最初に持っているアイテムと異なる恐れがあるため不正防止の観点から処理が中断されました", "MiningTools", false);
                 return;
             }
             if ($item->getNamedTag()->getTag('MiningTools_Expansion_FortuneEnchant') !== null) {
@@ -102,6 +102,6 @@ class FortuneEnchantBuyForm extends SimpleForm {
         $item->setNamedTag($nbt);
         $item->setLore((new SetLoreJudgment())->SetLoreJudgment($player, $item));
         $player->getInventory()->setItemInHand($item);
-        Server::getInstance()->broadcastMessage(Main::PrefixYellow . "{$player->getName()}がMiningToolsを幸運エンチャント強化 - Rank{$rank}にアップグレードしました");
+        SendBroadcastMessage::Send("{$player->getName()}がMiningToolsを幸運エンチャント強化 - Rank{$rank}にアップグレードしました", "MiningTools");
     }
 }

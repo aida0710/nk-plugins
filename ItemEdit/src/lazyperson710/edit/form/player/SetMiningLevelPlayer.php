@@ -8,7 +8,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -55,8 +55,7 @@ class SetMiningLevelPlayer extends CustomForm {
     public function handleSubmit(Player $player): void {
         $targetName = $this->players->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($targetName)) {
-            $player->sendMessage("§bPlayerEdit §7>> §cプレイヤーが存在しない為、処理を中断しました");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーが存在しない為、処理を中断しました", "PlayerEdit", false);
             return;
         }
         $target = Server::getInstance()->getPlayerByPrefix($targetName);
@@ -83,26 +82,22 @@ class SetMiningLevelPlayer extends CustomForm {
             if ($output === true) {
                 continue;
             } else {
-                $player->sendMessage("§bPlayerEdit §7>> §c{$output}");
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, $output, "PlayerEdit", false);
                 return;
             }
         }
         if (!$input) {
-            $player->sendMessage("§bPlayerEdit §7>> §c一つでも値を入力してください");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "最低一つは値を入力してください", "PlayerEdit", false);
             return;
         }
-        $others = false;
         if ($this->enableLevel->getValue() === true) {
             if ($level !== false) {
                 MiningLevelAPI::getInstance()->setLevel($target, $level);
                 if ($player->getName() === $target->getName()) {
-                    $player->sendMessage("§bPlayerEdit §7>> §aレベルを{$level}に設定しました");
+                    SendMessage::Send($player, "レベルを{$level}に設定しました", "PlayerEdit", true);
                 } else {
-                    $others = true;
-                    $player->sendMessage("§bPlayerEdit §7>> §aレベルを{$level}に設定しました");
-                    $target->sendMessage("§bPlayerEdit §7>> §aレベルを{$player->getName()}が{$level}に設定しました");
+                    SendMessage::Send($player, "レベルを{$level}に設定しました", "PlayerEdit", true);
+                    SendMessage::Send($target, "レベルを{$player->getName()}が{$level}に設定しました", "PlayerEdit", true);
                 }
             }
         }
@@ -110,11 +105,10 @@ class SetMiningLevelPlayer extends CustomForm {
             if ($exp !== false) {
                 MiningLevelAPI::getInstance()->setExp($target, $exp);
                 if ($player->getName() === $target->getName()) {
-                    $player->sendMessage("§bPlayerEdit §7>> §a経験値を{$exp}に設定しました");
+                    SendMessage::Send($player, "経験値を{$exp}に設定しました", "PlayerEdit", true);
                 } else {
-                    $others = true;
-                    $player->sendMessage("§bPlayerEdit §7>> §a経験値を{$exp}に設定しました");
-                    $target->sendMessage("§bPlayerEdit §7>> §a経験値を{$player->getName()}が{$exp}に設定しました");
+                    SendMessage::Send($player, "経験値を{$exp}に設定しました", "PlayerEdit", true);
+                    SendMessage::Send($target, "経験値を{$player->getName()}が{$exp}に設定しました", "PlayerEdit", true);
                 }
             }
         }
@@ -122,16 +116,13 @@ class SetMiningLevelPlayer extends CustomForm {
             if ($upExp !== false) {
                 MiningLevelAPI::getInstance()->setLevelUpExp($target, $upExp);
                 if ($player->getName() === $target->getName()) {
-                    $player->sendMessage("§bPlayerEdit §7>> §a次のレベルまでの経験値を{$upExp}に設定しました");
+                    SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", "PlayerEdit", true);
                 } else {
-                    $others = true;
-                    $player->sendMessage("§bPlayerEdit §7>> §a次のレベルまでの経験値を{$upExp}に設定しました");
-                    $target->sendMessage("§bPlayerEdit §7>> §a次のレベルまでの経験値を{$player->getName()}が{$upExp}に設定しました");
+                    SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", "PlayerEdit", true);
+                    SendMessage::Send($target, "次のレベルまでの経験値を{$player->getName()}が{$upExp}に設定しました", "PlayerEdit", true);
                 }
             }
         }
-        if ($others === true) SoundPacket::Send($target, 'note.harp');
-        SoundPacket::Send($player, 'note.harp');
     }
 
     private function checkValue(string $key, string $value): bool|string {

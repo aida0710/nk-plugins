@@ -2,7 +2,7 @@
 
 namespace deceitya\editEnchant;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\Item;
@@ -18,37 +18,31 @@ class InspectionItem {
     public function inspectionItem(Player $player): bool {
         $item = $player->getInventory()->getItemInHand();
         if (!$item instanceof Durable) {
-            $player->sendMessage('§bEditEnchant §7>> §c現在所持しているアイテムは道具では無いためエンチャントを編集することは出来ません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "現在所持しているアイテムは道具では無いためエンチャントを編集することは出来ません", "EditEnchant", true);
             return false;
         }
         if ($item->getNamedTag()->getTag('gacha_mining') === null) {
             if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
-                $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
-                SoundPacket::Send($player, 'note.bass');
+                SendMessage::Send($player, "このアイテムはエンチャントを編集できません", "EditEnchant", false);
                 return false;
             }
         }
         if ($item->getNamedTag()->getTag('4mining') !== null) {
-            $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "このアイテムはエンチャントを編集できません", "EditEnchant", false);
             return false;
         }
         if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-            $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "このアイテムはエンチャントを編集できません", "EditEnchant", false);
             return false;
         }
         if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
-            $player->sendMessage('§bEditEnchant §7>> §c衝撃エンチャントが付与されているため編集できません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "衝撃エンチャントが付与されているため編集できません", "EditEnchant", false);
             return false;
         }
         /** @var ?ListTag $enchListTag */
         $enchListTag = $item->getNamedTag()->getListTag(Item::TAG_ENCH);
         if ($enchListTag === null || $enchListTag->count() === 0) {
-            $player->sendMessage('§bEditEnchant §7>> §cこのアイテムはエンチャントを編集できません');
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "このアイテムはエンチャントを編集できません", "EditEnchant", false);
             return false;
         }
         return true;

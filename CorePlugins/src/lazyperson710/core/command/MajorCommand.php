@@ -2,7 +2,7 @@
 
 namespace lazyperson710\core\command;
 
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\ItemFactory;
@@ -28,17 +28,14 @@ class MajorCommand extends Command {
             "lore3" => "また、スニークしながらタップすることで設定したポイントを削除することが出来ます",
         ]);
         if ($sender->getInventory()->contains($major)) {
-            $sender->sendMessage("§bMajor §7>> §c既にMajorがインベントリに存在する為、処理が中断されました");
-            SoundPacket::Send($sender, 'note.bass');
+            SendMessage::Send($sender, "既にMajorがインベントリに存在する為、処理が中断されました", "Major", false);
             return;
         }
         if ($sender->getInventory()->canAddItem($major)) {
             $sender->getInventory()->addItem($major);
-            $sender->sendMessage("§bMajor §7>> §aMajorを一つ配布しました。使いかたはアイテム説明をご覧ください");
-            SoundPacket::Send($sender, 'note.harp');
+            SendMessage::Send($sender, "Majorを一つ配布しました。使いかたはアイテム説明をご覧ください", "Major", true);
         } else {
-            $sender->sendMessage("§bMajor §7>> §cインベントリが満タンの為、majorを配布できませんでした");
-            SoundPacket::Send($sender, 'note.bass');
+            SendMessage::Send($sender, "インベントリが満タンの為、majorを配布できませんでした", "Major", false);
         }
     }
 

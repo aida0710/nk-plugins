@@ -4,6 +4,7 @@ namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson710\core\Main;
+use lazyperson710\core\packet\SendNoSoundTip;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
@@ -43,7 +44,7 @@ class PlayerDamageEvent implements Listener {
                     break;
                 }
                 if (isset(self::$damageFlags[$entity->getName()])) {
-                    $entity->sendTip("§bDamageProtect §7>> §cワープ直前のためダメージが無効化されました");
+                    SendNoSoundTip::Send($entity, "ワープ直前のためダメージが無効化されました", "DamageProtect", true);
                     $event->cancel();
                     $this->unset($entity);
                 }

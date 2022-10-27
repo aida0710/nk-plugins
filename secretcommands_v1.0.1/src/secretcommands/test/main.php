@@ -2,6 +2,7 @@
 
 namespace secretcommands\test;
 
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\server\DataPacketSendEvent;
@@ -62,7 +63,7 @@ class main extends PluginBase implements Listener {
         $array = explode(" ", $message);
         $label = substr($array[0], 1);
         if (!$this->getServer()->isOp($event->getPlayer()->getName()) && isset($this->list[$label])) {
-            $player->sendMessage($this->getServer()->getLanguage()->translateString(TextFormat::RED . "%commands.generic.notFound"));
+            SendMessage::Send($player, $this->getServer()->getLanguage()->translateString(TextFormat::RED . "%commands.generic.notFound"), "System", false);
             $event->cancel();
         }
     }

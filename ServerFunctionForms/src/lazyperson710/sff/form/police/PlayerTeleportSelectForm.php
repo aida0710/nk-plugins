@@ -5,6 +5,7 @@ namespace lazyperson710\sff\form\police;
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -38,8 +39,7 @@ class PlayerTeleportSelectForm extends CustomForm {
     public function handleSubmit(Player $player): void {
         $playerName = $this->dropdown->getSelectedOption();
         if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-            $player->sendMessage("§bPolice §7>> §cプレイヤーが存在しない為、正常に座標を取得できませんでした");
-            SoundPacket::Send($player, 'note.bass');
+            SendMessage::Send($player, "プレイヤーが存在しない為、正常に座標を取得できませんでした", "Police", false);
             return;
         }
         if ($player->isSpectator()) {

@@ -5,7 +5,7 @@ namespace lazyperson0710\ShopAPI\command;
 use deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\ShopAPI\form\levelShop\other\InvSell\Confirmation;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -25,8 +25,7 @@ class InvSellCommand extends Command {
         if (MiningLevelAPI::getInstance()->getLevel($sender) >= 25) {
             SendForm::Send($sender, (new Confirmation()));
         } else {
-            $sender->sendMessage("§bLevelShop §7>> §cレベル25以上でないと実行できません");
-            SoundPacket::Send($sender, 'note.bass');
+            SendMessage::Send($sender, "レベル25以上でないと実行できません", "LevelShop", false);
             Server::getInstance()->dispatchCommand($sender, "shop");
         }
     }

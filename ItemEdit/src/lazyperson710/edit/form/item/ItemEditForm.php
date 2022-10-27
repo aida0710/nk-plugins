@@ -5,6 +5,7 @@ namespace lazyperson710\edit\form\item;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson710\core\packet\SendMessage;
 use pocketmine\player\Player;
 
 class ItemEditForm extends CustomForm {
@@ -47,11 +48,11 @@ class ItemEditForm extends CustomForm {
         }
         if (!$this->setCount->getValue() == "") {
             if (!preg_match('/^[0-9]+$/', $this->setCount->getValue())) {
-                $player->sendMessage("setCount -> 整数のみで入力してください");
+                SendMessage::Send($player, "数量は整数のみ入力してください", "ItemEdit", false);
             } elseif ($this->setCount->getValue() >= 65) {
-                $player->sendMessage("setCount -> 65以上は指定できません");
+                SendMessage::Send($player, "数量は64以下で入力してください", "ItemEdit", false);
             } else {
-                $itemInHand->setCount($this->setCount->getValue());
+                $itemInHand->setCount((int)$this->setCount->getValue());
                 $player->getInventory()->setItemInHand($itemInHand);
             }
         }
