@@ -11,7 +11,7 @@ use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\BlockToolType;
 use pocketmine\event\block\BlockBreakEvent;

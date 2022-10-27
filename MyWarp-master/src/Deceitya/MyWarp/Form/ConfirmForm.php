@@ -3,7 +3,7 @@
 namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MyWarp\Database;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 

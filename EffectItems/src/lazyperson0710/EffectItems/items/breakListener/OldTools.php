@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\breakListener;
 
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\event\block\BlockBreakEvent;
 
 class OldTools {

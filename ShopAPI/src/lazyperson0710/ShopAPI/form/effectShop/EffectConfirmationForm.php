@@ -8,7 +8,7 @@ use bbo51dog\bboform\element\Slider;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ShopAPI\database\EffectShopAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\lang\Translatable;

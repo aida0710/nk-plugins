@@ -1,6 +1,6 @@
 <?php
 
-namespace lazyperson710\core\packet;
+namespace lazyperson710\core\packet\SendNoSoundMessage;
 
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -13,6 +13,6 @@ class SendNoSoundTip {
         } else {
             $type = TextFormat::RED;
         }
-        $player->sendTip(TextFormat::BLUE . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+        $player->sendTip(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
     }
 }

@@ -5,7 +5,7 @@ namespace onebone\economyapi\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\command\PayCommand;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;

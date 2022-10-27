@@ -5,7 +5,7 @@ namespace shock95x\auctionhouse\form;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 

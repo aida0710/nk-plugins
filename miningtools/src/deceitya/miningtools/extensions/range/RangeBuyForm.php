@@ -7,8 +7,8 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\unbreaking\UnbreakingEnchantConfirmForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
-use lazyperson710\core\packet\SendBroadcastMessage;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 

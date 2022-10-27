@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopAPI\database\LevelShopAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 

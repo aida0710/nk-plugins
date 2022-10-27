@@ -3,7 +3,7 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\packet\AddEffectPacket;
-use lazyperson710\core\packet\SendNoSoundMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;

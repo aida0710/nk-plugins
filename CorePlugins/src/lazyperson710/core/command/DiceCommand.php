@@ -4,7 +4,7 @@ namespace lazyperson710\core\command;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

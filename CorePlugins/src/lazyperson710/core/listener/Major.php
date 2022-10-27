@@ -3,9 +3,9 @@
 namespace lazyperson710\core\listener;
 
 use InvalidArgumentException;
-use lazyperson710\core\packet\SendActionBarMessage;
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendActionBarMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;

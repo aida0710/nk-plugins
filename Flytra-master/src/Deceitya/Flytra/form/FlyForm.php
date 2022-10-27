@@ -8,7 +8,7 @@ use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\Flytra\Main;
 use Deceitya\Flytra\task\FlyCheckTask;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 
 class FlyForm extends CustomForm {

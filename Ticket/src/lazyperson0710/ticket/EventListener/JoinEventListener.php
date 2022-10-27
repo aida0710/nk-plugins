@@ -3,7 +3,7 @@
 namespace lazyperson0710\ticket\EventListener;
 
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 

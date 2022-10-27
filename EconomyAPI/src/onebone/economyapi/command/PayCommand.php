@@ -5,7 +5,7 @@ namespace onebone\economyapi\command;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyapi\event\money\PayMoneyEvent;
 use onebone\economyapi\form\PayCommandConfirmation;

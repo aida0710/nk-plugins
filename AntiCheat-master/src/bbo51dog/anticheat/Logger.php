@@ -8,7 +8,7 @@ use bbo51dog\pmdiscord\element\Embed;
 use bbo51dog\pmdiscord\element\Embeds;
 use DateTime;
 use DateTimeInterface;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
 

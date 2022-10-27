@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
-use lazyperson710\core\packet\SendNoSoundMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\player\PlayerInteractEvent;

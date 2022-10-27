@@ -2,7 +2,7 @@
 
 namespace ree_jp\bank\form;
 
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use ree_jp\bank\sqlite\BankHelper;

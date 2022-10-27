@@ -8,7 +8,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\SBI\mode\Mode;
 use Deceitya\SBI\mode\ModeList;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;

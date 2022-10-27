@@ -2,7 +2,7 @@
 
 namespace lazyperson0710\WorldManagement\EventListener;
 
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;

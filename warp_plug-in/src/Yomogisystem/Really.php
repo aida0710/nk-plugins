@@ -3,8 +3,8 @@
 namespace Yomogisystem;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

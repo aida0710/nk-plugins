@@ -7,7 +7,7 @@ use bbo51dog\bboform\form\CustomForm;
 use deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\ShopAPI\database\EnchantShopAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;

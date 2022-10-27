@@ -3,7 +3,7 @@
 namespace lazyperson0710\EffectItems\items\damageListener;
 
 use Deceitya\Flytra\Main;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\item\Durable;
 use pocketmine\player\GameMode;

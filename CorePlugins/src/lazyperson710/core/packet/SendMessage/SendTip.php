@@ -1,7 +1,8 @@
 <?php
 
-namespace lazyperson710\core\packet;
+namespace lazyperson710\core\packet\SendMessage;
 
+use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
@@ -20,6 +21,6 @@ class SendTip {
             $type = TextFormat::RED;
         }
         SoundPacket::Send($player, $sound);
-        $player->sendTip(TextFormat::BLUE . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+        $player->sendTip(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
     }
 }

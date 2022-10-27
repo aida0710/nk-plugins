@@ -4,8 +4,8 @@ namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MyWarp\Database;
 use Deceitya\MyWarp\MyWarpPlugin;
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendNoSoundMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\form\Form;
 use pocketmine\player\Player;

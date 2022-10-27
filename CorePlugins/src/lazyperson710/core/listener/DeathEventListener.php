@@ -3,9 +3,9 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson710\core\packet\SendBroadcastMessage;
-use lazyperson710\core\packet\SendBroadcastTip;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage\SendBroadcastTip;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByBlockEvent;

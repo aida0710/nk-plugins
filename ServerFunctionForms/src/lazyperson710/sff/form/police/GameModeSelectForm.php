@@ -4,7 +4,7 @@ namespace lazyperson710\sff\form\police;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 

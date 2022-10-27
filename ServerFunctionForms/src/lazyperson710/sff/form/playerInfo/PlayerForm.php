@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 

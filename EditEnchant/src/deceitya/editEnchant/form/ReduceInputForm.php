@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\editEnchant\InspectionItem;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\player\Player;
 

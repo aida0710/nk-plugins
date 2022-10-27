@@ -3,7 +3,7 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\listener\Major;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\item\Item;

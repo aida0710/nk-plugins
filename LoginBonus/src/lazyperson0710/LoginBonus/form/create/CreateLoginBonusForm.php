@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\LoginBonus\Main;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 
 class CreateLoginBonusForm extends CustomForm {

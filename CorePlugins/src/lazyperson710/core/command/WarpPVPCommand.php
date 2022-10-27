@@ -3,7 +3,7 @@
 namespace lazyperson710\core\command;
 
 use lazyperson710\core\Main;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

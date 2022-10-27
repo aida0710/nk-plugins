@@ -7,7 +7,7 @@ use bbo51dog\bboform\element\ClosureButton;
 use bbo51dog\bboform\form\ModalForm;
 use lazyperson0710\WorldManagement\form\WarpForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\sff\form\LandForm;
 use pocketmine\event\Listener;
 use pocketmine\event\server\CommandEvent;

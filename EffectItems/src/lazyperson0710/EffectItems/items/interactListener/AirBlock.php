@@ -3,8 +3,8 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\BlockLegacyIds;

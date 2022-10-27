@@ -6,7 +6,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\ExtensionsMainForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

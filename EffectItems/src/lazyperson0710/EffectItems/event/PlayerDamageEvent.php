@@ -3,7 +3,7 @@
 namespace lazyperson0710\EffectItems\event;
 
 use lazyperson0710\EffectItems\items\damageListener\DefensiveStone;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
 use pocketmine\player\Player;

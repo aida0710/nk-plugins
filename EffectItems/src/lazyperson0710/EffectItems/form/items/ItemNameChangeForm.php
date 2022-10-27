@@ -4,7 +4,7 @@ namespace lazyperson0710\EffectItems\form\items;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\item\Durable;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;

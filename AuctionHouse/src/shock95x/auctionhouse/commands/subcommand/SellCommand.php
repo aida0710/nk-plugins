@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace shock95x\auctionhouse\commands\subcommand;
 
 use DateTime;
-use lazyperson710\core\packet\SendBroadcastMessage;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

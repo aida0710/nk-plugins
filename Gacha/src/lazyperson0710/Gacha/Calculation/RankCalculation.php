@@ -4,7 +4,7 @@ namespace lazyperson0710\Gacha\Calculation;
 
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
 

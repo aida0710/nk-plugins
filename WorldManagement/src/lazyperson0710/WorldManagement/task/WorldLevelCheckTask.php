@@ -4,7 +4,7 @@ namespace lazyperson0710\WorldManagement\task;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
 

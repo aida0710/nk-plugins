@@ -3,7 +3,7 @@
 namespace Deceitya\ChestLock\Form;
 
 use Deceitya\ChestLock\Main;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 

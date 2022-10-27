@@ -6,7 +6,7 @@ use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 

@@ -3,7 +3,7 @@
 namespace lazyperson710\sff\command;
 
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\sff\form\police\PoliceMainForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

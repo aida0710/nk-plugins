@@ -3,7 +3,7 @@
 namespace deceitya\sersto;
 
 use DateTimeImmutable;
-use lazyperson710\core\packet\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\Config;

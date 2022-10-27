@@ -3,8 +3,8 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson710\core\Main;
-use lazyperson710\core\packet\SendActionBarMessage;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendMessage\SendActionBarMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use pocketmine\block\BaseSign;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;

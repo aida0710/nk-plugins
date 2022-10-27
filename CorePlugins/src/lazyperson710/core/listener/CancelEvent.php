@@ -2,7 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\block\inventory\AnvilInventory;
 use pocketmine\block\inventory\BrewingStandInventory;
 use pocketmine\block\inventory\EnchantInventory;

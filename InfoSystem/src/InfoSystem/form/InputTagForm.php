@@ -7,7 +7,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use InfoSystem\InfoSystem;
 use InfoSystem\task\ChangeNameTask;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\Server;
 

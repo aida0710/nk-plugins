@@ -3,7 +3,7 @@
 namespace lazyperson0710\LoginBonus\event;
 
 use lazyperson0710\LoginBonus\Main;
-use lazyperson710\core\packet\SendNoSoundMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;

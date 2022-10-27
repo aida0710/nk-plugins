@@ -1,11 +1,11 @@
 <?php
 
-namespace lazyperson710\core\packet;
+namespace lazyperson710\core\packet\SendNoSoundMessage;
 
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
-class SendNoSoundActionBarMessage {
+class SendNoSoundMessage {
 
     public static function Send(Player $player, string $message, string $prefix, bool $success): void {
         if ($success === true) {
@@ -13,6 +13,6 @@ class SendNoSoundActionBarMessage {
         } else {
             $type = TextFormat::RED;
         }
-        $player->sendActionBarMessage(TextFormat::BLUE . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+        $player->sendMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
     }
 }

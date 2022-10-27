@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 namespace shock95x\auctionhouse\menu;
 
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;

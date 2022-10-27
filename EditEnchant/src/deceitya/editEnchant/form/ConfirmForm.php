@@ -5,7 +5,7 @@ namespace deceitya\editEnchant\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\editEnchant\InspectionItem;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\lang\Translatable;

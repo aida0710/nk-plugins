@@ -7,7 +7,7 @@ use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use Exception;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\VanillaEnchantments;

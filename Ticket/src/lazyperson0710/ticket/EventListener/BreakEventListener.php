@@ -4,7 +4,7 @@ namespace lazyperson0710\ticket\EventListener;
 
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SendBroadcastTip;
+use lazyperson710\core\packet\SendMessage\SendBroadcastTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 

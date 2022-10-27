@@ -5,7 +5,7 @@ namespace lazyperson0710\ShopAPI\form\effectShop;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ShopAPI\database\effectShopAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\EffectInstance;

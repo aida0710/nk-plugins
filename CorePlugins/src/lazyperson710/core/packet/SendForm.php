@@ -3,6 +3,7 @@
 namespace lazyperson710\core\packet;
 
 use lazyperson710\core\Main;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;

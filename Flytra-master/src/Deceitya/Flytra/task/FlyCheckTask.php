@@ -3,9 +3,9 @@
 namespace Deceitya\Flytra\task;
 
 use Deceitya\Flytra\Main;
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendNoSoundActionBarMessage;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundActionBarMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\Durable;
 use pocketmine\item\ItemIds;

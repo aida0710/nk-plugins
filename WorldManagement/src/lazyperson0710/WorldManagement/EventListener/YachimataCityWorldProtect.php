@@ -3,7 +3,7 @@
 namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;

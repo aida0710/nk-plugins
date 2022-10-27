@@ -3,7 +3,7 @@
 namespace Deceitya\ChestLock\Event;
 
 use Deceitya\ChestLock\Main;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\block\Chest as BlockChest;
 use pocketmine\block\inventory\DoubleChestInventory;
 use pocketmine\block\tile\Chest;

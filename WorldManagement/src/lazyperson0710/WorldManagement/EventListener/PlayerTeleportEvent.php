@@ -9,7 +9,7 @@ use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
 use lazyperson0710\WorldManagement\form\WarpForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\player\Player;

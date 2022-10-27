@@ -6,7 +6,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use deceitya\repair\form\RepairForm;
 use Exception;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Durable;

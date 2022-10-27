@@ -5,7 +5,7 @@ namespace lazyperson0710\ticket\command\form;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 
 class GachaTicketReplaceForm extends CustomForm {

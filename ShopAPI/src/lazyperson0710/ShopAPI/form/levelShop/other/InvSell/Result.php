@@ -5,7 +5,7 @@ namespace lazyperson0710\ShopAPI\form\levelShop\other\InvSell;
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;

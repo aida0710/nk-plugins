@@ -3,7 +3,7 @@
 namespace lazyperson710\core\task;
 
 use lazyperson710\core\Main;
-use lazyperson710\core\packet\SendBroadcastTip;
+use lazyperson710\core\packet\SendMessage\SendBroadcastTip;
 use pocketmine\entity\object\ExperienceOrb;
 use pocketmine\scheduler\Task;
 

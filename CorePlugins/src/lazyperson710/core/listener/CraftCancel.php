@@ -2,7 +2,7 @@
 
 namespace lazyperson710\core\listener;
 
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\inventory\CraftItemEvent;
 use pocketmine\event\Listener;

@@ -5,7 +5,7 @@ namespace Deceitya\Flytra;
 use Deceitya\Flytra\command\FlyCommand;
 use Deceitya\Flytra\task\FlyCheckTask;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;

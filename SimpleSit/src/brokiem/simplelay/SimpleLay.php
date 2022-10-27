@@ -3,8 +3,8 @@
 declare(strict_types = 1);
 namespace brokiem\simplelay;
 
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\block\Block;
 use pocketmine\block\Opaque;
 use pocketmine\block\Slab;

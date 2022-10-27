@@ -3,8 +3,8 @@
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
-use lazyperson710\core\packet\SendTip;
+use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\sff\form\CommandStorageForm;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;

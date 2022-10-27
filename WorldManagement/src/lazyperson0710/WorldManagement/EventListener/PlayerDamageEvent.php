@@ -4,7 +4,7 @@ namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson710\core\Main;
-use lazyperson710\core\packet\SendNoSoundTip;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;

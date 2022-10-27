@@ -20,7 +20,7 @@
 namespace onebone\economyland;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use onebone\economyland\database\Database;
 use onebone\economyland\database\SQLiteDatabase;

@@ -5,7 +5,7 @@ namespace lazyperson710\sff\form\land;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\sff\form\LandForm;
 use pocketmine\player\Player;

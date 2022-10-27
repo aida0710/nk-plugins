@@ -5,7 +5,7 @@ namespace Deceitya\MyWarp\Form;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use Deceitya\MyWarp\Database;
 use Deceitya\MyWarp\MyWarpPlugin;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\player\Player;

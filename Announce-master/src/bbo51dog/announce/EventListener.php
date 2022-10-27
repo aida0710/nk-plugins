@@ -5,7 +5,7 @@ namespace bbo51dog\announce;
 use bbo51dog\announce\form\AnnounceForm;
 use bbo51dog\announce\service\AnnounceService;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\server\CommandEvent;

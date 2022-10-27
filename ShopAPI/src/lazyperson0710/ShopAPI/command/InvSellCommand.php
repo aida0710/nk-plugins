@@ -5,7 +5,7 @@ namespace lazyperson0710\ShopAPI\command;
 use deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\ShopAPI\form\levelShop\other\InvSell\Confirmation;
 use lazyperson710\core\packet\SendForm;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;

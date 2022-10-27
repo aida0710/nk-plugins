@@ -7,7 +7,7 @@ use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\LoginBonus\calculation\CheckInventoryCalculation;
 use lazyperson0710\LoginBonus\Main;
 use lazyperson0710\ticket\TicketAPI;
-use lazyperson710\core\packet\SendMessage;
+use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 
 class TicketConvertConfirmationForm extends CustomForm {
