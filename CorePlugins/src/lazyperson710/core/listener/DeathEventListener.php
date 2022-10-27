@@ -4,6 +4,7 @@ namespace lazyperson710\core\listener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson710\core\packet\SendBroadcastMessage;
+use lazyperson710\core\packet\SendBroadcastTip;
 use lazyperson710\core\packet\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
@@ -129,7 +130,7 @@ class DeathEventListener implements Listener {
     public function Respawn(PlayerRespawnEvent $event) {
         $player = $event->getPlayer();
         $name = $player->getName();
-        Server::getInstance()->broadcastTip("§bReSpawn §7>> §e{$name}がリスポーンしました");
+        SendBroadcastTip::Send("{$name}がリスポーンしました", "ReSpawn");
         SoundPacket::Send($player, "respawn_anchor.set_spawn");
     }
 }

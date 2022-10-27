@@ -4,9 +4,9 @@ namespace lazyperson0710\ticket\EventListener;
 
 use deceitya\miningtools\event\MiningToolsBreakEvent;
 use lazyperson0710\ticket\TicketAPI;
+use lazyperson710\core\packet\SendBroadcastTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\Server;
 
 class BreakEventListener implements Listener {
 
@@ -42,7 +42,7 @@ class BreakEventListener implements Listener {
         }
         if ($random === 500) {
             TicketAPI::getInstance()->addTicket($player, 1);
-            Server::getInstance()->broadcastTip("§bTicket §7>> §eTicketを{$probability}％の確率で{$player->getName()}がゲットしました");
+            SendBroadcastTip::Send("Ticketを{$probability}％の確率で{$player->getName()}がゲットしました", "Ticket");
         }
     }
 }
