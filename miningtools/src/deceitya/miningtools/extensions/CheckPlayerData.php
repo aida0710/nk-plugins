@@ -3,6 +3,7 @@
 namespace deceitya\miningtools\extensions;
 
 use deceitya\miningtools\Main;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;

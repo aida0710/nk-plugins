@@ -5,6 +5,8 @@ namespace deceitya\miningtools\normal;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\miningtools\Main;
+use lazyperson710\core\packet\SendBroadcastMessage;
+use lazyperson710\core\packet\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\item\enchantment\EnchantmentInstance;

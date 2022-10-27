@@ -54,10 +54,10 @@ class CmdListener implements Listener {
         $cmdPrefix = mb_substr($event->getCommand(), 0, 2, 'utf-8');
         if ($event->getCommand() === "w") {
             $event->cancel();
-            SendMessage::Send($event->getSender(), "wコマンドは実行できません。tellかmsgコマンドを実行してください", "Command", false);
+            SendMessage::Send($sender, "wコマンドは実行できません。tellかmsgコマンドを実行してください", "Command", false);
         } elseif ($cmdPrefix === "w ") {
             $event->cancel();
-            SendMessage::Send($event->getSender(), "wコマンドは実行できません。tellかmsgコマンドを実行してください", "Command", false);
+            SendMessage::Send($sender, "wコマンドは実行できません。tellかmsgコマンドを実行してください", "Command", false);
         }
     }
 }
