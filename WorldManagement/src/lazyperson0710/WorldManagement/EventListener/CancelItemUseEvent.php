@@ -51,7 +51,7 @@ class CancelItemUseEvent implements Listener {
                     if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                         $event->cancel();
                     }
-                SendTip::Send($event->getPlayer(), "農業ワールドでのみ使用可能です", "Farming", false);
+                    SendTip::Send($event->getPlayer(), "農業ワールドでのみ使用可能です", "Farming", false);
                     break;
             }
         }
@@ -68,7 +68,7 @@ class CancelItemUseEvent implements Listener {
                     if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                         $event->cancel();
                     }
-                SendTip::Send($event->getPlayer(), "{$event->getPlayer()->getInventory()->getItemInHand()->getName()}は生活ワールドと農業ワールドでのみ使用可能です", "Water", false);
+                    SendTip::Send($event->getPlayer(), "{$event->getPlayer()->getInventory()->getItemInHand()->getName()}は生活ワールドと農業ワールドでのみ使用可能です", "Water", false);
                     break;
             }
         }
@@ -121,7 +121,7 @@ class CancelItemUseEvent implements Listener {
                 if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
                     $event->cancel();
                 }
-            SendTip::Send($event->getPlayer(), "このアイテムは使用できません", "Cancel", false);
+                SendTip::Send($event->getPlayer(), "このアイテムは使用できません", "Cancel", false);
                 break;
         }
         if ($event->getPlayer()->getInventory()->getItemInHand()->getId() === 325) {

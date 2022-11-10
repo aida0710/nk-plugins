@@ -74,8 +74,8 @@ class FlyCheckTask extends Task {
             case 3:
             case 2:
             case 1:
-            SendMessage::Send($player, "FlyTask終了まで残り" . self::$flyTask[$player->getName()]["TimeLeft"] . "秒です", "FlyTask", false);
-            $this->checkTimeLeft($player);
+                SendMessage::Send($player, "FlyTask終了まで残り" . self::$flyTask[$player->getName()]["TimeLeft"] . "秒です", "FlyTask", false);
+                $this->checkTimeLeft($player);
                 break;
             case 0:
                 unset(self::$flyTask[$player->getName()]);
