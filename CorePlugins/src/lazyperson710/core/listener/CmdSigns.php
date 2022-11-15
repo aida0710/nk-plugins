@@ -2,23 +2,15 @@
 
 namespace lazyperson710\core\listener;
 
-use lazyperson710\core\Main;
 use lazyperson710\core\packet\SendMessage\SendActionBarMessage;
 use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
+use lazyperson710\core\task\IntervalTask;
 use pocketmine\block\BaseSign;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\player\Player;
-use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
 
 class CmdSigns implements Listener {
-
-    private static array $CmdSignsInterval;
-
-    public function __construct() {
-        self::$CmdSignsInterval = [];
-    }
 
     /**
      * @param PlayerInteractEvent $event
@@ -29,16 +21,11 @@ class CmdSigns implements Listener {
         if ($block instanceof BaseSign) {
             if ($block->getText()->getLine(0) == "##cmd") {
                 if (!$event->getPlayer()->isSneaking()) {
-                    if (isset(self::$CmdSignsInterval[$event->getPlayer()->getName()])) {
+                    if (IntervalTask::check($event->getPlayer(), "CmdSigns")) {
                         SendNoSoundTip::Send($event->getPlayer(), "コマンド看板は1秒以内に再度使用することは出来ません", "CmdSigns", true);
                         return;
                     } else {
-                        self::$CmdSignsInterval[$event->getPlayer()->getName()] = true;
-                        Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
-                            function () use ($event): void {
-                                $this->unset($event->getPlayer());
-                            }
-                        ), 20);
+                        IntervalTask::onRun($event->getPlayer(), "CmdSigns", 20);
                     }
                     $player = $event->getPlayer();
                     $world = $player->getWorld()->getFolderName();
@@ -61,9 +48,5 @@ class CmdSigns implements Listener {
                 }
             }
         }
-    }
-
-    public function unset(Player $player): void {
-        unset(self::$CmdSignsInterval[$player->getName()]);
     }
 }
