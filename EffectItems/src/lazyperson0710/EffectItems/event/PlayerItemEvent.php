@@ -50,6 +50,7 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('RedBull') !== null) RedBull::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('ZONe') !== null) ZONe::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('CoralButterfly') !== null) CoralButterfly::execution($event, $inHand);
         if ($inHand->getId() === -199) LoginBonusItem::execution($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::execution($event, $inHand);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::execution($event, $inHand);
