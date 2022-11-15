@@ -1,29 +1,35 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items\interactListener;
+namespace lazyperson0710\EffectItems\items\interactListener\effect;
 
 use lazyperson710\core\packet\AddEffectPacket;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\task\IntervalTask;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
-use pocketmine\item\CookedMutton;
 use pocketmine\item\Item;
 use pocketmine\player\GameMode;
 
-class Churu extends CookedMutton {
+class RedBull {
 
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
+        if (IntervalTask::check($player, 'EffectItems')) {
+            SendTip::Send($player, '現在エフェクトアイテムのインターバル中です', 'EffectItems', false);
+            return;
+        } else {
+            IntervalTask::onRun($player, 'EffectItems', 20 * 3);
+        }
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }
-        $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 20 * 60 * 3, 3, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::SLOWNESS(), true);
-        $effect = new EffectInstance(VanillaEffects::FIRE_RESISTANCE(), 20 * 60 * 5, 1, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::FIRE_RESISTANCE(), true);
+        $effect = new EffectInstance(VanillaEffects::LEVITATION(), 3, 30, false);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::LEVITATION(), true);
         SoundPacket::Send($player, 'item.trident.return');
     }
+
 }

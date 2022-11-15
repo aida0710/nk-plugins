@@ -1,9 +1,11 @@
 <?php
 
-namespace lazyperson0710\EffectItems\items\interactListener;
+namespace lazyperson0710\EffectItems\items\interactListener\effect;
 
 use lazyperson710\core\packet\AddEffectPacket;
+use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\core\packet\SoundPacket;
+use lazyperson710\core\task\IntervalTask;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -16,13 +18,17 @@ class ZONe {
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
+        if (IntervalTask::check($player, 'EffectItems')) {
+            SendTip::Send($player, '現在エフェクトアイテムのインターバル中です', 'EffectItems', false);
+            return;
+        } else {
+            IntervalTask::onRun($player, 'EffectItems', 20 * 3);
+        }
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }
-        $effect = new EffectInstance(VanillaEffects::RESISTANCE(), 20 * 60 * 5, 3, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::RESISTANCE(), true);
-        $effect = new EffectInstance(VanillaEffects::STRENGTH(), 20 * 60 * 5, 8, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::STRENGTH(), true);
+        $effect = new EffectInstance(VanillaEffects::CONDUIT_POWER(), 20 * 60 * 5, 3, false);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::CONDUIT_POWER(), true);
         SoundPacket::Send($player, 'item.trident.return');
     }
 }
