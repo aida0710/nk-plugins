@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/LoginBonus/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CorePlugins/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/EffectItems/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Countdown_v1.1.1" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop2" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop3" />
