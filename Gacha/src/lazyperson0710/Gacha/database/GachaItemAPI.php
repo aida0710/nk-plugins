@@ -54,7 +54,6 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EXPERIENCE_BOTTLE(), 16, "魔剤セット", "ちょっとずつ飲もう。。。", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaBlocks::TNT()->asItem(), 1, "爆発物", "設置すると爆発します", [], [], ["ExplosionBlock"]);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::EGG(), 1, "温泉卵", "温まってるので中身はない", [], [], []);
-        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::GLASS_BOTTLE(), 1, "エフェクトクリーナー", "現在付与されているエフェクトを全て削除します", [VanillaEnchantments::PUNCH()], [1], ["EffectCleaner"]);
         ## R Rank
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_FISH(), 1, "ラムネ", "美味しいよね", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_RABBIT(), 1, "モンスター", "カフェイン摂取キモチエェェェ！", [], [], []);
@@ -64,18 +63,63 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::IRON_PICKAXE(), 1, "溶鉱炉付きのつるはし", "一部のブロックを採掘時に焼いちゃうぞ！うおうお！", [VanillaEnchantments::SILK_TOUCH(), VanillaEnchantments::PUNCH()], [1, 1], ["BlastFurnacePickaxe"]);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaBlocks::POPPY()->asItem(), 1, "§cﾌｧｲﾔｰﾌﾗﾜｰ", "ふぁいやー！！！", [VanillaEnchantments::FIRE_ASPECT()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", ItemFactory::getInstance()->get(751), 1, "落下ダメージ完全防御ブーツ", "着用していると落下ダメージから自分を守ってくれる", [], [], ["DefensiveStone"]);
-        //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "金のリンゴ", "少しだけ掘る気になるリンゴ", [], [], []);
         ## SR Rank
+        //ちゅーる sr
+        //体力増強30s 1lv
+        //スピード30s 2lv
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_MUTTON(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_CHICKEN(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //
+        //コーラルバタフライ ssr
+        //採掘速度上昇 15m 50lv
+        //2分の1の確率でインスタントダメージ 50s 255lv
+        $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::SWEET_BERRIES(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //
+        //クリーミーポテト ssr
+        //採掘速度上昇 60s 3lv
+        //5秒後に毒 25s 5lv
+        $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::POISONOUS_POTATO(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //
+        //ヘイストアイテム sr
+        //採掘速度上昇 30s 50lv
+        //移動速度低下 90s 15lv
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::Lantern()->asItem(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //
+        //天国草 sr
+        //移動速度低下 5s 5lv
+        //耐性 120s 3lv
+        //25秒後に吐き気 15s 15lv
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::CORAL_FAN()->setCoralType(CoralType::FIRE())->asItem(), 1, "天国草", "天国で群生してる草", [], [], ["HeavenGrass"]);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "驛｢譎｢?ｽ?｢驛｢譎｢?ｽ?ｳ驛｢?ｧ??ｹ驛｢?ｧ??ｿ驛｢譎｢?ｽ?ｼ", [], [], ["UnknownItem"]);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
-        //$this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "core", [], [], ["UnknownItem"]);
-        //$this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_RABBIT(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "core", [], [], ["UnknownItem"]);
+        //
+        //ライトムーシュルーム r
+        //暗視 60m 1lv
+        //5分の1の確率で毒 15s 3lv
+        $this->dischargeItemRegister("常駐ガチャ", "R",  VanillaBlocks::CORAL_FAN()->setCoralType(CoralType::BRAIN())->asItem(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //
+        //レッドブル sr
+        //浮遊 3s 30lv
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::WATER_POTION(), 1, "RedBull", "翼を授ける", [], [], ["RedBull"]);
+        //
+        //アンノウンアイテム ssr
+        //全てのエフェクトを3m 50lv
+        $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::DRAGON_BREATH(), 1, "繝｢繝ｳ繧ｹ繧ｿ繝ｼ", "驛｢譎｢?ｽ?｢驛｢譎｢?ｽ?ｳ驛｢?ｧ??ｹ驛｢?ｧ??ｿ驛｢譎｢?ｽ?ｼ", [], [], ["UnknownItem"]);
+        //
+        //ゾーン r
+        //コンジットパワー 5m 3lv
+        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::RAW_FISH(), 1, "ZONe", "現在付与されているエフェクトを全て削除します", [VanillaEnchantments::PUNCH()], [1], ["EffectCleaner"]);
+        //
+        //エフェクトクリーナー uc
+        $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::GLASS_BOTTLE(), 1, "エフェクトクリーナー", "現在付与されているエフェクトを全て削除します", [VanillaEnchantments::PUNCH()], [1], ["EffectCleaner"]);
+        //
+        //ラッキーexpCoin r
+        //ラッキーfoodCoin r
+        //ラッキーmoneyCoin sr
+        //プレイヤーロケーション r
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COMPASS(), 1, "プレイヤー追跡機", "同じワールドにいる他プレイヤーの居場所から自身の座標まで直線状のパーティクルを出現させる", [VanillaEnchantments::PUNCH()], [1], ["PlayersGetLocation"]);
+        //
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::MONSTER_SPAWNER()->asItem(), 1, "レベルブロック", "れぇべぇるぅ\n破壊するとバニラ経験値がもらえます", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_PICKAXE(), 1, "黒曜石ブレイカー", "黒曜石だけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["ObsidianBreaker"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_HOE(), 1, "グロウストーンブレイカー", "グロウストーンだけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["GlowstoneBreaker"]);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COMPASS(), 1, "プレイヤー追跡機", "同じワールドにいる他プレイヤーの居場所から自身の座標まで直線状のパーティクルを出現させる", [VanillaEnchantments::PUNCH()], [1], ["PlayersGetLocation"]);
-        //$this->dischargeItemRegister("常駐ガチャ", "SR", items, 1, "エンチャント金のリンゴ", "とても掘る気になるリンゴ", [], [], []);
         ## SSR Rank
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::FISHING_ROD(), 1, "SuperRod", "どこまでも走れる気がする", [VanillaEnchantments::PUNCH()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "SSR", VanillaItems::GOLD_INGOT(), 1, "道具名チェンジャー", "道具、装備の名前を変更することが可能です\n名前を変更したいアイテムを持った状態で/itemsコマンドを実行してください", [VanillaEnchantments::PROJECTILE_PROTECTION()], [5], ["ItemNameChangeIngot"]);
@@ -153,5 +197,4 @@ class GachaItemAPI {
         }
         return self::$instance;
     }
-
 }
