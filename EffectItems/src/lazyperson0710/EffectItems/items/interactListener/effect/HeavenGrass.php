@@ -5,7 +5,6 @@ namespace lazyperson0710\EffectItems\items\interactListener\effect;
 use lazyperson0710\EffectItems\Main;
 use lazyperson710\core\packet\AddEffectPacket;
 use lazyperson710\core\packet\SendMessage\SendTip;
-use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use lazyperson710\core\task\IntervalTask;
 use pocketmine\entity\effect\EffectInstance;
