@@ -18,6 +18,7 @@ class AirBlock {
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
+
         $world_search = mb_substr($event->getPlayer()->getWorld()->getDisplayName(), 0, null, 'utf-8');
         if (!(str_contains($world_search, "-c") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug"))) {
             SendMessage::Send($player, "使用可能なワールドは資源系ワールドと生活ワールドのみとなります", "AirBlock", false);

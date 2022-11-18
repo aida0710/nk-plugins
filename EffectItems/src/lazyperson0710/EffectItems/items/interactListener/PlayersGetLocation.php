@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
+use lazyperson0710\EffectItems\event\PlayerItemEvent;
 use lazyperson710\core\listener\Major;
 use lazyperson710\core\packet\SendMessage\SendTip;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -16,6 +17,8 @@ class PlayersGetLocation {
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
+        if (PlayerItemEvent::checkInterval($player) === false) return;
+
         $particle = new RedstoneParticle(50);
         $count = 0;
         foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {

@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener\effect;
 
+use lazyperson0710\EffectItems\event\PlayerItemEvent;
 use lazyperson710\core\packet\AddEffectPacket;
 use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\core\packet\SoundPacket;
@@ -18,12 +19,8 @@ class HasteItem {
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
-        if (IntervalTask::check($player, 'EffectItems')) {
-            SendTip::Send($player, '現在エフェクトアイテムのインターバル中です', 'EffectItems', false);
-            return;
-        } else {
-            IntervalTask::onRun($player, 'EffectItems', 20 * 3);
-        }
+        if (PlayerItemEvent::checkInterval($player) === false) return;
+
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }

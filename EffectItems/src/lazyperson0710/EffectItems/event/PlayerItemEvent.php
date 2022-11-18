@@ -6,6 +6,7 @@ use lazyperson0710\EffectItems\items\interactListener\AirBlock;
 use lazyperson0710\EffectItems\items\interactListener\CommandStorage;
 use lazyperson0710\EffectItems\items\interactListener\effect\Churu;
 use lazyperson0710\EffectItems\items\interactListener\effect\CoralButterfly;
+use lazyperson0710\EffectItems\items\interactListener\effect\CreamyPotato;
 use lazyperson0710\EffectItems\items\interactListener\effect\HasteItem;
 use lazyperson0710\EffectItems\items\interactListener\effect\HeavenGrass;
 use lazyperson0710\EffectItems\items\interactListener\effect\LightMushroom;
@@ -18,9 +19,12 @@ use lazyperson0710\EffectItems\items\interactListener\LuckyExpCoin;
 use lazyperson0710\EffectItems\items\interactListener\LuckyMoneyCoin;
 use lazyperson0710\EffectItems\items\interactListener\LuckyTreeCoin;
 use lazyperson0710\EffectItems\items\interactListener\PlayersGetLocation;
+use lazyperson710\core\packet\SendMessage\SendTip;
+use lazyperson710\core\task\IntervalTask;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\player\Player;
 
 class PlayerItemEvent implements Listener {
 
@@ -51,9 +55,21 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getNamedTag()->getTag('UnknownItem') !== null) Unknown::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('ZONe') !== null) ZONe::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('CoralButterfly') !== null) CoralButterfly::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('CreamyPotato') !== null) CreamyPotato::execution($event, $inHand);
+        if ($inHand->getNamedTag()->getTag('HasteItem') !== null) HasteItem::execution($event, $inHand);
         if ($inHand->getId() === -199) LoginBonusItem::execution($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::execution($event, $inHand);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::execution($event, $inHand);
+    }
+
+    public static function checkInterval(Player $player): bool {
+        if (IntervalTask::check($player, 'EffectItems')) {
+            SendTip::Send($player, '現在エフェクトアイテムのインターバル中です', 'Items', false);
+            return false;
+        } else {
+            IntervalTask::onRun($player, 'EffectItems', 20 * 3);
+            return true;
+        }
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace lazyperson0710\EffectItems\items\interactListener;
 
+use lazyperson0710\EffectItems\event\PlayerItemEvent;
 use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\VanillaBlocks;
@@ -15,7 +16,8 @@ class LuckyTreeCoin {
     public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
         $event->cancel();
         $player = $event->getPlayer();
-        //todo こっちも連続しようされないように修正
+        if (PlayerItemEvent::checkInterval($player) === false) return;
+
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }
