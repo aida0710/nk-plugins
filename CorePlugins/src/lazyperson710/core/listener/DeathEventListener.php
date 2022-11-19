@@ -24,7 +24,7 @@ class DeathEventListener implements Listener {
         $this->deathPenalty($event);
     }
 
-    public function deathMessage(PlayerDeathEvent $event) {
+    private function deathMessage(PlayerDeathEvent $event) {
         $player = $event->getPlayer();
         $cause = $player->getLastDamageCause();
         switch ($cause->getCause()) {
@@ -88,7 +88,7 @@ class DeathEventListener implements Listener {
         }
     }
 
-    public function deathPenalty(PlayerDeathEvent $event) {
+    private function deathPenalty(PlayerDeathEvent $event) {
         $player = $event->getPlayer();
         $see = EconomyAPI::getInstance()->myMoney($player);
         $world = $player->getWorld()->getFolderName();
