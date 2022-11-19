@@ -28,8 +28,7 @@ class CoralButterfly {
             $effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60 * 15, 50, false);
             AddEffectPacket::Add($player, $effect, VanillaEffects::HASTE(), true);
         } else {
-            $effect = new EffectInstance(VanillaEffects::INSTANT_DAMAGE(), 50, 255, false);
-            AddEffectPacket::Add($player, $effect, VanillaEffects::INSTANT_DAMAGE(), true);
+            $player->kill();
         }
         SoundPacket::Send($player, 'item.trident.return');
     }
