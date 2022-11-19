@@ -58,7 +58,7 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::COOKED_FISH(), 1, "ラムネ", "美味しいよね", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "UC", VanillaItems::PAPER(), 1, "バスタオル", "常時濡れてるので叩かれると若干痛い", [VanillaEnchantments::SHARPNESS()], [1], []);
         ## R Rank
-        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::MAGMA_CREAM(), 1, "ラッキー苗木キューブ", "何かの苗木がもらえるよ！", [VanillaEnchantments::PUNCH()], [1], []);
+        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::MAGMA_CREAM(), 1, "ラッキー苗木キューブ", "何かの苗木がもらえるよ！", [VanillaEnchantments::PUNCH()], [1], ["LuckyTreeCoin"]);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COOKED_RABBIT(), 1, "モンスター", "カフェイン摂取キモチエェェェ！", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaBlocks::COBBLESTONE_STAIRS()->asItem(), 1, "鈍器", "殴られたら痛いじゃ済まないだろう", [VanillaEnchantments::SHARPNESS()], [50], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::STONE_SHOVEL(), 1, "鋭利なシャベル", "ゾンビを倒すために使うものではない", [VanillaEnchantments::SHARPNESS()], [5], []);
@@ -75,8 +75,8 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::CORAL_FAN()->setCoralType(CoralType::FIRE())->asItem(), 1, "天国草", "天国で群生してる草\n\n効果\n\n移動速度低下 lv.5 5秒\n耐性 lv.3 2分\n25秒後に吐き気 lv.15 15秒", [VanillaEnchantments::PUNCH()], [1], ["HeavenGrass"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::WATER_POTION(), 1, "RedBull", "翼を授ける\n\n効果\n\n浮遊 lv.30 3秒", [VanillaEnchantments::PUNCH()], [1], ["RedBull"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::WOODEN_PICKAXE(), 1, "すぴにー(実写)", "効果\n\nなし", [VanillaEnchantments::PUNCH()], [1], []);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::ENDER_PEARL(), 1, "ラッキーEXPオーブ", "expがもらえるよ！", [VanillaEnchantments::PUNCH()], [1], []);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::GOLD_NUGGET(), 1, "ラッキーマネーコイン", "お金がもらえるよ！", [VanillaEnchantments::PUNCH()], [1], []);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::ENDER_PEARL(), 1, "ラッキーEXPオーブ", "expがもらえるよ！", [VanillaEnchantments::PUNCH()], [1], ["LuckyExpCoin"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::GOLD_NUGGET(), 1, "ラッキーマネーコイン", "お金がもらえるよ！", [VanillaEnchantments::PUNCH()], [1], ["LuckyMoneyCoin"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::MONSTER_SPAWNER()->asItem(), 1, "レベルブロック", "れぇべぇるぅ\n破壊するとバニラ経験値がもらえます", [], [], []);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_PICKAXE(), 1, "黒曜石ブレイカー", "黒曜石だけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["ObsidianBreaker"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::DIAMOND_HOE(), 1, "グロウストーンブレイカー", "グロウストーンだけを徹底的に破壊する", [VanillaEnchantments::PUNCH()], [1], ["GlowstoneBreaker"]);
