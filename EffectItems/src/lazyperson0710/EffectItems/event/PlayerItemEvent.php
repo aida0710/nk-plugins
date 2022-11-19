@@ -67,7 +67,7 @@ class PlayerItemEvent implements Listener {
             SendTip::Send($player, '現在エフェクトアイテムのインターバル中です', 'Items', false);
             return false;
         } else {
-            IntervalTask::onRun($player, 'EffectItems', 20 * 3);
+            IntervalTask::onRun($player, 'EffectItems', 20);
             return true;
         }
     }
