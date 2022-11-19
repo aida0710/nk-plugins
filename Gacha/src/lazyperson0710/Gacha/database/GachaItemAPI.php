@@ -66,7 +66,7 @@ class GachaItemAPI {
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaBlocks::POPPY()->asItem(), 1, "§cﾌｧｲﾔｰﾌﾗﾜｰ", "ふぁいやー！！！", [VanillaEnchantments::FIRE_ASPECT()], [1], []);
         $this->dischargeItemRegister("常駐ガチャ", "R", ItemFactory::getInstance()->get(751), 1, "落下ダメージ完全防御ブーツ", "着用していると落下ダメージから自分を守ってくれる", [], [], ["DefensiveStone"]);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaBlocks::CORAL_FAN()->setCoralType(CoralType::BRAIN())->asItem(), 1, "ライトムーシュルーム", "脳を覚醒させてくれる\n\n効果\n\n暗視 lv.1 60分\n1/5の確率で毒 lv.3 15秒", [VanillaEnchantments::PUNCH()], [1], ["LightMushroom"]);
-        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::RAW_FISH(), 1, "ZONe", "効果\n\nコンジットパワー lv.3 5分", [VanillaEnchantments::PUNCH()], [1], ["ZONe"]);
+        $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::RAW_FISH(), 1, "ZONe", "効果\n\nコンジットパワー lv.3 2分\nウィザー lv.15 30秒\n浮遊 lv.15 30秒", [VanillaEnchantments::PUNCH()], [1], ["ZONe"]);
         $this->dischargeItemRegister("常駐ガチャ", "R", VanillaItems::COMPASS(), 1, "プレイヤー追跡機", "同じワールドにいる他プレイヤーの居場所から自身の座標まで直線状のパーティクルを出現させる", [VanillaEnchantments::PUNCH()], [1], ["PlayersGetLocation"]);
         ## SR Rank
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_MUTTON(), 1, "ちゅーる", "効果\n\n体力増強 lv.1 30s\nスピード lv.2 30秒", [], [], ["Churu"]);
