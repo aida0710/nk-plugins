@@ -5,9 +5,7 @@ namespace lazyperson0710\EffectItems\items\interactListener\effect;
 use lazyperson0710\EffectItems\event\PlayerItemEvent;
 use lazyperson0710\EffectItems\Main;
 use lazyperson710\core\packet\AddEffectPacket;
-use lazyperson710\core\packet\SendMessage\SendTip;
 use lazyperson710\core\packet\SoundPacket;
-use lazyperson710\core\task\IntervalTask;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -22,7 +20,6 @@ class HeavenGrass {
         $event->cancel();
         $player = $event->getPlayer();
         if (PlayerItemEvent::checkInterval($player) === false) return;
-
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }

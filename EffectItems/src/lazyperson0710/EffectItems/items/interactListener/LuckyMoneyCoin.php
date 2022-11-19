@@ -17,7 +17,6 @@ class LuckyMoneyCoin {
         $event->cancel();
         $player = $event->getPlayer();
         if (PlayerItemEvent::checkInterval($player) === false) return;
-
         if ($player->getGamemode() !== GameMode::CREATIVE()) {
             $player->getInventory()->removeItem($item->setCount(1));
         }

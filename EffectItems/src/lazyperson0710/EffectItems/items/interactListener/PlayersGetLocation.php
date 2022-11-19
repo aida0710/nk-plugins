@@ -18,7 +18,6 @@ class PlayersGetLocation {
         $event->cancel();
         $player = $event->getPlayer();
         if (PlayerItemEvent::checkInterval($player) === false) return;
-
         $particle = new RedstoneParticle(50);
         $count = 0;
         foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
