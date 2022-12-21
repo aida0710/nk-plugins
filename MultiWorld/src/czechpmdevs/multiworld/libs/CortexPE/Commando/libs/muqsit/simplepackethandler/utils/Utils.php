@@ -5,6 +5,7 @@ namespace czechpmdevs\multiworld\libs\CortexPE\Commando\libs\muqsit\simplepacket
 
 use Closure;
 use InvalidArgumentException;
+use pocketmine\event\Event;
 use pocketmine\event\HandlerListManager;
 use ReflectionFunction;
 use ReflectionNamedType;
@@ -45,7 +46,7 @@ final class Utils {
     }
 
     /**
-     * @template TEvent of \pocketmine\event\Event
+     * @template TEvent of Event
      * @param class-string<TEvent>   $event
      * @param Closure(TEvent) : void $handler
      * @param int                    $priority
