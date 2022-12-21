@@ -4,7 +4,6 @@ namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
-use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -15,6 +14,8 @@ use pocketmine\player\Player;
 
 class JoinPlayerEvent implements Listener {
 
+    public static array $joinMessage = [];
+
     public const NBT_ROOT = "sff";
     public const NBT_ID = "id";
 
@@ -24,15 +25,28 @@ class JoinPlayerEvent implements Listener {
     public const ID_SETTINGS = 4;
     public const ID_TOS = 15;
 
+    /**
+     * @param PlayerJoinEvent $event
+     * @return void
+     * @priority HIGHEST
+     */
     public function onJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
         if (!$player->hasPlayedBefore()) {
             $this->setItem($player, VanillaItems::BOOK(), self::ID_TOS, "利用規約本", ["タップすると利用規約を表示します", "利用規約web版 -> https://www.nkserver.net/tos.html"]);
-        }
+            self::$joinMessage[$player->getName()][] = "初めまして！ようこそなまけものサーバーへ！";
+            self::$joinMessage[$player->getName()][] = "最初は利用規約に同意して機能を開放してください";
+            self::$joinMessage[$player->getName()][] = "/passコマンドを使用するか前に進むことで利用規約に同意できます";
+        } else self::$joinMessage[$player->getName()][] = "なまけものサーバーにようこそ！";
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(JoinItemsSetting::getName())?->getValue() === true) {
             $this->sendJoinItem($player);
-        } else {
-            SendMessage::Send($player, "設定されている為アイテムが付与されませんでした。アイテムは/joinitemから取得可能です", "JoinSetting", true);
+        } else self::$joinMessage[$player->getName()][] = "設定されている為アイテムが付与されませんでした。アイテムは/joinitemから取得可能です";
+        if (isset(self::$joinMessage[$player->getName()])) {
+            $player->sendMessage("===============");
+            foreach (self::$joinMessage[$player->getName()] as $message) {
+                $player->sendMessage("§7>> §a" . $message);
+            }
+            $player->sendMessage("===============");
         }
     }
 
