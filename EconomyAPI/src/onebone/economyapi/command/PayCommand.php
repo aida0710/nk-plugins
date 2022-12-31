@@ -41,12 +41,12 @@ class PayCommand extends Command {
             return true;
         }
         if (!Server::getInstance()->getPlayerByPrefix($target) instanceof Player) {
-            SendMessage::Send($sender, "{$target->getName()}は現在オフラインの為送金できませんでした", "Economy", false);
+            SendMessage::Send($sender, "{$target}は現在オフラインの為送金できませんでした", "Economy", false);
             return true;
         }
         $target = Server::getInstance()->getPlayerByPrefix($target);
         if (!$this->plugin->accountExists($target)) {
-            SendMessage::Send($sender, "{$target->getName()}はアカウントデータが存在しない為送金できませんでした", "Economy", false);
+            SendMessage::Send($sender, "{$target}はアカウントデータが存在しない為送金できませんでした", "Economy", false);
             return true;
         }
         if (PlayerSettingPool::getInstance()->getSettingNonNull($sender)->getSetting(PayCommandUseSetting::getName())?->getValue() === true) {
