@@ -20,16 +20,16 @@ class LuckyExpCoin {
             $player->getInventory()->removeItem($item->setCount(1));
         }
         $addXp = match (mt_rand(1, 10)) {
-            1 => 100,
-            2 => 300,
-            3 => 800,
-            4 => 1400,
-            5 => 2000,
-            6 => 2500,
-            7 => 2800,
-            8 => 3200,
-            9 => 4000,
-            10 => 5000,
+            1 => 10,
+            2 => 30,
+            3 => 80,
+            4 => 140,
+            5 => 200,
+            6 => 250,
+            7 => 280,
+            8 => 320,
+            9 => 400,
+            10 => 800,
         };
         $player->getXpManager()->addXp($addXp);
         SendNoSoundMessage::Send($player, "{$addXp}xpが当たりました！", "LuckyExpCoin", true);
