@@ -48,6 +48,7 @@ class JoinPlayerEvent implements Listener {
             }
             $player->sendMessage("===============");
         }
+        self::$joinMessage[$player->getName()] = [];
     }
 
     public static function sendJoinItem(Player $player) {
