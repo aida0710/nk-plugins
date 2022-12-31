@@ -71,7 +71,7 @@ class GachaItemAPI {
         ## SR Rank
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_MUTTON(), 1, "ちゅーる", "効果\n\n体力増強 lv.1 30s\nスピード lv.2 30秒", [], [], ["Churu"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::COOKED_CHICKEN(), 1, "ちゅーる", "効果\n\n体力増強 lv.1 30s\nスピード lv.2 30秒", [], [], ["Churu"]);
-        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::Lantern()->asItem(), 1, "ヘイストアイテム", "妖精の入ったランタンを照らして。。。\n\n効果\n\n採掘速度上昇 lv.50 30秒\n移動速度低下 lv.15 90秒", [VanillaEnchantments::PUNCH()], [1], ["HasteItem"]);
+        $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::Lantern()->asItem(), 1, "ヘイストアイテム", "妖精の入ったランタンを照らして。。。\n\n効果\n\n採掘速度上昇 lv.50 30秒\n移動速度低下 lv.3 90秒", [VanillaEnchantments::PUNCH()], [1], ["HasteItem"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaBlocks::CORAL_FAN()->setCoralType(CoralType::FIRE())->asItem(), 1, "天国草", "天国で群生してる草\n\n効果\n\n移動速度低下 lv.5 5秒\n耐性 lv.3 2分\n25秒後に吐き気 lv.15 15秒", [VanillaEnchantments::PUNCH()], [1], ["HeavenGrass"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::WATER_POTION(), 1, "RedBull", "翼を授ける\n\n効果\n\n浮遊 lv.30 3秒", [VanillaEnchantments::PUNCH()], [1], ["RedBull"]);
         $this->dischargeItemRegister("常駐ガチャ", "SR", VanillaItems::WOODEN_PICKAXE(), 1, "すぴにー(実写)", "効果\n\nなし", [VanillaEnchantments::PUNCH()], [1], []);

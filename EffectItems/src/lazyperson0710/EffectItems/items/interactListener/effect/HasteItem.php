@@ -23,7 +23,7 @@ class HasteItem {
         }
         $effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 30, 50, false);
         AddEffectPacket::Add($player, $effect, VanillaEffects::HASTE(), true);
-        $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 20 * 90, 15, false);
+        $effect = new EffectInstance(VanillaEffects::SLOWNESS(), 20 * 90, 2, false);
         AddEffectPacket::Add($player, $effect, VanillaEffects::SLOWNESS(), true);
         SoundPacket::Send($player, 'item.trident.return');
     }
