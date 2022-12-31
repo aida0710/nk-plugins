@@ -22,51 +22,51 @@ class ConfirmationSettingForm extends CustomForm {
 
     private const EnablingGrassToDirt = [
         "money" => 3000000,
-        "rangeItem" => 8,
-        "enchantItem" => 8,
-        "settingItem" => 3,
+        "rangeItem" => 3,
+        "enchantItem" => 3,
+        "settingItem" => 1,
     ];
     private const EnablingCobblestoneToStone = [
         "money" => 15000000,
-        "rangeItem" => 16,
-        "enchantItem" => 16,
-        "settingItem" => 8,
+        "rangeItem" => 5,
+        "enchantItem" => 5,
+        "settingItem" => 3,
     ];
     private const EnablingGraniteToStone = [
         "money" => 3000000,
-        "rangeItem" => 8,
-        "enchantItem" => 8,
-        "settingItem" => 3,
+        "rangeItem" => 3,
+        "enchantItem" => 3,
+        "settingItem" => 1,
     ];
     private const EnablingDioriteToStone = [
         "money" => 3000000,
-        "rangeItem" => 8,
-        "enchantItem" => 8,
-        "settingItem" => 3,
+        "rangeItem" => 3,
+        "enchantItem" => 3,
+        "settingItem" => 1,
     ];
     private const EnablingAndesiteToStone = [
         "money" => 3000000,
-        "rangeItem" => 8,
-        "enchantItem" => 8,
-        "settingItem" => 3,
+        "rangeItem" => 3,
+        "enchantItem" => 3,
+        "settingItem" => 1,
     ];
     private const EnablingIronIngot = [
         "money" => 30000000,
-        "rangeItem" => 16,
-        "enchantItem" => 16,
-        "settingItem" => 32,
+        "rangeItem" => 5,
+        "enchantItem" => 5,
+        "settingItem" => 5,
     ];
     private const EnablingGoldIngot = [
         "money" => 30000000,
-        "rangeItem" => 16,
-        "enchantItem" => 16,
-        "settingItem" => 32,
+        "rangeItem" => 5,
+        "enchantItem" => 5,
+        "settingItem" => 5,
     ];
     private const EnablingSandToGlass = [
         "money" => 8000000,
-        "rangeItem" => 15,
-        "enchantItem" => 15,
-        "settingItem" => 8,
+        "rangeItem" => 3,
+        "enchantItem" => 3,
+        "settingItem" => 3,
     ];
 
     public function __construct(string $settingName, string $settingJaName) {
