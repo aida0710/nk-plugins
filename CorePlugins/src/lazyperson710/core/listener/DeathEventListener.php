@@ -27,6 +27,10 @@ class DeathEventListener implements Listener {
     private function deathMessage(PlayerDeathEvent $event) {
         $player = $event->getPlayer();
         $cause = $player->getLastDamageCause();
+        if (is_null($cause)) {
+            $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}が死亡しました");
+            return;
+        }
         switch ($cause->getCause()) {
             case EntityDamageEvent::CAUSE_CONTACT:
                 if ($cause instanceof EntityDamageByBlockEvent) {
