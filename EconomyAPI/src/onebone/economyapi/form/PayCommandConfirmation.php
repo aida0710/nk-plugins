@@ -14,7 +14,7 @@ class PayCommandConfirmation extends CustomForm {
 
     private Toggle $toggle;
     private EconomyAPI $plugin;
-    private string $target;
+    private Player $target;
     private int $amount;
 
     public function __construct(EconomyAPI $plugin, Player $target, int $amount) {
