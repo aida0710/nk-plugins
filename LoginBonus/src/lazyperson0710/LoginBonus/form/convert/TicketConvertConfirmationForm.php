@@ -8,6 +8,7 @@ use lazyperson0710\LoginBonus\calculation\CheckInventoryCalculation;
 use lazyperson0710\LoginBonus\Main;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendMessage\SendMessage;
+use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
 
 class TicketConvertConfirmationForm extends CustomForm {
@@ -29,7 +30,7 @@ class TicketConvertConfirmationForm extends CustomForm {
 
     public function handleSubmit(Player $player): void {
         if (CheckInventoryCalculation::check($player, $this->cost)) {
-            $player->getInventory()->removeItem(Main::getInstance()->loginBonusItem->setCount($this->cost));
+            $player->getInventory()->removeItem(ItemFactory::getInstance()->get(Main::getInstance()->loginBonusItem->getId(),Main::getInstance()->loginBonusItem->getMeta(),$this->cost));
             TicketAPI::getInstance()->addTicket($player, $this->quantity);
             SendMessage::Send($player, "ログインボーナスを" . $this->cost . "個消費してチケット" . $this->quantity . "枚に交換しました", "LoginBonus", false, 'break.amethyst_block');
         } else {

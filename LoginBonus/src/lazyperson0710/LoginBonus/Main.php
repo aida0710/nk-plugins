@@ -24,7 +24,7 @@ class Main extends PluginBase {
         "id" => -195,
         "meta" => 0,
         "count" => 1,
-        "enchant" => 17,
+        "enchant" => 18,
         "level" => 15,
     ];
 

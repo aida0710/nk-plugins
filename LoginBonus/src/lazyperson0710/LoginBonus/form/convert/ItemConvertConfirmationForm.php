@@ -8,6 +8,7 @@ use lazyperson0710\LoginBonus\calculation\CheckInventoryCalculation;
 use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
 use lazyperson0710\LoginBonus\Main;
 use lazyperson710\core\packet\SendMessage\SendMessage;
+use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
 
 class ItemConvertConfirmationForm extends CustomForm {
@@ -26,25 +27,24 @@ class ItemConvertConfirmationForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player): void {
-        $item = $this->item->getItem();
-        $item->setCount($this->item->getQuantity());
-        $item->setCustomName($this->item->getCustomName());
-        if ($this->item->getLore() !== null) {
-            $item->setLore($this->item->getLore());
-        }
-        //todo くそ適当、絶対やれ
-        if (!empty($this->item->getEnchants())) {
-            foreach ($this->item->getEnchants() as $enchantment) {
-                $item->addEnchantment($enchantment);
-            }
-        }
-        if (!$player->getInventory()->canAddItem($item)) {
-            SendMessage::Send($player, "インベントリに空きがないため処理が中断されました", "LoginBonus", false);
-            return;
-        }
         if (CheckInventoryCalculation::check($player, $this->item->getCost())) {
+            $item = $this->item->getItem();
+            $item->setCount($this->item->getQuantity());
+            $item->setCustomName($this->item->getCustomName());
+            if ($this->item->getLore() !== null) {
+                $item->setLore($this->item->getLore());
+            }
+            if (!empty($this->item->getEnchants())) {
+                foreach ($this->item->getEnchants() as $enchantment) {
+                    $item->addEnchantment($enchantment);
+                }
+            }
+            if (!$player->getInventory()->canAddItem($item)) {
+                SendMessage::Send($player, "インベントリに空きがないため処理が中断されました", "LoginBonus", false);
+                return;
+            }
             $player->getInventory()->addItem($item);
-            $player->getInventory()->removeItem(Main::getInstance()->loginBonusItem->setCount($this->item->getCost()));
+            $player->getInventory()->removeItem(ItemFactory::getInstance()->get(Main::getInstance()->loginBonusItem->getId(),Main::getInstance()->loginBonusItem->getMeta(),$this->item->getCost()));
             SendMessage::Send($player, "ログインボーナスを" . $this->item->getCost() . "個消費してチケット" . $this->item->getQuantity() . "枚に交換しました", "LoginBonus", true, 'break.amethyst_block');
         } else {
             SendMessage::Send($player, "インベントリ内にあるログインボーナス数が足りません", "LoginBonus", false);

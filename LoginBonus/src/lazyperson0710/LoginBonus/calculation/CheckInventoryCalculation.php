@@ -11,7 +11,7 @@ class CheckInventoryCalculation {
         if ($requiredCount === 0) return true;
         for ($i = 0, $size = $player->getInventory()->getSize(); $i < $size; ++$i) {
             $item = clone $player->getInventory()->getItem($i);
-            if (Main::getInstance()->loginBonusItem === $item) {
+            if (Main::getInstance()->loginBonusItem->getId() === $item->getId()) {
                 if ($requiredCount <= $item->getCount()) {
                     return true;
                 }
