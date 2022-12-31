@@ -49,7 +49,6 @@ class WarpForm extends SimpleForm {
                 $this->addButton($player, $this->checkLoadWorld("nature-1"), "オーバーワールド - 1", "warp nature-1", true),
                 $this->addButton($player, $this->checkLoadWorld("nature-2"), "オーバーワールド - 2", "warp nature-2", true),
                 $this->addButton($player, $this->checkLoadWorld("nature-3"), "オーバーワールド - 3", "warp nature-3", true),
-                $this->addButton($player, $this->checkLoadWorld("nature-java"), "オーバーワールド - java", "warp java", true),
                 $this->addButton($player, $this->checkLoadWorld("MiningWorld"), "マイニングワールド", "warp mining", true),
                 new SendFormButton($this, "戻る", new ButtonImage(ButtonImage::TYPE_PATH, "textures/ui/undoArrow.png")),
             );
