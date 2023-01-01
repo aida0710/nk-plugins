@@ -22,14 +22,14 @@ class PassBlockInteract implements Listener {
             $x = $event->getBlock()->getPosition()->getFloorX();
             $y = $event->getBlock()->getPosition()->getFloorY();
             $z = $event->getBlock()->getPosition()->getFloorZ();
-            if ($x === 214 && $y === 106 && $z === 246) {//パスワード解除用石英ブロック
+            if ($x === 214 && $y === 106 && $z === 246) {
                 Server::getInstance()->dispatchCommand($player, "pass");
             }
-            if ($x === 215 && $y === 105 && $z === 247) {//TosFormを送る
+            if ($x === 215 && $y === 105 && $z === 247) {
                 SendForm::Send($player, (new TosForm()));
                 SoundPacket::Send($player, 'note.harp');
             }
-            if ($x === 232 && $y === 105 && $z === 246) {//TosFormを送る
+            if ($x === 232 && $y === 105 && $z === 246) {
                 SendForm::Send($player, (new TosForm()));
                 SoundPacket::Send($player, 'note.harp');
             }
@@ -42,7 +42,7 @@ class PassBlockInteract implements Listener {
             $x = $event->getBlock()->getPosition()->getFloorX();
             $y = $event->getBlock()->getPosition()->getFloorY();
             $z = $event->getBlock()->getPosition()->getFloorZ();
-            if ($x === 214 && $y === 106 && $z === 246) {//パスワード解除用石英ブロック
+            if ($x === 214 && $y === 106 && $z === 246) {
                 Server::getInstance()->dispatchCommand($player, "pass");
             }
         }
