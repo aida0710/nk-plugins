@@ -102,6 +102,7 @@ class DeathEventListener implements Listener {
         SendMessage::Send($player, "死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です", "Death", true);
         if (in_array($player->getWorld()->getFolderName(), WorldCategory::PublicWorld) || in_array($player->getWorld()->getFolderName(), WorldCategory::PublicEventWorld) || in_array($player->getWorld()->getFolderName(), WorldCategory::PVP)) {
             SendMessage::Send($player, "死亡ペナルティーは死亡ワールドが公共ワールド&PVPワールドでは適用されません", "Death", true);
+            $event->setKeepXp(true);
             return;
         }
         if ($see >= 2000) {
