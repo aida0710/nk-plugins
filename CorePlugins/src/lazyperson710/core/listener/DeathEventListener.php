@@ -35,7 +35,7 @@ class DeathEventListener implements Listener {
             case EntityDamageEvent::CAUSE_CONTACT:
                 if ($cause instanceof EntityDamageByBlockEvent) {
                     $block = $cause->getDamager()->getName();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$block}によって圧死しました");
+                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$block}§r§aによって圧死しました");
                 } else {
                     $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は不明なブロックによって圧死しました");
                 }
@@ -44,7 +44,7 @@ class DeathEventListener implements Listener {
                 $killer = $cause->getDamager();
                 if ($killer instanceof Player) {
                     $itemHand = $killer->getInventory()->getItemInHand();
-                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$itemHand->getName()}で殺害されました");
+                    $event->setDeathMessage("§bDeath §7>> §e{$player->getName()}は{$killer->getName()}によって{$itemHand->getName()}§r§aで殺害されました");
                 } else {
                     $event->setDeathMessage("§bDeath §7>> §e{$killer->getName()}は何かを殺害しました");
                 }
