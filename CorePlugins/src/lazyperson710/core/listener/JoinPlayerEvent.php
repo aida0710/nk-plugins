@@ -3,6 +3,7 @@
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\donation\Donation_1500;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\event\Listener;
@@ -41,6 +42,11 @@ class JoinPlayerEvent implements Listener {
         if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(JoinItemsSetting::getName())?->getValue() === true) {
             $this->sendJoinItem($player);
         } else self::$joinMessage[$player->getName()][] = "設定されている為アイテムが付与されませんでした。アイテムは/joinitemから取得可能です";
+        if (!PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(Donation_1500::getName())?->getValue()) {
+            self::$joinMessage[$player->getName()][] = "§l§e☆ : 受け取ってない寄付特典のプレゼントが存在します！";
+            self::$joinMessage[$player->getName()][] = "§l§e☆ : /donationコマンドで確認できます";
+        }
+
         if (isset(self::$joinMessage[$player->getName()])) {
             $player->sendMessage("===============");
             foreach (self::$joinMessage[$player->getName()] as $message) {
