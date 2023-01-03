@@ -8,6 +8,7 @@ use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
+use pocketmine\Server;
 
 class ResourceWorldProtect implements Listener {
 
@@ -33,11 +34,17 @@ class ResourceWorldProtect implements Listener {
             $heightLimit = WorldManagementAPI::getInstance()->getHeightLimit("resource");
             if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
                 SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上のブロックを破壊することは許可されていません", "Protect", false);
+                if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    return;
+                }
                 $event->cancel();
                 return;
             }
             if (!in_array($event->getBlock()->getName(), $blocks)) {
                 SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません", "Protect", false);
+                if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    return;
+                }
                 $event->cancel();
             }
         }
@@ -65,11 +72,17 @@ class ResourceWorldProtect implements Listener {
             ];
             if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
                 SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", "Protect", false);
+                if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    return;
+                }
                 $event->cancel();
                 return;
             }
             if (!in_array($event->getBlock()->getName(), $blocks)) {
                 SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません", "Protect", false);
+                if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
+                    return;
+                }
                 $event->cancel();
             }
         }
