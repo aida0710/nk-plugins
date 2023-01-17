@@ -1,0 +1,5 @@
+name: Template
+main: lazyperson0710\plugin_name\Main
+api: [ "4.0.0" ]
+version: "1.0"
+author: lazyperson0710
