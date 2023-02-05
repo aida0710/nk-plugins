@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4970c0fed5086d7fc880a0e1741d711e",
+    "content-hash": "078a0578b8b87dc84dee50628ce478a6",
     "packages": [
         {
             "name": "adhocore/json-comment",
@@ -276,65 +276,6 @@
                 "source": "https://github.com/cweiske/jsonmapper/tree/v4.1.0"
             },
             "time": "2022-12-08T20:46:14+00:00"
-        },
-        {
-            "name": "phpstan/phpstan",
-            "version": "1.9.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "f68d7cc3d0638a01bc6321cb826e4cae7fa6884d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f68d7cc3d0638a01bc6321cb826e4cae7fa6884d",
-                "reference": "f68d7cc3d0638a01bc6321cb826e4cae7fa6884d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2|^8.0"
-            },
-            "conflict": {
-                "phpstan/phpstan-shim": "*"
-            },
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan - PHP Static Analysis Tool",
-            "keywords": [
-                "dev",
-                "static analysis"
-            ],
-            "support": {
-                "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.9"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/ondrejmirtes",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/phpstan",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-01-11T14:39:22+00:00"
         },
         {
             "name": "pocketmine/bedrock-data",
@@ -816,16 +757,16 @@
         },
         {
             "name": "pocketmine/pocketmine-mp",
-            "version": "4.12.8",
+            "version": "4.12.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pmmp/PocketMine-MP.git",
-                "reference": "bb7df60a4d6a26bffefa9fc5547a10b68bde0750"
+                "reference": "ce9b25e97a14c702d5be1b221f6c7b3356e8b5c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pmmp/PocketMine-MP/zipball/bb7df60a4d6a26bffefa9fc5547a10b68bde0750",
-                "reference": "bb7df60a4d6a26bffefa9fc5547a10b68bde0750",
+                "url": "https://api.github.com/repos/pmmp/PocketMine-MP/zipball/ce9b25e97a14c702d5be1b221f6c7b3356e8b5c2",
+                "reference": "ce9b25e97a14c702d5be1b221f6c7b3356e8b5c2",
                 "shasum": ""
             },
             "require": {
@@ -878,7 +819,7 @@
                 "webmozart/path-util": "^2.3"
             },
             "require-dev": {
-                "phpstan/phpstan": "1.9.7",
+                "phpstan/phpstan": "1.9.13",
                 "phpstan/phpstan-phpunit": "^1.1.0",
                 "phpstan/phpstan-strict-rules": "^1.2.0",
                 "phpunit/phpunit": "^9.2"
@@ -900,7 +841,7 @@
             "homepage": "https://pmmp.io",
             "support": {
                 "issues": "https://github.com/pmmp/PocketMine-MP/issues",
-                "source": "https://github.com/pmmp/PocketMine-MP/tree/4.12.8"
+                "source": "https://github.com/pmmp/PocketMine-MP/tree/4.12.11"
             },
             "funding": [
                 {
@@ -912,7 +853,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-01-09T00:04:40+00:00"
+            "time": "2023-01-22T20:44:26+00:00"
         },
         {
             "name": "pocketmine/raklib",
@@ -1130,16 +1071,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.7.1",
+            "version": "4.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "a1acf96007170234a8399586a6e2ab8feba109d1"
+                "reference": "433b2014e3979047db08a17a205f410ba3869cf2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a1acf96007170234a8399586a6e2ab8feba109d1",
-                "reference": "a1acf96007170234a8399586a6e2ab8feba109d1",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/433b2014e3979047db08a17a205f410ba3869cf2",
+                "reference": "433b2014e3979047db08a17a205f410ba3869cf2",
                 "shasum": ""
             },
             "require": {
@@ -1206,7 +1147,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.7.1"
+                "source": "https://github.com/ramsey/uuid/tree/4.7.3"
             },
             "funding": [
                 {
@@ -1218,7 +1159,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-31T22:20:34+00:00"
+            "time": "2023-01-12T18:13:24+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -1728,8 +1669,23 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-gmp": "*",
-        "ext-bcmath": "*"
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-date": "*",
+        "ext-hash": "*",
+        "ext-openssl": "*",
+        "ext-pcre": "*",
+        "ext-phar": "*",
+        "ext-pthreads": "*",
+        "ext-reflection": "*",
+        "ext-sockets": "*",
+        "ext-spl": "*",
+        "ext-yaml": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*",
+        "ext-sqlite3": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

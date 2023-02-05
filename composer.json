@@ -2,17 +2,31 @@
     "name": "lazyperson0710/nk-plugins",
     "description": "nk-plugins for pm4",
     "minimum-stability": "stable",
-    "require": {
-        "pocketmine/pocketmine-mp": "4.*",
-        "bbo51dog/bboform": "2.*",
-        "phpstan/phpstan": "1.*",
-        "ext-gmp": "*",
-        "ext-bcmath": "*"
-    },
     "repositories": [
         {
             "type": "git",
             "url": "https://github.com/bbo51dog/BboForm"
         }
-    ]
+    ],
+    "require": {
+        "pocketmine/pocketmine-mp": "4.*",
+        "bbo51dog/bboform": "2.*",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-date": "*",
+        "ext-hash": "*",
+        "ext-openssl": "*",
+        "ext-pcre": "*",
+        "ext-phar": "*",
+        "ext-pthreads": "*",
+        "ext-reflection": "*",
+        "ext-sockets": "*",
+        "ext-spl": "*",
+        "ext-yaml": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*",
+        "ext-sqlite3": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    }
 }
