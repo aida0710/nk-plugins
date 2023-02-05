@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace lazyperson0710\PlayerSetting\object;
 
 use InvalidArgumentException;
+use lazyperson0710\PlayerSetting\object\settings\donation\Donation_10000;
 use lazyperson0710\PlayerSetting\object\settings\donation\Donation_1500;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\AndesiteToStoneSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningTools\CobblestoneToStoneSetting;
@@ -76,6 +77,7 @@ class PlayerSetting {
         $this->register(new EnablingSandToGlassSetting());
         //donation
         $this->register(new Donation_1500());
+        $this->register(new Donation_10000());
     }
 
     public function __construct(string $xuid) {
