@@ -110,7 +110,7 @@ class BossBar {
     private function addDefaults(BossEventPacket $pk): BossEventPacket {
         $pk->title = $this->getFullTitle();
         $pk->healthPercent = $this->getPercentage();
-        $pk->unknownShort = 0;
+        $pk->darkenScreen = false;
         $pk->color = BossBarColor::GREEN;  //Does not function anyways
         $pk->overlay = 0;//Neither. Typical for Mojang: Copy-pasted from Java edition
         return $pk;
