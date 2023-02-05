@@ -25,14 +25,14 @@ class DonationForm extends SimpleForm {
             "item" => false,
         ],
         "8000" => [
-            "donor" => null,
-            "enable" => false,
+            "donor" => "ReimariDarkness",
+            "enable" => true,
             "item" => false,
         ],
         "10000" => [
-            "donor" => null,
-            "enable" => false,
-            "item" => false,
+            "donor" => "ReimariDarkness",
+            "enable" => true,
+            "item" => true,
         ],
         "15000" => [
             "donor" => null,
@@ -42,12 +42,19 @@ class DonationForm extends SimpleForm {
     ];
 
     public function __construct(?string $message = null) {
+
         $msg1 = "なま鯖では寄付を募っています。\n寄付方法はamazonギフトカードでDiscordにてなまけもののDMでのみ受け付けさせて頂いています。";
         $msg2 = "また、寄付して頂いた額に応じて全員が特典を得ることができます\n特典は寄付額に応じて以下のボタンから寄付を受け取り可能です。";
         $msg3 = "特典に関しては寄付していただいた際に寄付してくださった方の要望をある程度反映したいと考えております。";
+        $msg4 = "以下、今期が始まってからの総寄付金額";
         $this
             ->setTitle("Donation Form")
-            ->setText("{$msg1}\n\n{$msg2}\n\n{$msg3}{$message}");
+            ->setText("なま鯖では寄付を募っています。\n寄付方法はamazonギフトカードでDiscordにてなまけもののDMでのみ受け付けさせて頂いています。\n\n
+            また、寄付して頂いた額に応じて全員が特典を得ることができます\n特典は寄付額に応じて以下のボタンから寄付を受け取り可能です。\n\n
+            特典に関しては寄付していただいた際に寄付してくださった方の要望をある程度反映したいと考えております。\n\n
+            以下、今期が始まってからの総寄付金額\n\n
+            {$message}
+            ");
         foreach (self::DonationInfo as $key => $value) {
             if ($value["enable"]) {
                 if ($value["item"]) {

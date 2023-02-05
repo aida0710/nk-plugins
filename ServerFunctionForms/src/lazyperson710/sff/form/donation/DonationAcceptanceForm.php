@@ -6,9 +6,11 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\donation\Donation_10000;
 use lazyperson0710\PlayerSetting\object\settings\donation\Donation_1500;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendForm;
+use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
 class DonationAcceptanceForm extends CustomForm {
@@ -21,27 +23,36 @@ class DonationAcceptanceForm extends CustomForm {
         private string $donor,
     ) {
         $amount = DonationForm::DonationAmount;
+        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
         $message = null;
         $give = false;
         switch ($this->num) {
             case 1500:
-                $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
                 if (!$setting->getSetting(Donation_1500::getName())?->getValue()) {
                     $give = true;
-                    $message = "チケットを100枚受け取ることが可能です。受け取りますか？\n\n寄付者 : {$this->donor}";
+                    $message = "チケットを100枚受け取ることが可能です。受け取りますか？\n\n寄付者 : {$this->donor}\n\n寄付金額 : 5000円";
                 } else {
-                    $message = "既にチケットを受け取っています\n\n寄付者 : {$this->donor}";
+                    $message = "既にチケットを受け取っています\n\n寄付者 : {$this->donor}\n\n寄付金額 : 5000円";
                 }
                 break;
             case 3000:
-                $message = "道具の名前変更機能の実装\nCommand : /items\n\n寄付者 : {$this->donor}";
+                $message = "道具の名前変更機能の実装\nCommand : /items\n\n寄付者 : {$this->donor}\n\n寄付金額 : 5000円";
                 break;
             case 5000:
-                $message = "ガチャに様々な効果を付与するアイテムの追加実装\nCommand : /gacha\n\n寄付者 : {$this->donor}";
+                $message = "ガチャに様々な効果を付与するアイテムの追加実装\nCommand : /gacha\n\n寄付者 : {$this->donor}\n\n寄付金額 : 5000円";
+                break;
+            case 8000:
+                $message = "ReimariDarknessのログイン時のメッセージを変更。ログイン時の音を出力\n\n寄付者 : {$this->donor}\n\n寄付金額 : 6000円";
+                break;
+            case 10000:
+                if (!$setting->getSetting(Donation_10000::getName())?->getValue()) {
+                    $give = true;
+                    $message = "ダイヤモンドを15個受け取ることが可能です。受け取りますか？\n\n寄付者 : {$this->donor}\n\n寄付金額 : 6000円";
+                } else {
+                    $message = "既にアイテムを受け取っています\n\n寄付者 : {$this->donor}";
+                }
                 break;
             case 15000:
-            case 10000:
-            case 8000:
             default:
                 break;
         }
@@ -69,6 +80,21 @@ class DonationAcceptanceForm extends CustomForm {
                     TicketAPI::getInstance()->addTicket($this->player, 100);
                     $setting->getSetting(Donation_1500::getName())?->setValue(true);
                     $message = "\n\n§sチケットを100枚受け取りました";
+                    break;
+                } else throw new \Error("既にチケットを受け取っています");
+            case 10000:
+                if (!$this->enable->getValue()) {
+                    break;
+                }
+                $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
+                if (!$setting->getSetting(Donation_10000::getName())?->getValue()) {
+                    if (!$this->player->getInventory()->canAddItem(VanillaItems::DIAMOND()->setCount(15))) {
+                        $message = "\n\n§cインベントリに空きがありません";
+                        break;
+                    }
+                    $this->player->getInventory()->addItem(VanillaItems::DIAMOND()->setCount(15));
+                    $setting->getSetting(Donation_10000::getName())?->setValue(true);
+                    $message = "\n\n§sダイアモンドを15個受け取りました";
                     break;
                 } else throw new \Error("既にチケットを受け取っています");
             default:
