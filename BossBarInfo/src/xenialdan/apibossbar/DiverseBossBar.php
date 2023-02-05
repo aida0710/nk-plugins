@@ -5,6 +5,7 @@ namespace xenialdan\apibossbar;
 use pocketmine\entity\Attribute;
 use pocketmine\entity\AttributeMap;
 use pocketmine\network\mcpe\protocol\BossEventPacket;
+use pocketmine\network\mcpe\protocol\types\BossBarColor;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataCollection;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties;
 use pocketmine\network\mcpe\protocol\UpdateAttributesPacket;
@@ -107,8 +108,8 @@ class DiverseBossBar extends BossBar {
     private function addDefaults(Player $player, BossEventPacket $pk): BossEventPacket {
         $pk->title = $this->getFullTitleFor($player);
         $pk->healthPercent = $this->getPercentageFor($player);
-        $pk->unknownShort = 1;
-        $pk->color = 0;  //Does not function anyways
+        $pk->unknownShort = 0;
+        $pk->color = BossBarColor::GREEN;  //Does not function anyways
         $pk->overlay = 0;//neither. Typical for Mojang: Copy-pasted from Java edition
         return $pk;
     }
