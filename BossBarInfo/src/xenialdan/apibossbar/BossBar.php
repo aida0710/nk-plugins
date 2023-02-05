@@ -10,6 +10,7 @@ use pocketmine\entity\AttributeMap;
 use pocketmine\entity\Entity;
 use pocketmine\network\mcpe\protocol\BossEventPacket;
 use pocketmine\network\mcpe\protocol\RemoveActorPacket;
+use pocketmine\network\mcpe\protocol\types\BossBarColor;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataCollection;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties;
@@ -110,7 +111,7 @@ class BossBar {
         $pk->title = $this->getFullTitle();
         $pk->healthPercent = $this->getPercentage();
         $pk->unknownShort = 0;
-        $pk->color = 0;  //Does not function anyways
+        $pk->color = BossBarColor::GREEN;  //Does not function anyways
         $pk->overlay = 0;//Neither. Typical for Mojang: Copy-pasted from Java edition
         return $pk;
     }
