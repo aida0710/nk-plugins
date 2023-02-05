@@ -1,0 +1,59 @@
+{
+    "name": "yomogi_server/ymggacha",
+    "license": "",
+    "description": "",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/CortexPE/Commando.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Rark7040/Gacha.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Rark7040/Modals.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Rark7040/FireworkParticle.git"
+        }
+    ],
+    "require": {
+        "php": "8.0.16.*",
+        "php-64bit": "8.0.16.*",
+        "../vendor/phpstan/phpstan": "*",
+        "friendsofphp/php-cs-fixer": "v3.13.1",
+        "cortexpe/commando": "dev-master",
+        "rarkhopper/gacha": "dev-master",
+        "rarkhopper/modals": "dev-master",
+        "rarkhopper/firework-particle": "dev-master"
+    },
+    "require-dev": {
+        "../vendor/pocketmine/pocketmine-mp": "4.*",
+        "roave/security-advisories": "dev-latest",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-date": "*",
+        "ext-hash": "*",
+        "ext-openssl": "*",
+        "ext-pcre": "*",
+        "ext-phar": "*",
+        "ext-pthreads": "*",
+        "ext-reflection": "*",
+        "ext-sockets": "*",
+        "ext-spl": "*",
+        "ext-yaml": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*",
+        "ext-sqlite3": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "yomogi_server\\ymggacha\\": "src/yomogi_server/ymggacha/"
+        }
+    }
+}
