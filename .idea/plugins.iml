@@ -9,9 +9,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/LoginBonus/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CorePlugins/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/EffectItems/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Countdown_v1.1.1" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop2" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop3" />
@@ -40,34 +37,37 @@
       <excludeFolder url="file://$MODULE_DIR$/INether-master" />
       <excludeFolder url="file://$MODULE_DIR$/myworld" />
       <excludeFolder url="file://$MODULE_DIR$/miningtools-debug" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/bbo51dog/bboform" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/snooze" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/color" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-data" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/nbt" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/log" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/log-pthreads" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/pocketmine-mp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/locale-data" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/errorhandler" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/callback-validator" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/raklib-ipc" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/fgrosse/phpasn1" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/raklib" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/binaryutils" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/math" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/classloader" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-protocol" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/log-pthreads" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/nbt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-data" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/color" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/snooze" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/path-util" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/adhocore/json-comment" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fgrosse/phpasn1" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/pocketmine-mp" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bbo51dog/bboform" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/adhocore/json-comment" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/raklib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/classloader" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/math" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/binaryutils" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-protocol" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/raklib-ipc" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/callback-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/errorhandler" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
