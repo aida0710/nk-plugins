@@ -5,9 +5,9 @@ namespace ymggacha\src\yomogi_server\ymggacha\gacha;
 
 trait OneLineDescriptionTrait {
 
-    private string $oneLineDescription;
+	private string $oneLineDescription;
 
-    public function getOneLineDescription(): string {
-        return $this->oneLineDescription;
-    }
+	public function getOneLineDescription() : string {
+		return $this->oneLineDescription;
+	}
 }

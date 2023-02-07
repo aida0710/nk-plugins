@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\PlayerSetting\form\element;
 
 use bbo51dog\bboform\element\Button;
@@ -10,19 +12,14 @@ use pocketmine\player\Player;
 
 class SendNormalSettingFormButton extends Button {
 
-    private Form $form;
+	private Form $form;
 
-    /**
-     * @param Form             $form
-     * @param string           $text
-     * @param ButtonImage|null $image
-     */
-    public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
-        parent::__construct($text, $image);
-        $this->form = $form;
-    }
+	public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
+		parent::__construct($text, $image);
+		$this->form = $form;
+	}
 
-    public function handleSubmit(Player $player): void {
-        SendForm::Send($player, $this->form);
-    }
+	public function handleSubmit(Player $player) : void {
+		SendForm::Send($player, $this->form);
+	}
 }

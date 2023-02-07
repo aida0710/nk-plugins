@@ -6,54 +6,62 @@ namespace bbo51dog\pmdiscord;
 use bbo51dog\pmdiscord\connection\Webhook;
 use bbo51dog\pmdiscord\task\SendAsyncTask;
 use pocketmine\Server;
+use function curl_close;
+use function curl_exec;
+use function curl_init;
+use function curl_setopt;
+use function in_array;
+use function json_decode;
+use function json_encode;
+use const CURLOPT_HTTPHEADER;
+use const CURLOPT_POST;
+use const CURLOPT_POSTFIELDS;
+use const CURLOPT_RETURNTRANSFER;
+use const CURLOPT_SSL_VERIFYPEER;
+use const CURLOPT_URL;
 
 /**
  * @deprecated
  */
 class Sender {
 
-    /**
-     * Send Message to Discord
-     *
-     * @param Webhook $webhook
-     * @param bool    $async
-     * @throws PMDiscordAPIException
-     */
-    public static function send(Webhook $webhook, bool $async = true): void {
-        if ($async) {
-            Server::getInstance()->getAsyncPool()->submitTask(new SendAsyncTask($webhook));
-            return;
-        }
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $webhook->getUrl());
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhook->getData()));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Content-Type: application/json",
-        ]);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        if ($result === false) {
-            throw new PMDiscordAPIException('cURL connection failed');
-        } elseif (!empty($result)) {
-            $result_array = json_decode($result, true);
-            if (in_array('code', $result_array) && in_array('message', $result_array)) {
-                throw new PMDiscordAPIException("{$result_array['code']} : {$result_array['message']}");
-            } else {
-                throw new PMDiscordAPIException('Sending webhook failed');
-            }
-        }
-    }
+	/**
+	 * Send Message to Discord
+	 *
+	 * @throws PMDiscordAPIException
+	 */
+	public static function send(Webhook $webhook, bool $async = true) : void {
+		if ($async) {
+			Server::getInstance()->getAsyncPool()->submitTask(new SendAsyncTask($webhook));
+			return;
+		}
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $webhook->getUrl());
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhook->getData()));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, [
+			"Content-Type: application/json",
+		]);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		if ($result === false) {
+			throw new PMDiscordAPIException('cURL connection failed');
+		} elseif (!empty($result)) {
+			$result_array = json_decode($result, true);
+			if (in_array('code', $result_array, true) && in_array('message', $result_array, true)) {
+				throw new PMDiscordAPIException("{$result_array['code']} : {$result_array['message']}");
+			} else {
+				throw new PMDiscordAPIException('Sending webhook failed');
+			}
+		}
+	}
 
-    /**
-     * Create Webhook instance
-     *
-     * @param string $webhook_url
-     * @return Webhook
-     */
-    public static function create(string $webhook_url): Webhook {
-        return new Webhook($webhook_url);
-    }
+	/**
+	 * Create Webhook instance
+	 */
+	public static function create(string $webhook_url) : Webhook {
+		return new Webhook($webhook_url);
+	}
 }

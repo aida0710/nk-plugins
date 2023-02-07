@@ -7,10 +7,10 @@ namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\gl
 // (array access is a lot slower than member access)
 final class Grad {
 
-    public function __construct(
-        public float $x,
-        public float $y,
-        public float $z,
-    ) {
-    }
+	public function __construct(
+		public float $x,
+		public float $y,
+		public float $z,
+	) {
+	}
 }

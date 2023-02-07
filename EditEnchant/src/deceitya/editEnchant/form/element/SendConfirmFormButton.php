@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace deceitya\editEnchant\form\element;
 
 use bbo51dog\bboform\element\Button;
@@ -11,25 +13,18 @@ use pocketmine\player\Player;
 
 class SendConfirmFormButton extends Button {
 
-    private EnchantmentInstance $enchant;
-    private string $type;
-    private int $level;
+	private EnchantmentInstance $enchant;
+	private string $type;
+	private int $level;
 
-    /**
-     * @param string              $text
-     * @param EnchantmentInstance $enchant
-     * @param string              $type
-     * @param int|null            $level
-     * @param ButtonImage|null    $image
-     */
-    public function __construct(string $text, EnchantmentInstance $enchant, string $type, ?int $level = 0, ?ButtonImage $image = null) {
-        parent::__construct($text, $image);
-        $this->enchant = $enchant;
-        $this->type = $type;
-        $this->level = $level;
-    }
+	public function __construct(string $text, EnchantmentInstance $enchant, string $type, ?int $level = 0, ?ButtonImage $image = null) {
+		parent::__construct($text, $image);
+		$this->enchant = $enchant;
+		$this->type = $type;
+		$this->level = $level;
+	}
 
-    public function handleSubmit(Player $player): void {
-        SendForm::Send($player, (new ConfirmForm($player, $this->enchant, $this->type, $this->level)));
-    }
+	public function handleSubmit(Player $player) : void {
+		SendForm::Send($player, (new ConfirmForm($player, $this->enchant, $this->type, $this->level)));
+	}
 }

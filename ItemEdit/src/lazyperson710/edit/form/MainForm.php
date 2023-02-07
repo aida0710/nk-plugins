@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson710\edit\form;
 
 use bbo51dog\bboform\form\SimpleForm;
@@ -10,14 +12,14 @@ use pocketmine\player\Player;
 
 class MainForm extends SimpleForm {
 
-    public function __construct(Player $player) {
-        $this
-            ->setTitle("Edit Form")
-            ->setText("選択してください")
-            ->addElements(
-                new SendFormButton(new MainPlayerEditForm($player), "プレイヤーに関する情報を変更する"),
-                new SendFormButton(new MainItemEditForm($player), "所持しているアイテムに関する情報を変更する"),
-            );
-    }
+	public function __construct(Player $player) {
+		$this
+			->setTitle("Edit Form")
+			->setText("選択してください")
+			->addElements(
+				new SendFormButton(new MainPlayerEditForm($player), "プレイヤーに関する情報を変更する"),
+				new SendFormButton(new MainItemEditForm($player), "所持しているアイテムに関する情報を変更する"),
+			);
+	}
 
 }

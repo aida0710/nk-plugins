@@ -7,11 +7,11 @@ use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworld\biom
 
 class DesertMountainsPopulator extends DesertPopulator {
 
-    protected function initPopulators(): void {
-        $this->waterLakeDecorator->setAmount(1);
-    }
+	protected function initPopulators() : void {
+		$this->waterLakeDecorator->setAmount(1);
+	}
 
-    public function getBiomes(): ?array {
-        return [BiomeIds::DESERT_MUTATED];
-    }
+	public function getBiomes() : ?array {
+		return [BiomeIds::DESERT_MUTATED];
+	}
 }

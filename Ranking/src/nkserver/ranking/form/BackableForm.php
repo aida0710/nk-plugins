@@ -10,14 +10,14 @@ use pocketmine\player\Player;
 
 class BackableForm extends SimpleForm {
 
-    protected ?Form $before;
+	protected ?Form $before;
 
-    public function __construct(?Form $before) {
-        $this->before = $before;
-    }
+	public function __construct(?Form $before) {
+		$this->before = $before;
+	}
 
-    public function back(Player $player): void {
-        if ($this->before === null) return;
-        SendForm::Send($player, ($this->before));
-    }
+	public function back(Player $player) : void {
+		if ($this->before === null) return;
+		SendForm::Send($player, ($this->before));
+	}
 }

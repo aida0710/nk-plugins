@@ -8,20 +8,20 @@ use pocketmine\utils\SingletonTrait;
 
 class GachaRollingPlayersMap {
 
-    use SingletonTrait;
+	use SingletonTrait;
 
-    /** @var array<string, Player> */
-    private array $players = [];
+	/** @var array<string, Player> */
+	private array $players = [];
 
-    public function register(Player $player): void {
-        $this->players[$player->getName()] = $player;
-    }
+	public function register(Player $player) : void {
+		$this->players[$player->getName()] = $player;
+	}
 
-    public function exists(Player $player): bool {
-        return isset($this->players[$player->getName()]);
-    }
+	public function exists(Player $player) : bool {
+		return isset($this->players[$player->getName()]);
+	}
 
-    public function unregister(Player $player): void {
-        unset($this->players[$player->getName()]);
-    }
+	public function unregister(Player $player) : void {
+		unset($this->players[$player->getName()]);
+	}
 }

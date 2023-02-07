@@ -1,62 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace bbo51dog\mjolnir\model;
 
 use pocketmine\player\Player;
+use function strtolower;
 
 class Account {
 
-    private string $name;
+	private string $name;
 
-    private string $ip;
+	private string $ip;
 
-    private int $cid;
+	private int $cid;
 
-    private string $xuid;
+	private string $xuid;
 
-    /**
-     * @param string $name
-     * @param string $ip
-     * @param int    $cid
-     * @param string $xuid
-     */
-    public function __construct(string $name, string $ip, int $cid, string $xuid) {
-        $this->name = strtolower($name);
-        $this->ip = $ip;
-        $this->cid = $cid;
-        $this->xuid = $xuid;
-    }
+	public function __construct(string $name, string $ip, int $cid, string $xuid) {
+		$this->name = strtolower($name);
+		$this->ip = $ip;
+		$this->cid = $cid;
+		$this->xuid = $xuid;
+	}
 
-    public static function createFromPlayer(Player $player): self {
-        return new Account($player->getName(), $player->getNetworkSession()->getIp(), $player->getPlayerInfo()->getExtraData()["ClientRandomId"], $player->getXuid());
-    }
+	public static function createFromPlayer(Player $player) : self {
+		return new Account($player->getName(), $player->getNetworkSession()->getIp(), $player->getPlayerInfo()->getExtraData()["ClientRandomId"], $player->getXuid());
+	}
 
-    /**
-     * @return string
-     */
-    public function getName(): string {
-        return $this->name;
-    }
+	public function getName() : string {
+		return $this->name;
+	}
 
-    /**
-     * @return string
-     */
-    public function getIp(): string {
-        return $this->ip;
-    }
+	public function getIp() : string {
+		return $this->ip;
+	}
 
-    /**
-     * @return string
-     */
-    public function getCid(): string {
-        return $this->cid;
-    }
+	public function getCid() : string {
+		return $this->cid;
+	}
 
-    /**
-     * @return string
-     */
-    public function getXuid(): string {
-        return $this->xuid;
-    }
+	public function getXuid() : string {
+		return $this->xuid;
+	}
 
 }

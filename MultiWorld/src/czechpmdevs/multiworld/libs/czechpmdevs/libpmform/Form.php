@@ -24,50 +24,50 @@ use pocketmine\player\Player;
 
 abstract class Form implements \pocketmine\form\Form {
 
-    public const FORM_TYPE_SIMPLE = "form";
-    public const FORM_TYPE_MODAL = "modal";
-    public const FORM_TYPE_CUSTOM = "custom_form";
+	public const FORM_TYPE_SIMPLE = "form";
+	public const FORM_TYPE_MODAL = "modal";
+	public const FORM_TYPE_CUSTOM = "custom_form";
 
-    /** @var mixed[] */
-    protected array $data = [];
+	/** @var mixed[] */
+	protected array $data = [];
 
-    /** @var Closure(Player $player, FormResponse $response): void */
-    protected Closure $callback;
-    /** @var bool */
-    protected bool $ignoreInvalidResponse;
+	/** @var Closure(Player $player, FormResponse $response): void */
+	protected Closure $callback;
 
-    public function __construct(string $formType, bool $ignoreInvalidResponse = false) {
-        $this->data["type"] = $formType;
-        $this->ignoreInvalidResponse = $ignoreInvalidResponse;
-    }
+	protected bool $ignoreInvalidResponse;
 
-    /**
-     * These cancels handling forms if the response is null (form was closed, button was not pressed)
-     */
-    public function ignoreInvalidResponse(bool $ignoreInvalidResponse = true): void {
-        $this->ignoreInvalidResponse = $ignoreInvalidResponse;
-    }
+	public function __construct(string $formType, bool $ignoreInvalidResponse = false) {
+		$this->data["type"] = $formType;
+		$this->ignoreInvalidResponse = $ignoreInvalidResponse;
+	}
 
-    /**
-     * @param Closure(Player $player, FormResponse $response): void $callback
-     */
-    public function setCallback(Closure $callback): void {
-        $this->callback = $callback;
-    }
+	/**
+	 * These cancels handling forms if the response is null (form was closed, button was not pressed)
+	 */
+	public function ignoreInvalidResponse(bool $ignoreInvalidResponse = true) : void {
+		$this->ignoreInvalidResponse = $ignoreInvalidResponse;
+	}
 
-    final public function handleResponse(Player $player, $data): void {
-        $response = new FormResponse($data);
-        if ($this->ignoreInvalidResponse && !$response->isValid()) {
-            return;
-        }
-        if (!isset($this->callback)) {
-            return;
-        }
-        $callback = $this->callback;
-        $callback($player, $response);
-    }
+	/**
+	 * @param Closure(Player $player, FormResponse $response): void $callback
+	 */
+	public function setCallback(Closure $callback) : void {
+		$this->callback = $callback;
+	}
 
-    public function jsonSerialize() {
-        return $this->data;
-    }
+	final public function handleResponse(Player $player, $data) : void {
+		$response = new FormResponse($data);
+		if ($this->ignoreInvalidResponse && !$response->isValid()) {
+			return;
+		}
+		if (!isset($this->callback)) {
+			return;
+		}
+		$callback = $this->callback;
+		$callback($player, $response);
+	}
+
+	public function jsonSerialize() {
+		return $this->data;
+	}
 }

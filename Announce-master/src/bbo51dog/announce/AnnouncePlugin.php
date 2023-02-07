@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types = 1);
 namespace bbo51dog\announce;
 
 use bbo51dog\announce\command\AnnounceAdminCommand;
@@ -17,32 +18,32 @@ use SQLite3;
 
 class AnnouncePlugin extends PluginBase {
 
-    private const SQLITE_FILE = "Announce.sqlite";
+	private const SQLITE_FILE = "Announce.sqlite";
 
-    private RepositoryPool $repoPool;
+	private RepositoryPool $repoPool;
 
-    private SQLite3 $db;
+	private SQLite3 $db;
 
-    protected function onEnable(): void {
-        $this->initRepository();
-        AnnounceService::init($this->repoPool);
-        Server::getInstance()->getCommandMap()->registerAll("announce", [
-            new AnnounceCommand(),
-            new AnnounceAdminCommand(),
-            new PassCommand(),
-        ]);
-        Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
-    }
+	protected function onEnable() : void {
+		$this->initRepository();
+		AnnounceService::init($this->repoPool);
+		Server::getInstance()->getCommandMap()->registerAll("announce", [
+			new AnnounceCommand(),
+			new AnnounceAdminCommand(),
+			new PassCommand(),
+		]);
+		Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
+	}
 
-    private function initRepository() {
-        $this->db = new SQLite3($this->getDataFolder() . self::SQLITE_FILE);
-        $this->repoPool = new RepositoryPool();
-        $this->repoPool->register(UserRepository::class, new SQLiteUserRepository($this->db));
-        $this->repoPool->register(AnnounceRepository::class, new SQLiteAnnounceRepository($this->db));
-    }
+	private function initRepository() {
+		$this->db = new SQLite3($this->getDataFolder() . self::SQLITE_FILE);
+		$this->repoPool = new RepositoryPool();
+		$this->repoPool->register(UserRepository::class, new SQLiteUserRepository($this->db));
+		$this->repoPool->register(AnnounceRepository::class, new SQLiteAnnounceRepository($this->db));
+	}
 
-    protected function onDisable(): void {
-        $this->repoPool->close();
-        $this->db->close();
-    }
+	protected function onDisable() : void {
+		$this->repoPool->close();
+		$this->db->close();
+	}
 }

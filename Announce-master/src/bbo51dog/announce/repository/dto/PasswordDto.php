@@ -1,34 +1,25 @@
 <?php
 
+declare(strict_types = 1);
 namespace bbo51dog\announce\repository\dto;
 
 class PasswordDto {
 
-    private string $name;
+	private string $name;
 
-    private bool $isConfirmed;
+	private bool $isConfirmed;
 
-    /**
-     * @param string $name
-     * @param bool   $isConfirmed
-     */
-    public function __construct(string $name, bool $isConfirmed) {
-        $this->name = $name;
-        $this->isConfirmed = $isConfirmed;
-    }
+	public function __construct(string $name, bool $isConfirmed) {
+		$this->name = $name;
+		$this->isConfirmed = $isConfirmed;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName(): string {
-        return $this->name;
-    }
+	public function getName() : string {
+		return $this->name;
+	}
 
-    /**
-     * @return bool
-     */
-    public function isConfirmed(): bool {
-        return $this->isConfirmed;
-    }
+	public function isConfirmed() : bool {
+		return $this->isConfirmed;
+	}
 
 }

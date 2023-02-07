@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\EffectItems\items\interactListener\effect;
 
 use lazyperson0710\EffectItems\event\PlayerItemEvent;
@@ -14,19 +16,19 @@ use pocketmine\player\GameMode;
 
 class ZONe {
 
-    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item): void {
-        $event->cancel();
-        $player = $event->getPlayer();
-        if (PlayerItemEvent::checkInterval($player) === false) return;
-        if ($player->getGamemode() !== GameMode::CREATIVE()) {
-            $player->getInventory()->removeItem($item->setCount(1));
-        }
-        $effect = new EffectInstance(VanillaEffects::LEVITATION(), 20 * 30, 15, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::LEVITATION(), true);
-        $effect = new EffectInstance(VanillaEffects::WITHER(), 20 * 30, 15, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::WITHER(), true);
-        $effect = new EffectInstance(VanillaEffects::CONDUIT_POWER(), 20 * 60 * 2, 3, false);
-        AddEffectPacket::Add($player, $effect, VanillaEffects::CONDUIT_POWER(), true);
-        SoundPacket::Send($player, 'item.trident.return');
-    }
+	public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
+		$event->cancel();
+		$player = $event->getPlayer();
+		if (PlayerItemEvent::checkInterval($player) === false) return;
+		if ($player->getGamemode() !== GameMode::CREATIVE()) {
+			$player->getInventory()->removeItem($item->setCount(1));
+		}
+		$effect = new EffectInstance(VanillaEffects::LEVITATION(), 20 * 30, 15, false);
+		AddEffectPacket::Add($player, $effect, VanillaEffects::LEVITATION(), true);
+		$effect = new EffectInstance(VanillaEffects::WITHER(), 20 * 30, 15, false);
+		AddEffectPacket::Add($player, $effect, VanillaEffects::WITHER(), true);
+		$effect = new EffectInstance(VanillaEffects::CONDUIT_POWER(), 20 * 60 * 2, 3, false);
+		AddEffectPacket::Add($player, $effect, VanillaEffects::CONDUIT_POWER(), true);
+		SoundPacket::Send($player, 'item.trident.return');
+	}
 }

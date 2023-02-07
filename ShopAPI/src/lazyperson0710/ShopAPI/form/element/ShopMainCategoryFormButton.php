@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
@@ -22,36 +24,31 @@ use pocketmine\player\Player;
 
 class ShopMainCategoryFormButton extends Button {
 
-    private FormBase $class;
+	private FormBase $class;
 
-    /**
-     * @param string           $text
-     * @param FormBase         $class
-     * @param ButtonImage|null $image
-     */
-    public function __construct(string $text, FormBase $class, ?ButtonImage $image = null) {
-        parent::__construct($text, $image);
-        $this->class = $class;
-    }
+	public function __construct(string $text, FormBase $class, ?ButtonImage $image = null) {
+		parent::__construct($text, $image);
+		$this->class = $class;
+	}
 
-    public function handleSubmit(Player $player): void {
-        $level = match ($this->class::class) {
-            OtherShopFunctionSelectForm::class => LevelShopAPI::RestrictionLevel_OtherShop,
-            Shop1Form::class => LevelShopAPI::RestrictionLevel_Shop1,
-            Shop2Form::class => LevelShopAPI::RestrictionLevel_Shop2,
-            Shop3Form::class => LevelShopAPI::RestrictionLevel_Shop3,
-            Shop4Form::class => LevelShopAPI::RestrictionLevel_Shop4,
-            Shop5Form::class => LevelShopAPI::RestrictionLevel_Shop5,
-            Shop6Form::class => LevelShopAPI::RestrictionLevel_Shop6,
-            Shop7Form::class => LevelShopAPI::RestrictionLevel_Shop7,
-            default => 0,
-        };
-        if (MiningLevelAPI::getInstance()->getLevel($player) >= $level) {
-            SendForm::Send($player, ($this->class));
-        } else {
-            $error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$level}";
-            SendForm::Send($player, (new MainLevelShopForm($player, $error)));
-            SoundPacket::Send($player, 'dig.chain');
-        }
-    }
+	public function handleSubmit(Player $player) : void {
+		$level = match ($this->class::class) {
+			OtherShopFunctionSelectForm::class => LevelShopAPI::RestrictionLevel_OtherShop,
+			Shop1Form::class => LevelShopAPI::RestrictionLevel_Shop1,
+			Shop2Form::class => LevelShopAPI::RestrictionLevel_Shop2,
+			Shop3Form::class => LevelShopAPI::RestrictionLevel_Shop3,
+			Shop4Form::class => LevelShopAPI::RestrictionLevel_Shop4,
+			Shop5Form::class => LevelShopAPI::RestrictionLevel_Shop5,
+			Shop6Form::class => LevelShopAPI::RestrictionLevel_Shop6,
+			Shop7Form::class => LevelShopAPI::RestrictionLevel_Shop7,
+			default => 0,
+		};
+		if (MiningLevelAPI::getInstance()->getLevel($player) >= $level) {
+			SendForm::Send($player, ($this->class));
+		} else {
+			$error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$level}";
+			SendForm::Send($player, (new MainLevelShopForm($player, $error)));
+			SoundPacket::Send($player, 'dig.chain');
+		}
+	}
 }

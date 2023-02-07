@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -23,11 +25,11 @@ use pocketmine\scheduler\Task;
 
 class SaveTask extends Task {
 
-    public function __construct(EconomyLand $plugin) {
-        $this->plugin = $plugin;
-    }
+	public function __construct(EconomyLand $plugin) {
+		$this->plugin = $plugin;
+	}
 
-    public function onRun(): void {
-        $this->plugin->save();
-    }
+	public function onRun() : void {
+		$this->plugin->save();
+	}
 }

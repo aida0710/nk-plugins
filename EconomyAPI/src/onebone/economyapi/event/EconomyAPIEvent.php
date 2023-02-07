@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -26,13 +28,13 @@ use pocketmine\event\plugin\PluginEvent;
 
 class EconomyAPIEvent extends PluginEvent implements Cancellable {
 
-    use CancellableTrait;
+	use CancellableTrait;
 
-    public function __construct(EconomyAPI $plugin, private $issuer) {
-        parent::__construct($plugin);
-    }
+	public function __construct(EconomyAPI $plugin, private $issuer) {
+		parent::__construct($plugin);
+	}
 
-    public function getIssuer() {
-        return $this->issuer;
-    }
+	public function getIssuer() {
+		return $this->issuer;
+	}
 }

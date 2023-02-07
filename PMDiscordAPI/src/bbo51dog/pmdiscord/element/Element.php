@@ -5,15 +5,15 @@ namespace bbo51dog\pmdiscord\element;
 
 abstract class Element implements ElementType {
 
-    protected mixed $data;
+	protected mixed $data;
 
-    protected string $type;
+	protected string $type;
 
-    public function getData(): mixed {
-        return $this->data;
-    }
+	public function getData() : mixed {
+		return $this->data;
+	}
 
-    public function getType(): string {
-        return $this->type;
-    }
+	public function getType() : string {
+		return $this->type;
+	}
 }

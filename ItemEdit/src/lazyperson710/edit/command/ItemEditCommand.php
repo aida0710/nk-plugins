@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson710\edit\command;
 
 use lazyperson710\core\packet\SendForm;
@@ -11,14 +13,14 @@ use pocketmine\Server;
 
 class ItemEditCommand extends Command {
 
-    public function __construct() {
-        parent::__construct("edit", "色んな機能を改変する");
-        $this->setPermission("itemEditor.command.edit");
-    }
+	public function __construct() {
+		parent::__construct("edit", "色んな機能を改変する");
+		$this->setPermission("itemEditor.command.edit");
+	}
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if (!($sender instanceof Player)) return;
-        if (!Server::getInstance()->isOp($sender->getName())) return;
-        SendForm::Send($sender, (new MainForm($sender)));
-    }
+	public function execute(CommandSender $sender, string $commandLabel, array $args) {
+		if (!($sender instanceof Player)) return;
+		if (!Server::getInstance()->isOp($sender->getName())) return;
+		SendForm::Send($sender, (new MainForm($sender)));
+	}
 }

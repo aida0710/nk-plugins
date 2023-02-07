@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace deceitya\miningtools\extensions\enchant;
 
 use bbo51dog\bboform\form\SimpleForm;
@@ -11,17 +13,17 @@ use pocketmine\player\Player;
 
 class EnchantFunctionSelectForm extends SimpleForm {
 
-    const CostItemId = BlockLegacyIds::PACKED_ICE;
-    const CostItemNBT = "MiningToolsEnchantCostItem";
+	const CostItemId = BlockLegacyIds::PACKED_ICE;
+	const CostItemNBT = "MiningToolsEnchantCostItem";
 
-    public function __construct(Player $player) {
-        $this
-            ->setTitle("Expansion Mining Tools")
-            ->setText("付与したい拡張機能を選択して下さい")
-            ->addElements(
-                new SendFormButton(new UnbreakingEnchantConfirmForm($player), "耐久エンチャントを強化"),
-                new SendFormButton(new FortuneEnchantConfirmForm($player), "シルクタッチを幸運に変化"),
-            );
-    }
+	public function __construct(Player $player) {
+		$this
+			->setTitle("Expansion Mining Tools")
+			->setText("付与したい拡張機能を選択して下さい")
+			->addElements(
+				new SendFormButton(new UnbreakingEnchantConfirmForm($player), "耐久エンチャントを強化"),
+				new SendFormButton(new FortuneEnchantConfirmForm($player), "シルクタッチを幸運に変化"),
+			);
+	}
 
 }

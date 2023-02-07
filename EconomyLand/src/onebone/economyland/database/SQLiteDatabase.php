@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -22,20 +24,26 @@ namespace onebone\economyland\database;
 use pocketmine\player\Player;
 use pocketmine\world\World;
 use SQLite3;
+use function in_array;
+use function is_bool;
+use function serialize;
+use function str_replace;
+use function stripos;
+use function strtolower;
+use function unserialize;
+use const SQLITE3_ASSOC;
 
 class SQLiteDatabase implements Database {
 
-    public const INVITEE_SEPERATOR = ";";
-    /**
-     * @var array
-     */
-    private $land, $config;
-    private $path;
+	public const INVITEE_SEPERATOR = ";";
+	/** @var array */
+	private $land, $config;
+	private $path;
 
-    public function __construct($fileName, $config, $otherName = "") {
-        $this->path = $fileName;
-        $this->land = new SQLite3($fileName);
-        $this->land->exec("CREATE TABLE IF NOT EXISTS land(
+	public function __construct($fileName, $config, $otherName = "") {
+		$this->path = $fileName;
+		$this->land = new SQLite3($fileName);
+		$this->land->exec("CREATE TABLE IF NOT EXISTS land(
 			ID INTEGER PRIMARY KEY AUTOINCREMENT,
 			startX INTEGER NOT NULL,
 			startZ INTEGER NOT NULL,
@@ -47,120 +55,120 @@ class SQLiteDatabase implements Database {
 			price INTEGER NOT NULL,
 			expires INTEGER
 		)");
-        $this->config = $config;
-    }
+		$this->config = $config;
+	}
 
-    public function save() {
-    }
+	public function save() {
+	}
 
-    public function getByCoord($x, $z, $level) {
-        if ($level instanceof World) {
-            $level = $level->getFolderName();
-        }
-        return $this->land->query("SELECT * FROM land WHERE (startX <= $x AND endX >= $x) AND (startZ <= $z AND endZ >= $z) AND level = '$level'")->fetchArray(SQLITE3_ASSOC);
-    }
+	public function getByCoord($x, $z, $level) {
+		if ($level instanceof World) {
+			$level = $level->getFolderName();
+		}
+		return $this->land->query("SELECT * FROM land WHERE (startX <= $x AND endX >= $x) AND (startZ <= $z AND endZ >= $z) AND level = '$level'")->fetchArray(SQLITE3_ASSOC);
+	}
 
-    public function getAll() {
-        $result = $this->land->query("SELECT * FROM land");
-        $ret = [];
-        while (($ret[] = $result->fetchArray(SQLITE3_ASSOC)) !== false) {
-        }
-        return $ret;
-    }
+	public function getAll() {
+		$result = $this->land->query("SELECT * FROM land");
+		$ret = [];
+		while (($ret[] = $result->fetchArray(SQLITE3_ASSOC)) !== false) {
+		}
+		return $ret;
+	}
 
-    public function getLandById($id) {
-        return $this->land->query("SELECT * FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC);
-    }
+	public function getLandById($id) {
+		return $this->land->query("SELECT * FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC);
+	}
 
-    public function getLandsByOwner($owner) {
-        $result = $this->land->query("SELECT * FROM land WHERE owner = '$owner'");
-        $ret = [];
-        while (($result->fetchArray(SQLITE3_ASSOC)) !== false) {
-            $ret[] = $result->fetchArray(SQLITE3_ASSOC);
-        }
-        return $ret;
-    }
+	public function getLandsByOwner($owner) {
+		$result = $this->land->query("SELECT * FROM land WHERE owner = '$owner'");
+		$ret = [];
+		while (($result->fetchArray(SQLITE3_ASSOC)) !== false) {
+			$ret[] = $result->fetchArray(SQLITE3_ASSOC);
+		}
+		return $ret;
+	}
 
-    public function getLandsByKeyword($keyword) {
-        $result = $this->land->query("SELECT * FROM land WHERE owner LIKE '%$keyword%'");
-        $ret = [];
-        while (($result->fetchArray(SQLITE3_ASSOC)) != false) {
-            $ret[] = $result->fetchArray(SQLITE3_ASSOC);
-        }
-        return $ret;
-    }
+	public function getLandsByKeyword($keyword) {
+		$result = $this->land->query("SELECT * FROM land WHERE owner LIKE '%$keyword%'");
+		$ret = [];
+		while (($result->fetchArray(SQLITE3_ASSOC)) != false) {
+			$ret[] = $result->fetchArray(SQLITE3_ASSOC);
+		}
+		return $ret;
+	}
 
-    public function addInviteeById($id, $name) {
-        $invitee = $this->getInviteeById($id);
-        if (!in_array($name, $invitee)) {
-            $invitee[] = strtolower(str_replace("'", "", $name));
-            $this->land->exec("UPDATE land SET invitee = '" . serialize($invitee) . "' WHERE ID = $id");
-            return true;
-        }
-        return false;
-    }
+	public function addInviteeById($id, $name) {
+		$invitee = $this->getInviteeById($id);
+		if (!in_array($name, $invitee, true)) {
+			$invitee[] = strtolower(str_replace("'", "", $name));
+			$this->land->exec("UPDATE land SET invitee = '" . serialize($invitee) . "' WHERE ID = $id");
+			return true;
+		}
+		return false;
+	}
 
-    public function getInviteeById($id) {
-        $invitee = $this->land->exec("SELECT invitee FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC)["invitee"];
-        return unserialize($invitee);
-    }
+	public function getInviteeById($id) {
+		$invitee = $this->land->exec("SELECT invitee FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC)["invitee"];
+		return unserialize($invitee);
+	}
 
-    public function isInvitee($id, $name) {
-        $name = strtolower($name);
-        $invitee = $this->getInviteeById($id);
-        return in_array($name, $invitee) === true;
-    }
+	public function isInvitee($id, $name) {
+		$name = strtolower($name);
+		$invitee = $this->getInviteeById($id);
+		return in_array($name, $invitee, true) === true;
+	}
 
-    public function removeInviteeById($id, $name) {
-        $name = strtolower($name);
-        $invitee = $this->getInviteeById($id);
-        foreach ($invitee as $key => $i) {
-            if ($i === $name) {
-                unset($invitee[$key]);
-                $this->land->exec("UPDATE land SET invitee = '" . serialize($invitee) . "' WHERE ID = $id");
-                return true;
-            }
-        }
-        return false;
-    }
+	public function removeInviteeById($id, $name) {
+		$name = strtolower($name);
+		$invitee = $this->getInviteeById($id);
+		foreach ($invitee as $key => $i) {
+			if ($i === $name) {
+				unset($invitee[$key]);
+				$this->land->exec("UPDATE land SET invitee = '" . serialize($invitee) . "' WHERE ID = $id");
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public function addLand($startX, $endX, $startZ, $endZ, $level, $price, $owner, $expires = null, $invitee = []) {
-        if ($level instanceof World) {
-            $level = $level->getFolderName();
-        }
-        $this->land->exec("INSERT INTO land (startX, endX, startZ, endZ, owner, level, price, invitee" . ($expires === null ? "" : ", expires") . ") VALUES ($startX, $endX, $startZ, $endZ, '$owner', '$level', $price, '{}'" . ($expires === null ? "" : ", $expires") . ")");
-        return $this->land->query("SELECT seq FROM sqlite_sequence")->fetchArray(SQLITE3_ASSOC)["seq"] - 1;
-    }
+	public function addLand($startX, $endX, $startZ, $endZ, $level, $price, $owner, $expires = null, $invitee = []) {
+		if ($level instanceof World) {
+			$level = $level->getFolderName();
+		}
+		$this->land->exec("INSERT INTO land (startX, endX, startZ, endZ, owner, level, price, invitee" . ($expires === null ? "" : ", expires") . ") VALUES ($startX, $endX, $startZ, $endZ, '$owner', '$level', $price, '{}'" . ($expires === null ? "" : ", $expires") . ")");
+		return $this->land->query("SELECT seq FROM sqlite_sequence")->fetchArray(SQLITE3_ASSOC)["seq"] - 1;
+	}
 
-    public function setOwnerById($id, $owner) {
-        $this->land->exec("UPDATE land SET owner = '$owner' WHERE ID = $id");
-    }
+	public function setOwnerById($id, $owner) {
+		$this->land->exec("UPDATE land SET owner = '$owner' WHERE ID = $id");
+	}
 
-    public function removeLandById($id) {
-        $this->land->exec("DELETE FROM land WHERE ID = $id");
-    }
+	public function removeLandById($id) {
+		$this->land->exec("DELETE FROM land WHERE ID = $id");
+	}
 
-    public function canTouch($x, $z, $level, Player $player) {
-        if (!is_bool($land = $this->land->query("SELECT owner,invitee FROM land WHERE level = '$level' AND endX >= $x AND endZ >= $z AND startX <= $x AND startZ <= $z")->fetchArray(SQLITE3_ASSOC))) {
-            if ($player->getName() === $land["owner"] or stripos($player->getName() . self::INVITEE_SEPERATOR, $land["invitee"]) or $player->hasPermission("economyland.land.modify.others")) {
-                return true;
-            } else {
-                return $land;
-            }
-        }
-        //return !in_array($level, $this->config["white-land"]) or $player->hasPermission("economyland.land.modify.whiteland");
-        return true;
-    }
+	public function canTouch($x, $z, $level, Player $player) {
+		if (!is_bool($land = $this->land->query("SELECT owner,invitee FROM land WHERE level = '$level' AND endX >= $x AND endZ >= $z AND startX <= $x AND startZ <= $z")->fetchArray(SQLITE3_ASSOC))) {
+			if ($player->getName() === $land["owner"] || stripos($player->getName() . self::INVITEE_SEPERATOR, $land["invitee"]) || $player->hasPermission("economyland.land.modify.others")) {
+				return true;
+			} else {
+				return $land;
+			}
+		}
+		//return !in_array($level, $this->config["white-land"]) or $player->hasPermission("economyland.land.modify.whiteland");
+		return true;
+	}
 
-    public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
-        if ($level instanceof World) {
-            $level = $level->getFolderName();
-        }
-        $result = $this->land->query("SELECT * FROM land WHERE startX <= $endX AND endX >= $startX AND startZ <= $endZ AND endZ >= $startZ AND level = '$level'")->fetchArray(SQLITE3_ASSOC);
-        return $result !== null ? $result : false;
-    }
+	public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
+		if ($level instanceof World) {
+			$level = $level->getFolderName();
+		}
+		$result = $this->land->query("SELECT * FROM land WHERE startX <= $endX AND endX >= $startX AND startZ <= $endZ AND endZ >= $startZ AND level = '$level'")->fetchArray(SQLITE3_ASSOC);
+		return $result !== null ? $result : false;
+	}
 
-    public function close() {
-        $this->land->close();
-    }
+	public function close() {
+		$this->land->close();
+	}
 }

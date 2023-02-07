@@ -29,26 +29,26 @@ use pocketmine\Server;
 
 class LoadSubCommand extends BaseSubCommand {
 
-    protected function prepare(): void {
-        $this->registerArgument(0, new RawStringArgument("worldName"));
-        $this->setPermission("multiworld.command.load");
-    }
+	protected function prepare() : void {
+		$this->registerArgument(0, new RawStringArgument("worldName"));
+		$this->setPermission("multiworld.command.load");
+	}
 
-    /**
-     * @param array<string, mixed> $args
-     */
-    public function onRun(CommandSender $sender, string $aliasUsed, array $args): void {
-        /** @var string $worldName */
-        $worldName = $args["worldName"];
-        if (!Server::getInstance()->getWorldManager()->isWorldGenerated($worldName)) {
-            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-levelnotexists", [$worldName]));
-            return;
-        }
-        if (Server::getInstance()->getWorldManager()->isWorldLoaded($worldName)) {
-            $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-loaded"));
-            return;
-        }
-        Server::getInstance()->getWorldManager()->loadWorld($worldName, true);
-        $sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-done"));
-    }
+	/**
+	 * @param array<string, mixed> $args
+	 */
+	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
+		/** @var string $worldName */
+		$worldName = $args["worldName"];
+		if (!Server::getInstance()->getWorldManager()->isWorldGenerated($worldName)) {
+			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-levelnotexists", [$worldName]));
+			return;
+		}
+		if (Server::getInstance()->getWorldManager()->isWorldLoaded($worldName)) {
+			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-loaded"));
+			return;
+		}
+		Server::getInstance()->getWorldManager()->loadWorld($worldName, true);
+		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-done"));
+	}
 }

@@ -11,20 +11,20 @@ use pocketmine\world\format\Chunk;
 
 class IcePlainsSpikesPopulator extends IcePlainsPopulator {
 
-    protected IceDecorator $iceDecorator;
+	protected IceDecorator $iceDecorator;
 
-    public function __construct() {
-        parent::__construct();
-        $this->tallGrassDecorator->setAmount(0);
-        $this->iceDecorator = new IceDecorator();
-    }
+	public function __construct() {
+		parent::__construct();
+		$this->tallGrassDecorator->setAmount(0);
+		$this->iceDecorator = new IceDecorator();
+	}
 
-    protected function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk): void {
-        $this->iceDecorator->populate($world, $random, $chunkX, $chunkZ, $chunk);
-        parent::populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
-    }
+	protected function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
+		$this->iceDecorator->populate($world, $random, $chunkX, $chunkZ, $chunk);
+		parent::populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
+	}
 
-    public function getBiomes(): ?array {
-        return [BiomeIds::ICE_PLAINS_SPIKES];
-    }
+	public function getBiomes() : ?array {
+		return [BiomeIds::ICE_PLAINS_SPIKES];
+	}
 }

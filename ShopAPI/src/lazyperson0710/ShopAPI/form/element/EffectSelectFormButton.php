@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
@@ -11,19 +13,14 @@ use pocketmine\player\Player;
 
 class EffectSelectFormButton extends Button {
 
-    private Effect $effect;
+	private Effect $effect;
 
-    /**
-     * @param string           $text
-     * @param Effect           $effect
-     * @param ButtonImage|null $image
-     */
-    public function __construct(string $text, Effect $effect, ?ButtonImage $image = null) {
-        parent::__construct($text, $image);
-        $this->effect = $effect;
-    }
+	public function __construct(string $text, Effect $effect, ?ButtonImage $image = null) {
+		parent::__construct($text, $image);
+		$this->effect = $effect;
+	}
 
-    public function handleSubmit(Player $player): void {
-        SendForm::Send($player, (new EffectConfirmationForm($player, $this->effect)));
-    }
+	public function handleSubmit(Player $player) : void {
+		SendForm::Send($player, (new EffectConfirmationForm($player, $this->effect)));
+	}
 }

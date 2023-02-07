@@ -13,24 +13,24 @@ use pocketmine\plugin\PluginBase;
 
 class RankingCommand extends BaseCommand {
 
-    public function __construct(PluginBase $owner) {
-        parent::__construct(
-            $owner,
-            'ranking',
-            '統計情報・ランキングを確認できます',
-        );
-    }
+	public function __construct(PluginBase $owner) {
+		parent::__construct(
+			$owner,
+			'ranking',
+			'統計情報・ランキングを確認できます',
+		);
+	}
 
-    public function onRun(CommandSender $sender, string $command, array $args): void {
-        if (!$sender instanceof Player) {
-            $sender->sendMessage("サーバー内で実行してください");
-            return;
-        }
-        SendForm::Send($sender, (new HomeForm));
-    }
+	public function onRun(CommandSender $sender, string $command, array $args) : void {
+		if (!$sender instanceof Player) {
+			$sender->sendMessage("サーバー内で実行してください");
+			return;
+		}
+		SendForm::Send($sender, (new HomeForm()));
+	}
 
-    protected function prepare(): void {
-        $this->setPermission('conquest.command.public');
-        $this->registerSubCommand(new SearchSubCommand($this->getOwningPlugin()));
-    }
+	protected function prepare() : void {
+		$this->setPermission('conquest.command.public');
+		$this->registerSubCommand(new SearchSubCommand($this->getOwningPlugin()));
+	}
 }

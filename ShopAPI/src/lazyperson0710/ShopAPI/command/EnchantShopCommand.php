@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\ShopAPI\command;
 
 use lazyperson0710\ShopAPI\form\enchantShop\EnchantSelectForm;
@@ -10,15 +12,15 @@ use pocketmine\player\Player;
 
 class EnchantShopCommand extends Command {
 
-    public function __construct() {
-        parent::__construct("ven", "エンチャントショップを開くことができます");
-    }
+	public function __construct() {
+		parent::__construct("ven", "エンチャントショップを開くことができます");
+	}
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if (!($sender instanceof Player)) {
-            $sender->sendMessage("サーバー内で実行してください");
-            return;
-        }
-        SendForm::Send($sender, (new EnchantSelectForm()));
-    }
+	public function execute(CommandSender $sender, string $commandLabel, array $args) {
+		if (!($sender instanceof Player)) {
+			$sender->sendMessage("サーバー内で実行してください");
+			return;
+		}
+		SendForm::Send($sender, (new EnchantSelectForm()));
+	}
 }

@@ -10,14 +10,14 @@ use const PHP_EOL;
 
 class GachaButton extends MenuFormButton {
 
-    private IInFormRollableGacha $gacha;
+	private IInFormRollableGacha $gacha;
 
-    public function __construct(IInFormRollableGacha $gacha) {
-        parent::__construct(TextFormat::BOLD . $gacha->getName() . PHP_EOL . TextFormat::RESET . TextFormat::GRAY . $gacha->getOneLineDescription());
-        $this->gacha = $gacha;
-    }
+	public function __construct(IInFormRollableGacha $gacha) {
+		parent::__construct(TextFormat::BOLD . $gacha->getName() . PHP_EOL . TextFormat::RESET . TextFormat::GRAY . $gacha->getOneLineDescription());
+		$this->gacha = $gacha;
+	}
 
-    public function getGacha(): IInFormRollableGacha {
-        return $this->gacha;
-    }
+	public function getGacha() : IInFormRollableGacha {
+		return $this->gacha;
+	}
 }

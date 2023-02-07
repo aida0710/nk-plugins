@@ -5,19 +5,19 @@ namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\biomegri
 
 interface BiomeGrid {
 
-    /**
-     * Get biome at x, z within chunk being generated
-     *
-     * @param int $x - 0-15
-     * @param int $z - 0-15
-     */
-    public function getBiome(int $x, int $z): ?int;
+	/**
+	 * Get biome at x, z within chunk being generated
+	 *
+	 * @param int $x - 0-15
+	 * @param int $z - 0-15
+	 */
+	public function getBiome(int $x, int $z) : ?int;
 
-    /**
-     * Set biome at x, z within chunk being generated
-     *
-     * @param int $x - 0-15
-     * @param int $z - 0-15
-     */
-    public function setBiome(int $x, int $z, int $biomeId): void;
+	/**
+	 * Set biome at x, z within chunk being generated
+	 *
+	 * @param int $x - 0-15
+	 * @param int $z - 0-15
+	 */
+	public function setBiome(int $x, int $z, int $biomeId) : void;
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\ShopAPI;
 
 use lazyperson0710\ShopAPI\command\EffectShopCommand;
@@ -13,15 +15,15 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
-    public function onEnable(): void {
-        LevelShopAPI::getInstance()->init();
-        EffectShopAPI::getInstance()->init();
-        EnchantShopAPI::getInstance()->init();
-        $this->getServer()->getCommandMap()->registerAll("levelshop", [
-            new ShopCommand(),
-            new InvSellCommand(),
-            new EnchantShopCommand(),
-            new EffectShopCommand(),
-        ]);
-    }
+	public function onEnable() : void {
+		LevelShopAPI::getInstance()->init();
+		EffectShopAPI::getInstance()->init();
+		EnchantShopAPI::getInstance()->init();
+		$this->getServer()->getCommandMap()->registerAll("levelshop", [
+			new ShopCommand(),
+			new InvSellCommand(),
+			new EnchantShopCommand(),
+			new EffectShopCommand(),
+		]);
+	}
 }

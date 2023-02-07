@@ -1,12 +1,15 @@
 <?php
-$x = 2;
-$y = 2;
-add($x, $y);
 
-var_dump($x);
-var_dump($y);
+declare(strict_types=1);
 
-function add($x, &$y): void {
-    $x = $x + $y;
-    $y = $x + $y;
+$nextExp = 80;
+
+foreach(range(1, 811) as $lv){
+	if ($lv === 1) {
+		$nextExp = 80;
+		echo "[LV.$lv] " . $nextExp . PHP_EOL;
+		continue;
+	}
+	$nextExp += $lv - 1;
+	echo "[LV.$lv] " . $nextExp . PHP_EOL;
 }

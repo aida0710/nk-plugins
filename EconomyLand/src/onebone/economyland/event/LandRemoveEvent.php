@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -25,17 +27,17 @@ use pocketmine\event\Event;
 
 class LandRemoveEvent extends Event implements Cancellable {
 
-    use CancellableTrait;
+	use CancellableTrait;
 
-    public static $handlerList = null;
+	public static $handlerList = null;
 
-    private $id;
+	private $id;
 
-    public function __construct($id) {
-        $this->id = $id;
-    }
+	public function __construct($id) {
+		$this->id = $id;
+	}
 
-    public function getId() {
-        return $this->id;
-    }
+	public function getId() {
+		return $this->id;
+	}
 }

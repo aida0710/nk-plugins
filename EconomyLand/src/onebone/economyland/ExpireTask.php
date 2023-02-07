@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  * EconomyS, the massive economy plugin with many features for PocketMine-MP
  * Copyright (C) 2013-2017  onebone <jyc00410@gmail.com>
@@ -23,14 +25,14 @@ use pocketmine\scheduler\Task;
 
 class ExpireTask extends Task {
 
-    private $landId;
+	private $landId;
 
-    public function __construct(EconomyLand $plugin, $landId) {
-        $this->plugin = $plugin;
-        $this->landId = $landId;
-    }
+	public function __construct(EconomyLand $plugin, $landId) {
+		$this->plugin = $plugin;
+		$this->landId = $landId;
+	}
 
-    public function onRun(): void {
-        $this->plugin->expireLand($this->landId);
-    }
+	public function onRun() : void {
+		$this->plugin->expireLand($this->landId);
+	}
 }

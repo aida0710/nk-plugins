@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace deceitya\editEnchant\command;
 
 use deceitya\editEnchant\form\ReduceForm;
@@ -11,17 +13,17 @@ use pocketmine\player\Player;
 
 class ReductionCommand extends Command {
 
-    public function __construct() {
-        parent::__construct("enreduce", "エンチャントを削減する");
-    }
+	public function __construct() {
+		parent::__construct("enreduce", "エンチャントを削減する");
+	}
 
-    public function execute(CommandSender $sender, string $label, array $args): bool {
-        if (!($sender instanceof Player)) {
-            return true;
-        }
-        if (!(new InspectionItem())->inspectionItem($sender)) return true;
-        SendForm::Send($sender, (new ReduceForm($sender)));
-        return true;
-    }
+	public function execute(CommandSender $sender, string $label, array $args) : bool {
+		if (!($sender instanceof Player)) {
+			return true;
+		}
+		if (!(new InspectionItem())->inspectionItem($sender)) return true;
+		SendForm::Send($sender, (new ReduceForm($sender)));
+		return true;
+	}
 
 }

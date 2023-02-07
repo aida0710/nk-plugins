@@ -5,17 +5,15 @@ namespace bbo51dog\pmdiscord\element;
 
 class Content extends Element {
 
-    /** @var string */
-    protected mixed $data = "";
+	/** @var string */
+	protected mixed $data = "";
 
-    protected string $type = self::TYPE_CONTENT;
+	protected string $type = self::TYPE_CONTENT;
 
-    /**
-     * Set content text
-     *
-     * @param string $text
-     */
-    public function setText(string $text): void {
-        $this->data = $text;
-    }
+	/**
+	 * Set content text
+	 */
+	public function setText(string $text) : void {
+		$this->data = $text;
+	}
 }

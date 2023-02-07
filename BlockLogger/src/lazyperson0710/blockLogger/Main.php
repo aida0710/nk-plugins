@@ -10,28 +10,27 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
-    /** @var DataBase */
-    private DataBase $log;
-    private static Main $Main;
+	private DataBase $log;
+	private static Main $Main;
 
-    public function onEnable(): void {
-        self::$Main = $this;
-        $this->saveResource("log.db");
-        $this->getServer()->getPluginManager()->registerEvents(new PlayerEvent(), $this);
-        $this->getScheduler()->scheduleRepeatingTask(new LogDataSaveTask(), 20 * 60);
-        $this->log = new DataBase($this->getDataFolder());
-    }
+	public function onEnable() : void {
+		self::$Main = $this;
+		$this->saveResource("log.db");
+		$this->getServer()->getPluginManager()->registerEvents(new PlayerEvent(), $this);
+		$this->getScheduler()->scheduleRepeatingTask(new LogDataSaveTask(), 20 * 60);
+		$this->log = new DataBase($this->getDataFolder());
+	}
 
-    public function getDatabase(): DataBase {
-        return $this->log;
-    }
+	public function getDatabase() : DataBase {
+		return $this->log;
+	}
 
-    public function onDisable(): void {
-        $this->log->close();
-    }
+	public function onDisable() : void {
+		$this->log->close();
+	}
 
-    public static function getInstance(): Main {
-        return self::$Main;
-    }
+	public static function getInstance() : Main {
+		return self::$Main;
+	}
 
 }

@@ -9,24 +9,24 @@ use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworld\deco
 
 class IcePlainsPopulator extends BiomePopulator {
 
-    /** @var TreeDecoration[] */
-    protected static array $TREES;
+	/** @var TreeDecoration[] */
+	protected static array $TREES;
 
-    protected static function initTrees(): void {
-        self::$TREES = [
-            new TreeDecoration(RedwoodTree::class, 1),
-        ];
-    }
+	protected static function initTrees() : void {
+		self::$TREES = [
+			new TreeDecoration(RedwoodTree::class, 1),
+		];
+	}
 
-    public function getBiomes(): ?array {
-        return [BiomeIds::ICE_PLAINS, BiomeIds::ICE_MOUNTAINS];
-    }
+	public function getBiomes() : ?array {
+		return [BiomeIds::ICE_PLAINS, BiomeIds::ICE_MOUNTAINS];
+	}
 
-    protected function initPopulators(): void {
-        $this->treeDecorator->setAmount(1);
-        $this->treeDecorator->setTrees(...self::$TREES);
-        $this->flowerDecorator->setAmount(0);
-    }
+	protected function initPopulators() : void {
+		$this->treeDecorator->setAmount(1);
+		$this->treeDecorator->setTrees(...self::$TREES);
+		$this->flowerDecorator->setAmount(0);
+	}
 }
 
 IcePlainsPopulator::init();

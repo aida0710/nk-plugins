@@ -7,21 +7,21 @@ use lazyperson0710\PlayerSetting\object\Setting;
 
 class OnlinePlayersEffectsSetting extends Setting {
 
-    protected bool $value;
+	protected bool $value;
 
-    public static function getName(): string {
-        return 'OnlinePlayersEffects';
-    }
+	public static function getName() : string {
+		return 'OnlinePlayersEffects';
+	}
 
-    public function setValue(mixed $value): void {
-        $this->value = $value;
-    }
+	public function setValue(mixed $value) : void {
+		$this->value = $value;
+	}
 
-    public function getValue(): bool {
-        return $this->value ?? $this->getFallbackValue();
-    }
+	public function getValue() : bool {
+		return $this->value ?? $this->getFallbackValue();
+	}
 
-    public function getFallbackValue(): bool {
-        return true;
-    }
+	public function getFallbackValue() : bool {
+		return true;
+	}
 }

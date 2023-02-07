@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\ShopAPI\form\element;
 
 use bbo51dog\bboform\element\Button;
@@ -11,20 +13,15 @@ use pocketmine\player\Player;
 
 class SecondBackFormButton extends Button {
 
-    private Form $shopClass;
+	private Form $shopClass;
 
-    /**
-     * @param string           $text
-     * @param Form             $shopClass
-     * @param ButtonImage|null $image
-     */
-    public function __construct(string $text, form $shopClass, ?ButtonImage $image = null) {
-        parent::__construct($text, $image);
-        $this->shopClass = $shopClass;
-    }
+	public function __construct(string $text, form $shopClass, ?ButtonImage $image = null) {
+		parent::__construct($text, $image);
+		$this->shopClass = $shopClass;
+	}
 
-    public function handleSubmit(Player $player): void {
-        SendForm::Send($player, $this->shopClass);
-        SoundPacket::Send($player, 'mob.shulker.close');
-    }
+	public function handleSubmit(Player $player) : void {
+		SendForm::Send($player, $this->shopClass);
+		SoundPacket::Send($player, 'mob.shulker.close');
+	}
 }

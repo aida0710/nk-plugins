@@ -7,21 +7,21 @@ use lazyperson0710\PlayerSetting\object\Setting;
 
 class CobblestoneToStoneSetting extends Setting {
 
-    protected bool $value;
+	protected bool $value;
 
-    public static function getName(): string {
-        return 'CobblestoneToStone';
-    }
+	public static function getName() : string {
+		return 'CobblestoneToStone';
+	}
 
-    public function setValue(mixed $value): void {
-        $this->value = $value;
-    }
+	public function setValue(mixed $value) : void {
+		$this->value = $value;
+	}
 
-    public function getValue(): bool {
-        return $this->value ?? $this->getFallbackValue();
-    }
+	public function getValue() : bool {
+		return $this->value ?? $this->getFallbackValue();
+	}
 
-    public function getFallbackValue(): bool {
-        return false;
-    }
+	public function getFallbackValue() : bool {
+		return false;
+	}
 }

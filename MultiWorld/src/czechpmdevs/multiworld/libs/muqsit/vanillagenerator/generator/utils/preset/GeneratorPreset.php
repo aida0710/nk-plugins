@@ -5,15 +5,15 @@ namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\utils\pr
 
 interface GeneratorPreset {
 
-    public function exists(string $property): bool;
+	public function exists(string $property) : bool;
 
-    public function get(string $property): mixed;
+	public function get(string $property) : mixed;
 
-    public function getInt(string $property): int;
+	public function getInt(string $property) : int;
 
-    public function getFloat(string $property): float;
+	public function getFloat(string $property) : float;
 
-    public function getString(string $property): string;
+	public function getString(string $property) : string;
 
-    public function toString(): string;
+	public function toString() : string;
 }

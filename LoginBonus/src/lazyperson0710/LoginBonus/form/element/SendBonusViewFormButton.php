@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace lazyperson0710\LoginBonus\form\element;
 
 use bbo51dog\bboform\element\Button;
@@ -13,23 +15,18 @@ use pocketmine\player\Player;
 
 class SendBonusViewFormButton extends Button {
 
-    private Form $form;
+	private Form $form;
 
-    /**
-     * @param Form             $form
-     * @param string           $text
-     * @param ButtonImage|null $image
-     */
-    public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
-        parent::__construct($text, $image);
-        $this->form = $form;
-    }
+	public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
+		parent::__construct($text, $image);
+		$this->form = $form;
+	}
 
-    public function handleSubmit(Player $player): void {
-        if (Main::getInstance()->lastBonusDateConfig->get($player->getName()) === false) {
-            SendForm::Send($player, new BonusForm($player, "\n§c現在保留中のログインボーナスが存在しない為、受け取ることはできません"));
-            SoundPacket::Send($player, 'note.bass');
-        }
-        SendForm::Send($player, $this->form);
-    }
+	public function handleSubmit(Player $player) : void {
+		if (Main::getInstance()->lastBonusDateConfig->get($player->getName()) === false) {
+			SendForm::Send($player, new BonusForm($player, "\n§c現在保留中のログインボーナスが存在しない為、受け取ることはできません"));
+			SoundPacket::Send($player, 'note.bass');
+		}
+		SendForm::Send($player, $this->form);
+	}
 }

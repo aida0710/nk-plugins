@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace bbo51dog\pmdiscord\task;
 
 use bbo51dog\pmdiscord\connection\Webhook;
@@ -8,13 +10,13 @@ use pocketmine\scheduler\AsyncTask;
 
 class SendAsyncTask extends AsyncTask {
 
-    private Webhook $webhook;
+	private Webhook $webhook;
 
-    public function __construct(Webhook $webhook) {
-        $this->webhook = $webhook;
-    }
+	public function __construct(Webhook $webhook) {
+		$this->webhook = $webhook;
+	}
 
-    public function onRun(): void {
-        Sender::send($this->webhook, false);
-    }
+	public function onRun() : void {
+		Sender::send($this->webhook, false);
+	}
 }

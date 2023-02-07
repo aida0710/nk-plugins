@@ -32,16 +32,16 @@ use pocketmine\command\CommandSender;
 
 class BooleanArgument extends StringEnumArgument {
 
-    protected const VALUES = [
-        "true" => true,
-        "false" => false,
-    ];
+	protected const VALUES = [
+		"true" => true,
+		"false" => false,
+	];
 
-    public function getTypeName(): string {
-        return "bool";
-    }
+	public function getTypeName() : string {
+		return "bool";
+	}
 
-    public function parse(string $argument, CommandSender $sender) {
-        return $this->getValue($argument);
-    }
+	public function parse(string $argument, CommandSender $sender) {
+		return $this->getValue($argument);
+	}
 }

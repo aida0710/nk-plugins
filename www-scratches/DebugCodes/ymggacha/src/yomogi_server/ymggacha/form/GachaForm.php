@@ -16,30 +16,30 @@ use const PHP_EOL;
 
 class GachaForm extends MenuFormBase {
 
-    private IInFormRollableGacha $gacha;
+	private IInFormRollableGacha $gacha;
 
-    public function __construct(IInFormRollableGacha $gacha) {
-        $this->gacha = $gacha;
-        parent::__construct($this->createElement());
-    }
+	public function __construct(IInFormRollableGacha $gacha) {
+		$this->gacha = $gacha;
+		parent::__construct($this->createElement());
+	}
 
-    public function createElement(): MenuFormElements {
-        return new MenuFormElements(
-            $this->gacha->getName(),
-            $this->gacha->getDescription() . PHP_EOL . PHP_EOL,
-            (new ButtonList())
-                ->append(new MenuFormButton('確率表'))
-                ->append(new RollButton(1, TextFormat::WHITE))
-                ->append(new RollButton(10, TextFormat::YELLOW))
-        );
-    }
+	public function createElement() : MenuFormElements {
+		return new MenuFormElements(
+			$this->gacha->getName(),
+			$this->gacha->getDescription() . PHP_EOL . PHP_EOL,
+			(new ButtonList())
+				->append(new MenuFormButton('確率表'))
+				->append(new RollButton(1, TextFormat::WHITE))
+				->append(new RollButton(10, TextFormat::YELLOW))
+		);
+	}
 
-    protected function onSubmit(Player $player, MenuFormResponse $response): void {
-        $btn = $response->getPressedElement();
-        if (!$btn instanceof RollButton) {
-            (new GachaEmmitListForm($this, $this->gacha))->send($player);
-            return;
-        }
-        $this->gacha->roll($player, $btn->getRollNumber());
-    }
+	protected function onSubmit(Player $player, MenuFormResponse $response) : void {
+		$btn = $response->getPressedElement();
+		if (!$btn instanceof RollButton) {
+			(new GachaEmmitListForm($this, $this->gacha))->send($player);
+			return;
+		}
+		$this->gacha->roll($player, $btn->getRollNumber());
+	}
 }

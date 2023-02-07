@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace deceitya\editEnchant;
 
 use deceitya\editEnchant\command\DeleteCommand;
@@ -8,13 +10,10 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
-    /**
-     * @return void
-     */
-    public function onEnable(): void {
-        $this->getServer()->getCommandMap()->registerAll("editen", [
-            new ReductionCommand(),
-            new DeleteCommand(),
-        ]);
-    }
+	public function onEnable() : void {
+		$this->getServer()->getCommandMap()->registerAll("editen", [
+			new ReductionCommand(),
+			new DeleteCommand(),
+		]);
+	}
 }

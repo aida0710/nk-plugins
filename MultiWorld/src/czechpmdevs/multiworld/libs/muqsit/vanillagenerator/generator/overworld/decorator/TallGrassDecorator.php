@@ -15,26 +15,26 @@ use function abs;
 
 class TallGrassDecorator extends Decorator {
 
-    private float $fernDensity = 0.0;
+	private float $fernDensity = 0.0;
 
-    final public function setFernDensity(float $fernDensity): void {
-        $this->fernDensity = $fernDensity;
-    }
+	final public function setFernDensity(float $fernDensity) : void {
+		$this->fernDensity = $fernDensity;
+	}
 
-    public function decorate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk): void {
-        $x = $random->nextBoundedInt(16);
-        $z = $random->nextBoundedInt(16);
-        $topBlock = $chunk->getHighestBlockAt($x, $z);
-        if ($topBlock <= 0) {
-            // Nothing to do if this column is empty
-            return;
-        }
-        $sourceY = $random->nextBoundedInt(abs($topBlock << 1));
-        // the grass species can change on each decoration pass
-        $species = BlockLegacyMetadata::TALLGRASS_NORMAL;
-        if ($this->fernDensity > 0 && $random->nextFloat() < $this->fernDensity) {
-            $species = BlockLegacyMetadata::TALLGRASS_FERN;
-        }
-        (new TallGrass(BlockFactory::getInstance()->get(BlockLegacyIds::TALL_GRASS, $species)))->generate($world, $random, ($chunkX << 4) + $x, $sourceY, ($chunkZ << 4) + $z);
-    }
+	public function decorate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
+		$x = $random->nextBoundedInt(16);
+		$z = $random->nextBoundedInt(16);
+		$topBlock = $chunk->getHighestBlockAt($x, $z);
+		if ($topBlock <= 0) {
+			// Nothing to do if this column is empty
+			return;
+		}
+		$sourceY = $random->nextBoundedInt(abs($topBlock << 1));
+		// the grass species can change on each decoration pass
+		$species = BlockLegacyMetadata::TALLGRASS_NORMAL;
+		if ($this->fernDensity > 0 && $random->nextFloat() < $this->fernDensity) {
+			$species = BlockLegacyMetadata::TALLGRASS_FERN;
+		}
+		(new TallGrass(BlockFactory::getInstance()->get(BlockLegacyIds::TALL_GRASS, $species)))->generate($world, $random, ($chunkX << 4) + $x, $sourceY, ($chunkZ << 4) + $z);
+	}
 }

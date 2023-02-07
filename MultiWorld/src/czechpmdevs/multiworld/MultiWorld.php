@@ -36,48 +36,48 @@ use pocketmine\world\generator\GeneratorManager;
 
 class MultiWorld extends PluginBase {
 
-    private static MultiWorld $instance;
+	private static MultiWorld $instance;
 
-    public LanguageManager $languageManager;
-    public ConfigManager $configManager;
+	public LanguageManager $languageManager;
+	public ConfigManager $configManager;
 
-    /** @var Command[] */
-    public array $commands = [];
+	/** @var Command[] */
+	public array $commands = [];
 
-    public function onLoad(): void {
-        MultiWorld::$instance = $this;
-        $generators = [
-            "ender" => EnderGenerator::class,
-            "void" => VoidGenerator::class,
-            "skyblock" => SkyBlockGenerator::class,
-            "vanilla_normal" => OverworldGenerator::class,
-            "vanilla_nether" => NetherGenerator::class,
-        ];
-        foreach ($generators as $name => $class) {
-            GeneratorManager::getInstance()->addGenerator($class, $name, fn() => null, true);
-        }
-    }
+	public function onLoad() : void {
+		MultiWorld::$instance = $this;
+		$generators = [
+			"ender" => EnderGenerator::class,
+			"void" => VoidGenerator::class,
+			"skyblock" => SkyBlockGenerator::class,
+			"vanilla_normal" => OverworldGenerator::class,
+			"vanilla_nether" => NetherGenerator::class,
+		];
+		foreach ($generators as $name => $class) {
+			GeneratorManager::getInstance()->addGenerator($class, $name, fn() => null, true);
+		}
+	}
 
-    public function onEnable(): void {
-        $this->configManager = new ConfigManager();
-        $this->languageManager = new LanguageManager();
-        $this->commands = [
-            "multiworld" => new MultiWorldCommand($this, "multiworld", "MultiWorld commands", ["mw", "wm"]),
-        ];
-        foreach ($this->commands as $command) {
-            $this->getServer()->getCommandMap()->register("MultiWorld", $command);
-        }
-        try {
-            PacketHooker::register($this);
-        } catch (HookAlreadyRegistered) {
-        }
-    }
+	public function onEnable() : void {
+		$this->configManager = new ConfigManager();
+		$this->languageManager = new LanguageManager();
+		$this->commands = [
+			"multiworld" => new MultiWorldCommand($this, "multiworld", "MultiWorld commands", ["mw", "wm"]),
+		];
+		foreach ($this->commands as $command) {
+			$this->getServer()->getCommandMap()->register("MultiWorld", $command);
+		}
+		try {
+			PacketHooker::register($this);
+		} catch (HookAlreadyRegistered) {
+		}
+	}
 
-    public static function getPrefix(): string {
-        return ConfigManager::getPrefix();
-    }
+	public static function getPrefix() : string {
+		return ConfigManager::getPrefix();
+	}
 
-    public static function getInstance(): MultiWorld {
-        return MultiWorld::$instance;
-    }
+	public static function getInstance() : MultiWorld {
+		return MultiWorld::$instance;
+	}
 }

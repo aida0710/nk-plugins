@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace bbo51dog\mjolnir\service;
 
 use bbo51dog\mjolnir\MjolnirPlugin;
@@ -9,12 +11,12 @@ use pocketmine\player\Player;
 
 class AccountService {
 
-    private function __construct() {
-    }
+	private function __construct() {
+	}
 
-    public static function registerPlayerData(Player $player) {
-        /** @var AccountRepository $repo */
-        $repo = MjolnirPlugin::getRepositoryFactory()->getRepository(AccountRepository::class);
-        $repo->registerIfNotExists(Account::createFromPlayer($player));
-    }
+	public static function registerPlayerData(Player $player) {
+		/** @var AccountRepository $repo */
+		$repo = MjolnirPlugin::getRepositoryFactory()->getRepository(AccountRepository::class);
+		$repo->registerIfNotExists(Account::createFromPlayer($player));
+	}
 }

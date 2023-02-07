@@ -7,14 +7,14 @@ use ymggacha\src\yomogi_server\ymggacha\gacha\RarityMap;
 
 class GachaEmmitLists {
 
-    public static function getYmgGachaEmmitLists(): string {
-        $ur = RarityMap::NAME_UR;
-        $ssr = RarityMap::NAME_SSR;
-        $sr = RarityMap::NAME_SR;
-        $r = RarityMap::NAME_R;
-        $n = RarityMap::NAME_N;
-        $per = '%';
-        return <<<EMMITLIST
+	public static function getYmgGachaEmmitLists() : string {
+		$ur = RarityMap::NAME_UR;
+		$ssr = RarityMap::NAME_SSR;
+		$sr = RarityMap::NAME_SR;
+		$r = RarityMap::NAME_R;
+		$n = RarityMap::NAME_N;
+		$per = '%';
+		return <<<EMMITLIST
 			[よもぎガチャ排出確率一覧表]
 
 			[$ur] 排出確率: 2$per
@@ -47,5 +47,5 @@ class GachaEmmitLists {
 			・スイートベリー
 			・骨粉
 			EMMITLIST;
-    }
+	}
 }
