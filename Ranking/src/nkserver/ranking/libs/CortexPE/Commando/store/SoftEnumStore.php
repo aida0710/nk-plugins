@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace nkserver\ranking\libs\CortexPE\Commando\store;
 
 use nkserver\ranking\libs\CortexPE\Commando\exception\CommandoException;

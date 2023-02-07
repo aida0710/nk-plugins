@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MyWarp\Database;

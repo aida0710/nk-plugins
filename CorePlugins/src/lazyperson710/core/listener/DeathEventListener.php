@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\WorldManagement\database\WorldCategory;

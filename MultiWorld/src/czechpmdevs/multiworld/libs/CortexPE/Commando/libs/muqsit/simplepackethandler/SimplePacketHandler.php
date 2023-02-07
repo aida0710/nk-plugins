@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando\libs\muqsit\simplepackethandler;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\libs\muqsit\simplepackethandler\interceptor\IPacketInterceptor;

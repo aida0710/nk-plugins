@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace ymggacha\src\yomogi_server\ymggacha\gacha\effect;
 
 use Closure;
@@ -47,11 +47,11 @@ class NormalEffect extends GachaEffect {
 		$vec3 = $player->getDirectionVector()->normalize()->multiply(2.5)->addVector($loc)->floor();
 		$vec3->y = $loc->y;
 		(new EventSchedule())
-			->register(new ScheduledEvent(fn() => $this->setShulkerBox($world, $vec3), 0))
-			->register(new ScheduledEvent(fn() => $this->openShulkerBox($world, $vec3), 30))
-			->register(new ScheduledEvent(fn() => $this->removeShulkerBox($world, $vec3, $world->getBlock($vec3)), 70))
-			->register(new ScheduledEvent(fn() => $this->createFloatingTextEffect($world, clone $vec3, $items), 35))
-			->register(new ScheduledEvent(fn() => $giveItemFn(), 35))
+			->register(new ScheduledEvent(fn () => $this->setShulkerBox($world, $vec3), 0))
+			->register(new ScheduledEvent(fn () => $this->openShulkerBox($world, $vec3), 30))
+			->register(new ScheduledEvent(fn () => $this->removeShulkerBox($world, $vec3, $world->getBlock($vec3)), 70))
+			->register(new ScheduledEvent(fn () => $this->createFloatingTextEffect($world, clone $vec3, $items), 35))
+			->register(new ScheduledEvent(fn () => $giveItemFn(), 35))
 			->execute();
 	}
 
@@ -103,8 +103,8 @@ class NormalEffect extends GachaEffect {
 	protected function addFloatingTextEffect(string $txt, World $world, Vector3 $vec3) : void {
 		$eid = Entity::nextRuntimeId();
 		(new EventSchedule())
-			->register(new ScheduledEvent(fn() => $this->addFloatingText($txt, $eid, $world, $vec3), 0))
-			->register(new ScheduledEvent(fn() => $this->removeFloatingText($eid, $world, $vec3), 35))
+			->register(new ScheduledEvent(fn () => $this->addFloatingText($txt, $eid, $world, $vec3), 0))
+			->register(new ScheduledEvent(fn () => $this->removeFloatingText($eid, $world, $vec3), 35))
 			->execute();
 	}
 

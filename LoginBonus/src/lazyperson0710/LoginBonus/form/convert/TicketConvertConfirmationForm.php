@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson0710\LoginBonus\form\convert;
 
 use bbo51dog\bboform\element\Label;
@@ -32,7 +31,7 @@ class TicketConvertConfirmationForm extends CustomForm {
 
 	public function handleSubmit(Player $player) : void {
 		if (CheckInventoryCalculation::check($player, $this->cost)) {
-			$player->getInventory()->removeItem(ItemFactory::getInstance()->get(Main::getInstance()->loginBonusItem->getId(),Main::getInstance()->loginBonusItem->getMeta(),$this->cost));
+			$player->getInventory()->removeItem(ItemFactory::getInstance()->get(Main::getInstance()->loginBonusItem->getId(), Main::getInstance()->loginBonusItem->getMeta(), $this->cost));
 			TicketAPI::getInstance()->addTicket($player, $this->quantity);
 			SendMessage::Send($player, "ログインボーナスを" . $this->cost . "個消費してチケット" . $this->quantity . "枚に交換しました", "LoginBonus", false, 'break.amethyst_block');
 		} else {

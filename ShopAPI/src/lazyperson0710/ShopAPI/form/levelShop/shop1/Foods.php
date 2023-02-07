@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson0710\ShopAPI\form\levelShop\shop1;
 
 use bbo51dog\bboform\form\SimpleForm;

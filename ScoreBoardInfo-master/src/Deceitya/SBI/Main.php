@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Deceitya\SBI;
 
 use bbo51dog\bboform\element\Button;

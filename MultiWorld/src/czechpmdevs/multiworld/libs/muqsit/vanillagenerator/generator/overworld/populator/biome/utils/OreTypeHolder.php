@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworld\populator\biome\utils;
 
 use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\object\OreType;

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace ree_jp\bank\sqlite;
 
 use ree_jp\bank\BankPlugin;

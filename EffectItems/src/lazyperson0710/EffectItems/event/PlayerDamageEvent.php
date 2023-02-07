@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson0710\EffectItems\event;
 
 use lazyperson0710\EffectItems\items\damageListener\DefensiveStone;

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace deceitya\repair\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;

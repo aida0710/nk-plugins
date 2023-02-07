@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace czechpmdevs\multiworld\util;
 
 use FilesystemIterator;
@@ -162,7 +162,7 @@ class WorldUtils {
 		// This is not necessary in case only clean PocketMine without other plugins is used,
 		// however, due to compatibility with plugins such as NativeDimensions it's needed to keep this.
 		$files = array_unique(array_merge(
-			array_map(fn(World $world) => $world->getFolderName(), Server::getInstance()->getWorldManager()->getWorlds()),
+			array_map(fn (World $world) => $world->getFolderName(), Server::getInstance()->getWorldManager()->getWorlds()),
 			$files,
 		));
 		return array_values(array_filter($files, function (string $fileName) : bool {

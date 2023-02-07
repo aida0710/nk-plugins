@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace deceitya\editEnchant;
 
 use lazyperson710\core\packet\SendMessage\SendMessage;

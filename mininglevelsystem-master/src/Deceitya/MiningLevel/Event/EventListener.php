@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Deceitya\MiningLevel\Event;
 
 use bbo51dog\pmdiscord\connection\Webhook;

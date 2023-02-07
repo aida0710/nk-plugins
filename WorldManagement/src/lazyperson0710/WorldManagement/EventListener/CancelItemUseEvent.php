@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace lazyperson0710\WorldManagement\EventListener;
 
 use lazyperson710\core\packet\SendMessage\SendTip;

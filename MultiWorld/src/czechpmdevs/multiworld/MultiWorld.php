@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace czechpmdevs\multiworld;
 
 use czechpmdevs\multiworld\command\MultiWorldCommand;
@@ -54,7 +54,7 @@ class MultiWorld extends PluginBase {
 			"vanilla_nether" => NetherGenerator::class,
 		];
 		foreach ($generators as $name => $class) {
-			GeneratorManager::getInstance()->addGenerator($class, $name, fn() => null, true);
+			GeneratorManager::getInstance()->addGenerator($class, $name, fn () => null, true);
 		}
 	}
 

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Deceitya\MiningLevel\Task;
 
 use lazyperson710\core\packet\SendMessage\SendMessage;

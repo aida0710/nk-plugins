@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace rib\tw\form;
 
 use pocketmine\form\Form;

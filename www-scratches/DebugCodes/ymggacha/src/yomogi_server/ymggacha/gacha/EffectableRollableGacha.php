@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace ymggacha\src\yomogi_server\ymggacha\gacha;
 
 use InvalidArgumentException;
@@ -70,13 +70,13 @@ class EffectableRollableGacha extends Gacha implements IInFormRollableGacha {
 		}
 		$playersMap->register($player);
 		$items = $this->table->pop($count);
-		$giveItemFn = fn() => $this->giveItem($player, $items);
+		$giveItemFn = fn () => $this->giveItem($player, $items);
 		$effect = match ($this->getHighestRarity($items)->getName()) {
 			RarityMap::NAME_SSR => mt_rand(0, 1) === 1 ? new RareEffect() : new NormalEffect(),
 			RarityMap::NAME_UR => mt_rand(0, 1) === 1 ? new SuperRareEffect() : new SwitchToSuperRareEffect(),
 			default => new NormalEffect()
 		};
-		YmgGachaPlugin::getTaskScheduler()?->scheduleDelayedTask(new ClosureTask(fn() => $effect->play($player, $items, $giveItemFn)), 15);
+		YmgGachaPlugin::getTaskScheduler()?->scheduleDelayedTask(new ClosureTask(fn () => $effect->play($player, $items, $giveItemFn)), 15);
 	}
 
 	/**

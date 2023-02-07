@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson710\sff\form\donation;
 
 use bbo51dog\bboform\form\SimpleForm;
@@ -44,7 +43,6 @@ class DonationForm extends SimpleForm {
 	];
 
 	public function __construct(?string $message = null) {
-
 		$msg1 = "なま鯖では寄付を募っています。\n寄付方法はamazonギフトカードでDiscordにてなまけもののDMでのみ受け付けさせて頂いています。";
 		$msg2 = "また、寄付して頂いた額に応じて全員が特典を得ることができます\n特典は寄付額に応じて以下のボタンから寄付を受け取り可能です。";
 		$msg3 = "特典に関しては寄付していただいた際に寄付してくださった方の要望をある程度反映したいと考えております。";

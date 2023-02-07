@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace nkserver\ranking\command\sub;
 
 use lazyperson710\core\packet\SendForm;

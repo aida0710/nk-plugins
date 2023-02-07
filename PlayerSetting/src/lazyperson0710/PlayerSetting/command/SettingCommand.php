@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson0710\PlayerSetting\command;
 
 use lazyperson0710\PlayerSetting\form\SelectSettingForm;

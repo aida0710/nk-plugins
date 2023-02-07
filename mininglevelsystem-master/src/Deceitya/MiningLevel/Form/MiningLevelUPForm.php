@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Deceitya\MiningLevel\Form;
 
 use bbo51dog\bboform\element\Label;

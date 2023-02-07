@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson710\sff\form\land;
 
 use bbo51dog\bboform\form\SimpleForm;

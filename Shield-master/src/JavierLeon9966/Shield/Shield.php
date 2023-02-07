@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace JavierLeon9966\Shield;
 
 use JavierLeon9966\Shield\item\Shield as ShieldItem;
@@ -41,14 +41,14 @@ final class Shield extends PluginBase implements Listener {
 		$shield = new ShieldItem(new ItemIdentifier(ItemIds::SHIELD, 0), 'Shield');
 		ItemFactory::getInstance()->register($shield);
 		CreativeInventory::getInstance()->add($shield);
-		StringToItemParser::getInstance()->register('shield', static fn() => clone $shield);
+		StringToItemParser::getInstance()->register('shield', static fn () => clone $shield);
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
 	public function setCooldown(Player $player, int $ticks) : void {
 		$player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::BLOCKING, false);
 		$this->cooldowns[$player->getUniqueId()->getBytes()] = true;
-		$this->getScheduler()->scheduleDelayedTask(new ClosureTask(fn() => $this->removeCooldown($player)), $ticks);
+		$this->getScheduler()->scheduleDelayedTask(new ClosureTask(fn () => $this->removeCooldown($player)), $ticks);
 	}
 
 	public function hasCooldown(Player $player) : bool {

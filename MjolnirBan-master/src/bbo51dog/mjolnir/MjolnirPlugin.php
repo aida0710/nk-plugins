@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace bbo51dog\mjolnir;
 
 use bbo51dog\mjolnir\command\MjolnirBanCommand;

@@ -14,7 +14,7 @@ class gacha {
 	}
 
 	public function initTable() : void {
-		$this->rank = array_map(static fn($value) => $value * 1000, $this->tmp_table);
+		$this->rank = array_map(static fn ($value) => $value * 1000, $this->tmp_table);
 		$this->num = (int) array_sum($this->rank);
 	}
 

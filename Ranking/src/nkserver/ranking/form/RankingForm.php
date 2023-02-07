@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace nkserver\ranking\form;
 
 use nkserver\ranking\object\PlayerDataArray;
@@ -35,6 +35,6 @@ class RankingForm extends BackableForm {
 			$id,
 		);
 		$this->addButton('戻る');
-		$this->submit = fn(Player $player, int $data) => $this->back($player);
+		$this->submit = fn (Player $player, int $data) => $this->back($player);
 	}
 }

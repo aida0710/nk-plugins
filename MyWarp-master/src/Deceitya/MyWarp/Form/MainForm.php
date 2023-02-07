@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Deceitya\MyWarp\Form;
 
 use lazyperson710\core\packet\SendForm;

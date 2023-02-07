@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando\store;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\exception\CommandoException;

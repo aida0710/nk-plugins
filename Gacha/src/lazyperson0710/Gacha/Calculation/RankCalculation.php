@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace lazyperson0710\Gacha\Calculation;
 
 use lazyperson0710\Gacha\database\GachaItemAPI;
@@ -31,7 +30,7 @@ class RankCalculation {
 	}
 
 	public function initTable() : void {
-		$this->rank = array_map(static fn($value) => $value * 1000, $this->tmp_table);
+		$this->rank = array_map(static fn ($value) => $value * 1000, $this->tmp_table);
 		$this->num = (int) array_sum($this->rank);
 	}
 

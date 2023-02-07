@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace nkserver\ranking\form;
 
 use Exception;
@@ -54,7 +54,7 @@ class BlockDetailForm extends BackableForm {
 			}
 			if ($unknown !== 0) $this->label .= TextFormat::BOLD . '[UNKNOWN]' . PHP_EOL . TextFormat::RED . number_format($unknown) . TextFormat::RESET . '回' . PHP_EOL . PHP_EOL;
 			$this->addButton('戻る');
-			$this->submit = fn(Player $player, int $data) => $this->back($player);
+			$this->submit = fn (Player $player, int $data) => $this->back($player);
 		}
 	}
 }

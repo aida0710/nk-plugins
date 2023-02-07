@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\BaseSubCommand;
@@ -108,7 +108,7 @@ class ManageSubCommand extends BaseSubCommand {
 					break;
 				case 3:
 					$customForm->addLabel("Load world");
-					$customForm->addDropdown("World to load", $worlds = array_values(array_filter(WorldUtils::getAllWorlds(), fn(string $worldName) => !Server::getInstance()->getWorldManager()->isWorldLoaded($worldName))));
+					$customForm->addDropdown("World to load", $worlds = array_values(array_filter(WorldUtils::getAllWorlds(), fn (string $worldName) => !Server::getInstance()->getWorldManager()->isWorldLoaded($worldName))));
 					$customForm->setCallback(static function (Player $player, FormResponse $response) use ($worlds) : void {
 						$data = $response->getData();
 						if (!is_array($data)) {
@@ -125,7 +125,7 @@ class ManageSubCommand extends BaseSubCommand {
 					break;
 				case 4:
 					$customForm->addLabel("Unload world");
-					$customForm->addDropdown("World to unload", $worlds = array_values(array_filter(WorldUtils::getAllWorlds(), fn(string $worldName) => Server::getInstance()->getWorldManager()->isWorldLoaded($worldName))));
+					$customForm->addDropdown("World to unload", $worlds = array_values(array_filter(WorldUtils::getAllWorlds(), fn (string $worldName) => Server::getInstance()->getWorldManager()->isWorldLoaded($worldName))));
 					$customForm->setCallback(static function (Player $player, FormResponse $response) use ($worlds) : void {
 						$data = $response->getData();
 						if (!is_array($data)) {
@@ -159,7 +159,7 @@ class ManageSubCommand extends BaseSubCommand {
 					break;
 				case 6:
 					$customForm->addLabel("Teleport player to world");
-					$customForm->addDropdown("Player", $players = array_values(array_map(fn(Player $player) => $player->getName(), Server::getInstance()->getOnlinePlayers())));
+					$customForm->addDropdown("Player", $players = array_values(array_map(fn (Player $player) => $player->getName(), Server::getInstance()->getOnlinePlayers())));
 					$customForm->addDropdown("World", $worlds = WorldUtils::getAllWorlds());
 					$customForm->setCallback(static function (Player $player, FormResponse $response) use ($players, $worlds) {
 						$data = $response->getData();
