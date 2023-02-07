@@ -44,6 +44,7 @@
         "netresearch/jsonmapper": "^4.0",
         "ramsey/uuid": "^4.1",
         "symfony/filesystem": "^5.4",
-        "webmozart/path-util": "^2.3"
+        "webmozart/path-util": "^2.3",
+        "ext-mysqli": "*"
     }
 }
