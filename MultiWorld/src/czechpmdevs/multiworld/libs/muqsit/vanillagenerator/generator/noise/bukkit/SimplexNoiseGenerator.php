@@ -1,8 +1,6 @@
 <?php
 
 /** @noinspection PhpIfWithCommonPartsInspection */
-
-/** @noinspection PhpIfWithCommonPartsInspection */
 declare(strict_types=1);
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\bukkit;
 
