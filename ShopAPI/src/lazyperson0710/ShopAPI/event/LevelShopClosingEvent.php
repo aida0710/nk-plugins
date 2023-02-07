@@ -10,9 +10,9 @@ use pocketmine\player\Player;
 class LevelShopClosingEvent extends Event {
 
 	public function __construct(
-		private Player        $player,
+		private Player $player,
 		private LevelShopItem $item,
-		private string        $type,
+		private string $type,
 	) {
 		if (($this->type === "buy" || $this->type === "sell") === false) {
 			throw new \Error("不明なタイプが指定されました -> " . $this->type);

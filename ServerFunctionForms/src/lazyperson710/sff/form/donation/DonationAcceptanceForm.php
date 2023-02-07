@@ -21,7 +21,7 @@ class DonationAcceptanceForm extends CustomForm {
 
 	public function __construct(
 		private Player $player,
-		private int    $num,
+		private int $num,
 		private string $donor,
 	) {
 		$amount = DonationForm::DonationAmount;

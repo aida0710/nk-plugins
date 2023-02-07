@@ -33,13 +33,13 @@ class EffectableRollableGacha extends Gacha implements IInFormRollableGacha {
 	protected GachaMessages $messages;
 
 	public function __construct(
-		string                 $name,
-		string                 $oneLineDescription,
-		string                 $description,
-		string                 $emmitList,
+		string $name,
+		string $oneLineDescription,
+		string $description,
+		string $emmitList,
 		EffectableGachaMessage $messages,
-		ItemTable              $table,
-		ITicket                $ticket,
+		ItemTable $table,
+		ITicket $ticket,
 	) {
 		parent::__construct($name, $description, $messages, $table, $ticket);
 		$this->oneLineDescription = $oneLineDescription;

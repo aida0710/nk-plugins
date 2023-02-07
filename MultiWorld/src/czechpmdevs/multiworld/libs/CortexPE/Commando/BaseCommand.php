@@ -77,7 +77,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 		Plugin $plugin,
 		string $name,
 		string $description = "",
-		array  $aliases = [],
+		array $aliases = [],
 	) {
 		$this->plugin = $plugin;
 		parent::__construct($name, $description, null, $aliases);

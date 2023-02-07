@@ -9,10 +9,10 @@ class LevelShopItem {
 
 	public function __construct(
 		private Item $item,
-		private int  $price,
-		private int  $count,
-		private int  $myMoney,
-		private int  $storage,
+		private int $price,
+		private int $count,
+		private int $myMoney,
+		private int $storage,
 	) {
 	}
 

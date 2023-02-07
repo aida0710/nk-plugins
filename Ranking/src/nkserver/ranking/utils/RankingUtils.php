@@ -20,11 +20,11 @@ abstract class RankingUtils {
 	}
 
 	public static function createRanking(
-		string  $type,
+		string $type,
 		?string $must_render = null,
-		?int    $max_render = null,
+		?int $max_render = null,
 		?string $level = null,
-		?int    $id = null,
+		?int $id = null,
 	) : string {
 		$data_array = [];
 		foreach (PlayerDataPool::getAll() as $name => $data) {

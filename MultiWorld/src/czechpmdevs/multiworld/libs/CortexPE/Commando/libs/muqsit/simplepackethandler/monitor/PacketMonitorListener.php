@@ -49,7 +49,7 @@ final class PacketMonitorListener implements IPacketMonitor, Listener {
 
 	public function __construct(
 		private Plugin $register,
-		private bool   $handleCancelled,
+		private bool $handleCancelled,
 	) {
 	}
 

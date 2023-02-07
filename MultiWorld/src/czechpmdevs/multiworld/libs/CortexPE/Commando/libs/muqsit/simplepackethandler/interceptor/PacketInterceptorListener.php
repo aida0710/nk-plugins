@@ -48,8 +48,8 @@ final class PacketInterceptorListener implements IPacketInterceptor, Listener {
 
 	public function __construct(
 		private Plugin $register,
-		private int    $priority,
-		private bool   $handleCancelled,
+		private int $priority,
+		private bool $handleCancelled,
 	) {
 	}
 
