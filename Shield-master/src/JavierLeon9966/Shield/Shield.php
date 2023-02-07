@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace JavierLeon9966\Shield;
 
 use JavierLeon9966\Shield\item\Shield as ShieldItem;
@@ -110,12 +111,13 @@ final class Shield extends PluginBase implements Listener {
 				$this->setCooldown($entity, 5 * 20);
 			}
 			$entity->broadcastSound(new ShieldBlockSound());
-			$damage = (int) (2 * ($event->getBaseDamage() + array_sum([
+			$temp = array_sum([
 				$event->getModifier(EntityDamageEvent::MODIFIER_STRENGTH),
 				$event->getModifier(EntityDamageEvent::MODIFIER_WEAKNESS),
 				$event->getModifier(EntityDamageEvent::MODIFIER_CRITICAL),
 				$event->getModifier(EntityDamageEvent::MODIFIER_WEAPON_ENCHANTMENTS),
-			])));
+			]);
+			$damage = (int) (2 * ($event->getBaseDamage() + $temp));
 			$shield = $offhandInventory->getItem(0);
 			if ($shield instanceof ShieldItem) {
 				$shield->applyDamage($damage);
