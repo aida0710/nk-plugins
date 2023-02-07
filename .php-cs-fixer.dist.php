@@ -1,36 +1,34 @@
 <?php
 
 declare(strict_types=1);
-
 include_once __DIR__ . "/vendor/autoload.php";
 $finder = PhpCsFixer\Finder::create()
-	->in(__DIR__ );
-
+	->in(__DIR__);
 return (new PhpCsFixer\Config())
 	->setRiskyAllowed(true)
 	->setRules([
 		'align_multiline_comment' => [
-			'comment_type' => 'phpdocs_only'
+			'comment_type' => 'phpdocs_only',
 		],
 		'array_indentation' => true,
 		'array_syntax' => [
-			'syntax' => 'short'
+			'syntax' => 'short',
 		],
 		'binary_operator_spaces' => [
-			'default' => 'single_space'
+			'default' => 'single_space',
 		],
 		'blank_line_after_namespace' => true,
 		'blank_line_after_opening_tag' => true,
 		'blank_line_before_statement' => [
 			'statements' => [
-				'declare'
-			]
+				'declare',
+			],
 		],
 		'cast_spaces' => [
-			'space' => 'single'
+			'space' => 'single',
 		],
 		'concat_space' => [
-			'spacing' => 'one'
+			'spacing' => 'one',
 		],
 		'declare_strict_types' => true,
 		'elseif' => true,
@@ -43,7 +41,7 @@ return (new PhpCsFixer\Config())
 		'indentation_type' => true,
 		'logical_operators' => true,
 		'native_constant_invocation' => [
-			'scope' => 'namespaced'
+			'scope' => 'namespaced',
 		],
 		'native_function_invocation' => [
 			'scope' => 'namespaced',
@@ -69,23 +67,23 @@ return (new PhpCsFixer\Config())
 				'function',
 				'const',
 			],
-			'sort_algorithm' => 'alpha'
+			'sort_algorithm' => 'alpha',
 		],
 		'phpdoc_align' => [
 			'align' => 'vertical',
 			'tags' => [
 				'param',
-			]
+			],
 		],
 		'phpdoc_line_span' => [
 			'property' => 'single',
 			'method' => null,
-			'const' => null
+			'const' => null,
 		],
 		'phpdoc_trim' => true,
 		'phpdoc_trim_consecutive_blank_line_separation' => true,
 		'return_type_declaration' => [
-			'space_before' => 'one'
+			'space_before' => 'one',
 		],
 		'single_blank_line_at_eof' => true,
 		'single_import_per_statement' => true,
