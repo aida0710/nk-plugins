@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace ymggacha\src\yomogi_server\ymggacha\command\gacha;
 
 use CortexPE\Commando\BaseCommand;
@@ -11,6 +11,8 @@ use ymggacha\src\yomogi_server\ymggacha\command\CommandMessages;
 use ymggacha\src\yomogi_server\ymggacha\command\CommandPermissions;
 use ymggacha\src\yomogi_server\ymggacha\command\gacha\sub\RollGachaSubCommand;
 use ymggacha\src\yomogi_server\ymggacha\form\GachaListForm;
+use ymggacha\src\yomogi_server\ymggacha\gacha\GachaMap;
+use ymggacha\src\yomogi_server\ymggacha\gacha\IInFormRollableGacha;
 use function strtolower;
 
 class GachaCommand extends BaseCommand {
@@ -25,8 +27,8 @@ class GachaCommand extends BaseCommand {
 	}
 
 	protected function prepare() : void {
-		foreach (\ymggacha\src\yomogi_server\ymggacha\gacha\GachaMap::getAll() as $name => $gacha) {
-			if (!$gacha instanceof \ymggacha\src\yomogi_server\ymggacha\gacha\IInFormRollableGacha) continue;
+		foreach (GachaMap::getAll() as $name => $gacha) {
+			if (!$gacha instanceof IInFormRollableGacha) continue;
 			$this->registerSubCommand(new RollGachaSubCommand(strtolower($name), $gacha));
 		}
 	}

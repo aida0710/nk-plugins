@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson710\edit\form\item;
 
 use bbo51dog\bboform\element\Label;

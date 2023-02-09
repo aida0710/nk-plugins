@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson710\core\command;
 
+use Error;
 use lazyperson710\core\Main;
 use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
@@ -52,7 +53,7 @@ class WarpPVPCommand extends Command {
 			23 => new Vector3(319, 90, 171),
 			24 => new Vector3(318, 90, 198),
 			25 => new Vector3(318, 90, 244),
-			default => throw new \Error("不正な値が代入されました"),
+			default => throw new Error("不正な値が代入されました"),
 		};
 		$this->teleportPlayer($sender, $pos);
 	}

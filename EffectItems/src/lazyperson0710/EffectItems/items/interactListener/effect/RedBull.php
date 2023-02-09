@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\EffectItems\items\interactListener\effect;
 
 use lazyperson0710\EffectItems\event\PlayerItemEvent;

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace ymggacha\src\yomogi_server\ymggacha\gacha\text;
 
 use pocketmine\utils\TextFormat;

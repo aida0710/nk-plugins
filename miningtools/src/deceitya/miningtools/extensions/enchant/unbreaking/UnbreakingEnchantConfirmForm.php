@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\extensions\enchant\unbreaking;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use Error;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
@@ -37,7 +38,7 @@ class UnbreakingEnchantConfirmForm extends SimpleForm {
 					$upgrade = "最上位ランクの為アップグレードに対応していません";
 					break;
 				default:
-					throw new \Error("rank4以上の値が入力されました");
+					throw new Error("rank4以上の値が入力されました");
 			}
 		} else {
 			$upgrade = "現在、耐久強化はされていません\n\n強化効果 : 耐久10から耐久25に強化\n\n以下のコストを支払ってMiningToolを強化しますか？";

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\LoginBonus\form\convert;
 
 use bbo51dog\bboform\element\Label;

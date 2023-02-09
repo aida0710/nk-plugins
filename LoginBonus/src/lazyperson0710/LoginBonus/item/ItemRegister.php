@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\LoginBonus\item;
 
+use Error;
 use lazyperson710\core\Main;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\Item;
@@ -40,7 +41,7 @@ class ItemRegister {
 
 	private function itemRegister(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt) : void {
 		if (count($enchants) !== count($level)) {
-			throw new \Error("LoginBonus : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
+			throw new Error("LoginBonus : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
 		}
 		$this->items[] = (new LoginBonusItemInfo($item, $quantity, $cost, $customName, $lore, $formExplanation, $enchants, $level, $nbt));
 	}

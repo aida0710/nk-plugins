@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\extensions;
 
+use Error;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
 
@@ -36,7 +37,7 @@ class SetLoreJudgment {
 			}
 		}
 		if ($lore === "このMiningToolは最上位ツールの為修繕が可能です\n\n現在付与されている特殊効果") {
-			throw new \Error("値が何もない為不明な挙動として処理しました");
+			throw new Error("値が何もない為不明な挙動として処理しました");
 		}
 		return [0 => $lore];
 	}

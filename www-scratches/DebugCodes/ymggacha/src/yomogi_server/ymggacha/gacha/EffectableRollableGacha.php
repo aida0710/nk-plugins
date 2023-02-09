@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace ymggacha\src\yomogi_server\ymggacha\gacha;
 
 use InvalidArgumentException;
@@ -29,7 +29,7 @@ class EffectableRollableGacha extends Gacha implements IInFormRollableGacha {
 	use OneLineDescriptionTrait;
 	use EmmitListTrait;
 
-	/** @var \ymggacha\src\yomogi_server\ymggacha\gacha\text\EffectableGachaMessage */
+	/** @var EffectableGachaMessage */
 	protected GachaMessages $messages;
 
 	public function __construct(

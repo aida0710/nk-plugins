@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\EnablingSetting;
 
 use bbo51dog\bboform\element\Label;
@@ -8,6 +8,7 @@ use bbo51dog\bboform\form\CustomForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\range\RangeConfirmForm;
+use Error;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
@@ -119,9 +120,9 @@ class ConfirmationSettingForm extends CustomForm {
 			return;
 		}
 		EconomyAPI::getInstance()->reduceMoney($player, $cost["money"]);
-		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["rangeItem"], RangeConfirmForm::CostItemId, RangeConfirmForm::CostItemNBT) === false) throw new \Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/110");
-		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["enchantItem"], EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) throw new \Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/111");
-		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["settingItem"], self::CostItemId, self::CostItemNBT) === false) throw new \Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/112");
+		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["rangeItem"], RangeConfirmForm::CostItemId, RangeConfirmForm::CostItemNBT) === false) throw new Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/110");
+		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["enchantItem"], EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) throw new Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/111");
+		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost["settingItem"], self::CostItemId, self::CostItemNBT) === false) throw new Error("不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/112");
 		PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting($settingName)->setValue(true);
 		SendForm::Send($player, new SelectEnablingSettings($player, "§a{$settingName}を有効化しました"));
 		SoundPacket::Send($player, 'note.harp');

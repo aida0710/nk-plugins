@@ -25,7 +25,7 @@
  * Written by @CortexPE <https://CortexPE.xyz>
  *
  */
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\constraint\BaseConstraint;

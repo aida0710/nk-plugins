@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\args\IntegerArgument;

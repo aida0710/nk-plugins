@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\extensions\range;
 
 use bbo51dog\bboform\element\Button;
@@ -8,6 +8,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\unbreaking\UnbreakingEnchantConfirmForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
+use Error;
 use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
@@ -31,7 +32,7 @@ class RangeBuyForm extends SimpleForm {
 		} elseif ($namedTag->getTag('MiningTools_3') !== null) {
 			$upgrade = "現在の所持金 : " . EconomyAPI::getInstance()->myMoney($player) . "\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\nコストは" . UnbreakingEnchantConfirmForm::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . UnbreakingEnchantConfirmForm::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
 		}
-		if (is_null($upgrade)) throw new \Error("値が代入されませんでした");
+		if (is_null($upgrade)) throw new Error("値が代入されませんでした");
 		$this
 			->setTitle("Expansion Mining Tools")
 			->setText($upgrade)
@@ -70,7 +71,7 @@ class RangeBuyForm extends SimpleForm {
 						EconomyAPI::getInstance()->reduceMoney($player, $price);
 						break;
 					default:
-						throw new \Error("rank3以上の値が入力されました");
+						throw new Error("rank3以上の値が入力されました");
 				}
 				$tag = "MiningTools_Expansion_Range";
 				$nbt->removeTag($tag);

@@ -25,7 +25,7 @@
  * Written by @CortexPE <https://CortexPE.xyz>
  *
  */
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace nkserver\ranking\libs\CortexPE\Commando\exception;
 
 class HookAlreadyRegistered extends CommandoException {

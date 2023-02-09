@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace Saisana299\frameguard;
 
 use lazyperson710\core\packet\SendMessage\SendMessage;

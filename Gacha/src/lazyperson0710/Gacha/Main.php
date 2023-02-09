@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\Gacha;
 
+use Error;
 use lazyperson0710\Gacha\command\GachaCommand;
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use pocketmine\plugin\PluginBase;
@@ -19,7 +20,7 @@ class Main extends PluginBase {
 			new GachaCommand(),
 		]);
 		if ($this->checkChance() === false) {
-			throw new \Error("Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します");
+			throw new Error("Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します");
 		}
 	}
 
@@ -31,7 +32,7 @@ class Main extends PluginBase {
 				$result = bcadd($result, $value, 2);
 			}
 			if ((float) $result !== 100.0) {
-				throw new \Error($category . "の確率が合計" . $result . "%になっています");
+				throw new Error($category . "の確率が合計" . $result . "%になっています");
 			}
 		}
 		$this->getLogger()->info("正常に確率が計算されました");

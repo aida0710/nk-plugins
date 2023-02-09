@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace xenialdan\apibossbar;
 
 use GlobalLogger;
@@ -129,9 +129,11 @@ class BossBar {
 
 	/**
 	 * Removes a single player from this bar.
-	 * Use @param Player $player
+	 * Use
 	 *
-	 * @see BossBar::hideFrom() when just removing temporarily to save some performance / bandwidth
+	 * @param Player $player
+	 *
+	 * @return BossBar @see BossBar::hideFrom() when just removing temporarily to save some performance / bandwidth
 	 */
 	public function removePlayer(Player $player) : BossBar {
 		if (!isset($this->players[$player->getId()])) {

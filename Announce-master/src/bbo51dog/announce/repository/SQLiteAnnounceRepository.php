@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace bbo51dog\announce\repository;
 
 use bbo51dog\announce\repository\dto\AnnounceDto;

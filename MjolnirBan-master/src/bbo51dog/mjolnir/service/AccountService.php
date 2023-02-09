@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace bbo51dog\mjolnir\service;
 
 use bbo51dog\mjolnir\MjolnirPlugin;

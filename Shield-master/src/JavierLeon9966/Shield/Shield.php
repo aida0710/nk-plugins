@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace JavierLeon9966\Shield;
 
 use JavierLeon9966\Shield\item\Shield as ShieldItem;

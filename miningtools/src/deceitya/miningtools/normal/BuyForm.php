@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\normal;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\miningtools\Main;
+use Error;
 use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
@@ -35,7 +36,7 @@ class BuyForm extends CustomForm {
 		$explanation = match ($mode) {
 			'diamond' => new Label("DiamondMiningTools\nType : {$selection}\n\n必要金額 : {$diamondCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n衝撃 Lv.1\n耐久 Lv.5\n\n注意事項\nネザライトツールと比べ耐久が少なく修繕不可\n範囲拡張等の拡張構成機能が使えない"),
 			'netherite' => new Label("NetheriteMiningTools\nType : {$selection}\n\n必要金額 : {$netheriteCost}\n\n付与エンチャント\nシルクタッチ Lv.1\n耐久 Lv.10"),
-			default => throw new \Error("不正なモードが指定されました"),
+			default => throw new Error("不正なモードが指定されました"),
 		};
 		$this
 			->setTitle("Mining Tools")
@@ -49,7 +50,7 @@ class BuyForm extends CustomForm {
 		}
 		$item = $this->itemRegister();
 		if (empty($item)) {
-			throw new \Error('$item変数の中身が存在しない為不正な挙動として処理しました');
+			throw new Error('$item変数の中身が存在しない為不正な挙動として処理しました');
 		}
 		if (!$player->getInventory()->canAddItem($item)) {
 			SendMessage::Send($player, "インベントリに空きが無い為処理が中断されました", "MiningTools", false);
@@ -65,7 +66,7 @@ class BuyForm extends CustomForm {
 				SendBroadcastMessage::Send("{$player->getName()}がNetheriteMiningToolsを購入しました", "MiningTools");
 				break;
 			default:
-				throw new \Error("不正なモードが指定されました");
+				throw new Error("不正なモードが指定されました");
 		}
 	}
 

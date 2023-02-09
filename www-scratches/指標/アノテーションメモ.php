@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 //TODO:	あとで追加、修正するべき機能がある。
 //FIXME: 既知の不具合があるコード。修正が必要。

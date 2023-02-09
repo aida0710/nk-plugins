@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\calculation;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;

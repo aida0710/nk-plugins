@@ -1,12 +1,13 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\repair\form;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
+use Error;
 use Exception;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
@@ -190,7 +191,7 @@ class RepairForm extends CustomForm {
 				SendMessage::Send($player, "Levelを{$this->level}消費してアイテムを修理しました", "Repair", true, "random.anvil_use");
 				break;
 			default:
-				throw new \Error("不正な状態が保存された変数が処理されました");
+				throw new Error("不正な状態が保存された変数が処理されました");
 		}
 	}
 

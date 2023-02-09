@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson710\edit\form\element;
 
 use bbo51dog\bboform\element\Button;

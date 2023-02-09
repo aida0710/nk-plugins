@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\LoginBonus\event;
 
+use Error;
 use lazyperson0710\LoginBonus\Main;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -38,7 +39,7 @@ class JoinPlayerEvent implements Listener {
 			$lastBonus = 1;
 		}
 		if ($lastBonus === 0) {
-			throw new \Error("ログインBonusのチェック処理の際に0が入力されました");
+			throw new Error("ログインBonusのチェック処理の際に0が入力されました");
 		}
 		$item = Main::getInstance()->loginBonusItem;
 		$item->setCount($lastBonus);

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\Gacha\command;
 
 use lazyperson0710\Gacha\form\MainForm;

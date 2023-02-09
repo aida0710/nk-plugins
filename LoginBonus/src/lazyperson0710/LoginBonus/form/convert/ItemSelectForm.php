@@ -1,9 +1,10 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\LoginBonus\form\convert;
 
 use bbo51dog\bboform\form\SimpleForm;
+use Error;
 use lazyperson0710\LoginBonus\form\element\SelectLoginBonusItemButton;
 use lazyperson0710\LoginBonus\item\ItemRegister;
 use lazyperson0710\LoginBonus\item\LoginBonusItemInfo;
@@ -21,7 +22,7 @@ class ItemSelectForm extends SimpleForm {
 			if ($item instanceof LoginBonusItemInfo) {
 				$this->addElement(new SelectLoginBonusItemButton($item->getCustomName() . "x" . $item->getQuantity() . " / Cost : " . $item->getCost() . "\n" . $item->getFormExplanation(), $item));
 			} else {
-				throw new \Error("ログインボーナスTicketリスト生成時に不正なobjectが挿入されました。危険と思われるため鯖を停止しました");
+				throw new Error("ログインボーナスTicketリスト生成時に不正なobjectが挿入されました。危険と思われるため鯖を停止しました");
 			}
 		}
 	}

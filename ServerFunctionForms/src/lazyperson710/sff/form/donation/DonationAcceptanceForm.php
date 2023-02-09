@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson710\sff\form\donation;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
+use Error;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\donation\Donation_10000;
 use lazyperson0710\PlayerSetting\object\settings\donation\Donation_1500;
@@ -83,7 +84,7 @@ class DonationAcceptanceForm extends CustomForm {
 					$setting->getSetting(Donation_1500::getName())?->setValue(true);
 					$message = "\n\n§sチケットを100枚受け取りました";
 					break;
-				} else throw new \Error("既にチケットを受け取っています");
+				} else throw new Error("既にチケットを受け取っています");
 			case 10000:
 				if (!$this->enable->getValue()) {
 					break;
@@ -98,7 +99,7 @@ class DonationAcceptanceForm extends CustomForm {
 					$setting->getSetting(Donation_10000::getName())?->setValue(true);
 					$message = "\n\n§sダイアモンドを15個受け取りました";
 					break;
-				} else throw new \Error("既にチケットを受け取っています");
+				} else throw new Error("既にチケットを受け取っています");
 			default:
 				break;
 		}

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 $nextExp = 80;
 foreach (range(1, 811) as $lv) {
 	if ($lv === 1) {

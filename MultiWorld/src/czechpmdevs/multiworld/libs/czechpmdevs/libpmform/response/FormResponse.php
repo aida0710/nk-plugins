@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace czechpmdevs\multiworld\libs\czechpmdevs\libpmform\response;
 
 class FormResponse {

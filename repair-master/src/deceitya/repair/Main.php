@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\repair;
 
 use deceitya\repair\command\RepairCommand;
 use deceitya\repair\form\RepairForm;
+use Error;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -37,7 +38,7 @@ class Main extends PluginBase implements Listener {
 			$level += 8 + $enchant->getLevel();
 		}
 		$mode = "others";
-		if (!$item instanceof Durable) throw new \Error("道具以外のアイテムが指定されました");
+		if (!$item instanceof Durable) throw new Error("道具以外のアイテムが指定されました");
 		SendForm::Send($player, (new RepairForm($level, $item, $mode)));
 	}
 }

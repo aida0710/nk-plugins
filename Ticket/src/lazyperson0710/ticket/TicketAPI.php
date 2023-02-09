@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\ticket;
 
+use Error;
 use JetBrains\PhpStorm\Pure;
 use JsonException;
 use pocketmine\item\VanillaItems;
@@ -31,7 +32,7 @@ class TicketAPI {
 			$this->config->save();
 			return true;
 		} catch (JsonException $e) {
-			throw new \Error($e->getMessage());
+			throw new Error($e->getMessage());
 		}
 	}
 

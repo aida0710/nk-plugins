@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\Gacha\database;
 
+use Error;
 use pocketmine\block\utils\CoralType;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\item\enchantment\VanillaEnchantments;
@@ -109,13 +110,13 @@ class GachaItemAPI {
 
 	private function checkFunctionArgument(string $category, string $rank, array $enchants, array $level) : void {
 		if (!in_array($rank, RarityMap::AllRarity, true)) {
-			throw new \Error("Gacha : アイテム登録時にRarityMapに登録されていないRarityが入力された為プラグインを停止します");
+			throw new Error("Gacha : アイテム登録時にRarityMapに登録されていないRarityが入力された為プラグインを停止します");
 		}
 		if (!in_array($category, self::Category, true)) {
-			throw new \Error("Gacha : アイテム登録時にカテゴリーに登録されていないガチャが入力された為プラグインを停止します");
+			throw new Error("Gacha : アイテム登録時にカテゴリーに登録されていないガチャが入力された為プラグインを停止します");
 		}
 		if (count($enchants) !== count($level)) {
-			throw new \Error("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
+			throw new Error("Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します");
 		}
 	}
 

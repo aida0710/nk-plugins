@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\extensions\enchant\unbreaking;
 
 use bbo51dog\bboform\element\Button;
@@ -8,6 +8,7 @@ use bbo51dog\bboform\form\SimpleForm;
 use deceitya\miningtools\extensions\CheckPlayerData;
 use deceitya\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use deceitya\miningtools\extensions\SetLoreJudgment;
+use Error;
 use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
@@ -85,12 +86,12 @@ class UnbreakingEnchantBuyForm extends SimpleForm {
 						$item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 50));
 						break;
 					default:
-						throw new \Error("rank3以上の値が入力されました");
+						throw new Error("rank3以上の値が入力されました");
 				}
 			}
 		}
 		if (is_null($rank)) {
-			throw new \Error("rankがnullの為不明な挙動として処理しました");
+			throw new Error("rankがnullの為不明な挙動として処理しました");
 		}
 		$nbt = $item->getNamedTag();
 		$nbt->removeTag('MiningTools_Expansion_UnbreakingEnchant');

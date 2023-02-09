@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\normal;
 
 use bbo51dog\bboform\element\Dropdown;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
+use Error;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 
@@ -31,7 +32,7 @@ class ConfirmForm extends CustomForm {
 				$explanation = new Label("NetheriteMiningTools\n\n必要金額 : {$netheriteCost}\n\n「送信」を押すと確認画面に飛びます\n\nしゃべるとピッケルの機能\n採掘地点を中心とした3x3の範囲採掘\n範囲破壊が行われるのはツールに対応したブロックのみになります\n\n斧の機能\nマインオールのような機能を持ち、採掘したブロック(原木と葉っぱが対象)に隣接するブロックを破壊していく");
 				break;
 			default:
-				throw new \Error("不正なモードが指定されました");
+				throw new Error("不正なモードが指定されました");
 		}
 		$type = [
 			"つるはし",

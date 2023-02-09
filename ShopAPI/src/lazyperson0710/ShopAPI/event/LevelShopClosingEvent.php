@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace lazyperson0710\ShopAPI\event;
 
+use Error;
 use lazyperson0710\ShopAPI\object\LevelShopItem;
 use pocketmine\event\Event;
 use pocketmine\player\Player;
@@ -15,7 +16,7 @@ class LevelShopClosingEvent extends Event {
 		private string $type,
 	) {
 		if (($this->type === "buy" || $this->type === "sell") === false) {
-			throw new \Error("不明なタイプが指定されました -> " . $this->type);
+			throw new Error("不明なタイプが指定されました -> " . $this->type);
 		}
 	}
 

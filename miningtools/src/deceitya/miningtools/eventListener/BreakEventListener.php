@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace deceitya\miningtools\eventListener;
 
 use deceitya\miningtools\calculation\AxeDestructionRange;
@@ -8,6 +8,7 @@ use deceitya\miningtools\calculation\CheckItem;
 use deceitya\miningtools\calculation\ItemDrop;
 use deceitya\miningtools\calculation\PickaxeDestructionRange;
 use deceitya\miningtools\Main;
+use Error;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
@@ -58,7 +59,7 @@ class BreakEventListener implements Listener {
 					$set = Main::$netherite['pickaxe'];
 				}
 			} else {
-				throw new \Error('$setに何も代入されませんでした');
+				throw new Error('$setに何も代入されませんでした');
 			}
 		}
 		$block = $event->getBlock();

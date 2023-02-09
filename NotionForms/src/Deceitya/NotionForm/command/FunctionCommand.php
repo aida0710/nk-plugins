@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace Deceitya\NotionForm\command;
 
 use Deceitya\NotionForm\Form\StartForm;
