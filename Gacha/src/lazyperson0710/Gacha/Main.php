@@ -35,7 +35,7 @@ class Main extends PluginBase {
 			$result = 0;
 			$probability = GachaItemAPI::getInstance()->rankProbability[$category][0];
 			foreach ($probability as $value) {
-				$result = bcadd($result, $value, 2);
+				$result = bcadd((string) $result, (string) $value, 2);
 			}
 			if ((float) $result !== 100.0) {
 				throw new Error($category . 'の確率が合計' . $result . '%になっています');
