@@ -10,7 +10,7 @@ use pocketmine\plugin\PluginBase;
 class Main extends PluginBase {
 
 	public function onEnable() : void {
-		$this->getServer()->getCommandMap()->registerAll("editen", [
+		$this->getServer()->getCommandMap()->registerAll('editen', [
 			new ReductionCommand(),
 			new DeleteCommand(),
 		]);

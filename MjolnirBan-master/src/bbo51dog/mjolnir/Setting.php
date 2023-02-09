@@ -14,8 +14,8 @@ class Setting {
 	private string $defaultBanReason;
 
 	public function setData(array $datas) : void {
-		$this->kickMessage = $datas["messages"]["kick-message"];
-		$this->defaultBanReason = $datas["messages"]["default-ban-reason"];
+		$this->kickMessage = $datas['messages']['kick-message'];
+		$this->defaultBanReason = $datas['messages']['default-ban-reason'];
 	}
 
 	public function getKickMessage() : string {

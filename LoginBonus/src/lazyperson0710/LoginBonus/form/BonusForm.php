@@ -16,14 +16,14 @@ class BonusForm extends SimpleForm {
 
 	public function __construct(Player $player, ?string $message = null) {
 		$this
-			->setTitle("Login Bonus")
-			->setText("使用したい機能を選択してください" . $message)
+			->setTitle('Login Bonus')
+			->setText('使用したい機能を選択してください' . $message)
 			->addElements(
-				new SendFormButton(new ItemSelectForm(), "ログインボーナスをアイテムと交換"),
-				new SendBonusViewFormButton(new BonusViewForm($player), "保留しているログインボーナスを回収"),
+				new SendFormButton(new ItemSelectForm(), 'ログインボーナスをアイテムと交換'),
+				new SendBonusViewFormButton(new BonusViewForm($player), '保留しているログインボーナスを回収'),
 			);
 		if (Server::getInstance()->isOp($player->getName())) {
-			$this->addElements(new SendFormButton(new CreateLoginBonusForm(), "ログインボーナスを錬金"));
+			$this->addElements(new SendFormButton(new CreateLoginBonusForm(), 'ログインボーナスを錬金'));
 		}
 	}
 }

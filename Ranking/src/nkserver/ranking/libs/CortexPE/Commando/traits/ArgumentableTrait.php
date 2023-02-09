@@ -55,17 +55,17 @@ trait ArgumentableTrait {
 	 */
 	public function registerArgument(int $position, BaseArgument $argument) : void {
 		if ($position < 0) {
-			throw new ArgumentOrderException("You cannot register arguments at negative positions");
+			throw new ArgumentOrderException('You cannot register arguments at negative positions');
 		}
 		if ($position > 0 && !isset($this->argumentList[$position - 1])) {
 			throw new ArgumentOrderException("There were no arguments before $position");
 		}
 		foreach ($this->argumentList[$position - 1] ?? [] as $arg) {
 			if ($arg instanceof TextArgument) {
-				throw new ArgumentOrderException("No other arguments can be registered after a TextArgument");
+				throw new ArgumentOrderException('No other arguments can be registered after a TextArgument');
 			}
 			if ($arg->isOptional() && !$argument->isOptional()) {
-				throw new ArgumentOrderException("You cannot register a required argument after an optional argument");
+				throw new ArgumentOrderException('You cannot register a required argument after an optional argument');
 			}
 		}
 		$this->argumentList[$position][] = $argument;
@@ -76,15 +76,15 @@ trait ArgumentableTrait {
 
 	public function parseArguments(array $rawArgs, CommandSender $sender) : array {
 		$return = [
-			"arguments" => [],
-			"errors" => [],
+			'arguments' => [],
+			'errors' => [],
 		];
 		// try parsing arguments
 		$required = count($this->requiredArgumentCount);
 		if (!$this->hasArguments() && count($rawArgs) > 0) { // doesnt take args but sender gives args anyways
-			$return["errors"][] = [
-				"code" => BaseCommand::ERR_NO_ARGUMENTS,
-				"data" => [],
+			$return['errors'][] = [
+				'code' => BaseCommand::ERR_NO_ARGUMENTS,
+				'data' => [],
 			];
 		}
 		$offset = 0;
@@ -100,20 +100,20 @@ trait ArgumentableTrait {
 				$parsed = false;
 				$optional = true;
 				foreach ($possibleArguments as $argument) {
-					$arg = trim(implode(" ", array_slice($rawArgs, $offset, ($len = $argument->getSpanLength()))));
+					$arg = trim(implode(' ', array_slice($rawArgs, $offset, ($len = $argument->getSpanLength()))));
 					if (!$argument->isOptional()) {
 						$optional = false;
 					}
-					if ($arg !== "" && $argument->canParse($arg, $sender)) {
+					if ($arg !== '' && $argument->canParse($arg, $sender)) {
 						$k = $argument->getName();
 						$result = (clone $argument)->parse($arg, $sender);
-						if (isset($return["arguments"][$k]) && !is_array($return["arguments"][$k])) {
-							$old = $return["arguments"][$k];
-							unset($return["arguments"][$k]);
-							$return["arguments"][$k] = [$old];
-							$return["arguments"][$k][] = $result;
+						if (isset($return['arguments'][$k]) && !is_array($return['arguments'][$k])) {
+							$old = $return['arguments'][$k];
+							unset($return['arguments'][$k]);
+							$return['arguments'][$k] = [$old];
+							$return['arguments'][$k][] = $result;
 						} else {
-							$return["arguments"][$k] = $result;
+							$return['arguments'][$k] = $result;
 						}
 						if (!$optional) {
 							$required--;
@@ -128,16 +128,16 @@ trait ArgumentableTrait {
 				}
 				if (!$parsed && !($optional && empty($arg))) { // we tried every other possible argument type, none was satisfied
 					$expectedArgs = $this->argumentList[$offset];
-					$expected = "";
+					$expected = '';
 					foreach ($expectedArgs as $expectedArg) {
-						$expected .= $expectedArg->getTypeName() . "|";
+						$expected .= $expectedArg->getTypeName() . '|';
 					}
-					$return["errors"][] = [
-						"code" => BaseCommand::ERR_INVALID_ARG_VALUE,
-						"data" => [
-							"value" => $rawArgs[$offset] ?? "",
-							"position" => $pos + 1,
-							"expected" => rtrim($expected, "|"),
+					$return['errors'][] = [
+						'code' => BaseCommand::ERR_INVALID_ARG_VALUE,
+						'data' => [
+							'value' => $rawArgs[$offset] ?? '',
+							'position' => $pos + 1,
+							'expected' => rtrim($expected, '|'),
 						],
 					];
 					return $return; // let's break it here.
@@ -145,15 +145,15 @@ trait ArgumentableTrait {
 			}
 		}
 		if ($offset < count($rawArgs)) { // this means that the arguments our user sent is more than the needed amount
-			$return["errors"][] = [
-				"code" => BaseCommand::ERR_TOO_MANY_ARGUMENTS,
-				"data" => [],
+			$return['errors'][] = [
+				'code' => BaseCommand::ERR_TOO_MANY_ARGUMENTS,
+				'data' => [],
 			];
 		}
 		if ($required > 0) {// We still have more unfilled required arguments
-			$return["errors"][] = [
-				"code" => BaseCommand::ERR_INSUFFICIENT_ARGUMENTS,
-				"data" => [],
+			$return['errors'][] = [
+				'code' => BaseCommand::ERR_INSUFFICIENT_ARGUMENTS,
+				'data' => [],
 			];
 		}
 		// up to my testing this occurs when BaseCommand::ERR_NO_ARGUMENTS and BaseCommand::ERR_TOO_MANY_ARGUMENTS are given as errors
@@ -161,14 +161,14 @@ trait ArgumentableTrait {
 		// also the error code remains as shown due to the way they are passed
 		// have a better way? pr please :)
 		if (
-			count($return["errors"]) === 2 &&
-			$return["errors"][0]["code"] === BaseCommand::ERR_NO_ARGUMENTS &&
-			$return["errors"][1]["code"] === BaseCommand::ERR_TOO_MANY_ARGUMENTS
+			count($return['errors']) === 2 &&
+			$return['errors'][0]['code'] === BaseCommand::ERR_NO_ARGUMENTS &&
+			$return['errors'][1]['code'] === BaseCommand::ERR_TOO_MANY_ARGUMENTS
 		) {
-			unset($return["errors"]);
-			$return["errors"][] = [
-				"code" => BaseCommand::ERR_INVALID_ARGUMENTS,
-				"data" => [],
+			unset($return['errors']);
+			$return['errors'][] = [
+				'code' => BaseCommand::ERR_INVALID_ARGUMENTS,
+				'data' => [],
 			];
 		}
 		return $return;
@@ -178,27 +178,27 @@ trait ArgumentableTrait {
 		return !empty($this->argumentList);
 	}
 
-	public function generateUsageMessage(string $parent = "") : string {
-		$name = $parent . (empty($parent) ? "" : " ") . $this->getName();
-		$msg = TextFormat::RED . "/" . $name;
+	public function generateUsageMessage(string $parent = '') : string {
+		$name = $parent . (empty($parent) ? '' : ' ') . $this->getName();
+		$msg = TextFormat::RED . '/' . $name;
 		$args = [];
 		foreach ($this->argumentList as $pos => $arguments) {
 			$hasOptional = false;
 			$names = [];
 			foreach ($arguments as $k => $argument) {
-				$names[] = $argument->getName() . ":" . $argument->getTypeName();
+				$names[] = $argument->getName() . ':' . $argument->getTypeName();
 				if ($argument->isOptional()) {
 					$hasOptional = true;
 				}
 			}
-			$names = implode("|", $names);
+			$names = implode('|', $names);
 			if ($hasOptional) {
-				$args[] = "[" . $names . "]";
+				$args[] = '[' . $names . ']';
 			} else {
-				$args[] = "<" . $names . ">";
+				$args[] = '<' . $names . '>';
 			}
 		}
-		$msg .= ((empty($args)) ? "" : " ") . implode(TextFormat::RED . " ", $args) . ": " . $this->getDescription();
+		$msg .= ((empty($args)) ? '' : ' ') . implode(TextFormat::RED . ' ', $args) . ': ' . $this->getDescription();
 		foreach ($this->subCommands as $label => $subCommand) {
 			if ($label === $subCommand->getName()) {
 				$msg .= "\n - " . $subCommand->generateUsageMessage($name);

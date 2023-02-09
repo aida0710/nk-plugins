@@ -19,11 +19,11 @@ class CommandStorage {
 		$player = $event->getPlayer();
 		if ($player->isSneaking()) {
 			SendForm::Send($player, (new CommandStorageForm()));
-		} elseif ($item->getName() === "コマンド記憶装置") {
-			SendMessage::Send($player, "スニークしながらタップすることでコマンドを設定することが出来ます", "CmdStorage", true);
+		} elseif ($item->getName() === 'コマンド記憶装置') {
+			SendMessage::Send($player, 'スニークしながらタップすることでコマンドを設定することが出来ます', 'CmdStorage', true);
 		} else {
 			Server::getInstance()->dispatchCommand($player, $item->getName());
-			SendTip::Send($player, "{$item->getName()}を実行しました", "CmdStorage", true);
+			SendTip::Send($player, "{$item->getName()}を実行しました", 'CmdStorage', true);
 		}
 	}
 }

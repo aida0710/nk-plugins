@@ -18,7 +18,7 @@ use pocketmine\world\BlockTransaction;
 class VanillaSponge extends Sponge {
 
 	public function __construct() {
-		parent::__construct(new BlockIdentifier(BlockLegacyIds::SPONGE, 0), "Sponge", new BlockBreakInfo(0.6, BlockToolType::HOE));
+		parent::__construct(new BlockIdentifier(BlockLegacyIds::SPONGE, 0), 'Sponge', new BlockBreakInfo(0.6, BlockToolType::HOE));
 	}
 
 	public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, Player $player = null) : bool {

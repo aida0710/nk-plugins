@@ -33,7 +33,7 @@ class Main extends PluginBase {
 		self::$worlds = $this->getConfig()->getAll();
 		$this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
 		$this->getScheduler()->scheduleRepeatingTask(new FlyCheckTask(), 20);
-		$this->getServer()->getCommandMap()->registerAll("fly", [
+		$this->getServer()->getCommandMap()->registerAll('fly', [
 			new FlyCommand(),
 		]);
 	}
@@ -55,7 +55,7 @@ class Main extends PluginBase {
 				if ($player->getPosition()->getFloorY() > WorldManagementAPI::getInstance()->getFlyLimit($player->getWorld()->getFolderName())) {
 					$player->setAllowFlight(false);
 					$player->setFlying(false);
-					SendTip::Send($player, "高さ制限に引っ掛かった為飛行が一時的に不可になりました", "FlyTask", false);
+					SendTip::Send($player, '高さ制限に引っ掛かった為飛行が一時的に不可になりました', 'FlyTask', false);
 					return false;
 				} else {
 					$player->setAllowFlight(true);
@@ -74,8 +74,8 @@ class Main extends PluginBase {
 		for ($t = 0; $t <= 2.0; $t += 0.1) {
 			$x = cos(M_PI * $t);
 			$z = sin(M_PI * $t);
-			$x = sprintf("%.5f", $x);
-			$z = sprintf("%.5f", $z);
+			$x = sprintf('%.5f', $x);
+			$z = sprintf('%.5f', $z);
 			$player->getWorld()->addParticle($player->getPosition()->add($x, -1, $z), new RedstoneParticle(0.1));
 		}
 	}

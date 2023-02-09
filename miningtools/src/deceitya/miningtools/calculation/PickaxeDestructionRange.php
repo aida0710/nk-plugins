@@ -29,7 +29,7 @@ class PickaxeDestructionRange {
 		}
 		$radius = 0;
 		if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-			$radius = $item->getNamedTag()->getInt("MiningTools_Expansion_Range");
+			$radius = $item->getNamedTag()->getInt('MiningTools_Expansion_Range');
 		}
 		Main::$flag[$player->getName()] = true;
 		for ($y = -1 - $radius; $y < 2 + $radius; $y++) {
@@ -97,7 +97,7 @@ class PickaxeDestructionRange {
 						/** @var Durable $handItem */
 						$maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
 						if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-							$player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+							$player->sendTitle('§c耐久が15以下の為採掘できません！', '§cかなとこ等を使用して修繕してください');
 							SoundPacket::Send($player, 'respawn_anchor.deplete');
 							continue;
 						}

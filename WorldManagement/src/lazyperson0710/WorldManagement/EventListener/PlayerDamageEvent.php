@@ -44,7 +44,7 @@ class PlayerDamageEvent implements Listener {
 					break;
 				}
 				if (isset(self::$damageFlags[$entity->getName()])) {
-					SendNoSoundTip::Send($entity, "ワープ直前のためダメージが無効化されました", "DamageProtect", true);
+					SendNoSoundTip::Send($entity, 'ワープ直前のためダメージが無効化されました', 'DamageProtect', true);
 					$event->cancel();
 					$this->unset($entity);
 				}

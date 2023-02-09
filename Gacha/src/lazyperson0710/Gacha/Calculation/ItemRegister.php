@@ -28,10 +28,10 @@ class ItemRegister {
 			$item->setCustomName($data['name']);
 		}
 		if ($data['lore'] !== null) {
-			$item->setLore([$data["lore"]]);
+			$item->setLore([$data['lore']]);
 		}
 		foreach ($data['enchants'] as $key => $enchant) {
-			$item->addEnchantment(new EnchantmentInstance($enchant, $data["level"][$key]));
+			$item->addEnchantment(new EnchantmentInstance($enchant, $data['level'][$key]));
 		}
 		if ($data['nbt'] !== null) {
 			foreach ($data['nbt'] as $setNbt) {

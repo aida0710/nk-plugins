@@ -30,7 +30,7 @@ final class PacketMonitorListener implements IPacketMonitor, Listener {
 	 * @param class-string<TPacket>                   $class
 	 */
 	private static function getPidFromHandler(Closure $handler, string $class) : int {
-		$classes = Utils::parseClosureSignature($handler, [$class, NetworkSession::class], "void");
+		$classes = Utils::parseClosureSignature($handler, [$class, NetworkSession::class], 'void');
 		assert(is_a($classes[0], DataPacket::class, true));
 		return $classes[0]::NETWORK_ID;
 	}

@@ -41,12 +41,12 @@ class YamlProvider implements Provider {
 	}
 
 	public function open() {
-		$this->config = new Config($this->plugin->getDataFolder() . "Money.yml", Config::YAML, ["version" => 2, "money" => []]);
+		$this->config = new Config($this->plugin->getDataFolder() . 'Money.yml', Config::YAML, ['version' => 2, 'money' => []]);
 		$this->money = $this->config->getAll();
 	}
 
 	public function getAll() {
-		return isset($this->money["money"]) ? $this->money["money"] : [];
+		return isset($this->money['money']) ? $this->money['money'] : [];
 	}
 
 	public function accountExists($player) {
@@ -54,11 +54,11 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		return isset($this->money["money"][$player]);
+		return isset($this->money['money'][$player]);
 	}
 
 	public function getName() {
-		return "Yaml";
+		return 'Yaml';
 	}
 
 	public function createAccount($player, $defaultMoney = 1000) {
@@ -66,8 +66,8 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		if (!isset($this->money["money"][$player])) {
-			$this->money["money"][$player] = $defaultMoney;
+		if (!isset($this->money['money'][$player])) {
+			$this->money['money'][$player] = $defaultMoney;
 			return true;
 		}
 		return false;
@@ -78,8 +78,8 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		if (isset($this->money["money"][$player])) {
-			unset($this->money["money"][$player]);
+		if (isset($this->money['money'][$player])) {
+			unset($this->money['money'][$player]);
 			return true;
 		}
 		return false;
@@ -90,8 +90,8 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		if (isset($this->money["money"][$player])) {
-			return $this->money["money"][$player];
+		if (isset($this->money['money'][$player])) {
+			return $this->money['money'][$player];
 		}
 		return false;
 	}
@@ -101,9 +101,9 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		if (isset($this->money["money"][$player])) {
-			$this->money["money"][$player] = $amount;
-			$this->money["money"][$player] = round($this->money["money"][$player], 2);
+		if (isset($this->money['money'][$player])) {
+			$this->money['money'][$player] = $amount;
+			$this->money['money'][$player] = round($this->money['money'][$player], 2);
 			return true;
 		}
 		return false;
@@ -114,9 +114,9 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		if (isset($this->money["money"][$player])) {
-			$this->money["money"][$player] += $amount;
-			$this->money["money"][$player] = round($this->money["money"][$player], 2);
+		if (isset($this->money['money'][$player])) {
+			$this->money['money'][$player] += $amount;
+			$this->money['money'][$player] = round($this->money['money'][$player], 2);
 			return true;
 		}
 		return false;
@@ -127,9 +127,9 @@ class YamlProvider implements Provider {
 			$player = $player->getName();
 		}
 		$player = strtolower($player);
-		if (isset($this->money["money"][$player])) {
-			$this->money["money"][$player] -= $amount;
-			$this->money["money"][$player] = round($this->money["money"][$player], 2);
+		if (isset($this->money['money'][$player])) {
+			$this->money['money'][$player] -= $amount;
+			$this->money['money'][$player] = round($this->money['money'][$player], 2);
 			return true;
 		}
 		return false;

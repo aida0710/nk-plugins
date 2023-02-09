@@ -14,7 +14,7 @@ class DonationsButton extends Button {
 	private int $num;
 	private string $donor;
 
-	public function __construct(string $text, int $num, ?string $donor = "null", ?ButtonImage $image = null) {
+	public function __construct(string $text, int $num, ?string $donor = 'null', ?ButtonImage $image = null) {
 		parent::__construct($text, $image);
 		$this->num = $num;
 		$this->donor = $donor;

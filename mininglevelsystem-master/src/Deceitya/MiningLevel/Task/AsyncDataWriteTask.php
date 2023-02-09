@@ -49,7 +49,7 @@ class AsyncDataWriteTask extends AsyncTask {
 			')',
 		);
 		foreach ($cache as $name => $data) {
-			$stmt = $db->prepare("UPDATE mining SET level = :level, exp = :exp, upexp = :upexp WHERE name = :name");
+			$stmt = $db->prepare('UPDATE mining SET level = :level, exp = :exp, upexp = :upexp WHERE name = :name');
 			$stmt->bindValue(':level', $data[self::TYPE_LEVEL], SQLITE3_INTEGER);
 			$stmt->bindValue(':exp', $data[self::TYPE_EXP], SQLITE3_INTEGER);
 			$stmt->bindValue(':upexp', $data[self::TYPE_UPEXP], SQLITE3_INTEGER);
@@ -62,13 +62,13 @@ class AsyncDataWriteTask extends AsyncTask {
 	public function onCompletion() : void {
 		$name = unserialize($this->name);
 		if ($name !== null) {
-			if ($name === "CONSOLE") {
-				Server::getInstance()->getLogger()->info("§bLevel §7>> §a保存は完了致しました。");
+			if ($name === 'CONSOLE') {
+				Server::getInstance()->getLogger()->info('§bLevel §7>> §a保存は完了致しました。');
 				return;
 			}
 			$player = Server::getInstance()->getOfflinePlayer($name);
 			if ($player instanceof Player) {
-				SendMessage::Send($player, "保存は完了致しました。", "Level", true);
+				SendMessage::Send($player, '保存は完了致しました。', 'Level', true);
 			}
 		}
 	}

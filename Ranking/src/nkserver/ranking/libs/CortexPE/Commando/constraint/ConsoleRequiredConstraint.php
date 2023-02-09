@@ -43,6 +43,6 @@ class ConsoleRequiredConstraint extends BaseConstraint {
 	}
 
 	public function onFailure(CommandSender $sender, string $aliasUsed, array $args) : void {
-		$sender->sendMessage(TextFormat::RED . "This command must be executed from a server console."); // f*ck off grammar police
+		$sender->sendMessage(TextFormat::RED . 'This command must be executed from a server console.'); // f*ck off grammar police
 	}
 }

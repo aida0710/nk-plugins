@@ -19,7 +19,7 @@ class ResourceWorldProtect implements Listener {
 	 * @priority Low
 	 */
 	public function onBreak(BlockBreakEvent $event) {
-		if ($event->getBlock()->getPosition()->getWorld()->getFolderName() === "resource") {
+		if ($event->getBlock()->getPosition()->getWorld()->getFolderName() === 'resource') {
 			$blocks = [
 				VanillaBlocks::STONE()->getName(),
 				VanillaBlocks::GRANITE()->getName(),
@@ -32,9 +32,9 @@ class ResourceWorldProtect implements Listener {
 				VanillaBlocks::ACACIA_LOG()->getName(),
 				VanillaBlocks::DARK_OAK_LOG()->getName(),
 			];
-			$heightLimit = WorldManagementAPI::getInstance()->getHeightLimit("resource");
+			$heightLimit = WorldManagementAPI::getInstance()->getHeightLimit('resource');
 			if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
-				SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上のブロックを破壊することは許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上のブロックを破壊することは許可されていません", 'Protect', false);
 				if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
 					return;
 				}
@@ -42,7 +42,7 @@ class ResourceWorldProtect implements Listener {
 				return;
 			}
 			if (!in_array($event->getBlock()->getName(), $blocks, true)) {
-				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません", 'Protect', false);
 				if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
 					return;
 				}
@@ -56,8 +56,8 @@ class ResourceWorldProtect implements Listener {
 	 * @priority Low
 	 */
 	public function onPlace(BlockPlaceEvent $event) {
-		$heightLimit = WorldManagementAPI::getInstance()->getHeightLimit("resource");
-		if ($event->getBlock()->getPosition()->getWorld()->getFolderName() === "resource") {
+		$heightLimit = WorldManagementAPI::getInstance()->getHeightLimit('resource');
+		if ($event->getBlock()->getPosition()->getWorld()->getFolderName() === 'resource') {
 			$blocks = [
 				VanillaBlocks::STONE()->getName(),
 				VanillaBlocks::GRANITE()->getName(),
@@ -71,7 +71,7 @@ class ResourceWorldProtect implements Listener {
 				VanillaBlocks::DARK_OAK_LOG()->getName(),
 			];
 			if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
-				SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", 'Protect', false);
 				if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
 					return;
 				}
@@ -79,7 +79,7 @@ class ResourceWorldProtect implements Listener {
 				return;
 			}
 			if (!in_array($event->getBlock()->getName(), $blocks, true)) {
-				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の設置は許可されていません", 'Protect', false);
 				if (Server::getInstance()->isOp($event->getPlayer()->getName())) {
 					return;
 				}

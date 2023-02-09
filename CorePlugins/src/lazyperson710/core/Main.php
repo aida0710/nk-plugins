@@ -64,7 +64,7 @@ class Main extends PluginBase {
 		$this->entityRemoveTimeLeft = self::EntityRemoveTaskInterval;
 		$enchant = new Enchantment('幸運', Rarity::RARE, ItemFlags::DIG, ItemFlags::SHEARS, 3);
 		EnchantmentIdMap::getInstance()->register(EnchantmentIds::FORTUNE, $enchant);
-		StringToEnchantmentParser::getInstance()->register("fortune", fn () => $enchant);
+		StringToEnchantmentParser::getInstance()->register('fortune', fn () => $enchant);
 		/*PlayerEventListener*/
 		$this->getServer()->getPluginManager()->registerEvents(new MessageListener(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new BreakListener(), $this);
@@ -87,7 +87,7 @@ class Main extends PluginBase {
 		/*Items*/
 		$this->defaultItemNameChange();
 		/*Command*/
-		$this->getServer()->getCommandMap()->registerAll("core", [
+		$this->getServer()->getCommandMap()->registerAll('core', [
 			new MajorCommand(),
 			new DiceCommand(),
 			new JoinItemCommand(),
@@ -113,17 +113,17 @@ class Main extends PluginBase {
 		StringToItemParser::getInstance()->register('MiningToolsRangeCostItem', fn (string $input) => new Item(new ItemIdentifier(self::ITEM_CHISELED_NETHER_BRICKS, 0), 'MiningToolsRangeCostItem'));
 		/*その他*/
 		ItemFactory::getInstance()->register(new CookedMutton(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), '猫用チュール'), true);
-		StringToItemParser::getInstance()->register("猫用チュール", fn () => (new CookedMutton(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), "猫用チュール")));
+		StringToItemParser::getInstance()->register('猫用チュール', fn () => (new CookedMutton(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), '猫用チュール')));
 		ItemFactory::getInstance()->register(new CookedChicken(new ItemIdentifier(VanillaItems::COOKED_CHICKEN()->getId(), 0), '犬用チュール'), true);
-		StringToItemParser::getInstance()->register("犬用チュール", fn () => (new CookedChicken(new ItemIdentifier(VanillaItems::COOKED_CHICKEN()->getId(), 0), "犬用チュール")));
+		StringToItemParser::getInstance()->register('犬用チュール', fn () => (new CookedChicken(new ItemIdentifier(VanillaItems::COOKED_CHICKEN()->getId(), 0), '犬用チュール')));
 		ItemFactory::getInstance()->register(new CookedSalmon(new ItemIdentifier(VanillaItems::COOKED_SALMON()->getId(), 0), 'かき氷'), true);
-		StringToItemParser::getInstance()->register("かき氷", fn () => (new CookedSalmon(new ItemIdentifier(VanillaItems::COOKED_SALMON()->getId(), 0), "かき氷")));
+		StringToItemParser::getInstance()->register('かき氷', fn () => (new CookedSalmon(new ItemIdentifier(VanillaItems::COOKED_SALMON()->getId(), 0), 'かき氷')));
 		ItemFactory::getInstance()->register(new CookedFish(new ItemIdentifier(VanillaItems::COOKED_FISH()->getId(), 0), 'ラムネ'), true);
-		StringToItemParser::getInstance()->register("ラムネ", fn () => (new CookedFish(new ItemIdentifier(VanillaItems::COOKED_FISH()->getId(), 0), "ラムネ")));
+		StringToItemParser::getInstance()->register('ラムネ', fn () => (new CookedFish(new ItemIdentifier(VanillaItems::COOKED_FISH()->getId(), 0), 'ラムネ')));
 		ItemFactory::getInstance()->register(new CookedPorkchop(new ItemIdentifier(VanillaItems::COOKED_PORKCHOP()->getId(), 0), 'アメリカンドック'), true);
-		StringToItemParser::getInstance()->register("アメリカンドック", fn () => (new CookedPorkchop(new ItemIdentifier(VanillaItems::COOKED_PORKCHOP()->getId(), 0), "アメリカンドック")));
+		StringToItemParser::getInstance()->register('アメリカンドック', fn () => (new CookedPorkchop(new ItemIdentifier(VanillaItems::COOKED_PORKCHOP()->getId(), 0), 'アメリカンドック')));
 		ItemFactory::getInstance()->register(new CookedRabbit(new ItemIdentifier(VanillaItems::COOKED_RABBIT()->getId(), 0), 'モンスター'), true);
-		StringToItemParser::getInstance()->register("モンスター", fn () => (new CookedRabbit(new ItemIdentifier(VanillaItems::COOKED_RABBIT()->getId(), 0), "モンスター")));
+		StringToItemParser::getInstance()->register('モンスター', fn () => (new CookedRabbit(new ItemIdentifier(VanillaItems::COOKED_RABBIT()->getId(), 0), 'モンスター')));
 	}
 
 	public static function getInstance() : Main {

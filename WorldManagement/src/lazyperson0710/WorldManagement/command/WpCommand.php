@@ -12,12 +12,12 @@ use pocketmine\player\Player;
 class WpCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("wp", "ワープフォームを開きます");
+		parent::__construct('wp', 'ワープフォームを開きます');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		SendForm::Send($sender, (new WarpForm($sender)));

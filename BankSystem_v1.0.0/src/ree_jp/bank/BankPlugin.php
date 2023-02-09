@@ -23,7 +23,7 @@ class BankPlugin extends PluginBase {
 
 	public function onEnable() : void {
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
-		$this->getServer()->getCommandMap()->register("bank", new BankCommand());
+		$this->getServer()->getCommandMap()->register('bank', new BankCommand());
 		parent::onEnable();
 	}
 }

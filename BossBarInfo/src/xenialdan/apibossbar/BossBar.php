@@ -29,8 +29,8 @@ class BossBar {
 	protected EntityMetadataCollection $propertyManager;
 	/** @var Player[] */
 	private array $players = [];
-	private string $title = "";
-	private string $subTitle = "";
+	private string $title = '';
+	private string $subTitle = '';
 	private AttributeMap $attributeMap;
 
 	/**
@@ -105,6 +105,7 @@ class BossBar {
 	}
 
 	private function addDefaults(BossEventPacket $pk) : BossEventPacket {
+		var_dump('Boss');
 		$pk->title = $this->getFullTitle();
 		$pk->healthPercent = $this->getPercentage();
 		$pk->darkenScreen = false;
@@ -137,7 +138,7 @@ class BossBar {
 	 */
 	public function removePlayer(Player $player) : BossBar {
 		if (!isset($this->players[$player->getId()])) {
-			GlobalLogger::get()->debug("Removed player that was not added to the boss bar (" . $this . ")");
+			GlobalLogger::get()->debug('Removed player that was not added to the boss bar (' . $this . ')');
 			return $this;
 		}
 		$this->sendRemoveBossPacket([$player]);
@@ -183,7 +184,7 @@ class BossBar {
 	/**
 	 * Text above the bar. Can be empty. Should be single-line
 	 */
-	public function setTitle(string $title = "") : BossBar {
+	public function setTitle(string $title = '') : BossBar {
 		$this->title = $title;
 		$this->sendBossTextPacket($this->getPlayers());
 		return $this;
@@ -210,7 +211,7 @@ class BossBar {
 	/**
 	 * Optional text below the bar. Can be empty
 	 */
-	public function setSubTitle(string $subTitle = "") : BossBar {
+	public function setSubTitle(string $subTitle = '') : BossBar {
 		$this->subTitle = $subTitle;
 		#$this->sendEntityDataPacket($this->getPlayers());
 		$this->sendBossTextPacket($this->getPlayers());

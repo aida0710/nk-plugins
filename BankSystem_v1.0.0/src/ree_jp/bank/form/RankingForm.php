@@ -19,10 +19,10 @@ class RankingForm implements Form {
 	 * @inheritDoc
 	 */
 	public function jsonSerialize() {
-		$string = "";
+		$string = '';
 		$rank = 1;
 		foreach (BankHelper::getInstance()->getBankDate() as $bank) {
-			$string = $string . "§r[" . $rank . "位] §r" . $bank["bank"] . "§r | §r" . $bank["money"] . "円§r | §r作成者" . $bank["leader"] . "\n";
+			$string = $string . '§r[' . $rank . '位] §r' . $bank['bank'] . '§r | §r' . $bank['money'] . '円§r | §r作成者' . $bank['leader'] . "\n";
 			$rank++;
 		}
 		return [

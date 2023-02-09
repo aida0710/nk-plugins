@@ -60,11 +60,11 @@ class AsyncLogDataWriteTask extends AsyncTask {
 	public function onCompletion() : void {
 		if (!empty($this->error)) {
 			foreach ($this->error as $error) {
-				Main::getInstance()->getLogger()->error("BlockLogger -> Log data save error: " . $error);
+				Main::getInstance()->getLogger()->error('BlockLogger -> Log data save error: ' . $error);
 			}
 		}
 		$totalTime = microtime(true) - $this->time;
-		$totalTime = sprintf("%.7f", $totalTime);
+		$totalTime = sprintf('%.7f', $totalTime);
 		//echo "合計出力時間 : {$totalTime}\n";
 		//echo "保存は完了致しました\n";
 	}

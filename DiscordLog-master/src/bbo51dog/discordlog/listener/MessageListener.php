@@ -27,7 +27,7 @@ class MessageListener implements Listener {
 		$name = $event->getPlayer()->getName();
 		$time = Main::getTime();
 		$message = $event->getMessage();
-		$s = str_replace(["%time", "%player", "%message"], [$time, $name, $message], Main::MESSAGE);
+		$s = str_replace(['%time', '%player', '%message'], [$time, $name, $message], Main::MESSAGE);
 		$webhook = Webhook::create($this->url);
 		$content = new Content();
 		$content->setText($s);

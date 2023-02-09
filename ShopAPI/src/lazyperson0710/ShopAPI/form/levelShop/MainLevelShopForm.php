@@ -31,19 +31,19 @@ class MainLevelShopForm extends SimpleForm {
 			LevelShopAPI::RestrictionLevel_Shop7 => new Shop7Form(),
 		];
 		$this
-			->setTitle("Level Shop")
+			->setTitle('Level Shop')
 			->setText("見たいコンテンツを選択してください\n{$error}");
 		foreach ($levelShopList as $restrictionLevel => $levelShop) {
 			$content = match ($levelShop::class) {
 				OtherShopFunctionSelectForm::class => 'Other - 一括売却 & 検索',
-				Shop1Form::class => "Level Shop - 1",
-				Shop2Form::class => "Level Shop - 2",
-				Shop3Form::class => "Level Shop - 3",
-				Shop4Form::class => "Level Shop - 4",
-				Shop5Form::class => "Level Shop - 5",
-				Shop6Form::class => "Level Shop - 6",
-				Shop7Form::class => "Level Shop - 7",
-				default => "Unknown",
+				Shop1Form::class => 'Level Shop - 1',
+				Shop2Form::class => 'Level Shop - 2',
+				Shop3Form::class => 'Level Shop - 3',
+				Shop4Form::class => 'Level Shop - 4',
+				Shop5Form::class => 'Level Shop - 5',
+				Shop6Form::class => 'Level Shop - 6',
+				Shop7Form::class => 'Level Shop - 7',
+				default => 'Unknown',
 			};
 			if (MiningLevelAPI::getInstance()->getLevel($player) >= $restrictionLevel) {
 				$restrictionLevelMessage = "§a解放済み / 要求レベル -> lv.{$restrictionLevel}";

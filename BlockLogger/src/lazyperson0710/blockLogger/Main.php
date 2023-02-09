@@ -15,7 +15,7 @@ class Main extends PluginBase {
 
 	public function onEnable() : void {
 		self::$Main = $this;
-		$this->saveResource("log.db");
+		$this->saveResource('log.db');
 		$this->getServer()->getPluginManager()->registerEvents(new PlayerEvent(), $this);
 		$this->getScheduler()->scheduleRepeatingTask(new LogDataSaveTask(), 20 * 60);
 		$this->log = new DataBase($this->getDataFolder());

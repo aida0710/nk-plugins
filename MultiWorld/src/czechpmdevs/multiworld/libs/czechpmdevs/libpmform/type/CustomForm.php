@@ -24,40 +24,40 @@ class CustomForm extends Form {
 
 	public function __construct(string $title, bool $ignoreInvalidResponse = false) {
 		parent::__construct(Form::FORM_TYPE_CUSTOM, $ignoreInvalidResponse);
-		$this->data["title"] = $title;
-		$this->data["content"] = [];
+		$this->data['title'] = $title;
+		$this->data['content'] = [];
 	}
 
 	/**
 	 * Adds text input to the custom form
 	 */
 	public function addInput(string $text, ?string $defaultText = null, ?string $placeholder = null) : void {
-		$input = ["type" => "input", "text" => $text];
+		$input = ['type' => 'input', 'text' => $text];
 		if ($defaultText !== null) {
-			$input["default"] = $defaultText;
+			$input['default'] = $defaultText;
 		}
 		if ($placeholder !== null) {
-			$input["placeholder"] = $placeholder;
+			$input['placeholder'] = $placeholder;
 		}
-		$this->data["content"][] = $input;
+		$this->data['content'][] = $input;
 	}
 
 	/**
 	 * Adds label (text) to the custom form
 	 */
 	public function addLabel(string $text) : void {
-		$this->data["content"][] = ["type" => "label", "text" => $text];
+		$this->data['content'][] = ['type' => 'label', 'text' => $text];
 	}
 
 	/**
 	 * Adds toggle (switch) to the custom form
 	 */
 	public function addToggle(string $text, ?bool $defaultValue = null) : void {
-		$toggle = ["type" => "toggle", "text" => $text];
+		$toggle = ['type' => 'toggle', 'text' => $text];
 		if ($defaultValue !== null) {
-			$toggle["default"] = $defaultValue;
+			$toggle['default'] = $defaultValue;
 		}
-		$this->data["content"][] = $toggle;
+		$this->data['content'][] = $toggle;
 	}
 
 	/**
@@ -66,10 +66,10 @@ class CustomForm extends Form {
 	 * @param string[] $options
 	 */
 	public function addDropdown(string $text, array $options, ?int $defaultOption = null) : void {
-		$dropdown = ["type" => "dropdown", "text" => $text, "options" => $options];
+		$dropdown = ['type' => 'dropdown', 'text' => $text, 'options' => $options];
 		if ($defaultOption !== null) {
-			$dropdown["default"] = $defaultOption;
+			$dropdown['default'] = $defaultOption;
 		}
-		$this->data["content"][] = $dropdown;
+		$this->data['content'][] = $dropdown;
 	}
 }

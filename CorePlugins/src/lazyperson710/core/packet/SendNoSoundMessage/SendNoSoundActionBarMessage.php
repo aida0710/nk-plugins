@@ -14,6 +14,6 @@ class SendNoSoundActionBarMessage {
 		} else {
 			$type = TextFormat::RED;
 		}
-		$player->sendActionBarMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+		$player->sendActionBarMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . ' >> ' . $type . $message);
 	}
 }

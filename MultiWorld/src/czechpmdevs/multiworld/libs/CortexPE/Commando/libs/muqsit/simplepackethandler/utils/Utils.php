@@ -43,7 +43,7 @@ final class Utils {
 				return $parsed_params;
 			}
 		}
-		throw new InvalidArgumentException("Closure must satisfy signature (" . implode(", ", $params) . ") : {$return_type}");
+		throw new InvalidArgumentException('Closure must satisfy signature (' . implode(', ', $params) . ") : {$return_type}");
 	}
 
 	/**

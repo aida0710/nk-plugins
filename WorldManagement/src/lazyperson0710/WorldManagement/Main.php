@@ -34,8 +34,8 @@ class Main extends PluginBase {
 	public const TELEPORT_INTERVAL = 15;
 
 	protected function onEnable() : void {
-		foreach (scandir("worlds/") as $value) {
-			if (is_dir("worlds/" . $value) && ($value !== "." && $value !== "..")) {
+		foreach (scandir('worlds/') as $value) {
+			if (is_dir('worlds/' . $value) && ($value !== '.' && $value !== '..')) {
 				Server::getInstance()->getWorldManager()->loadWorld($value, true);
 			}
 		}
@@ -48,8 +48,8 @@ class Main extends PluginBase {
 		$this->getServer()->getPluginManager()->registerEvents(new WorldProtect(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new YachimataCityWorldProtect(), $this);
 		$this->getScheduler()->scheduleDelayedTask(new WorldTimeScheduler(), 60);
-		BlockFactory::getInstance()->register(new FarmlandBlock(new BlockIdentifier(VanillaBlocks::FARMLAND()->getId(), 0), "Farmland", new BlockBreakInfo(0.6, BlockToolType::SHOVEL)), true);
-		$this->getServer()->getCommandMap()->registerAll("worldManagement", [
+		BlockFactory::getInstance()->register(new FarmlandBlock(new BlockIdentifier(VanillaBlocks::FARMLAND()->getId(), 0), 'Farmland', new BlockBreakInfo(0.6, BlockToolType::SHOVEL)), true);
+		$this->getServer()->getCommandMap()->registerAll('worldManagement', [
 			new WpCommand(),
 		]);
 		$worlds = [];

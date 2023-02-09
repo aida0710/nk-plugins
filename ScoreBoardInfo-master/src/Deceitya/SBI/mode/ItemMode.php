@@ -26,21 +26,21 @@ class ItemMode implements Mode {
 	public function getLines(Player $player) : ?array {
 		$item = $player->getInventory()->getItemInHand();
 		return [
-			"所持金 - " . number_format($this->EconomyAPI->myMoney($player)) . "円",
-			"チケット - " . number_format(TicketAPI::getInstance()->checkData($player)) . "枚",
+			'所持金 - ' . number_format($this->EconomyAPI->myMoney($player)) . '円',
+			'チケット - ' . number_format(TicketAPI::getInstance()->checkData($player)) . '枚',
 			"ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
-			"オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
-			"  ",
+			'オンライン - ' . count(Server::getInstance()->getOnlinePlayers()) . '/' . Server::getInstance()->getMaxPlayers(),
+			'  ',
 			"アイテムID - {$item->getId()}:{$item->getMeta()}/{$item->getCount()}",
 			"ItemName - {$item->getName()}",
 			"VanillaName - {$item->getVanillaName()}",
 			"CustomName - {$item->getCustomName()}",
 			"応答速度 - {$player->getNetworkSession()->getPing()}ms",
-			" ",
-			"サーバー再起動 - " . (int) ($this->ServerStopper->getCurrent() / 60) . "分" . ($this->ServerStopper->getCurrent() % 60) . "秒",
-			"経験値オーブ削除 - " . (int) (Main::getInstance()->entityRemoveTimeLeft / 60) . "分" . (Main::getInstance()->entityRemoveTimeLeft % 60) . "秒",
-			"",
-			TextFormat::YELLOW . "nkserver.net",
+			' ',
+			'サーバー再起動 - ' . (int) ($this->ServerStopper->getCurrent() / 60) . '分' . ($this->ServerStopper->getCurrent() % 60) . '秒',
+			'経験値オーブ削除 - ' . (int) (Main::getInstance()->entityRemoveTimeLeft / 60) . '分' . (Main::getInstance()->entityRemoveTimeLeft % 60) . '秒',
+			'',
+			TextFormat::YELLOW . 'nkserver.net',
 		];
 	}
 
@@ -49,6 +49,6 @@ class ItemMode implements Mode {
 	}
 
 	public function getName() : string {
-		return "ノーマル+アイテム名表記有り";
+		return 'ノーマル+アイテム名表記有り';
 	}
 }

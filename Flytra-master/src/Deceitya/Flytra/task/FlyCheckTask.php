@@ -45,14 +45,14 @@ class FlyCheckTask extends Task {
 			}
 			$player = Server::getInstance()->getPlayerExact($playerName);
 			Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
-			if (self::$flyTask[$player->getName()]["Flag"] === false) {
+			if (self::$flyTask[$player->getName()]['Flag'] === false) {
 				$this->reduceMoney($player);
 				if ($this->exists($player) === false) return;
-				self::$flyTask[$player->getName()]["Flag"] = true;
+				self::$flyTask[$player->getName()]['Flag'] = true;
 				EconomyAPI::getInstance()->reduceMoney($player->getName(), 1500);
-				SendNoSoundTip::Send($player, "お金を1500円消費しました", "FlyTask", true);
+				SendNoSoundTip::Send($player, 'お金を1500円消費しました', 'FlyTask', true);
 			}
-			if ($list["Mode"] === "limited") {
+			if ($list['Mode'] === 'limited') {
 				$this->limited($player);
 			} else {
 				$this->unLimited($player);
@@ -64,7 +64,7 @@ class FlyCheckTask extends Task {
 		if (EconomyAPI::getInstance()->myMoney($player->getName()) < 1500) {
 			unset(self::$flyTask[$player->getName()]);
 			Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
-			SendMessage::Send($player, "お金が足りないためfly機能が自動的に停止しました", "FlyTask", false);
+			SendMessage::Send($player, 'お金が足りないためfly機能が自動的に停止しました', 'FlyTask', false);
 		}
 	}
 
@@ -73,55 +73,55 @@ class FlyCheckTask extends Task {
 	}
 
 	public function limited(Player $player) {
-		--self::$flyTask[$player->getName()]["TimeLeft"];
-		switch (self::$flyTask[$player->getName()]["TimeLeft"]) {
+		--self::$flyTask[$player->getName()]['TimeLeft'];
+		switch (self::$flyTask[$player->getName()]['TimeLeft']) {
 			case 5:
 			case 3:
 			case 2:
 			case 1:
-				SendMessage::Send($player, "FlyTask終了まで残り" . self::$flyTask[$player->getName()]["TimeLeft"] . "秒です", "FlyTask", false);
+				SendMessage::Send($player, 'FlyTask終了まで残り' . self::$flyTask[$player->getName()]['TimeLeft'] . '秒です', 'FlyTask', false);
 				$this->checkTimeLeft($player);
 				break;
 			case 0:
 				unset(self::$flyTask[$player->getName()]);
 				Main::getInstance()->checkFly($player, $player->getWorld(), $player->getArmorInventory()->getChestplate());
-				SendNoSoundActionBarMessage::Send($player, "FlyTaskが正常に処理されました", "FlyTask", true);
-				SendMessage::Send($player, "FlyTaskが終了しました", "FlyTask", true);
+				SendNoSoundActionBarMessage::Send($player, 'FlyTaskが正常に処理されました', 'FlyTask', true);
+				SendMessage::Send($player, 'FlyTaskが終了しました', 'FlyTask', true);
 				return;
 			default:
 				$this->checkTimeLeft($player);
 		}
-		if (self::$flyTask[$player->getName()]["TimeLeft"] % 60 === 0) {
+		if (self::$flyTask[$player->getName()]['TimeLeft'] % 60 === 0) {
 			$this->reduceMoney($player);
 			if ($this->exists($player) === false) return;
 		}
 	}
 
 	public function checkTimeLeft(Player $player) {
-		$minutes = self::$flyTask[$player->getName()]["TimeLeft"] / 60;
+		$minutes = self::$flyTask[$player->getName()]['TimeLeft'] / 60;
 		$minutes = floor($minutes);
-		$seconds = self::$flyTask[$player->getName()]["TimeLeft"] % 60;
+		$seconds = self::$flyTask[$player->getName()]['TimeLeft'] % 60;
 		if (in_array($player->getWorld()->getFolderName(), Main::$worlds, true)) {
-			SendNoSoundActionBarMessage::Send($player, "このワールドでは飛行を使用できません\n残り時間 - {$minutes}分{$seconds}秒", "FlyTask", false);
+			SendNoSoundActionBarMessage::Send($player, "このワールドでは飛行を使用できません\n残り時間 - {$minutes}分{$seconds}秒", 'FlyTask', false);
 		} else {
-			SendNoSoundActionBarMessage::Send($player, "残り時間 - {$minutes}分{$seconds}秒", "FlyTask", true);
+			SendNoSoundActionBarMessage::Send($player, "残り時間 - {$minutes}分{$seconds}秒", 'FlyTask', true);
 		}
 	}
 
 	public function unLimited(Player $player) {
-		++self::$flyTask[$player->getName()]["TimeLeft"];
-		if (self::$flyTask[$player->getName()]["TimeLeft"] === 60) {
-			self::$flyTask[$player->getName()]["TimeLeft"] = 0;
+		++self::$flyTask[$player->getName()]['TimeLeft'];
+		if (self::$flyTask[$player->getName()]['TimeLeft'] === 60) {
+			self::$flyTask[$player->getName()]['TimeLeft'] = 0;
 			EconomyAPI::getInstance()->reduceMoney($player->getName(), 1500);
 			if ($this->exists($player) === false) return;
-			SendNoSoundActionBarMessage::Send($player, "FlyTaskが正常に処理されました", "FlyTask", true);
-			SendNoSoundTip::Send($player, "お金を1500円消費しました", "FlyTask", true);
+			SendNoSoundActionBarMessage::Send($player, 'FlyTaskが正常に処理されました', 'FlyTask', true);
+			SendNoSoundTip::Send($player, 'お金を1500円消費しました', 'FlyTask', true);
 			$this->reduceMoney($player);
 			if ($this->exists($player) === false) return;
 		} elseif (in_array($player->getWorld()->getFolderName(), Main::$worlds, true)) {
-			SendNoSoundActionBarMessage::Send($player, "このワールドでは飛行を使用できません\n次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]["TimeLeft"] . "秒", "FlyTask", false);
+			SendNoSoundActionBarMessage::Send($player, "このワールドでは飛行を使用できません\n次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]['TimeLeft'] . '秒', 'FlyTask', false);
 		} else {
-			SendNoSoundActionBarMessage::Send($player, "次の料金発生まで - " . 60 - self::$flyTask[$player->getName()]["TimeLeft"] . "秒", "FlyTask", true);
+			SendNoSoundActionBarMessage::Send($player, '次の料金発生まで - ' . 60 - self::$flyTask[$player->getName()]['TimeLeft'] . '秒', 'FlyTask', true);
 		}
 	}
 }

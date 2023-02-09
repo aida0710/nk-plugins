@@ -33,9 +33,9 @@ class ShareSelectForm implements Form {
 		return [
 			'type' => 'modal',
 			'title' => 'BankSystem',
-			'content' => "選択してください",
-			"button1" => "共有する",
-			"button2" => "共有を解除する",
+			'content' => '選択してください',
+			'button1' => '共有する',
+			'button2' => '共有を解除する',
 		];
 	}
 }

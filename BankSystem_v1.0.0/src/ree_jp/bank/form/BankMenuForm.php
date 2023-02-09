@@ -39,7 +39,7 @@ class BankMenuForm implements Form {
 				SendForm::Send($player, (new LogForm($this->bank)));
 				break;
 			default:
-				SendMessage::Send($player, "エラーが発生しました", "Bank", false);
+				SendMessage::Send($player, 'エラーが発生しました', 'Bank', false);
 		}
 	}
 
@@ -50,19 +50,19 @@ class BankMenuForm implements Form {
 		return [
 			'type' => 'form',
 			'title' => 'BankSystem',
-			'content' => "",
+			'content' => '',
 			'buttons' => [
 				[
-					'text' => "振り込み",
+					'text' => '振り込み',
 				],
 				[
-					'text' => "引き出し",
+					'text' => '引き出し',
 				],
 				[
-					'text' => "共有",
+					'text' => '共有',
 				],
 				[
-					'text' => "記録",
+					'text' => '記録',
 				],
 			],
 		];

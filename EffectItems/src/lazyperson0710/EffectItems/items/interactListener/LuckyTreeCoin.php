@@ -35,7 +35,7 @@ class LuckyTreeCoin {
 		} else {
 			$player->dropItem($addItem);
 		}
-		SendNoSoundMessage::Send($player, "{$addItem->getName()}の苗が手に入りました！！", "LuckyTreeSaplingCoin", true);
+		SendNoSoundMessage::Send($player, "{$addItem->getName()}の苗が手に入りました！！", 'LuckyTreeSaplingCoin', true);
 		SoundPacket::Send($player, 'item.trident.return');
 	}
 }

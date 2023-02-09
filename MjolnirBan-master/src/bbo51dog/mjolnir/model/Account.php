@@ -24,7 +24,7 @@ class Account {
 	}
 
 	public static function createFromPlayer(Player $player) : self {
-		return new Account($player->getName(), $player->getNetworkSession()->getIp(), $player->getPlayerInfo()->getExtraData()["ClientRandomId"], $player->getXuid());
+		return new Account($player->getName(), $player->getNetworkSession()->getIp(), $player->getPlayerInfo()->getExtraData()['ClientRandomId'], $player->getXuid());
 	}
 
 	public function getName() : string {

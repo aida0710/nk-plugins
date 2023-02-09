@@ -30,11 +30,11 @@ class SaleForm implements Form {
 	public function handleResponse(Player $player, $data) : void {
 		$itemName = $this->api->getItemName($this->item->getItem()->getId(), $this->item->getItem()->getMeta());
 		if ($data === null || $data[1] === null) {
-			SendMessage::Send($player, $itemName . "の売却がキャンセルされました", "LevelShop", true, 'dig.chain');
+			SendMessage::Send($player, $itemName . 'の売却がキャンセルされました', 'LevelShop', true, 'dig.chain');
 			return;
 		}
 		if ($data[1] === '' || !$this->isInteger($data[1]) || (int) floor($data[1]) <= 0) {
-			SendMessage::Send($player, "§c1以上の整数を入力してください", "LevelShop", true, 'dig.chain');
+			SendMessage::Send($player, '§c1以上の整数を入力してください', 'LevelShop', true, 'dig.chain');
 			return;
 		}
 		$count = (int) floor($data[1]);
@@ -59,7 +59,7 @@ class SaleForm implements Form {
 		if ($data[2] === true && $this->item->getStorage() !== 0) {
 			if ($count <= $this->item->getStorage()) {
 				$resultSalePrice = number_format($this->buyItemFromStackStorage($player, $this->item->getItem(), $count));
-				SendMessage::Send($player, "仮想ストレージから" . $count . "個アイテムが売却され、所持金が{$resultSalePrice}円増えました", "LevelShop", true, 'break.amethyst_block');
+				SendMessage::Send($player, '仮想ストレージから' . $count . "個アイテムが売却され、所持金が{$resultSalePrice}円増えました", 'LevelShop', true, 'break.amethyst_block');
 				return;
 			}
 			$storageItemCount = $count - $this->item->getStorage();
@@ -67,10 +67,10 @@ class SaleForm implements Form {
 				$storageResultSalePrice = $this->buyItemFromStackStorage($player, $this->item->getItem(), $this->item->getStorage());
 				$inventoryResultSalePrice = $this->buyItemFromInventory($player, $this->item->getItem(), $storageItemCount);
 				$resultSalePrice = number_format($storageResultSalePrice + $inventoryResultSalePrice);
-				SendMessage::Send($player, "仮想ストレージから" . number_format($this->item->getStorage()) . "個とインベントリから" . number_format($storageItemCount) . "個、計" . number_format($this->item->getStorage() + $storageItemCount) . "アイテムが売却され、所持金が{$resultSalePrice}円増えました", "LevelShop", true, 'break.amethyst_block');
+				SendMessage::Send($player, '仮想ストレージから' . number_format($this->item->getStorage()) . '個とインベントリから' . number_format($storageItemCount) . '個、計' . number_format($this->item->getStorage() + $storageItemCount) . "アイテムが売却され、所持金が{$resultSalePrice}円増えました", 'LevelShop', true, 'break.amethyst_block');
 				return;
 			}
-			SendMessage::Send($player, "アイテムがない、もしくは足りません", "LevelShop", false, 'dig.chain');
+			SendMessage::Send($player, 'アイテムがない、もしくは足りません', 'LevelShop', false, 'dig.chain');
 			return;
 		}
 		if (!$player->getInventory()->contains($this->item->getItem())) {
@@ -78,21 +78,21 @@ class SaleForm implements Form {
 			if ($storageItemCount <= $this->item->getStorage()) {
 				$storageResult = $this->buyItemFromStackStorage($player, $this->item->getItem(), $storageItemCount); //$this->price * $storageItemCount;
 				if ($inventoryItemCount === 0) {
-					SendMessage::Send($player, "仮想ストレージから" . number_format($storageItemCount) . "個アイテムが売却され、所持金が " . number_format($storageResult) . "円増えました", "LevelShop", true, 'break.amethyst_block');
+					SendMessage::Send($player, '仮想ストレージから' . number_format($storageItemCount) . '個アイテムが売却され、所持金が ' . number_format($storageResult) . '円増えました', 'LevelShop', true, 'break.amethyst_block');
 					return;
 				}
 				$inventoryResult = $this->buyItemFromInventory($player, $this->item->getItem(), $inventoryItemCount);
 				$result = $inventoryResult + $storageResult;
-				SendMessage::Send($player, "仮想ストレージから" . number_format($storageItemCount) . "個とインベントリから" . number_format($inventoryItemCount) . "個、計" . number_format($storageItemCount + $inventoryItemCount) . "アイテムが売却され、所持金が" . number_format($result) . "円増えました", "LevelShop", true, 'break.amethyst_block');
+				SendMessage::Send($player, '仮想ストレージから' . number_format($storageItemCount) . '個とインベントリから' . number_format($inventoryItemCount) . '個、計' . number_format($storageItemCount + $inventoryItemCount) . 'アイテムが売却され、所持金が' . number_format($result) . '円増えました', 'LevelShop', true, 'break.amethyst_block');
 				return;
 			}
-			SendMessage::Send($player, "アイテムがない、もしくは足りません", "LevelShop", false, 'dig.chain');
+			SendMessage::Send($player, 'アイテムがない、もしくは足りません', 'LevelShop', false, 'dig.chain');
 			return;
 		}
 		$this->buyItemFromInventory($player, $this->item->getItem(), $count);
 		$result = $this->item->getPrice() * $count;
-		SendMessage::Send($player, "アイテムが" . number_format($count) . "個売却され、所持金が" . number_format($result) . "円増えました", "LevelShop", true, 'break.amethyst_block');
-		(new LevelShopClosingEvent($player, $this->item, "sell"))->call();
+		SendMessage::Send($player, 'アイテムが' . number_format($count) . '個売却され、所持金が' . number_format($result) . '円増えました', 'LevelShop', true, 'break.amethyst_block');
+		(new LevelShopClosingEvent($player, $this->item, 'sell'))->call();
 	}
 
 	public function countItem(Player $player, Item $targetItem) : int {
@@ -129,7 +129,7 @@ class SaleForm implements Form {
 			'content' => [
 				[
 					'type' => 'label',
-					'text' => "売却するアイテム/" . LevelShopAPI::getInstance()->getItemName($this->item->getItem()->getId(), $this->item->getItem()->getMeta()) . "\n1つあたりの値段/" . number_format($this->item->getPrice()) . "\n仮想ストレージにある量/" . number_format($this->item->getStorage()) . "\nインベントリにある数/" . number_format($this->item->getCount()) . "\n現在の所持金/" . number_format($this->item->getMyMoney()),
+					'text' => '売却するアイテム/' . LevelShopAPI::getInstance()->getItemName($this->item->getItem()->getId(), $this->item->getItem()->getMeta()) . "\n1つあたりの値段/" . number_format($this->item->getPrice()) . "\n仮想ストレージにある量/" . number_format($this->item->getStorage()) . "\nインベントリにある数/" . number_format($this->item->getCount()) . "\n現在の所持金/" . number_format($this->item->getMyMoney()),
 				],
 				[
 					'type' => 'input',
@@ -139,7 +139,7 @@ class SaleForm implements Form {
 				],
 				[
 					'type' => 'toggle',
-					'text' => "仮想ストレージ優先",
+					'text' => '仮想ストレージ優先',
 				],
 			],
 		];

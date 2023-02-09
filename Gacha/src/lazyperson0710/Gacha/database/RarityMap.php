@@ -5,12 +5,12 @@ namespace lazyperson0710\Gacha\database;
 
 class RarityMap {
 
-	public const C = "C";
-	public const UC = "UC";
-	public const R = "R";
-	public const SR = "SR";
-	public const SSR = "SSR";
-	public const L = "L";
+	public const C = 'C';
+	public const UC = 'UC';
+	public const R = 'R';
+	public const SR = 'SR';
+	public const SSR = 'SSR';
+	public const L = 'L';
 
 	public const AllRarity = [
 		self::C,

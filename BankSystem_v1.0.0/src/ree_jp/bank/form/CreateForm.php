@@ -25,20 +25,20 @@ class CreateForm implements Form {
 		$money = EconomyAPI::getInstance()->myMoney($player);
 		if ($money && $money >= self::MONEY) {
 			$string = $data[0];
-			$string = str_replace(["[", "]", "{", "}"], "***sqliteで使用出来ない記号です***", $string);
+			$string = str_replace(['[', ']', '{', '}'], '***sqliteで使用出来ない記号です***', $string);
 			if (!str_contains($string, '§')) {
 				if (!BankHelper::getInstance()->isExists($string)) {
 					BankHelper::getInstance()->create($string, $player->getName());
 					EconomyAPI::getInstance()->reduceMoney($player, self::MONEY);
-					SendMessage::Send($player, "銀行を作成しました", "Bank", true);
+					SendMessage::Send($player, '銀行を作成しました', 'Bank', true);
 				} else {
-					SendMessage::Send($player, "すでにその名前の銀行が存在しています", "Bank", false);
+					SendMessage::Send($player, 'すでにその名前の銀行が存在しています', 'Bank', false);
 				}
 			} else {
-				SendMessage::Send($player, "銀行名にセクションを含めることは出来ません", "Bank", false);
+				SendMessage::Send($player, '銀行名にセクションを含めることは出来ません', 'Bank', false);
 			}
 		} else {
-			SendMessage::Send($player, "お金が足りません", "Bank", false);
+			SendMessage::Send($player, 'お金が足りません', 'Bank', false);
 		}
 	}
 
@@ -51,10 +51,10 @@ class CreateForm implements Form {
 			'title' => 'BankSystem',
 			'content' => [
 				[
-					"type" => "input",
-					"text" => "作成コストは1000円です",
-					"placeholder" => "なまけもの銀行",
-					"default" => "",
+					'type' => 'input',
+					'text' => '作成コストは1000円です',
+					'placeholder' => 'なまけもの銀行',
+					'default' => '',
 				],
 			],
 		];

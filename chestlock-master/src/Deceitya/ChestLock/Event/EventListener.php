@@ -42,17 +42,17 @@ class EventListener implements Listener {
 		switch ($this->plugin->getStat($player)) {
 			case 0:
 				if (in_array($player->getWorld()->getFolderName(), $this->plugin->getEnabledWorlds(), true)) {
-					SendTip::Send($player, "このワールドではチェストをロックすることは出来ません", "Lock", false);
+					SendTip::Send($player, 'このワールドではチェストをロックすることは出来ません', 'Lock', false);
 					return;
 				} else {
 					$lock = $this->lockChest($chest, $player);
-					SendTip::Send($player, "{$lock}個のチェストをロックしました", "Lock", true);
+					SendTip::Send($player, "{$lock}個のチェストをロックしました", 'Lock', true);
 					$event->cancel();
 					break;
 				}
 			case 1:
 				$unlock = $this->unlockChest($chest, $player);
-				SendTip::Send($player, "{$unlock}個のチェストのロックを解除しました", "Lock", true);
+				SendTip::Send($player, "{$unlock}個のチェストのロックを解除しました", 'Lock', true);
 				$event->cancel();
 				break;
 			case 2:
@@ -60,16 +60,16 @@ class EventListener implements Listener {
 				if (count($info) > 0) {
 					$date = date('Y年m月d日 H時i分s秒', $info['time']);
 					$pos = explode(':', $info['pos']);
-					SendTip::Send($player, "player | {$info['player']}\nlock | {$date}\n座標 | {$pos[0]}, {$pos[1]}, {$pos[2]}, {$pos[3]}", "", true);
+					SendTip::Send($player, "player | {$info['player']}\nlock | {$date}\n座標 | {$pos[0]}, {$pos[1]}, {$pos[2]}, {$pos[3]}", '', true);
 				} else {
-					SendTip::Send($player, "このチェストはロックされていません", "Lock", false);
+					SendTip::Send($player, 'このチェストはロックされていません', 'Lock', false);
 				}
 				$event->cancel();
 				break;
 			default:
 				$data = $this->plugin->getData($chest->getPosition());
 				if (count($data) > 0 && $data['player'] !== strtolower($player->getName())) {
-					SendTip::Send($player, "このチェストは{$data['player']}がロックしています", "Lock", false);
+					SendTip::Send($player, "このチェストは{$data['player']}がロックしています", 'Lock', false);
 					if (!Server::getInstance()->isOp($player->getName())) {
 						$event->cancel();
 					}
@@ -129,10 +129,10 @@ class EventListener implements Listener {
 		}
 		if ($data['player'] === strtolower($player->getName())) {
 			$this->plugin->unlockChest($chest->getPosition());
-			SendTip::Send($player, "1個のチェストのロックを解除しました", "Lock", true);
+			SendTip::Send($player, '1個のチェストのロックを解除しました', 'Lock', true);
 		} else {
 			$event->cancel();
-			SendTip::Send($player, "このチェストは{$data['player']}がロックしています", "Lock", false);
+			SendTip::Send($player, "このチェストは{$data['player']}がロックしています", 'Lock', false);
 		}
 	}
 
@@ -150,10 +150,10 @@ class EventListener implements Listener {
 			}
 			if ($data['player'] === $name) {
 				$this->plugin->lockChest($block->getPosition(), $player);
-				SendTip::Send($player, "1個のチェストをロックしました", "Lock", true);
+				SendTip::Send($player, '1個のチェストをロックしました', 'Lock', true);
 			} else {
 				$event->cancel();
-				SendTip::Send($player, "隣のチェストは{$data['player']}がロックしています", "Lock", true);
+				SendTip::Send($player, "隣のチェストは{$data['player']}がロックしています", 'Lock', true);
 			}
 		};
 		$world = $block->getPosition()->getWorld();

@@ -32,9 +32,9 @@ use pocketmine\Server;
 class TeleportSubCommand extends BaseSubCommand {
 
 	protected function prepare() : void {
-		$this->registerArgument(0, new RawStringArgument("world"));
-		$this->registerArgument(1, new RawStringArgument("player", true));
-		$this->setPermission("multiworld.command.teleport");
+		$this->registerArgument(0, new RawStringArgument('world'));
+		$this->registerArgument(1, new RawStringArgument('player', true));
+		$this->setPermission('multiworld.command.teleport');
 	}
 
 	/**
@@ -42,30 +42,30 @@ class TeleportSubCommand extends BaseSubCommand {
 	 */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		/** @var string $world */
-		$world = $args["world"];
+		$world = $args['world'];
 		/** @var string|null $player */
-		$player = $args["player"] ?? null;
+		$player = $args['player'] ?? null;
 		$targetWorld = WorldUtils::getLoadedWorldByName($world);
 		if ($targetWorld === null) {
-			$sender->sendMessage(LanguageManager::translateMessage($sender, "teleport-levelnotexists", [$world]));
+			$sender->sendMessage(LanguageManager::translateMessage($sender, 'teleport-levelnotexists', [$world]));
 			return;
 		}
 		if ($player === null) {
 			if (!$sender instanceof Player) {
-				$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "teleport-usage"));
+				$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'teleport-usage'));
 				return;
 			}
 			$sender->teleport($targetWorld->getSpawnLocation());
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "teleport-done-1", [$targetWorld->getDisplayName()]));
+			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'teleport-done-1', [$targetWorld->getDisplayName()]));
 			return;
 		}
 		$targetPlayer = Server::getInstance()->getPlayerByPrefix($player);
 		if ($targetPlayer === null) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "teleport-playernotexists", [$player]));
+			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'teleport-playernotexists', [$player]));
 			return;
 		}
 		$targetPlayer->teleport($targetWorld->getSafeSpawn());
-		$targetPlayer->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "teleport-done-1", [$targetWorld->getDisplayName()]));
-		$sender->sendMessage(LanguageManager::translateMessage($sender, "teleport-done-2", [$targetWorld->getDisplayName(), $targetPlayer->getName()]));
+		$targetPlayer->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'teleport-done-1', [$targetWorld->getDisplayName()]));
+		$sender->sendMessage(LanguageManager::translateMessage($sender, 'teleport-done-2', [$targetWorld->getDisplayName(), $targetPlayer->getName()]));
 	}
 }

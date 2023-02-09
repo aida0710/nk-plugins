@@ -63,7 +63,7 @@ class Webhook {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->getData()));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			"Content-Type: application/json",
+			'Content-Type: application/json',
 		]);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$result = curl_exec($ch);
@@ -91,7 +91,7 @@ class Webhook {
 	 * Change custom senders name
 	 */
 	public function setCustomName(string $name) : self {
-		$this->data["username"] = $name;
+		$this->data['username'] = $name;
 		return $this;
 	}
 
@@ -99,7 +99,7 @@ class Webhook {
 	 * Set custom senders avatar url
 	 */
 	public function setCustomAvatar(string $url) : self {
-		$this->data["avatar_url"] = $url;
+		$this->data['avatar_url'] = $url;
 		return $this;
 	}
 
@@ -107,7 +107,7 @@ class Webhook {
 	 * Enable|Disable tts message
 	 */
 	public function setTts(bool $tts = true) : self {
-		$this->data["tts"] = $tts;
+		$this->data['tts'] = $tts;
 		return $this;
 	}
 }

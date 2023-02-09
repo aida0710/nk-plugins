@@ -28,13 +28,13 @@ class TransferTicketForm extends CustomForm {
 			$names[] .= $name;
 		}
 		if (is_null($names)) {
-			$names[] .= "表示可能なプレイヤーが存在しません";
+			$names[] .= '表示可能なプレイヤーが存在しません';
 		}
-		$this->playerList = new Dropdown("プレイヤー", $names);
-		$this->label = new Label("チケットの枚数と譲渡したいプレイヤーを選択してください");
-		$this->int = new Input("譲渡したい枚数を入力してください", "int");
+		$this->playerList = new Dropdown('プレイヤー', $names);
+		$this->label = new Label('チケットの枚数と譲渡したいプレイヤーを選択してください');
+		$this->int = new Input('譲渡したい枚数を入力してください', 'int');
 		$this
-			->setTitle("Ticket")
+			->setTitle('Ticket')
 			->addElements(
 				$this->label,
 				$this->playerList,
@@ -45,24 +45,24 @@ class TransferTicketForm extends CustomForm {
 	public function handleSubmit(Player $player) : void {
 		$playerName = $this->playerList->getSelectedOption();
 		if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-			SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "Ticket", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'Ticket', false);
 			return;
 		}
 		$playerInstance = Server::getInstance()->getPlayerByPrefix($playerName);
-		if ($this->int->getValue() === "") {
-			SendMessage::Send($player, "譲渡したいTicketの枚数を入力してください", "Ticket", false);
+		if ($this->int->getValue() === '') {
+			SendMessage::Send($player, '譲渡したいTicketの枚数を入力してください', 'Ticket', false);
 			return;
 		}
 		if (is_numeric($this->int->getValue()) === false) {
-			SendMessage::Send($player, "整数のみ入力してください", "Ticket", false);
+			SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
 			return;
 		}
 		if (TicketAPI::getInstance()->reduceTicket($player, $this->int->getValue()) === false) {
-			SendMessage::Send($player, "{$playerName}のTicketの枚数が足らないかエラーが発生しました", "Ticket", false);
+			SendMessage::Send($player, "{$playerName}のTicketの枚数が足らないかエラーが発生しました", 'Ticket', false);
 			return;
 		}
 		TicketAPI::getInstance()->addTicket($playerInstance, $this->int->getValue());
-		SendMessage::Send($player, "{$playerName}さんにTicketを{$this->int->getValue()}枚譲渡しました", "Ticket", true);
-		SendMessage::Send($playerInstance, "{$player->getName()}さんからTicketを{$this->int->getValue()}枚プレゼントされました", "Ticket", true);
+		SendMessage::Send($player, "{$playerName}さんにTicketを{$this->int->getValue()}枚譲渡しました", 'Ticket', true);
+		SendMessage::Send($playerInstance, "{$player->getName()}さんからTicketを{$this->int->getValue()}枚プレゼントされました", 'Ticket', true);
 	}
 }

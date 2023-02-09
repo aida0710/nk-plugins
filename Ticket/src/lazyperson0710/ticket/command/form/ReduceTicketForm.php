@@ -25,12 +25,12 @@ class ReduceTicketForm extends CustomForm {
 			$names[] .= $name;
 		}
 		if (is_null($names)) {
-			$names[] .= "表示可能なプレイヤーが存在しません";
+			$names[] .= '表示可能なプレイヤーが存在しません';
 		}
-		$this->playerList = new Dropdown("情報を操作したいプレイヤーを選択してください", $names);
-		$this->int = new Input("Ticketを減らす数を入力", "int");
+		$this->playerList = new Dropdown('情報を操作したいプレイヤーを選択してください', $names);
+		$this->int = new Input('Ticketを減らす数を入力', 'int');
 		$this
-			->setTitle("Ticket")
+			->setTitle('Ticket')
 			->addElements(
 				$this->playerList,
 				$this->int,
@@ -40,21 +40,21 @@ class ReduceTicketForm extends CustomForm {
 	public function handleSubmit(Player $player) : void {
 		$playerName = $this->playerList->getSelectedOption();
 		if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-			SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "Ticket", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'Ticket', false);
 			return;
 		}
-		if ($this->int->getValue() === "") {
-			SendMessage::Send($player, "減算分を入力してください", "Ticket", false);
+		if ($this->int->getValue() === '') {
+			SendMessage::Send($player, '減算分を入力してください', 'Ticket', false);
 			return;
 		}
 		if (is_numeric($this->int->getValue()) === false) {
-			SendMessage::Send($player, "整数のみ入力してください", "Ticket", false);
+			SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
 			return;
 		}
 		if (TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue()) === false) {
-			SendMessage::Send($player, "{$playerName}のTicketを減らせませんでした", "Ticket", false);
+			SendMessage::Send($player, "{$playerName}のTicketを減らせませんでした", 'Ticket', false);
 		} else {
-			SendMessage::Send($player, "{$playerName}のTicketを{$this->int->getValue()}枚減らしました", "Ticket", true);
+			SendMessage::Send($player, "{$playerName}のTicketを{$this->int->getValue()}枚減らしました", 'Ticket', true);
 		}
 	}
 }

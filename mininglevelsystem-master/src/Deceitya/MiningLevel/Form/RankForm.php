@@ -13,7 +13,7 @@ class RankForm implements Form {
 	}
 
 	public function jsonSerialize() {
-		$res = "";
+		$res = '';
 		$ranking = MiningLevelAPI::getInstance()->genRanking();
 		foreach ($ranking as $data) {
 			$res .= "[{$data['rank']}位] {$data['name']}さん / {$data['level']}レベル\n";

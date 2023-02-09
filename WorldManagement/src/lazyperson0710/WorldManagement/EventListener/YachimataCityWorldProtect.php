@@ -28,7 +28,7 @@ class YachimataCityWorldProtect implements Listener {
 				VanillaBlocks::BEETROOTS()->getId(),
 			];
 			if (!in_array($event->getBlock()->getId(), $blocks, true)) {
-				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getBlock()->getName()}の破壊は許可されていません", 'Protect', false);
 				$event->cancel();
 			}
 		}
@@ -47,7 +47,7 @@ class YachimataCityWorldProtect implements Listener {
 				VanillaItems::BEETROOT_SEEDS()->getId(),
 			];
 			if (!in_array($event->getPlayer()->getInventory()->getItemInHand()->getId(), $items, true)) {
-				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の設置は許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の設置は許可されていません", 'Protect', false);
 				$event->cancel();
 			}
 		}
@@ -62,7 +62,7 @@ class YachimataCityWorldProtect implements Listener {
 				VanillaItems::BEETROOT_SEEDS()->getId(),
 			];
 			if (!in_array($event->getPlayer()->getInventory()->getItemInHand()->getId(), $items, true)) {
-				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の使用は許可されていません", "Protect", false);
+				SendTip::Send($event->getPlayer(), "現在のワールドでは{$event->getPlayer()->getInventory()->getItemInHand()->getName()}の使用は許可されていません", 'Protect', false);
 				$event->cancel();
 			}
 		}

@@ -60,7 +60,7 @@ class PacketHooker implements Listener {
 
 	public static function register(Plugin $registrant) : void {
 		if (self::$isRegistered) {
-			throw new HookAlreadyRegistered("Event listener is already registered by another plugin.");
+			throw new HookAlreadyRegistered('Event listener is already registered by another plugin.');
 		}
 		$interceptor = SimplePacketHandler::createInterceptor($registrant, EventPriority::NORMAL, false);
 		$interceptor->interceptOutgoing(function (AvailableCommandsPacket $pk, NetworkSession $target) : bool {
@@ -127,7 +127,7 @@ class PacketHooker implements Listener {
 	private static function generateOverloadList(IArgumentable $argumentable) : array {
 		$input = $argumentable->getArgumentList();
 		$combinations = [];
-		$outputLength = array_product(array_map("count", $input));
+		$outputLength = array_product(array_map('count', $input));
 		$indexes = [];
 		foreach ($input as $k => $charList) {
 			$indexes[$k] = 0;
@@ -139,9 +139,9 @@ class PacketHooker implements Listener {
 				$param = $set[$k] = clone $input[$k][$index]->getNetworkParameterData();
 				if (isset($param->enum) && $param->enum instanceof CommandEnum) {
 					$refClass = new ReflectionClass(CommandEnum::class);
-					$refProp = $refClass->getProperty("enumName");
+					$refProp = $refClass->getProperty('enumName');
 					$refProp->setAccessible(true);
-					$refProp->setValue($param->enum, "enum#" . spl_object_id($param->enum));
+					$refProp->setValue($param->enum, 'enum#' . spl_object_id($param->enum));
 				}
 			}
 			$combinations[] = $set;

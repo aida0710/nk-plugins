@@ -22,12 +22,12 @@ class ResultLog {
 	private function covert(array $logs) : void {
 		foreach ($logs as $log) {
 			try {
-				$date = date("[m月d日|H時i分s秒]", $log["time"]);
+				$date = date('[m月d日|H時i分s秒]', $log['time']);
 				if ($date) {
-					$this->logs[] = $date . $log["message"];
-				} else throw new Exception("時間のフォーマットに失敗しました");
+					$this->logs[] = $date . $log['message'];
+				} else throw new Exception('時間のフォーマットに失敗しました');
 			} catch (Exception $ex) {
-				$this->logs[] = TextFormat::RED . ">> " . TextFormat::RESET . "[error]" . $ex->getMessage();
+				$this->logs[] = TextFormat::RED . '>> ' . TextFormat::RESET . '[error]' . $ex->getMessage();
 			}
 		}
 	}

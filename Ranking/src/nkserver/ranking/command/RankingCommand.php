@@ -23,7 +23,7 @@ class RankingCommand extends BaseCommand {
 
 	public function onRun(CommandSender $sender, string $command, array $args) : void {
 		if (!$sender instanceof Player) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		SendForm::Send($sender, (new HomeForm()));

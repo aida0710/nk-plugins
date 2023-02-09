@@ -18,11 +18,11 @@ class AnnounceService {
 	private function __construct() {
 	}
 
-	public static function init(RepositoryPool $repositoryPool) {
+	public static function init(RepositoryPool $repositoryPool) : void {
 		self::$repositoryPool = $repositoryPool;
 	}
 
-	public static function createAnnounce(string $content, int $type) {
+	public static function createAnnounce(string $content, int $type) : void {
 		/** @var AnnounceRepository $announceRepository */
 		$announceRepository = self::$repositoryPool->getRepository(AnnounceRepository::class);
 		$announceDto = new AnnounceDto($content, $type, time());
@@ -46,7 +46,7 @@ class AnnounceService {
 		return null;
 	}
 
-	public static function setAlreadyRead(string $name, bool $b) {
+	public static function setAlreadyRead(string $name, bool $b) : void {
 		/** @var UserRepository $userRepository */
 		$userRepository = self::$repositoryPool->getRepository(UserRepository::class);
 		$dto = $userRepository->getUser($name);
@@ -93,7 +93,7 @@ class AnnounceService {
 		return $userRepository->getUser($name)->hasRead();
 	}
 
-	public static function createUser(string $name) {
+	public static function createUser(string $name) : void {
 		/** @var UserRepository $userRepository */
 		$userRepository = self::$repositoryPool->getRepository(UserRepository::class);
 		/** @var AnnounceRepository $announceRepository */
@@ -108,7 +108,7 @@ class AnnounceService {
 		return $userRepository->exists($name);
 	}
 
-	public static function confirm(string $name, bool $b = true) {
+	public static function confirm(string $name, bool $b = true) : void {
 		/** @var UserRepository $userRepository */
 		$userRepository = self::$repositoryPool->getRepository(UserRepository::class);
 		$dto = $userRepository->getUser($name);

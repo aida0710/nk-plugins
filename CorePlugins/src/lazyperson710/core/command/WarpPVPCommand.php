@@ -19,12 +19,12 @@ use function mt_rand;
 class WarpPVPCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("pvp", "pvpワールドにTeleportします");
+		parent::__construct('pvp', 'pvpワールドにTeleportします');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		$pos = match (mt_rand(1, 25)) {
@@ -53,15 +53,15 @@ class WarpPVPCommand extends Command {
 			23 => new Vector3(319, 90, 171),
 			24 => new Vector3(318, 90, 198),
 			25 => new Vector3(318, 90, 244),
-			default => throw new Error("不正な値が代入されました"),
+			default => throw new Error('不正な値が代入されました'),
 		};
 		$this->teleportPlayer($sender, $pos);
 	}
 
 	public function teleportPlayer(Player $player, Vector3 $pos) {
-		$world = Server::getInstance()->getWorldManager()->getWorldByName("pvp");
+		$world = Server::getInstance()->getWorldManager()->getWorldByName('pvp');
 		$player->teleport(new Position($pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ(), $world));
-		SendNoSoundTip::Send($player, "Teleportしました！", "PVP", true);
+		SendNoSoundTip::Send($player, 'Teleportしました！', 'PVP', true);
 		Main::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
 			function () use ($player) : void {
 				SoundPacket::Send($player, 'mob.endermen.portal');

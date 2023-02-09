@@ -30,18 +30,18 @@ class PlayerTeleportSelectForm extends CustomForm {
 			$names[] .= $name;
 		}
 		if (is_null($names)) {//こんなことは存在しないけど一応条件分岐だけ(上記のコメントアウトを消したら必要になります)
-			$names[] .= "表示可能なプレイヤーが存在しません";
+			$names[] .= '表示可能なプレイヤーが存在しません';
 		}
 		$this->dropdown = new Dropdown("テレポートしたいプレイヤーを選択してください\nテレポートにはスペクテイターモードである必要があります", $names);
 		$this
-			->setTitle("Police System")
+			->setTitle('Police System')
 			->addElement($this->dropdown);
 	}
 
 	public function handleSubmit(Player $player) : void {
 		$playerName = $this->dropdown->getSelectedOption();
 		if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-			SendMessage::Send($player, "プレイヤーが存在しない為、正常に座標を取得できませんでした", "Police", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、正常に座標を取得できませんでした', 'Police', false);
 			return;
 		}
 		if ($player->isSpectator()) {

@@ -15,8 +15,8 @@ class LevelShopClosingEvent extends Event {
 		private LevelShopItem $item,
 		private string $type,
 	) {
-		if (($this->type === "buy" || $this->type === "sell") === false) {
-			throw new Error("不明なタイプが指定されました -> " . $this->type);
+		if (($this->type === 'buy' || $this->type === 'sell') === false) {
+			throw new Error('不明なタイプが指定されました -> ' . $this->type);
 		}
 	}
 

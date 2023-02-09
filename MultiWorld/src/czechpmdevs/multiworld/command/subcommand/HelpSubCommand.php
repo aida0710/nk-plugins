@@ -28,8 +28,8 @@ use pocketmine\command\CommandSender;
 class HelpSubCommand extends BaseSubCommand {
 
 	protected function prepare() : void {
-		$this->registerArgument(0, new IntegerArgument("page", true));
-		$this->setPermission("multiworld.command.help");
+		$this->registerArgument(0, new IntegerArgument('page', true));
+		$this->setPermission('multiworld.command.help');
 	}
 
 	/**
@@ -37,7 +37,7 @@ class HelpSubCommand extends BaseSubCommand {
 	 */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		/** @var int $page */
-		$page = $args["page"] ?? 1;
+		$page = $args['page'] ?? 1;
 		$sender->sendMessage($this->getHelpMessage($sender, $page));
 	}
 
@@ -45,7 +45,7 @@ class HelpSubCommand extends BaseSubCommand {
 		if ($page < 1 || $page > 3) {
 			$page = 1;
 		}
-		$message = LanguageManager::translateMessage($sender, "help", [(string) $page, "3"]);
+		$message = LanguageManager::translateMessage($sender, 'help', [(string) $page, '3']);
 		for ($i = $j = (($page - 1) * 5) + 1, $j = $j + 5; $i < $j; ++$i) {
 			$message .= "\n" . LanguageManager::translateMessage($sender, "help-$i");
 		}

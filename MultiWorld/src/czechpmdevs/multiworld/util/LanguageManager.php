@@ -51,27 +51,27 @@ class LanguageManager {
 
 	public function __construct() {
 		$configuration = MultiWorld::getInstance()->getConfig()->getAll();
-		$defaultLang = $configuration["language"];
+		$defaultLang = $configuration['language'];
 		if (!is_string($defaultLang)) {
-			throw new LogicException("Could not fetch default language from config.yml");
+			throw new LogicException('Could not fetch default language from config.yml');
 		}
 		LanguageManager::$defaultLang = $defaultLang;
-		if ($langResources = glob(ConfigManager::getDataFolder() . "/languages/*.yml")) {
+		if ($langResources = glob(ConfigManager::getDataFolder() . '/languages/*.yml')) {
 			foreach ($langResources as $langResource) {
 				$fileContents = yaml_parse_file($langResource);
 				if (!is_array($fileContents)) {
 					MultiWorld::getInstance()->getLogger()->debug("Could not load language file ($langResource) - invalid data given");
 					continue;
 				}
-				LanguageManager::$languages[basename($langResource, ".yml")] = $fileContents;
+				LanguageManager::$languages[basename($langResource, '.yml')] = $fileContents;
 			}
 		}
 		if (!isset(LanguageManager::$languages[LanguageManager::$defaultLang])) {
 			// @phpstan-ignore-next-line
 			LanguageManager::$languages[LanguageManager::$defaultLang] = json_decode((string) base64_decode(LanguageManager::DEFAULT_LANGUAGE, true), true); // it should fix bug
 		}
-		if (isset($configuration["force-default-language"])) {
-			LanguageManager::$forceDefaultLang = (bool) $configuration["force-default-language"];
+		if (isset($configuration['force-default-language'])) {
+			LanguageManager::$forceDefaultLang = (bool) $configuration['force-default-language'];
 		}
 	}
 
@@ -88,15 +88,15 @@ class LanguageManager {
 				$lang = LanguageManager::$defaultLang;
 			}
 			if (empty(LanguageManager::$languages[$lang])) {
-				$lang = "en_US";
+				$lang = 'en_US';
 			}
 			$message = LanguageManager::$languages[$lang][$messageIndex];
 			foreach ($params as $index => $param) {
 				$message = str_replace("{%$index}", $param, $message);
 			}
 		} catch (Exception $exception) {
-			MultiWorld::getInstance()->getLogger()->error("LanguageManager error: " . $exception->getMessage() . " Try remove language resources and restart the server.");
-			return "";
+			MultiWorld::getInstance()->getLogger()->error('LanguageManager error: ' . $exception->getMessage() . ' Try remove language resources and restart the server.');
+			return '';
 		}
 		return $message;
 	}

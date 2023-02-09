@@ -66,27 +66,27 @@ class BreakEventListener implements Listener {
 		$world_name = $event->getPlayer()->getWorld()->getDisplayName();
 		$world_search = mb_substr($world_name, 0, null, 'utf-8');
 		$startBlock = $block->getPosition()->getWorld()->getBlock($block->getPosition()->asVector3());
-		if (!(str_contains($world_search, "-c") || str_contains($world_search, "nature") || str_contains($world_search, "nether") || str_contains($world_search, "end") || str_contains($world_search, "MiningWorld") || str_contains($world_search, "debug") || Server::getInstance()->isOp($player->getName()))) {
-			SendTip::Send($player, "現在のワールドでは範囲破壊は行われません", "MiningTools", false);
+		if (!(str_contains($world_search, '-c') || str_contains($world_search, 'nature') || str_contains($world_search, 'nether') || str_contains($world_search, 'end') || str_contains($world_search, 'MiningWorld') || str_contains($world_search, 'debug') || Server::getInstance()->isOp($player->getName()))) {
+			SendTip::Send($player, '現在のワールドでは範囲破壊は行われません', 'MiningTools', false);
 			return;
 		}
 		switch ($t = PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
-			case "all":
+			case 'all':
 				break;
-			case "life":
+			case 'life':
 				if (!in_array($player->getWorld()->getFolderName(), WorldCategory::LifeWorldAll, true)) {
-					SendTip::Send($player, "現在のワールドでは設定により範囲破壊が無効化されています/settings", "MiningTools", false);
+					SendTip::Send($player, '現在のワールドでは設定により範囲破壊が無効化されています/settings', 'MiningTools', false);
 					return;
 				}
 				break;
-			case "nature":
+			case 'nature':
 				if (!in_array($player->getWorld()->getFolderName(), WorldCategory::NatureAll, true)) {
-					SendTip::Send($player, "現在のワールドでは設定により範囲破壊が無効化されています/settings", "MiningTools", false);
+					SendTip::Send($player, '現在のワールドでは設定により範囲破壊が無効化されています/settings', 'MiningTools', false);
 					return;
 				}
 				break;
-			case "none":
-				SendTip::Send($player, "現在のワールドでは設定により範囲破壊が無効化されています/settings", "MiningTools", false);
+			case 'none':
+				SendTip::Send($player, '現在のワールドでは設定により範囲破壊が無効化されています/settings', 'MiningTools', false);
 				return;
 		}
 		$handItem = $player->getInventory()->getItemInHand();
@@ -95,7 +95,7 @@ class BreakEventListener implements Listener {
 			/** @var Durable $handItem */
 			$maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
 			if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-				$player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+				$player->sendTitle('§c耐久が15以下の為採掘できません！', '§cかなとこ等を使用して修繕してください');
 				SoundPacket::Send($player, 'respawn_anchor.deplete');
 				return;
 			}

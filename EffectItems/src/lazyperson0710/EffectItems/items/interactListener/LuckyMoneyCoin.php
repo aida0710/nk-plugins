@@ -35,7 +35,7 @@ class LuckyMoneyCoin {
 			10 => 35000,
 		};
 		EconomyAPI::getInstance()->addMoney($player, $addMoney);
-		SendNoSoundMessage::Send($player, "{$addMoney}円のお金が当たりました！", "LuckyMoneyCoin", true);
+		SendNoSoundMessage::Send($player, "{$addMoney}円のお金が当たりました！", 'LuckyMoneyCoin', true);
 		SoundPacket::Send($player, 'item.trident.return');
 	}
 }

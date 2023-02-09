@@ -13,7 +13,13 @@ class AnnounceDto {
 
 	private int $timestamp;
 
-	public function __construct(string $content, int $type, string $timestamp, int $id = -1) {
+	/**
+	 * @param string $content
+	 * @param int    $type
+	 * @param int    $timestamp
+	 * @param int    $id
+	 */
+	public function __construct(string $content, int $type, int $timestamp, int $id = -1) {
 		$this->content = $content;
 		$this->type = $type;
 		$this->timestamp = $timestamp;

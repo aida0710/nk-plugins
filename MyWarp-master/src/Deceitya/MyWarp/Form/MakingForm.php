@@ -39,18 +39,18 @@ class MakingForm implements Form {
 		if (count(Database::getInstance()->getWarpPositions($player)) < $climit) {
 			foreach (Database::getInstance()->getWarpPositions($player) as $warp) {
 				if ($warp['name'] === $data[0]) {
-					SendMessage::Send($player, "同じ名前のワープ地点があるため作成できませんでした", "MyWarp", false);
+					SendMessage::Send($player, '同じ名前のワープ地点があるため作成できませんでした', 'MyWarp', false);
 					return;
 				}
 			}
 			if (EconomyAPI::getInstance()->reduceMoney($player, $cost) === EconomyAPI::RET_SUCCESS) {
 				Database::getInstance()->createWarpPosition($player, $data[0]);
-				SendMessage::Send($player, "§aワープ地点を作成しました", "MyWarp", true);
+				SendMessage::Send($player, '§aワープ地点を作成しました', 'MyWarp', true);
 			} else {
-				SendMessage::Send($player, "お金が足りません", "MyWarp", false);
+				SendMessage::Send($player, 'お金が足りません', 'MyWarp', false);
 			}
 		} else {
-			SendMessage::Send($player, "ワープ地点は {$climit}個までしか作成できません", "MyWarp", false);
+			SendMessage::Send($player, "ワープ地点は {$climit}個までしか作成できません", 'MyWarp', false);
 		}
 	}
 

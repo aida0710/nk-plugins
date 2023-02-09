@@ -17,7 +17,7 @@ class PlayerDamageEvent implements Listener {
 		if (!$player instanceof Player) return;
 		DefensiveStone::execution($event, $player);
 		if ($event->getCause() == EntityDamageEvent::CAUSE_BLOCK_EXPLOSION) {
-			SendNoSoundTip::Send($player, "爆発ダメージが無効化されました", "Explosion", true);
+			SendNoSoundTip::Send($player, '爆発ダメージが無効化されました', 'Explosion', true);
 			$event->cancel();
 		}
 	}

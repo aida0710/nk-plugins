@@ -14,9 +14,9 @@ use function trim;
 class SeeMoneyCommand extends Command {
 
 	public function __construct(private EconomyAPI $plugin) {
-		$desc = $plugin->getCommandMessage("seemoney");
-		parent::__construct("seemoney", $desc["description"], $desc["usage"]);
-		$this->setPermission("economyapi.command.seemoney");
+		$desc = $plugin->getCommandMessage('seemoney');
+		parent::__construct('seemoney', $desc['description'], $desc['usage']);
+		$this->setPermission('economyapi.command.seemoney');
 		$this->plugin = $plugin;
 	}
 
@@ -26,8 +26,8 @@ class SeeMoneyCommand extends Command {
 			return false;
 		}
 		$player = array_shift($params);
-		if (trim($player) === "") {
-			$sender->sendMessage(TextFormat::RED . "Usage: " . $this->getUsage());
+		if (trim($player) === '') {
+			$sender->sendMessage(TextFormat::RED . 'Usage: ' . $this->getUsage());
 			return true;
 		}
 		if (($p = $this->plugin->getServer()->getPlayerByPrefix($player)) instanceof Player) {
@@ -35,9 +35,9 @@ class SeeMoneyCommand extends Command {
 		}
 		$money = $this->plugin->myMoney($player);
 		if ($money !== false) {
-			$sender->sendMessage($this->plugin->getMessage("seemoney-seemoney", [$player, $money], $sender->getName()));
+			$sender->sendMessage($this->plugin->getMessage('seemoney-seemoney', [$player, $money], $sender->getName()));
 		} else {
-			$sender->sendMessage($this->plugin->getMessage("player-never-connected", [$player], $sender->getName()));
+			$sender->sendMessage($this->plugin->getMessage('player-never-connected', [$player], $sender->getName()));
 		}
 		return true;
 	}

@@ -40,7 +40,7 @@ class EnderPilar implements Populator {
 		}
 		$chunk = $world->getChunk($chunkX, $chunkZ);
 		if ($chunk === null) {
-			throw new AssumptionFailedError("Populated chunk is null");
+			throw new AssumptionFailedError('Populated chunk is null');
 		}
 		$bound = 16 - self::MAX_RADIUS * 2;
 		$relativeX = self::MAX_RADIUS + $random->nextBoundedInt($bound);

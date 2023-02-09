@@ -33,7 +33,7 @@ use function implode;
 class ListSubCommand extends BaseSubCommand {
 
 	protected function prepare() : void {
-		$this->setPermission("multiworld.command.list");
+		$this->setPermission('multiworld.command.list');
 	}
 
 	/**
@@ -42,11 +42,11 @@ class ListSubCommand extends BaseSubCommand {
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		$worlds = array_values(array_map(static function (string $file) : string {
 			if (Server::getInstance()->getWorldManager()->isWorldLoaded($file)) {
-				return "§7$file > §aLoaded§7, " . count(WorldUtils::getWorldByNameNonNull($file)->getPlayers()) . " Players";
+				return "§7$file > §aLoaded§7, " . count(WorldUtils::getWorldByNameNonNull($file)->getPlayers()) . ' Players';
 			} else {
 				return "§7$file > §cUnloaded";
 			}
 		}, WorldUtils::getAllWorlds()));
-		$sender->sendMessage(LanguageManager::translateMessage($sender, "list-done", [(string) count($worlds)]) . "\n" . implode("\n", $worlds));
+		$sender->sendMessage(LanguageManager::translateMessage($sender, 'list-done', [(string) count($worlds)]) . "\n" . implode("\n", $worlds));
 	}
 }

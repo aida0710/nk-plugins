@@ -24,8 +24,8 @@ class DefensiveStone {
 							$damage = $event->getBaseDamage() * 2;
 							$item->applyDamage($damage);
 							$armorInventory->setItem($i, $item);
-						} else $damage = "0";
-						SendNoSoundTip::Send($player, "落下ダメージが無効化されました！耐久 -" . $damage, "Durable", false, 'block.lantern.break');
+						} else $damage = '0';
+						SendNoSoundTip::Send($player, '落下ダメージが無効化されました！耐久 -' . $damage, 'Durable', false, 'block.lantern.break');
 						$event->cancel();
 					}
 					return;

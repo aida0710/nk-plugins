@@ -34,12 +34,12 @@ class PlayerBanSelectForm extends CustomForm {
 			$names[] .= $name;
 		}
 		if (is_null($names)) {
-			$names[] .= "表示可能なプレイヤーが存在しません";
+			$names[] .= '表示可能なプレイヤーが存在しません';
 		}
-		$this->dropdown = new Dropdown("Banしたいプレイヤーを選択してください", $names);
+		$this->dropdown = new Dropdown('Banしたいプレイヤーを選択してください', $names);
 		$this->input = new Input("banの理由を表記してください\n※このメッセージはbanされた人となまけものに表示されます");
 		$this
-			->setTitle("Police System")
+			->setTitle('Police System')
 			->addElements(
 				$this->dropdown,
 				$this->input,
@@ -52,7 +52,7 @@ class PlayerBanSelectForm extends CustomForm {
 			Server::getInstance()->getPlayerByPrefix($playerName)->kick($this->input->getText());
 		}
 		BanService::banName($playerName, "{$this->input->getText()}");
-		$webhook = Webhook::create("https://discord.com/api/webhooks/1006116792915202078/P_8DNsYoGS5msBiylZdbjhjDXWq3Ds9GVL6rnsroLE6i2QlQLd9DQi4HGBF13N1Ee8Cu");
+		$webhook = Webhook::create('https://discord.com/api/webhooks/1006116792915202078/P_8DNsYoGS5msBiylZdbjhjDXWq3Ds9GVL6rnsroLE6i2QlQLd9DQi4HGBF13N1Ee8Cu');
 		$embed = (new Embed())
 			->setTitle("{$player->getName()}が{$playerName}をmBanしました")
 			->setColor(255)

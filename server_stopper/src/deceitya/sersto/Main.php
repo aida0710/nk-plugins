@@ -39,10 +39,10 @@ class Main extends PluginBase {
 	public function onEnable() : void {
 		$this->reloadConfig();
 		$this->current = $this->getConfig()->get('time', 120) * 60;
-		$this->lastdelete = new Config($this->getDataFolder() . 'lastdelete.yml', config::YAML, ["lastdelete" => (new DateTimeImmutable(self::FORMAT))->format('Y/m/d')]);
+		$this->lastdelete = new Config($this->getDataFolder() . 'lastdelete.yml', config::YAML, ['lastdelete' => (new DateTimeImmutable(self::FORMAT))->format('Y/m/d')]);
 		$this->getScheduler()->scheduleRepeatingTask(new ShutdownTask($this), 20);
 		$options = WorldCreationOptions::create();
-		$options->setGeneratorClass(GeneratorManager::getInstance()->getGenerator("default")->getGeneratorClass());
+		$options->setGeneratorClass(GeneratorManager::getInstance()->getGenerator('default')->getGeneratorClass());
 		$this->getServer()->getWorldManager()->generateWorld('MiningWorld', $options);
 	}
 
@@ -50,10 +50,10 @@ class Main extends PluginBase {
 		$level = $this->getServer()->getWorldManager()->getWorldByName('MiningWorld');
 		if ($level !== null) {
 			$lastSunday = (new DateTimeImmutable(self::FORMAT))->format('Y/m/d');
-			if ($this->lastdelete->get("lastdelete") === $lastSunday) {
+			if ($this->lastdelete->get('lastdelete') === $lastSunday) {
 				return;
 			}
-			$this->lastdelete->set("lastdelete", $lastSunday);
+			$this->lastdelete->set('lastdelete', $lastSunday);
 			$this->lastdelete->save();
 			$this->deleteLevel($level);
 		}
@@ -95,22 +95,22 @@ class ShutdownTask extends Task {
 			$this->plugin->setCurrent($this->plugin->getCurrent() - 1);
 			switch ($this->plugin->getCurrent()) {
 				case 900:
-					SendBroadcastMessage::Send("サーバー再起動まで残り15分になりました", "Server");
+					SendBroadcastMessage::Send('サーバー再起動まで残り15分になりました', 'Server');
 					break;
 				case 300:
-					SendBroadcastMessage::Send("サーバー再起動まで残り5分になりました", "Server");
+					SendBroadcastMessage::Send('サーバー再起動まで残り5分になりました', 'Server');
 					break;
 				case 15:
-					SendBroadcastMessage::Send("サーバー再起動まで残り15秒になりました", "Server");
+					SendBroadcastMessage::Send('サーバー再起動まで残り15秒になりました', 'Server');
 					break;
 				case 3:
-					SendBroadcastMessage::Send("サーバー再起動まで残り3秒になりました", "Server");
+					SendBroadcastMessage::Send('サーバー再起動まで残り3秒になりました', 'Server');
 					break;
 				case 2:
-					SendBroadcastMessage::Send("サーバー再起動まで残り2秒になりました", "Server");
+					SendBroadcastMessage::Send('サーバー再起動まで残り2秒になりました', 'Server');
 					break;
 				case 1:
-					SendBroadcastMessage::Send("サーバー再起動まで残り1秒になりました", "Server");
+					SendBroadcastMessage::Send('サーバー再起動まで残り1秒になりました', 'Server');
 					break;
 			}
 		} else {

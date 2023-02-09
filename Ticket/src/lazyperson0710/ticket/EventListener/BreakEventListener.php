@@ -31,10 +31,10 @@ class BreakEventListener implements Listener {
 	public function blockBreakTicket(BlockBreakEvent|MiningToolsBreakEvent $event) {
 		$player = $event->getPlayer();
 		if ($event->getEventName() === (new BlockBreakEvent($player, $event->getBlock(), $player->getInventory()->getItemInHand()))->getEventName()) {
-			$probability = "0.125";
+			$probability = '0.125';
 			$random = mt_rand(1, 800);
 		} elseif ($event->getEventName() === (new MiningToolsBreakEvent($player, $event->getBlock()))->getEventName()) {
-			$probability = "0.0769";
+			$probability = '0.0769';
 			$random = mt_rand(1, 1300);
 		}
 		if (empty($random) || empty($probability)) {
@@ -42,7 +42,7 @@ class BreakEventListener implements Listener {
 		}
 		if ($random === 500) {
 			TicketAPI::getInstance()->addTicket($player, 1);
-			SendBroadcastTip::Send("Ticketを{$probability}％の確率で{$player->getName()}がゲットしました", "Ticket");
+			SendBroadcastTip::Send("Ticketを{$probability}％の確率で{$player->getName()}がゲットしました", 'Ticket');
 		}
 	}
 }

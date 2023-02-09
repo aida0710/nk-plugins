@@ -29,6 +29,6 @@ class MiningToolsDestructionEnabledWorldsSetting extends Setting {
 	}
 
 	public function getFallbackValue() : string {
-		return "all";
+		return 'all';
 	}
 }

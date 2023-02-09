@@ -103,9 +103,9 @@ class DeathEventListener implements Listener {
 		$floor_x = floor($player->getPosition()->getX());
 		$floor_y = floor($player->getPosition()->getY());
 		$floor_z = floor($player->getPosition()->getZ());
-		SendMessage::Send($player, "死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です", "Death", true);
+		SendMessage::Send($player, "死亡地点は{$world}のx.{$floor_x},y.{$floor_y},z.{$floor_z}です", 'Death', true);
 		if (in_array($player->getWorld()->getFolderName(), WorldCategory::PublicWorld, true) || in_array($player->getWorld()->getFolderName(), WorldCategory::PublicEventWorld, true) || in_array($player->getWorld()->getFolderName(), WorldCategory::PVP, true)) {
-			SendMessage::Send($player, "死亡ペナルティーは死亡ワールドが公共ワールド&PVPワールドでは適用されません", "Death", true);
+			SendMessage::Send($player, '死亡ペナルティーは死亡ワールドが公共ワールド&PVPワールドでは適用されません', 'Death', true);
 			$event->setKeepXp(true);
 			return;
 		}
@@ -114,9 +114,9 @@ class DeathEventListener implements Listener {
 				$floor_money1000000 = floor($see / 2);
 				EconomyAPI::getInstance()->reduceMoney($player, $floor_money1000000);
 				if (Server::getInstance()->isOp($player->getName())) {
-					SendMessage::Send($player, "{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました", "Death", true);
+					SendMessage::Send($player, "{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました", 'Death', true);
 				} else {
-					SendBroadcastMessage::Send("{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました", "Death");
+					SendBroadcastMessage::Send("{$player->getName()}に死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money1000000}円が徴収されました", 'Death');
 				}
 				return;
 			}
@@ -127,19 +127,19 @@ class DeathEventListener implements Listener {
 			$result = -$result;
 			if ($myMoney <= 1999) {
 				EconomyAPI::getInstance()->setMoney($player, 2000);
-				SendMessage::Send($player, "死亡ペナルティーが適用されたため、所持金が{$see}円から5割徴収される予定でしたが2000円以下になってしまう為{$result}円だけ徴収されました", "Death", true);
+				SendMessage::Send($player, "死亡ペナルティーが適用されたため、所持金が{$see}円から5割徴収される予定でしたが2000円以下になってしまう為{$result}円だけ徴収されました", 'Death', true);
 			} else {
-				SendMessage::Send($player, "死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money}円が徴収されました", "Death", true);
+				SendMessage::Send($player, "死亡ペナルティーが適用されたため、所持金が{$see}円から{$floor_money}円が徴収されました", 'Death', true);
 			}
 		} else {
-			SendMessage::Send($player, "所持金が2000円以下の{$see}円だっため死亡ペナルティーは経験値のみとなりました", "Death", true);
+			SendMessage::Send($player, "所持金が2000円以下の{$see}円だっため死亡ペナルティーは経験値のみとなりました", 'Death', true);
 		}
 	}
 
 	public function Respawn(PlayerRespawnEvent $event) {
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		SendBroadcastTip::Send("{$name}がリスポーンしました", "ReSpawn");
-		SoundPacket::Send($player, "respawn_anchor.set_spawn");
+		SendBroadcastTip::Send("{$name}がリスポーンしました", 'ReSpawn');
+		SoundPacket::Send($player, 'respawn_anchor.set_spawn');
 	}
 }

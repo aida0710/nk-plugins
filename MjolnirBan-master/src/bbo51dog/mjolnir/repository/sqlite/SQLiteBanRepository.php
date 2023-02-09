@@ -21,10 +21,10 @@ class SQLiteBanRepository implements BanRepository {
 	}
 
 	public function register(Ban $ban) : void {
-		$stmt = $this->db->prepare("INSERT INTO bans values(:literal, :banType, :reason)");
-		$stmt->bindValue(":literal", $ban->getLiteral());
-		$stmt->bindValue(":banType", $ban->getType());
-		$stmt->bindValue(":reason", $ban->getReason());
+		$stmt = $this->db->prepare('INSERT INTO bans values(:literal, :banType, :reason)');
+		$stmt->bindValue(':literal', $ban->getLiteral());
+		$stmt->bindValue(':banType', $ban->getType());
+		$stmt->bindValue(':reason', $ban->getReason());
 		$stmt->execute();
 	}
 
@@ -45,14 +45,14 @@ class SQLiteBanRepository implements BanRepository {
 	}
 
 	private function exists(int|string $literal, BanType $type) : bool {
-		$stmt = $this->db->prepare("SELECT COUNT (*) FROM bans WHERE literal = :literal AND banType = :banType");
-		$stmt->bindValue(":literal", $literal);
-		$stmt->bindValue(":banType", $type);
+		$stmt = $this->db->prepare('SELECT COUNT (*) FROM bans WHERE literal = :literal AND banType = :banType');
+		$stmt->bindValue(':literal', $literal);
+		$stmt->bindValue(':banType', $type);
 		$rows = $stmt->execute()->fetchArray();
 		return $rows[0] > 0;
 	}
 
 	private function prepareTable() : void {
-		$this->db->query("CREATE TABLE IF NOT EXISTS bans(literal TEXT, banType TEXT, reason TEXT)");
+		$this->db->query('CREATE TABLE IF NOT EXISTS bans(literal TEXT, banType TEXT, reason TEXT)');
 	}
 }

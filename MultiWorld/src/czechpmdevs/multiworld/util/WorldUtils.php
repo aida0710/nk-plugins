@@ -89,15 +89,15 @@ class WorldUtils {
 	public static function getDefaultWorldNonNull() : World {
 		$world = Server::getInstance()->getWorldManager()->getDefaultWorld();
 		if ($world === null) {
-			throw new AssumptionFailedError("Default world is null");
+			throw new AssumptionFailedError('Default world is null');
 		}
 		return $world;
 	}
 
 	public static function renameWorld(string $oldName, string $newName) : void {
 		WorldUtils::lazyUnloadWorld($oldName, true);
-		$from = Server::getInstance()->getDataPath() . "/worlds/" . $oldName;
-		$to = Server::getInstance()->getDataPath() . "/worlds/" . $newName;
+		$from = Server::getInstance()->getDataPath() . '/worlds/' . $oldName;
+		$to = Server::getInstance()->getDataPath() . '/worlds/' . $newName;
 		rename($from, $to);
 		WorldUtils::lazyLoadWorld($newName);
 		$newWorld = Server::getInstance()->getWorldManager()->getWorldByName($newName);
@@ -108,7 +108,7 @@ class WorldUtils {
 		if (!$worldData instanceof BaseNbtWorldData) {
 			return;
 		}
-		$worldData->getCompoundTag()->setString("LevelName", $newName);
+		$worldData->getCompoundTag()->setString('LevelName', $newName);
 		Server::getInstance()->getWorldManager()->unloadWorld($newWorld); // reloading the world
 		WorldUtils::lazyLoadWorld($newName);
 	}
@@ -155,7 +155,7 @@ class WorldUtils {
 	 * unloaded ones
 	 */
 	public static function getAllWorlds() : array {
-		$files = scandir(Server::getInstance()->getDataPath() . "/worlds/");
+		$files = scandir(Server::getInstance()->getDataPath() . '/worlds/');
 		if (!$files) {
 			return [];
 		}
@@ -167,7 +167,7 @@ class WorldUtils {
 		));
 		return array_values(array_filter($files, function (string $fileName) : bool {
 			return Server::getInstance()->getWorldManager()->isWorldGenerated($fileName) &&
-				$fileName !== "." && $fileName !== ".."; // Server->isWorldGenerated detects '.' and '..' as world, TODO - make pull request
+				$fileName !== '.' && $fileName !== '..'; // Server->isWorldGenerated detects '.' and '..' as world, TODO - make pull request
 		}));
 	}
 
@@ -185,16 +185,16 @@ class WorldUtils {
 	public static function getGeneratorByName(string $name) : ?GeneratorManagerEntry {
 		$name = match (strtolower($name)) {
 			// 'Vanilla' generators...
-			"normal", "classic", "basic", "vanilla" => "vanilla_normal",
-			"nether", "hell" => "vanilla_nether",
-			"ender", "end" => "ender",
-			"superflat", "flat" => "flat",
+			'normal', 'classic', 'basic', 'vanilla' => 'vanilla_normal',
+			'nether', 'hell' => 'vanilla_nether',
+			'ender', 'end' => 'ender',
+			'superflat', 'flat' => 'flat',
 			// PocketMine generators
-			"nether_old" => "nether",
-			"normal_old" => "normal",
+			'nether_old' => 'nether',
+			'normal_old' => 'normal',
 			// Custom generators
-			"skyblock", "sb" => "skyblock",
-			"void", "empty", "emptyworld" => "void",
+			'skyblock', 'sb' => 'skyblock',
+			'void', 'empty', 'emptyworld' => 'void',
 			// Other generators
 			default => strtolower($name)
 		};

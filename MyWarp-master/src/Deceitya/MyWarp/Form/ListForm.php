@@ -29,7 +29,7 @@ class ListForm implements Form {
 		$pos = Database::getInstance()->getWarpPMMPPosition($player, $this->warps[$data]);
 		if ($pos !== null) {
 			$player->teleport($pos);
-			SendNoSoundMessage::Send($player, "ワープ地点にテレポートしました！", "MyWarp", true);
+			SendNoSoundMessage::Send($player, 'ワープ地点にテレポートしました！', 'MyWarp', true);
 			MyWarpPlugin::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(
 				function () use ($player) : void {
 					SoundPacket::Send($player, 'mob.endermen.portal');
@@ -37,7 +37,7 @@ class ListForm implements Form {
 			), 8);
 			SoundPacket::Send($player, 'mob.endermen.portal');
 		} else {
-			SendMessage::Send($player, "ワープ地点が見つかりませんでした", "MyWarp", false);
+			SendMessage::Send($player, 'ワープ地点が見つかりませんでした', 'MyWarp', false);
 		}
 	}
 

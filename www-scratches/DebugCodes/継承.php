@@ -33,7 +33,7 @@ class Spiny implements Human {
 	}
 
 	public function name() : string {
-		return "Spiny";
+		return 'Spiny';
 	}
 
 	public function age() : int {
@@ -50,7 +50,7 @@ class WeakeningSpiny extends Spiny {
 
 	public function name() : string {
 		$name = parent::name();
-		return "弱弱しい" . $name;
+		return '弱弱しい' . $name;
 	}
 
 	public function iq() : int {

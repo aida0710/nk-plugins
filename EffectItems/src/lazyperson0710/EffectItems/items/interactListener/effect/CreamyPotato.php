@@ -30,7 +30,7 @@ class CreamyPotato {
 				$effect = new EffectInstance(VanillaEffects::POISON(), 20 * 25, 5, false);
 				AddEffectPacket::Add($player, $effect, VanillaEffects::POISON(), true);
 				SoundPacket::Send($player, 'item.shield.block');
-				SendNoSoundMessage::Send($player, "デメリット効果が発動した！！！", "Item", false);
+				SendNoSoundMessage::Send($player, 'デメリット効果が発動した！！！', 'Item', false);
 			}
 		), 20 * 5);
 		$effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60, 3, false);

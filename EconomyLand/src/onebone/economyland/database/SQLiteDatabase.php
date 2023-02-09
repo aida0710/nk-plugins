@@ -34,15 +34,15 @@ use const SQLITE3_ASSOC;
 
 class SQLiteDatabase implements Database {
 
-	public const INVITEE_SEPERATOR = ";";
+	public const INVITEE_SEPERATOR = ';';
 	/** @var array */
 	private $land, $config;
 	private $path;
 
-	public function __construct($fileName, $config, $otherName = "") {
+	public function __construct($fileName, $config, $otherName = '') {
 		$this->path = $fileName;
 		$this->land = new SQLite3($fileName);
-		$this->land->exec("CREATE TABLE IF NOT EXISTS land(
+		$this->land->exec('CREATE TABLE IF NOT EXISTS land(
 			ID INTEGER PRIMARY KEY AUTOINCREMENT,
 			startX INTEGER NOT NULL,
 			startZ INTEGER NOT NULL,
@@ -53,7 +53,7 @@ class SQLiteDatabase implements Database {
 			invitee TEXT NOT NULL,
 			price INTEGER NOT NULL,
 			expires INTEGER
-		)");
+		)');
 		$this->config = $config;
 	}
 
@@ -68,7 +68,7 @@ class SQLiteDatabase implements Database {
 	}
 
 	public function getAll() {
-		$result = $this->land->query("SELECT * FROM land");
+		$result = $this->land->query('SELECT * FROM land');
 		$ret = [];
 		while (($ret[] = $result->fetchArray(SQLITE3_ASSOC)) !== false) {
 		}
@@ -100,7 +100,7 @@ class SQLiteDatabase implements Database {
 	public function addInviteeById($id, $name) {
 		$invitee = $this->getInviteeById($id);
 		if (!in_array($name, $invitee, true)) {
-			$invitee[] = strtolower(str_replace("'", "", $name));
+			$invitee[] = strtolower(str_replace("'", '', $name));
 			$this->land->exec("UPDATE land SET invitee = '" . serialize($invitee) . "' WHERE ID = $id");
 			return true;
 		}
@@ -108,7 +108,7 @@ class SQLiteDatabase implements Database {
 	}
 
 	public function getInviteeById($id) {
-		$invitee = $this->land->exec("SELECT invitee FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC)["invitee"];
+		$invitee = $this->land->exec("SELECT invitee FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC)['invitee'];
 		return unserialize($invitee);
 	}
 
@@ -135,8 +135,8 @@ class SQLiteDatabase implements Database {
 		if ($level instanceof World) {
 			$level = $level->getFolderName();
 		}
-		$this->land->exec("INSERT INTO land (startX, endX, startZ, endZ, owner, level, price, invitee" . ($expires === null ? "" : ", expires") . ") VALUES ($startX, $endX, $startZ, $endZ, '$owner', '$level', $price, '{}'" . ($expires === null ? "" : ", $expires") . ")");
-		return $this->land->query("SELECT seq FROM sqlite_sequence")->fetchArray(SQLITE3_ASSOC)["seq"] - 1;
+		$this->land->exec('INSERT INTO land (startX, endX, startZ, endZ, owner, level, price, invitee' . ($expires === null ? '' : ', expires') . ") VALUES ($startX, $endX, $startZ, $endZ, '$owner', '$level', $price, '{}'" . ($expires === null ? '' : ", $expires") . ')');
+		return $this->land->query('SELECT seq FROM sqlite_sequence')->fetchArray(SQLITE3_ASSOC)['seq'] - 1;
 	}
 
 	public function setOwnerById($id, $owner) {
@@ -149,7 +149,7 @@ class SQLiteDatabase implements Database {
 
 	public function canTouch($x, $z, $level, Player $player) {
 		if (!is_bool($land = $this->land->query("SELECT owner,invitee FROM land WHERE level = '$level' AND endX >= $x AND endZ >= $z AND startX <= $x AND startZ <= $z")->fetchArray(SQLITE3_ASSOC))) {
-			if ($player->getName() === $land["owner"] || stripos($player->getName() . self::INVITEE_SEPERATOR, $land["invitee"]) || $player->hasPermission("economyland.land.modify.others")) {
+			if ($player->getName() === $land['owner'] || stripos($player->getName() . self::INVITEE_SEPERATOR, $land['invitee']) || $player->hasPermission('economyland.land.modify.others')) {
 				return true;
 			} else {
 				return $land;

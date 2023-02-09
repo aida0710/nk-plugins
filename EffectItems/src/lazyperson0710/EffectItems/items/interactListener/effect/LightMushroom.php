@@ -30,7 +30,7 @@ class LightMushroom {
 			$effect = new EffectInstance(VanillaEffects::POISON(), 20 * 15, 3, false);
 			AddEffectPacket::Add($player, $effect, VanillaEffects::POISON(), true);
 			SoundPacket::Send($player, 'item.shield.block');
-			SendNoSoundMessage::Send($player, "キノコの毒に侵されてしまった!", "LightMushroom", false);
+			SendNoSoundMessage::Send($player, 'キノコの毒に侵されてしまった!', 'LightMushroom', false);
 		}
 		SoundPacket::Send($player, 'item.trident.return');
 	}

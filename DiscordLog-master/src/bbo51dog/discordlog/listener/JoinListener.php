@@ -26,7 +26,7 @@ class JoinListener implements Listener {
 	public function onJoin(PlayerJoinEvent $event) {
 		$name = $event->getPlayer()->getName();
 		$time = Main::getTime();
-		$s = str_replace(["%time", "%player"], [$time, $name], Main::JOIN);
+		$s = str_replace(['%time', '%player'], [$time, $name], Main::JOIN);
 		$webhook = Webhook::create($this->url);
 		$content = new Content();
 		$content->setText($s);

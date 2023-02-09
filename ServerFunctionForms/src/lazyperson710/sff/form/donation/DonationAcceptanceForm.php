@@ -62,9 +62,9 @@ class DonationAcceptanceForm extends CustomForm {
 		if (is_null($message)) {
 			$message = "現在寄付額が足りていない為特典を受け取ることができません\n\n現在の寄付総額 : {$amount}円 | 必要寄付額 : {$num}円";
 		}
-		$this->enable = new Toggle("特典を受け取る", false);
+		$this->enable = new Toggle('特典を受け取る', false);
 		$this
-			->setTitle("Donation Form")
+			->setTitle('Donation Form')
 			->addElement(new Label($message));
 		if ($give) {
 			$this->addElement($this->enable);
@@ -84,7 +84,7 @@ class DonationAcceptanceForm extends CustomForm {
 					$setting->getSetting(Donation_1500::getName())?->setValue(true);
 					$message = "\n\n§sチケットを100枚受け取りました";
 					break;
-				} else throw new Error("既にチケットを受け取っています");
+				} else throw new Error('既にチケットを受け取っています');
 			case 10000:
 				if (!$this->enable->getValue()) {
 					break;
@@ -99,7 +99,7 @@ class DonationAcceptanceForm extends CustomForm {
 					$setting->getSetting(Donation_10000::getName())?->setValue(true);
 					$message = "\n\n§sダイアモンドを15個受け取りました";
 					break;
-				} else throw new Error("既にチケットを受け取っています");
+				} else throw new Error('既にチケットを受け取っています');
 			default:
 				break;
 		}

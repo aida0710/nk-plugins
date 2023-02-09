@@ -21,7 +21,7 @@ class TicketAPI {
 
 	public function setCache($dataFile) : void {
 		$this->config = new Config($dataFile, Config::YAML, [
-			"player" => 0,
+			'player' => 0,
 		]);
 		$this->cache = $this->config->getAll();
 	}

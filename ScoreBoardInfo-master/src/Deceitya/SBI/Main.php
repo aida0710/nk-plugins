@@ -20,7 +20,7 @@ use pocketmine\plugin\PluginBase;
 class Main extends PluginBase implements Listener {
 
 	protected function onEnable() : void {
-		Database::init($this->getDataFolder() . "SbiData.yml");
+		Database::init($this->getDataFolder() . 'SbiData.yml');
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
@@ -41,13 +41,13 @@ class Main extends PluginBase implements Listener {
 			return false;
 		}
 		$form = (new SimpleForm())
-			->setTitle("Select Status Mode")
-			->setText("表示形式を選択してください");
+			->setTitle('Select Status Mode')
+			->setText('表示形式を選択してください');
 		foreach (ModeList::getInstance()->getAll() as $mode) {
 			$form->addElement(new ClosureButton($mode->getName(), null, function (Player $player, Button $button) use ($mode) {
 				Database::getInstance()->setMode($player, $mode->getId());
 				Database::getInstance()->save();
-				SendTip::Send($player, "表示状態を『{$mode->getName()}』にしました", "MyStatus", true);
+				SendTip::Send($player, "表示状態を『{$mode->getName()}』にしました", 'MyStatus', true);
 			}));
 		}
 		SendForm::Send($sender, ($form));

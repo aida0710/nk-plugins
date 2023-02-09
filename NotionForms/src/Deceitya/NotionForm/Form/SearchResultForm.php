@@ -26,11 +26,11 @@ class SearchResultForm implements Form {
 			return;
 		}
 		if ($data === 0) {
-			SendForm::Send($player, (new SearchForm($this->file, "", $this->searchdefault)));
+			SendForm::Send($player, (new SearchForm($this->file, '', $this->searchdefault)));
 			return;
 		}
 		if (!isset($this->index[$data - 1])) {
-			SendMessage::Send($player, "エラーが発生しました", "NotionForm", false);
+			SendMessage::Send($player, 'エラーが発生しました', 'NotionForm', false);
 			return;
 		}
 		$id = $this->index[$data - 1];
@@ -43,7 +43,7 @@ class SearchResultForm implements Form {
 			'title' => 'Notion Form',
 			'content' => '見たいコンテンツを選択してください',
 			'buttons' => [
-				['text' => "戻る"],
+				['text' => '戻る'],
 			],
 		];
 		foreach ($this->heading as $key => $heading) {

@@ -52,7 +52,7 @@ class MiningToolsSettingListForm extends CustomForm {
 	public function __construct(Player $player) {
 		$this->player = $player;
 		$setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
-		$this->setTitle("PlayerSettings");
+		$this->setTitle('PlayerSettings');
 		$empty = true;
 		foreach ($this->settings as $value) {
 			$settingName = match ($value) {
@@ -153,7 +153,7 @@ class MiningToolsSettingListForm extends CustomForm {
 			}
 		}
 		SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
-		SoundPacket::Send($player, "item.spyglass.use");
+		SoundPacket::Send($player, 'item.spyglass.use');
 	}
 
 }

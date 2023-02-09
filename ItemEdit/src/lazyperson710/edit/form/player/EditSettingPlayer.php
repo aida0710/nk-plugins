@@ -21,9 +21,9 @@ class EditSettingPlayer extends CustomForm {
 			$name = $onlinePlayer->getName();
 			$names[] .= $name;
 		}
-		$this->players = new Dropdown("設定を変更したいプレイヤーを選択してください", $names);
+		$this->players = new Dropdown('設定を変更したいプレイヤーを選択してください', $names);
 		$this
-			->setTitle("Player Edit")
+			->setTitle('Player Edit')
 			->addElements(
 				$this->players,
 			);
@@ -32,7 +32,7 @@ class EditSettingPlayer extends CustomForm {
 	public function handleSubmit(Player $player) : void {
 		$targetName = $this->players->getSelectedOption();
 		if (!Server::getInstance()->getPlayerByPrefix($targetName)) {
-			SendMessage::Send($player, "プレイヤーが存在しない為、処理を中断しました", "PlayerEdit", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、処理を中断しました', 'PlayerEdit', false);
 			return;
 		}
 		$target = Server::getInstance()->getPlayerByPrefix($targetName);

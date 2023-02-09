@@ -24,9 +24,9 @@ class ModalForm extends Form {
 
 	public function __construct(string $title, string $content, string $firstButton, string $secondButton) {
 		parent::__construct(Form::FORM_TYPE_MODAL); // It is not possible to ignore invalid response on modal form
-		$this->data["title"] = $title;
-		$this->data["content"] = $content;
-		$this->data["button1"] = $firstButton;
-		$this->data["button2"] = $secondButton;
+		$this->data['title'] = $title;
+		$this->data['content'] = $content;
+		$this->data['button1'] = $firstButton;
+		$this->data['button2'] = $secondButton;
 	}
 }

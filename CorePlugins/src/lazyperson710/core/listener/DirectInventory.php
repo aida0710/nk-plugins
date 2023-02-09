@@ -32,7 +32,7 @@ class DirectInventory implements Listener {
 			foreach ($drops as $item) {
 				if ((new DirectInventory())->notStorageItem($player, $item) === false) continue;
 				StackStorageAPI::$instance->add($player->getXuid(), $item);
-				SendNoSoundActionBarMessage::Send($player, $item->getName() . "が倉庫にしまわれました", "Storage", true);
+				SendNoSoundActionBarMessage::Send($player, $item->getName() . 'が倉庫にしまわれました', 'Storage', true);
 			}
 		} else {
 			foreach ($drops as $item) {
@@ -41,7 +41,7 @@ class DirectInventory implements Listener {
 					$player->getInventory()->addItem($item);
 				} else {
 					StackStorageAPI::$instance->add($player->getXuid(), $item);
-					SendNoSoundActionBarMessage::Send($player, "インベントリに空きが無いため" . $item->getName() . "が倉庫にしまわれました", "Storage", true);
+					SendNoSoundActionBarMessage::Send($player, 'インベントリに空きが無いため' . $item->getName() . 'が倉庫にしまわれました', 'Storage', true);
 				}
 			}
 		}
@@ -57,7 +57,7 @@ class DirectInventory implements Listener {
 					$player->getInventory()->addItem($item);
 				} else {
 					$player->dropItem($item);
-					SendNoSoundActionBarMessage::Send($player, $item->getName() . "を直接ストレージに格納することは出来ない為ドロップされました", "Storage", false);
+					SendNoSoundActionBarMessage::Send($player, $item->getName() . 'を直接ストレージに格納することは出来ない為ドロップされました', 'Storage', false);
 				}
 				return false;
 		}

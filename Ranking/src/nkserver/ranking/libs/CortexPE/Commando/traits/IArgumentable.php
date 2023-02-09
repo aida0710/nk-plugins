@@ -33,7 +33,7 @@ use pocketmine\command\CommandSender;
 
 interface IArgumentable {
 
-	public function generateUsageMessage(string $parent = "") : string;
+	public function generateUsageMessage(string $parent = '') : string;
 
 	public function hasArguments() : bool;
 

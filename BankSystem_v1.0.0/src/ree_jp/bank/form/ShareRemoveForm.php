@@ -28,11 +28,11 @@ class ShareRemoveForm implements Form {
 		if ($data === null) return;
 		$name = $this->option[$data[0]];
 		if (BankHelper::getInstance()->getLeader($this->bank) === strtolower($name)) {
-			SendMessage::Send($player, "リーダーは共有を外すことが出来ません", "Bank", false);
+			SendMessage::Send($player, 'リーダーは共有を外すことが出来ません', 'Bank', false);
 			return;
 		}
 		BankHelper::getInstance()->removeShare($this->bank, $data[0], $player->getName());
-		SendMessage::Send($player, $data[0] . "さんの共有を外しました", "Bank", true);
+		SendMessage::Send($player, $data[0] . 'さんの共有を外しました', 'Bank', true);
 	}
 
 	/**
@@ -47,9 +47,9 @@ class ShareRemoveForm implements Form {
 			'title' => 'BankSystem',
 			'content' => [
 				[
-					"type" => "dropdown",
-					"text" => "選択してください",
-					"options" => $option,
+					'type' => 'dropdown',
+					'text' => '選択してください',
+					'options' => $option,
 				],
 			],
 		];

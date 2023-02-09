@@ -14,16 +14,16 @@ use ree_jp\bank\form\BankForm;
 
 class BankCommand extends Command {
 
-	public function __construct(string $name = "bank", string $description = "銀行システム", string $usageMessage = null, array $aliases = []) {
+	public function __construct(string $name = 'bank', string $description = '銀行システム', string $usageMessage = null, array $aliases = []) {
 		$overloads = [
 			[
-				CommandParameter::enum("bankMode", new CommandEnum("bankMode", ["ranking", "create", "delete", "log", "put", "out", "share", "transfer"]), AvailableCommandsPacket::ARG_TYPE_STRING, true),
-				CommandParameter::standard("bank", AvailableCommandsPacket::ARG_TYPE_STRING),
-				CommandParameter::standard("money", AvailableCommandsPacket::ARG_TYPE_INT),
+				CommandParameter::enum('bankMode', new CommandEnum('bankMode', ['ranking', 'create', 'delete', 'log', 'put', 'out', 'share', 'transfer']), AvailableCommandsPacket::ARG_TYPE_STRING, true),
+				CommandParameter::standard('bank', AvailableCommandsPacket::ARG_TYPE_STRING),
+				CommandParameter::standard('money', AvailableCommandsPacket::ARG_TYPE_INT),
 			],
 		];
 		parent::__construct($name, $description, $usageMessage, $aliases, $overloads);
-		$this->setPermission("command.banksystem.true");
+		$this->setPermission('command.banksystem.true');
 	}
 
 	/**
@@ -35,7 +35,7 @@ class BankCommand extends Command {
 				SendForm::Send($sender, (new BankForm()));
 			}
 		} else {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 		}
 		return true;
 	}

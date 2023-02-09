@@ -31,7 +31,7 @@ class Major implements Listener {
 		if ($player->getInventory()->getItemInHand()->getId() == 318) {
 			$event->cancel();
 			$name = $player->getName();
-			if ($player->getInventory()->getItemInHand()->getName() === "Major") {
+			if ($player->getInventory()->getItemInHand()->getName() === 'Major') {
 				$event->cancel();
 				if (!$player->isSneaking()) {
 					$block = $event->getblock();
@@ -42,15 +42,15 @@ class Major implements Listener {
 							$player->getWorld()->addParticle($pos, $particle);
 						}
 						$distance = $this->data[$name]->distance($block->getPosition());
-						SendActionBarMessage::Send($player, (round($distance, 2) + 1) . " mです", "Major", true);
+						SendActionBarMessage::Send($player, (round($distance, 2) + 1) . ' mです', 'Major', true);
 					} else {
 						$this->data[$name] = $block->getPosition();
-						SendMessage::Send($player, "始点のブロック座標を記録しました。 {$block->getPosition()->getX()}, {$block->getPosition()->getY()}, {$block->getPosition()->getZ()}", "Major", true);
-						SendTip::Send($player, "スニークしながらタップすることで座標を再設定出来ます", "Major", true);
+						SendMessage::Send($player, "始点のブロック座標を記録しました。 {$block->getPosition()->getX()}, {$block->getPosition()->getY()}, {$block->getPosition()->getZ()}", 'Major', true);
+						SendTip::Send($player, 'スニークしながらタップすることで座標を再設定出来ます', 'Major', true);
 					}
 				} else {
 					unset($this->data[$name]);
-					SendTip::Send($player, "記録した座標のデータを削除しました", "Major", true);
+					SendTip::Send($player, '記録した座標のデータを削除しました', 'Major', true);
 				}
 			}
 		}

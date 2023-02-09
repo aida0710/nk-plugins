@@ -23,7 +23,7 @@ class FunctionListButton extends Button {
 		$form = (new SimpleForm())
 			->setTitle($this->title)
 			->setText($this->description)
-			->addElement(new Button("閉じる"));
+			->addElement(new Button('閉じる'));
 		SendForm::Send($player, ($form));
 	}
 }

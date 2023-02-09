@@ -13,14 +13,14 @@ class ReduceForm extends SimpleForm {
 
 	public function __construct(Player $player) {
 		$this
-			->setTitle("Reduce Enchant")
-			->setText("レベルを削減したいエンチャントを選択してください");
+			->setTitle('Reduce Enchant')
+			->setText('レベルを削減したいエンチャントを選択してください');
 		foreach ($player->getInventory()->getItemInHand()->getEnchantments() as $enchant) {
 			$enchantName = $enchant->getType()->getName();
 			if ($enchantName instanceof Translatable) {
 				$enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
 			}
-			$this->addElement(new SendReduceInputFormButton("{$enchantName}(Lv{$enchant->getLevel()})", $enchant, "reduce"),);
+			$this->addElement(new SendReduceInputFormButton("{$enchantName}(Lv{$enchant->getLevel()})", $enchant, 'reduce'),);
 		}
 	}
 }

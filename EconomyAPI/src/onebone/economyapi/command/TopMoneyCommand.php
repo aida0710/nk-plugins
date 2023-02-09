@@ -29,9 +29,9 @@ use function array_shift;
 class TopMoneyCommand extends Command {
 
 	public function __construct(private EconomyAPI $plugin) {
-		$desc = $plugin->getCommandMessage("topmoney");
-		parent::__construct("topmoney", $desc["description"], $desc["usage"]);
-		$this->setPermission("economyapi.command.topmoney");
+		$desc = $plugin->getCommandMessage('topmoney');
+		parent::__construct('topmoney', $desc['description'], $desc['usage']);
+		$this->setPermission('economyapi.command.topmoney');
 		$this->plugin = $plugin;
 	}
 
@@ -52,7 +52,7 @@ class TopMoneyCommand extends Command {
 				$ops[] = $op;
 			}
 		}
-		$task = new SortTask($sender->getName(), $this->plugin->getAllMoney(), $this->plugin->getConfig()->get("add-op-at-rank"), $page, $ops, $banned);
+		$task = new SortTask($sender->getName(), $this->plugin->getAllMoney(), $this->plugin->getConfig()->get('add-op-at-rank'), $page, $ops, $banned);
 		$server->getAsyncPool()->submitTask($task);
 		return true;
 	}

@@ -15,19 +15,19 @@ class Shop3Form extends SimpleForm {
 
 	public function __construct() {
 		$contents = [
-			"建材ブロック類" => "BuildingMaterials",
-			"その他ブロック" => "OtherBlocks3",
-			"原石ブロック類" => "Ores",
-			"染料アイテム" => "Dyes",
+			'建材ブロック類' => 'BuildingMaterials',
+			'その他ブロック' => 'OtherBlocks3',
+			'原石ブロック類' => 'Ores',
+			'染料アイテム' => 'Dyes',
 		];
 		$this
-			->setTitle("Level Shop")
-			->setText("§7選択してください");
+			->setTitle('Level Shop')
+			->setText('§7選択してください');
 		foreach ($contents as $key => $value) {
 			$class = __NAMESPACE__ . "\\" . $value;
 			$this->addElements(new ShopItemFormButton($key, $class));
 		}
-		$this->addElements(new FirstBackFormButton("ホームに戻る"));
+		$this->addElements(new FirstBackFormButton('ホームに戻る'));
 	}
 
 	public function handleClosed(Player $player) : void {

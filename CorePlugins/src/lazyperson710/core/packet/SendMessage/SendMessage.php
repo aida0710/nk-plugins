@@ -22,6 +22,6 @@ class SendMessage {
 			$type = TextFormat::RED;
 		}
 		SoundPacket::Send($player, $sound);
-		$player->sendMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+		$player->sendMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . ' >> ' . $type . $message);
 	}
 }

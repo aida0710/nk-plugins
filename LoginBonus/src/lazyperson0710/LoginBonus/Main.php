@@ -23,11 +23,11 @@ class Main extends PluginBase {
 	public Config $lastBonusDateConfig;
 	public Item $loginBonusItem;
 	public const LoginBonusItemInfo = [
-		"id" => -195,
-		"meta" => 0,
-		"count" => 1,
-		"enchant" => 18,
-		"level" => 15,
+		'id' => -195,
+		'meta' => 0,
+		'count' => 1,
+		'enchant' => 18,
+		'level' => 15,
 	];
 
 	public function onLoad() : void {
@@ -35,23 +35,23 @@ class Main extends PluginBase {
 	}
 
 	public function onEnable() : void {
-		$this->getServer()->getCommandMap()->registerAll("LoginBonus", [
+		$this->getServer()->getCommandMap()->registerAll('LoginBonus', [
 			new LoginBonusCommand(),
 		]);
 		ItemRegister::getInstance()->init();
 		date_default_timezone_set('Asia/Tokyo');
 		$this->reloadConfig();
-		Main::getInstance()->lastBonusDateConfig = new Config($this->getDataFolder() . "lastBonus.yml", Config::YAML);
+		Main::getInstance()->lastBonusDateConfig = new Config($this->getDataFolder() . 'lastBonus.yml', Config::YAML);
 		$this->getScheduler()->scheduleRepeatingTask(new CheckChangeDateTask($this), 20 * 60);
 		$this->getServer()->getPluginManager()->registerEvents(new JoinPlayerEvent(), $this);
 		$this->loginBonusItem = $this->registerLoginBonusItem();
 	}
 
 	private function registerLoginBonusItem() : Item {
-		$item = ItemFactory::getInstance()->get((int) self::LoginBonusItemInfo["id"], (int) Main::LoginBonusItemInfo["meta"], (int) Main::LoginBonusItemInfo["count"]);
-		$item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId((int) Main::LoginBonusItemInfo["enchant"]), (int) Main::LoginBonusItemInfo["level"]));
-		$item->setCustomName("Login Bonus");
-		$item->setLore(["アイテムを持ってタップすることでログインボーナスとアイテムを交換することができます",]);
+		$item = ItemFactory::getInstance()->get((int) self::LoginBonusItemInfo['id'], (int) Main::LoginBonusItemInfo['meta'], (int) Main::LoginBonusItemInfo['count']);
+		$item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId((int) Main::LoginBonusItemInfo['enchant']), (int) Main::LoginBonusItemInfo['level']));
+		$item->setCustomName('Login Bonus');
+		$item->setLore(['アイテムを持ってタップすることでログインボーナスとアイテムを交換することができます',]);
 		return $item;
 	}
 }

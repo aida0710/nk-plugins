@@ -11,14 +11,14 @@ use pocketmine\Server;
 class RecipeCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("recipe", "オリジナルRecipeを見れます(teleportするので注意)");
+		parent::__construct('recipe', 'オリジナルRecipeを見れます(teleportするので注意)');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
-		Server::getInstance()->dispatchCommand($sender, "warp recipe");
+		Server::getInstance()->dispatchCommand($sender, 'warp recipe');
 	}
 }

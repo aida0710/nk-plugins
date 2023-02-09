@@ -32,35 +32,35 @@ class MessageListener implements Listener {
 			CoordinatesPacket::Send($player, false);
 		}
 		if (!$player->hasPlayedBefore()) {
-			$pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName("tos"));
+			$pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName('tos'));
 			$event->getPlayer()->teleport($pos);
 			$pickaxe = ItemFactory::getInstance()->get(ItemIds::IRON_PICKAXE);
-			$pickaxe->setCustomName("ﾃﾂぴっける");
+			$pickaxe->setCustomName('ﾃﾂぴっける');
 			$pickaxe->setLore([
-				"lore1" => "初回限定ピッケル",
-				"lore2" => "サーバーを楽しんでください！",
+				'lore1' => '初回限定ピッケル',
+				'lore2' => 'サーバーを楽しんでください！',
 			]);
 			if (!$player->getInventory()->contains($pickaxe) && $player->getInventory()->canAddItem($pickaxe)) {
 				$player->getInventory()->addItem($pickaxe);
 			}
 			$axe = ItemFactory::getInstance()->get(ItemIds::GOLD_AXE);
-			$axe->setCustomName("きんのおのぉー");
+			$axe->setCustomName('きんのおのぉー');
 			$axe->setLore([
-				"lore1" => "初回限定斧",
-				"lore2" => "耐久力が乏しい・・・",
+				'lore1' => '初回限定斧',
+				'lore2' => '耐久力が乏しい・・・',
 			]);
 			if (!$player->getInventory()->contains($axe) && $player->getInventory()->canAddItem($axe)) {
 				$player->getInventory()->addItem($axe);
 			}
 			$event->setJoinMessage("§l§bNewPlayer §7>> §e{$name}さんが初めてサーバーに参加しました！");
-		} elseif ($player->getName() === "hakokokku") {
+		} elseif ($player->getName() === 'hakokokku') {
 			$event->setJoinMessage("§bHakokokkuLogin §7>> §eわん、つー、すりー！はこさんがきたぞー！MiningLv.{$level}");
 		} else {
 			if (AnnounceService::isConfirmed($player->getName())) {
 				$event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
 			} else {
 				$event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。Passが認証されていません");
-				$pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName("tos"));
+				$pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName('tos'));
 				$event->getPlayer()->teleport($pos);
 			}
 		}
@@ -69,7 +69,7 @@ class MessageListener implements Listener {
 	public function onUse(PlayerInteractEvent $event) {
 		if ($event->getPlayer()->getInventory()->getItemInHand()->getId() === -195) {
 			$event->cancel();
-			Server::getInstance()->dispatchCommand($event->getPlayer(), "bonus");
+			Server::getInstance()->dispatchCommand($event->getPlayer(), 'bonus');
 		}
 	}
 
@@ -87,7 +87,7 @@ class MessageListener implements Listener {
 
 	public function onPlace(BlockPlaceEvent $event) {
 		if ($event->getBlock()->getId() === 449) {//書見台
-			SendMessage::Send($event->getPlayer(), "本は土地保護されていても取れるので注意してください", "Lectern", false);
+			SendMessage::Send($event->getPlayer(), '本は土地保護されていても取れるので注意してください', 'Lectern', false);
 		}
 	}
 

@@ -35,8 +35,8 @@ class InfoSystem extends PluginBase implements Listener {
 	public function onEnable() : void {
 		self::$instance = $this;
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML, ["デフォルト称号" => "§b鯖民"]);
-		$this->getServer()->getCommandMap()->registerAll("infoSystem", [
+		$this->config = new Config($this->getDataFolder() . 'config.yml', Config::YAML, ['デフォルト称号' => '§b鯖民']);
+		$this->getServer()->getCommandMap()->registerAll('infoSystem', [
 			new TagCommand(),
 		]);
 	}
@@ -46,7 +46,7 @@ class InfoSystem extends PluginBase implements Listener {
 		$name = strtolower($player->getName());
 		$folder = $this->getFolder($name);
 		$this->data[$name] = new Config($folder, Config::JSON, [
-			"tag" => $this->config->get("デフォルト称号"),
+			'tag' => $this->config->get('デフォルト称号'),
 		]);
 		$this->data[$name]->save();
 		$this->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
@@ -63,25 +63,25 @@ class InfoSystem extends PluginBase implements Listener {
 
 	public function ChangeTag(Player $player) {
 		$name = strtolower($player->getName());
-		$tag = $this->data[$name]->get("tag");
+		$tag = $this->data[$name]->get('tag');
 		$name = $player->getName();
 		$level = MiningLevelAPI::getInstance()->getLevel($player);
 		if (in_array($player->getName(), self::owner, true)) {
 			if (Server::getInstance()->isOp($player->getName())) {
-				$player->setDisplayName("§eOwner§a-§e" . $tag . "§r§a-§f" . $name . "§r§a");
-				$player->setNameTag("§eOwner§a-§e" . $tag . "§r§a-§f" . $name . "§r§a");
+				$player->setDisplayName('§eOwner§a-§e' . $tag . '§r§a-§f' . $name . '§r§a');
+				$player->setNameTag('§eOwner§a-§e' . $tag . '§r§a-§f' . $name . '§r§a');
 			} else {
-				$player->setDisplayName("§eOwner§a-§eLv." . $level . "§a-§e" . $tag . "§r§a-§f" . $name . "§r§f");
-				$player->setNameTag("§eOwner§a-§eLv." . $level . "§a-§e" . $tag . "§r§a-§f" . $name . "§r§f");
+				$player->setDisplayName('§eOwner§a-§eLv.' . $level . '§a-§e' . $tag . '§r§a-§f' . $name . '§r§f');
+				$player->setNameTag('§eOwner§a-§eLv.' . $level . '§a-§e' . $tag . '§r§a-§f' . $name . '§r§f');
 			}
 			return;
 		}
 		if (Server::getInstance()->isOp($player->getName())) {
-			$player->setDisplayName("§eStaff§a-§e" . $tag . "§r§a-§f" . $name . "§r§f");
-			$player->setNameTag("§eStaff§a-§e" . $tag . "§r§a-§f" . $name . "§r§f");
+			$player->setDisplayName('§eStaff§a-§e' . $tag . '§r§a-§f' . $name . '§r§f');
+			$player->setNameTag('§eStaff§a-§e' . $tag . '§r§a-§f' . $name . '§r§f');
 		} else {
-			$player->setDisplayName("§eLv." . $level . "§a-§e" . $tag . "§r§a-§r§f" . $name);
-			$player->setNameTag("§eLv." . $level . "§a-§e" . $tag . "§r§a-§r§f" . $name);
+			$player->setDisplayName('§eLv.' . $level . '§a-§e' . $tag . '§r§a-§r§f' . $name);
+			$player->setNameTag('§eLv.' . $level . '§a-§e' . $tag . '§r§a-§r§f' . $name);
 		}
 	}
 

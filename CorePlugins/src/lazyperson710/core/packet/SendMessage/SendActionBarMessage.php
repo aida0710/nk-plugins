@@ -22,6 +22,6 @@ class SendActionBarMessage {
 			$type = TextFormat::RED;
 		}
 		SoundPacket::Send($player, $sound);
-		$player->sendActionBarMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+		$player->sendActionBarMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . ' >> ' . $type . $message);
 	}
 }

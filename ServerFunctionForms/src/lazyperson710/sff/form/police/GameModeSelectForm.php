@@ -15,24 +15,24 @@ class GameModeSelectForm extends CustomForm {
 
 	public function __construct(Player $player) {
 		$gameMode = [
-			"Survival",
-			"Spectator",
+			'Survival',
+			'Spectator',
 		];
-		$this->dropdown = new Dropdown("ゲームモードを選択してください", $gameMode);
+		$this->dropdown = new Dropdown('ゲームモードを選択してください', $gameMode);
 		$this
-			->setTitle("Police System")
+			->setTitle('Police System')
 			->addElement($this->dropdown);
 	}
 
 	public function handleSubmit(Player $player) : void {
 		switch ($this->dropdown->getSelectedOption()) {
-			case "Survival":
+			case 'Survival':
 				$player->setGamemode(GameMode::SURVIVAL());
-				SendMessage::Send($player, "サバイバルモードに変更しました", "Police", true);
+				SendMessage::Send($player, 'サバイバルモードに変更しました', 'Police', true);
 				return;
-			case "Spectator":
+			case 'Spectator':
 				$player->setGamemode(GameMode::SPECTATOR());
-				SendMessage::Send($player, "スペクテイターモードに変更しました", "Police", true);
+				SendMessage::Send($player, 'スペクテイターモードに変更しました', 'Police', true);
 				return;
 		}
 	}

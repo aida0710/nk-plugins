@@ -17,13 +17,13 @@ class PassBlockInteract implements Listener {
 	 * @priority LOWEST
 	 */
 	public function onInteract(PlayerInteractEvent $event) {
-		if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == "tos") {
+		if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == 'tos') {
 			$player = $event->getPlayer();
 			$x = $event->getBlock()->getPosition()->getFloorX();
 			$y = $event->getBlock()->getPosition()->getFloorY();
 			$z = $event->getBlock()->getPosition()->getFloorZ();
 			if ($x === 214 && $y === 106 && $z === 246) {
-				Server::getInstance()->dispatchCommand($player, "pass");
+				Server::getInstance()->dispatchCommand($player, 'pass');
 			}
 			if ($x === 215 && $y === 105 && $z === 247) {
 				SendForm::Send($player, (new TosForm()));
@@ -37,13 +37,13 @@ class PassBlockInteract implements Listener {
 	}
 
 	public function onBreak(BlockBreakEvent $event) {
-		if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == "tos") {
+		if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == 'tos') {
 			$player = $event->getPlayer();
 			$x = $event->getBlock()->getPosition()->getFloorX();
 			$y = $event->getBlock()->getPosition()->getFloorY();
 			$z = $event->getBlock()->getPosition()->getFloorZ();
 			if ($x === 214 && $y === 106 && $z === 246) {
-				Server::getInstance()->dispatchCommand($player, "pass");
+				Server::getInstance()->dispatchCommand($player, 'pass');
 			}
 		}
 	}

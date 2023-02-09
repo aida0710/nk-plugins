@@ -30,8 +30,8 @@ use pocketmine\Server;
 class LoadSubCommand extends BaseSubCommand {
 
 	protected function prepare() : void {
-		$this->registerArgument(0, new RawStringArgument("worldName"));
-		$this->setPermission("multiworld.command.load");
+		$this->registerArgument(0, new RawStringArgument('worldName'));
+		$this->setPermission('multiworld.command.load');
 	}
 
 	/**
@@ -39,16 +39,16 @@ class LoadSubCommand extends BaseSubCommand {
 	 */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		/** @var string $worldName */
-		$worldName = $args["worldName"];
+		$worldName = $args['worldName'];
 		if (!Server::getInstance()->getWorldManager()->isWorldGenerated($worldName)) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-levelnotexists", [$worldName]));
+			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'load-levelnotexists', [$worldName]));
 			return;
 		}
 		if (Server::getInstance()->getWorldManager()->isWorldLoaded($worldName)) {
-			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-loaded"));
+			$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'load-loaded'));
 			return;
 		}
 		Server::getInstance()->getWorldManager()->loadWorld($worldName, true);
-		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "load-done"));
+		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'load-done'));
 	}
 }

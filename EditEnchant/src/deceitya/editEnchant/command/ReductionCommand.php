@@ -13,7 +13,7 @@ use pocketmine\player\Player;
 class ReductionCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("enreduce", "エンチャントを削減する");
+		parent::__construct('enreduce', 'エンチャントを削減する');
 	}
 
 	public function execute(CommandSender $sender, string $label, array $args) : bool {

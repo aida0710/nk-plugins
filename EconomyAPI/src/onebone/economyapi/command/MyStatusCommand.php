@@ -14,9 +14,9 @@ use function strtolower;
 class MyStatusCommand extends Command {
 
 	public function __construct(private EconomyAPI $plugin) {
-		$desc = $plugin->getCommandMessage("mystatus");
-		parent::__construct("mystatus", $desc["description"], $desc["usage"]);
-		$this->setPermission("economyapi.command.mystatus");
+		$desc = $plugin->getCommandMessage('mystatus');
+		parent::__construct('mystatus', $desc['description'], $desc['usage']);
+		$this->setPermission('economyapi.command.mystatus');
 		$this->plugin = $plugin;
 	}
 
@@ -26,7 +26,7 @@ class MyStatusCommand extends Command {
 			return false;
 		}
 		if (!$sender instanceof Player) {
-			$sender->sendMessage(TextFormat::RED . "Please run this command in-game.");
+			$sender->sendMessage(TextFormat::RED . 'Please run this command in-game.');
 			return true;
 		}
 		$money = $this->plugin->getAllMoney();
@@ -38,7 +38,7 @@ class MyStatusCommand extends Command {
 		if ($allMoney > 0) {
 			$topMoney = round((($money[strtolower($sender->getName())] / $allMoney) * 100), 2);
 		}
-		$sender->sendMessage($this->plugin->getMessage("mystatus-show", [$topMoney], $sender->getName()));
+		$sender->sendMessage($this->plugin->getMessage('mystatus-show', [$topMoney], $sender->getName()));
 		return true;
 	}
 }

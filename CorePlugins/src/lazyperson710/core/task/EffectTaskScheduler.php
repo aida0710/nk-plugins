@@ -24,14 +24,14 @@ class EffectTaskScheduler extends Task {
 		$color = mt_rand(1, 2);
 		switch ($color) {
 			case 1:
-				$color = "§e";
+				$color = '§e';
 				break;
 			case 2:
-				$color = "§g";
+				$color = '§g';
 				break;
 		}
 		foreach (Server::getInstance()->getOnlinePlayers() as $player) {
-			if ($player->getPosition()->getWorld()->getFolderName() !== "pvp") {
+			if ($player->getPosition()->getWorld()->getFolderName() !== 'pvp') {
 				if ($player->getHungerManager()->getFood() <= 6) {
 					$effect = new EffectInstance(VanillaEffects::SLOWNESS(), 40, 0, false);
 					$vanillaEffect = VanillaEffects::SLOWNESS();

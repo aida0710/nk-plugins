@@ -63,7 +63,7 @@ class PacketHooker implements Listener {
 
 	public static function register(Plugin $registrant) : void {
 		if (self::$isRegistered) {
-			throw new HookAlreadyRegistered("Event listener is already registered by another plugin.");
+			throw new HookAlreadyRegistered('Event listener is already registered by another plugin.');
 		}
 		$registrant->getServer()->getPluginManager()->registerEvents(new PacketHooker(), $registrant);
 	}
@@ -133,7 +133,7 @@ class PacketHooker implements Listener {
 	private static function generateOverloadList(IArgumentable $argumentable) : array {
 		$input = $argumentable->getArgumentList();
 		$combinations = [];
-		$outputLength = array_product(array_map("count", $input));
+		$outputLength = array_product(array_map('count', $input));
 		$indexes = [];
 		foreach ($input as $k => $charList) {
 			$indexes[$k] = 0;

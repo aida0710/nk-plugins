@@ -10,7 +10,7 @@ use pocketmine\player\Player;
 class SearchResultForm extends SimpleForm {
 
 	public function __construct(Player $player, array $items) {
-		(new Calculation())->sendButton($player, "search", $items, $this);
+		(new Calculation())->sendButton($player, 'search', $items, $this);
 	}
 
 }

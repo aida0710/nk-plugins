@@ -16,12 +16,12 @@ class InvClearForm extends CustomForm {
 	private Toggle $Hotbar;
 
 	public function __construct() {
-		$this->Armor = new Toggle("Armorインベントリの削除(default/off)", false);
-		$this->Hotbar = new Toggle("ホットバーアイテムの削除(default/off)", false);
+		$this->Armor = new Toggle('Armorインベントリの削除(default/off)', false);
+		$this->Hotbar = new Toggle('ホットバーアイテムの削除(default/off)', false);
 		$this
-			->setTitle("InventoryClear")
+			->setTitle('InventoryClear')
 			->addElements(
-				new label("インベントリ内のアイテムを削除します"),
+				new label('インベントリ内のアイテムを削除します'),
 				$this->Armor,
 				$this->Hotbar,
 			);
@@ -51,17 +51,17 @@ class InvClearForm extends CustomForm {
 			$armorInventory->getContents();
 		}
 		if (($count + $armorCount) == 0) {
-			SendMessage::Send($player, "インベントリからは何も消去されませんでした", "InvClear", false);
+			SendMessage::Send($player, 'インベントリからは何も消去されませんでした', 'InvClear', false);
 			return;
 		}
 		if (($armorCount) == 0) {
-			SendMessage::Send($player, "インベントリから{$count}個のアイテムが削除されました", "InvClear", true);
+			SendMessage::Send($player, "インベントリから{$count}個のアイテムが削除されました", 'InvClear', true);
 			return;
 		}
 		if (($count) == 0) {
-			SendMessage::Send($player, "Armorインベントリから{$armorCount}個のアイテムが削除されました", "InvClear", true);
+			SendMessage::Send($player, "Armorインベントリから{$armorCount}個のアイテムが削除されました", 'InvClear', true);
 			return;
 		}
-		SendMessage::Send($player, "インベントリから{$count}個、Armorインベントリからは{$armorCount}個のアイテムが削除されました", "InvClear", true);
+		SendMessage::Send($player, "インベントリから{$count}個、Armorインベントリからは{$armorCount}個のアイテムが削除されました", 'InvClear', true);
 	}
 }

@@ -15,9 +15,9 @@ class ItemNameChangeForm extends CustomForm {
 	private Input $itemName;
 
 	public function __construct() {
-		$this->itemName = new Input("所持しているアイテムに付与したい名前を入力してください\n名前を変更できるのは道具のみとなります", "なまけものソード");
+		$this->itemName = new Input("所持しているアイテムに付与したい名前を入力してください\n名前を変更できるのは道具のみとなります", 'なまけものソード');
 		$this
-			->setTitle("Item Edit")
+			->setTitle('Item Edit')
 			->addElements(
 				$this->itemName,
 			);
@@ -25,7 +25,7 @@ class ItemNameChangeForm extends CustomForm {
 
 	public function handleSubmit(Player $player) : void {
 		if (!$player->getInventory()->getItemInHand() instanceof Durable) {
-			SendMessage::Send($player, "道具や装備以外のアイテムは名前を変更することができません", "ItemEdit", false);
+			SendMessage::Send($player, '道具や装備以外のアイテムは名前を変更することができません', 'ItemEdit', false);
 			return;
 		}
 		$approval = false;
@@ -39,12 +39,12 @@ class ItemNameChangeForm extends CustomForm {
 			}
 		}
 		if ($approval === false) {
-			SendMessage::Send($player, "アイテム名変更アイテムを取得することができませんでした", "ItemEdit", false);
+			SendMessage::Send($player, 'アイテム名変更アイテムを取得することができませんでした', 'ItemEdit', false);
 			return;
 		}
 		$inHandItem = $player->getInventory()->getItemInHand();
 		$inHandItem->setCustomName($this->itemName->getValue());
 		$player->getInventory()->setItemInHand($inHandItem);
-		SendMessage::Send($player, "アイテム名を{$this->itemName->getValue()}§r§aに変更しました", "ItemEdit", true);
+		SendMessage::Send($player, "アイテム名を{$this->itemName->getValue()}§r§aに変更しました", 'ItemEdit', true);
 	}
 }

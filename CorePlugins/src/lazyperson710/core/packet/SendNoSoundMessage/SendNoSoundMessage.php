@@ -14,6 +14,6 @@ class SendNoSoundMessage {
 		} else {
 			$type = TextFormat::RED;
 		}
-		$player->sendMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+		$player->sendMessage(TextFormat::AQUA . $prefix . TextFormat::GRAY . ' >> ' . $type . $message);
 	}
 }

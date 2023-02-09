@@ -20,10 +20,10 @@ class InventoryEditPlayer extends CustomForm {
 			$name = $onlinePlayer->getName();
 			$names[] .= $name;
 		}
-		$this->players = new Dropdown("設定を変更したいプレイヤーを選択してください", $names);
-		$this->input = new Input("オフラインのプレイヤーを指定したい場合はこちらを入力してください", "lazyperson710");
+		$this->players = new Dropdown('設定を変更したいプレイヤーを選択してください', $names);
+		$this->input = new Input('オフラインのプレイヤーを指定したい場合はこちらを入力してください', 'lazyperson710');
 		$this
-			->setTitle("Player Edit")
+			->setTitle('Player Edit')
 			->addElements(
 				$this->players,
 				$this->input,
@@ -33,9 +33,9 @@ class InventoryEditPlayer extends CustomForm {
 	public function handleSubmit(Player $player) : void {
 		$targetName = $this->players->getSelectedOption();
 		if (empty($this->input->getValue())) {
-			Server::getInstance()->dispatchCommand($player, "invsee " . $targetName);
+			Server::getInstance()->dispatchCommand($player, 'invsee ' . $targetName);
 		} else {
-			Server::getInstance()->dispatchCommand($player, "invsee " . $this->input->getValue());
+			Server::getInstance()->dispatchCommand($player, 'invsee ' . $this->input->getValue());
 		}
 	}
 

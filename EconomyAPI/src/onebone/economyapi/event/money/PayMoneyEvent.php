@@ -28,7 +28,7 @@ class PayMoneyEvent extends EconomyAPIEvent {
 	public static $handlerList;
 
 	public function __construct(EconomyAPI $plugin, private $payer, private $target, private $amount) {
-		parent::__construct($plugin, "PayCommand");
+		parent::__construct($plugin, 'PayCommand');
 	}
 
 	public function getPayer() {

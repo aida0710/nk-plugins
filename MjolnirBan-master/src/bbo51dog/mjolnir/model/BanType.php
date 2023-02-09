@@ -15,10 +15,10 @@ class BanType {
 
 	use EnumTrait;
 
-	private const NAME = "player_name";
-	private const IP = "ip";
-	private const CID = "cid";
-	private const XUID = "xuid";
+	private const NAME = 'player_name';
+	private const IP = 'ip';
+	private const CID = 'cid';
+	private const XUID = 'xuid';
 
 	protected static function setup() : void {
 		self::registerAll(

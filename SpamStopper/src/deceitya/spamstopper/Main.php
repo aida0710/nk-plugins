@@ -28,7 +28,7 @@ class Main extends PluginBase implements Listener {
 		$msg = $event->getMessage();
 		if (MiningLevelAPI::getInstance()->getLevel($event->getPlayer()) >= 30) {
 			if (isset(self::$interval[$event->getPlayer()->getName()])) {
-				SendMessage::Send($event->getPlayer(), "チャットは1秒以内に再度送信することは出来ません", "SpamBlock", false);
+				SendMessage::Send($event->getPlayer(), 'チャットは1秒以内に再度送信することは出来ません', 'SpamBlock', false);
 				$event->cancel();
 			} else {
 				self::$interval[$event->getPlayer()->getName()] = true;
@@ -41,11 +41,11 @@ class Main extends PluginBase implements Listener {
 		} else {
 			if (isset($this->spam[$name]) && $this->spam[$name] == $msg) {
 				$event->cancel();
-				SendMessage::Send($event->getPlayer(), "30レベル未満のプレイヤーは連続して同じメッセージは送信できません", "SpamBlock", false);
+				SendMessage::Send($event->getPlayer(), '30レベル未満のプレイヤーは連続して同じメッセージは送信できません', 'SpamBlock', false);
 				return;
 			}
 			if (isset(self::$interval[$event->getPlayer()->getName()])) {
-				SendMessage::Send($event->getPlayer(), "30レベル未満のプレイヤーはチャット後5秒以内は連続してメッセージを送信できません", "SpamBlock", false);
+				SendMessage::Send($event->getPlayer(), '30レベル未満のプレイヤーはチャット後5秒以内は連続してメッセージを送信できません', 'SpamBlock', false);
 				$event->cancel();
 			} else {
 				self::$interval[$event->getPlayer()->getName()] = true;

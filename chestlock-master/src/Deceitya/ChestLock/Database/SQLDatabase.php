@@ -29,7 +29,7 @@ class SQLDatabase {
 		if ($this->isRegistered($x, $y, $z, $level)) {
 			return false;
 		}
-		$stmt = $this->db->prepare("INSERT INTO lock (pos, time, player) VALUES (:pos, :time, :player)");
+		$stmt = $this->db->prepare('INSERT INTO lock (pos, time, player) VALUES (:pos, :time, :player)');
 		$stmt->bindValue(':pos', "$x:$y:$z:$level", SQLITE3_TEXT);
 		$stmt->bindValue(':time', time(), SQLITE3_INTEGER);
 		$stmt->bindValue(':player', strtolower($player), SQLITE3_TEXT);
@@ -42,7 +42,7 @@ class SQLDatabase {
 	}
 
 	public function getData(int $x, int $y, int $z, string $level) : array {
-		$stmt = $this->db->prepare("SELECT * FROM lock WHERE pos = :pos");
+		$stmt = $this->db->prepare('SELECT * FROM lock WHERE pos = :pos');
 		$stmt->bindValue(':pos', "$x:$y:$z:$level", SQLITE3_TEXT);
 		$data = $stmt->execute();
 		$result = [];
@@ -56,7 +56,7 @@ class SQLDatabase {
 		if (!$this->isRegistered($x, $y, $z, $level)) {
 			return false;
 		}
-		$stmt = $this->db->prepare("DELETE FROM lock WHERE pos = :pos");
+		$stmt = $this->db->prepare('DELETE FROM lock WHERE pos = :pos');
 		$stmt->bindValue(':pos', "$x:$y:$z:$level", SQLITE3_TEXT);
 		$stmt->execute();
 		return true;

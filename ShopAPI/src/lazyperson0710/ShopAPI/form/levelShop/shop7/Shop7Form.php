@@ -15,17 +15,17 @@ class Shop7Form extends SimpleForm {
 
 	public function __construct() {
 		$contents = [
-			"その他ブロック" => "OtherBlocks7",
-			"レッドストーン類" => "RedStone",
+			'その他ブロック' => 'OtherBlocks7',
+			'レッドストーン類' => 'RedStone',
 		];
 		$this
-			->setTitle("Level Shop")
-			->setText("§7選択してください");
+			->setTitle('Level Shop')
+			->setText('§7選択してください');
 		foreach ($contents as $key => $value) {
 			$class = __NAMESPACE__ . "\\" . $value;
 			$this->addElements(new ShopItemFormButton($key, $class));
 		}
-		$this->addElements(new FirstBackFormButton("ホームに戻る"));
+		$this->addElements(new FirstBackFormButton('ホームに戻る'));
 	}
 
 	public function handleClosed(Player $player) : void {

@@ -14,7 +14,7 @@ class EntityRemoveTask extends Task {
 		if (Main::getInstance()->entityRemoveTimeLeft > 0) {
 			Main::getInstance()->entityRemoveTimeLeft -= 1;
 			if (Main::getInstance()->entityRemoveTimeLeft === 15) {
-				SendBroadcastTip::Send("残り15秒で落下している経験値オーブが消去されます", "ExpRemover");
+				SendBroadcastTip::Send('残り15秒で落下している経験値オーブが消去されます', 'ExpRemover');
 			}
 		} else {
 			$count = 0;
@@ -27,7 +27,7 @@ class EntityRemoveTask extends Task {
 				}
 			}
 			if ($count >= 1) {
-				SendBroadcastTip::Send("経験値オーブを{$count}個削除しました", "ExpRemover");
+				SendBroadcastTip::Send("経験値オーブを{$count}個削除しました", 'ExpRemover');
 			}
 			Main::getInstance()->entityRemoveTimeLeft = Main::EntityRemoveTaskInterval - 1;
 		}

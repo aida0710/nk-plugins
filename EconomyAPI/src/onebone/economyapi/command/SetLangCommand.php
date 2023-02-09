@@ -13,9 +13,9 @@ use function trim;
 class SetLangCommand extends Command {
 
 	public function __construct(private EconomyAPI $plugin) {
-		$desc = $plugin->getCommandMessage("setlang");
-		parent::__construct("setlang", $desc["description"], $desc["usage"]);
-		$this->setPermission("economyapi.command.setlang");
+		$desc = $plugin->getCommandMessage('setlang');
+		parent::__construct('setlang', $desc['description'], $desc['usage']);
+		$this->setPermission('economyapi.command.setlang');
 		$this->plugin = $plugin;
 	}
 
@@ -25,12 +25,12 @@ class SetLangCommand extends Command {
 			return false;
 		}
 		$lang = array_shift($params);
-		if (trim($lang) === "") {
-			$sender->sendMessage(TextFormat::RED . "Usage: " . $this->getUsage());
+		if (trim($lang) === '') {
+			$sender->sendMessage(TextFormat::RED . 'Usage: ' . $this->getUsage());
 			return true;
 		}
 		if ($this->plugin->setPlayerLanguage($sender->getName(), $lang)) {
-			$sender->sendMessage($this->plugin->getMessage("language-set", [$lang], $sender->getName()));
+			$sender->sendMessage($this->plugin->getMessage('language-set', [$lang], $sender->getName()));
 		} else {
 			$sender->sendMessage(TextFormat::RED . "There is no language such as $lang");
 		}

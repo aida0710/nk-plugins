@@ -43,7 +43,7 @@ class YmgGachaPlugin extends PluginBase {
 			PacketHooker::register($this);
 		} catch (HookAlreadyRegistered $err) {
 			$logger = $this->getLogger();
-			$logger->error("already registered hook, by " . $this->getName());
+			$logger->error('already registered hook, by ' . $this->getName());
 			$logger->error($err->getMessage());
 			$logger->error($err->getTraceAsString());
 			$this->getServer()->getPluginManager()->disablePlugin($this);

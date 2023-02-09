@@ -107,6 +107,7 @@ class DiverseBossBar extends BossBar {
 	}
 
 	private function addDefaults(Player $player, BossEventPacket $pk) : BossEventPacket {
+		var_dump('diverseBoss');
 		$pk->title = $this->getFullTitleFor($player);
 		$pk->healthPercent = $this->getPercentageFor($player);
 		$pk->darkenScreen = false;
@@ -120,9 +121,9 @@ class DiverseBossBar extends BossBar {
 	 * newline characters
 	 */
 	public function getFullTitleFor(Player $player) : string {
-		$text = $this->titles[$player->getId()] ?? "";
-		if (!empty($this->subTitles[$player->getId()] ?? "")) {
-			$text .= "\n\n" . $this->subTitles[$player->getId()] ?? "";//?? "" even necessary?
+		$text = $this->titles[$player->getId()] ?? '';
+		if (!empty($this->subTitles[$player->getId()] ?? '')) {
+			$text .= "\n\n" . $this->subTitles[$player->getId()] ?? '';//?? "" even necessary?
 		}
 		if (empty($text)) $text = $this->getFullTitle();
 		return mb_convert_encoding($text, 'UTF-8');
@@ -139,7 +140,7 @@ class DiverseBossBar extends BossBar {
 	/**
 	 * @param Player[] $players
 	 */
-	public function setTitleFor(array $players, string $title = "") : DiverseBossBar {
+	public function setTitleFor(array $players, string $title = '') : DiverseBossBar {
 		foreach ($players as $player) {
 			$this->titles[$player->getId()] = $title;
 			$this->sendBossTextPacket([$player]);
@@ -169,7 +170,7 @@ class DiverseBossBar extends BossBar {
 	/**
 	 * @param Player[] $players
 	 */
-	public function setSubTitleFor(array $players, string $subTitle = "") : DiverseBossBar {
+	public function setSubTitleFor(array $players, string $subTitle = '') : DiverseBossBar {
 		foreach ($players as $player) {
 			$this->subTitles[$player->getId()] = $subTitle;
 			$this->sendBossTextPacket([$player]);
@@ -230,6 +231,6 @@ class DiverseBossBar extends BossBar {
 	}
 
 	public function __toString() : string {
-		return __CLASS__ . " ID: $this->actorId, Titles: " . count($this->titles) . ", Subtitles: " . count($this->subTitles) . " [Defaults: " . parent::__toString() . "]";
+		return __CLASS__ . " ID: $this->actorId, Titles: " . count($this->titles) . ', Subtitles: ' . count($this->subTitles) . ' [Defaults: ' . parent::__toString() . ']';
 	}
 }

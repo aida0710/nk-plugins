@@ -21,11 +21,11 @@ class CancelEvent implements Listener {
 		$inventory = $event->getInventory();
 		$player = $event->getPlayer();
 		if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory) {
-			SendTip::Send($player, "このブロックのインベントリは開くことが出来ません", "Inventory", false);
+			SendTip::Send($player, 'このブロックのインベントリは開くことが出来ません', 'Inventory', false);
 			$event->cancel();
 		}
 		if ($inventory instanceof AnvilInventory) {
-			SendTip::Send($player, "スニークしながらタップするとアイテムの修繕が可能です", "Repair", false);
+			SendTip::Send($player, 'スニークしながらタップするとアイテムの修繕が可能です', 'Repair', false);
 			$event->cancel();
 		}
 	}

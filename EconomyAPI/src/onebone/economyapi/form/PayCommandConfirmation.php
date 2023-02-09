@@ -22,9 +22,9 @@ class PayCommandConfirmation extends CustomForm {
 		$this->plugin = $plugin;
 		$this->target = $target;
 		$this->amount = $amount;
-		$this->toggle = new Toggle("送金を行いますか？", false);
+		$this->toggle = new Toggle('送金を行いますか？', false);
 		$this
-			->setTitle("PaySystem")
+			->setTitle('PaySystem')
 			->addElements(
 				new Label("振り込み金額を確認してください\n"),
 				new Label("振り込み金額: §e{$amount}"),
@@ -38,7 +38,7 @@ class PayCommandConfirmation extends CustomForm {
 		if ($this->toggle->getValue() === true) {
 			(new PayCommand($this->plugin))->Calculation($this->plugin, $player, $this->target, $this->amount);
 		} else {
-			SendMessage::Send($player, "トグルをtrueにしないでformを送信したため送金は行われませんでした", "Economy", true);
+			SendMessage::Send($player, 'トグルをtrueにしないでformを送信したため送金は行われませんでした', 'Economy', true);
 		}
 	}
 }

@@ -44,7 +44,7 @@ class NormalSettingListForm extends CustomForm {
 	public function __construct(Player $player) {
 		$this->player = $player;
 		$setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
-		$this->setTitle("PlayerSettings");
+		$this->setTitle('PlayerSettings');
 		$this->addElements(
 			$this->coordinate = new Toggle("§l> Coordinate§r\n座標を表示するか否か", $setting->getSetting(CoordinateSetting::getName())?->getValue()),
 			$this->joinItems = new Toggle("§l> JoinItems§r\n参加時にアイテムを渡すか否か", $setting->getSetting(JoinItemsSetting::getName())?->getValue()),
@@ -56,17 +56,17 @@ class NormalSettingListForm extends CustomForm {
 			$this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
 			$this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
 			$this->moveWorldMessage = new Toggle("§l> MoveWorldMessage§r\nワールド移動時に送信されるメッセージを表示するか否か(§l§c非表示は非推奨です§r)", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
-			$this->levelUpDisplay = new StepSlider("§l> LevelUpDisplay§r\nレベルアップ時に何を表示するか", ["タイトル表示", "実績表示", "表示無し"],
+			$this->levelUpDisplay = new StepSlider("§l> LevelUpDisplay§r\nレベルアップ時に何を表示するか", ['タイトル表示', '実績表示', '表示無し'],
 				match ($setting->getSetting(LevelUpDisplaySetting::getName())?->getValue()) {
-					"toast" => 1,
-					"none" => 2,
+					'toast' => 1,
+					'none' => 2,
 					default => 0
 				}),
-			$this->miningToolsDestructionEnabledWorlds = new StepSlider("§l> MiningToolsDestructionEnabledWorlds§r\nマイニングツールで破壊出来るワールドを制限", ["全てのワールドで有効", "生活ワールドでのみ有効", "天然資源系ワールドでのみ有効", "全てのワールドで無効"],
+			$this->miningToolsDestructionEnabledWorlds = new StepSlider("§l> MiningToolsDestructionEnabledWorlds§r\nマイニングツールで破壊出来るワールドを制限", ['全てのワールドで有効', '生活ワールドでのみ有効', '天然資源系ワールドでのみ有効', '全てのワールドで無効'],
 				match ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
-					"life" => 1,
-					"nature" => 2,
-					"none" => 3,
+					'life' => 1,
+					'nature' => 2,
+					'none' => 3,
 					default => 0
 				}),
 		);
@@ -111,24 +111,24 @@ class NormalSettingListForm extends CustomForm {
 			$setting->getSetting(MoveWorldMessageSetting::getName())?->setValue($this->moveWorldMessage->getValue());
 		}
 		$levelUpTitle = match ($this->levelUpDisplay->getValue()) {
-			1 => "toast",
-			2 => "none",
-			default => "title"
+			1 => 'toast',
+			2 => 'none',
+			default => 'title'
 		};
 		if ($setting->getSetting(LevelUpDisplaySetting::getName())?->getValue() !== $levelUpTitle) {
 			$setting->getSetting(LevelUpDisplaySetting::getName())?->setValue($levelUpTitle);
 		}
 		$miningToolsDestructionEnabledWorlds = match ($this->miningToolsDestructionEnabledWorlds->getValue()) {
-			1 => "life",
-			2 => "nature",
-			3 => "none",
-			default => "all"
+			1 => 'life',
+			2 => 'nature',
+			3 => 'none',
+			default => 'all'
 		};
 		if ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue() !== $miningToolsDestructionEnabledWorlds) {
 			$setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
 		}
 		SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
-		SoundPacket::Send($player, "item.spyglass.use");
+		SoundPacket::Send($player, 'item.spyglass.use');
 	}
 
 }

@@ -16,7 +16,7 @@ class Main extends PluginBase implements Listener {
 
 	public function onEnable() : void {
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getServer()->getCommandMap()->registerAll("sff", [
+		$this->getServer()->getCommandMap()->registerAll('sff', [
 			new RepairCommand(),
 		]);
 	}
@@ -37,8 +37,8 @@ class Main extends PluginBase implements Listener {
 		foreach ($item->getEnchantments() as $enchant) {
 			$level += 8 + $enchant->getLevel();
 		}
-		$mode = "others";
-		if (!$item instanceof Durable) throw new Error("道具以外のアイテムが指定されました");
+		$mode = 'others';
+		if (!$item instanceof Durable) throw new Error('道具以外のアイテムが指定されました');
 		SendForm::Send($player, (new RepairForm($level, $item, $mode)));
 	}
 }

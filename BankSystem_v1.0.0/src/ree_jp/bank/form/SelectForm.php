@@ -31,7 +31,7 @@ class SelectForm implements Form {
 		if (isset($this->option[$data[0]])) {
 			SendForm::Send($player, (new BankMenuForm($player, $this->option[$data[0]])));
 		} else {
-			SendMessage::Send($player, "エラーが発生しました", "Bank", false);
+			SendMessage::Send($player, 'エラーが発生しました', 'Bank', false);
 		}
 	}
 
@@ -47,9 +47,9 @@ class SelectForm implements Form {
 			'title' => 'BankSystem',
 			'content' => [
 				[
-					"type" => "dropdown",
-					"text" => "選択してください",
-					"options" => $option,
+					'type' => 'dropdown',
+					'text' => '選択してください',
+					'options' => $option,
 				],
 			],
 		];

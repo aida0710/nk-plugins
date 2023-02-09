@@ -25,7 +25,7 @@ class ModeForm implements Form {
 			return;
 		}
 		$this->plugin->setStat($player, $data);
-		SendMessage::Send($player, "チェストをタップして下さい", "ChestLock", true);
+		SendMessage::Send($player, 'チェストをタップして下さい', 'ChestLock', true);
 	}
 
 	public function jsonSerialize() {

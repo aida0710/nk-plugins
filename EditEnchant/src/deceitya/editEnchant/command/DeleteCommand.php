@@ -13,7 +13,7 @@ use pocketmine\player\Player;
 class DeleteCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("endelete", "エンチャントを削除する");
+		parent::__construct('endelete', 'エンチャントを削除する');
 	}
 
 	public function execute(CommandSender $sender, string $label, array $args) : bool {

@@ -21,7 +21,7 @@ class WorldProtect implements Listener {
 		}
 		$heightLimit = WorldManagementAPI::getInstance()->getHeightLimit($event->getPlayer()->getWorld()->getFolderName());
 		if ($event->getBlock()->getPosition()->getFloorY() >= $heightLimit) {
-			SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", "Protect", false);
+			SendTip::Send($event->getPlayer(), "現在のワールドではY.{$heightLimit}以上でブロックを設置することは許可されていません", 'Protect', false);
 			if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
 				$event->cancel();
 			}
@@ -54,7 +54,7 @@ class WorldProtect implements Listener {
 				if (!Server::getInstance()->isOp($event->getPlayer()->getName())) {
 					$event->cancel();
 				}
-				SendTip::Send($event->getPlayer(), "このワールドは保護されています", "Protect", false);
+				SendTip::Send($event->getPlayer(), 'このワールドは保護されています', 'Protect', false);
 			}
 		}
 	}

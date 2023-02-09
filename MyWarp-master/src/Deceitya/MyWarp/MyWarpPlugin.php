@@ -28,7 +28,7 @@ class MyWarpPlugin extends PluginBase {
 		if ($sender instanceof Player) {
 			SendForm::Send($sender, (new MainForm()));
 		} else {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 		}
 		return true;
 	}

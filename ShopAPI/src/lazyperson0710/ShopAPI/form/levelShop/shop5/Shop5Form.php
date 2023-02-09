@@ -15,18 +15,18 @@ class Shop5Form extends SimpleForm {
 
 	public function __construct() {
 		$contents = [
-			"ネザーストーン類" => "NetherStones",
-			"その他ブロック" => "OtherBlocks5",
-			"その他アイテム" => "OtherItems",
+			'ネザーストーン類' => 'NetherStones',
+			'その他ブロック' => 'OtherBlocks5',
+			'その他アイテム' => 'OtherItems',
 		];
 		$this
-			->setTitle("Level Shop")
-			->setText("§7選択してください");
+			->setTitle('Level Shop')
+			->setText('§7選択してください');
 		foreach ($contents as $key => $value) {
 			$class = __NAMESPACE__ . "\\" . $value;
 			$this->addElements(new ShopItemFormButton($key, $class));
 		}
-		$this->addElements(new FirstBackFormButton("ホームに戻る"));
+		$this->addElements(new FirstBackFormButton('ホームに戻る'));
 	}
 
 	public function handleClosed(Player $player) : void {

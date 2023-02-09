@@ -14,6 +14,6 @@ class SendNoSoundTip {
 		} else {
 			$type = TextFormat::RED;
 		}
-		$player->sendTip(TextFormat::AQUA . $prefix . TextFormat::GRAY . " >> " . $type . $message);
+		$player->sendTip(TextFormat::AQUA . $prefix . TextFormat::GRAY . ' >> ' . $type . $message);
 	}
 }

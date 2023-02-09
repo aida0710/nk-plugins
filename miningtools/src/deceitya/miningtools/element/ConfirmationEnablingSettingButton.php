@@ -24,7 +24,7 @@ class ConfirmationEnablingSettingButton extends Button {
 
 	public function handleSubmit(Player $player) : void {
 		if ($this->approval) {
-			SendForm::Send($player, new SelectEnablingSettings($player, "既に有効化されている為/settingから設定出来ます"));
+			SendForm::Send($player, new SelectEnablingSettings($player, '既に有効化されている為/settingから設定出来ます'));
 		} else {
 			SendForm::Send($player, new ConfirmationSettingForm($this->settingName, $this->settingJaName));
 		}

@@ -29,7 +29,7 @@ class EnchantSelectFormButton extends Button {
 		if (MiningLevelAPI::getInstance()->getLevel($player) >= EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName)) {
 			SendForm::Send($player, (new EnchantConfirmationForm($player, $this->enchantment)));
 		} else {
-			SendForm::Send($player, (new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName) . "lv")));
+			SendForm::Send($player, (new EnchantSelectForm("§cMiningLevelが足りないためformを開けませんでした\n要求レベル ->" . EnchantShopAPI::getInstance()->getMiningLevel($this->enchantName) . 'lv')));
 			SoundPacket::Send($player, 'dig.chain');
 		}
 	}

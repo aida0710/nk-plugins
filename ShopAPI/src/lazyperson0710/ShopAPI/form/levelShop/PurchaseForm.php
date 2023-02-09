@@ -29,18 +29,18 @@ class PurchaseForm implements Form {
 	public function handleResponse(Player $player, $data) : void {
 		$itemName = $this->api->getItemName($this->item->getItem()->getId(), $this->item->getItem()->getMeta());
 		if ($data === null || $data[1] === null) {
-			SendMessage::Send($player, $itemName . "の購入をキャンセルしました", "LevelShop", true, 'dig.chain');
+			SendMessage::Send($player, $itemName . 'の購入をキャンセルしました', 'LevelShop', true, 'dig.chain');
 			return;
 		}
 		if ($data[1] === '' || !$this->isInteger($data[1]) || (int) floor($data[1]) <= 0) {
-			SendMessage::Send($player, "1以上の整数を入力してください", "LevelShop", false, 'dig.chain');
+			SendMessage::Send($player, '1以上の整数を入力してください', 'LevelShop', false, 'dig.chain');
 			return;
 		}
 		$count = (int) floor($data[1]);
 		$totalPrice = $this->item->getPrice() * $count; //1 = 変数名、衝突対策...
 		$result = $totalPrice - $this->item->getMyMoney();
 		if ($this->item->getMyMoney() < $totalPrice) {
-			SendMessage::Send($player, "お金が" . number_format($result) . "円足りませんでした。合計必要金額:" . number_format($totalPrice) . "円", false, 'dig.chain');
+			SendMessage::Send($player, 'お金が' . number_format($result) . '円足りませんでした。合計必要金額:' . number_format($totalPrice) . '円', false, 'dig.chain');
 			return;
 		}
 		$this->item->getItem()->setCount($count);
@@ -48,18 +48,18 @@ class PurchaseForm implements Form {
 			EconomyAPI::getInstance()->reduceMoney($player, $this->item->getPrice() * $count);
 			StackStorageAPI::$instance->add($player->getXuid(), $this->item->getItem());
 			$totalPrice = $this->item->getPrice() * $count;
-			SendMessage::Send($player, $itemName . "を" . number_format($count) . "個購入し、仮想ストレージに転送しました。使用金額 : " . number_format($totalPrice) . "円", true, 'break.amethyst_block');
+			SendMessage::Send($player, $itemName . 'を' . number_format($count) . '個購入し、仮想ストレージに転送しました。使用金額 : ' . number_format($totalPrice) . '円', true, 'break.amethyst_block');
 			return;
 		}
 		if (!$player->getInventory()->canAddItem($this->item->getItem())) {
-			SendMessage::Send($player, "インベントリに空きはありません", "LevelShop", false, 'dig.chain');
+			SendMessage::Send($player, 'インベントリに空きはありません', 'LevelShop', false, 'dig.chain');
 			return;
 		}
 		$player->getInventory()->addItem($this->item->getItem());
 		EconomyAPI::getInstance()->reduceMoney($player, $this->item->getPrice() * $count);
 		$totalPrice = $this->item->getPrice() * $count;
-		SendMessage::Send($player, $itemName . "を" . number_format($count) . "個購入しました。使用金額 : " . number_format($totalPrice) . "円", "LevelShop", true, 'break.amethyst_block');
-		(new LevelShopClosingEvent($player, $this->item, "buy"))->call();
+		SendMessage::Send($player, $itemName . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', 'LevelShop', true, 'break.amethyst_block');
+		(new LevelShopClosingEvent($player, $this->item, 'buy'))->call();
 	}
 
 	private function isInteger($input) : bool {
@@ -87,7 +87,7 @@ class PurchaseForm implements Form {
 				],
 				[
 					'type' => 'toggle',
-					'text' => "仮想ストレージに転送",
+					'text' => '仮想ストレージに転送',
 				],
 			],
 		];

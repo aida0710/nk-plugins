@@ -34,7 +34,7 @@ class LuckyExpCoin {
 			10 => 800,
 		};
 		$player->getXpManager()->addXp($addXp);
-		SendNoSoundMessage::Send($player, "{$addXp}xpが当たりました！", "LuckyExpCoin", true);
+		SendNoSoundMessage::Send($player, "{$addXp}xpが当たりました！", 'LuckyExpCoin', true);
 		SoundPacket::Send($player, 'item.trident.return');
 	}
 }

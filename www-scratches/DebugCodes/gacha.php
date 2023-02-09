@@ -31,19 +31,19 @@ class gacha {
 					continue 2;
 				}
 			}
-			throw new RuntimeException("test");
+			throw new RuntimeException('test');
 		}
 		return $result;
 	}
 
 	protected function getTmpTable() : array {
 		return [
-			"C" => 80,
-			"UC" => 13,
-			"R" => 5,
-			"m" => 0.001,
-			"SR" => 1.7,
-			"L" => 0.3,
+			'C' => 80,
+			'UC' => 13,
+			'R' => 5,
+			'm' => 0.001,
+			'SR' => 1.7,
+			'L' => 0.3,
 		];
 	}
 }
@@ -53,15 +53,15 @@ $count = 1000010000;
 $class = new gacha();
 $result = $class->run($count);
 $result += [
-	"C" => 0,
-	"UC" => 0,
-	"R" => 0,
-	"SR" => 0,
-	"L" => 0,
-	"m" => 0,
+	'C' => 0,
+	'UC' => 0,
+	'R' => 0,
+	'SR' => 0,
+	'L' => 0,
+	'm' => 0,
 ];
 const SCALE = 10;
 foreach ($result as $table => $item) {
 	//bcmul(bcdiv($item,$count,SCALE), 100,SCALE)
-	echo "\n{$table}の数{$item},	", $item / $count * 100, "%";
+	echo "\n{$table}の数{$item},	", $item / $count * 100, '%';
 }

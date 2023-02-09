@@ -35,15 +35,15 @@ class PlayerForm extends SimpleForm {
 				}
 			}
 			if (is_null($effectIds)) {
-				$effectIds = "なし";
+				$effectIds = 'なし';
 			}
 			$position = $player->getPosition();
-			if ($position->getWorld()->getDisplayName() !== "pvp") {
+			if ($position->getWorld()->getDisplayName() !== 'pvp') {
 				$playerPosition = "X, {$position->getFloorX()} Y, {$position->getFloorY()} Z, {$position->getFloorZ()} \nWorld : {$position->getWorld()->getDisplayName()}";
 			} else {
 				$playerPosition = "PVPワールドにいるため座標を開示出来ませんでした\nWorld : {$position->getWorld()->getDisplayName()}";
 			}
-			$date = date("Y/m/d - H:i:s");
+			$date = date('Y/m/d - H:i:s');
 			$life = "{$player->getHealth()}/{$player->getMaxHealth()}";
 			$miningLevel = MiningLevelAPI::getInstance()->getLevel($playerName);
 			$miningExp = MiningLevelAPI::getInstance()->getExp($playerName);
@@ -51,18 +51,18 @@ class PlayerForm extends SimpleForm {
 			$progress = ($miningExp / $miningLevelUpExp) * 100;
 			$progress = floor($progress);
 		} else {
-			SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "PlayerInfo", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'PlayerInfo', false);
 			return;
 		}
 		$this
-			->setTitle("Player info")
+			->setTitle('Player info')
 			->setText("§l{$player->getName()}の情報§r\n\nCoordinate : $playerPosition\n\nLife $life\nMiningLevel Lv.{$miningLevel}, Exp.{$miningExp}, LevelUpExp.{$miningLevelUpExp} / Progress:{$progress}％\n\n現在付与されているエフェクト\n{$effectIds}\n\n最終更新時刻\n{$date}")
-			->addElements(new Button("情報を更新"));
+			->addElements(new Button('情報を更新'));
 	}
 
 	public function handleSubmit(Player $player) : void {
 		if (!Server::getInstance()->getPlayerByPrefix($this->playerName)) {
-			SendMessage::Send($player, "プレイヤーが存在しない為、正常にformを送信できませんでした", "PlayerInfo", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'PlayerInfo', false);
 			return;
 		}
 		SendForm::Send($player, (new PlayerForm($player, $this->playerName)));

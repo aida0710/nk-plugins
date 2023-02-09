@@ -39,14 +39,14 @@ class RankCalculation {
 		for ($i = 1; $i <= $num; $i++) {
 			if ($this->checkMoney($player) !== true) return $result;
 			if ($this->checkTicket($player) !== true) return $result;
-			EconomyAPI::getInstance()->reduceMoney($player->getName(), $this->cost["moneyCost"]);
-			TicketAPI::getInstance()->reduceTicket($player, $this->cost["ticketCost"]);
+			EconomyAPI::getInstance()->reduceMoney($player->getName(), $this->cost['moneyCost']);
+			TicketAPI::getInstance()->reduceTicket($player, $this->cost['ticketCost']);
 			$rand = mt_rand(1, $this->num);
 			$count = 0;
 			foreach ($this->rank as $table => $item) {
 				$count += $item;
 				if ($rand <= $count) {
-					$result .= $table . ",";
+					$result .= $table . ',';
 					continue 2;
 				}
 			}
@@ -56,21 +56,21 @@ class RankCalculation {
 
 	protected function getTmpTable() : array {
 		return [
-			"C" => $this->probability["C"],
-			"UC" => $this->probability["UC"],
-			"R" => $this->probability["R"],
-			"SR" => $this->probability["SR"],
-			"SSR" => $this->probability["SSR"],
-			"L" => $this->probability["L"],
+			'C' => $this->probability['C'],
+			'UC' => $this->probability['UC'],
+			'R' => $this->probability['R'],
+			'SR' => $this->probability['SR'],
+			'SSR' => $this->probability['SSR'],
+			'L' => $this->probability['L'],
 		];
 	}
 
 	public function checkMoney(Player $player) : bool {
-		if ($this->cost["moneyCost"] >= 0) {
-			if (EconomyAPI::getInstance()->myMoney($player->getName()) >= $this->cost["moneyCost"]) {
+		if ($this->cost['moneyCost'] >= 0) {
+			if (EconomyAPI::getInstance()->myMoney($player->getName()) >= $this->cost['moneyCost']) {
 				return true;
 			} else {
-				SendMessage::Send($player, "所持金が足りない為処理が中断されました", "Gacha", false);
+				SendMessage::Send($player, '所持金が足りない為処理が中断されました', 'Gacha', false);
 				return false;
 			}
 		}
@@ -78,11 +78,11 @@ class RankCalculation {
 	}
 
 	public function checkTicket(Player $player) : bool {
-		if ($this->cost["ticketCost"] >= 0) {
-			if (TicketAPI::getInstance()->checkData($player) >= $this->cost["ticketCost"]) {
+		if ($this->cost['ticketCost'] >= 0) {
+			if (TicketAPI::getInstance()->checkData($player) >= $this->cost['ticketCost']) {
 				return true;
 			} else {
-				SendMessage::Send($player, "所持Ticketが足りない為処理が中断されました", "Gacha", false);
+				SendMessage::Send($player, '所持Ticketが足りない為処理が中断されました', 'Gacha', false);
 				return false;
 			}
 		}

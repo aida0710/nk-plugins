@@ -31,8 +31,8 @@ class CheckLifeWorldTask extends Task {
 			foreach ($world->getPlayers() as $player) {
 				if (in_array($world->getFolderName(), WorldCategory::Nature, true) || in_array($world->getFolderName(), WorldCategory::MiningWorld, true) || in_array($world->getFolderName(), WorldCategory::Nether, true) || in_array($world->getFolderName(), WorldCategory::End, true)) return;
 				if (!$property->inSafeArea($player->getPosition())) {
-					Server::getInstance()->dispatchCommand($player, "warp lobby");
-					SendMessage::Send($player, "範囲外に行こうとする試みは許可されていません", "WorldBorder", false);
+					Server::getInstance()->dispatchCommand($player, 'warp lobby');
+					SendMessage::Send($player, '範囲外に行こうとする試みは許可されていません', 'WorldBorder', false);
 				}
 			}
 		}

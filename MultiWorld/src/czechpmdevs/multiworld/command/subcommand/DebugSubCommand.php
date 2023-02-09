@@ -38,7 +38,7 @@ class DebugSubCommand extends BaseSubCommand {
 	 */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		if (!$sender instanceof Player) {
-			throw new AssumptionFailedError("Sender is not a player");
+			throw new AssumptionFailedError('Sender is not a player');
 		}
 		$position = $sender->getPosition()->floor();
 		$sender->sendMessage("Current position: {$position->getX()}, {$position->getY()}, {$position->getZ()}");

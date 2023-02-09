@@ -120,23 +120,23 @@ class PlayerEvent implements Listener {
 		}
 		/** @var Player $player */
 		$damage = match ($event->getCause()) {
-			0 => "CONTACT",
-			1 => "ENTITY_ATTACK",
-			2 => "PROJECTILE",
-			3 => "SUFFOCATION",
-			4 => "FALL",
-			5 => "FIRE",
-			6 => "FIRE_TICK",
-			7 => "LAVA",
-			8 => "DROWNING",
-			9 => "BLOCK_EXPLOSION",
-			10 => "ENTITY_EXPLOSION",
-			11 => "VOID",
-			12 => "SUICIDE",
-			13 => "MAGIC",
-			14 => "CUSTOM",
-			15 => "STARVATION",
-			default => "unknown",
+			0 => 'CONTACT',
+			1 => 'ENTITY_ATTACK',
+			2 => 'PROJECTILE',
+			3 => 'SUFFOCATION',
+			4 => 'FALL',
+			5 => 'FIRE',
+			6 => 'FIRE_TICK',
+			7 => 'LAVA',
+			8 => 'DROWNING',
+			9 => 'BLOCK_EXPLOSION',
+			10 => 'ENTITY_EXPLOSION',
+			11 => 'VOID',
+			12 => 'SUICIDE',
+			13 => 'MAGIC',
+			14 => 'CUSTOM',
+			15 => 'STARVATION',
+			default => 'unknown',
 		};
 		$this->othersLog($player->getName(), $event->getEventName(), $player->getWorld(), $player->getPosition(), $player->getInventory()->getItemInHand(), "damage - {$damage}");
 	}
@@ -280,18 +280,18 @@ class PlayerEvent implements Listener {
 		$type = strrchr($type, '\\');
 		$type = str_replace('\\', '', $type);
 		$log[] = [
-			"name" => $player,
-			"type" => $type,
-			"world" => $world,
-			"x" => $positionX,
-			"y" => $positionY,
-			"z" => $positionZ,
-			"blockName" => $blockName,
-			"blockId" => $blockId,
-			"blockMeta" => $blockMeta,
-			"others" => $others,
-			"date" => date("Y-m-d"),
-			"time" => date("H:i:s") . "." . substr(explode(".", microtime())[1], 0, 3),
+			'name' => $player,
+			'type' => $type,
+			'world' => $world,
+			'x' => $positionX,
+			'y' => $positionY,
+			'z' => $positionZ,
+			'blockName' => $blockName,
+			'blockId' => $blockId,
+			'blockMeta' => $blockMeta,
+			'others' => $others,
+			'date' => date('Y-m-d'),
+			'time' => date('H:i:s') . '.' . substr(explode('.', microtime())[1], 0, 3),
 		];
 		$this->setBlockLogTemp($log);
 	}

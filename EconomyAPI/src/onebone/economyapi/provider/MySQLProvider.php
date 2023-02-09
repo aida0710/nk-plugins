@@ -34,22 +34,22 @@ class MySQLProvider implements Provider {
 	}
 
 	public function open() {
-		$config = $this->plugin->getConfig()->get("provider-settings", []);
+		$config = $this->plugin->getConfig()->get('provider-settings', []);
 		$this->db = new mysqli(
-			$config["host"] ?? "127.0.0.1",
-			$config["user"] ?? "onebone",
-			$config["password"] ?? "hello_world",
-			$config["db"] ?? "economyapi",
-			$config["port"] ?? 3306);
+			$config['host'] ?? '127.0.0.1',
+			$config['user'] ?? 'onebone',
+			$config['password'] ?? 'hello_world',
+			$config['db'] ?? 'economyapi',
+			$config['port'] ?? 3306);
 		if ($this->db->connect_error) {
-			$this->plugin->getLogger()->critical("Could not connect to MySQL server: " . $this->db->connect_error);
+			$this->plugin->getLogger()->critical('Could not connect to MySQL server: ' . $this->db->connect_error);
 			return;
 		}
-		if (!$this->db->query("CREATE TABLE IF NOT EXISTS user_money(
+		if (!$this->db->query('CREATE TABLE IF NOT EXISTS user_money(
 			username VARCHAR(20) PRIMARY KEY,
 			money FLOAT
-		);")) {
-			$this->plugin->getLogger()->critical("Error creating table: " . $this->db->error);
+		);')) {
+			$this->plugin->getLogger()->critical('Error creating table: ' . $this->db->error);
 			return;
 		}
 		$this->plugin->getScheduler()->scheduleRepeatingTask(new MySQLPingTask($this->plugin, $this->db), 600);
@@ -72,7 +72,7 @@ class MySQLProvider implements Provider {
 	}
 
 	public function getName() : string {
-		return "MySQL";
+		return 'MySQL';
 	}
 
 	/**
@@ -156,7 +156,7 @@ class MySQLProvider implements Provider {
 	 * @return array
 	 */
 	public function getAll() {
-		$res = $this->db->query("SELECT * FROM user_money");
+		$res = $this->db->query('SELECT * FROM user_money');
 		$ret = [];
 		foreach ($res->fetch_all() as $val) {
 			$ret[$val[0]] = $val[1];

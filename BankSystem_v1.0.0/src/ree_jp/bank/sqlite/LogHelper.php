@@ -60,8 +60,8 @@ class LogHelper implements ILogHelper {
 		if (!$this->isExists($bank)) $this->setTable($bank);
 		$time = time();
 		$stmt = $this->db->prepare("INSERT INTO [${bank}] VALUES (:time, :message)");
-		$stmt->bindValue(":time", $time, SQLITE3_INTEGER);
-		$stmt->bindParam(":message", $message, SQLITE3_TEXT);
+		$stmt->bindValue(':time', $time, SQLITE3_INTEGER);
+		$stmt->bindParam(':message', $message, SQLITE3_TEXT);
 		$stmt->execute();
 	}
 

@@ -14,9 +14,9 @@ class GachaTicketReplaceForm extends CustomForm {
 	private Label $label;
 
 	public function __construct(Player $player) {
-		$this->label = new Label("はずれ石をTicketに変換してもよろしいでしょうか");
+		$this->label = new Label('はずれ石をTicketに変換してもよろしいでしょうか');
 		$this
-			->setTitle("Ticket");
+			->setTitle('Ticket');
 		$this->addElement($this->label);
 	}
 
@@ -24,9 +24,9 @@ class GachaTicketReplaceForm extends CustomForm {
 		$count = TicketAPI::getInstance()->InventoryConfirmationTicket($player);
 		if ($count >= 1) {
 			TicketAPI::getInstance()->addTicket($player, $count);
-			SendMessage::Send($player, "チケットの変換処理を実行し、{$count}枚のチケットを取得しました", "Ticket", true);
+			SendMessage::Send($player, "チケットの変換処理を実行し、{$count}枚のチケットを取得しました", 'Ticket', true);
 		} else {
-			SendMessage::Send($player, "変換するアイテムが存在しませんでした", "Ticket", true);
+			SendMessage::Send($player, '変換するアイテムが存在しませんでした', 'Ticket', true);
 		}
 	}
 }

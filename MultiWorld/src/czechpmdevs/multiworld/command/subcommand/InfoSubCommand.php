@@ -34,8 +34,8 @@ use function count;
 class InfoSubCommand extends BaseSubCommand {
 
 	protected function prepare() : void {
-		$this->registerArgument(0, new RawStringArgument("worldName", true));
-		$this->setPermission("multiworld.command.info");
+		$this->registerArgument(0, new RawStringArgument('worldName', true));
+		$this->setPermission('multiworld.command.info');
 	}
 
 	/**
@@ -43,14 +43,14 @@ class InfoSubCommand extends BaseSubCommand {
 	 */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		/** @var string|null $worldName */
-		$worldName = $args["worldName"] ?? null;
+		$worldName = $args['worldName'] ?? null;
 		if ($worldName === null && !($sender instanceof Player)) {
-			$sender->sendMessage("§cUsage: §7/mw info <worldName>"); // This cannot be translated, because the sender is always console
+			$sender->sendMessage('§cUsage: §7/mw info <worldName>'); // This cannot be translated, because the sender is always console
 			return;
 		}
 		if ($worldName !== null) {
 			if (!Server::getInstance()->getWorldManager()->isWorldGenerated($worldName)) {
-				$sender->sendMessage(LanguageManager::translateMessage($sender, "info.levelnotexists", [$worldName]));
+				$sender->sendMessage(LanguageManager::translateMessage($sender, 'info.levelnotexists', [$worldName]));
 				return;
 			}
 			WorldUtils::lazyLoadWorld($worldName);
@@ -58,17 +58,17 @@ class InfoSubCommand extends BaseSubCommand {
 		} elseif ($sender instanceof Player) {
 			$sender->sendMessage($this->getInfoMessage($sender, $sender->getWorld()));
 		} else {
-			throw new AssumptionFailedError("Sender is not a player");
+			throw new AssumptionFailedError('Sender is not a player');
 		}
 	}
 
 	private function getInfoMessage(CommandSender $sender, World $world) : string {
-		return LanguageManager::translateMessage($sender, "info", [$world->getDisplayName()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-name", [$world->getDisplayName()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-folderName", [$world->getFolderName()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-players", [(string) count($world->getPlayers())]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-generator", [$world->getProvider()->getWorldData()->getGenerator()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-seed", [(string) $world->getSeed()]) . "\n" .
-			LanguageManager::translateMessage($sender, "info-time", [(string) $world->getTime()]);
+		return LanguageManager::translateMessage($sender, 'info', [$world->getDisplayName()]) . "\n" .
+			LanguageManager::translateMessage($sender, 'info-name', [$world->getDisplayName()]) . "\n" .
+			LanguageManager::translateMessage($sender, 'info-folderName', [$world->getFolderName()]) . "\n" .
+			LanguageManager::translateMessage($sender, 'info-players', [(string) count($world->getPlayers())]) . "\n" .
+			LanguageManager::translateMessage($sender, 'info-generator', [$world->getProvider()->getWorldData()->getGenerator()]) . "\n" .
+			LanguageManager::translateMessage($sender, 'info-seed', [(string) $world->getSeed()]) . "\n" .
+			LanguageManager::translateMessage($sender, 'info-time', [(string) $world->getTime()]);
 	}
 }

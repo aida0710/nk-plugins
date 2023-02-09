@@ -26,7 +26,7 @@ class DeathListener implements Listener {
 	public function onDeath(PlayerDeathEvent $event) {
 		$name = $event->getPlayer()->getName();
 		$time = Main::getTime();
-		$s = str_replace(["%time", "%player"], [$time, $name], Main::DEATH);
+		$s = str_replace(['%time', '%player'], [$time, $name], Main::DEATH);
 		$webhook = Webhook::create($this->url);
 		$content = new Content();
 		$content->setText($s);

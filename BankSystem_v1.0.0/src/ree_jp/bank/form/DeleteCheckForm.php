@@ -27,7 +27,7 @@ class DeleteCheckForm implements Form {
 		}
 		if ($data) {
 			BankHelper::getInstance()->remove($this->bank);
-			SendMessage::Send($player, "削除しました", "Bank", true);
+			SendMessage::Send($player, '削除しました', 'Bank', true);
 		} else SendForm::Send($player, (new BankForm()));
 	}
 
@@ -38,9 +38,9 @@ class DeleteCheckForm implements Form {
 		return [
 			'type' => 'modal',
 			'title' => 'BankSystem',
-			'content' => $this->bank . "を本当に削除しますか?",
-			"button1" => "はい",
-			"button2" => "いいえ",
+			'content' => $this->bank . 'を本当に削除しますか?',
+			'button1' => 'はい',
+			'button2' => 'いいえ',
 		];
 	}
 }

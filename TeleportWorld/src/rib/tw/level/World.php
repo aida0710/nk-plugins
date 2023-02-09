@@ -19,7 +19,7 @@ class World {
 	}
 
 	private function update() : void {
-		$this->worlds_name = array_diff(scandir("./worlds"), [".", ".."]);
+		$this->worlds_name = array_diff(scandir('./worlds'), ['.', '..']);
 	}
 
 	public function teleport(Player $player, string $name) : void {

@@ -26,16 +26,16 @@ class Logger {
 		$pos = $player->getPosition();
 		$webhook = Webhook::create(Main::getSetting()->getWebhookUrl());
 		$embed = (new Embed())
-			->setTitle("Warning")
+			->setTitle('Warning')
 			->setColor(16776960)
-			->setAuthorName("AntiCheat")
-			->setDesc("チート使用の疑いがあります")
+			->setAuthorName('AntiCheat')
+			->setDesc('チート使用の疑いがあります')
 			->setTime((new DateTime())->format(DateTimeInterface::ATOM))
-			->addField("Player", $player->getName(), true)
-			->addField("Detected by", $checker->getName(), true)
-			->addField("Violation point", "{$checker->getViolation()}/{$checker->getMaxViolation()}", true)
-			->addField("Position", "({$pos->getFloorX()}, {$pos->getFloorY()}, {$pos->getFloorZ()}, {$pos->getWorld()->getFolderName()})", true)
-			->addField("Ping", $player->getNetworkSession()->getPing() . "ms", true);
+			->addField('Player', $player->getName(), true)
+			->addField('Detected by', $checker->getName(), true)
+			->addField('Violation point', "{$checker->getViolation()}/{$checker->getMaxViolation()}", true)
+			->addField('Position', "({$pos->getFloorX()}, {$pos->getFloorY()}, {$pos->getFloorZ()}, {$pos->getWorld()->getFolderName()})", true)
+			->addField('Ping', $player->getNetworkSession()->getPing() . 'ms', true);
 		$embeds = new Embeds();
 		$embeds->add($embed);
 		$webhook->add($embeds);
@@ -51,16 +51,16 @@ class Logger {
 		$pos = $player->getPosition();
 		$webhook = Webhook::create(Main::getSetting()->getWebhookUrl());
 		$embed = (new Embed())
-			->setTitle("Punishment")
+			->setTitle('Punishment')
 			->setColor(16711680)
-			->setAuthorName("AntiCheat")
-			->setDesc("チート使用を検知し、処罰しました")
+			->setAuthorName('AntiCheat')
+			->setDesc('チート使用を検知し、処罰しました')
 			->setTime((new DateTime())->format(DateTimeInterface::ATOM))
-			->addField("Player", $player->getName(), true)
-			->addField("Detected by", $checker->getName(), true)
-			->addField("Violation point", "{$checker->getViolation()}/{$checker->getMaxViolation()}", true)
-			->addField("Position", "({$pos->getFloorX()}, {$pos->getFloorY()}, {$pos->getFloorZ()}, {$pos->getWorld()->getFolderName()})", true)
-			->addField("Ping", $player->getNetworkSession()->getPing() . "ms", true);
+			->addField('Player', $player->getName(), true)
+			->addField('Detected by', $checker->getName(), true)
+			->addField('Violation point', "{$checker->getViolation()}/{$checker->getMaxViolation()}", true)
+			->addField('Position', "({$pos->getFloorX()}, {$pos->getFloorY()}, {$pos->getFloorZ()}, {$pos->getWorld()->getFolderName()})", true)
+			->addField('Ping', $player->getNetworkSession()->getPing() . 'ms', true);
 		$embeds = new Embeds();
 		$embeds->add($embed);
 		$webhook->add($embeds);
@@ -72,7 +72,7 @@ class Logger {
 			if (!Server::getInstance()->isOp($player->getName())) {
 				continue;
 			}
-			SendMessage::Send($player, $message, "Warning", false);
+			SendMessage::Send($player, $message, 'Warning', false);
 		}
 		Server::getInstance()->getLogger()->warning($message);
 	}

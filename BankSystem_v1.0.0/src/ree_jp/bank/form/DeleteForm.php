@@ -31,7 +31,7 @@ class DeleteForm implements Form {
 		if (isset($this->option[$data[0]])) {
 			SendForm::Send($player, (new DeleteCheckForm($this->option[$data[0]])));
 		} else {
-			SendTip::Send($player, "エラーが発生しました", "Bank", false);
+			SendTip::Send($player, 'エラーが発生しました', 'Bank', false);
 		}
 	}
 
@@ -47,9 +47,9 @@ class DeleteForm implements Form {
 			'title' => 'BankSystem',
 			'content' => [
 				[
-					"type" => "dropdown",
-					"text" => "選択してください",
-					"options" => $option,
+					'type' => 'dropdown',
+					'text' => '選択してください',
+					'options' => $option,
 				],
 			],
 		];

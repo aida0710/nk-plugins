@@ -29,7 +29,7 @@ class ChestCommand extends Command {
 			return false;
 		}
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return true;
 		}
 		$form = new ModeForm($this->plugin);
@@ -39,7 +39,7 @@ class ChestCommand extends Command {
 				$form->handleResponse($sender, $stat[$args[0]]);
 				return true;
 			} else {
-				SendMessage::Send($sender, "サブコマンドはlock|unlock|infoのみ使用可能です", "ChestLock", false);
+				SendMessage::Send($sender, 'サブコマンドはlock|unlock|infoのみ使用可能です', 'ChestLock', false);
 				return false;
 			}
 		} else {

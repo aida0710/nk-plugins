@@ -24,11 +24,11 @@ class SimpleForm extends Form {
 
 	public function __construct(string $title, string $content, bool $ignoreInvalidResponse = false) {
 		parent::__construct(Form::FORM_TYPE_SIMPLE, $ignoreInvalidResponse);
-		$this->data["title"] = $title;
-		$this->data["content"] = $content;
+		$this->data['title'] = $title;
+		$this->data['content'] = $content;
 	}
 
 	public function addButton(string $text) : void {
-		$this->data["buttons"][] = ["text" => $text];
+		$this->data['buttons'][] = ['text' => $text];
 	}
 }

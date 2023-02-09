@@ -12,12 +12,12 @@ use pocketmine\player\Player;
 class LockCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("lock", "チェストと額縁をロックする");
+		parent::__construct('lock', 'チェストと額縁をロックする');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		SendForm::Send($sender, (new LockForm($sender)));

@@ -24,7 +24,7 @@ class Main extends PluginBase {
 		$manager->registerEvents(new PlayerItemEvent(), $this);
 		//ItemFactory::getInstance()->register(new Churu(new ItemIdentifier(VanillaItems::COOKED_MUTTON()->getId(), 0), "Churu"), true);
 		$this->getScheduler()->scheduleRepeatingTask(new RepetitionTask(), 10);
-		$this->getServer()->getCommandMap()->registerAll("effectItems", [
+		$this->getServer()->getCommandMap()->registerAll('effectItems', [
 			new ItemsCommand(),
 		]);
 	}

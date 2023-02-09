@@ -17,12 +17,12 @@ class OtherShopFunctionSelectForm extends SimpleForm {
 
 	public function __construct() {
 		$this
-			->setTitle("Level Shop")
-			->setText("使用したいコンテンツを選択してください")
+			->setTitle('Level Shop')
+			->setText('使用したいコンテンツを選択してください')
 			->addElements(
 				new ShopMainCategoryFormButton("Inventory内のアイテムを一括売却\nツールや売却値が0円のアイテムは対象外", new Confirmation()),
 				new ShopMainCategoryFormButton("アイテムを検索\n表示されてる名前で検索が可能です(日本語)", new InputItemForm()),
-				new FirstBackFormButton("ホームに戻る"),
+				new FirstBackFormButton('ホームに戻る'),
 			);
 	}
 

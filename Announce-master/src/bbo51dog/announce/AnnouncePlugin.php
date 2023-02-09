@@ -18,7 +18,7 @@ use SQLite3;
 
 class AnnouncePlugin extends PluginBase {
 
-	private const SQLITE_FILE = "Announce.sqlite";
+	private const SQLITE_FILE = 'Announce.sqlite';
 
 	private RepositoryPool $repoPool;
 
@@ -27,7 +27,7 @@ class AnnouncePlugin extends PluginBase {
 	protected function onEnable() : void {
 		$this->initRepository();
 		AnnounceService::init($this->repoPool);
-		Server::getInstance()->getCommandMap()->registerAll("announce", [
+		Server::getInstance()->getCommandMap()->registerAll('announce', [
 			new AnnounceCommand(),
 			new AnnounceAdminCommand(),
 			new PassCommand(),

@@ -12,12 +12,12 @@ use pocketmine\player\Player;
 class PlayerCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("player", "プレイヤーの情報を取得する");
+		parent::__construct('player', 'プレイヤーの情報を取得する');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		SendForm::Send($sender, (new PlayerInfoForm($sender)));

@@ -14,9 +14,9 @@ class Setting {
 
 	public static function loadFromArray(array $data) : self {
 		$setting = new Setting();
-		$setting->enableDiscordLog = (bool) $data["discord"]["enabled"];
+		$setting->enableDiscordLog = (bool) $data['discord']['enabled'];
 		if ($setting->enableDiscordLog) {
-			$setting->webhookUrl = $data["discord"]["url"];
+			$setting->webhookUrl = $data['discord']['url'];
 		}
 		return $setting;
 	}

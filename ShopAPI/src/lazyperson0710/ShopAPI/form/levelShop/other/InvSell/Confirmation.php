@@ -16,9 +16,9 @@ class Confirmation extends SimpleForm {
 
 	public function __construct() {
 		$this
-			->setTitle("Level Shop")
+			->setTitle('Level Shop')
 			->setText("inventory内のアイテムを一括売却します\n\n売却値が0円のアイテムや解放されていないアイテム(レベル不足)は売却されません")
-			->addElements(new Button("確認画面に進む"));
+			->addElements(new Button('確認画面に進む'));
 	}
 
 	public function handleSubmit(Player $player) : void {
@@ -32,11 +32,11 @@ class Confirmation extends SimpleForm {
 			$item = clone $inventory->getItem($i);
 			if ($item->getId() == ItemIds::AIR) continue;
 			if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
-			if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "failure") {
+			if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'failure') {
 				$insufficientLevelAllCount += $item->getCount();
 				$insufficientLevelAllItem .= $item->getName() . " x{$item->getCount()}\n";
 				continue;
-			} elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "exception") continue;
+			} elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'exception') continue;
 			$count = $item->getCount();
 			$sellMoney = LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta());
 			$sellMoney = $sellMoney * $count;
@@ -45,7 +45,7 @@ class Confirmation extends SimpleForm {
 			$allItem .= $item->getName() . " x{$count}\n";
 		}
 		if (is_null($allItem)) {
-			SendMessage::Send($player, "売却できるアイテムが存在しません", "LevelShop", true, 'dig.chain');
+			SendMessage::Send($player, '売却できるアイテムが存在しません', 'LevelShop', true, 'dig.chain');
 			return;
 		}
 		if (is_null($insufficientLevelAllItem)) {

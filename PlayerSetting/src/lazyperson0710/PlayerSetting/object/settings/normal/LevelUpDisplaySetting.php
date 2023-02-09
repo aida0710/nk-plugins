@@ -28,6 +28,6 @@ class LevelUpDisplaySetting extends Setting {
 	}
 
 	public function getFallbackValue() : string {
-		return "title";
+		return 'title';
 	}
 }

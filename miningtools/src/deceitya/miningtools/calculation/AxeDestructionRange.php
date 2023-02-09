@@ -64,7 +64,7 @@ class AxeDestructionRange {
 					}
 					if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
 						if ($handItem->getDamage() >= $maxDurability - 15) {
-							$player->sendTitle("§c耐久が15以下の為採掘できません！", "§cかなとこ等を使用して修繕してください");
+							$player->sendTitle('§c耐久が15以下の為採掘できません！', '§cかなとこ等を使用して修繕してください');
 							SoundPacket::Send($player, 'respawn_anchor.deplete');
 							break 2;
 						}

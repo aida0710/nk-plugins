@@ -12,9 +12,9 @@ use pocketmine\utils\TextFormat;
 class MyMoneyCommand extends Command {
 
 	public function __construct(private EconomyAPI $plugin) {
-		$desc = $plugin->getCommandMessage("mymoney");
-		parent::__construct("mymoney", $desc["description"], $desc["usage"]);
-		$this->setPermission("economyapi.command.mymoney");
+		$desc = $plugin->getCommandMessage('mymoney');
+		parent::__construct('mymoney', $desc['description'], $desc['usage']);
+		$this->setPermission('economyapi.command.mymoney');
 		$this->plugin = $plugin;
 	}
 
@@ -25,10 +25,10 @@ class MyMoneyCommand extends Command {
 		}
 		if ($sender instanceof Player) {
 			$money = $this->plugin->myMoney($sender);
-			$sender->sendMessage($this->plugin->getMessage("mymoney-mymoney", [$money]));
+			$sender->sendMessage($this->plugin->getMessage('mymoney-mymoney', [$money]));
 			return true;
 		}
-		$sender->sendMessage(TextFormat::RED . "Please run this command in-game.");
+		$sender->sendMessage(TextFormat::RED . 'Please run this command in-game.');
 		return true;
 	}
 }

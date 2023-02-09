@@ -29,13 +29,13 @@ class PlayersGetLocation {
 				$player->getWorld()->addParticle($pos, $particle);
 			}
 			$count++;
-			SendTip::Send($onlinePlayer, "{$player->getName()}さんがあなたのいる場所を特定しました！", "Location", true, "item.spyglass.use");
+			SendTip::Send($onlinePlayer, "{$player->getName()}さんがあなたのいる場所を特定しました！", 'Location', true, 'item.spyglass.use');
 		}
 		if ($count === 0) {
-			SendTip::Send($player, "現在同じワールドにいるプレイヤーが一人もいない為処理が中断されました", "Location", false);
+			SendTip::Send($player, '現在同じワールドにいるプレイヤーが一人もいない為処理が中断されました', 'Location', false);
 			return;
 		}
-		SendTip::Send($player, "プレイヤーの場所を特定しました", "Location", true, "item.spyglass.use");
+		SendTip::Send($player, 'プレイヤーの場所を特定しました', 'Location', true, 'item.spyglass.use');
 		if ($player->getGamemode() !== GameMode::CREATIVE()) {
 			$player->getInventory()->removeItem($item->setCount(1));
 		}

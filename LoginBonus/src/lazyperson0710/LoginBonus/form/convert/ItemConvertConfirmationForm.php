@@ -20,11 +20,11 @@ class ItemConvertConfirmationForm extends CustomForm {
 	public function __construct(LoginBonusItemInfo $itemInfo) {
 		$this->item = $itemInfo;
 		$this
-			->setTitle("Login Bonus")
+			->setTitle('Login Bonus')
 			->addElements(
-				new Label("以下のアイテムと交換しますか？"),
-				new Label("アイテム名 : " . $itemInfo->getCustomName() . " x" . $itemInfo->getQuantity()),
-				new Label("交換コスト : " . $itemInfo->getCost() . "個"),
+				new Label('以下のアイテムと交換しますか？'),
+				new Label('アイテム名 : ' . $itemInfo->getCustomName() . ' x' . $itemInfo->getQuantity()),
+				new Label('交換コスト : ' . $itemInfo->getCost() . '個'),
 			);
 	}
 
@@ -42,14 +42,14 @@ class ItemConvertConfirmationForm extends CustomForm {
 				}
 			}
 			if (!$player->getInventory()->canAddItem($item)) {
-				SendMessage::Send($player, "インベントリに空きがないため処理が中断されました", "LoginBonus", false);
+				SendMessage::Send($player, 'インベントリに空きがないため処理が中断されました', 'LoginBonus', false);
 				return;
 			}
 			$player->getInventory()->addItem($item);
 			$player->getInventory()->removeItem(ItemFactory::getInstance()->get(Main::getInstance()->loginBonusItem->getId(), Main::getInstance()->loginBonusItem->getMeta(), $this->item->getCost()));
-			SendMessage::Send($player, "ログインボーナスを" . $this->item->getCost() . "個消費してチケット" . $this->item->getQuantity() . "枚に交換しました", "LoginBonus", true, 'break.amethyst_block');
+			SendMessage::Send($player, 'ログインボーナスを' . $this->item->getCost() . '個消費してチケット' . $this->item->getQuantity() . '枚に交換しました', 'LoginBonus', true, 'break.amethyst_block');
 		} else {
-			SendMessage::Send($player, "インベントリ内にあるログインボーナス数が足りません", "LoginBonus", false);
+			SendMessage::Send($player, 'インベントリ内にあるログインボーナス数が足りません', 'LoginBonus', false);
 		}
 	}
 }

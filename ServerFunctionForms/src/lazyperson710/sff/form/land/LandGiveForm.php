@@ -21,14 +21,14 @@ class LandGiveForm extends CustomForm {
 	public function __construct() {
 		$this->input1 = new Input(
 			"他プレイヤーに譲渡したい土地番号を入力してください\n自分の持っている土地は/land whoseか/land hereから調べることが可能です",
-			"例: 1",
+			'例: 1',
 		);
 		$this->input2 = new Input(
 			"土地を譲渡したいプレイヤーを入力\n必ずプレイヤーidは省略しないで記述してください\nまた、オンラインプレイヤーであることを確認してください",
-			"例: lazyperson710"
+			'例: lazyperson710'
 		);
 		$this
-			->setTitle("Land Command")
+			->setTitle('Land Command')
 			->addElements(
 				$this->input1,
 				$this->input2,
@@ -42,19 +42,19 @@ class LandGiveForm extends CustomForm {
 	}
 
 	public function handleSubmit(Player $player) : void {
-		if ($this->input1->getValue() === "") {
-			SendMessage::Send($player, "土地番号を入力してください", "Land", false);
+		if ($this->input1->getValue() === '') {
+			SendMessage::Send($player, '土地番号を入力してください', 'Land', false);
 			return;
 		} elseif (!preg_match('/^[0-9]+$/', $this->input1->getValue())) {
-			SendMessage::Send($player, "土地番号は数字で入力してください", "Land", false);
+			SendMessage::Send($player, '土地番号は数字で入力してください', 'Land', false);
 			return;
 		}
-		if ($this->input2->getValue() === "") {
-			SendMessage::Send($player, "プレイヤーidを入力してください", "Land", false);
+		if ($this->input2->getValue() === '') {
+			SendMessage::Send($player, 'プレイヤーidを入力してください', 'Land', false);
 			return;
 		}
 		if (!Server::getInstance()->getPlayerExact($this->input2->getValue())) {
-			SendMessage::Send($player, "オンラインのプレイヤーを入力してください", "Land", false);
+			SendMessage::Send($player, 'オンラインのプレイヤーを入力してください', 'Land', false);
 			return;
 		}
 		Server::getInstance()->dispatchCommand($player, "land give {$this->input2->getValue()} {$this->input1->getValue()}");

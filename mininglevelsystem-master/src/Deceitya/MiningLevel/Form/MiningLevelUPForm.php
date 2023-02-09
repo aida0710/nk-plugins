@@ -10,7 +10,7 @@ class MiningLevelUPForm extends CustomForm {
 
 	public function __construct(string $msg) {
 		$this
-			->setTitle("MiningLevel Form")
+			->setTitle('MiningLevel Form')
 			->addElements(
 				new Label($msg),
 			);

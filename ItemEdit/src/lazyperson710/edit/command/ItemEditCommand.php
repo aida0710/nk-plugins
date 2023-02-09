@@ -13,8 +13,8 @@ use pocketmine\Server;
 class ItemEditCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("edit", "色んな機能を改変する");
-		$this->setPermission("itemEditor.command.edit");
+		parent::__construct('edit', '色んな機能を改変する');
+		$this->setPermission('itemEditor.command.edit');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {

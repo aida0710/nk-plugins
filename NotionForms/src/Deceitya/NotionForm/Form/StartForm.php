@@ -32,7 +32,7 @@ class StartForm implements Form {
 			'title' => 'Notion Form',
 			'content' => '見たいコンテンツを選択してください',
 			'buttons' => [
-				['text' => "コンテンツを検索"],
+				['text' => 'コンテンツを検索'],
 			],
 		];
 		foreach ($this->file as $c) {

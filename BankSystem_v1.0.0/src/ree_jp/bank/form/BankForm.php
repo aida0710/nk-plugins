@@ -28,7 +28,7 @@ class BankForm implements Form {
 				SendForm::Send($player, (new DeleteForm($player)));
 				break;
 			default:
-				SendMessage::Send($player, "エラーが発生しました", "Bank", false);
+				SendMessage::Send($player, 'エラーが発生しました', 'Bank', false);
 		}
 	}
 
@@ -39,16 +39,16 @@ class BankForm implements Form {
 		return [
 			'type' => 'form',
 			'title' => 'BankSystem',
-			'content' => "選択してください",
+			'content' => '選択してください',
 			'buttons' => [
 				[
-					'text' => "銀行を選択する",
+					'text' => '銀行を選択する',
 				],
 				[
-					'text' => "銀行を作成する",
+					'text' => '銀行を作成する',
 				],
 				[
-					'text' => "銀行を削除する",
+					'text' => '銀行を削除する',
 				],
 			],
 		];

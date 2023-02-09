@@ -17,20 +17,20 @@ class DiamondMiningToolCommand extends Command {
 	public const DiamondMiningToolsLevelLimit = 15;
 
 	public function __construct() {
-		parent::__construct("dmt", "DiamondMiningTool");
+		parent::__construct('dmt', 'DiamondMiningTool');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		if (MiningLevelAPI::getInstance()->getLevel($sender) < self::DiamondMiningToolsLevelLimit) {
-			SendMessage::Send($sender, "レベル" . self::DiamondMiningToolsLevelLimit . "以上でないと開けません", "MiningTool", false);
-			Server::getInstance()->dispatchCommand($sender, "mt");
+			SendMessage::Send($sender, 'レベル' . self::DiamondMiningToolsLevelLimit . '以上でないと開けません', 'MiningTool', false);
+			Server::getInstance()->dispatchCommand($sender, 'mt');
 			return;
 		}
-		SendForm::Send($sender, (new ConfirmForm($sender, "diamond")));
+		SendForm::Send($sender, (new ConfirmForm($sender, 'diamond')));
 	}
 
 }

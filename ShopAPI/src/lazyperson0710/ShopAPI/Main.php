@@ -18,7 +18,7 @@ class Main extends PluginBase {
 		LevelShopAPI::getInstance()->init();
 		EffectShopAPI::getInstance()->init();
 		EnchantShopAPI::getInstance()->init();
-		$this->getServer()->getCommandMap()->registerAll("levelshop", [
+		$this->getServer()->getCommandMap()->registerAll('levelshop', [
 			new ShopCommand(),
 			new InvSellCommand(),
 			new EnchantShopCommand(),

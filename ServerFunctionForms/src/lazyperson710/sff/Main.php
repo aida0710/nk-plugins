@@ -20,7 +20,7 @@ use function stream_get_contents;
 
 class Main extends PluginBase {
 
-	private const TOS_FILE = "tos.text";
+	private const TOS_FILE = 'tos.text';
 
 	private static string $tos;
 
@@ -31,7 +31,7 @@ class Main extends PluginBase {
 	public function onEnable() : void {
 		$this->loadTos();
 		$this->getServer()->getPluginManager()->registerEvents(new CmdListener(), $this);
-		$this->getServer()->getCommandMap()->registerAll("sff", [
+		$this->getServer()->getCommandMap()->registerAll('sff', [
 			new TosCommand(),
 			new LockCommand(),
 			new EnchantCommand(),

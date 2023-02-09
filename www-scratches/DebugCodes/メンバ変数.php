@@ -14,10 +14,10 @@ class Main {
 
 	public function getName() : string {
 		if (!isset($this->name)) {
-			return "メンバ変数が定義されてないよ！";
+			return 'メンバ変数が定義されてないよ！';
 		}
 		return $this->name;
 	}
 }
 
-echo (new Main("0が選ばれました"))->getName();
+echo (new Main('0が選ばれました'))->getName();

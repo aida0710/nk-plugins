@@ -24,12 +24,12 @@ class DisplayTask extends Task {
 			return;
 		}
 		$mode = Database::getInstance()->getMode($this->player);
-		$this->player->getNetworkSession()->sendDataPacket(RemoveObjectivePacket::create("sidebar"));
+		$this->player->getNetworkSession()->sendDataPacket(RemoveObjectivePacket::create('sidebar'));
 		$lines = $mode->getLines($this->player);
 		if ($lines === null) {
 			return;
 		}
-		$this->player->getNetworkSession()->sendDataPacket(SetDisplayObjectivePacket::create("sidebar", "sidebar", $this->player->getName(), "dummy", 0));
+		$this->player->getNetworkSession()->sendDataPacket(SetDisplayObjectivePacket::create('sidebar', 'sidebar', $this->player->getName(), 'dummy', 0));
 		$entries = [];
 		$score = 0;
 		foreach ($lines as $line) {
@@ -41,7 +41,7 @@ class DisplayTask extends Task {
 
 	private function createEntry(string $customName, int $score) : ScorePacketEntry {
 		$entry = new ScorePacketEntry();
-		$entry->objectiveName = "sidebar";
+		$entry->objectiveName = 'sidebar';
 		$entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
 		$entry->customName = $customName;
 		$entry->score = $score;

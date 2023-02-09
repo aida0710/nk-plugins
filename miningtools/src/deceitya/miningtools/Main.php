@@ -31,18 +31,18 @@ class Main extends PluginBase implements Listener {
 	static array $netherite;
 
 	protected function onEnable() : void {
-		$this->saveResource("config.json");
+		$this->saveResource('config.json');
 		$this->getServer()->getPluginManager()->registerEvents(new BreakEventListener(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new JoinEventListener(), $this);
-		$this->getServer()->getCommandMap()->registerAll("MiningTools", [
+		$this->getServer()->getCommandMap()->registerAll('MiningTools', [
 			new DiamondMiningToolCommand(),
 			new NetheriteMiningToolCommand(),
 			new ExpansionMiningToolCommand(),
 			new MiningToolsCommand(),
 		]);
-		$this->allData = json_decode(file_get_contents($this->getDataFolder() . "config.json"), true);
-		self::$diamond = Main::getInstance()->dataAcquisition("diamond");
-		self::$netherite = Main::getInstance()->dataAcquisition("netherite");
+		$this->allData = json_decode(file_get_contents($this->getDataFolder() . 'config.json'), true);
+		self::$diamond = Main::getInstance()->dataAcquisition('diamond');
+		self::$netherite = Main::getInstance()->dataAcquisition('netherite');
 	}
 
 	public function dataAcquisition($tools) : array {

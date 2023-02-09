@@ -12,12 +12,12 @@ use pocketmine\player\Player;
 class SettingCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("settings", "サーバーの個人用設定画面を開く");
+		parent::__construct('settings', 'サーバーの個人用設定画面を開く');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!($sender instanceof Player)) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		SendForm::Send($sender, (new SelectSettingForm($sender)));

@@ -38,7 +38,7 @@ class RawStringArgument extends BaseArgument {
 	}
 
 	public function getTypeName() : string {
-		return "string";
+		return 'string';
 	}
 
 	public function canParse(string $testString, CommandSender $sender) : bool {

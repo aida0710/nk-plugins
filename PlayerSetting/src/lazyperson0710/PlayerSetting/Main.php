@@ -14,7 +14,7 @@ class Main extends PluginBase {
 		$setting_file = SettingsJson::getInstance();
 		$setting_file->init($this->getDataFolder());
 		$setting_file->output(PlayerSettingPool::getInstance());
-		$this->getServer()->getCommandMap()->registerAll("playerSetting", [
+		$this->getServer()->getCommandMap()->registerAll('playerSetting', [
 			new SettingCommand(),
 		]);
 	}

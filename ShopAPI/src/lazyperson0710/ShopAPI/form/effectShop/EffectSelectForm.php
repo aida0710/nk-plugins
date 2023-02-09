@@ -12,7 +12,7 @@ use pocketmine\Server;
 
 class EffectSelectForm extends SimpleForm {
 
-	public function __construct(?string $error = "") {
+	public function __construct(?string $error = '') {
 		$effects = [
 			VanillaEffects::HASTE(),
 			VanillaEffects::SPEED(),
@@ -23,7 +23,7 @@ class EffectSelectForm extends SimpleForm {
 		];
 		$api = EffectShopAPI::getInstance();
 		$this
-			->setTitle("effect Form")
+			->setTitle('effect Form')
 			->setText("付与したい効果を選択してください\n{$error}");
 		foreach ($effects as $effect) {
 			$effectName = $effect->getName();

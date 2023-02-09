@@ -27,8 +27,8 @@ class Player {
 
 function test(string $name, int $age) : Player {
 	$player = new Player($name, $age);
-	echo $player->getName() . " is " . $player->getAge() . " years old.";
+	echo $player->getName() . ' is ' . $player->getAge() . ' years old.';
 	return $player;
 }
 
-$player = test("lazyperson710", -10);
+$player = test('lazyperson710', -10);

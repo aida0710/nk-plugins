@@ -15,8 +15,8 @@ use function is_null;
 class MjolnirBanCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("mjolnirban", "MjolnirBan command", "/mjolnirban [type: player_name | cid | xuid] [literal] [reason]", ["mban"]);
-		$this->setPermission("mjolnir.command.mjolnirban");
+		parent::__construct('mjolnirban', 'MjolnirBan command', '/mjolnirban [type: player_name | cid | xuid] [literal] [reason]', ['mban']);
+		$this->setPermission('mjolnir.command.mjolnirban');
 	}
 
 	/**
@@ -43,7 +43,7 @@ class MjolnirBanCommand extends Command {
 				$player->kick(Setting::getInstance()->getKickMessage());
 				break;
 			default:
-				$sender->sendMessage("Types: " . implode(", ", BanType::getAll()));
+				$sender->sendMessage('Types: ' . implode(', ', BanType::getAll()));
 				return;
 		}
 		$sender->sendMessage("You banned $args[1] (Type: $args[0])");

@@ -10,6 +10,6 @@ class SendToastPacket {
 
 	public static function Send(Player $player, string $title, string $body) : void {
 		$player->getNetworkSession()->sendDataPacket(ToastRequestPacket::create($title, $body));
-		SoundPacket::Send($player, "random.toast");
+		SoundPacket::Send($player, 'random.toast');
 	}
 }

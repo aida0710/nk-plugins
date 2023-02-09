@@ -39,11 +39,11 @@ class FloatArgument extends BaseArgument {
 	}
 
 	public function getTypeName() : string {
-		return "decimal";
+		return 'decimal';
 	}
 
 	public function canParse(string $testString, CommandSender $sender) : bool {
-		return (bool) preg_match("/^-?(?:\d+|\d*\.\d+)$/", $testString);
+		return (bool) preg_match('/^-?(?:\d+|\d*\.\d+)$/', $testString);
 	}
 
 	public function parse(string $argument, CommandSender $sender) {

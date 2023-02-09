@@ -55,7 +55,7 @@ abstract class BaseSubCommand implements IArgumentable, IRunnable {
 	/** @var BaseConstraint[] */
 	private array $constraints = [];
 
-	public function __construct(string $name, string $description = "", array $aliases = []) {
+	public function __construct(string $name, string $description = '', array $aliases = []) {
 		$this->name = $name;
 		$this->description = $description;
 		$this->aliases = $aliases;
@@ -96,7 +96,7 @@ abstract class BaseSubCommand implements IArgumentable, IRunnable {
 		if (empty($this->permission)) {
 			return true;
 		}
-		foreach (explode(";", $this->permission) as $permission) {
+		foreach (explode(';', $this->permission) as $permission) {
 			if ($sender->hasPermission($permission)) {
 				return true;
 			}

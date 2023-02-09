@@ -32,7 +32,7 @@ class EventListener implements Listener {
 	 */
 	public function onQuit(PlayerQuitEvent $event) {
 		if ($event->getQuitReason() === Setting::getInstance()->getKickMessage()) {
-			$event->setQuitMessage("");
+			$event->setQuitMessage('');
 		}
 	}
 }

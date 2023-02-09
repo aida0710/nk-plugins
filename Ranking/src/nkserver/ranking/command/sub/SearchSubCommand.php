@@ -24,7 +24,7 @@ class SearchSubCommand extends BaseSubCommand {
 
 	public function onRun(CommandSender $sender, string $command, array $args) : void {
 		if (!$sender instanceof Player) {
-			$sender->sendMessage("サーバー内で実行してください");
+			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
 		if (!Server::getInstance()->isOp((string) $sender)) return;

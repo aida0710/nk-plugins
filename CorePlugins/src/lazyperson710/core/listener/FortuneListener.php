@@ -24,7 +24,7 @@ class FortuneListener implements Listener {
 			return;
 		}
 		if ($event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::SILK_TOUCH)) !== null) {
-			SendMessage::Send($event->getPlayer(), "シルクタッチと幸運が同時付与されているツールは使用することができません", "Enchant", false);
+			SendMessage::Send($event->getPlayer(), 'シルクタッチと幸運が同時付与されているツールは使用することができません', 'Enchant', false);
 			return;
 		}
 		if (empty($event->getDrops())) return;

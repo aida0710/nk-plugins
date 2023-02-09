@@ -128,23 +128,23 @@ class CraftCancel implements Listener {
 			$player = $event->getPlayer();
 			if ($item instanceof Food) {
 				$event->cancel();
-				SendMessage::Send($event->getPlayer(), "食べ物をクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
+				SendMessage::Send($event->getPlayer(), '食べ物をクラフトすることは出来ません。一部を除いてショップから購入が可能です', '§bCraftCancel', false);
 			}
 			if ($item instanceof Durable) {
 				$event->cancel();
-				SendMessage::Send($event->getPlayer(), "道具をクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
+				SendMessage::Send($event->getPlayer(), '道具をクラフトすることは出来ません。一部を除いてショップから購入が可能です', '§bCraftCancel', false);
 			}
 			if (in_array($item->getVanillaName(), $blocks, true)) {
 				$event->cancel();
-				SendMessage::Send($event->getPlayer(), "このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
+				SendMessage::Send($event->getPlayer(), 'このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です', '§bCraftCancel', false);
 			}
 			if (in_array($item->getVanillaName(), $items, true)) {
 				$event->cancel();
-				SendMessage::Send($event->getPlayer(), "このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
+				SendMessage::Send($event->getPlayer(), 'このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です', '§bCraftCancel', false);
 			}
 			if (in_array($item->getId(), $ids, true)) {
 				$event->cancel();
-				SendMessage::Send($event->getPlayer(), "このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です", "§bCraftCancel", false);
+				SendMessage::Send($event->getPlayer(), 'このアイテムをクラフトすることは出来ません。一部を除いてショップから購入が可能です', '§bCraftCancel', false);
 			}
 			return;
 		}

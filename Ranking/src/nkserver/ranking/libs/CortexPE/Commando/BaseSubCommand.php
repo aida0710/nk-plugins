@@ -36,21 +36,21 @@ abstract class BaseSubCommand extends BaseCommand {
 	/** @var BaseCommand */
 	protected $parent;
 
-	public function __construct(Plugin $plugin, string $name, string $description = "", array $aliases = []) {
+	public function __construct(Plugin $plugin, string $name, string $description = '', array $aliases = []) {
 		parent::__construct($plugin, $name, $description, $aliases);
-		$this->usageMessage = "";
+		$this->usageMessage = '';
 	}
 
 	public function getUsage() : string {
 		if (empty($this->usageMessage)) {
 			$parent = $this->parent;
-			$parentNames = "";
+			$parentNames = '';
 			while ($parent instanceof BaseSubCommand) {
 				$parentNames = $parent->getName() . $parentNames;
 				$parent = $parent->getParent();
 			}
 			if ($parent instanceof BaseCommand) {
-				$parentNames = $parent->getName() . " " . $parentNames;
+				$parentNames = $parent->getName() . ' ' . $parentNames;
 			}
 			$this->usageMessage = $this->generateUsageMessage(trim($parentNames));
 		}

@@ -42,7 +42,7 @@ abstract class StringEnumArgument extends BaseArgument {
 
 	public function __construct(string $name, bool $optional = false) {
 		parent::__construct($name, $optional);
-		$this->parameterData->enum = new CommandEnum("", $this->getEnumValues());
+		$this->parameterData->enum = new CommandEnum('', $this->getEnumValues());
 	}
 
 	public function getNetworkType() : int {
@@ -52,7 +52,7 @@ abstract class StringEnumArgument extends BaseArgument {
 
 	public function canParse(string $testString, CommandSender $sender) : bool {
 		return (bool) preg_match(
-			"/^(" . implode("|", array_map("\\strtolower", $this->getEnumValues())) . ")$/iu",
+			'/^(' . implode('|', array_map("\\strtolower", $this->getEnumValues())) . ')$/iu',
 			$testString,
 		);
 	}

@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 $array = [
-	"a",
-	"b",
-	"c",
-	"d",
-	"e",
-	"f",
-	"g",
+	'a',
+	'b',
+	'c',
+	'd',
+	'e',
+	'f',
+	'g',
 ];
 //配列の要素を数で指定して切り捨てる
 //$test = array_slice($array, 0, 4);

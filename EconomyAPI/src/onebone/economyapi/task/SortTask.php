@@ -74,15 +74,15 @@ class SortTask extends AsyncTask {
 
 	public function onCompletion() : void {
 		$server = Server::getInstance();
-		if ($this->sender === "CONSOLE" || ($player = $server->getPlayerExact($this->sender)) instanceof Player) {
+		if ($this->sender === 'CONSOLE' || ($player = $server->getPlayerExact($this->sender)) instanceof Player) {
 			$plugin = EconomyAPI::getInstance();
-			$output = ($plugin->getMessage("topmoney-tag", [$this->page, $this->max], $this->sender) . "\n");
-			$message = ($plugin->getMessage("topmoney-format", [], $this->sender) . "\n");
+			$output = ($plugin->getMessage('topmoney-tag', [$this->page, $this->max], $this->sender) . "\n");
+			$message = ($plugin->getMessage('topmoney-format', [], $this->sender) . "\n");
 			foreach (unserialize($this->topList) as $n => $list) {
-				$output .= str_replace(["%1", "%2", "%3"], [$n, $list[0], $list[1]], $message);
+				$output .= str_replace(['%1', '%2', '%3'], [$n, $list[0], $list[1]], $message);
 			}
 			$output = substr($output, 0, -1);
-			if ($this->sender === "CONSOLE") {
+			if ($this->sender === 'CONSOLE') {
 				$plugin->getLogger()->info($output);
 			} else {
 				$player->sendMessage($output);

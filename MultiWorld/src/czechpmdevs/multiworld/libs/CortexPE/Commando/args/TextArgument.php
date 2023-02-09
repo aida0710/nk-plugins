@@ -39,7 +39,7 @@ class TextArgument extends RawStringArgument {
 	}
 
 	public function getTypeName() : string {
-		return "text";
+		return 'text';
 	}
 
 	public function getSpanLength() : int {
@@ -47,6 +47,6 @@ class TextArgument extends RawStringArgument {
 	}
 
 	public function canParse(string $testString, CommandSender $sender) : bool {
-		return $testString !== "";
+		return $testString !== '';
 	}
 }

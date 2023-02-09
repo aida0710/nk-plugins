@@ -58,10 +58,10 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 	/** @var string[] */
 	protected $errorMessages = [
 		self::ERR_INVALID_ARG_VALUE => TextFormat::RED . "Invalid value '{value}' for argument #{position}. Expecting: {expected}.",
-		self::ERR_TOO_MANY_ARGUMENTS => TextFormat::RED . "Too many arguments given.",
-		self::ERR_INSUFFICIENT_ARGUMENTS => TextFormat::RED . "Insufficient number of arguments given.",
-		self::ERR_NO_ARGUMENTS => TextFormat::RED . "No arguments are required for this command.",
-		self::ERR_INVALID_ARGUMENTS => TextFormat::RED . "Invalid arguments supplied.",
+		self::ERR_TOO_MANY_ARGUMENTS => TextFormat::RED . 'Too many arguments given.',
+		self::ERR_INSUFFICIENT_ARGUMENTS => TextFormat::RED . 'Insufficient number of arguments given.',
+		self::ERR_NO_ARGUMENTS => TextFormat::RED . 'No arguments are required for this command.',
+		self::ERR_INVALID_ARGUMENTS => TextFormat::RED . 'Invalid arguments supplied.',
 	];
 
 	/** @var CommandSender */
@@ -76,7 +76,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 	public function __construct(
 		Plugin $plugin,
 		string $name,
-		string $description = "",
+		string $description = '',
 		array $aliases = [],
 	) {
 		$this->plugin = $plugin;
@@ -128,13 +128,13 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 	 */
 	private function attemptArgumentParsing($ctx, array $args) : ?array {
 		$dat = $ctx->parseArguments($args, $this->currentSender);
-		if (!empty(($errors = $dat["errors"]))) {
+		if (!empty(($errors = $dat['errors']))) {
 			foreach ($errors as $error) {
-				$this->sendError($error["code"], $error["data"]);
+				$this->sendError($error['code'], $error['data']);
 			}
 			return null;
 		}
-		return $dat["arguments"];
+		return $dat['arguments'];
 	}
 
 	public function sendError(int $errorCode, array $args = []) : void {
@@ -147,7 +147,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 	}
 
 	protected function sendUsage() : void {
-		$this->currentSender->sendMessage(TextFormat::RED . "Usage: " . $this->getUsage());
+		$this->currentSender->sendMessage(TextFormat::RED . 'Usage: ' . $this->getUsage());
 	}
 
 	/**
@@ -167,7 +167,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 
 	public function setErrorFormat(int $errorCode, string $format) : void {
 		if (!isset($this->errorMessages[$errorCode])) {
-			throw new InvalidErrorCode("Invalid error code 0x" . dechex($errorCode));
+			throw new InvalidErrorCode('Invalid error code 0x' . dechex($errorCode));
 		}
 		$this->errorMessages[$errorCode] = $format;
 	}

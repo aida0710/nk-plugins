@@ -21,7 +21,7 @@ class EventSchedule {
 	 * @throws LogicException
 	 */
 	public function execute() : void {
-		$scheduler = YmgGachaPlugin::getTaskScheduler() ?? throw new LogicException("can not a execute in before enabled YmgGachaPlugin");
+		$scheduler = YmgGachaPlugin::getTaskScheduler() ?? throw new LogicException('can not a execute in before enabled YmgGachaPlugin');
 		foreach ($this->events as $ev) {
 			$scheduler->scheduleDelayedTask(new ClosureTask(fn () => $ev->getFunction()()), $ev->getDelay());
 		}

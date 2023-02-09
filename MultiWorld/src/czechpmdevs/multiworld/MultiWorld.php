@@ -47,11 +47,11 @@ class MultiWorld extends PluginBase {
 	public function onLoad() : void {
 		MultiWorld::$instance = $this;
 		$generators = [
-			"ender" => EnderGenerator::class,
-			"void" => VoidGenerator::class,
-			"skyblock" => SkyBlockGenerator::class,
-			"vanilla_normal" => OverworldGenerator::class,
-			"vanilla_nether" => NetherGenerator::class,
+			'ender' => EnderGenerator::class,
+			'void' => VoidGenerator::class,
+			'skyblock' => SkyBlockGenerator::class,
+			'vanilla_normal' => OverworldGenerator::class,
+			'vanilla_nether' => NetherGenerator::class,
 		];
 		foreach ($generators as $name => $class) {
 			GeneratorManager::getInstance()->addGenerator($class, $name, fn () => null, true);
@@ -62,10 +62,10 @@ class MultiWorld extends PluginBase {
 		$this->configManager = new ConfigManager();
 		$this->languageManager = new LanguageManager();
 		$this->commands = [
-			"multiworld" => new MultiWorldCommand($this, "multiworld", "MultiWorld commands", ["mw", "wm"]),
+			'multiworld' => new MultiWorldCommand($this, 'multiworld', 'MultiWorld commands', ['mw', 'wm']),
 		];
 		foreach ($this->commands as $command) {
-			$this->getServer()->getCommandMap()->register("MultiWorld", $command);
+			$this->getServer()->getCommandMap()->register('MultiWorld', $command);
 		}
 		try {
 			PacketHooker::register($this);

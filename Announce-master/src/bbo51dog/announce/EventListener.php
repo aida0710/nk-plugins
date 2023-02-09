@@ -28,8 +28,8 @@ class EventListener implements Listener {
 	}
 
 	public function onCommand(CommandEvent $event) {
-		$str = explode(" ", $event->getCommand(), 2);
-		if ($str[0] === "pass") {
+		$str = explode(' ', $event->getCommand(), 2);
+		if ($str[0] === 'pass') {
 			return;
 		}
 		$sender = $event->getSender();
@@ -38,7 +38,7 @@ class EventListener implements Listener {
 		}
 		if (!AnnounceService::isConfirmed($sender->getName())) {
 			$event->cancel();
-			SendMessage::Send($sender, "コマンドを使うには/passで機能をアクティブにする必要があります", "Pass", false);
+			SendMessage::Send($sender, 'コマンドを使うには/passで機能をアクティブにする必要があります', 'Pass', false);
 		}
 	}
 }

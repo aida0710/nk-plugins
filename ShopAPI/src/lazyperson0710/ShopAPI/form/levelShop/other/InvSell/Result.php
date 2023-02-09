@@ -15,9 +15,9 @@ class Result extends SimpleForm {
 
 	public function __construct(int $allCount, int $allSellMoney, string $allItem, int $insufficientLevelAllCount, string $insufficientLevelAllItem) {
 		$this
-			->setTitle("Level Shop")
+			->setTitle('Level Shop')
 			->setText("下記のアイテムを売却しても本当によろしいでしょうか？\n\n売却合計金額 {$allSellMoney}円\n売却アイテム合計数 {$allCount}個\n\n売却アイテム一覧\n{$allItem}\nレベル不足で売却ができないアイテム合計数 {$insufficientLevelAllCount}個\nレベル不足で売却ができないアイテム一覧\n{$insufficientLevelAllItem}")
-			->addElements(new Button("はい"));
+			->addElements(new Button('はい'));
 	}
 
 	public function handleSubmit(Player $player) : void {
@@ -28,9 +28,9 @@ class Result extends SimpleForm {
 			$item = clone $inventory->getItem($i);
 			if ($item->getId() == ItemIds::AIR) continue;
 			if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
-			if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "failure") {
+			if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'failure') {
 				continue;
-			} elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === "exception") continue;
+			} elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'exception') continue;
 			$sellMoney = LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta());
 			$count = $item->getCount();
 			$sellMoney = $sellMoney * $count;
@@ -39,6 +39,6 @@ class Result extends SimpleForm {
 			$inventory->removeItem($item);
 		}
 		EconomyAPI::getInstance()->addMoney($player->getName(), $allSellMoney);
-		SendMessage::Send($player, "{$allSellMoney}円で{$allCount}個のアイテムが売却されました", "LevelShop", true, 'break.amethyst_block');
+		SendMessage::Send($player, "{$allSellMoney}円で{$allCount}個のアイテムが売却されました", 'LevelShop', true, 'break.amethyst_block');
 	}
 }

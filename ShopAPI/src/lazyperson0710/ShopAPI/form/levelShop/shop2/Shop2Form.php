@@ -15,18 +15,18 @@ class Shop2Form extends SimpleForm {
 
 	public function __construct() {
 		$contents = [
-			"作物類" => "Crop",
-			"種子類" => "Seeds",
-			"農耕系ツール&アイテム" => "FarmingTools",
+			'作物類' => 'Crop',
+			'種子類' => 'Seeds',
+			'農耕系ツール&アイテム' => 'FarmingTools',
 		];
 		$this
-			->setTitle("Level Shop")
-			->setText("§7選択してください");
+			->setTitle('Level Shop')
+			->setText('§7選択してください');
 		foreach ($contents as $key => $value) {
 			$class = __NAMESPACE__ . "\\" . $value;
 			$this->addElements(new ShopItemFormButton($key, $class));
 		}
-		$this->addElements(new FirstBackFormButton("ホームに戻る"));
+		$this->addElements(new FirstBackFormButton('ホームに戻る'));
 	}
 
 	public function handleClosed(Player $player) : void {

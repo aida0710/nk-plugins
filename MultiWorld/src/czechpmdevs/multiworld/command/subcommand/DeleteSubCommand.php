@@ -34,8 +34,8 @@ use function str_replace;
 class DeleteSubCommand extends BaseSubCommand {
 
 	protected function prepare() : void {
-		$this->registerArgument(0, new RawStringArgument("worldName"));
-		$this->setPermission("multiworld.command.delete");
+		$this->registerArgument(0, new RawStringArgument('worldName'));
+		$this->setPermission('multiworld.command.delete');
 	}
 
 	/**
@@ -43,18 +43,18 @@ class DeleteSubCommand extends BaseSubCommand {
 	 */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
 		/** @var string $worldName */
-		$worldName = $args["worldName"];
+		$worldName = $args['worldName'];
 		if (!Server::getInstance()->getWorldManager()->isWorldGenerated($worldName) || !file_exists(Server::getInstance()->getDataPath() . "worlds/$worldName")) {
-			$sender->sendMessage(MultiWorld::getPrefix() . str_replace("%1", $worldName, LanguageManager::translateMessage($sender, "delete-levelnotexists")));
+			$sender->sendMessage(MultiWorld::getPrefix() . str_replace('%1', $worldName, LanguageManager::translateMessage($sender, 'delete-levelnotexists')));
 			return;
 		}
 		$world = Server::getInstance()->getWorldManager()->getWorldByName($worldName);
 		if ($world instanceof World) { // World is loaded
 			if (WorldUtils::getDefaultWorldNonNull()->getId() === $world->getId()) {
-				$sender->sendMessage("§cCould not remove default world!");
+				$sender->sendMessage('§cCould not remove default world!');
 				return;
 			}
 		}
-		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, "delete-done", [(string) WorldUtils::removeWorld($worldName)]));
+		$sender->sendMessage(MultiWorld::getPrefix() . LanguageManager::translateMessage($sender, 'delete-done', [(string) WorldUtils::removeWorld($worldName)]));
 	}
 }

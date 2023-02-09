@@ -22,9 +22,9 @@ class CraftEvnetListener implements Listener {
 					}
 					$event->cancel();
 					$output = VanillaBlocks::WATER()->asItem();
-					$output->setCustomName("精製水");
+					$output->setCustomName('精製水');
 					$output->setLore([
-						"lore1" => "生活ワールドと農業ワールドで使用可能です",
+						'lore1' => '生活ワールドと農業ワールドで使用可能です',
 					]);
 					$player->getInventory()->addItem($output);
 					break;

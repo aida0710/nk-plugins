@@ -24,11 +24,11 @@ use pocketmine\player\Player;
 
 abstract class Form implements \pocketmine\form\Form {
 
-	public const FORM_TYPE_SIMPLE = "form";
-	public const FORM_TYPE_MODAL = "modal";
-	public const FORM_TYPE_CUSTOM = "custom_form";
+	public const FORM_TYPE_SIMPLE = 'form';
+	public const FORM_TYPE_MODAL = 'modal';
+	public const FORM_TYPE_CUSTOM = 'custom_form';
 
-	/** @var mixed[] */
+	/** @var array */
 	protected array $data = [];
 
 	/** @var Closure(Player $player, FormResponse $response): void */
@@ -37,7 +37,7 @@ abstract class Form implements \pocketmine\form\Form {
 	protected bool $ignoreInvalidResponse;
 
 	public function __construct(string $formType, bool $ignoreInvalidResponse = false) {
-		$this->data["type"] = $formType;
+		$this->data['type'] = $formType;
 		$this->ignoreInvalidResponse = $ignoreInvalidResponse;
 	}
 

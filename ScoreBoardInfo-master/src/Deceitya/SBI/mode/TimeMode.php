@@ -26,23 +26,23 @@ class TimeMode implements Mode {
 
 	public function getLines(Player $player) : ?array {
 		$item = $player->getInventory()->getItemInHand();
-		$date = date("Y年m月d日");
-		$time = date("H時i分s秒");
+		$date = date('Y年m月d日');
+		$time = date('H時i分s秒');
 		return [
-			"所持金 - " . number_format($this->EconomyAPI->myMoney($player)) . "円",
-			"チケット - " . number_format(TicketAPI::getInstance()->checkData($player)) . "枚",
+			'所持金 - ' . number_format($this->EconomyAPI->myMoney($player)) . '円',
+			'チケット - ' . number_format(TicketAPI::getInstance()->checkData($player)) . '枚',
 			"ワールド - {$player->getPosition()->getWorld()->getFolderName()}",
-			"オンライン - " . count(Server::getInstance()->getOnlinePlayers()) . "/" . Server::getInstance()->getMaxPlayers(),
-			"  ",
+			'オンライン - ' . count(Server::getInstance()->getOnlinePlayers()) . '/' . Server::getInstance()->getMaxPlayers(),
+			'  ',
 			"アイテムID - {$item->getId()}:{$item->getMeta()}/{$item->getCount()}",
 			"現在日付 - {$date}",
 			"現在時刻 - {$time}",
 			"応答速度 - {$player->getNetworkSession()->getPing()}ms",
-			" ",
-			"サーバー再起動 - " . (int) ($this->ServerStopper->getCurrent() / 60) . "分" . ($this->ServerStopper->getCurrent() % 60) . "秒",
-			"経験値オーブ削除 - " . (int) (Main::getInstance()->entityRemoveTimeLeft / 60) . "分" . (Main::getInstance()->entityRemoveTimeLeft % 60) . "秒",
-			"",
-			TextFormat::YELLOW . "nkserver.net",
+			' ',
+			'サーバー再起動 - ' . (int) ($this->ServerStopper->getCurrent() / 60) . '分' . ($this->ServerStopper->getCurrent() % 60) . '秒',
+			'経験値オーブ削除 - ' . (int) (Main::getInstance()->entityRemoveTimeLeft / 60) . '分' . (Main::getInstance()->entityRemoveTimeLeft % 60) . '秒',
+			'',
+			TextFormat::YELLOW . 'nkserver.net',
 		];
 	}
 
@@ -51,6 +51,6 @@ class TimeMode implements Mode {
 	}
 
 	public function getName() : string {
-		return "ノーマル+時間表記あり";
+		return 'ノーマル+時間表記あり';
 	}
 }

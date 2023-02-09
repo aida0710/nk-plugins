@@ -16,6 +16,6 @@ class NoMode implements Mode {
 	}
 
 	public function getName() : string {
-		return "削除";
+		return '削除';
 	}
 }

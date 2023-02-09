@@ -29,15 +29,15 @@ final class SimpleGeneratorPreset implements GeneratorPreset {
 	 *   * worldtype=largebiomes,environment=overworld
 	 */
 	public static function parse(string $preset) : self {
-		if ($preset === "") {
+		if ($preset === '') {
 			return self::empty();
 		}
 		$data = [];
-		foreach (explode(",", $preset) as $entry) {
-			if (!str_contains($entry, "=")) {
+		foreach (explode(',', $preset) as $entry) {
+			if (!str_contains($entry, '=')) {
 				throw new InvalidArgumentException("Preset is invalid: $entry must contain an '=' symbol");
 			}
-			[$key, $value] = explode("=", $entry);
+			[$key, $value] = explode('=', $entry);
 			if (is_numeric($value)) {
 				$value = (float) $value;
 				if ($value - floor($value) < PHP_FLOAT_EPSILON) {
@@ -90,10 +90,10 @@ final class SimpleGeneratorPreset implements GeneratorPreset {
 	}
 
 	public function toString() : string {
-		$string = "";
+		$string = '';
 		foreach ($this->data as $property => $value) {
 			$string .= "$property=$value,";
 		}
-		return rtrim($string, ",");
+		return rtrim($string, ',');
 	}
 }

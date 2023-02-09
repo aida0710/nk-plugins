@@ -16,8 +16,8 @@ use pocketmine\utils\TextFormat;
 class PassCommand extends Command {
 
 	public function __construct() {
-		parent::__construct("pass", "パスワードを入力してコマンドを実行可能にする");
-		$this->setPermission("announce.command.pass");
+		parent::__construct('pass', 'パスワードを入力してコマンドを実行可能にする');
+		$this->setPermission('announce.command.pass');
 	}
 
 	/**
@@ -25,11 +25,11 @@ class PassCommand extends Command {
 	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if (!$sender instanceof Player) {
-			$sender->sendMessage(TextFormat::RED . "ゲーム内で実行してください");
+			$sender->sendMessage(TextFormat::RED . 'ゲーム内で実行してください');
 			return;
 		}
 		if (AnnounceService::isConfirmed($sender->getName())) {
-			SendMessage::Send($sender, "既にアクティベートされています", "Pass", false);
+			SendMessage::Send($sender, '既にアクティベートされています', 'Pass', false);
 			SendForm::Send($sender, (new WarpForm($sender)));
 			return;
 		}

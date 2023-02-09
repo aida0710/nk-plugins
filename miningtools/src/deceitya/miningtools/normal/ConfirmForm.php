@@ -32,16 +32,16 @@ class ConfirmForm extends CustomForm {
 				$explanation = new Label("NetheriteMiningTools\n\n必要金額 : {$netheriteCost}\n\n「送信」を押すと確認画面に飛びます\n\nしゃべるとピッケルの機能\n採掘地点を中心とした3x3の範囲採掘\n範囲破壊が行われるのはツールに対応したブロックのみになります\n\n斧の機能\nマインオールのような機能を持ち、採掘したブロック(原木と葉っぱが対象)に隣接するブロックを破壊していく");
 				break;
 			default:
-				throw new Error("不正なモードが指定されました");
+				throw new Error('不正なモードが指定されました');
 		}
 		$type = [
-			"つるはし",
-			"しゃべる",
-			"おの",
+			'つるはし',
+			'しゃべる',
+			'おの',
 		];
-		$this->toolType = new Dropdown("購入したいツールタイプを選択してください", $type);
+		$this->toolType = new Dropdown('購入したいツールタイプを選択してください', $type);
 		$this
-			->setTitle("Mining Tools")
+			->setTitle('Mining Tools')
 			->addElements(
 				$explanation,
 				$this->toolType,

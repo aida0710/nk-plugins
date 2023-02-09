@@ -14,7 +14,7 @@ use pocketmine\Server;
 
 class EnchantSelectForm extends SimpleForm {
 
-	public function __construct(?string $error = "") {
+	public function __construct(?string $error = '') {
 		$enchants = [
 			VanillaEnchantments::SHARPNESS(),
 			VanillaEnchantments::EFFICIENCY(),
@@ -25,7 +25,7 @@ class EnchantSelectForm extends SimpleForm {
 		];
 		$api = EnchantShopAPI::getInstance();
 		$this
-			->setTitle("Enchant Form")
+			->setTitle('Enchant Form')
 			->setText("付与したい効果を選択してください\n{$error}");
 		foreach ($enchants as $enchantment) {
 			$enchantName = $enchantment->getName();

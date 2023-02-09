@@ -23,13 +23,13 @@ class CmdSigns implements Listener {
 	public function onTap(PlayerInteractEvent $event) {
 		$block = $event->getBlock();
 		if ($block instanceof BaseSign) {
-			if ($block->getText()->getLine(0) == "##cmd") {
+			if ($block->getText()->getLine(0) == '##cmd') {
 				if (!$event->getPlayer()->isSneaking()) {
-					if (IntervalTask::check($event->getPlayer(), "CmdSigns")) {
-						SendNoSoundTip::Send($event->getPlayer(), "コマンド看板は1秒以内に再度使用することは出来ません", "CmdSigns", true);
+					if (IntervalTask::check($event->getPlayer(), 'CmdSigns')) {
+						SendNoSoundTip::Send($event->getPlayer(), 'コマンド看板は1秒以内に再度使用することは出来ません', 'CmdSigns', true);
 						return;
 					} else {
-						IntervalTask::onRun($event->getPlayer(), "CmdSigns", 20);
+						IntervalTask::onRun($event->getPlayer(), 'CmdSigns', 20);
 					}
 					$player = $event->getPlayer();
 					$world = $player->getWorld()->getFolderName();
@@ -48,7 +48,7 @@ class CmdSigns implements Listener {
 					$cmd = $block->getText()->getLine(2);
 					Server::getInstance()->dispatchCommand($event->getPlayer(), str_replace($search, $replace, $cmd));
 				} else {
-					SendActionBarMessage::Send($event->getPlayer(), "スニーク中はコマンド看板は実行されず破壊が可能です", "CmdSigns", true);
+					SendActionBarMessage::Send($event->getPlayer(), 'スニーク中はコマンド看板は実行されず破壊が可能です', 'CmdSigns', true);
 				}
 			}
 		}

@@ -10,7 +10,7 @@ use lazyperson0710\Gacha\form\element\SendGachaFormButton;
 class MainForm extends SimpleForm {
 
 	public function __construct() {
-		$this->setTitle("Gacha System");
+		$this->setTitle('Gacha System');
 		foreach (GachaItemAPI::Category as $category) {
 			$this->addElements(new SendGachaFormButton($category));
 		}

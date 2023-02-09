@@ -13,9 +13,9 @@ class ResultForm extends CustomForm {
 			$this->addElements(new Label("§l§cアイテムを渡せない為itemをdropさせました§r\n"));
 		}
 		$this
-			->setTitle("Gacha System")
+			->setTitle('Gacha System')
 			->addElements(
-				new Label("ガチャの結果"),
+				new Label('ガチャの結果'),
 				new Label($formMessage),
 			);
 	}

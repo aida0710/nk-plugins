@@ -23,11 +23,11 @@ class ShareForm implements Form {
 	public function handleResponse(Player $player, $data) : void {
 		if ($data === null) return;
 		if (BankHelper::getInstance()->isShare($this->bank, $data[0])) {
-			SendMessage::Send($player, "その人はすでに共有されています", "Bank", false);
+			SendMessage::Send($player, 'その人はすでに共有されています', 'Bank', false);
 			return;
 		}
 		BankHelper::getInstance()->share($this->bank, $data[0], $player->getName());
-		SendMessage::Send($player, "{$data[0]}さんを共有しました", "Bank", true);
+		SendMessage::Send($player, "{$data[0]}さんを共有しました", 'Bank', true);
 	}
 
 	/**
@@ -39,10 +39,10 @@ class ShareForm implements Form {
 			'title' => 'BankSystem',
 			'content' => [
 				[
-					"type" => "input",
-					"text" => "入力してください",
-					"placeholder" => "gameTag",
-					"default" => "",
+					'type' => 'input',
+					'text' => '入力してください',
+					'placeholder' => 'gameTag',
+					'default' => '',
 				],
 			],
 		];

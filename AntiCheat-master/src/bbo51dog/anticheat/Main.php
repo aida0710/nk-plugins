@@ -15,11 +15,11 @@ class Main extends PluginBase {
 	}
 
 	protected function onEnable() : void {
-		$config = new Config($this->getDataFolder() . "Config.yml", Config::YAML, [
-			"AntiJumpCommand" => "command",
-			"discord" => [
-				"enabled" => false,
-				"url" => "https://discord.com/xxxx",
+		$config = new Config($this->getDataFolder() . 'Config.yml', Config::YAML, [
+			'AntiJumpCommand' => 'command',
+			'discord' => [
+				'enabled' => false,
+				'url' => 'https://discord.com/xxxx',
 			],
 		]);
 		self::$setting = Setting::loadFromArray($config->getAll());

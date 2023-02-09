@@ -15,14 +15,14 @@ class Main extends PluginBase {
 	protected function onEnable() : void {
 		$this->getServer()->getPluginManager()->registerEvents(new BreakEventListener(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new JoinEventListener(), $this);
-		$this->getServer()->getCommandMap()->registerAll("ticketApi", [
+		$this->getServer()->getCommandMap()->registerAll('ticketApi', [
 			new TicketCommand(),
 		]);
 		if (!file_exists($this->getDataFolder())) {
-			mkdir($this->getDataFolder() . "TicketData.yml");
+			mkdir($this->getDataFolder() . 'TicketData.yml');
 		}
 		$this->getScheduler()->scheduleRepeatingTask(new SaveTask(), 20 * 60);
-		TicketAPI::getInstance()->setCache($this->getDataFolder() . "TicketData.yml");
+		TicketAPI::getInstance()->setCache($this->getDataFolder() . 'TicketData.yml');
 	}
 
 	protected function onDisable() : void {

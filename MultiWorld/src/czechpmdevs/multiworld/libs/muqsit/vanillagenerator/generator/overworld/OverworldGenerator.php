@@ -121,8 +121,8 @@ class OverworldGenerator extends VanillaGenerator {
 		$preset = SimpleGeneratorPreset::parse($presetString);
 		parent::__construct(
 			$seed,
-			$preset->exists("environment") ? Environment::fromString($preset->getString("environment")) : Environment::OVERWORLD,
-			$preset->exists("worldtype") ? WorldType::fromString($preset->getString("worldtype")) : null,
+			$preset->exists('environment') ? Environment::fromString($preset->getString('environment')) : Environment::OVERWORLD,
+			$preset->exists('worldtype') ? WorldType::fromString($preset->getString('worldtype')) : null,
 			$preset,
 		);
 		$this->groundGen = new GroundGenerator();

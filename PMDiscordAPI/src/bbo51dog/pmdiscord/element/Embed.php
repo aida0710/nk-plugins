@@ -18,7 +18,7 @@ class Embed {
 	 * Set embed title
 	 */
 	public function setTitle(string $title) : self {
-		$this->data["title"] = $title;
+		$this->data['title'] = $title;
 		return $this;
 	}
 
@@ -26,7 +26,7 @@ class Embed {
 	 * Set embed description
 	 */
 	public function setDesc(string $desc) : self {
-		$this->data["description"] = $desc;
+		$this->data['description'] = $desc;
 		return $this;
 	}
 
@@ -34,7 +34,7 @@ class Embed {
 	 * Set title url
 	 */
 	public function setUrl(string $url) : self {
-		$this->data["url"] = $url;
+		$this->data['url'] = $url;
 		return $this;
 	}
 
@@ -42,7 +42,7 @@ class Embed {
 	 * Set time stamp
 	 */
 	public function setTime(string $time) : self {
-		$this->data["timestamp"] = $time;
+		$this->data['timestamp'] = $time;
 		return $this;
 	}
 
@@ -51,7 +51,7 @@ class Embed {
 	 * $color is a color code which is decimal
 	 */
 	public function setColor(int $color) : self {
-		$this->data["color"] = $color;
+		$this->data['color'] = $color;
 		return $this;
 	}
 
@@ -59,7 +59,7 @@ class Embed {
 	 * Set image url
 	 */
 	public function setImage(string $url) : self {
-		$this->data["image"]["url"] = $url;
+		$this->data['image']['url'] = $url;
 		return $this;
 	}
 
@@ -67,7 +67,7 @@ class Embed {
 	 * Set thumbnail url
 	 */
 	public function setThumbnail(string $url) : self {
-		$this->data["thumbnail"]["url"] = $url;
+		$this->data['thumbnail']['url'] = $url;
 		return $this;
 	}
 
@@ -75,7 +75,7 @@ class Embed {
 	 * Set text in the footer
 	 */
 	public function setFooterText(string $text) : self {
-		$this->data["footer"]["text"] = $text;
+		$this->data['footer']['text'] = $text;
 		return $this;
 	}
 
@@ -83,7 +83,7 @@ class Embed {
 	 * Set footer icon url
 	 */
 	public function setFooterIcon(string $url) : self {
-		$this->data["footer"]["icon_url"] = $url;
+		$this->data['footer']['icon_url'] = $url;
 		return $this;
 	}
 
@@ -91,7 +91,7 @@ class Embed {
 	 * Set embed authors name
 	 */
 	public function setAuthorName(string $name) : self {
-		$this->data["author"]["name"] = $name;
+		$this->data['author']['name'] = $name;
 		return $this;
 	}
 
@@ -99,7 +99,7 @@ class Embed {
 	 * Set embed authors url
 	 */
 	public function setAuthorUrl(string $url) : self {
-		$this->data["author"]["url"] = $url;
+		$this->data['author']['url'] = $url;
 		return $this;
 	}
 
@@ -107,7 +107,7 @@ class Embed {
 	 * Set embed authors icon url
 	 */
 	public function setAuthorIcon(string $url) : self {
-		$this->data["author"]["icon_url"] = $url;
+		$this->data['author']['icon_url'] = $url;
 		return $this;
 	}
 
@@ -115,12 +115,12 @@ class Embed {
 	 * Add field
 	 */
 	public function addField(string $name, string $value, bool $inline = false) : self {
-		$field["name"] = $name;
-		$field["value"] = $value;
+		$field['name'] = $name;
+		$field['value'] = $value;
 		if ($inline) {
-			$field["inline"] = true;
+			$field['inline'] = true;
 		}
-		$this->data["fields"][] = $field;
+		$this->data['fields'][] = $field;
 		return $this;
 	}
 }

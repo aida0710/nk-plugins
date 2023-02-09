@@ -21,11 +21,11 @@ class Calculation {
 
 	public function sendButton(Player $player, string $shopNumber, array $items, $class) : void {
 		if (empty($items)) {
-			$text = "§c検索した値ではアイテムは検出されませんでした";
+			$text = '§c検索した値ではアイテムは検出されませんでした';
 		} else {
-			$text = "§7選択してください";
+			$text = '§7選択してください';
 		}
-		$class->setTitle("Level Shop");
+		$class->setTitle('Level Shop');
 		$class->setText($text);
 		$api = LevelShopAPI::getInstance();
 		foreach ($items as $item) {
@@ -42,16 +42,16 @@ class Calculation {
 			}
 			$class->addElements(new SellBuyItemFormButton("{$error}\n購入:{$api->getBuy($id ,$meta)} / 売却:{$api->getSell($id ,$meta)}", $id, $meta));
 		}
-		if ($shopNumber === "search") {
-			$class->addElements(new ShopMainCategoryFormButton("検索画面に戻る", new InputItemForm()));
+		if ($shopNumber === 'search') {
+			$class->addElements(new ShopMainCategoryFormButton('検索画面に戻る', new InputItemForm()));
 			return;
 		}
 		$shopClass = self::getInstance()->secondBackFormClass($shopNumber);
-		$class->addElements(new SecondBackFormButton("一つ戻る", $shopClass));
+		$class->addElements(new SecondBackFormButton('一つ戻る', $shopClass));
 	}
 
 	public function secondBackFormClass(string $shopNumber) : Form {
-		$shopNumber = str_replace("shop", "", $shopNumber);
+		$shopNumber = str_replace('shop', '', $shopNumber);
 		$shopNumber = (int) $shopNumber;
 		$class = '\lazyperson0710\ShopAPI\form\levelShop\shop' . $shopNumber . '\Shop' . $shopNumber . 'Form';
 		return new $class();

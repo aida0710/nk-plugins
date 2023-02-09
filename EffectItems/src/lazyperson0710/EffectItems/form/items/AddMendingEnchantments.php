@@ -21,29 +21,29 @@ class AddMendingEnchantments extends CustomForm {
 	//debug デバックしてください
 	public function __construct(Player $player) {
 		$item = $player->getInventory()->getItemInHand();
-		$this->enable = new Toggle("修繕エンチャントを付与しますか？", false);
+		$this->enable = new Toggle('修繕エンチャントを付与しますか？', false);
 		$this
-			->setTitle("Item Edit")
+			->setTitle('Item Edit')
 			->addElements(
-				new Label("修繕エンチャントを付与するには、修繕付与アイテムを所持している必要があります"),
+				new Label('修繕エンチャントを付与するには、修繕付与アイテムを所持している必要があります'),
 				$this->enable,
-				new Label("現在所持しているアイテムの情報"),
-				new Label("Vanillaアイテム名: " . $item->getVanillaName() . "\nCustomアイテム名: " . $item->getCustomName()),
+				new Label('現在所持しているアイテムの情報'),
+				new Label('Vanillaアイテム名: ' . $item->getVanillaName() . "\nCustomアイテム名: " . $item->getCustomName()),
 			);
 	}
 
 	public function handleSubmit(Player $player) : void {
 		$inHandItem = $player->getInventory()->getItemInHand();
 		if (!$this->enable->getValue()) {
-			SendMessage::Send($player, "機能の有効化のボタンをオンにしていない為処理を中断しました", "ItemEdit", false);
+			SendMessage::Send($player, '機能の有効化のボタンをオンにしていない為処理を中断しました', 'ItemEdit', false);
 			return;
 		}
 		if (!$inHandItem instanceof Durable) {
-			SendMessage::Send($player, "道具や装備以外のアイテムは修繕エンチャントを付与することが出来ません", "ItemEdit", false);
+			SendMessage::Send($player, '道具や装備以外のアイテムは修繕エンチャントを付与することが出来ません', 'ItemEdit', false);
 			return;
 		}
 		if ((new CheckItem())->isMiningTools($inHandItem)) {
-			SendMessage::Send($player, "MiningToolsに修繕を付与することはできません", "ItemEdit", false);
+			SendMessage::Send($player, 'MiningToolsに修繕を付与することはできません', 'ItemEdit', false);
 			return;
 		}
 		$approval = false;
@@ -57,12 +57,12 @@ class AddMendingEnchantments extends CustomForm {
 			}
 		}
 		if ($approval === false) {
-			SendMessage::Send($player, "修繕付与アイテムを取得することができませんでした", "ItemEdit", false);
+			SendMessage::Send($player, '修繕付与アイテムを取得することができませんでした', 'ItemEdit', false);
 			return;
 		}
 		$inHandItem->addEnchantment(new EnchantmentInstance(VanillaEnchantments::MENDING()), 1);
 		$player->getInventory()->setItemInHand($inHandItem);
-		SendMessage::Send($player, "修繕を付与しました", "ItemEdit", true);
+		SendMessage::Send($player, '修繕を付与しました', 'ItemEdit', true);
 	}
 
 }

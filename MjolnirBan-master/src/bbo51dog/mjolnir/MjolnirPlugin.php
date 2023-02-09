@@ -24,7 +24,7 @@ class MjolnirPlugin extends PluginBase {
 
 	protected function onEnable() : void {
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
-		$this->getServer()->getCommandMap()->register("mjolnir", new MjolnirBanCommand());
+		$this->getServer()->getCommandMap()->register('mjolnir', new MjolnirBanCommand());
 	}
 
 	protected function onDisable() : void {
@@ -32,14 +32,14 @@ class MjolnirPlugin extends PluginBase {
 	}
 
 	private function initRepository() : void {
-		self::$repositoryFactory = new SQLiteRepositoryFactory($this->getDataFolder() . "MjolnirData.sqlite");
+		self::$repositoryFactory = new SQLiteRepositoryFactory($this->getDataFolder() . 'MjolnirData.sqlite');
 	}
 
 	private function initSetting() : void {
-		$config = new Config($this->getDataFolder() . "Config.yml", Config::YAML, [
-			"messages" => [
-				"kick-message" => "You are banned",
-				"default-ban-reason" => "Banned by admin",
+		$config = new Config($this->getDataFolder() . 'Config.yml', Config::YAML, [
+			'messages' => [
+				'kick-message' => 'You are banned',
+				'default-ban-reason' => 'Banned by admin',
 			],
 		]);
 		$config->save();

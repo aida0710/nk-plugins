@@ -6,7 +6,7 @@ namespace bbo51dog\pmdiscord\element;
 class Content extends Element {
 
 	/** @var string */
-	protected mixed $data = "";
+	protected mixed $data = '';
 
 	protected string $type = self::TYPE_CONTENT;
 

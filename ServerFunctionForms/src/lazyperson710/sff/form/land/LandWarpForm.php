@@ -20,10 +20,10 @@ class LandWarpForm extends CustomForm {
 	public function __construct() {
 		$this->input1 = new Input(
 			"ワープしたい土地の番号を入力してください\n自分の持っている土地は/land whoseか/land hereから調べることが可能です",
-			"例: 1",
+			'例: 1',
 		);
 		$this
-			->setTitle("Land Command")
+			->setTitle('Land Command')
 			->addElement($this->input1);
 	}
 
@@ -34,11 +34,11 @@ class LandWarpForm extends CustomForm {
 	}
 
 	public function handleSubmit(Player $player) : void {
-		if ($this->input1->getValue() === "") {
-			SendMessage::Send($player, "土地番号を入力してください", "Land", false);
+		if ($this->input1->getValue() === '') {
+			SendMessage::Send($player, '土地番号を入力してください', 'Land', false);
 			return;
 		} elseif (!preg_match('/^[0-9]+$/', $this->input1->getValue())) {
-			SendMessage::Send($player, "土地番号は数字で入力してください", "Land", false);
+			SendMessage::Send($player, '土地番号は数字で入力してください', 'Land', false);
 			return;
 		}
 		Server::getInstance()->dispatchCommand($player, "land move {$this->input1->getValue()}");

@@ -13,7 +13,7 @@ class BlockBreakChecker extends Checker {
 	private float $previousTime = 0.0;
 
 	public function __construct(PlayerData $playerData) {
-		parent::__construct($playerData, "AntiFastBreak", 4, 8);
+		parent::__construct($playerData, 'AntiFastBreak', 4, 8);
 	}
 
 	public function blockBreak() : void {

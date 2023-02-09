@@ -10,7 +10,7 @@ use rib\tw\command\TeleportCommand;
 class Main extends PluginBase {
 
 	public function onEnable() : void {
-		Server::getInstance()->getCommandMap()->register("worldTeleport", new TeleportCommand());
+		Server::getInstance()->getCommandMap()->register('worldTeleport', new TeleportCommand());
 	}
 
 }

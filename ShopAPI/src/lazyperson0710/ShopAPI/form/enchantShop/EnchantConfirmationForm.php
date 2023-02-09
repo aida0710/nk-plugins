@@ -25,12 +25,12 @@ class EnchantConfirmationForm extends CustomForm {
 		if ($enchantName instanceof Translatable) {
 			$enchantName = Server::getInstance()->getLanguage()->translate($enchantName);
 		}
-		$this->level = new Slider("付与したいレベルにスライドして下さい", 1, EnchantShopAPI::getInstance()->getLevelLimit($enchantName));
+		$this->level = new Slider('付与したいレベルにスライドして下さい', 1, EnchantShopAPI::getInstance()->getLevelLimit($enchantName));
 		$this->enchantment = $enchantment;
 		$this->enchantName = $enchantName;
 		$api = EnchantShopAPI::getInstance();
 		$this
-			->setTitle("Enchant Form")
+			->setTitle('Enchant Form')
 			->addElements(
 				new Label("{$enchantName}を付与しようとしています"),
 				new Label("{$enchantName}は1レベルごとに{$api->getBuy($enchantName)}円かかります"),

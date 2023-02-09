@@ -10,10 +10,10 @@ final class Environment {
 
 	public static function fromString(string $string) : int {
 		return match (strtolower($string)) {
-			"overworld" => self::OVERWORLD,
-			"nether" => self::NETHER,
-			"end", "the_end" => self::THE_END,
-			default => throw new InvalidArgumentException("Could not convert string \"$string\" to a " . self::class . " constant")
+			'overworld' => self::OVERWORLD,
+			'nether' => self::NETHER,
+			'end', 'the_end' => self::THE_END,
+			default => throw new InvalidArgumentException("Could not convert string \"$string\" to a " . self::class . ' constant')
 		};
 	}
 

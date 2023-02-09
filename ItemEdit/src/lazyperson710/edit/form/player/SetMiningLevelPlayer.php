@@ -32,15 +32,15 @@ class SetMiningLevelPlayer extends CustomForm {
 			$name = $onlinePlayer->getName();
 			$names[] .= $name;
 		}
-		$this->players = new Dropdown("プレイヤーを選択してください", $names);
-		$this->enableLevel = new Toggle("レベルの設定を有効化する", false);
-		$this->enableExp = new Toggle("経験値の設定を有効化する", false);
-		$this->enableUpExp = new Toggle("次のレベルまでの経験値の設定を有効化する", false);
-		$this->level = new Input("設定したいレベル値を入力してください", "1");
-		$this->exp = new Input("設定したい経験値を入力してください", "1");
-		$this->upExp = new Input("設定したい次のレベルまでの経験値を入力してください", "80");
+		$this->players = new Dropdown('プレイヤーを選択してください', $names);
+		$this->enableLevel = new Toggle('レベルの設定を有効化する', false);
+		$this->enableExp = new Toggle('経験値の設定を有効化する', false);
+		$this->enableUpExp = new Toggle('次のレベルまでの経験値の設定を有効化する', false);
+		$this->level = new Input('設定したいレベル値を入力してください', '1');
+		$this->exp = new Input('設定したい経験値を入力してください', '1');
+		$this->upExp = new Input('設定したい次のレベルまでの経験値を入力してください', '80');
 		$this
-			->setTitle("Player Edit")
+			->setTitle('Player Edit')
 			->addElements(
 				$this->players,
 				new Label("設定したい項目を有効化してください\n有効化していない項目は数値を入力しても反映されません"),
@@ -57,7 +57,7 @@ class SetMiningLevelPlayer extends CustomForm {
 	public function handleSubmit(Player $player) : void {
 		$targetName = $this->players->getSelectedOption();
 		if (!Server::getInstance()->getPlayerByPrefix($targetName)) {
-			SendMessage::Send($player, "プレイヤーが存在しない為、処理を中断しました", "PlayerEdit", false);
+			SendMessage::Send($player, 'プレイヤーが存在しない為、処理を中断しました', 'PlayerEdit', false);
 			return;
 		}
 		$target = Server::getInstance()->getPlayerByPrefix($targetName);
@@ -66,16 +66,16 @@ class SetMiningLevelPlayer extends CustomForm {
 		$upExp = $this->upExp->getValue();
 		$input = false;
 		$type = [
-			"level" => $level,
-			"exp" => $exp,
-			"upExp" => $upExp,
+			'level' => $level,
+			'exp' => $exp,
+			'upExp' => $upExp,
 		];
 		foreach ($type as $key => $value) {
 			if (empty($value)) {
 				match ($key) {
-					"level" => $level = false,
-					"exp" => $exp = false,
-					"upExp" => $upExp = false,
+					'level' => $level = false,
+					'exp' => $exp = false,
+					'upExp' => $upExp = false,
 				};
 				continue;
 			}
@@ -84,22 +84,22 @@ class SetMiningLevelPlayer extends CustomForm {
 			if ($output === true) {
 				continue;
 			} else {
-				SendMessage::Send($player, $output, "PlayerEdit", false);
+				SendMessage::Send($player, $output, 'PlayerEdit', false);
 				return;
 			}
 		}
 		if (!$input) {
-			SendMessage::Send($player, "最低一つは値を入力してください", "PlayerEdit", false);
+			SendMessage::Send($player, '最低一つは値を入力してください', 'PlayerEdit', false);
 			return;
 		}
 		if ($this->enableLevel->getValue() === true) {
 			if ($level !== false) {
 				MiningLevelAPI::getInstance()->setLevel($target, $level);
 				if ($player->getName() === $target->getName()) {
-					SendMessage::Send($player, "レベルを{$level}に設定しました", "PlayerEdit", true);
+					SendMessage::Send($player, "レベルを{$level}に設定しました", 'PlayerEdit', true);
 				} else {
-					SendMessage::Send($player, "レベルを{$level}に設定しました", "PlayerEdit", true);
-					SendMessage::Send($target, "レベルを{$player->getName()}が{$level}に設定しました", "PlayerEdit", true);
+					SendMessage::Send($player, "レベルを{$level}に設定しました", 'PlayerEdit', true);
+					SendMessage::Send($target, "レベルを{$player->getName()}が{$level}に設定しました", 'PlayerEdit', true);
 				}
 			}
 		}
@@ -107,10 +107,10 @@ class SetMiningLevelPlayer extends CustomForm {
 			if ($exp !== false) {
 				MiningLevelAPI::getInstance()->setExp($target, $exp);
 				if ($player->getName() === $target->getName()) {
-					SendMessage::Send($player, "経験値を{$exp}に設定しました", "PlayerEdit", true);
+					SendMessage::Send($player, "経験値を{$exp}に設定しました", 'PlayerEdit', true);
 				} else {
-					SendMessage::Send($player, "経験値を{$exp}に設定しました", "PlayerEdit", true);
-					SendMessage::Send($target, "経験値を{$player->getName()}が{$exp}に設定しました", "PlayerEdit", true);
+					SendMessage::Send($player, "経験値を{$exp}に設定しました", 'PlayerEdit', true);
+					SendMessage::Send($target, "経験値を{$player->getName()}が{$exp}に設定しました", 'PlayerEdit', true);
 				}
 			}
 		}
@@ -118,10 +118,10 @@ class SetMiningLevelPlayer extends CustomForm {
 			if ($upExp !== false) {
 				MiningLevelAPI::getInstance()->setLevelUpExp($target, $upExp);
 				if ($player->getName() === $target->getName()) {
-					SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", "PlayerEdit", true);
+					SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", 'PlayerEdit', true);
 				} else {
-					SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", "PlayerEdit", true);
-					SendMessage::Send($target, "次のレベルまでの経験値を{$player->getName()}が{$upExp}に設定しました", "PlayerEdit", true);
+					SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", 'PlayerEdit', true);
+					SendMessage::Send($target, "次のレベルまでの経験値を{$player->getName()}が{$upExp}に設定しました", 'PlayerEdit', true);
 				}
 			}
 		}
@@ -129,9 +129,9 @@ class SetMiningLevelPlayer extends CustomForm {
 
 	private function checkValue(string $key, string $value) : bool|string {
 		$type = match ($key) {
-			"level" => "レベル",
-			"exp" => "現在の経験値",
-			"upExp" => "次のレベルまでの経験値",
+			'level' => 'レベル',
+			'exp' => '現在の経験値',
+			'upExp' => '次のレベルまでの経験値',
 		};
 		if (!is_numeric($value)) {
 			return "{$type}入力では数字以外の文字列を入力しないでください";

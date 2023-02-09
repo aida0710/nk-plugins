@@ -15,7 +15,7 @@ final class SimplePacketHandler {
 
 	public static function createInterceptor(Plugin $registerer, int $priority = EventPriority::NORMAL, bool $handleCancelled = false) : IPacketInterceptor {
 		if ($priority === EventPriority::MONITOR) {
-			throw new InvalidArgumentException("Cannot intercept packets at MONITOR priority");
+			throw new InvalidArgumentException('Cannot intercept packets at MONITOR priority');
 		}
 		return new PacketInterceptor($registerer, $priority, $handleCancelled);
 	}

@@ -20,12 +20,12 @@ class SearchForm implements Form {
 
 	public $heading = [];
 	/** @var string $error */
-	public $error = "";
+	public $error = '';
 	/** @var string[] $error */
 	public $default = [];
 	private array $file;
 
-	public function __construct(array $file, string $error = "", array $default = []) {
+	public function __construct(array $file, string $error = '', array $default = []) {
 		$this->error = $error;
 		$this->default = $default;
 		$this->file = $file;
@@ -43,18 +43,18 @@ class SearchForm implements Form {
 		unset($data[4]);
 		foreach ($this->file as $id => $c) {
 			foreach ($data as $search) {
-				if ($search === "") {
+				if ($search === '') {
 					continue;
 				}
 				if (isset($this->heading[$id])) {
 					continue;
 				}
-				if (($result = strpos($c["title"], $search)) !== false) {
-					$this->heading[$id] = $this->createHeading($result, $c["title"], $search) . "\n" . $this->strcut($c["text"], 0, 20) . "§r";
+				if (($result = strpos($c['title'], $search)) !== false) {
+					$this->heading[$id] = $this->createHeading($result, $c['title'], $search) . "\n" . $this->strcut($c['text'], 0, 20) . '§r';
 					continue;
 				}
-				if (($result = strpos($c["text"], $search)) !== false) {
-					$this->heading[$id] = $c["title"] . "\n" . $this->createHeading($result, $c["text"], $search);
+				if (($result = strpos($c['text'], $search)) !== false) {
+					$this->heading[$id] = $c['title'] . "\n" . $this->createHeading($result, $c['text'], $search);
 				}
 			}
 		}
@@ -74,9 +74,9 @@ class SearchForm implements Form {
 		$text = $array[1];
 		$start = $result - 10;
 		if ($start < 0) {
-			return $this->strcut($text, 0, 20) . "§8";
+			return $this->strcut($text, 0, 20) . '§8';
 		}
-		return $color . $this->strcut($text, $start, 20) . "§8";
+		return $color . $this->strcut($text, $start, 20) . '§8';
 	}
 
 	public function convertEOL($string, $to = "\n") : string {
@@ -88,14 +88,14 @@ class SearchForm implements Form {
 	}
 
 	public function InjectDecoration(int $result, string $text, string $search) : array {
-		$color = "§8";
+		$color = '§8';
 		$tmp = substr($text, 0, $result);
-		$beforeColor = strrchr($tmp, "§");
+		$beforeColor = strrchr($tmp, '§');
 		if ($beforeColor !== false) {
-			$color = "§" . ($beforeColor[2] ?? "8");
+			$color = '§' . ($beforeColor[2] ?? '8');
 		}
 		$text = substr_replace($text, $color, $result + strlen($search), 0);
-		$text = substr_replace($text, $color !== "§e" ? "§e" : "§g", $result, 0);
+		$text = substr_replace($text, $color !== '§e' ? '§e' : '§g', $result, 0);
 		return [$color, $text];
 	}
 
@@ -110,7 +110,7 @@ class SearchForm implements Form {
 			'content' => [
 				[
 					'type' => 'label',
-					'text' => $this->error . "検索したいキーワードを入力してください",
+					'text' => $this->error . '検索したいキーワードを入力してください',
 				],
 				[
 					'type' => 'input',
@@ -131,8 +131,8 @@ class SearchForm implements Form {
 					'default' => $this->default[3] ?? '',
 				],
 				[
-					"type" => "toggle",
-					"text" => "戻る",
+					'type' => 'toggle',
+					'text' => '戻る',
 				],
 			],
 		];
