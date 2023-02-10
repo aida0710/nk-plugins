@@ -95,7 +95,7 @@ class MessageListener implements Listener {
 		$player = $event->getPlayer();
 		$reason = $event->getReason();
 		if ($reason === 'Server is whitelisted') {
-			$player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください", false);
+			$player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください", null);
 		}
 	}
 

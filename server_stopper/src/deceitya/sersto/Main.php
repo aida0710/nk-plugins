@@ -118,7 +118,7 @@ class ShutdownTask extends Task {
 				if ($player->getWorld()->getFolderName() === 'MiningWorld') {
 					$player->teleport($this->plugin->getServer()->getWorldManager()->getDefaultWorld()->getSafeSpawn());
 				}
-				$player->kick("サーバーを再起動しています\nもし、サーバーが起動しない等の問題があった場合連絡をお願いします\n§aTwitter/@lazyperson710", false);
+				$player->kick("サーバーを再起動しています\nもし、サーバーが起動しない等の問題があった場合連絡をお願いします\n§aTwitter/@lazyperson710", null);
 			}
 			$this->plugin->getServer()->shutdown();
 		}

@@ -48,7 +48,7 @@ class PacketListener implements Listener {
 			Server::getInstance()->getLogger()->debug('Got BossEventPacket ' . ($pk->eventType === BossEventPacket::TYPE_REGISTER_PLAYER ? '' : 'un') . 'register by client for player id ' . $pk->playerActorUniqueId);
 				break;
 			default:
-				$e->getOrigin()->getPlayer()->kick('Invalid packet received', false);
+				$e->getOrigin()->getPlayer()->kick('Invalid packet received');
 		}
 	}
 

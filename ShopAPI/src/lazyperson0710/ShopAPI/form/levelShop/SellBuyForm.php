@@ -42,7 +42,7 @@ class SellBuyForm implements Form {
 
 	public function callback(Player $player, Item $item, bool $data, int $storage) : void {
 		$count = 0;
-		$myMoney = EconomyAPI::getInstance()->mymoney($player);
+		$myMoney = (int) EconomyAPI::getInstance()->mymoney($player);
 		foreach ($player->getInventory()->getContents() as $v) {
 			if ($item->getId() === $v->getId() && $item->getMeta() === $v->getMeta()) {
 				$count += $v->getCount();

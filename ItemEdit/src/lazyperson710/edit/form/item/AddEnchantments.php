@@ -85,7 +85,7 @@ class AddEnchantments extends CustomForm {
 			'Infinity' => VanillaEnchantments::INFINITY(),
 			'Mending' => VanillaEnchantments::MENDING(),
 		};
-		$item->addEnchantment(new EnchantmentInstance($vanillaEnchantments, $enchantmentsLevel));
+		$item->addEnchantment(new EnchantmentInstance($vanillaEnchantments, (int) $enchantmentsLevel));
 		$player->getInventory()->setItemInHand($item);
 		SendForm::Send($player, new AddEnchantments("{$enchantments}を{$enchantmentsLevel}レベルで付与しました"));
 	}

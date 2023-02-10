@@ -57,11 +57,11 @@ class TransferTicketForm extends CustomForm {
 			SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
 			return;
 		}
-		if (TicketAPI::getInstance()->reduceTicket($player, $this->int->getValue()) === false) {
+		if (TicketAPI::getInstance()->reduceTicket($player, (int) $this->int->getValue()) === false) {
 			SendMessage::Send($player, "{$playerName}のTicketの枚数が足らないかエラーが発生しました", 'Ticket', false);
 			return;
 		}
-		TicketAPI::getInstance()->addTicket($playerInstance, $this->int->getValue());
+		TicketAPI::getInstance()->addTicket($playerInstance, (int) $this->int->getValue());
 		SendMessage::Send($player, "{$playerName}さんにTicketを{$this->int->getValue()}枚譲渡しました", 'Ticket', true);
 		SendMessage::Send($playerInstance, "{$player->getName()}さんからTicketを{$this->int->getValue()}枚プレゼントされました", 'Ticket', true);
 	}

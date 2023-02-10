@@ -35,7 +35,7 @@ class Account {
 		return $this->ip;
 	}
 
-	public function getCid() : string {
+	public function getCid() : int {
 		return $this->cid;
 	}
 

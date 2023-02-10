@@ -46,6 +46,6 @@ class ReduceInputForm extends CustomForm {
 			SendMessage::Send($player, '削減したいレベルがエンチャントのレベルよりも大きいです', 'EditEnchant', false);
 			return;
 		}
-		SendForm::Send($player, (new ConfirmForm($player, $this->enchantmentInstance, $this->type, $this->reduceEnchantLevel->getValue())));
+		SendForm::Send($player, (new ConfirmForm($player, $this->enchantmentInstance, $this->type, (int) $this->reduceEnchantLevel->getValue())));
 	}
 }

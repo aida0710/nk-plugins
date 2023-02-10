@@ -94,6 +94,7 @@ class SetMiningLevelPlayer extends CustomForm {
 		}
 		if ($this->enableLevel->getValue() === true) {
 			if ($level !== false) {
+				$level = (int) $level;
 				MiningLevelAPI::getInstance()->setLevel($target, $level);
 				if ($player->getName() === $target->getName()) {
 					SendMessage::Send($player, "レベルを{$level}に設定しました", 'PlayerEdit', true);
@@ -105,6 +106,7 @@ class SetMiningLevelPlayer extends CustomForm {
 		}
 		if ($this->enableExp->getValue() === true) {
 			if ($exp !== false) {
+				$exp = (int) $exp;
 				MiningLevelAPI::getInstance()->setExp($target, $exp);
 				if ($player->getName() === $target->getName()) {
 					SendMessage::Send($player, "経験値を{$exp}に設定しました", 'PlayerEdit', true);
@@ -116,6 +118,7 @@ class SetMiningLevelPlayer extends CustomForm {
 		}
 		if ($this->enableUpExp->getValue() === true) {
 			if ($upExp !== false) {
+				$upExp = (int) $upExp;
 				MiningLevelAPI::getInstance()->setLevelUpExp($target, $upExp);
 				if ($player->getName() === $target->getName()) {
 					SendMessage::Send($player, "次のレベルまでの経験値を{$upExp}に設定しました", 'PlayerEdit', true);
