@@ -51,7 +51,7 @@ class ReduceTicketForm extends CustomForm {
 			SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
 			return;
 		}
-		if (TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue()) === false) {
+		if (TicketAPI::getInstance()->reduceTicket(Server::getInstance()->getPlayerByPrefix($playerName), (int) $this->int->getValue()) === false) {
 			SendMessage::Send($player, "{$playerName}のTicketを減らせませんでした", 'Ticket', false);
 		} else {
 			SendMessage::Send($player, "{$playerName}のTicketを{$this->int->getValue()}枚減らしました", 'Ticket', true);

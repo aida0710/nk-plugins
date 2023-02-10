@@ -31,7 +31,7 @@ class EffectConfirmationForm extends CustomForm {
 			$effectName = Server::getInstance()->getLanguage()->translate($effectName);
 		}
 		$this->level = new Slider('付与したいレベルにスライドして下さい', 1, EffectShopAPI::getInstance()->getLevelLimit($effectName));
-		$this->time = new Input("付与したい時間を入力して下さい / 単位 : 分\n付与時間上限 {$api->getTimeRestriction($effectName)}分", 100);
+		$this->time = new Input("付与したい時間を入力して下さい / 単位 : 分\n付与時間上限 {$api->getTimeRestriction($effectName)}分", '100');
 		$this->effect = $effect;
 		$this->effectName = $effectName;
 		$total = 3 * $api->getBuy($effectName) + (2 * $api->getAmplifiedMoney($effectName));

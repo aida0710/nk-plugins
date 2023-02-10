@@ -56,6 +56,7 @@ class DonationForm extends SimpleForm {
             {$message}
             ");
 		foreach (self::DonationInfo as $key => $value) {
+			$key = (int) $key;
 			if ($value['enable']) {
 				if ($value['item']) {
 					$this->addElement(new DonationsButton("{$key}円寄付 | §a特典: アイテム§r\n寄付者: {$value['donor']}", $key, $value['donor']));

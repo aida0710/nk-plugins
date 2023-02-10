@@ -28,7 +28,7 @@ class LevelShopClosingEvent extends Event {
 		return $this->item;
 	}
 
-	public function getType() : bool {
+	public function getType() : string {
 		return $this->type;
 	}
 

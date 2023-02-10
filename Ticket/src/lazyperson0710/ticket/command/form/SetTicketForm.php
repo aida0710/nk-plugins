@@ -51,7 +51,7 @@ class SetTicketForm extends CustomForm {
 			SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
 			return;
 		}
-		$int = TicketAPI::getInstance()->setTicket(Server::getInstance()->getPlayerByPrefix($playerName), $this->int->getValue());
+		$int = TicketAPI::getInstance()->setTicket(Server::getInstance()->getPlayerByPrefix($playerName), (int) $this->int->getValue());
 		SendMessage::Send($player, "{$playerName}のTicketを{$int}枚に設定しました", 'Ticket', true);
 	}
 }

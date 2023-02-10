@@ -53,7 +53,7 @@ class SaleForm implements Form {
 	}
 
 	public function transaction(Player $player, array $data) : void {
-		$count = floor($data[1]);
+		$count = (int) floor($data[1]);
 		$this->item->getItem()->setCount($count);
 		$inventoryItemCount = $this->countItem($player, $this->item->getItem());
 		if ($data[2] === true && $this->item->getStorage() !== 0) {

@@ -76,7 +76,7 @@ class Main extends PluginBase {
 			$z = sin(M_PI * $t);
 			$x = sprintf('%.5f', $x);
 			$z = sprintf('%.5f', $z);
-			$player->getWorld()->addParticle($player->getPosition()->add($x, -1, $z), new RedstoneParticle(0.1));
+			$player->getWorld()->addParticle($player->getPosition()->add((float) $x, -1, (float) $z), new RedstoneParticle(0));
 		}
 	}
 

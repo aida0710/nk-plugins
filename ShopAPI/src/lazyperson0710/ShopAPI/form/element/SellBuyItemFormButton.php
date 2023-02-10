@@ -52,7 +52,7 @@ class SellBuyItemFormButton extends Button {
 
 	public function callback(Player $player, Item $item, int $storage) : void {
 		$count = 0;
-		$myMoney = EconomyAPI::getInstance()->mymoney($player);
+		$myMoney = (int) EconomyAPI::getInstance()->mymoney($player);
 		foreach ($player->getInventory()->getContents() as $inventoryItem) {
 			if ($item->getId() === $inventoryItem->getId() && $item->getMeta() === $inventoryItem->getMeta()) {
 				$count += $inventoryItem->getCount();
