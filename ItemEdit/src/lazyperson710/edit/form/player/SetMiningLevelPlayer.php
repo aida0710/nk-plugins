@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace lazyperson710\edit\form\player;
 
 use bbo51dog\bboform\element\Dropdown;
@@ -143,8 +143,8 @@ class SetMiningLevelPlayer extends CustomForm {
 		if ($value < 0) {
 			return "{$type}入力では0以上の数値で入力してください";
 		}
-		if ($value > 15000) {
-			return "{$type}入力では15000以下の数値で入力してください";
+		if ($value > 5000000000000) {
+			return "{$type}入力では5兆以下の数値で入力してください";
 		}
 		return true;
 	}
