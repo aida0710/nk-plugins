@@ -1,17 +1,19 @@
 <?php
 
 declare(strict_types = 1);
+
 namespace xenialdan\apibossbar;
 
 use GlobalLogger;
 use InvalidArgumentException;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\normal\BossBarColorSetting;
 use pocketmine\entity\Attribute;
 use pocketmine\entity\AttributeFactory;
 use pocketmine\entity\AttributeMap;
 use pocketmine\entity\Entity;
 use pocketmine\network\mcpe\protocol\BossEventPacket;
 use pocketmine\network\mcpe\protocol\RemoveActorPacket;
-use pocketmine\network\mcpe\protocol\types\BossBarColor;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataCollection;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties;
@@ -100,16 +102,16 @@ class BossBar {
 		foreach ($players as $player) {
 			if (!$player->isConnected()) continue;
 			$pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-			$player->getNetworkSession()->sendDataPacket($this->addDefaults($pk));
+			$player->getNetworkSession()->sendDataPacket($this->addDefaults($player, $pk));
 		}
 	}
 
-	private function addDefaults(BossEventPacket $pk) : BossEventPacket {
-		var_dump('Boss');
+	private function addDefaults(Player $player, BossEventPacket $pk) : BossEventPacket {
 		$pk->title = $this->getFullTitle();
 		$pk->healthPercent = $this->getPercentage();
 		$pk->darkenScreen = false;
-		$pk->color = BossBarColor::GREEN;  //Does not function anyways
+		$setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
+		$pk->color = $setting->getSetting(BossBarColorSetting::getName())?->getValue();  //Does not function anyways
 		$pk->overlay = 0;//Neither. Typical for Mojang: Copy-pasted from Java edition
 		return $pk;
 	}
@@ -263,7 +265,7 @@ class BossBar {
 		foreach ($players as $player) {
 			if (!$player->isConnected()) continue;
 			$pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-			$player->getNetworkSession()->sendDataPacket($this->addDefaults($pk));
+			$player->getNetworkSession()->sendDataPacket($this->addDefaults($player, $pk));
 		}
 	}
 
@@ -286,7 +288,7 @@ class BossBar {
 		foreach ($players as $player) {
 			if (!$player->isConnected()) continue;
 			$pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-			$player->getNetworkSession()->sendDataPacket($this->addDefaults($pk));
+			$player->getNetworkSession()->sendDataPacket($this->addDefaults($player, $pk));
 		}
 	}
 
@@ -298,6 +300,9 @@ class BossBar {
 		return $this->setEntity();
 	}
 
+	/**
+	 * @return Entity|null
+	 */
 	public function getEntity() : ?Entity {
 		if ($this->actorId === null) return null;
 		return Server::getInstance()->getWorldManager()->findEntity($this->actorId);
@@ -331,6 +336,9 @@ class BossBar {
 		return $this;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function __toString() : string {
 		return __CLASS__ . " ID: $this->actorId, Players: " . count($this->players) . ", Title: \"$this->title\", Subtitle: \"$this->subTitle\", Percentage: \"" . $this->getPercentage() . "\"";
 	}
@@ -346,6 +354,9 @@ class BossBar {
 		Server::getInstance()->broadcastPackets($players, [$pk]);
 	}
 
+	/**
+	 * @return EntityMetadataCollection
+	 */
 	protected function getPropertyManager() : EntityMetadataCollection {
 		return $this->propertyManager;
 	}

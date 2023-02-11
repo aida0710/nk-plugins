@@ -22,6 +22,7 @@ use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\Enab
 use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingGrassToDirtSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingIronIngotSetting;
 use lazyperson0710\PlayerSetting\object\settings\miningToolsEnablingSetting\EnablingSandToGlassSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\BossBarColorSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
@@ -55,6 +56,7 @@ class PlayerSetting {
 		$this->register(new PayCommandUseSetting());
 		$this->register(new OnlinePlayersEffectsSetting());
 		$this->register(new MiningToolsDestructionEnabledWorldsSetting());
+		$this->register(new BossBarColorSetting());
 		//miningTools
 		$this->register(new AndesiteToStoneSetting());
 		$this->register(new CobblestoneToStoneSetting());

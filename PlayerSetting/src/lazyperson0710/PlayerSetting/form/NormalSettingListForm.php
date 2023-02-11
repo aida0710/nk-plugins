@@ -1,12 +1,14 @@
 <?php
 
 declare(strict_types = 1);
+
 namespace lazyperson0710\PlayerSetting\form;
 
 use bbo51dog\bboform\element\StepSlider;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\normal\BossBarColorSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
@@ -22,6 +24,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
+use pocketmine\network\mcpe\protocol\types\BossBarColor;
 use pocketmine\player\Player;
 
 class NormalSettingListForm extends CustomForm {
@@ -38,6 +41,7 @@ class NormalSettingListForm extends CustomForm {
 	private Toggle $moveWorldMessage;
 	private StepSlider $levelUpDisplay;
 	private StepSlider $miningToolsDestructionEnabledWorlds;
+	private StepSlider $bossBarColor;
 
 	private Player $player;
 
@@ -56,17 +60,44 @@ class NormalSettingListForm extends CustomForm {
 			$this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
 			$this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
 			$this->moveWorldMessage = new Toggle("§l> MoveWorldMessage§r\nワールド移動時に送信されるメッセージを表示するか否か(§l§c非表示は非推奨です§r)", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
-			$this->levelUpDisplay = new StepSlider("§l> LevelUpDisplay§r\nレベルアップ時に何を表示するか", ['タイトル表示', '実績表示', '表示無し'],
+			$this->levelUpDisplay = new StepSlider("§l> LevelUpDisplay§r\nレベルアップ時に何を表示するか", [
+				'タイトル表示',
+				'実績表示',
+				'表示無し',
+			],
 				match ($setting->getSetting(LevelUpDisplaySetting::getName())?->getValue()) {
 					'toast' => 1,
 					'none' => 2,
 					default => 0
 				}),
-			$this->miningToolsDestructionEnabledWorlds = new StepSlider("§l> MiningToolsDestructionEnabledWorlds§r\nマイニングツールで破壊出来るワールドを制限", ['全てのワールドで有効', '生活ワールドでのみ有効', '天然資源系ワールドでのみ有効', '全てのワールドで無効'],
+			$this->miningToolsDestructionEnabledWorlds = new StepSlider("§l> MiningToolsDestructionEnabledWorlds§r\nマイニングツールで破壊出来るワールドを制限", [
+				'全てのワールドで有効',
+				'生活ワールドでのみ有効',
+				'天然資源系ワールドでのみ有効',
+				'全てのワールドで無効',
+			],
 				match ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
 					'life' => 1,
 					'nature' => 2,
 					'none' => 3,
+					default => 0
+				}),
+			$this->bossBarColor = new StepSlider("§l> BossBarColor§r\nレベル表示用のボスバーの色を変更(リログ必須)", [
+				'ピンク',
+				'ブルー',
+				'レッド',
+				'グリーン',
+				'イエロー',
+				'パープル',
+				'ホワイト',
+			],
+				match ($setting->getSetting(BossBarColorSetting::getName())?->getValue()) {
+					BossBarColor::BLUE => 1,
+					BossBarColor::RED => 2,
+					BossBarColor::GREEN => 3,
+					BossBarColor::YELLOW => 4,
+					BossBarColor::PURPLE => 5,
+					BossBarColor::WHITE => 6,
 					default => 0
 				}),
 		);
@@ -126,6 +157,18 @@ class NormalSettingListForm extends CustomForm {
 		};
 		if ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue() !== $miningToolsDestructionEnabledWorlds) {
 			$setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
+		}
+		$bossBarColor = match ($this->bossBarColor->getValue()) {
+			1 => BossBarColor::BLUE,
+			2 => BossBarColor::RED,
+			3 => BossBarColor::GREEN,
+			4 => BossBarColor::YELLOW,
+			5 => BossBarColor::PURPLE,
+			6 => BossBarColor::WHITE,
+			default => BossBarColor::PINK
+		};
+		if ($setting->getSetting(BossBarColorSetting::getName())?->getValue() !== $bossBarColor) {
+			$setting->getSetting(BossBarColorSetting::getName())?->setValue($bossBarColor);
 		}
 		SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
 		SoundPacket::Send($player, 'item.spyglass.use');
