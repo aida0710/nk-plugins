@@ -15,6 +15,7 @@ class WorldLevelCheckTask extends Task {
 		foreach (Server::getInstance()->getOnlinePlayers() as $player) {
 			$worldApi = WorldManagementAPI::getInstance();
 			if (MiningLevelAPI::getInstance()->getLevel($player) < $worldApi->getMiningLevelLimit($player->getWorld()->getFolderName())) {
+				Server::getInstance()->dispatchCommand($player, 'warp lobby');
 				SendMessage::Send($player, '移動した先のワールドはまだ解放されていない為ロビーに戻されました', 'World', false);
 			}
 		}
