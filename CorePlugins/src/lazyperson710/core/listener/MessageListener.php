@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 1);
+
 namespace lazyperson710\core\listener;
 
 use bbo51dog\announce\service\AnnounceService;
@@ -52,17 +53,17 @@ class MessageListener implements Listener {
 			if (!$player->getInventory()->contains($axe) && $player->getInventory()->canAddItem($axe)) {
 				$player->getInventory()->addItem($axe);
 			}
-			$event->setJoinMessage("§l§bNewPlayer §7>> §e{$name}さんが初めてサーバーに参加しました！");
+			$event->setJoinMessage("§l§bNewPlayer §7>> §e{$name}さんが初めてサーバーに参加しました！。Ping {$player->getNetworkSession()->getPing()}ms");
 		} elseif ($player->getName() === 'hakokokku') {
-			$event->setJoinMessage("§bHakokokkuLogin §7>> §eわん、つー、すりー！はこさんがきたぞー！MiningLv.{$level}");
+			$event->setJoinMessage("§bHakokokkuLogin §7>> §eわん、つー、すりー！はこさんがきたぞー！MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
+		} elseif ($player->getName() === 'ReimariDarkness') {
+			$event->setJoinMessage("§bReimariLogin §7>> §a整地を愛し、§b整地に愛された男、§cレーマリだー！MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
+		} elseif (AnnounceService::isConfirmed($player->getName())) {
+			$event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
 		} else {
-			if (AnnounceService::isConfirmed($player->getName())) {
-				$event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。MiningLv.{$level}|Ping {$player->getNetworkSession()->getPing()}ms");
-			} else {
-				$event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。Passが認証されていません");
-				$pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName('tos'));
-				$event->getPlayer()->teleport($pos);
-			}
+			$event->setJoinMessage("§bLogin §7>> §e{$name}がログインしました。Passが認証されていません。Ping {$player->getNetworkSession()->getPing()}ms");
+			$pos = new Position(245, 113, 246, Server::getInstance()->getWorldManager()->getWorldByName('tos'));
+			$event->getPlayer()->teleport($pos);
 		}
 	}
 
@@ -95,8 +96,7 @@ class MessageListener implements Listener {
 		$player = $event->getPlayer();
 		$reason = $event->getReason();
 		if ($reason === 'Server is whitelisted') {
-			$player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください", null);
+			$player->kick("§a現在サーバーはメンテナンス中です\n詳細はDiscordをご覧ください");
 		}
 	}
-
 }
