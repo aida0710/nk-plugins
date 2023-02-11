@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace lazyperson0710\WorldManagement\WorldLimit\task;
 
 use lazyperson0710\WorldManagement\WorldLimit\WorldProperty;

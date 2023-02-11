@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace ree_jp\bank\command;
 
 use lazyperson710\core\packet\SendForm;

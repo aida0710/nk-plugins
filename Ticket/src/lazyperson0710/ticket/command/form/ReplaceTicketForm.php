@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace lazyperson0710\ticket\command\form;
 
 use bbo51dog\bboform\element\Dropdown;

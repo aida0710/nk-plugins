@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace lazyperson0710\EffectItems\form\items;
 
 use bbo51dog\bboform\form\SimpleForm;

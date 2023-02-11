@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace czechpmdevs\multiworld\libs\czechpmdevs\libpmform;
 
 use Closure;

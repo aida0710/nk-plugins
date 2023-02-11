@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace bbo51dog\anticheat\chcker;
 
 use bbo51dog\anticheat\Logger;

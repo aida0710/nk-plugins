@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace lazyperson0710\WorldManagement\command;
 
 use lazyperson0710\WorldManagement\form\WarpForm;

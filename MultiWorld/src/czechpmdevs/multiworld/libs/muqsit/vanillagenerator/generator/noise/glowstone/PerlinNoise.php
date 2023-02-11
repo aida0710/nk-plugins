@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\glowstone;
 
 use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\bukkit\BasePerlinNoiseGenerator;

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace JavierLeon9966\Shield\item;
 
 use pocketmine\block\Block;

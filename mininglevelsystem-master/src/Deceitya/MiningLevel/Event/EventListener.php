@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace Deceitya\MiningLevel\Event;
 
 use bbo51dog\pmdiscord\connection\Webhook;
@@ -138,7 +138,7 @@ class EventListener implements Listener {
 	private function LevelUpBonus(Player $player, int $originalLevel, int $level) {
 		if (isset($this->config['item'][$level])) {
 			$data = explode(':', $this->config['item'][$level]);
-			$item = ItemFactory::getInstance()->get($data[0], $data[1], $data[2]);
+			$item = ItemFactory::getInstance()->get((int) $data[0], (int) $data[1], (int) $data[2]);
 			if ($player->getInventory()->canAddItem($item)) {
 				$player->getInventory()->addItem($item);
 			} else {

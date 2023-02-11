@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace bbo51dog\discordlog\listener;
 
 use bbo51dog\discordlog\Main;
@@ -26,7 +26,7 @@ class QuitListener implements Listener {
 	public function onQuit(PlayerQuitEvent $event) {
 		$name = $event->getPlayer()->getName();
 		$time = Main::getTime();
-		$s = str_replace(["%time", "%player"], [$time, $name], Main::QUIT);
+		$s = str_replace(['%time', '%player'], [$time, $name], Main::QUIT);
 		$webhook = Webhook::create($this->url);
 		$content = new Content();
 		$content->setText($s);

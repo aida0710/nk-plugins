@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace JavierLeon9966\Shield;
 
 use JavierLeon9966\Shield\item\Shield as ShieldItem;
@@ -37,7 +37,7 @@ final class Shield extends PluginBase implements Listener {
 	 */
 	private array $cooldowns = [];
 
-	public function onEnable() : void {
+	protected function onEnable() : void {
 		$shield = new ShieldItem(new ItemIdentifier(ItemIds::SHIELD, 0), 'Shield');
 		ItemFactory::getInstance()->register($shield);
 		CreativeInventory::getInstance()->add($shield);
