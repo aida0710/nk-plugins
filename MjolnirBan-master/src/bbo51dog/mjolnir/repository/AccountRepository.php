@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 namespace bbo51dog\mjolnir\repository;
 
 use bbo51dog\mjolnir\model\Account;
