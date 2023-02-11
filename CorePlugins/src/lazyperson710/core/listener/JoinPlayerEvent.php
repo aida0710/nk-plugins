@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 1);
+
 namespace lazyperson710\core\listener;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
@@ -48,7 +49,7 @@ class JoinPlayerEvent implements Listener {
 			PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(Donation_1500::getName())?->getValue(),
 			PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(Donation_10000::getName())?->getValue(),
 		], true);
-		if ($donationNotice === false) {
+		if ($donationNotice === true) {
 			self::$joinMessage[$player->getName()][] = '§l§e☆ : 受け取ってない寄付特典のプレゼントが存在します！';
 			self::$joinMessage[$player->getName()][] = '§l§e☆ : /donationコマンドで確認できます';
 		}
