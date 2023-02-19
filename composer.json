@@ -6,14 +6,28 @@
         {
             "type": "git",
             "url": "https://github.com/bbo51dog/BboForm"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Rark7040/FireworkParticle.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Rark7040/Modals.git"
         }
     ],
     "require": {
+        "php": "8.0.*",
+        "php-64bit": "8.0.*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "v3.13.1",
+        "friendsofphp/php-cs-fixer": "v3.13.1"
+    },
+    "require-dev": {
+        "bbo51dog/bboform": "2.*",
+        "rarkhopper/modals": "dev-master",
+        "rarkhopper/firework-particle": "dev-master",
         "pocketmine/pocketmine-mp": "4.*",
         "roave/security-advisories": "dev-latest",
-        "bbo51dog/bboform": "2.*",
         "ext-sqlite3": "*",
         "ext-chunkutils2": "^0.3.1",
         "ext-crypto": "^0.3.1",
@@ -44,8 +58,11 @@
         "netresearch/jsonmapper": "^4.0",
         "ramsey/uuid": "^4.1",
         "symfony/filesystem": "^5.4",
-        "webmozart/path-util": "^2.3",
-        "ext-mysqli": "*",
-        "ext-bcmath": "*"
+        "webmozart/path-util": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "\\": "/"
+        }
     }
 }
