@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" uploadOnCheckin="442a9142-1c46-44f4-898d-996faca4a6d1" autoUploadExternalChanges="true">
-    <serverData>
-      <paths name="debug/plugins">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="自宅鯖sftp">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-    </serverData>
-    <option name="myUploadOnCheckinName" value="debug/plugins" />
+  <component name="PublishConfigData" autoUpload="Always" persistUploadOnCheckin="false" autoUploadExternalChanges="true">
     <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

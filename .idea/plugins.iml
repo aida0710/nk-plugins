@@ -35,7 +35,6 @@
       <excludeFolder url="file://$MODULE_DIR$/EconomyLand/vendor/pocketmine/raklib" />
       <excludeFolder url="file://$MODULE_DIR$/Mineflow-3.0-pm4" />
       <excludeFolder url="file://$MODULE_DIR$/Netherite" />
-      <excludeFolder url="file://$MODULE_DIR$/INether-master" />
       <excludeFolder url="file://$MODULE_DIR$/myworld" />
       <excludeFolder url="file://$MODULE_DIR$/miningtools-debug" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/locale-data" />
