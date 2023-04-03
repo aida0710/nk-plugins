@@ -70,7 +70,7 @@ class BreakEventListener implements Listener {
 			SendTip::Send($player, '現在のワールドでは範囲破壊は行われません', 'MiningTools', false);
 			return;
 		}
-		switch ($t = PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
+		switch (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
 			case 'all':
 				break;
 			case 'life':
