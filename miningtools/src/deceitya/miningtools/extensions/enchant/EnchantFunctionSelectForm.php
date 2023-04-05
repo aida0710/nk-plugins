@@ -12,8 +12,8 @@ use pocketmine\player\Player;
 
 class EnchantFunctionSelectForm extends SimpleForm {
 
-	const CostItemId = BlockLegacyIds::PACKED_ICE;
-	const CostItemNBT = 'MiningToolsEnchantCostItem';
+	public const CostItemId = BlockLegacyIds::PACKED_ICE;
+	public const CostItemNBT = 'MiningToolsEnchantCostItem';
 
 	public function __construct(Player $player) {
 		$this

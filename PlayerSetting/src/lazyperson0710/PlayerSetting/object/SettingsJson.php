@@ -12,7 +12,7 @@ class SettingsJson {
 
 	use SingletonTrait;
 
-	const FILE_NAME = 'player_settings.json';
+	public const FILE_NAME = 'player_settings.json';
 
 	protected Config $config;
 
