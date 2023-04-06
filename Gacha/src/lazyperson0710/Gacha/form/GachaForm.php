@@ -41,7 +41,7 @@ class GachaForm extends CustomForm {
 		$this
 			->setTitle("Gacha System / {$categoryName}")
 			->addElements(
-				new Label("ガチャコスト / 所持数量\nMoney -> {$this->cost['moneyCost']} / {$moneyApi->myMoney($player->getName())}円\nMiningTicket -> {$this->cost['ticketCost']}枚 / {$ticket->checkData($player)}枚"),
+				new Label("ガチャコスト / 所持数量\nMoney -> {$this->cost['moneyCost']}円 / {$moneyApi->myMoney($player->getName())}円\nMiningTicket -> {$this->cost['ticketCost']}枚 / {$ticket->checkData($player)}枚"),
 				new Label("ガチャの排出確率\nCommon -> {$this->probability['C']}％\nUnCommon -> {$this->probability['UC']}％\nRare -> {$this->probability['R']}％\nSuperRare -> {$this->probability['SR']}％\nSpecialSuperRare -> {$this->probability['SSR']}％\nLegendary -> {$this->probability['L']}％"),
 				new Label('inventoryが満タンの場合アイテムはドロップする為アイテム削除には十分にお気を付けください'),
 				$this->quantity,
