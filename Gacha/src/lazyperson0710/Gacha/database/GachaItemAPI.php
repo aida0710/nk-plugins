@@ -27,7 +27,7 @@ class GachaItemAPI {
 
 	public function init() : void {
 		## Gacha Category
-		$this->categorySettingRegister('常駐ガチャ', 0, 1, 60, 33, 5, 1.6, 0.3, 0.1);
+		$this->categorySettingRegister('常駐ガチャ', 100, 1, 60, 23, 12.6, 3.3, 0.8, 0.3);
 		$this->categorySettingRegister('Coming Soon...', 10000000000, 0, 50, 10, 10, 10, 10, 10);
 		## 未使用Category用テスト用景品
 		$this->dischargeItemRegister('Coming Soon...', RarityMap::C, VanillaBlocks::STONE()->asItem(), 1, 'Rank C', 'テスト用の景品になります', [], [], []);
