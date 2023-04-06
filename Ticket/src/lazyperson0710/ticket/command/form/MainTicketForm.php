@@ -15,6 +15,7 @@ class MainTicketForm extends SimpleForm {
 			$this
 				->setTitle('Ticket')
 				->addElements(
+					new SendFormButton(new PurchaseTicketForm($player), 'Ticketを購入する'),
 					new SendFormButton(new CheckTicketForm($player), 'Ticket枚数を調べる'),
 					new SendFormButton(new SetTicketForm($player), 'Ticket枚数を設定する'),
 					new SendFormButton(new AddTicketForm($player), 'Ticket枚数を増やす'),
