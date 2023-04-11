@@ -4,43 +4,37 @@ declare(strict_types = 0);
 
 namespace lazyperson0710\ticket\EventListener;
 
-use deceitya\miningtools\event\MiningToolsBreakEvent;
+use lazyperson0710\miningtools\event\MiningToolsBreakEvent;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendMessage\SendBroadcastTip;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
+use pocketmine\player\Player;
 use function mt_rand;
 
 class BreakEventListener implements Listener {
 
 	/**
-	 * @priority HIGHEST
+	 * @priority MONITOR
 	 */
-	public function onBreak(BlockBreakEvent $event) {
+	public function onBlockBreak(BlockBreakEvent $event) : void {
 		if ($event->isCancelled()) return;
-		$this->blockBreakTicket($event);
+		$probability = '0.125';
+		$random = mt_rand(1, 800);
+		$this->giveTicket($event->getPlayer(), $random, $probability);
 	}
 
 	/**
-	 * @priority HIGHEST
+	 * @priority MONITOR
 	 */
-	public function onCountEvent(MiningToolsBreakEvent $event) {
+	public function onMiningToolsBlockBreak(MiningToolsBreakEvent $event) : void {
 		if ($event->isCancelled()) return;
-		$this->blockBreakTicket($event);
+		$probability = '0.0769';
+		$random = mt_rand(1, 1300);
+		$this->giveTicket($event->getPlayer(), $random, $probability);
 	}
 
-	public function blockBreakTicket(BlockBreakEvent|MiningToolsBreakEvent $event) {
-		$player = $event->getPlayer();
-		if ($event->getEventName() === (new BlockBreakEvent($player, $event->getBlock(), $player->getInventory()->getItemInHand()))->getEventName()) {
-			$probability = '0.125';
-			$random = mt_rand(1, 800);
-		} elseif ($event->getEventName() === (new MiningToolsBreakEvent($player, $event->getBlock()))->getEventName()) {
-			$probability = '0.0769';
-			$random = mt_rand(1, 1300);
-		}
-		if (empty($random) || empty($probability)) {
-			return;
-		}
+	private function giveTicket(Player $player, int $random, string $probability) : void {
 		if ($random === 500) {
 			TicketAPI::getInstance()->addTicket($player, 1);
 			SendBroadcastTip::Send("Ticketを{$probability}％の確率で{$player->getName()}がゲットしました", 'Ticket');
