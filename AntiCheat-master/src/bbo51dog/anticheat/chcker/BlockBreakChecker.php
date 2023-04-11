@@ -21,7 +21,7 @@ class BlockBreakChecker extends Checker {
 		$currentTime = microtime(true);
 		$diff = $currentTime - $this->previousTime;
 		if ($this->getPlayerData()->getPlayer()->getInventory()->getItemInHand() instanceof Tool) {
-			if ($diff <= 0.003) {
+			if ($diff <= 0.001) {
 				$this->increaseViolation();
 			} else {
 				$this->decreaseViolation();
