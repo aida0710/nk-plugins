@@ -10,6 +10,8 @@ use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\Gacha\Calculation\ItemRegister;
 use lazyperson0710\Gacha\Calculation\RankCalculation;
 use lazyperson0710\Gacha\database\GachaItemAPI;
+use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
@@ -81,7 +83,11 @@ class GachaForm extends CustomForm {
 					break;
 				case 'L':
 					SoundPacket::Send($player, 'mob.enderdragon.death');
-					SendBroadcastMessage::Send("Legendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました", 'Gacha');
+					foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
+						if (PlayerSettingPool::getInstance()->getSettingNonNull($onlinePlayer)->getSetting(GachaEjectMessageSetting::getName())?->getValue() === true) {
+							SendMessage::Send($player, "§eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました", '§bGacha', true);
+						}
+					}
 					break;
 			}
 			$formDisplayRank = match ($rank) {

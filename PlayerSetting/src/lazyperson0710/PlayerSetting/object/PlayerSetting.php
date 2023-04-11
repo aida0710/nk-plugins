@@ -29,6 +29,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
@@ -58,6 +59,7 @@ class PlayerSetting {
 		$this->register(new OnlinePlayersEffectsSetting());
 		$this->register(new MiningToolsDestructionEnabledWorldsSetting());
 		$this->register(new BossBarColorSetting());
+		$this->register(new GachaEjectMessageSetting());
 		//miningTools
 		$this->register(new AndesiteToStoneSetting());
 		$this->register(new CobblestoneToStoneSetting());
