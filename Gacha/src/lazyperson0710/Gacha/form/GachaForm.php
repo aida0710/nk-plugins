@@ -11,12 +11,14 @@ use lazyperson0710\Gacha\Calculation\ItemRegister;
 use lazyperson0710\Gacha\Calculation\RankCalculation;
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
+use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectFormSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\ticket\TicketAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
@@ -76,13 +78,19 @@ class GachaForm extends CustomForm {
 			$item = (new ItemRegister($this->categoryName, $rank))->Items($rank);
 			switch ($rank) {
 				case 'SR':
-					SendNoSoundMessage::Send($player, "SuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました", '§bGacha', true);
+					if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(GachaEjectMessageSetting::getName())?->getValue() === true) {
+						SendNoSoundMessage::Send($player, "SuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました", '§bGacha', true);
+					}
 					break;
 				case 'SSR':
-					SendMessage::Send($player, "SpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました", '§bGacha', true, 'item.trident.thunder');
+					if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(GachaEjectMessageSetting::getName())?->getValue() === true) {
+						SendMessage::Send($player, "SpecialSuperRare > {$item->getCustomName()}§r§eを{$this->probability[$rank]}％で当てました", '§bGacha', true, 'item.trident.thunder');
+					}
 					break;
 				case 'L':
-					SoundPacket::Send($player, 'mob.enderdragon.death');
+					if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(GachaEjectMessageSetting::getName())?->getValue() === true) {
+						SoundPacket::Send($player, 'mob.enderdragon.death');
+					}
 					foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
 						if (PlayerSettingPool::getInstance()->getSettingNonNull($onlinePlayer)->getSetting(GachaEjectMessageSetting::getName())?->getValue() === true) {
 							SendMessage::Send($player, "§eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました", '§bGacha', true);
@@ -110,7 +118,11 @@ class GachaForm extends CustomForm {
 				TicketAPI::getInstance()->addTicket($player, 500);
 			}
 		}
-		SendForm::Send($player, (new ResultForm($formMessage, $onDrop)));
+		if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(GachaEjectFormSetting::getName())?->getValue() === true) {
+			SendForm::Send($player, (new ResultForm($formMessage, $onDrop)));
+		} else {
+			SendNoSoundTip::Send($player, 'ガチャを' . $this->quantity->getValue() . '回回しました', 'Gacha', true);
+		}
 	}
 
 }
