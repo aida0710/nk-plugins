@@ -34,33 +34,8 @@ class BreakEventListener implements Listener {
 			return;
 		}
 		$player = $event->getPlayer();
-		$item = $player->getInventory()->getItemInHand();
-		if (!(new CheckItem())->isMiningTools($item)) return;
-		$id = $item->getId();
-		if (!Main::$flag[$player->getName()]) {
-			$set = match ($id) {
-				ItemIds::DIAMOND_SHOVEL => Main::$diamond['shovel'],
-				ItemIds::DIAMOND_PICKAXE => Main::$diamond['pickaxe'],
-				ItemIds::DIAMOND_AXE => Main::$diamond['axe'],
-				Main::NETHERITE_SHOVEL => Main::$netherite['shovel'],
-				Main::NETHERITE_PICKAXE => Main::$netherite['pickaxe'],
-				Main::NETHERITE_AXE => Main::$netherite['axe'],
-				default => null,
-			};
-		}
-		if (empty($set)) {
-			if (Server::getInstance()->isOp($player->getName())) {
-				if (($item->getBlockToolType() === BlockToolType::PICKAXE) || ($item->getBlockToolType() === BlockToolType::SHOVEL)) {
-					$set = Main::$netherite['pickaxe'];
-				} elseif ($item->getBlockToolType() === BlockToolType::AXE) {
-					$set = Main::$netherite['axe'];
-				} else {
-					$set = Main::$netherite['pickaxe'];
-				}
-			} else {
-				throw new Error('$setに何も代入されませんでした');
-			}
-		}
+		$handItem = $player->getInventory()->getItemInHand();
+		if (!(new CheckItem())->isMiningTools($handItem)) return;
 		$block = $event->getBlock();
 		$world_name = $event->getPlayer()->getWorld()->getDisplayName();
 		$world_search = mb_substr($world_name, 0, null, 'utf-8');
