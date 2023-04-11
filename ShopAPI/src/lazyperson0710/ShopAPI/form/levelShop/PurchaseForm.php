@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop;
 
-use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson0710\ShopAPI\event\LevelShopClosingEvent;
-use lazyperson0710\ShopAPI\object\LevelShopItem;
+namespace lazyperson0710\ShopSystem\form\levelShop;
+
+use lazyperson0710\ShopSystem\database\LevelShopAPI;
+use lazyperson0710\ShopSystem\event\LevelShopSellEvent;
+use lazyperson0710\ShopSystem\object\LevelShopItem;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
@@ -59,7 +60,7 @@ class PurchaseForm implements Form {
 		EconomyAPI::getInstance()->reduceMoney($player, $this->item->getPrice() * $count);
 		$totalPrice = $this->item->getPrice() * $count;
 		SendMessage::Send($player, $itemName . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', 'LevelShop', true, 'break.amethyst_block');
-		(new LevelShopClosingEvent($player, $this->item, 'buy'))->call();
+		(new LevelShopSellEvent($player, $this->item, 'buy'))->call();
 	}
 
 	private function isInteger($input) : bool {

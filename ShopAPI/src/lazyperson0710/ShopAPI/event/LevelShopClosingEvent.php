@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\event;
+
+namespace lazyperson0710\ShopSystem\event;
 
 use Error;
-use lazyperson0710\ShopAPI\object\LevelShopItem;
+use lazyperson0710\ShopSystem\object\LevelShopItem;
 use pocketmine\event\Event;
 use pocketmine\player\Player;
 

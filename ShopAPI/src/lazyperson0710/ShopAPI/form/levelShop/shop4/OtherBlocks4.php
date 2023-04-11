@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop\shop4;
+
+namespace lazyperson0710\ShopSystem\form\levelShop\shop4;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\ShopAPI\form\levelShop\Calculation;
+use lazyperson0710\ShopSystem\form\levelShop\Calculation;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\VanillaBlocks;

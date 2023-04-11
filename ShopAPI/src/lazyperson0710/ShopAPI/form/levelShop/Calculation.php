@@ -1,14 +1,15 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop;
+
+namespace lazyperson0710\ShopSystem\form\levelShop;
 
 use deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson0710\ShopAPI\form\element\SecondBackFormButton;
-use lazyperson0710\ShopAPI\form\element\SellBuyItemFormButton;
-use lazyperson0710\ShopAPI\form\element\ShopMainCategoryFormButton;
-use lazyperson0710\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
+use lazyperson0710\ShopSystem\database\LevelShopAPI;
+use lazyperson0710\ShopSystem\form\element\SecondBackFormButton;
+use lazyperson0710\ShopSystem\form\element\SellBuyItemFormButton;
+use lazyperson0710\ShopSystem\form\element\ShopMainCategoryFormButton;
+use lazyperson0710\ShopSystem\form\levelShop\other\SearchShop\InputItemForm;
 use pocketmine\form\Form;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
@@ -35,8 +36,8 @@ class Calculation {
 				$id = $item->getId();
 				$meta = $item->getMeta();
 			}
-			if (MiningLevelAPI::getInstance()->getLevel($player) < $api->getLevel($id, $meta)) {
-				$error = "§c{$api->getItemName($id ,$meta)} - レベル不足/lv.{$api->getLevel($id, $meta)}§r";
+			if (MiningLevelAPI::getInstance()->getLevel($player) < $api->getShop($id, $meta)) {
+				$error = "§c{$api->getItemName($id ,$meta)} - レベル不足/lv.{$api->getShop($id, $meta)}§r";
 			} else {
 				$error = "{$api->getItemName($id ,$meta)}";
 			}

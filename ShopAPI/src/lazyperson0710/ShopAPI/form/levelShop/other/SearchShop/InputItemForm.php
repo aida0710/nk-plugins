@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop\other\SearchShop;
+
+namespace lazyperson0710\ShopSystem\form\levelShop\other\SearchShop;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
-use lazyperson0710\ShopAPI\database\LevelShopAPI;
+use lazyperson0710\ShopSystem\database\LevelShopAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;

@@ -1,16 +1,17 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\element;
+
+namespace lazyperson0710\ShopSystem\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson0710\ShopAPI\form\levelShop\other\SearchShop\InputItemForm;
-use lazyperson0710\ShopAPI\form\levelShop\PurchaseForm;
-use lazyperson0710\ShopAPI\form\levelShop\SellBuyForm;
-use lazyperson0710\ShopAPI\object\LevelShopItem;
+use lazyperson0710\ShopSystem\database\LevelShopAPI;
+use lazyperson0710\ShopSystem\form\levelShop\other\SearchShop\InputItemForm;
+use lazyperson0710\ShopSystem\form\levelShop\PurchaseForm;
+use lazyperson0710\ShopSystem\form\levelShop\SellBuyForm;
+use lazyperson0710\ShopSystem\object\LevelShopItem;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
@@ -32,8 +33,8 @@ class SellBuyItemFormButton extends Button {
 
 	public function handleSubmit(Player $player) : void {
 		$api = LevelShopAPI::getInstance();
-		if (MiningLevelAPI::getInstance()->getLevel($player) < LevelShopAPI::getInstance()->getLevel($this->itemId, $this->itemMeta)) {
-			$error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$api->getLevel($this->itemId, $this->itemMeta)}\n§r";
+		if (MiningLevelAPI::getInstance()->getLevel($player) < LevelShopAPI::getInstance()->getShop($this->itemId, $this->itemMeta)) {
+			$error = "§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv.{$api->getShop($this->itemId, $this->itemMeta)}\n§r";
 			SendForm::Send($player, (new InputItemForm($error)));
 			SoundPacket::Send($player, 'dig.chain');
 			return;

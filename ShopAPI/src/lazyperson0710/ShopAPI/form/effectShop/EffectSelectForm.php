@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\effectShop;
+
+namespace lazyperson0710\ShopSystem\form\effectShop;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\ShopAPI\database\EffectShopAPI;
-use lazyperson0710\ShopAPI\form\element\EffectSelectFormButton;
+use lazyperson0710\ShopSystem\database\EffectShopAPI;
+use lazyperson0710\ShopSystem\form\element\EffectSelectFormButton;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\lang\Translatable;
 use pocketmine\Server;

@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop\other\SearchShop;
+
+namespace lazyperson0710\ShopSystem\form\levelShop\other\SearchShop;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\ShopAPI\form\levelShop\Calculation;
+use lazyperson0710\ShopSystem\form\levelShop\Calculation;
 use pocketmine\player\Player;
 
 class SearchResultForm extends SimpleForm {

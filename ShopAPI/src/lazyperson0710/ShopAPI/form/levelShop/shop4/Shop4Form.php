@@ -1,14 +1,15 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop\shop4;
+
+namespace lazyperson0710\ShopSystem\form\levelShop\shop4;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson0710\ShopAPI\form\element\FirstBackFormButton;
-use lazyperson0710\ShopAPI\form\element\SellBuyItemFormButton;
-use lazyperson0710\ShopAPI\form\element\ShopItemFormButton;
-use lazyperson0710\ShopAPI\form\levelShop\MainLevelShopForm;
+use lazyperson0710\ShopSystem\database\LevelShopAPI;
+use lazyperson0710\ShopSystem\form\element\FirstBackFormButton;
+use lazyperson0710\ShopSystem\form\element\SellBuyItemFormButton;
+use lazyperson0710\ShopSystem\form\element\ShopItemFormButton;
+use lazyperson0710\ShopSystem\form\levelShop\MainLevelShopForm;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;

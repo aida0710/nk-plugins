@@ -1,12 +1,13 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\enchantShop;
+
+namespace lazyperson0710\ShopSystem\form\enchantShop;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson0710\ShopAPI\database\EnchantShopAPI;
+use lazyperson0710\ShopSystem\database\EnchantShopAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;

@@ -1,7 +1,8 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\object;
+
+namespace lazyperson0710\ShopSystem\object;
 
 use pocketmine\item\Item;
 

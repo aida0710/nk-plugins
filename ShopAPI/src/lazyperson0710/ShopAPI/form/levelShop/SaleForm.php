@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop;
 
-use lazyperson0710\ShopAPI\database\LevelShopAPI;
-use lazyperson0710\ShopAPI\event\LevelShopClosingEvent;
-use lazyperson0710\ShopAPI\object\LevelShopItem;
+namespace lazyperson0710\ShopSystem\form\levelShop;
+
+use lazyperson0710\ShopSystem\database\LevelShopAPI;
+use lazyperson0710\ShopSystem\event\LevelShopSellEvent;
+use lazyperson0710\ShopSystem\object\LevelShopItem;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
@@ -92,7 +93,7 @@ class SaleForm implements Form {
 		$this->buyItemFromInventory($player, $this->item->getItem(), $count);
 		$result = $this->item->getPrice() * $count;
 		SendMessage::Send($player, 'アイテムが' . number_format($count) . '個売却され、所持金が' . number_format($result) . '円増えました', 'LevelShop', true, 'break.amethyst_block');
-		(new LevelShopClosingEvent($player, $this->item, 'sell'))->call();
+		(new LevelShopSellEvent($player, $this->item, 'sell'))->call();
 	}
 
 	public function countItem(Player $player, Item $targetItem) : int {

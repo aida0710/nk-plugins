@@ -1,14 +1,15 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\element;
+
+namespace lazyperson0710\ShopSystem\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
 use deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson0710\ShopAPI\database\EnchantShopAPI;
-use lazyperson0710\ShopAPI\form\enchantShop\EnchantConfirmationForm;
-use lazyperson0710\ShopAPI\form\enchantShop\EnchantSelectForm;
+use lazyperson0710\ShopSystem\database\EnchantShopAPI;
+use lazyperson0710\ShopSystem\form\enchantShop\EnchantConfirmationForm;
+use lazyperson0710\ShopSystem\form\enchantShop\EnchantSelectForm;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\item\enchantment\Enchantment;

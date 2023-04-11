@@ -1,12 +1,13 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\levelShop\shop5;
+
+namespace lazyperson0710\ShopSystem\form\levelShop\shop5;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\ShopAPI\form\element\FirstBackFormButton;
-use lazyperson0710\ShopAPI\form\element\ShopItemFormButton;
-use lazyperson0710\ShopAPI\form\levelShop\MainLevelShopForm;
+use lazyperson0710\ShopSystem\form\element\FirstBackFormButton;
+use lazyperson0710\ShopSystem\form\element\ShopItemFormButton;
+use lazyperson0710\ShopSystem\form\levelShop\MainLevelShopForm;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;

@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\element;
+
+namespace lazyperson0710\ShopSystem\form\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
-use lazyperson0710\ShopAPI\form\effectShop\EffectConfirmationForm;
+use lazyperson0710\ShopSystem\form\effectShop\EffectConfirmationForm;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\entity\effect\Effect;
 use pocketmine\player\Player;

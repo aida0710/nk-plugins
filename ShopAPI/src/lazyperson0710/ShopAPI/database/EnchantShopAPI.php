@@ -1,7 +1,8 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\database;
+
+namespace lazyperson0710\ShopSystem\database;
 
 use deceitya\MiningLevel\MiningLevelAPI;
 use pocketmine\data\bedrock\EnchantmentIdMap;

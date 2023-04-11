@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\form\enchantShop;
+
+namespace lazyperson0710\ShopSystem\form\enchantShop;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\ShopAPI\database\EnchantShopAPI;
-use lazyperson0710\ShopAPI\form\element\EnchantSelectFormButton;
+use lazyperson0710\ShopSystem\database\EnchantShopAPI;
+use lazyperson0710\ShopSystem\form\element\EnchantSelectFormButton;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\item\enchantment\VanillaEnchantments;

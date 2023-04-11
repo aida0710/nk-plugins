@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\command;
+
+namespace lazyperson0710\ShopSystem\command;
 
 use deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson0710\ShopAPI\form\levelShop\other\InvSell\Confirmation;
+use lazyperson0710\ShopSystem\form\levelShop\other\InvSell\Confirmation;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\command\Command;

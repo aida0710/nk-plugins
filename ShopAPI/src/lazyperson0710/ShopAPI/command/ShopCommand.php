@@ -1,9 +1,10 @@
 <?php
 
 declare(strict_types = 0);
-namespace lazyperson0710\ShopAPI\command;
 
-use lazyperson0710\ShopAPI\form\levelShop\MainLevelShopForm;
+namespace lazyperson0710\ShopSystem\command;
+
+use lazyperson0710\ShopSystem\form\levelShop\MainLevelShopForm;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
