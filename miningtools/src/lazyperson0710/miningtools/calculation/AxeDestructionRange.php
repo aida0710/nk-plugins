@@ -28,8 +28,6 @@ class AxeDestructionRange {
 		$startPos = $block->getPosition()->asVector3();
 		$handItem = $player->getInventory()->getItemInHand();
 		$haveDurable = $handItem instanceof Durable;
-		/** @var Durable $handItem */
-		$maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
 		$open = [World::blockHash($startPos->x, $startPos->y, $startPos->z) => $startPos];
 		$close = [];
 		$drops = [];
