@@ -42,6 +42,11 @@ class ItemConvertConfirmationForm extends CustomForm {
 					$item->addEnchantment(new EnchantmentInstance($enchantment, $this->item->getLevel()[$key]));
 				}
 			}
+			$nbt = $item->getNamedTag();
+			foreach ($this->item->getNbt() as $value) {
+				$nbt->setInt($value, 0);
+			}
+			$item->setNamedTag($nbt);
 			if (!$player->getInventory()->canAddItem($item)) {
 				SendMessage::Send($player, 'インベントリに空きがないため処理が中断されました', 'LoginBonus', false);
 				return;
