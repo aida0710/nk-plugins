@@ -18,6 +18,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\command;
 
 use czechpmdevs\multiworld\command\subcommand\CreateSubCommand;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\ChestLock\Command;
 
 use Deceitya\ChestLock\Form\ModeForm;

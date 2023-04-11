@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\sff\form\land;
 
 use bbo51dog\bboform\element\Input;

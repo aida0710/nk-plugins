@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\pmdiscord\task;
 
 use bbo51dog\pmdiscord\connection\Webhook;

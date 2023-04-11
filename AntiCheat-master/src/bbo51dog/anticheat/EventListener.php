@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\anticheat;
 
 use bbo51dog\anticheat\model\PlayerDataFactory;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\LoginBonus\task;
 
 use lazyperson0710\LoginBonus\event\JoinPlayerEvent;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\editEnchant\form\element;
 
 use bbo51dog\bboform\element\Button;

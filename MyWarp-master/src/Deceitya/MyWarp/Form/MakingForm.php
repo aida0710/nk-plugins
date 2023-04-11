@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\MyWarp\Form;
 
 use Deceitya\MiningLevel\MiningLevelAPI;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\sff\form;
 
 use bbo51dog\bboform\element\ButtonImage;
@@ -32,7 +33,7 @@ class CommandExecutionForm extends SimpleForm {
 			);
 		$this
 			->setTitle('Command Execution')
-			->setText("実行したいコマンドを選択してください\nコマンドの一覧は/cmdlsで確認できます")
+			->setText('実行したいコマンドを選択してください')
 			->addElements(
 				new CommandDispatchButton('Virtual Storage', 'st', new ButtonImage(ButtonImage::TYPE_PATH, 'textures/ui/inventory_icon.png')),
 				new CommandDispatchButton('Level Shop', 'shop', new ButtonImage(ButtonImage::TYPE_PATH, 'textures/ui/icon_balloon.png')),

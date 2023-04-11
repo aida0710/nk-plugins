@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\sff\form\police;
 
 use bbo51dog\bboform\form\SimpleForm;

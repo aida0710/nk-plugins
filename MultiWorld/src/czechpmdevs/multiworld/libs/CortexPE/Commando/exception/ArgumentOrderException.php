@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando\exception;
 
 class ArgumentOrderException extends CommandoException {

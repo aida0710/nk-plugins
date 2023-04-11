@@ -1,32 +1,23 @@
 <?php
 
-declare(strict_types = 0);
+declare(strict_types = 1);
+
 namespace lazyperson0710\LoginBonus\item;
 
 use pocketmine\item\Item;
 
-class LoginBonusItemInfo {
+readonly class LoginBonusItemInfo {
 
-	private Item $item;
-	private int $quantity;
-	private int $cost;
-	private string $customName;
-	private array $lore;
-	private ?string $formExplanation;
-	private array $enchants;
-	private array $level;
-	private array $nbt;
-
-	public function __construct(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt) {
-		$this->item = $item;
-		$this->quantity = $quantity;
-		$this->cost = $cost;
-		$this->customName = $customName;
-		$this->lore = $lore;
-		$this->formExplanation = $formExplanation;
-		$this->enchants = $enchants;
-		$this->level = $level;
-		$this->nbt = $nbt;
+	public function __construct(
+		private Item $item,
+		private int $quantity,
+		private int $cost,
+		private string $customName,
+		private array $lore,
+		private ?string $formExplanation,
+		private array $enchants,
+		private array $level,
+		private array $nbt) {
 	}
 
 	public function getItem() : Item {

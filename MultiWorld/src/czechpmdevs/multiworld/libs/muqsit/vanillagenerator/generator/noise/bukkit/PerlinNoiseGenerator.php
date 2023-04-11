@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\bukkit;
 
 class PerlinNoiseGenerator extends BasePerlinNoiseGenerator {

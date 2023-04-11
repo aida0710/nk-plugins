@@ -2,10 +2,9 @@
 
 namespace ipad54\netherblocks\blocks;
 
-class WarpedFungus extends Fungus{
+class WarpedFungus extends Fungus {
 
-    public function isWarped(): bool
-    {
-        return true;
-    }
+	public function isWarped() : bool {
+		return true;
+	}
 }

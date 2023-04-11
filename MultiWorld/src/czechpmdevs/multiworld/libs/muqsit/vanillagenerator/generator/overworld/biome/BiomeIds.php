@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworld\biome;
 
 use pocketmine\data\bedrock\BiomeIds as VanillaBiomeIds;

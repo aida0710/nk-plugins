@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\editEnchant\command;
 
 use deceitya\editEnchant\form\ReduceForm;

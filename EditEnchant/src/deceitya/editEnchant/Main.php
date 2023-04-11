@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\editEnchant;
 
 use deceitya\editEnchant\command\DeleteCommand;

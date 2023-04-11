@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace nkserver\ranking\libs\CortexPE\Commando\constraint;
 
 use nkserver\ranking\libs\CortexPE\Commando\IRunnable;

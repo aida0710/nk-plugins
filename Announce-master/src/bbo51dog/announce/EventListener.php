@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\announce;
 
 use bbo51dog\announce\form\AnnounceForm;

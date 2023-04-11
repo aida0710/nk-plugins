@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\EffectItems;
 
 use lazyperson0710\EffectItems\command\ItemsCommand;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\core\task;
 
 use lazyperson710\core\Main;

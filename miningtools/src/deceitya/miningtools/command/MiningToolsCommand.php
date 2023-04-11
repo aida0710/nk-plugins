@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\miningtools\command;
 
 use deceitya\miningtools\command\form\MiningToolsForm;
@@ -15,7 +16,7 @@ class MiningToolsCommand extends Command {
 		parent::__construct('mt', 'MiningToolShopを開きます');
 	}
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args) {
+	public function execute(CommandSender $sender, string $commandLabel, array $args) : void {
 		if (!($sender instanceof Player)) {
 			$sender->sendMessage('サーバー内で実行してください');
 			return;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\MiningLevel;
 
 use Deceitya\MiningLevel\Database\SQLiteDatabase;
@@ -51,6 +52,7 @@ class MiningLevelAPI {
 	}
 
 	/**
+	 * @param Player|string $player
 	 * @return boolean
 	 */
 	public function playerDataExists(Player|string $player) : bool {
@@ -58,6 +60,7 @@ class MiningLevelAPI {
 	}
 
 	/**
+	 * @param Player|string $player
 	 * @return integer|null
 	 */
 	public function getLevel(Player|string $player) : ?int {
@@ -100,7 +103,8 @@ class MiningLevelAPI {
 	}
 
 	/**
-	 * @param integer $level
+	 * @param string|Player $player
+	 * @param integer       $level
 	 * @return void
 	 */
 	public function setLevel(string|Player $player, int $level) {
@@ -113,6 +117,7 @@ class MiningLevelAPI {
 	}
 
 	/**
+	 * @param string|Player $player
 	 * @return integer|null
 	 */
 	public function getExp(string|Player $player) : ?int {
@@ -184,12 +189,12 @@ class MiningLevelAPI {
 		return self::$instance;
 	}
 
-	public function writecache(?string $name = null) {
+	public function writecache(?string $name = null) : void {
 		$asyncexecutor = new AsyncDataWriteTask($this->cache, $this->databasefile, $name);
 		Server::getInstance()->getAsyncPool()->submitTask($asyncexecutor);
 	}
 
-	public function clearCache($player) {
+	public function clearCache($player) : void {
 		$player = $this->convert2lower($player);
 		unset($this->cache[$player]);
 	}

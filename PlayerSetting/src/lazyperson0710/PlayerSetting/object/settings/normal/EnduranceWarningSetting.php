@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;

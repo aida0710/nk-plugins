@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace onebone\economyapi\command;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\LoginBonus\calculation;
 
 use lazyperson0710\LoginBonus\Main;

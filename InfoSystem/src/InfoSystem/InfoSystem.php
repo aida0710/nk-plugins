@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace InfoSystem;
 
 use Deceitya\MiningLevel\MiningLevelAPI;

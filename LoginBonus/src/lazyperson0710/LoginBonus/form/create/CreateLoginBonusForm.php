@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\LoginBonus\form\create;
 
 use bbo51dog\bboform\element\Input;

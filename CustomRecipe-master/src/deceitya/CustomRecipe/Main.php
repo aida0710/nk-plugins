@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\CustomRecipe;
 
 use pocketmine\block\utils\DyeColor;

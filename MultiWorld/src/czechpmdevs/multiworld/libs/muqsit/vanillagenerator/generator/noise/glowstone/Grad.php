@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\noise\glowstone;
 
 // Inner class to speed up gradient computations

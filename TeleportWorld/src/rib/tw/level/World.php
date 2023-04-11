@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace rib\tw\level;
 
 use pocketmine\player\Player;

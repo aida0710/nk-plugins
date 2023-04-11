@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\Flytra\command;
 
 use Deceitya\Flytra\form\FlyForm;

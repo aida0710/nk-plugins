@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\miningtools\command;
 
 use Deceitya\MiningLevel\MiningLevelAPI;
@@ -20,7 +21,7 @@ class NetheriteMiningToolCommand extends Command {
 
 	public const NetheriteMiningToolsLevelLimit = 30;
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args) {
+	public function execute(CommandSender $sender, string $commandLabel, array $args) : void {
 		if (!($sender instanceof Player)) {
 			$sender->sendMessage('サーバー内で実行してください');
 			return;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\miningtools\extensions\enchant\unbreaking;
 
 use bbo51dog\bboform\element\Button;

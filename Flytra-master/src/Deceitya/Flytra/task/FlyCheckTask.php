@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\Flytra\task;
 
 use Deceitya\Flytra\Main;

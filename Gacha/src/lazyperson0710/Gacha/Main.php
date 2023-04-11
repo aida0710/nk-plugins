@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\Gacha;
 
 use Error;
@@ -8,7 +9,6 @@ use lazyperson0710\Gacha\command\GachaCommand;
 use lazyperson0710\Gacha\database\GachaItemAPI;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
-use function bcadd;
 
 class Main extends PluginBase {
 

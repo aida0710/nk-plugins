@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\sff;
 
 use lazyperson710\sff\command\CmdExecutionCommand;

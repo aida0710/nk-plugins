@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\ticket\command;
 
 use lazyperson0710\ticket\command\form\MainTicketForm;

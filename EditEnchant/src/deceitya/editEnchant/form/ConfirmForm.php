@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\editEnchant\form;
 
 use bbo51dog\bboform\element\Label;

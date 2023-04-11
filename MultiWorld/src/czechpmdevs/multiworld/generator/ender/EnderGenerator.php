@@ -18,6 +18,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\generator\ender;
 
 use czechpmdevs\multiworld\generator\ender\populator\EnderPilar;

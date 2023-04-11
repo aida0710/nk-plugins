@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\EffectItems\task;
 
 use lazyperson710\core\packet\AddEffectPacket;

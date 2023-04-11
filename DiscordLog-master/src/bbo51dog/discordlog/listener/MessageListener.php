@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\discordlog\listener;
 
 use bbo51dog\discordlog\Main;

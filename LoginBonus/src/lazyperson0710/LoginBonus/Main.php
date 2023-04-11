@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\LoginBonus;
 
 use lazyperson0710\LoginBonus\command\LoginBonusCommand;
@@ -30,11 +31,11 @@ class Main extends PluginBase {
 		'level' => 15,
 	];
 
-	public function onLoad() : void {
+	protected function onLoad() : void {
 		self::setInstance($this);
 	}
 
-	public function onEnable() : void {
+	protected function onEnable() : void {
 		$this->getServer()->getCommandMap()->registerAll('LoginBonus', [
 			new LoginBonusCommand(),
 		]);

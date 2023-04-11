@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\miningtools\eventListener;
 
 use deceitya\miningtools\calculation\AxeDestructionRange;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace nkserver\ranking\form;
 
 use Deceitya\MiningLevel\Form\RankForm as MiningLevelRankinkForm;

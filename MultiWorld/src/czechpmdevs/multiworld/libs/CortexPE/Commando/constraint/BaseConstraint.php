@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando\constraint;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\IRunnable;

@@ -5,20 +5,18 @@ namespace ipad54\netherblocks\blocks;
 use pocketmine\block\Slab as PMSlab;
 use pocketmine\block\utils\SlabType;
 
-class Slab extends PMSlab
-{
+class Slab extends PMSlab {
+
 	public const SLAB_FLAG_UPPER = 0x01;
 
-	protected function writeStateToMeta(): int
-	{
+	protected function writeStateToMeta() : int {
 		if (!$this->slabType->equals(SlabType::DOUBLE())) {
 			return ($this->slabType->equals(SlabType::TOP()) ? self::SLAB_FLAG_UPPER : 0);
 		}
 		return 0;
 	}
 
-	public function readStateFromData(int $id, int $stateMeta): void
-	{
+	public function readStateFromData(int $id, int $stateMeta) : void {
 		if ($id === $this->idInfoFlattened->getSecondId()) {
 			$this->slabType = SlabType::DOUBLE();
 		} else {
@@ -26,8 +24,7 @@ class Slab extends PMSlab
 		}
 	}
 
-	public function getStateBitmask(): int
-	{
+	public function getStateBitmask() : int {
 		return 0b1;
 	}
 }

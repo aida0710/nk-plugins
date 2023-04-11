@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\Flytra\form;
 
 use bbo51dog\bboform\element\Input;

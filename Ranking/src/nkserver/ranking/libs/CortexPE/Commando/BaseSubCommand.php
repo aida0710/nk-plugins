@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace nkserver\ranking\libs\CortexPE\Commando;
 
 use pocketmine\plugin\Plugin;

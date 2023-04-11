@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\discordlog;
 
 use bbo51dog\discordlog\listener\DeathListener;

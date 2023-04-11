@@ -9,8 +9,7 @@ use pocketmine\world\sound\Sound;
 
 class LodestoneCompassLinkSound implements Sound {
 
-    public function encode(Vector3 $pos): array
-    {
-        return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::LODESTONE_COMPASS_LINK_COMPASS_TO_LODESTONE, $pos, false)];
-    }
+	public function encode(Vector3 $pos) : array {
+		return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::LODESTONE_COMPASS_LINK_COMPASS_TO_LODESTONE, $pos, false)];
+	}
 }

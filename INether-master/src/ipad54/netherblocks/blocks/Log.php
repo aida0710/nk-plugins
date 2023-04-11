@@ -6,10 +6,10 @@ use pocketmine\block\utils\PillarRotationInMetadataTrait;
 
 class Log extends Wood {
 
-    use PillarRotationInMetadataTrait;
+	use PillarRotationInMetadataTrait;
 
-    protected function getAxisMetaShift() : int{
-        return 0;
-    }
+	protected function getAxisMetaShift() : int {
+		return 0;
+	}
 
 }

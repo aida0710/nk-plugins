@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace InfoSystem\form;
 
 use bbo51dog\bboform\element\Input;

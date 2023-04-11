@@ -36,17 +36,17 @@ use ipad54\netherblocks\blocks\WarpedNylium;
 use ipad54\netherblocks\blocks\WarpedWartBlock;
 use ipad54\netherblocks\blocks\WeepingVines;
 use ipad54\netherblocks\blocks\WoodenButton;
-use ipad54\netherblocks\tile\Campfire as TileCampfire;
 use ipad54\netherblocks\items\FlintAndSteel;
 use ipad54\netherblocks\listener\EventListener;
+use ipad54\netherblocks\tile\Campfire as TileCampfire;
 use ipad54\netherblocks\utils\CustomConfig;
 use ipad54\netherblocks\utils\CustomIds;
 use pocketmine\block\Block;
 use pocketmine\block\BlockBreakInfo;
 use pocketmine\block\BlockFactory;
+use pocketmine\block\BlockIdentifier as BID;
 use pocketmine\block\BlockIdentifierFlattened as BIDFlattened;
 use pocketmine\block\BlockLegacyIds as Ids;
-use pocketmine\block\BlockIdentifier as BID;
 use pocketmine\block\BlockToolType;
 use pocketmine\block\Door;
 use pocketmine\block\Fence;
@@ -62,95 +62,83 @@ use pocketmine\block\utils\TreeType;
 use pocketmine\block\Wall;
 use pocketmine\block\WoodenPressurePlate;
 use pocketmine\block\WoodenTrapdoor;
-use pocketmine\inventory\CreativeInventory;
-use pocketmine\item\ItemBlock;
-use pocketmine\item\ItemBlockWallOrFloor;
-use pocketmine\item\StringToItemParser;
-use pocketmine\lang\Translatable;
 use pocketmine\inventory\ArmorInventory;
+use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Armor;
 use pocketmine\item\ArmorTypeInfo;
 use pocketmine\item\Axe;
 use pocketmine\item\Hoe;
 use pocketmine\item\Item;
+use pocketmine\item\ItemBlock;
+use pocketmine\item\ItemBlockWallOrFloor;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemIds;
 use pocketmine\item\Pickaxe;
-use pocketmine\item\Shovel;
-use pocketmine\item\Sword;
 use pocketmine\item\Record;
+use pocketmine\item\Shovel;
+use pocketmine\item\StringToItemParser;
+use pocketmine\item\Sword;
 use pocketmine\item\ToolTier;
+use pocketmine\lang\Translatable;
 use pocketmine\network\mcpe\convert\RuntimeBlockMapping;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\AsyncTask;
 use pocketmine\Server;
 use pocketmine\utils\Config;
 use ReflectionMethod;
-use const pocketmine\BEDROCK_DATA_PATH;
 
-class Main extends PluginBase
-{
+class Main extends PluginBase {
 
 	private CustomConfig $config;
 	private static self $instance;
 
-	protected function onLoad(): void
-	{
+	protected function onLoad() : void {
 		self::$instance = $this;
 		$this->saveResource("config.yml");
 		$this->config = new CustomConfig(new Config($this->getDataFolder() . "config.yml", Config::YAML));
-		self::initializeRuntimeIds($this->getFile()."/resources/block_id_map.json");
+		self::initializeRuntimeIds($this->getFile() . "/resources/block_id_map.json");
 		$this->initBlocks();
 		$this->initTiles();
 		$this->initItems();
 	}
 
-	protected function onEnable(): void
-	{ //credits https://github.com/cladevs/VanillaX
+	protected function onEnable() : void { //credits https://github.com/cladevs/VanillaX
 		Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
-		$path = $this->getFile()."/resources/block_id_map.json";
-
-		Server::getInstance()->getAsyncPool()->addWorkerStartHook(function (int $worker) use ($path): void {
+		$path = $this->getFile() . "/resources/block_id_map.json";
+		Server::getInstance()->getAsyncPool()->addWorkerStartHook(function (int $worker) use ($path) : void {
 			Server::getInstance()->getAsyncPool()->submitTaskToWorker(new class($path) extends AsyncTask {
+
 				public function __construct(
-					private string $path
-				){
+					private string $path,
+				) {
 				}
 
-				public function onRun(): void
-				{
+				public function onRun() : void {
 					Main::initializeRuntimeIds($this->path);
 				}
 			}, $worker);
 		});
 	}
 
-
-	public static function getInstance(): self
-	{
+	public static function getInstance() : self {
 		return self::$instance;
 	}
 
-	public function getCustomConfig(): CustomConfig
-	{
+	public function getCustomConfig() : CustomConfig {
 		return $this->config;
 	}
 
-	public static function initializeRuntimeIds(string $path): void
-	{
+	public static function initializeRuntimeIds(string $path) : void {
 		$instance = RuntimeBlockMapping::getInstance();
 		$method = new ReflectionMethod(RuntimeBlockMapping::class, "registerMapping");
 		$method->setAccessible(true);
-
 		$blockIdMap = json_decode(file_get_contents($path), true);
 		$metaMap = [];
-
 		foreach ($instance->getBedrockKnownStates() as $runtimeId => $nbt) {
 			$mcpeName = $nbt->getString("name");
 			$meta = isset($metaMap[$mcpeName]) ? ($metaMap[$mcpeName] + 1) : 0;
 			$id = $blockIdMap[$mcpeName] ?? Ids::AIR;
-
 			if ($id !== Ids::AIR && $meta <= 15 && !BlockFactory::getInstance()->isRegistered($id, $meta)) {
 				$metaMap[$mcpeName] = $meta;
 				$method->invoke($instance, $runtimeId, $id, $meta);
@@ -158,9 +146,7 @@ class Main extends PluginBase
 		}
 	}
 
-
-	public function initBlocks(): void
-	{
+	public function initBlocks() : void {
 		$class = new \ReflectionClass(TreeType::class);
 		$register = $class->getMethod('register');
 		$register->setAccessible(true);
@@ -169,11 +155,9 @@ class Main extends PluginBase
 		$instance = $class->newInstanceWithoutConstructor();
 		$constructor->invoke($instance, 'crimson', 'Crimson', 6);
 		$register->invoke(null, $instance);
-
 		$instance = $class->newInstanceWithoutConstructor();
 		$constructor->invoke($instance, 'warped', 'Warped', 7);
 		$register->invoke(null, $instance);
-
 		$cfg = $this->getCustomConfig();
 		if ($cfg->isEnabledDebris()) {
 			$this->registerBlock(new Opaque(new BID(CustomIds::ANCIENT_DEBRIS_BLOCK, 0, CustomIds::ANCIENT_DEBRIS_ITEM), "Ancient Debris", new BlockBreakInfo(30, BlockToolType::PICKAXE, ToolTier::DIAMOND()->getHarvestLevel(), 6000)));
@@ -222,24 +206,18 @@ class Main extends PluginBase
 		if ($cfg->isEnabledRespawnAnchor()) {
 			$this->registerBlock(new RespawnAnchor(new BID(CustomIds::RESPAWN_ANCHOR_BLOCK, 0, CustomIds::RESPAWN_ANCHOR_ITEM), "Respawn Anchor", new BlockBreakInfo(50, BlockToolType::PICKAXE, ToolTier::DIAMOND()->getHarvestLevel(), 6000)));
 		}
-
 		if ($cfg->isEnableBlackstone()) {
-
 			$blackstoneBreakInfo = new BlockBreakInfo(1.5, BlockToolType::PICKAXE, ToolTier::WOOD()->getHarvestLevel(), 6);
-
 			$this->registerBlock(new Blackstone(new BID(CustomIds::BLACKSTONE_BLOCK, 0, CustomIds::BLACKSTONE_ITEM), "Blackstone", $blackstoneBreakInfo));
 			$this->registerBlock(new PolishedBlackStone(new BID(CustomIds::POLISHED_BLACKSTONE_BLOCK, 0, CustomIds::POLISHED_BLACKSTONE_ITEM), "Polished Blackstone", $blackstoneBreakInfo));
 			$this->registerBlock(new ChiseledPolishedBlackstone(new BID(CustomIds::CHISELED_POLISHED_BLACKSTONE_BLOCK, 0, CustomIds::CHISELED_POLISHED_BLACKSTONE_ITEM), "Chiseled Polished Blackstone", $blackstoneBreakInfo));
 			$this->registerBlock(new GildedBlackstone(new BID(CustomIds::GILDED_BLACKSTONE_BLOCK, 0, CustomIds::GILDED_BLACKSTONE_ITEM), "Gilded Blackstone", $blackstoneBreakInfo));
 			$this->registerBlock(new Opaque(new BID(CustomIds::POLISHED_BLACKSTONE_BRICKS_BLOCK, 0, CustomIds::POLISHED_BLACKSTONE_BRICKS_ITEM), "Polished Blackstone Bricks", $blackstoneBreakInfo));
 			$this->registerBlock(new Opaque(new BID(CustomIds::CRACKED_POLISHED_BLACKSTONE_BRICKS_BLOCK, 0, CustomIds::CRACKED_POLISHED_BLACKSTONE_BRICKS_ITEM), "Cracked Polished Blackstone Bricks", $blackstoneBreakInfo));
-
 			$this->registerSlab(new Slab(new BIDFlattened(CustomIds::BLACKSTONE_SLAB_BLOCK, [CustomIds::BLACKSTONE_DOUBLE_SLAB], 0, CustomIds::BLACKSTONE_SLAB_ITEM), "Blackstone Slab", $blackstoneBreakInfo));
 			$this->registerSlab(new Slab(new BIDFlattened(CustomIds::POLISHED_BLACKSTONE_SLAB_BLOCK, [CustomIds::POLISHED_BLACKSTONE_DOUBLE_SLAB], 0, CustomIds::POLISHED_BLACKSTONE_SLAB_ITEM), "Polished Blackstone Slab", $blackstoneBreakInfo));
 			$this->registerSlab(new Slab(new BIDFlattened(CustomIds::POLISHED_BLACKSTONE_BRICK_SLAB_BLOCK, [CustomIds::POLISHED_BLACKSTONE_BRICK_DOUBLE_SLAB], 0, CustomIds::POLISHED_BLACKSTONE_BRICK_SLAB_ITEM), "Polished Blackstone Brick Slab", $blackstoneBreakInfo));
-
 			$this->registerBlock(new StonePressurePlate(new BID(CustomIds::POLISHED_BLACKSTONE_PRESSURE_PLATE_BLOCK, 0, CustomIds::POLISHED_BLACKSTONE_PRESSURE_PLATE_ITEM), "Polished Blackstone Pressure Plate", new BlockBreakInfo(0.5, BlockToolType::PICKAXE, ToolTier::WOOD()->getHarvestLevel())));
-
 			$this->registerBlock(new PolishedBlackstoneButton(new BID(CustomIds::POLISHED_BLACKSTONE_BUTTON_BLOCK, 0, CustomIds::POLISHED_BLACKSTONE_BUTTON_ITEM), "Polished Blackstone Button", new BlockBreakInfo(0.5, BlockToolType::PICKAXE, ToolTier::WOOD()->getHarvestLevel())));
 			$wallBreakInfo = new BlockBreakInfo(2.0, BlockToolType::PICKAXE, ToolTier::WOOD()->getHarvestLevel(), 30.0);
 			$this->registerBlock(new Wall(new BID(CustomIds::BLACKSTONE_WALL_BLOCK, 0, CustomIds::BLACKSTONE_WALL_ITEM), "Blackstone Wall", $wallBreakInfo));
@@ -259,21 +237,16 @@ class Main extends PluginBase
 		}
 		if ($cfg->isEnableWood()) {
 			$planksBreakInfo = new BlockBreakInfo(2.0, BlockToolType::AXE, 0, 15.0);
-
 			$this->registerBlock(new Planks(new BID(CustomIds::CRIMSON_PLANKS_BLOCK, 0, CustomIds::CRIMSON_PLANKS_ITEM), "Crimson Planks", $planksBreakInfo));
 			$this->registerBlock(new Planks(new BID(CustomIds::WARPED_PLANKS_BLOCK, 0, CustomIds::WARPED_PLANKS_ITEM), "Warped Planks", $planksBreakInfo));
-
 			$this->registerSlab(new Slab(new BIDFlattened(CustomIds::CRIMSON_SLAB_BLOCK, [CustomIds::CRIMSON_DOUBLE_SLAB], 0, CustomIds::CRIMSON_SLAB_ITEM), "Crimson Slab", $planksBreakInfo));
 			$this->registerSlab(new Slab(new BIDFlattened(CustomIds::WARPED_SLAB_BLOCK, [CustomIds::WARPED_DOUBLE_SLAB], 0, CustomIds::WARPED_SLAB_ITEM), "Warped Slab", $planksBreakInfo));
-
 			$this->registerBlock(new Log(new BID(CustomIds::CRIMSON_STEM_BLOCK, 0, CustomIds::CRIMSON_STEM_ITEM), "Crimson Stem", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::CRIMSON(), false));
 			$this->registerBlock(new Log(new BID(CustomIds::WARPED_STEM_BLOCK, 0, CustomIds::WARPED_STEM_ITEM), "Warped Stem", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::WARPED(), false));
 			$this->registerBlock(new Log(new BID(CustomIds::CRIMSON_STRIPPED_STEM_BLOCK, 0, CustomIds::CRIMSON_STRIPPED_STEM_ITEM), "Crimson Stripped Stem", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::CRIMSON(), true));
 			$this->registerBlock(new Log(new BID(CustomIds::WARPED_STRIPPED_STEM_BLOCK, 0, CustomIds::WARPED_STRIPPED_STEM_ITEM), "Warped Stripped Stem", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::WARPED(), true));
-
 			$this->registerBlock(new Hyphae(new BID(CustomIds::CRIMSON_HYPHAE_BLOCK, 0, CustomIds::CRIMSON_HYPHAE_ITEM), "Crimson Hyphae", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::CRIMSON(), false));
 			$this->registerBlock(new Hyphae(new BID(CustomIds::WARPED_HYPHAE_BLOCK, 0, CustomIds::WARPED_HYPHAE_ITEM), "Warped Hyphae", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::WARPED(), false));
-
 			$this->registerBlock(new Hyphae(new BID(CustomIds::CRIMSON_STRIPPED_HYPHAE_BLOCK, 0, CustomIds::CRIMSON_STRIPPED_HYPHAE_ITEM), "Crimson Stripped Hyphae", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::CRIMSON(), true));
 			$this->registerBlock(new Hyphae(new BID(CustomIds::WARPED_STRIPPED_HYPHAE_BLOCK, 0, CustomIds::WARPED_STRIPPED_HYPHAE_ITEM), "Warped Stripped Hyphae", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10), TreeType::WARPED(), true));
 			$this->registerBlock(new Door(new BID(CustomIds::CRIMSON_DOOR_BLOCK, 0, CustomIds::CRIMSON_DOOOR_ITEM), "Crimson Door", new BlockBreakInfo(3, BlockToolType::AXE)), false);
@@ -284,17 +257,14 @@ class Main extends PluginBase
 			$this->registerBlock(new FenceGate(new BID(CustomIds::WARPED_FENCE_GATE_BLOCK, 0, CustomIds::WARPED_FENCE_GATE_ITEM), "Warped Fence Gate", new BlockBreakInfo(2, BlockToolType::AXE, 0, 3)));
 			$this->registerBlock(new WoodenTrapdoor(new BID(CustomIds::CRIMSON_TRAPDOOR_BLOCK, 0, CustomIds::CRIMSON_TRAPDOOR_ITEM), "Crimson Trapdoor", new BlockBreakInfo(3, BlockToolType::AXE, 0, 15)));
 			$this->registerBlock(new WoodenTrapdoor(new BID(CustomIds::WARPED_TRAPDOOR_BLOCK, 0, CustomIds::WARPED_TRAPDOOR_ITEM), "Warped Trapdoor", new BlockBreakInfo(3, BlockToolType::AXE, 0, 15)));
-
 			$signBreakInfo = new BlockBreakInfo(1.0, BlockToolType::AXE);
 			$this->registerBlock(new FloorSign(new BID(CustomIds::CRIMSON_FLOOR_SIGN_BLOCK, 0, CustomIds::CRIMSON_FLOOR_SIGN_ITEM, TileSign::class), "Crimson Floor Sign", $signBreakInfo), true, false);
 			$this->registerBlock(new WallSign(new BID(CustomIds::CRIMSON_WALL_SIGN_BLOCK, 0, CustomIds::CRIMSON_WALL_SIGN_ITEM, TileSign::class), "Crimson Wall Sign", $signBreakInfo), true, false);
 			$this->registerBlock(new FloorSign(new BID(CustomIds::WARPED_FLOOR_SIGN_BLOCK, 0, CustomIds::WARPED_FLOOR_SIGN_ITEM, TileSign::class), "Warped Floor Sign", $signBreakInfo), true, false);
 			$this->registerBlock(new WallSign(new BID(CustomIds::WARPED_WALL_SIGN_BLOCK, 0, CustomIds::WARPED_WALL_SIGN_ITEM, TileSign::class), "Warped Wall Sign", $signBreakInfo), true, false);
-
 			$woodenButtonBreakInfo = new BlockBreakInfo(0.5, BlockToolType::AXE);
 			$this->registerBlock(new WoodenButton(new BID(CustomIds::CRIMSON_BUTTON_BLOCK, 0, CustomIds::CRIMSON_BUTTON_ITEM), "Crimson Button", $woodenButtonBreakInfo));
 			$this->registerBlock(new WoodenButton(new BID(CustomIds::WARPED_BUTTON_BLOCK, 0, CustomIds::WARPED_BUTTON_ITEM), "Warped Button", $woodenButtonBreakInfo));
-
 			$pressurePlateBreakInfo = new BlockBreakInfo(0.5, BlockToolType::AXE);
 			$this->registerBlock(new WoodenPressurePlate(new BID(CustomIds::CRIMSON_PRESSURE_PLATE_BLOCK, 0), "Crimson Pressure Plate", $pressurePlateBreakInfo));
 			$this->registerBlock(new WoodenPressurePlate(new BID(CustomIds::WARPED_PRESSURE_PLATE_BLOCK, 0), "Warped Pressure Plate", $pressurePlateBreakInfo));
@@ -310,11 +280,9 @@ class Main extends PluginBase
 			$this->registerBlock(new Campfire(new BID(Ids::CAMPFIRE, 0, CustomIds::CAMPFIRE_ITEM, TileCampfire::class), "Campfire", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10)), false, false);
 			$this->registerBlock(new SoulCampfire(new BID(CustomIds::SOUL_CAMPFIRE_BLOCK, 0, CustomIds::SOUL_CAMPFIRE_ITEM, TileCampfire::class), "Soul Campfire", new BlockBreakInfo(2, BlockToolType::AXE, 0, 10)), false, false);
 		}
-
 	}
 
-	public function initTiles(): void
-	{
+	public function initTiles() : void {
 		$cfg = $this->getCustomConfig();
 		$tf = TileFactory::getInstance();
 		if ($cfg->isEnableCampfire()) {
@@ -322,8 +290,7 @@ class Main extends PluginBase
 		}
 	}
 
-	public function initItems(): void
-	{
+	public function initItems() : void {
 		$cfg = $this->getCustomConfig();
 		if ($cfg->isEnabledSoulSoil()) {
 			$this->registerItem(new FlintAndSteel(new ItemIdentifier(ItemIds::FLINT_AND_STEEL, 0), "Flint and Steel"), false);
@@ -337,7 +304,6 @@ class Main extends PluginBase
 			$instance = $class->newInstanceWithoutConstructor();
 			$constructor->invoke($instance, 'disk_pigstep', 'Lena Raine - Pigstep', CustomIds::RECORD_PIGSTEP_SOUND_ID, new Translatable('item.record_pigstep.desc', []));
 			$register->invoke(null, $instance);
-			
 			$this->registerItem(new Record(new ItemIdentifier(CustomIds::RECORD_PIGSTEP, 0), RecordType::DISK_PIGSTEP(), "Record Pigstep"));
 		}
 		if ($cfg->isEnableWood()) {
@@ -345,8 +311,8 @@ class Main extends PluginBase
 			$this->registerItem(new ItemBlock(new ItemIdentifier(CustomIds::WARPED_DOOR_ITEM, 0), BlockFactory::getInstance()->get(CustomIds::WARPED_DOOR_BLOCK, 0)));
 			$this->registerItem(new ItemBlockWallOrFloor(new ItemIdentifier(CustomIds::CRIMSON_SIGN, 0), BlockFactory::getInstance()->get(CustomIds::CRIMSON_FLOOR_SIGN_BLOCK, 0), BlockFactory::getInstance()->get(CustomIds::CRIMSON_WALL_SIGN_BLOCK, 0)), false);
 			$this->registerItem(new ItemBlockWallOrFloor(new ItemIdentifier(CustomIds::WARPED_SIGN, 0), BlockFactory::getInstance()->get(CustomIds::WARPED_FLOOR_SIGN_BLOCK, 0), BlockFactory::getInstance()->get(CustomIds::WARPED_WALL_SIGN_BLOCK, 0)), false);
-			StringToItemParser::getInstance()->register("crimson_sign", fn() => ItemFactory::getInstance()->get(CustomIds::CRIMSON_SIGN));
-			StringToItemParser::getInstance()->register("warped_sign", fn() => ItemFactory::getInstance()->get(CustomIds::WARPED_SIGN));
+			StringToItemParser::getInstance()->register("crimson_sign", fn () => ItemFactory::getInstance()->get(CustomIds::CRIMSON_SIGN));
+			StringToItemParser::getInstance()->register("warped_sign", fn () => ItemFactory::getInstance()->get(CustomIds::WARPED_SIGN));
 		}
 		if ($cfg->isEnableCampfire()) {
 			$this->registerItem(new ItemBlock(new ItemIdentifier(CustomIds::CAMPFIRE_ITEM, 0), BlockFactory::getInstance()->get(Ids::CAMPFIRE, 0)));
@@ -364,7 +330,6 @@ class Main extends PluginBase
 			$instance = $class->newInstanceWithoutConstructor();
 			$constructor->invoke($instance, 'netherite', 6, 2031, 9, 10);
 			$register->invoke(null, $instance);
-			
 			$this->registerItem(new Item(new ItemIdentifier(CustomIds::ITEM_NETHERITE_INGOT, 0), 'Netherite Ingot'));
 			$this->registerItem(new Item(new ItemIdentifier(CustomIds::ITEM_NETHERITE_SCRAP, 0), 'Netherite Scrap'));
 			$this->registerItem(new Sword(new ItemIdentifier(CustomIds::ITEM_NETHERITE_SWORD, 0), 'Netherite Sword', ToolTier::NETHERITE()));
@@ -372,7 +337,6 @@ class Main extends PluginBase
 			$this->registerItem(new Pickaxe(new ItemIdentifier(CustomIds::ITEM_NETHERITE_PICKAXE, 0), 'Netherite Pickaxe', ToolTier::NETHERITE()));
 			$this->registerItem(new Axe(new ItemIdentifier(CustomIds::ITEM_NETHERITE_AXE, 0), 'Netherite Axe', ToolTier::NETHERITE()));
 			$this->registerItem(new Hoe(new ItemIdentifier(CustomIds::ITEM_NETHERITE_HOE, 0), 'Netherite Hoe', ToolTier::NETHERITE()));
-
 			$this->registerItem(new Armor(new ItemIdentifier(CustomIds::NETHERITE_HELMET, 0), 'Netherite Helmet', new ArmorTypeInfo(6, 407, ArmorInventory::SLOT_HEAD)));
 			$this->registerItem(new Armor(new ItemIdentifier(CustomIds::NETHERITE_CHESTPLATE, 0), 'Netherite Chestplate', new ArmorTypeInfo(3, 592, ArmorInventory::SLOT_CHEST)));
 			$this->registerItem(new Armor(new ItemIdentifier(CustomIds::NETHERITE_LEGGINGS, 0), 'Netherite Leggings', new ArmorTypeInfo(3, 481, ArmorInventory::SLOT_LEGS)));
@@ -380,8 +344,7 @@ class Main extends PluginBase
 		}
 	}
 
-	private function registerBlock(Block $block, bool $registerToParser = true, bool $addToCreative = true): void
-	{
+	private function registerBlock(Block $block, bool $registerToParser = true, bool $addToCreative = true) : void {
 		BlockFactory::getInstance()->register($block, true);
 		if ($addToCreative && !CreativeInventory::getInstance()->contains($block->asItem())) {
 			CreativeInventory::getInstance()->add($block->asItem());
@@ -389,12 +352,11 @@ class Main extends PluginBase
 		if ($registerToParser) {
 			$name = strtolower($block->getName());
 			$name = str_replace(" ", "_", $name);
-			StringToItemParser::getInstance()->registerBlock($name, fn() => $block);
+			StringToItemParser::getInstance()->registerBlock($name, fn () => $block);
 		}
 	}
 
-	private function registerItem(Item $item, bool $registerToParser = true): void
-	{
+	private function registerItem(Item $item, bool $registerToParser = true) : void {
 		ItemFactory::getInstance()->register($item, true);
 		if (!CreativeInventory::getInstance()->contains($item)) {
 			CreativeInventory::getInstance()->add($item);
@@ -402,14 +364,14 @@ class Main extends PluginBase
 		if ($registerToParser) {
 			$name = strtolower($item->getName());
 			$name = str_replace(" ", "_", $name);
-			StringToItemParser::getInstance()->register($name, fn() => $item);
+			StringToItemParser::getInstance()->register($name, fn () => $item);
 		}
 	}
 
-	private function registerSlab(Slab $slab) : void{
+	private function registerSlab(Slab $slab) : void {
 		$this->registerBlock($slab);
 		$identifierFlattened = $slab->getIdInfo();
-		if($identifierFlattened instanceof BIDFlattened){
+		if ($identifierFlattened instanceof BIDFlattened) {
 			BlockFactory::getInstance()->remap($identifierFlattened->getSecondId(), $identifierFlattened->getVariant() | 0x1, $slab->setSlabType(SlabType::DOUBLE()));
 		}
 	}

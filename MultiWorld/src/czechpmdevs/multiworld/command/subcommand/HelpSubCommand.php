@@ -18,6 +18,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\command\subcommand;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\args\IntegerArgument;

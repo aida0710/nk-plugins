@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace nkserver\ranking\object;
 
 use nkserver\ranking\Main;

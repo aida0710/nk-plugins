@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\biomegrid;
 
 use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\biomegrid\utils\BiomeEdgeEntry;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando\libs\muqsit\simplepackethandler\interceptor;
 
 use Closure;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\miningtools\extensions;
 
 use deceitya\miningtools\Main;

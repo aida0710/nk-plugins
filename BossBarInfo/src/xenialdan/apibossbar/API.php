@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace xenialdan\apibossbar;
 
 use pocketmine\plugin\Plugin;

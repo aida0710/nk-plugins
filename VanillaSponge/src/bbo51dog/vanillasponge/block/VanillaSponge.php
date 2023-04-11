@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\vanillasponge\block;
 
 use pocketmine\block\Block;

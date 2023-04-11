@@ -16,6 +16,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\czechpmdevs\libpmform;
 
 use Closure;

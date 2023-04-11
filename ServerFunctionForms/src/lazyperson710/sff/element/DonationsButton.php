@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\sff\element;
 
 use bbo51dog\bboform\element\Button;

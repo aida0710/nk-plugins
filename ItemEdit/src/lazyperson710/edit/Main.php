@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\edit;
 
 use lazyperson710\edit\command\ItemEditCommand;

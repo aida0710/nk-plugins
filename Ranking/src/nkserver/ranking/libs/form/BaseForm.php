@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace nkserver\ranking\libs\form;
 
 use pocketmine\form\Form;

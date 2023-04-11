@@ -18,6 +18,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld;
 
 use czechpmdevs\multiworld\command\MultiWorldCommand;

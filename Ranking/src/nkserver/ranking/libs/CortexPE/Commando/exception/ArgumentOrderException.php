@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace nkserver\ranking\libs\CortexPE\Commando\exception;
 
 class ArgumentOrderException extends CommandoException {

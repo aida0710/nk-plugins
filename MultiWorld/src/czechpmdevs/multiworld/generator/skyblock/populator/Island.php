@@ -18,6 +18,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\generator\skyblock\populator;
 
 use pocketmine\block\VanillaBlocks;

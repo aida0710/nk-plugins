@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace secretcommands\test;
 
 use lazyperson710\core\packet\SendMessage\SendMessage;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace nkserver\ranking\event\handler;
 
 use deceitya\miningtools\event\MiningToolsBreakEvent;

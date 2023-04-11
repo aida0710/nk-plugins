@@ -1,11 +1,11 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace ree_jp\bank;
 
 use pocketmine\plugin\PluginBase;
 use ree_jp\bank\command\BankCommand;
-use ree_jp\bank\event\EventListener;
 
 class BankPlugin extends PluginBase {
 
@@ -22,7 +22,6 @@ class BankPlugin extends PluginBase {
 	}
 
 	public function onEnable() : void {
-		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 		$this->getServer()->getCommandMap()->register('bank', new BankCommand());
 		parent::onEnable();
 	}

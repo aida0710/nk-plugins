@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\Flytra;
 
 use Deceitya\Flytra\command\FlyCommand;

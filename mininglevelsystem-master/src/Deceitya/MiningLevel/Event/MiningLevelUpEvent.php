@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\MiningLevel\Event;
 
 use pocketmine\event\player\PlayerEvent;

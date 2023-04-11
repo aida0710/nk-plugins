@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\EffectItems\items\interactListener;
 
 use lazyperson710\core\packet\SendForm;

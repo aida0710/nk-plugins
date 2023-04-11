@@ -6,8 +6,7 @@ use pocketmine\block\Opaque;
 
 class CryingObsidian extends Opaque {
 
-    public function getLightLevel(): int
-    {
-        return 10;
-    }
+	public function getLightLevel() : int {
+		return 10;
+	}
 }

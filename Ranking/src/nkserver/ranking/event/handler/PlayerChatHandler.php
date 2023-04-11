@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace nkserver\ranking\event\handler;
 
 use nkserver\ranking\object\PlayerDataPool;

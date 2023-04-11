@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace nkserver\ranking\libs\CortexPE\Commando\traits;
 
 use nkserver\ranking\libs\CortexPE\Commando\args\BaseArgument;

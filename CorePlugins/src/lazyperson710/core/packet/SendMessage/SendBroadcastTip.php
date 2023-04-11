@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\core\packet\SendMessage;
 
 use pocketmine\Server;

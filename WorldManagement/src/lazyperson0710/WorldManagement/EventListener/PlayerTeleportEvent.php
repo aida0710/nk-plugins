@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\WorldManagement\EventListener;
 
 use Deceitya\MiningLevel\MiningLevelAPI;

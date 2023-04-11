@@ -26,6 +26,7 @@
  *
  */
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\libs\CortexPE\Commando\traits;
 
 use czechpmdevs\multiworld\libs\CortexPE\Commando\args\BaseArgument;

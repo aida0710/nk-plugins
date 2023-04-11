@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson0710\ticket\command\form;
 
 use bbo51dog\bboform\form\SimpleForm;
@@ -28,6 +29,8 @@ class MainTicketForm extends SimpleForm {
 			$this
 				->setTitle('Ticket')
 				->addElements(
+					new SendFormButton(new PurchaseTicketForm(), 'Ticketを購入する'),
+					new SendFormButton(new CheckTicketForm($player), 'Ticket枚数を調べる'),
 					new SendFormButton(new TransferTicketForm($player), 'Ticketを譲渡する'),
 					new SendFormButton(new GachaTicketReplaceForm($player), "Ticketを変換する\n[gachaはずれ -> ticket]"),
 					new SendFormButton(new ReplaceTicketForm($player), "Ticketを変換する\n[旧 -> 新]"),

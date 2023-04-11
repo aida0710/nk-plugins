@@ -18,6 +18,7 @@
  */
 
 declare(strict_types = 0);
+
 namespace czechpmdevs\multiworld\generator\ender\populator;
 
 use czechpmdevs\multiworld\generator\ender\EnderGenerator;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace bbo51dog\anticheat\model;
 
 use bbo51dog\anticheat\chcker\BlockBreakChecker;

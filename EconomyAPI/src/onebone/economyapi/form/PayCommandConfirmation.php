@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace onebone\economyapi\form;
 
 use bbo51dog\bboform\element\Label;

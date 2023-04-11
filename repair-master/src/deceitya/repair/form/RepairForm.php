@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\repair\form;
 
 use bbo51dog\bboform\element\Label;
@@ -227,17 +228,6 @@ class RepairForm extends CustomForm {
 				SendMessage::Send($player, 'ネザライトマイニングツールのみ修繕が可能です', 'Repair', false);
 				return false;
 			}
-		}
-		if ($item->getNamedTag()->getTag('4mining') !== null) {
-			if ($item->getTier() === ToolTier::DIAMOND()) {
-				SendMessage::Send($player, 'ネザライトマイニングツールのみ修繕が可能です', 'Repair', false);
-				return false;
-			}
-		}
-		$itemIds = $item->getId();
-		if ($itemIds >= 1000) {
-			SendMessage::Send($player, 'このアイテムは修繕することが出来ません', 'Repair', false);
-			return false;
 		}
 		return true;
 	}

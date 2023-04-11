@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\MiningLevel\Event;
 
 use bbo51dog\pmdiscord\connection\Webhook;
@@ -82,7 +83,7 @@ class EventListener implements Listener {
 		$this->getBreakEvent($event, $player);
 	}
 
-	public function LevelCalculation($player, $exp) {
+	public function LevelCalculation($player, $exp) : void {
 		$api = MiningLevelAPI::getInstance();
 		$originalLevel = $api->getLevel($player);
 		$level = $originalLevel;
@@ -109,7 +110,7 @@ class EventListener implements Listener {
 		$api->setLevelUpExp($player, $upExp);
 	}
 
-	private function getBreakEvent(BlockBreakEvent|MiningToolsBreakEvent $event, Player $player) {
+	private function getBreakEvent(BlockBreakEvent|MiningToolsBreakEvent $event, Player $player) : void {
 		if (in_array($player->getPosition()->getWorld()->getFolderName(), $this->config['world'], true)) {
 			return;
 		}
@@ -119,7 +120,7 @@ class EventListener implements Listener {
 		$this->LevelCalculation($player, $exp);
 	}
 
-	private function DiscordWebHook(Player $player, int $originalLevel, int $level) {
+	private function DiscordWebHook(Player $player, int $originalLevel, int $level) : void {
 		if ($level % 5 == 0) {
 			$name = $player->getName();
 			$webhook = Webhook::create('https://discord.com/api/webhooks/931209546603593791/UPL48PM8DQtUwb0ulupP3i1xgL3JmvQ4zN87Wo6Il0ynGgLRsBfGT076cPdPF9HzYS5N');

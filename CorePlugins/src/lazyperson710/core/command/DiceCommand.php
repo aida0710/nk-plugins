@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace lazyperson710\core\command;
 
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;

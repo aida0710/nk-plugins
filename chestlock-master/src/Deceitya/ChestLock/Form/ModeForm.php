@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace Deceitya\ChestLock\Form;
 
 use Deceitya\ChestLock\Main;

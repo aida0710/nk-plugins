@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 0);
+
 namespace deceitya\miningtools\command\form;
 
 use bbo51dog\bboform\form\SimpleForm;

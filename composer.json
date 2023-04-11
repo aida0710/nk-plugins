@@ -20,7 +20,8 @@
         "php": "8.0.*",
         "php-64bit": "8.0.*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "v3.13.1"
+        "friendsofphp/php-cs-fixer": "v3.13.1",
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "bbo51dog/bboform": "2.*",
