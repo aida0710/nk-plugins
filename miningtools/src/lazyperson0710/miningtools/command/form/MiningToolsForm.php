@@ -5,7 +5,7 @@ declare(strict_types = 0);
 namespace lazyperson0710\miningtools\command\form;
 
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\MiningLevel\MiningLevelAPI;
+use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\miningtools\command\DiamondMiningToolCommand;
 use lazyperson0710\miningtools\command\ExpansionMiningToolCommand;
 use lazyperson0710\miningtools\command\NetheriteMiningToolCommand;

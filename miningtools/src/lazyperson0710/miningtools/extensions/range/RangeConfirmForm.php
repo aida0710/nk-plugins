@@ -6,8 +6,8 @@ namespace lazyperson0710\miningtools\extensions\range;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
+use Deceitya\MiningLevel\MiningLevelAPI;
 use Error;
-use lazyperson0710\MiningLevel\MiningLevelAPI;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
 

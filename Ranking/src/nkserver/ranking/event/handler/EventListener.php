@@ -4,7 +4,7 @@ declare(strict_types = 0);
 
 namespace nkserver\ranking\event\handler;
 
-use deceitya\miningTools\event\MiningToolsBreakEvent;
+use lazyperson0710\miningtools\event\MiningToolsBreakEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Event;

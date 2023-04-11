@@ -4,7 +4,7 @@ declare(strict_types = 0);
 
 namespace lazyperson0710\miningtools\command;
 
-use lazyperson0710\MiningLevel\MiningLevelAPI;
+use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\miningtools\normal\ConfirmForm;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;

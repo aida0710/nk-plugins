@@ -7,7 +7,7 @@ namespace lazyperson0710\EffectItems\form\items;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
-use deceitya\miningtools\calculation\CheckItem;
+use lazyperson0710\miningtools\calculation\CheckItem;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\EnchantmentInstance;

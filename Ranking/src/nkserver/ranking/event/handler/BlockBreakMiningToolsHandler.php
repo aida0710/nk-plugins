@@ -4,7 +4,7 @@ declare(strict_types = 0);
 
 namespace nkserver\ranking\event\handler;
 
-use deceitya\miningtools\event\MiningToolsBreakEvent;
+use lazyperson0710\miningtools\event\MiningToolsBreakEvent;
 use nkserver\ranking\object\PlayerDataPool;
 use pocketmine\event\Event;
 

@@ -4,7 +4,7 @@ declare(strict_types = 0);
 
 namespace lazyperson0710\blockLogger\event;
 
-use deceitya\miningtools\event\MiningToolsBreakEvent;
+use lazyperson0710\miningtools\event\MiningToolsBreakEvent;
 use pocketmine\block\Block;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
