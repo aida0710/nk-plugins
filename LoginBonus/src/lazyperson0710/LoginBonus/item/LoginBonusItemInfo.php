@@ -6,7 +6,7 @@ namespace lazyperson0710\LoginBonus\item;
 
 use pocketmine\item\Item;
 
-readonly class LoginBonusItemInfo {
+class LoginBonusItemInfo {
 
 	public function __construct(
 		private Item $item,
@@ -17,7 +17,8 @@ readonly class LoginBonusItemInfo {
 		private ?string $formExplanation,
 		private array $enchants,
 		private array $level,
-		private array $nbt) {
+		private array $nbt,
+	) {
 	}
 
 	public function getItem() : Item {
