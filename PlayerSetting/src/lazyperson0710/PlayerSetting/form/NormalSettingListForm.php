@@ -14,6 +14,7 @@ use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectFormSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
@@ -41,6 +42,7 @@ class NormalSettingListForm extends CustomForm {
 	private Toggle $onlinePlayersEffects;
 	private Toggle $moveWorldMessage;
 	private Toggle $gachaEjectMessage;
+	private Toggle $gachaEjectForm;
 	private StepSlider $levelUpDisplay;
 	private StepSlider $miningToolsDestructionEnabledWorlds;
 	private StepSlider $bossBarColor;
@@ -59,7 +61,8 @@ class NormalSettingListForm extends CustomForm {
 			$this->miningToolsEnduranceWarning = new Toggle("§l> MiningToolsEnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue()),
 			$this->destructionSound = new Toggle("§l> DestructionSound§r\n破壊時に経験値の音を鳴らすか否か", $setting->getSetting(DestructionSoundSetting::getName())?->getValue()),
 			$this->diceMessage = new Toggle("§l> DiceMessage§r\nDiceのメッセージを表示するか否か", $setting->getSetting(DiceMessageSetting::getName())?->getValue()),
-			$this->gachaEjectMessage = new Toggle("§l> GachaEjectMessage§r\nGachaのレジェンダリーなどのメッセージを表示するか否か", $setting->getSetting(GachaEjectMessageSetting::getName())?->getValue()),
+			$this->gachaEjectForm = new Toggle("§l> GachaEjectForm§r\nGachaの排出時に表示されるFormを表示するか否か(オフにすると実行完了時に完了をお知らせするTipメッセージが表示されます)", $setting->getSetting(GachaEjectFormSetting::getName())?->getValue()),
+			$this->gachaEjectMessage = new Toggle("§l> GachaEjectMessage§r\nGachaのレジェンダリーなどのメッセージを表示するか否か(他人の表示や排出音なども消えます)", $setting->getSetting(GachaEjectMessageSetting::getName())?->getValue()),
 			$this->payCommandUse = new Toggle("§l> PayCommandUse§r\nPayコマンド使用時に確認formを表示させるか否か", $setting->getSetting(PayCommandUseSetting::getName())?->getValue()),
 			$this->onlinePlayersEffects = new Toggle("§l> OnlinePlayersEffects§r\nオンラインプレイヤーが8人以上の時エフェクトを付与するか否か", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
 			$this->moveWorldMessage = new Toggle("§l> MoveWorldMessage§r\nワールド移動時に送信されるメッセージを表示するか否か(§l§c非表示は非推奨です§r)", $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue()),
@@ -140,6 +143,9 @@ class NormalSettingListForm extends CustomForm {
 		}
 		if ($setting->getSetting(GachaEjectMessageSetting::getName())?->getValue() !== $this->gachaEjectMessage->getValue()) {
 			$setting->getSetting(GachaEjectMessageSetting::getName())?->setValue($this->gachaEjectMessage->getValue());
+		}
+		if ($setting->getSetting(GachaEjectFormSetting::getName())?->getValue() !== $this->gachaEjectForm->getValue()) {
+			$setting->getSetting(GachaEjectFormSetting::getName())?->setValue($this->gachaEjectForm->getValue());
 		}
 		if ($setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() !== $this->onlinePlayersEffects->getValue()) {
 			$setting->getSetting(OnlinePlayersEffectsSetting::getName())?->setValue($this->onlinePlayersEffects->getValue());
