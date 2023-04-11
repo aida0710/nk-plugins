@@ -56,15 +56,10 @@ class EventListener implements Listener {
 		}
 	}
 
-	/*
-	public function Quit(PlayerQuitEvent $event){
-		  MiningLevelAPI::getInstance()->clearCache($event->getPlayer()->getName());
-	}
-*/
 	/**
 	 * @priority HIGHEST
 	 */
-	public function onBlockBreak(BlockBreakEvent $event) {
+	public function onBlockBreak(BlockBreakEvent $event) : void {
 		if ($event->isCancelled()) {
 			return;
 		}
