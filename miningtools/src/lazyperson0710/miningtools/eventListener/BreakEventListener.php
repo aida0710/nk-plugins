@@ -88,17 +88,16 @@ class BreakEventListener implements Listener {
 				SendTip::Send($player, '現在のワールドでは設定により範囲破壊が無効化されています/settings', 'MiningTools', false);
 				return;
 		}
-		$handItem = $player->getInventory()->getItemInHand();
-		$haveDurable = $item instanceof Durable;
-		if ((new PickaxeDestructionRange())->MiningToolsEnduranceWarningSetting($player, $item, $handItem, $haveDurable, $startBlock)) return;
-		if ($item->getId() === ItemIds::DIAMOND_AXE || $item->getId() === Main::NETHERITE_AXE) {
+		$haveDurable = $handItem instanceof Durable;
+		if (!(new PickaxeDestructionRange())->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $startBlock)) return;
+		if ($handItem->getId() === ItemIds::DIAMOND_AXE || $handItem->getId() === Main::NETHERITE_AXE) {
 			$dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player);
-			(new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
+			(new ItemDrop())->DropItem($player, $event, $dropItems);
 			Main::$flag[$player->getName()] = false;
 			return;
 		}
-		if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-			if ($item->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
+		if ($handItem->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
+			if ($handItem->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
 				if ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
 					$event->cancel();
 				}
@@ -108,8 +107,8 @@ class BreakEventListener implements Listener {
 				$event->cancel();
 			}
 		}
-		$dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $item, $haveDurable, $handItem, $set, $dropItems = []);
-		(new ItemDrop())->DropItem($player, $event, $dropItems, $startBlock);
+		$dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $haveDurable, $handItem);
+		(new ItemDrop())->DropItem($player, $event, $dropItems);
 		Main::$flag[$player->getName()] = false;
 	}
 

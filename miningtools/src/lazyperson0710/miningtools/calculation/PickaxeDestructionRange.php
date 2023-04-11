@@ -64,16 +64,17 @@ class PickaxeDestructionRange {
 		BlockLegacyIds::LIT_SMOKER,
 	];
 
-	public function PickaxeDestructionRange(Player $player, Block $block, Item $item, bool $haveDurable, Item $handItem, array $set, array $dropItems) : array {
-		if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+	public function PickaxeDestructionRange(Player $player, Block $block, bool $haveDurable, Item $handItem) : array {
+		if ($handItem->getNamedTag()->getTag('MiningTools_3') !== null) {
 			$toolType = $handItem->getBlockToolType();
 			if ($toolType !== $block->getBreakInfo()->getToolType()) {
 				return [];
 			}
 		}
+		$dropItems = [];
 		$radius = 0;
-		if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-			$radius = $item->getNamedTag()->getInt('MiningTools_Expansion_Range');
+		if ($handItem->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
+			$radius = $handItem->getNamedTag()->getInt('MiningTools_Expansion_Range');
 		}
 		Main::$flag[$player->getName()] = true;
 		for ($y = -1 - $radius; $y < 2 + $radius; $y++) {
@@ -83,20 +84,20 @@ class PickaxeDestructionRange {
 					$targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
 					if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
 					if ($targetBlock->getPosition()->getFloorY() >= 256) continue;
-					if (!$this->MiningToolsEnduranceWarningSetting($player, $item, $handItem, $haveDurable, $targetBlock)) continue;
+					if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $targetBlock)) continue;
 					foreach (self::ANTI_BLOCK as $id) {
 						if ($targetBlock->getId() === $id) {
 							continue 2;
 						}
 					}
-					if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+					if ($handItem->getNamedTag()->getTag('MiningTools_3') !== null) {
 						$toolType = $handItem->getBlockToolType();
 						if ($toolType !== $targetBlock->getBreakInfo()->getToolType()) {
 							continue;
 						}
 					}
-					if ($item->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-						if ($item->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
+					if ($handItem->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
+						if ($handItem->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
 							$toolType = $handItem->getBlockToolType();
 							if ($toolType !== $targetBlock->getBreakInfo()->getToolType()) {
 								continue;
@@ -142,17 +143,13 @@ class PickaxeDestructionRange {
 	 * falseが返ってきたら破壊処理を中断する
 	 *
 	 * @param Player $player
-	 * @param Item   $item
 	 * @param Item   $handItem
 	 * @param bool   $haveDurable
 	 * @param Block  $targetBlock
 	 * @return bool
 	 */
-	public function MiningToolsEnduranceWarningSetting(Player $player, Item $item, Item $handItem, bool $haveDurable, Block $targetBlock) : bool {
-		if ($player->getGamemode() !== GameMode::CREATIVE()) {
-			return true;
-		}
-		if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+	public function MiningToolsEnduranceWarningSetting(Player $player, Item $handItem, bool $haveDurable, Block $targetBlock) : bool {
+		if ($handItem->getNamedTag()->getTag('MiningTools_3') !== null) {
 			$toolType = $handItem->getBlockToolType();
 			if ($toolType !== $targetBlock->getBreakInfo()->getToolType()) {
 				return false;

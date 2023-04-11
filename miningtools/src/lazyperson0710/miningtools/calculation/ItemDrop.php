@@ -94,7 +94,7 @@ class ItemDrop {
 		return $result;
 	}
 
-	public function DropItem(Player $player, BlockBreakEvent $event, array $dropItems, Block $startBlock) : void {
+	public function DropItem(Player $player, BlockBreakEvent $event, array $dropItems) : void {
 		if (empty($dropItems)) {
 			return;
 		}
