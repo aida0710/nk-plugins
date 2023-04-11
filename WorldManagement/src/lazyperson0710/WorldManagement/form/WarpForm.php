@@ -34,7 +34,7 @@ class WarpForm extends SimpleForm {
 				$this->addButton($player, $this->checkLoadWorld('生物市-c'), '生物市', 'warp 生物市', true),
 				$this->addButton($player, $this->checkLoadWorld('船橋市-c'), '船橋市', 'warp 船橋市', true),
 				$this->addButton($player, $this->checkLoadWorld('横浜市-c'), '横浜市', 'warp 横浜市', true),
-				$this->addButton($player, $this->checkLoadWorld('名古屋市-c'), '名古屋市', 'warp 名古屋市', false),
+				$this->addButton($player, $this->checkLoadWorld('名古屋市-c'), '名古屋市', 'warp 名古屋市', true),
 				$this->addButton($player, $this->checkLoadWorld('lobby'), 'なんとか市', 'warp なんとか市', false),
 				new SendFormButton($this, '戻る', new ButtonImage(ButtonImage::TYPE_PATH, 'textures/ui/undoArrow.png')),
 			);
