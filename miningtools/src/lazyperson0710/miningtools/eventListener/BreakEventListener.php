@@ -4,7 +4,6 @@ declare(strict_types = 0);
 
 namespace lazyperson0710\miningtools\eventListener;
 
-use Error;
 use lazyperson0710\miningtools\calculation\AxeDestructionRange;
 use lazyperson0710\miningtools\calculation\CheckItem;
 use lazyperson0710\miningtools\calculation\ItemDrop;
@@ -14,7 +13,6 @@ use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson710\core\packet\SendMessage\SendTip;
-use pocketmine\block\BlockToolType;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;

@@ -168,11 +168,4 @@ class PickaxeDestructionRange {
 		return true;
 	}
 
-	/**
-	 * @param Item $item
-	 * @return int
-	 */
-	private function getRadius(Item $item) : int {
-		return $radius;
-	}
 }
