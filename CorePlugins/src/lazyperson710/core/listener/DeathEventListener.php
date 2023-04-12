@@ -23,13 +23,13 @@ use function is_null;
 
 class DeathEventListener implements Listener {
 
-	public function Death(PlayerDeathEvent $event) {
+	public function Death(PlayerDeathEvent $event) : void {
 		$event->setKeepInventory(true);
 		$this->deathMessage($event);
 		$this->deathPenalty($event);
 	}
 
-	private function deathMessage(PlayerDeathEvent $event) {
+	private function deathMessage(PlayerDeathEvent $event) : void {
 		$player = $event->getPlayer();
 		$cause = $player->getLastDamageCause();
 		if (is_null($cause)) {

@@ -17,7 +17,7 @@ class BreakListener implements Listener {
 	/**
 	 * @priority HIGH
 	 */
-	public function onBreak(BlockBreakEvent $event) {
+	public function onBreak(BlockBreakEvent $event) : void {
 		$player = $event->getPlayer();
 		$item = $event->getItem();
 		if ($event->getBlock()->getId() == BlockLegacyIds::MONSTER_SPAWNER) {

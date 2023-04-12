@@ -28,6 +28,11 @@ class DirectInventory implements Listener {
 		DirectInventory::onDrop($player, $drops);
 	}
 
+	/**
+	 * @param Player $player
+	 * @param Item[] $drops
+	 * @return void
+	 */
 	static public function onDrop(Player $player, array $drops) : void {
 		if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(DirectDropItemStorageSetting::getName())?->getValue() === true) {
 			foreach ($drops as $item) {

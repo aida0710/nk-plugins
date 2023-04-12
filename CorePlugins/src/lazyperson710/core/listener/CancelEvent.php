@@ -18,7 +18,7 @@ use pocketmine\event\Listener;
 
 class CancelEvent implements Listener {
 
-	public function onInventoryOpen(InventoryOpenEvent $event) {
+	public function onInventoryOpen(InventoryOpenEvent $event) : void {
 		$inventory = $event->getInventory();
 		$player = $event->getPlayer();
 		if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory) {
@@ -31,19 +31,19 @@ class CancelEvent implements Listener {
 		}
 	}
 
-	public function onBlockForm(BlockFormEvent $event) {
+	public function onBlockForm(BlockFormEvent $event) : void {
 		$event->cancel();
 	}
 
-	public function onBrewItem(BrewItemEvent $event) {
+	public function onBrewItem(BrewItemEvent $event) : void {
 		$event->cancel();
 	}
 
-	public function onEntityExplode(EntityExplodeEvent $event) {
+	public function onEntityExplode(EntityExplodeEvent $event) : void {
 		$event->cancel();
 	}
 
-	public function onBlockTeleport(BlockTeleportEvent $event) {
+	public function onBlockTeleport(BlockTeleportEvent $event) : void {
 		$event->cancel();
 	}
 }

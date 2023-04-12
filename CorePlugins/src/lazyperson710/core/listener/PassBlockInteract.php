@@ -17,7 +17,7 @@ class PassBlockInteract implements Listener {
 	/**
 	 * @priority LOWEST
 	 */
-	public function onInteract(PlayerInteractEvent $event) {
+	public function onInteract(PlayerInteractEvent $event) : void {
 		if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == 'tos') {
 			$player = $event->getPlayer();
 			$x = $event->getBlock()->getPosition()->getFloorX();
@@ -37,7 +37,7 @@ class PassBlockInteract implements Listener {
 		}
 	}
 
-	public function onBreak(BlockBreakEvent $event) {
+	public function onBreak(BlockBreakEvent $event) : void {
 		if ($event->getBlock()->getPosition()->getWorld()->getDisplayName() == 'tos') {
 			$player = $event->getPlayer();
 			$x = $event->getBlock()->getPosition()->getFloorX();

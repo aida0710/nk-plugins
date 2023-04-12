@@ -43,7 +43,7 @@ class JoinPlayerEvent implements Listener {
 			self::$joinMessage[$player->getName()][] = '/passコマンドを使用するか前に進むことで利用規約に同意できます';
 		} else self::$joinMessage[$player->getName()][] = 'なまけものサーバーにようこそ！';
 		if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(JoinItemsSetting::getName())?->getValue() === true) {
-			$this->sendJoinItem($player);
+			static::sendJoinItem($player);
 		} else self::$joinMessage[$player->getName()][] = '設定されている為アイテムが付与されませんでした。アイテムは/joinitemから取得可能です';
 		$donationNotice = in_array(false, [
 			PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(Donation_1500::getName())?->getValue(),
