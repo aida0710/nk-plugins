@@ -5,19 +5,22 @@ declare(strict_types = 1);
 namespace lazyperson0710\ShopSystem\command;
 
 use lazyperson0710\ShopSystem\form\levelShop\CategorySelectForm;
-use lazyperson0710\ShopSystem\form\levelShop\future\LevelConfirmation;
+use lazyperson0710\ShopSystem\form\levelShop\future\LevelCheck;
 use lazyperson0710\ShopSystem\form\levelShop\future\RestrictionShop;
-use lazyperson0710\ShopSystem\form\levelShop\other\OtherShopFunctionSelectForm;
+use lazyperson0710\ShopSystem\form\levelShop\other\InvSellConfirmationForm;
+use lazyperson0710\ShopSystem\form\levelShop\other\OtherShopSelectForm;
+use lazyperson0710\ShopSystem\form\levelShop\other\SearchItemForm;
 use lazyperson0710\ShopSystem\form\levelShop\ShopSelectForm;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use RuntimeException;
 
 class ShopCommand extends Command {
 
 	public function __construct() {
-		parent::__construct('shop', 'ItemShopを開きます - /shop [shopNumber]');
+		parent::__construct('shop', 'ItemShopを開きます - /shop [shopID]');
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : void {
@@ -26,16 +29,18 @@ class ShopCommand extends Command {
 			return;
 		}
 		match ($args[0]) {
-			'0' => LevelConfirmation::getInstance()->levelConfirmation($sender, new OtherShopFunctionSelectForm, RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'1' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(1), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'2' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(2), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'3' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(3), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'4' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(4), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'5' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(5), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'6' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(6), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
-			'7' => LevelConfirmation::getInstance()->levelConfirmation($sender, new CategorySelectForm(7), RestrictionShop::getInstance()->getRestrictionByShopNumber($args[0])),
+			'other' => LevelCheck::getInstance()->check($sender, new OtherShopSelectForm, RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
+			'search' => LevelCheck::getInstance()->check($sender, new SearchItemForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
+			'invsell' => LevelCheck::getInstance()->check($sender, new InvSellConfirmationForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
+			'1' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 1), RestrictionShop::RESTRICTION_LEVEL_SHOP_1),
+			'2' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 2), RestrictionShop::RESTRICTION_LEVEL_SHOP_2),
+			'3' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 3), RestrictionShop::RESTRICTION_LEVEL_SHOP_3),
+			'4' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 4), RestrictionShop::RESTRICTION_LEVEL_SHOP_4),
+			'5' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 5), RestrictionShop::RESTRICTION_LEVEL_SHOP_5),
+			'6' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 6), RestrictionShop::RESTRICTION_LEVEL_SHOP_6),
+			'7' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 7), RestrictionShop::RESTRICTION_LEVEL_SHOP_7),
 			default => SendForm::Send($sender, new ShopSelectForm($sender)),
 		};
-		throw new \RuntimeException('Invalid shop number');
+		throw new RuntimeException('Invalid shop number');
 	}
 }
