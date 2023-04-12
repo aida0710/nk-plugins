@@ -15,13 +15,14 @@ use function mt_rand;
 
 class BreakEventListener implements Listener {
 
-	private array $ticket_temp = [];
+	private static array $ticket_temp = [];
 
 	/**
 	 * @priority MONITOR
 	 */
 	public function onBlockBreak(BlockBreakEvent $event) : void {
 		if ($event->isCancelled()) return;
+		var_dump("yes_normal");
 		$this->setCache($event->getPlayer(), 'normal');
 	}
 
@@ -30,19 +31,23 @@ class BreakEventListener implements Listener {
 	 */
 	public function onMiningToolsBlockBreak(MiningToolsBreakEvent $event) : void {
 		if ($event->isCancelled()) return;
+		var_dump("yes_miningTools");
 		$this->setCache($event->getPlayer(), 'miningTools');
 	}
 
 	private function setCache(Player $player, string $type) : void {
-		$this->ticket_temp[$player->getName()][$type]['count']++;
+		if (!isset($this->ticket_temp[$player->getName()])) {
+			self::$ticket_temp[$player->getName()]['normal']['count'] = 0;
+			self::$ticket_temp[$player->getName()]['miningTools']['count'] = 0;
+		}
+		self::$ticket_temp[$player->getName()][$type]['count'] += 1;
+		var_dump(self::$ticket_temp[$player->getName()][$type]['count']);
 	}
 
 	public function giveTicket() : void {
-		$temp = $this->ticket_temp;
-		$this->ticket_temp = [];
 		$rand_normal = mt_rand(1, 800);
 		$rand_miningTools = mt_rand(1, 1300);
-		foreach ($temp as $player_name) {
+		foreach (self::$ticket_temp as $player_name) {
 			$count = 0;
 			$normal = 0;
 			$miningTools = 0;
@@ -54,12 +59,14 @@ class BreakEventListener implements Listener {
 			for ($k = 0; $k < $miningTools; $k++) {
 				if ($rand_miningTools === 500) $count++;
 			}
+			if ($count === 0) continue;
 			if (!is_null($player = Server::getInstance()->getPlayerExact($player_name))) {
 				SendNoSoundTip::Send($player, '3分間でチケットを' . $count . '枚獲得しました', 'Ticket', true);
 			} elseif (is_null($player = Server::getInstance()->getOfflinePlayer($player_name))) throw new \RuntimeException('オフラインプレイヤーのデータが見つかりませんでした');
 			TicketAPI::getInstance()->addTicket($player, $count);
 		}
-		var_dump($temp);
+		var_dump('データの削除');
+		self::$ticket_temp = [];
 	}
 
 }
