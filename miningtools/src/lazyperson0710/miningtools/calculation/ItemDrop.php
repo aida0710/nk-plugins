@@ -52,44 +52,44 @@ class ItemDrop {
 		$setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
 		$result = [];
 		foreach ($drops as $drop) {
-			switch ($drop->getId()) {
-				case VanillaBlocks::GRASS()->getId():
+			switch ($drop) {
+				case VanillaBlocks::GRASS():
 					if ($setting->getSetting(GrassToDirtSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::DIRT()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::COBBLESTONE()->getId():
+				case VanillaBlocks::COBBLESTONE():
 					if ($setting->getSetting(CobblestoneToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::GRANITE()->getId():
+				case VanillaBlocks::GRANITE():
 					if ($setting->getSetting(GraniteToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::DIORITE()->getId():
+				case VanillaBlocks::DIORITE():
 					if ($setting->getSetting(DioriteToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::ANDESITE()->getId():
+				case VanillaBlocks::ANDESITE():
 					if ($setting->getSetting(AndesiteToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::SAND()->getId():
-				case VanillaBlocks::RED_SAND()->getId():
+				case VanillaBlocks::SAND():
+				case VanillaBlocks::RED_SAND():
 					if ($setting->getSetting(SandToGlassSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::GLASS()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::IRON_ORE()->getId():
+				case VanillaBlocks::IRON_ORE():
 					if ($setting->getSetting(IronIngotSetting::getName())?->getValue()) {
 						$drop = VanillaItems::IRON_INGOT()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::GOLD_ORE()->getId():
+				case VanillaBlocks::GOLD_ORE():
 					if ($setting->getSetting(GoldIngotSetting::getName())?->getValue()) {
 						$drop = VanillaItems::GOLD_INGOT()->setCount($drop->getCount());
 					}
