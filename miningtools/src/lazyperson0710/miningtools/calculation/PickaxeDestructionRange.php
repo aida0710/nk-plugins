@@ -71,6 +71,7 @@ class PickaxeDestructionRange {
 				return [];
 			}
 		}
+		$targetBlocks = [];
 		$dropItems = [];
 		$radius = 0;
 		if ($handItem->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
@@ -110,7 +111,7 @@ class PickaxeDestructionRange {
 							if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
 						}
 					}
-					$dropItems = array_merge($dropItems, (new ItemDrop())->getDrop($player, $targetBlock));
+					$targetBlocks[] = $targetBlock;
 					if (!$handItem instanceof Durable) throw new RuntimeException('$handItem must be instance of Durable');
 					if ($player->isSneaking()) {
 						if ($pos->getFloorY() <= $player->getPosition()->getFloorY() - 1) {
@@ -128,6 +129,8 @@ class PickaxeDestructionRange {
 				}
 			}
 		}
+		if (empty($targetBlocks)) return [];
+		$dropItems = array_merge($dropItems, (new ItemDrop())->getDrop($player, $targetBlocks));
 		Main::$flag[$player->getName()] = false;
 		return $dropItems;
 	}

@@ -26,18 +26,26 @@ use function count;
 
 class ItemDrop {
 
-	public function getDrop(Player $player, Block $block) : array {
-		$item = $player->getInventory()->getItemInHand();
-		if ($item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE)) !== null) {
-			$drops = $block->getDrops($item);
-			if (empty($drops)) {
-				return $block->getDrops($item);
+	/**
+	 * @param Player  $player
+	 * @param Block[] $blocks
+	 * @return array
+	 */
+	public function getDrop(Player $player, array $blocks) : array {
+		foreach ($blocks as $block) {
+			$item = $player->getInventory()->getItemInHand();
+			if ($item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE)) !== null) {
+				$drops = $block->getDrops($item);
+				if (empty($drops)) {
+					return $block->getDrops($item);
+				}
+				$plus = FortuneListener::Calculation($block, $item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE))->getLevel());
+				$drops[0]->setCount($drops[0]->getCount() + $plus);
+				return $this->checkMiningSettings($player, $drops);
 			}
-			$plus = FortuneListener::Calculation($block, $item->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE))->getLevel());
-			$drops[0]->setCount($drops[0]->getCount() + $plus);
-			return $this->checkMiningSettings($player, $drops);
+			return $this->checkMiningSettings($player, $block->getDrops($item));
 		}
-		return $this->checkMiningSettings($player, $block->getDrops($item));
+		throw new \RuntimeException('Block is not found');
 	}
 
 	public function checkMiningSettings(Player $player, array $drops) : array {
