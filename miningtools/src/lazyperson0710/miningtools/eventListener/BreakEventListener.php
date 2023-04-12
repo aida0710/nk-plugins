@@ -62,7 +62,7 @@ class BreakEventListener implements Listener {
 				return;
 		}
 		$haveDurable = $handItem instanceof Durable;
-		if (!(new PickaxeDestructionRange())->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $startBlock)) return;
+		if (!(new PickaxeDestructionRange())->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable)) return;
 		if ($handItem->getId() === ItemIds::DIAMOND_AXE || $handItem->getId() === Main::NETHERITE_AXE) {
 			$dropItems = (new AxeDestructionRange())->breakTree($startBlock, $player);
 			(new ItemDrop())->DropItem($player, $event, $dropItems);
@@ -75,10 +75,8 @@ class BreakEventListener implements Listener {
 					$event->cancel();
 				}
 			}
-		} else {
-			if ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
-				$event->cancel();
-			}
+		} elseif ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
+			$event->cancel();
 		}
 		$dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $haveDurable, $handItem);
 		(new ItemDrop())->DropItem($player, $event, $dropItems);

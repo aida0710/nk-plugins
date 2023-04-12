@@ -9,7 +9,7 @@ use lazyperson0710\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
 use lazyperson0710\WorldManagement\database\WorldCategory;
-use lazyperson710\core\packet\SendMessage\SendMessage;
+use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
@@ -85,7 +85,7 @@ class PickaxeDestructionRange {
 					if (VanillaBlocks::AIR() === $targetBlock) continue;
 					if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
 					if ($targetBlock->getPosition()->getFloorY() >= 256) continue;
-					if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $targetBlock)) continue;
+					if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable)) continue;
 					foreach (self::ANTI_BLOCK as $id) {
 						if ($targetBlock->getId() === $id) {
 							continue 2;
@@ -146,27 +146,21 @@ class PickaxeDestructionRange {
 	 * @param Player $player
 	 * @param Item   $handItem
 	 * @param bool   $haveDurable
-	 * @param Block  $targetBlock
 	 * @return bool
 	 */
-	public function MiningToolsEnduranceWarningSetting(Player $player, Item $handItem, bool $haveDurable, Block $targetBlock) : bool {
+	public function MiningToolsEnduranceWarningSetting(Player $player, Item $handItem, bool $haveDurable) : bool {
 		if ($handItem->getNamedTag()->getTag('MiningTools_3') !== null) {
-			$toolType = $handItem->getBlockToolType();
-			if ($toolType !== $targetBlock->getBreakInfo()->getToolType()) {
-				return false;
-			}
+			return true;
 		}
 		if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
 			/** @var Durable $handItem */
 			$maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
 			if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
-				SendMessage::Send($player, '耐久が15以下になった為範囲採掘をキャンセルしました', 'MiningTool', false);
-				SendMessage::Send($player, 'かなとこなどを使用して修繕を行ってください。このメッセージは/settingから無効化出来ます', 'MiningTool', false);
+				SendNoSoundTip::Send($player, '耐久が15以下になった為範囲採掘をキャンセルしました' . PHP_EOL . 'かなとこなどを使用して修繕を行ってください。このメッセージは/settingから無効化出来ます', 'MiningTool', false);
 				SoundPacket::Send($player, 'respawn_anchor.deplete');
-				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 
 }
