@@ -82,6 +82,7 @@ class PickaxeDestructionRange {
 				for ($z = -1 - $radius; $z < 2 + $radius; $z++) {
 					$pos = $block->getPosition()->add($x, $y, $z);
 					$targetBlock = $block->getPosition()->getWorld()->getBlock($pos);
+					if (VanillaBlocks::AIR() === $targetBlock) continue;
 					if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
 					if ($targetBlock->getPosition()->getFloorY() >= 256) continue;
 					if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $targetBlock)) continue;
