@@ -93,7 +93,7 @@ class GachaForm extends CustomForm {
 					}
 					foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
 						if (PlayerSettingPool::getInstance()->getSettingNonNull($onlinePlayer)->getSetting(GachaEjectMessageSetting::getName())?->getValue() === true) {
-							SendMessage::Send($player, "§eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました", '§bGacha', true);
+							SendMessage::Send($onlinePlayer, "§eLegendary > {$item->getCustomName()}§r§eを{$player->getName()}が{$this->probability[$rank]}％で当てました", '§bGacha', true);
 						}
 					}
 					break;
