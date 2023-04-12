@@ -46,7 +46,7 @@ class BreakEventListener implements Listener {
 			case 'all':
 				break;
 			case 'life':
-				if (!in_array($player->getWorld()->getFolderName(), WorldCategory::LifeWorldAll, true)) {
+				if (!in_array($player->getWorld()->getFolderName(), WorldCategory::LifeWorld, true)) {
 					SendTip::Send($player, '現在のワールドでは設定により範囲破壊が無効化されています/settings', 'MiningTools', false);
 					return;
 				}

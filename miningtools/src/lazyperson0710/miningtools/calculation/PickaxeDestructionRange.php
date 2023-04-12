@@ -106,8 +106,8 @@ class PickaxeDestructionRange {
 							}
 						}
 					}
-					foreach (WorldCategory::LifeWorldAll as $world) {
-						if ($player->getWorld()->getFolderName() == $world) {
+					foreach (WorldCategory::LifeWorld as $world) {
+						if ($player->getWorld()->getFolderName() === $world) {
 							if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
 						}
 					}
