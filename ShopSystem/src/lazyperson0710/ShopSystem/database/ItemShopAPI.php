@@ -11,6 +11,7 @@ use pocketmine\block\VanillaBlocks;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\VanillaItems;
 use pocketmine\utils\SingletonTrait;
+use RuntimeException;
 
 class ItemShopAPI {
 
@@ -262,7 +263,7 @@ class ItemShopAPI {
 	 * @return array
 	 */
 	public function getCategory(int $shopId) : array {
-		if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new \RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
+		if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
 		return $this->items[$shopId];
 	}
 
@@ -272,7 +273,7 @@ class ItemShopAPI {
 	 * @return ShopItem[]
 	 */
 	public function getCategoryItems(int $shopId, string $category) : array {
-		if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new \RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
+		if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
 		return $this->items[$shopId][$category];
 	}
 
