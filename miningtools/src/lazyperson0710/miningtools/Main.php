@@ -4,10 +4,7 @@ declare(strict_types = 0);
 
 namespace lazyperson0710\miningtools;
 
-use lazyperson0710\miningtools\command\DiamondMiningToolCommand;
-use lazyperson0710\miningtools\command\ExpansionMiningToolCommand;
 use lazyperson0710\miningtools\command\MiningToolsCommand;
-use lazyperson0710\miningtools\command\NetheriteMiningToolCommand;
 use lazyperson0710\miningtools\eventListener\BreakEventListener;
 use lazyperson0710\miningtools\eventListener\JoinEventListener;
 use pocketmine\event\Listener;
@@ -36,9 +33,6 @@ class Main extends PluginBase implements Listener {
 		$this->getServer()->getPluginManager()->registerEvents(new BreakEventListener(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new JoinEventListener(), $this);
 		$this->getServer()->getCommandMap()->registerAll('MiningTools', [
-			new DiamondMiningToolCommand(),
-			new NetheriteMiningToolCommand(),
-			new ExpansionMiningToolCommand(),
 			new MiningToolsCommand(),
 		]);
 		$this->allData = json_decode(file_get_contents($this->getDataFolder() . 'config.json'), true);

@@ -6,9 +6,6 @@ namespace lazyperson0710\miningtools\command\form;
 
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
-use lazyperson0710\miningtools\command\DiamondMiningToolCommand;
-use lazyperson0710\miningtools\command\ExpansionMiningToolCommand;
-use lazyperson0710\miningtools\command\NetheriteMiningToolCommand;
 use lazyperson0710\miningtools\element\CommandDispatchButton;
 use lazyperson0710\miningtools\element\SendFormButton;
 use lazyperson0710\miningtools\EnablingSetting\SelectEnablingSettings;
@@ -16,21 +13,25 @@ use pocketmine\player\Player;
 
 class MiningToolsForm extends SimpleForm {
 
+	public const DiamondMiningToolsLevelLimit = 15;
+	public const NetheriteMiningToolsLevelLimit = 30;
+	public const ExpansionMiningToolsLevelLimit = 250;
+
 	public function __construct(Player $player) {
-		if (MiningLevelAPI::getInstance()->getLevel($player) >= DiamondMiningToolCommand::DiamondMiningToolsLevelLimit) {//2
-			$diamondLimit = '§a' . DiamondMiningToolCommand::DiamondMiningToolsLevelLimit . 'レベルの為、開放済み';
+		if (MiningLevelAPI::getInstance()->getLevel($player) >= self::DiamondMiningToolsLevelLimit) {//2
+			$diamondLimit = '§a' . self::DiamondMiningToolsLevelLimit . 'レベルの為、開放済み';
 		} else {
-			$diamondLimit = '§c' . DiamondMiningToolCommand::DiamondMiningToolsLevelLimit . 'レベル以上で開放されます';
+			$diamondLimit = '§c' . self::DiamondMiningToolsLevelLimit . 'レベル以上で開放されます';
 		}
-		if (MiningLevelAPI::getInstance()->getLevel($player) >= NetheriteMiningToolCommand::NetheriteMiningToolsLevelLimit) {//3
-			$netheriteLimit = '§a' . NetheriteMiningToolCommand::NetheriteMiningToolsLevelLimit . 'レベルの為、開放済み';
+		if (MiningLevelAPI::getInstance()->getLevel($player) >= self::NetheriteMiningToolsLevelLimit) {//3
+			$netheriteLimit = '§a' . self::NetheriteMiningToolsLevelLimit . 'レベルの為、開放済み';
 		} else {
-			$netheriteLimit = '§c' . NetheriteMiningToolCommand::NetheriteMiningToolsLevelLimit . 'レベル以上で開放されます';
+			$netheriteLimit = '§c' . self::NetheriteMiningToolsLevelLimit . 'レベル以上で開放されます';
 		}
-		if (MiningLevelAPI::getInstance()->getLevel($player) >= ExpansionMiningToolCommand::ExpansionMiningToolsLevelLimit) {//4
-			$expansionLimit = '§a' . ExpansionMiningToolCommand::ExpansionMiningToolsLevelLimit . 'レベルの為、開放済み';
+		if (MiningLevelAPI::getInstance()->getLevel($player) >= self::ExpansionMiningToolsLevelLimit) {//4
+			$expansionLimit = '§a' . self::ExpansionMiningToolsLevelLimit . 'レベルの為、開放済み';
 		} else {
-			$expansionLimit = '§c' . ExpansionMiningToolCommand::ExpansionMiningToolsLevelLimit . 'レベル以上で開放されます';
+			$expansionLimit = '§c' . self::ExpansionMiningToolsLevelLimit . 'レベル以上で開放されます';
 		}
 		$this
 			->setTitle('Mining Tools')
