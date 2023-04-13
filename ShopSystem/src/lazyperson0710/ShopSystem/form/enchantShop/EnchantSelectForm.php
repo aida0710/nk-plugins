@@ -6,7 +6,7 @@ namespace lazyperson0710\ShopSystem\form\enchantShop;
 
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopSystem\database\EnchantShopAPI;
-use lazyperson0710\ShopSystem\form\element\EnchantSelectFormButton;
+use lazyperson0710\ShopSystem\form\enchantShop\element\EnchantSelectFormButton;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\item\enchantment\VanillaEnchantments;

@@ -2,7 +2,7 @@
 
 declare(strict_types = 0);
 
-namespace lazyperson0710\ShopSystem\form\element;
+namespace lazyperson0710\ShopSystem\form\effectShop\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;

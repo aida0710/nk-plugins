@@ -6,7 +6,7 @@ namespace lazyperson0710\ShopSystem\form\effectShop;
 
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopSystem\database\EffectShopAPI;
-use lazyperson0710\ShopSystem\form\element\EffectSelectFormButton;
+use lazyperson0710\ShopSystem\form\effectShop\element\EffectSelectFormButton;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\lang\Translatable;
 use pocketmine\Server;
