@@ -10,6 +10,7 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use Error;
 use lazyperson710\core\packet\SendForm;
 use pocketmine\player\Player;
+use RuntimeException;
 
 class RangeConfirmForm extends SimpleForm {
 
@@ -68,9 +69,7 @@ class RangeConfirmForm extends SimpleForm {
 			}
 			$upgrade = "現在、範囲強化はされていません\n\n強化効果 : 破壊範囲[3x3]->[5x5]\n\n以下のコストを支払ってMiningToolを強化しますか？";
 			$cost = 'コストは' . self::Rank1_MoneyCost . "円と\nMiningToolsEnchantCostItem " . self::Rank1_ItemCost . "個のアイテム\nをインベントリに保持している必要があります";
-		} else {
-			throw new Error('nbtタグが存在しない為不正な挙動として処理しました');
-		}
+		} else return;
 		$this
 			->setTitle('Expansion Mining Tools')
 			->setText("{$limit}{$upgrade}{$cost}")
@@ -79,7 +78,7 @@ class RangeConfirmForm extends SimpleForm {
 
 	public function handleSubmit(Player $player) : void {
 		if (empty($this->nbt)) {
-			throw new Error('nbtタグが存在しない為不正な挙動として処理しました');
+			throw new RuntimeException('nbtタグが存在しない為不正な挙動として処理しました');
 		}
 		if ($this->judgement === false) return;
 		if ($player->getInventory()->getItemInHand()->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
