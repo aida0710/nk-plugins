@@ -2,17 +2,18 @@
 
 declare(strict_types = 0);
 
-namespace lazyperson0710\ShopSystem\form\levelShop\other\InvSell;
+namespace lazyperson0710\ShopSystem\form\levelShop\other;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopSystem\form\levelShop\future\ShopText;
+use lazyperson0710\ShopSystem\form\levelShop\other\InvSell\LevelShopAPI;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
-class Result extends SimpleForm implements ShopText {
+class InvSellResultForm extends SimpleForm implements ShopText {
 
 	public function __construct(int $allCount, int $allSellMoney, string $allItem, int $insufficientLevelAllCount, string $insufficientLevelAllItem) {
 		$this

@@ -2,19 +2,20 @@
 
 declare(strict_types = 1);
 
-namespace lazyperson0710\ShopSystem\form\levelShop\other\InvSell;
+namespace lazyperson0710\ShopSystem\form\levelShop\other;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\ShopSystem\database\ItemShopAPI;
 use lazyperson0710\ShopSystem\form\levelShop\future\ShopText;
+use lazyperson0710\ShopSystem\form\levelShop\other\InvSell\LevelShopAPI;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 use function is_null;
 
-class Confirmation extends SimpleForm implements ShopText {
+class InvSellConfirmationForm extends SimpleForm implements ShopText {
 
 	private string $allItems;
 	private string $insufficientLevelAllItem;
@@ -55,6 +56,6 @@ class Confirmation extends SimpleForm implements ShopText {
 		if (is_null($insufficientLevelAllItem)) {
 			$insufficientLevelAllItem .= "none\n";
 		}
-		SendForm::Send($player, (new Result($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem)));
+		SendForm::Send($player, (new InvSellResultForm($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem)));
 	}
 }
