@@ -8,10 +8,8 @@ use lazyperson0710\miningtools\event\MiningToolsBreakEvent;
 use lazyperson0710\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
-use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
-use onebone\economyland\EconomyLand;
 use pocketmine\block\Block;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\VanillaBlocks;
@@ -71,7 +69,6 @@ class PickaxeDestructionRange {
 				return [];
 			}
 		}
-		$targetBlocks = [];
 		$dropItems = [];
 		$radius = 0;
 		if ($handItem->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
@@ -86,7 +83,7 @@ class PickaxeDestructionRange {
 					if (VanillaBlocks::AIR() === $targetBlock) continue;
 					if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
 					if ($targetBlock->getPosition()->getFloorY() >= 256) continue;
-					if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable)) continue;
+					if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $targetBlock)) continue;
 					foreach (self::ANTI_BLOCK as $id) {
 						if ($targetBlock->getId() === $id) {
 							continue 2;
@@ -106,12 +103,12 @@ class PickaxeDestructionRange {
 							}
 						}
 					}
-					foreach (WorldCategory::LifeWorld as $world) {
-						if ($player->getWorld()->getFolderName() === $world) {
-							if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
-						}
-					}
-					$targetBlocks[] = $targetBlock;
+					//foreach (WorldCategory::LifeWorld as $world) {
+					//	if ($player->getWorld()->getFolderName() === $world) {
+					//		if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
+					//	}
+					//}
+					$dropItems = array_merge($dropItems, (new ItemDrop())->getDrop($player, $targetBlock));
 					if (!$handItem instanceof Durable) throw new RuntimeException('$handItem must be instance of Durable');
 					if ($player->isSneaking()) {
 						if ($pos->getFloorY() <= $player->getPosition()->getFloorY() - 1) {
@@ -129,8 +126,6 @@ class PickaxeDestructionRange {
 				}
 			}
 		}
-		if (empty($targetBlocks)) return [];
-		$dropItems = array_merge($dropItems, (new ItemDrop())->getDrop($player, $targetBlocks));
 		Main::$flag[$player->getName()] = false;
 		return $dropItems;
 	}
@@ -149,11 +144,15 @@ class PickaxeDestructionRange {
 	 * @param Player $player
 	 * @param Item   $handItem
 	 * @param bool   $haveDurable
+	 * @param Block  $targetBlock
 	 * @return bool
 	 */
-	public function MiningToolsEnduranceWarningSetting(Player $player, Item $handItem, bool $haveDurable) : bool {
+	public function MiningToolsEnduranceWarningSetting(Player $player, Item $handItem, bool $haveDurable, Block $targetBlock) : bool {
 		if ($handItem->getNamedTag()->getTag('MiningTools_3') !== null) {
-			return true;
+			$toolType = $handItem->getBlockToolType();
+			if ($toolType !== $targetBlock->getBreakInfo()->getToolType()) {
+				return false;
+			}
 		}
 		if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
 			/** @var Durable $handItem */
@@ -161,9 +160,10 @@ class PickaxeDestructionRange {
 			if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {
 				SendNoSoundTip::Send($player, '耐久が15以下になった為範囲採掘をキャンセルしました' . PHP_EOL . 'かなとこなどを使用して修繕を行ってください。このメッセージは/settingから無効化出来ます', 'MiningTool', false);
 				SoundPacket::Send($player, 'respawn_anchor.deplete');
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
