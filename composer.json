@@ -25,8 +25,6 @@
     },
     "require-dev": {
         "bbo51dog/bboform": "2.*",
-        "rarkhopper/modals": "dev-master",
-        "rarkhopper/firework-particle": "dev-master",
         "pocketmine/pocketmine-mp": "4.*",
         "roave/security-advisories": "dev-latest",
         "ext-sqlite3": "*",
