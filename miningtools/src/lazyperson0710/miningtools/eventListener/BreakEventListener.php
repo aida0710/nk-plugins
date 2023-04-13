@@ -42,6 +42,12 @@ class BreakEventListener implements Listener {
 			SendTip::Send($player, '現在のワールドでは範囲破壊は行われません', 'MiningTools', false);
 			return;
 		}
+		foreach (WorldCategory::LifeWorld as $world) {
+			if ($player->getWorld()->getFolderName() === $world) {
+				SendTip::Send($player, '生活ワールドでのマイニングツールの使用は一時的に' . PHP_EOL . '動作しないよう機能を制限しています', 'MiningTools', false);
+				return;
+			}
+		}
 		switch (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue()) {
 			case 'all':
 				break;
