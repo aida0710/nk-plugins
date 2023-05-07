@@ -62,7 +62,7 @@ class PlayerDamageEvent implements Listener {
 		}
 	}
 
-	public function worldTeleport(EntityTeleportEvent $event) {
+	public function worldTeleport(EntityTeleportEvent $event) : void {
 		$player = $event->getEntity();
 		if ($player instanceof Player) {
 			self::$damageFlags[$player->getName()] = true;
