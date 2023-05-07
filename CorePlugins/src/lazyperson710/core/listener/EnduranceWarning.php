@@ -7,12 +7,11 @@ namespace lazyperson710\core\listener;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson710\core\packet\SoundPacket;
-use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\item\Durable;
 
-class BreakListener implements Listener {
+class EnduranceWarning implements Listener {
 
 	/**
 	 * @priority HIGH
@@ -20,10 +19,6 @@ class BreakListener implements Listener {
 	public function onBreak(BlockBreakEvent $event) : void {
 		$player = $event->getPlayer();
 		$item = $event->getItem();
-		if ($event->getBlock()->getId() == BlockLegacyIds::MONSTER_SPAWNER) {
-			$setExp = 5000;
-			$event->getPlayer()->getXpManager()->addXp($setExp);
-		}
 		if ($item instanceof Durable) {
 			$value = $item->getMaxDurability() - $item->getDamage();
 			$value--;
