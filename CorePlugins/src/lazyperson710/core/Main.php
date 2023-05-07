@@ -62,9 +62,10 @@ class Main extends PluginBase {
 	public int $entityRemoveTimeLeft;
 	private static Main $instance;
 
-	public function onEnable() : void {
+	protected function onEnable() : void {
 		self::$instance = $this;
 		$this->entityRemoveTimeLeft = self::EntityRemoveTaskInterval;
+		(new Override())->init();
 		$enchant = new Enchantment('幸運', Rarity::RARE, ItemFlags::DIG, ItemFlags::SHEARS, 3);
 		EnchantmentIdMap::getInstance()->register(EnchantmentIds::FORTUNE, $enchant);
 		StringToEnchantmentParser::getInstance()->register('fortune', fn () => $enchant);
