@@ -9,7 +9,6 @@ use lazyperson710\core\command\DiceCommand;
 use lazyperson710\core\command\JoinItemCommand;
 use lazyperson710\core\command\MajorCommand;
 use lazyperson710\core\command\WarpPVPCommand;
-use lazyperson710\core\listener\BreakListener;
 use lazyperson710\core\listener\BreakSoundPacket;
 use lazyperson710\core\listener\CancelEvent;
 use lazyperson710\core\listener\CmdSigns;
@@ -18,6 +17,8 @@ use lazyperson710\core\listener\DeathEventListener;
 use lazyperson710\core\listener\DirectInventory;
 use lazyperson710\core\listener\DropItemSetDeleteTime;
 use lazyperson710\core\listener\Elevator;
+use lazyperson710\core\listener\EnduranceWarning;
+use lazyperson710\core\listener\ExpAssignment;
 use lazyperson710\core\listener\FortuneListener;
 use lazyperson710\core\listener\GeneralEventListener;
 use lazyperson710\core\listener\HitEntityDelete;
@@ -27,6 +28,7 @@ use lazyperson710\core\listener\Major;
 use lazyperson710\core\listener\MessageListener;
 use lazyperson710\core\listener\PassBlockInteract;
 use lazyperson710\core\listener\VanillaPickBlock;
+use lazyperson710\core\override\Override;
 use lazyperson710\core\task\EffectTaskScheduler;
 use lazyperson710\core\task\EntityRemoveTask;
 use lazyperson710\core\task\MotdTask;
@@ -68,7 +70,7 @@ class Main extends PluginBase {
 		StringToEnchantmentParser::getInstance()->register('fortune', fn () => $enchant);
 		/*PlayerEventListener*/
 		$this->getServer()->getPluginManager()->registerEvents(new MessageListener(), $this);
-		$this->getServer()->getPluginManager()->registerEvents(new BreakListener(), $this);
+		$this->getServer()->getPluginManager()->registerEvents(new EnduranceWarning(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new CmdSigns(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new CancelEvent(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new DeathEventListener(), $this);
@@ -85,6 +87,7 @@ class Main extends PluginBase {
 		$this->getServer()->getPluginManager()->registerEvents(new FortuneListener(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new CraftCancel(), $this);
 		$this->getServer()->getPluginManager()->registerEvents(new HitEntityDelete(), $this);
+		$this->getServer()->getPluginManager()->registerEvents(new ExpAssignment(), $this);
 		/*Items*/
 		$this->defaultItemNameChange();
 		/*Command*/
