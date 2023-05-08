@@ -1,8 +1,8 @@
 <?php
 
-declare(strict_types = 0);
+declare(strict_types = 1);
 
-namespace bbo51dog\pmdiscord;
+namespace bbo51dog\pmdiscord\exception;
 
 use RuntimeException;
 

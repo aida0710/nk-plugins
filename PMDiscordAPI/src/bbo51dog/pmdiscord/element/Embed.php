@@ -1,15 +1,18 @@
 <?php
 
-declare(strict_types = 0);
+declare(strict_types = 1);
 
 namespace bbo51dog\pmdiscord\element;
 
 class Embed {
 
+	/** @var array */
 	private array $data = [];
 
 	/**
 	 * Get data
+	 *
+	 * @return array
 	 */
 	public function getData() : array {
 		return $this->data;
@@ -17,6 +20,9 @@ class Embed {
 
 	/**
 	 * Set embed title
+	 *
+	 * @param string $title
+	 * @return $this
 	 */
 	public function setTitle(string $title) : self {
 		$this->data['title'] = $title;
@@ -25,6 +31,9 @@ class Embed {
 
 	/**
 	 * Set embed description
+	 *
+	 * @param string $desc
+	 * @return $this
 	 */
 	public function setDesc(string $desc) : self {
 		$this->data['description'] = $desc;
@@ -33,6 +42,9 @@ class Embed {
 
 	/**
 	 * Set title url
+	 *
+	 * @param string $url
+	 * @return $this
 	 */
 	public function setUrl(string $url) : self {
 		$this->data['url'] = $url;
@@ -41,6 +53,9 @@ class Embed {
 
 	/**
 	 * Set time stamp
+	 *
+	 * @param string $time
+	 * @return $this
 	 */
 	public function setTime(string $time) : self {
 		$this->data['timestamp'] = $time;
@@ -50,6 +65,9 @@ class Embed {
 	/**
 	 * Set embed color
 	 * $color is a color code which is decimal
+	 *
+	 * @param int $color
+	 * @return $this
 	 */
 	public function setColor(int $color) : self {
 		$this->data['color'] = $color;
@@ -58,6 +76,9 @@ class Embed {
 
 	/**
 	 * Set image url
+	 *
+	 * @param string $url
+	 * @return $this
 	 */
 	public function setImage(string $url) : self {
 		$this->data['image']['url'] = $url;
@@ -66,6 +87,9 @@ class Embed {
 
 	/**
 	 * Set thumbnail url
+	 *
+	 * @param string $url
+	 * @return $this
 	 */
 	public function setThumbnail(string $url) : self {
 		$this->data['thumbnail']['url'] = $url;
@@ -74,6 +98,9 @@ class Embed {
 
 	/**
 	 * Set text in the footer
+	 *
+	 * @param string $text
+	 * @return $this
 	 */
 	public function setFooterText(string $text) : self {
 		$this->data['footer']['text'] = $text;
@@ -82,6 +109,9 @@ class Embed {
 
 	/**
 	 * Set footer icon url
+	 *
+	 * @param string $url
+	 * @return $this
 	 */
 	public function setFooterIcon(string $url) : self {
 		$this->data['footer']['icon_url'] = $url;
@@ -90,6 +120,9 @@ class Embed {
 
 	/**
 	 * Set embed authors name
+	 *
+	 * @param string $name
+	 * @return $this
 	 */
 	public function setAuthorName(string $name) : self {
 		$this->data['author']['name'] = $name;
@@ -98,6 +131,9 @@ class Embed {
 
 	/**
 	 * Set embed authors url
+	 *
+	 * @param string $url
+	 * @return $this
 	 */
 	public function setAuthorUrl(string $url) : self {
 		$this->data['author']['url'] = $url;
@@ -106,6 +142,9 @@ class Embed {
 
 	/**
 	 * Set embed authors icon url
+	 *
+	 * @param string $url
+	 * @return $this
 	 */
 	public function setAuthorIcon(string $url) : self {
 		$this->data['author']['icon_url'] = $url;
@@ -114,6 +153,11 @@ class Embed {
 
 	/**
 	 * Add field
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @param bool   $inline
+	 * @return $this
 	 */
 	public function addField(string $name, string $value, bool $inline = false) : self {
 		$field['name'] = $name;
