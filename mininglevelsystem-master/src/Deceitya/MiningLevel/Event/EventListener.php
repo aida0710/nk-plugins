@@ -27,26 +27,17 @@ use onebone\economyapi\EconomyAPI;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
-use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\utils\TextFormat;
 use ree_jp\stackStorage\api\StackStorageAPI;
-use function explode;
-use function in_array;
 use function is_null;
 
 class EventListener implements Listener {
 
 	use SingletonTrait;
-
-	private array $config;
-
-	public function __construct(Config $config) {
-		self::setInstance($this);
-		$this->config = $config->getAll();
-	}
 
 	public function onPlayerJoin(PlayerJoinEvent $event) {
 		$api = MiningLevelAPI::getInstance();
@@ -105,16 +96,6 @@ class EventListener implements Listener {
 		$api->setLevelUpExp($player, $upExp);
 	}
 
-	private function getBreakEvent(BlockBreakEvent|MiningToolsBreakEvent $event, Player $player) : void {
-		if (in_array($player->getPosition()->getWorld()->getFolderName(), $this->config['world'], true)) {
-			return;
-		}
-		$api = MiningLevelAPI::getInstance();
-		$block = $event->getBlock();
-		$exp = ($this->config[$block->getId() . ':' . $block->getMeta()] ?? $this->config['default'] ?? 0) + $api->getExp($player);
-		$this->LevelCalculation($player, $exp);
-	}
-
 	private function DiscordWebHook(Player $player, int $originalLevel, int $level) : void {
 		if ($level % 5 == 0) {
 			$name = $player->getName();
@@ -131,10 +112,8 @@ class EventListener implements Listener {
 		}
 	}
 
-	private function LevelUpBonus(Player $player, int $originalLevel, int $level) {
-		if (isset($this->config['item'][$level])) {
-			$data = explode(':', $this->config['item'][$level]);
-			$item = ItemFactory::getInstance()->get((int) $data[0], (int) $data[1], (int) $data[2]);
+	private function levelUpBonusItem(Item $item, Player $player, int $level, ?bool $give = false) : void {
+		if ($give) {
 			if ($player->getInventory()->canAddItem($item)) {
 				$player->getInventory()->addItem($item);
 			} else {
@@ -145,6 +124,41 @@ class EventListener implements Listener {
 		} elseif ($level % 5 == 0) {
 			EconomyAPI::getInstance()->addMoney($player, 8000);
 			SendMessage::Send($player, 'レベルアップボーナスとして8000円が付与されました', 'Level', true);
+		}
+	}
+
+	private function LevelUpBonus(Player $player, int $originalLevel, int $level) : void {
+		switch ($level) {
+			case 5:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(364, 0, 8), $player, $level, true);
+				break;
+			case 10:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(384, 0, 5), $player, $level, true);
+				break;
+			case 25:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(52, 0, 1), $player, $level, true);
+				break;
+			case 50:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(745, 0, 1), $player, $level, true);
+				break;
+			case 180:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(397, 2, 1), $player, $level, true);
+				break;
+			case 230:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(397, 0, 1), $player, $level, true);
+				break;
+			case 280:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(397, 4, 1), $player, $level, true);
+				break;
+			case 300:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(397, 1, 1), $player, $level, true);
+				break;
+			case 325:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(397, 5, 1), $player, $level, true);
+				break;
+			case 350:
+				$this->levelUpBonusItem(ItemFactory::getInstance()->get(120, 0, 1), $player, $level, true);
+				break;
 		}
 		if ($level % 50 == 0) {
 			SendBroadcastMessage::Send("{$player->getName()}がLv.{$originalLevel}からLv.{$level}にレベルアップしました", 'Level');
