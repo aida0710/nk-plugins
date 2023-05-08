@@ -99,6 +99,7 @@ class SQLiteDatabase {
 	}
 
 	/**
+	 * @param string $name
 	 * @return integer|null
 	 */
 	public function getUpExp(string $name) : ?int {
