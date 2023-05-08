@@ -81,7 +81,7 @@ class EventListener implements Listener {
 				$this->DiscordWebHook($player, $originalLevel, $level);
 				InfoSystem::getInstance()->getScheduler()->scheduleDelayedTask(new ChangeNameTask([$player]), 10);
 				match (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(LevelUpDisplaySetting::getName())?->getValue()) {
-					'title' => $player->sendtitle('Mining Level UP', "Lv.{$originalLevel} -> Lv.{$level}"),
+					'title' => $player->sendTitle('Mining Level UP', "Lv.{$originalLevel} -> Lv.{$level}"),
 					'toast' => SendToastPacket::Send($player, 'Mining Level UP Message', "Lv.{$originalLevel}からLv.{$level}にレベルアップしました！"),
 					default => null,
 				};
