@@ -10,18 +10,18 @@ use pocketmine\scheduler\ClosureTask;
 
 class MiningLevelSystem extends PluginBase {
 
-	public function onEnable() : void {
-		$this->saveResource('config.yml');
+	protected function onEnable() : void {
 		MiningLevelAPI::getInstance()->init($this);
-		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this->getConfig()), $this);
+		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 		$this->getScheduler()->scheduleRepeatingTask(new ClosureTask(
 			function () : void {
 				MiningLevelAPI::getInstance()->writecache();
 			}
-		), 20 * 60);
+		), 20 * 60 * 3);
 	}
 
-	public function onDisable() : void {
+	protected function onDisable() : void {
+		MiningLevelAPI::getInstance()->writecache();
 		MiningLevelAPI::getInstance()->deinit();
 	}
 
