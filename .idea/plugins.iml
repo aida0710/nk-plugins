@@ -12,8 +12,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/nezumi/cheese_escape" isTestSource="false" packagePrefix="nezumi\cheese_escape\" />
       <sourceFolder url="file://$MODULE_DIR$/AntiCheat-master/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MjolnirBan-master/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/ShopSystem/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/miningtools/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../Folivora/src/lazyperson0710/folivora/features/shop/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Countdown_v1.1.1" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop2" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop3" />
@@ -94,11 +94,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/rarkhopper/modals" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/rarkhopper/firework-particle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-block-upgrade-schema" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-item-upgrade-schema" />
-      <excludeFolder url="file://$MODULE_DIR$/ShopSystem/src/lazyperson0710/ShopSystem/form/levelShop/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/../Folivora/src/lazyperson0710/folivora/features/shop/src/lazyperson0710/ShopSystem/form/levelShop/temp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

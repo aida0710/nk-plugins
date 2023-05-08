@@ -66,8 +66,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/rarkhopper/modals" />
-      <path value="$PROJECT_DIR$/vendor/rarkhopper/firework-particle" />
       <path value="$PROJECT_DIR$/vendor/pocketmine/bedrock-block-upgrade-schema" />
       <path value="$PROJECT_DIR$/vendor/pocketmine/bedrock-item-upgrade-schema" />
     </include_path>
