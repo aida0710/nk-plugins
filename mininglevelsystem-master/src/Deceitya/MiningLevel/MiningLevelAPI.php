@@ -92,7 +92,7 @@ class MiningLevelAPI {
 	 * @param string|Player $player
 	 * @return void
 	 */
-	public function createPlayerData($player) {
+	public function createPlayerData(Player|string $player) : void {
 		$player = $this->convert2lower($player);
 		if (!$this->playerDataExists($player)) {
 			$this->db->createPlayerData($player, 1, 0, 80);
@@ -107,7 +107,7 @@ class MiningLevelAPI {
 	 * @param integer       $level
 	 * @return void
 	 */
-	public function setLevel(string|Player $player, int $level) {
+	public function setLevel(string|Player $player, int $level) : void {
 		$player = $this->convert2lower($player);
 		if (!$this->isLoadeddata($player)) $this->loaddata($player);
 		if ($this->playerDataExists($player)) {
@@ -127,7 +127,8 @@ class MiningLevelAPI {
 	}
 
 	/**
-	 * @param integer $exp
+	 * @param string|Player $player
+	 * @param integer       $exp
 	 * @return void
 	 */
 	public function setExp(string|Player $player, int $exp) {
@@ -140,6 +141,7 @@ class MiningLevelAPI {
 	}
 
 	/**
+	 * @param string|Player $player
 	 * @return integer|null
 	 */
 	public function getLevelUpExp(string|Player $player) : ?int {
@@ -149,10 +151,11 @@ class MiningLevelAPI {
 	}
 
 	/**
-	 * @param integer $upexp
+	 * @param string|Player $player
+	 * @param integer       $upexp
 	 * @return void
 	 */
-	public function setLevelUpExp(string|Player $player, int $upexp) {
+	public function setLevelUpExp(string|Player $player, int $upexp) : void {
 		$player = $this->convert2lower($player);
 		if ($this->playerDataExists($player)) {
 			if (!$this->isLoadeddata($player)) $this->loaddata($player);
