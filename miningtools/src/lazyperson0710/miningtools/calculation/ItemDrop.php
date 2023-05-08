@@ -20,6 +20,7 @@ use pocketmine\block\VanillaBlocks;
 use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\data\bedrock\EnchantmentIds;
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 use function count;
@@ -45,48 +46,53 @@ class ItemDrop {
 		return $this->checkMiningSettings($player, $block->getDrops($item));
 	}
 
+	/**
+	 * @param Player $player
+	 * @param Item[] $drops
+	 * @return array
+	 */
 	public function checkMiningSettings(Player $player, array $drops) : array {
 		$setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
 		$result = [];
 		foreach ($drops as $drop) {
 			switch ($drop) {
-				case VanillaBlocks::GRASS():
+				case VanillaBlocks::GRASS()->asItem():
 					if ($setting->getSetting(GrassToDirtSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::DIRT()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::COBBLESTONE():
+				case VanillaBlocks::COBBLESTONE()->asItem():
 					if ($setting->getSetting(CobblestoneToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::GRANITE():
+				case VanillaBlocks::GRANITE()->asItem():
 					if ($setting->getSetting(GraniteToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::DIORITE():
+				case VanillaBlocks::DIORITE()->asItem():
 					if ($setting->getSetting(DioriteToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::ANDESITE():
+				case VanillaBlocks::ANDESITE()->asItem():
 					if ($setting->getSetting(AndesiteToStoneSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::STONE()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::SAND():
-				case VanillaBlocks::RED_SAND():
+				case VanillaBlocks::SAND()->asItem():
+				case VanillaBlocks::RED_SAND()->asItem():
 					if ($setting->getSetting(SandToGlassSetting::getName())?->getValue()) {
 						$drop = VanillaBlocks::GLASS()->asItem()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::IRON_ORE():
+				case VanillaBlocks::IRON_ORE()->asItem():
 					if ($setting->getSetting(IronIngotSetting::getName())?->getValue()) {
 						$drop = VanillaItems::IRON_INGOT()->setCount($drop->getCount());
 					}
 					break;
-				case VanillaBlocks::GOLD_ORE():
+				case VanillaBlocks::GOLD_ORE()->asItem():
 					if ($setting->getSetting(GoldIngotSetting::getName())?->getValue()) {
 						$drop = VanillaItems::GOLD_INGOT()->setCount($drop->getCount());
 					}
