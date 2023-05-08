@@ -178,7 +178,7 @@ class MiningLevelAPI {
 			}
 			$list[$i] = $r;
 			$i++;
-			if ($i === 30) {
+			if ($i === 31) {
 				return $list;
 			}
 		}
