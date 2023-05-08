@@ -51,29 +51,26 @@ class EventListener implements Listener {
 	 * @priority HIGHEST
 	 */
 	public function onBlockBreak(BlockBreakEvent $event) : void {
-		if ($event->isCancelled()) {
-			return;
-		}
+		if ($event->isCancelled()) return;
 		$player = $event->getPlayer();
-		$this->getBreakEvent($event, $player);
+		$this->LevelCalculation($player, 1);
 	}
 
 	/**
 	 * @priority HIGHEST
 	 */
-	public function CountBlock(MiningToolsBreakEvent $event) : void {
-		if ($event->isCancelled()) {
-			return;
-		}
+	public function onMiningToolsBreakEvent(MiningToolsBreakEvent $event) : void {
+		if ($event->isCancelled()) return;
 		$player = $event->getPlayer();
-		$this->getBreakEvent($event, $player);
+		$this->LevelCalculation($player, 1);
 	}
 
-	public function LevelCalculation($player, $exp) : void {
+	public function LevelCalculation(Player $player, int $exp) : void {
 		$api = MiningLevelAPI::getInstance();
 		$originalLevel = $api->getLevel($player);
 		$level = $originalLevel;
 		$upExp = $api->getLevelUpExp($player);
+		$exp += $api->getExp($player);
 		for ($up = 0; $exp >= $upExp; $up++) {
 			$exp -= $upExp;
 			$upExp += $level;
