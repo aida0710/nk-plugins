@@ -12,13 +12,13 @@ class ExpAssignment implements Listener {
 
 	public function onBreak(BlockBreakEvent $event) : void {
 		if ($event->isCancelled()) return;
-		$player = $event->getPlayer();
-		$exp = $event->getXpDropAmount();
 		if ($event->getBlock()->getName() === VanillaBlocks::MONSTER_SPAWNER()->getName()) {
+			$exp = $event->getXpDropAmount();
 			$exp += 5000;
+			$player = $event->getPlayer();
+			$player->getXpManager()->addXp($exp);
+			$event->setXpDropAmount(0);
 		}
-		$player->getXpManager()->addXp($exp);
-		$event->setXpDropAmount(0);
 	}
 
 }
