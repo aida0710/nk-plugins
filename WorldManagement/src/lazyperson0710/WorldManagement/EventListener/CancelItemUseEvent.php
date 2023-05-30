@@ -102,7 +102,6 @@ class CancelItemUseEvent implements Listener {
 			case ItemIds::ENCHANTED_BOOK:
 			case ItemIds::ENDER_CHEST:
 			case ItemIds::ENDER_EYE:
-			case ItemIds::ENDER_PEARL:
 			case ItemIds::LEAD:
 			case ItemIds::ARMOR_STAND:
 			case ItemIds::CHORUS_FLOWER:
