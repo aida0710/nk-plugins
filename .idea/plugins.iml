@@ -14,6 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/MjolnirBan-master/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/miningtools/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../Folivora/src/lazyperson0710/folivora/features/shop/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ShopSystem/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Countdown_v1.1.1" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop2" />
       <excludeFolder url="file://$MODULE_DIR$/ecolshop3" />
