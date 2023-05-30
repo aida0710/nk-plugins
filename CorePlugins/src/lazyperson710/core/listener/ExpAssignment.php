@@ -10,6 +10,11 @@ use pocketmine\event\Listener;
 
 class ExpAssignment implements Listener {
 
+	/**
+	 * @priority Monitor
+	 * @param BlockBreakEvent $event
+	 * @return void
+	 */
 	public function onBreak(BlockBreakEvent $event) : void {
 		if ($event->isCancelled()) return;
 		if ($event->getBlock()->getName() === VanillaBlocks::MONSTER_SPAWNER()->getName()) {
