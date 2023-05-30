@@ -15,7 +15,6 @@ use lazyperson710\core\packet\SendForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use RuntimeException;
 
 class ItemShopCommand extends Command {
 
@@ -23,6 +22,12 @@ class ItemShopCommand extends Command {
 		parent::__construct('shop', 'ItemShopを開きます - /shop [shopID]');
 	}
 
+	/**
+	 * @param CommandSender $sender
+	 * @param string        $commandLabel
+	 * @param array         $args
+	 * @return void
+	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : void {
 		if (!($sender instanceof Player)) {
 			$sender->sendMessage('サーバー内で実行してください');
@@ -45,6 +50,5 @@ class ItemShopCommand extends Command {
 			'7' => LevelCheck::getInstance()->check($sender, new CategorySelectForm($sender, 7), RestrictionShop::RESTRICTION_LEVEL_SHOP_7),
 			default => SendForm::Send($sender, new ShopSelectForm($sender)),
 		};
-		throw new RuntimeException('Invalid shop number');
 	}
 }
