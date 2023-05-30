@@ -28,6 +28,10 @@ class ItemShopCommand extends Command {
 			$sender->sendMessage('サーバー内で実行してください');
 			return;
 		}
+		if (!isset($args[0])) {
+			$sender->sendForm(new ShopSelectForm($sender));
+			return;
+		}
 		match ($args[0]) {
 			'other' => LevelCheck::getInstance()->check($sender, new OtherShopSelectForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
 			'search' => LevelCheck::getInstance()->check($sender, new SearchItemForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
