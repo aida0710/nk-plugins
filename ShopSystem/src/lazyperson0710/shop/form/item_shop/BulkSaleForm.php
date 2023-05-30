@@ -22,7 +22,12 @@ class BulkSaleForm extends CustomForm implements ShopText {
 		$shopItems = ItemShopAPI::getInstance()->getCategoryItems($shopNumber, $category);
 		$this
 			->setTitle(self::TITLE)
-			->addElement(new Label('仮想ストレージとインベントリ含む全ての場所から一括で売却出来ます' . PHP_EOL . '売却kしたいアイテムのtoggleを有効にして送信を押してください'));
+			->addElement(
+				new Label(
+					'仮想ストレージとインベントリ含む全ての場所から一括で売却出来ます' . PHP_EOL .
+					'売却したいアイテムのtoggleを有効にして送信を押してください'
+				),
+			);
 		foreach ($shopItems as $item) {
 			$toggleTemp = new Toggle($item->getDisplayName());
 			$this->toggles[] = $toggleTemp;
