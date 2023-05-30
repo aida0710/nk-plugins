@@ -84,13 +84,12 @@ class TicketAPI {
 		if ($reduce <= 0) return false;
 		$int = $this->cache[$player->getName()];
 		$result = $int - $reduce;
-		if ($result >= 0) {
-			$this->cache[$player->getName()] = $result;
-			return $result;
-		} else {
+		if ($result < 0) {
 			$this->cache[$player->getName()] = 0;
 			return false;
 		}
+		$this->cache[$player->getName()] = $result;
+		return $result;
 	}
 
 	/*
