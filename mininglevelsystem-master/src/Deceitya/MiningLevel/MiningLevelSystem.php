@@ -17,11 +17,10 @@ class MiningLevelSystem extends PluginBase {
 			function () : void {
 				MiningLevelAPI::getInstance()->writecache();
 			}
-		), 20 * 60 * 3);
+		), 20 * 60 * 8);
 	}
 
 	protected function onDisable() : void {
-		MiningLevelAPI::getInstance()->writecache();
 		MiningLevelAPI::getInstance()->deinit();
 	}
 
