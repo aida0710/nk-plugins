@@ -98,6 +98,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-block-upgrade-schema" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pocketmine/bedrock-item-upgrade-schema" />
       <excludeFolder url="file://$MODULE_DIR$/../Folivora/src/lazyperson0710/folivora/features/shop/src/lazyperson0710/ShopSystem/form/levelShop/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/ShopSystem/src/lazyperson0710/shop/form/item_shop/temp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
