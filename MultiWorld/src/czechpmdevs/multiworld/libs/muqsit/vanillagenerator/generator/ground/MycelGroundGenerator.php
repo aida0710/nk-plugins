@@ -8,7 +8,7 @@ use pocketmine\block\VanillaBlocks;
 
 class MycelGroundGenerator extends GroundGenerator {
 
-	public function __construct() {
-		parent::__construct(VanillaBlocks::MYCELIUM());
-	}
+    public function __construct() {
+        parent::__construct(VanillaBlocks::MYCELIUM());
+    }
 }

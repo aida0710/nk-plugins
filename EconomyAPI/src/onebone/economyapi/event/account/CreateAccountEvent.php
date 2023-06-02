@@ -26,21 +26,21 @@ use onebone\economyapi\event\EconomyAPIEvent;
 
 class CreateAccountEvent extends EconomyAPIEvent {
 
-	public static $handlerList;
+    public static $handlerList;
 
-	public function __construct(EconomyAPI $plugin, private $username, private $defaultMoney, $issuer) {
-		parent::__construct($plugin, $issuer);
-	}
+    public function __construct(EconomyAPI $plugin, private $username, private $defaultMoney, $issuer) {
+        parent::__construct($plugin, $issuer);
+    }
 
-	public function getUsername() {
-		return $this->username;
-	}
+    public function getUsername() {
+        return $this->username;
+    }
 
-	public function setDefaultMoney($money) {
-		$this->defaultMoney = $money;
-	}
+    public function setDefaultMoney($money) {
+        $this->defaultMoney = $money;
+    }
 
-	public function getDefaultMoney() {
-		return $this->defaultMoney;
-	}
+    public function getDefaultMoney() {
+        return $this->defaultMoney;
+    }
 }

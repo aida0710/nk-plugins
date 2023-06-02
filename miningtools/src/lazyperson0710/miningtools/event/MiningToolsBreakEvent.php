@@ -12,17 +12,17 @@ use pocketmine\player\Player;
 
 class MiningToolsBreakEvent extends BlockEvent implements Cancellable {
 
-	use CancellableTrait;
+    use CancellableTrait;
 
-	private Player $player;
+    private Player $player;
 
-	public function __construct(Player $player, Block $block) {
-		parent::__construct($block);
-		$this->player = $player;
-	}
+    public function __construct(Player $player, Block $block) {
+        parent::__construct($block);
+        $this->player = $player;
+    }
 
-	public function getPlayer() : Player {
-		return $this->player;
-	}
+    public function getPlayer() : Player {
+        return $this->player;
+    }
 
 }

@@ -15,31 +15,31 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {
 
-	public function onEnable() : void {
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getServer()->getCommandMap()->registerAll('sff', [
-			new RepairCommand(),
-		]);
-	}
+    public function onEnable() : void {
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->getServer()->getCommandMap()->registerAll('sff', [
+            new RepairCommand(),
+        ]);
+    }
 
-	public function onTap(PlayerInteractEvent $event) {
-		$player = $event->getPlayer();
-		$item = $player->getInventory()->getItemInHand();
-		if (!($event->getBlock()->getId() === 145)) {
-			return;
-		}
-		if (!$player->isSneaking()) {
-			return;
-		}
-		if (RepairForm::checkItem($player) === false) {
-			return;
-		}
-		$level = 5;
-		foreach ($item->getEnchantments() as $enchant) {
-			$level += 8 + $enchant->getLevel();
-		}
-		$mode = 'others';
-		if (!$item instanceof Durable) throw new Error('道具以外のアイテムが指定されました');
-		SendForm::Send($player, (new RepairForm($level, $item, $mode)));
-	}
+    public function onTap(PlayerInteractEvent $event) {
+        $player = $event->getPlayer();
+        $item = $player->getInventory()->getItemInHand();
+        if (!($event->getBlock()->getId() === 145)) {
+            return;
+        }
+        if (!$player->isSneaking()) {
+            return;
+        }
+        if (RepairForm::checkItem($player) === false) {
+            return;
+        }
+        $level = 5;
+        foreach ($item->getEnchantments() as $enchant) {
+            $level += 8 + $enchant->getLevel();
+        }
+        $mode = 'others';
+        if (!$item instanceof Durable) throw new Error('道具以外のアイテムが指定されました');
+        SendForm::Send($player, (new RepairForm($level, $item, $mode)));
+    }
 }

@@ -14,21 +14,21 @@ use pocketmine\player\Player;
 
 class SelectLoginBonusTicketButton extends Button {
 
-	private int $cost;
-	private int $quantity;
+    private int $cost;
+    private int $quantity;
 
-	public function __construct(string $text, int $cost, int $quantity) {
-		parent::__construct($text);
-		$this->cost = $cost;
-		$this->quantity = $quantity;
-	}
+    public function __construct(string $text, int $cost, int $quantity) {
+        parent::__construct($text);
+        $this->cost = $cost;
+        $this->quantity = $quantity;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		if (CheckInventoryCalculation::check($player, $this->cost)) {
-			SendForm::Send($player, (new TicketConvertConfirmationForm($this->cost, $this->quantity)));
-		} else {
-			SendForm::Send($player, new BonusForm($player, "\n§cインベントリ内にあるログインボーナス数が足りません"));
-			SoundPacket::Send($player, 'note.bass');
-		}
-	}
+    public function handleSubmit(Player $player) : void {
+        if (CheckInventoryCalculation::check($player, $this->cost)) {
+            SendForm::Send($player, (new TicketConvertConfirmationForm($this->cost, $this->quantity)));
+        } else {
+            SendForm::Send($player, new BonusForm($player, "\n§cインベントリ内にあるログインボーナス数が足りません"));
+            SoundPacket::Send($player, 'note.bass');
+        }
+    }
 }

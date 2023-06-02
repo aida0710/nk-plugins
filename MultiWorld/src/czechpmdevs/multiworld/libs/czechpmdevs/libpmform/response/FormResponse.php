@@ -21,17 +21,17 @@ namespace czechpmdevs\multiworld\libs\czechpmdevs\libpmform\response;
 
 class FormResponse {
 
-	private mixed $data;
+    private mixed $data;
 
-	public function __construct(mixed $data) {
-		$this->data = $data;
-	}
+    public function __construct(mixed $data) {
+        $this->data = $data;
+    }
 
-	public function isValid() : bool {
-		return $this->data !== null;
-	}
+    public function isValid() : bool {
+        return $this->data !== null;
+    }
 
-	public function getData() : mixed {
-		return $this->data;
-	}
+    public function getData() : mixed {
+        return $this->data;
+    }
 }

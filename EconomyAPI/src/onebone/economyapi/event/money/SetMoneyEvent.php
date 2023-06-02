@@ -26,19 +26,19 @@ use onebone\economyapi\event\EconomyAPIEvent;
 
 class SetMoneyEvent extends EconomyAPIEvent {
 
-	public static $handlerList;
+    public static $handlerList;
 
-	public function __construct(EconomyAPI $plugin, private $username, private $money, $issuer) {
-		parent::__construct($plugin, $issuer);
-		$this->username = $username;
-		$this->money = $money;
-	}
+    public function __construct(EconomyAPI $plugin, private $username, private $money, $issuer) {
+        parent::__construct($plugin, $issuer);
+        $this->username = $username;
+        $this->money = $money;
+    }
 
-	public function getUsername() {
-		return $this->username;
-	}
+    public function getUsername() {
+        return $this->username;
+    }
 
-	public function getMoney() {
-		return $this->money;
-	}
+    public function getMoney() {
+        return $this->money;
+    }
 }

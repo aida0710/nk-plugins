@@ -27,17 +27,17 @@ use pocketmine\event\Event;
 
 class LandRemoveEvent extends Event implements Cancellable {
 
-	use CancellableTrait;
+    use CancellableTrait;
 
-	public static $handlerList = null;
+    public static $handlerList = null;
 
-	private $id;
+    private $id;
 
-	public function __construct($id) {
-		$this->id = $id;
-	}
+    public function __construct($id) {
+        $this->id = $id;
+    }
 
-	public function getId() {
-		return $this->id;
-	}
+    public function getId() {
+        return $this->id;
+    }
 }

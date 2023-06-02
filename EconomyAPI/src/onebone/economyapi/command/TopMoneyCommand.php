@@ -29,32 +29,32 @@ use function array_shift;
 
 class TopMoneyCommand extends Command {
 
-	public function __construct(private EconomyAPI $plugin) {
-		$desc = $plugin->getCommandMessage('topmoney');
-		parent::__construct('topmoney', $desc['description'], $desc['usage']);
-		$this->setPermission('economyapi.command.topmoney');
-		$this->plugin = $plugin;
-	}
+    public function __construct(private EconomyAPI $plugin) {
+        $desc = $plugin->getCommandMessage('topmoney');
+        parent::__construct('topmoney', $desc['description'], $desc['usage']);
+        $this->setPermission('economyapi.command.topmoney');
+        $this->plugin = $plugin;
+    }
 
-	public function execute(CommandSender $sender, string $label, array $params) : bool {
-		if (!$this->plugin->isEnabled()) return false;
-		if (!$this->testPermission($sender)) return false;
-		$page = (int) array_shift($params);
-		$server = $this->plugin->getServer();
-		$banned = [];
-		foreach ($server->getNameBans()->getEntries() as $entry) {
-			if ($this->plugin->accountExists($entry->getName())) {
-				$banned[] = $entry->getName();
-			}
-		}
-		$ops = [];
-		foreach ($server->getOps()->getAll() as $op) {
-			if ($this->plugin->accountExists($op)) {
-				$ops[] = $op;
-			}
-		}
-		$task = new SortTask($sender->getName(), $this->plugin->getAllMoney(), $this->plugin->getConfig()->get('add-op-at-rank'), $page, $ops, $banned);
-		$server->getAsyncPool()->submitTask($task);
-		return true;
-	}
+    public function execute(CommandSender $sender, string $label, array $params) : bool {
+        if (!$this->plugin->isEnabled()) return false;
+        if (!$this->testPermission($sender)) return false;
+        $page = (int) array_shift($params);
+        $server = $this->plugin->getServer();
+        $banned = [];
+        foreach ($server->getNameBans()->getEntries() as $entry) {
+            if ($this->plugin->accountExists($entry->getName())) {
+                $banned[] = $entry->getName();
+            }
+        }
+        $ops = [];
+        foreach ($server->getOps()->getAll() as $op) {
+            if ($this->plugin->accountExists($op)) {
+                $ops[] = $op;
+            }
+        }
+        $task = new SortTask($sender->getName(), $this->plugin->getAllMoney(), $this->plugin->getConfig()->get('add-op-at-rank'), $page, $ops, $banned);
+        $server->getAsyncPool()->submitTask($task);
+        return true;
+    }
 }

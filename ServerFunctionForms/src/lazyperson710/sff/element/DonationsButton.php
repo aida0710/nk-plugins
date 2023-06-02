@@ -12,16 +12,16 @@ use pocketmine\player\Player;
 
 class DonationsButton extends Button {
 
-	private int $num;
-	private string $donor;
+    private int $num;
+    private string $donor;
 
-	public function __construct(string $text, int $num, ?string $donor = 'null', ?ButtonImage $image = null) {
-		parent::__construct($text, $image);
-		$this->num = $num;
-		$this->donor = $donor;
-	}
+    public function __construct(string $text, int $num, ?string $donor = 'null', ?ButtonImage $image = null) {
+        parent::__construct($text, $image);
+        $this->num = $num;
+        $this->donor = $donor;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		SendForm::Send($player, (new DonationAcceptanceForm($player, $this->num, $this->donor)));
-	}
+    public function handleSubmit(Player $player) : void {
+        SendForm::Send($player, (new DonationAcceptanceForm($player, $this->num, $this->donor)));
+    }
 }

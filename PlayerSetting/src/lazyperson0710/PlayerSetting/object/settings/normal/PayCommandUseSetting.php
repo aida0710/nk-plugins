@@ -8,21 +8,21 @@ use lazyperson0710\PlayerSetting\object\Setting;
 
 class PayCommandUseSetting extends Setting {
 
-	protected bool $value;
+    protected bool $value;
 
-	public static function getName() : string {
-		return 'PayCommandUse';
-	}
+    public function getFallbackValue() : bool {
+        return true;
+    }
 
-	public function setValue(mixed $value) : void {
-		$this->value = $value;
-	}
+    public static function getName() : string {
+        return 'PayCommandUse';
+    }
 
-	public function getValue() : bool {
-		return $this->value ?? $this->getFallbackValue();
-	}
+    public function getValue() : bool {
+        return $this->value ?? $this->getFallbackValue();
+    }
 
-	public function getFallbackValue() : bool {
-		return true;
-	}
+    public function setValue(mixed $value) : void {
+        $this->value = $value;
+    }
 }

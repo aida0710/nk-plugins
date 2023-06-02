@@ -25,14 +25,14 @@ use pocketmine\scheduler\Task;
 
 class ExpireTask extends Task {
 
-	private $landId;
+    private $landId;
 
-	public function __construct(EconomyLand $plugin, $landId) {
-		$this->plugin = $plugin;
-		$this->landId = $landId;
-	}
+    public function __construct(EconomyLand $plugin, $landId) {
+        $this->plugin = $plugin;
+        $this->landId = $landId;
+    }
 
-	public function onRun() : void {
-		$this->plugin->expireLand($this->landId);
-	}
+    public function onRun() : void {
+        $this->plugin->expireLand($this->landId);
+    }
 }

@@ -14,23 +14,23 @@ use pocketmine\utils\EnumTrait;
  */
 class BanType {
 
-	use EnumTrait;
+    use EnumTrait;
 
-	private const NAME = 'player_name';
-	private const IP = 'ip';
-	private const CID = 'cid';
-	private const XUID = 'xuid';
+    private const NAME = 'player_name';
+    private const IP = 'ip';
+    private const CID = 'cid';
+    private const XUID = 'xuid';
 
-	protected static function setup() : void {
-		self::registerAll(
-			new self(self::NAME),
-			new self(self::IP),
-			new self(self::CID),
-			new self(self::XUID),
-		);
-	}
+    protected static function setup() : void {
+        self::registerAll(
+            new self(self::NAME),
+            new self(self::IP),
+            new self(self::CID),
+            new self(self::XUID),
+        );
+    }
 
-	public function __toString() : string {
-		return $this->enumName;
-	}
+    public function __toString() : string {
+        return $this->enumName;
+    }
 }

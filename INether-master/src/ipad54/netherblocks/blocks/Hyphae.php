@@ -6,10 +6,10 @@ use pocketmine\block\utils\PillarRotationInMetadataTrait;
 
 class Hyphae extends Wood {
 
-	use PillarRotationInMetadataTrait;
+    use PillarRotationInMetadataTrait;
 
-	public function getAxisMetaShift() : int {
-		return 0;
-	}
+    public function getAxisMetaShift() : int {
+        return 0;
+    }
 
 }

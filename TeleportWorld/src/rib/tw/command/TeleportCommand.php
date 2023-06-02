@@ -13,15 +13,15 @@ use rib\tw\form\TeleportForm;
 
 class TeleportCommand extends Command {
 
-	public function __construct() {
-		parent::__construct('wtp', 'デバッグ用teleportコマンド', '/wtp');
-	}
+    public function __construct() {
+        parent::__construct('wtp', 'デバッグ用teleportコマンド', '/wtp');
+    }
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
-		if (!($sender instanceof Player) || !Server::getInstance()->isOp($sender->getName())) {
-			return false;
-		}
-		SendForm::Send($sender, (new TeleportForm()));
-		return true;
-	}
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
+        if (!($sender instanceof Player) || !Server::getInstance()->isOp($sender->getName())) {
+            return false;
+        }
+        SendForm::Send($sender, (new TeleportForm()));
+        return true;
+    }
 }

@@ -38,107 +38,102 @@ use function explode;
 
 abstract class BaseSubCommand implements IArgumentable, IRunnable {
 
-	use ArgumentableTrait;
+    use ArgumentableTrait;
 
-	private string $name;
-	/** @var string[] */
-	private array $aliases;
+    protected string $usageMessage;
+    protected CommandSender $currentSender;
+    protected BaseCommand $parent;
+    private string $name;
+    /** @var string[] */
+    private array $aliases;
+    private string $description;
+    private ?string $permission = null;
+    /** @var BaseConstraint[] */
+    private array $constraints = [];
 
-	private string $description;
+    public function __construct(string $name, string $description = '', array $aliases = []) {
+        $this->name = $name;
+        $this->description = $description;
+        $this->aliases = $aliases;
+        $this->prepare();
+        $this->usageMessage = $this->generateUsageMessage();
+    }
 
-	protected string $usageMessage;
+    abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void;
 
-	private ?string $permission = null;
+    /**
+     * @return string[]
+     */
+    public function getAliases() : array {
+        return $this->aliases;
+    }
 
-	protected CommandSender $currentSender;
+    /**
+     * @return BaseConstraint[]
+     */
+    public function getConstraints() : array {
+        return $this->constraints;
+    }
 
-	protected BaseCommand $parent;
-	/** @var BaseConstraint[] */
-	private array $constraints = [];
+    public function getName() : string {
+        return $this->name;
+    }
 
-	public function __construct(string $name, string $description = '', array $aliases = []) {
-		$this->name = $name;
-		$this->description = $description;
-		$this->aliases = $aliases;
-		$this->prepare();
-		$this->usageMessage = $this->generateUsageMessage();
-	}
+    public function getPermission() : ?string {
+        return $this->permission;
+    }
 
-	abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void;
+    public function setPermission(string $permission) : void {
+        $this->permission = $permission;
+    }
 
-	public function getName() : string {
-		return $this->name;
-	}
+    public function getUsageMessage() : string {
+        return $this->usageMessage;
+    }
 
-	/**
-	 * @return string[]
-	 */
-	public function getAliases() : array {
-		return $this->aliases;
-	}
+    public function getDescription() : string {
+        return $this->description;
+    }
 
-	public function getDescription() : string {
-		return $this->description;
-	}
+    public function testPermissionSilent(CommandSender $sender) : bool {
+        if (empty($this->permission)) {
+            return true;
+        }
+        foreach (explode(';', $this->permission) as $permission) {
+            if ($sender->hasPermission($permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public function getUsageMessage() : string {
-		return $this->usageMessage;
-	}
+    /**
+     * @internal Used to pass the current sender from the parent command
+     */
+    public function setCurrentSender(CommandSender $currentSender) : void {
+        $this->currentSender = $currentSender;
+    }
 
-	public function getPermission() : ?string {
-		return $this->permission;
-	}
+    /**
+     * @internal Used to pass the parent context from the parent command
+     */
+    public function setParent(BaseCommand $parent) : void {
+        $this->parent = $parent;
+    }
 
-	public function setPermission(string $permission) : void {
-		$this->permission = $permission;
-	}
+    public function sendError(int $errorCode, array $args = []) : void {
+        $this->parent->sendError($errorCode, $args);
+    }
 
-	public function testPermissionSilent(CommandSender $sender) : bool {
-		if (empty($this->permission)) {
-			return true;
-		}
-		foreach (explode(';', $this->permission) as $permission) {
-			if ($sender->hasPermission($permission)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public function sendUsage() : void {
+        $this->currentSender->sendMessage("/{$this->parent->getName()} $this->usageMessage");
+    }
 
-	/**
-	 * @internal Used to pass the current sender from the parent command
-	 */
-	public function setCurrentSender(CommandSender $currentSender) : void {
-		$this->currentSender = $currentSender;
-	}
+    public function addConstraint(BaseConstraint $constraint) : void {
+        $this->constraints[] = $constraint;
+    }
 
-	/**
-	 * @internal Used to pass the parent context from the parent command
-	 */
-	public function setParent(BaseCommand $parent) : void {
-		$this->parent = $parent;
-	}
-
-	public function sendError(int $errorCode, array $args = []) : void {
-		$this->parent->sendError($errorCode, $args);
-	}
-
-	public function sendUsage() : void {
-		$this->currentSender->sendMessage("/{$this->parent->getName()} $this->usageMessage");
-	}
-
-	public function addConstraint(BaseConstraint $constraint) : void {
-		$this->constraints[] = $constraint;
-	}
-
-	/**
-	 * @return BaseConstraint[]
-	 */
-	public function getConstraints() : array {
-		return $this->constraints;
-	}
-
-	public function getOwningPlugin() : Plugin {
-		return $this->parent->getOwningPlugin();
-	}
+    public function getOwningPlugin() : Plugin {
+        return $this->parent->getOwningPlugin();
+    }
 }

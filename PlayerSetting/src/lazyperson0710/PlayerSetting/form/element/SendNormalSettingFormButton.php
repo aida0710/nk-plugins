@@ -12,14 +12,14 @@ use pocketmine\player\Player;
 
 class SendNormalSettingFormButton extends Button {
 
-	private Form $form;
+    private Form $form;
 
-	public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
-		parent::__construct($text, $image);
-		$this->form = $form;
-	}
+    public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
+        parent::__construct($text, $image);
+        $this->form = $form;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		SendForm::Send($player, $this->form);
-	}
+    public function handleSubmit(Player $player) : void {
+        SendForm::Send($player, $this->form);
+    }
 }

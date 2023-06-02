@@ -39,25 +39,25 @@ use pocketmine\command\CommandSender;
 
 class MultiWorldCommand extends BaseCommand {
 
-	protected function prepare() : void {
-		$this->registerSubCommand(new CreateSubCommand('create', 'Generate a new world', ['new', 'c']));
-		$this->registerSubCommand(new DebugSubCommand('debug', 'Displays debug information'));
-		$this->registerSubCommand(new DeleteSubCommand('delete', 'Remove world', ['remove', 'rm', 'del']));
-		$this->registerSubCommand(new DuplicateSubCommand('duplicate', 'Duplicate a world', ['dp']));
-		$this->registerSubCommand(new HelpSubCommand('help', 'Display all the MultiWorld commands', ['?']));
-		$this->registerSubCommand(new InfoSubCommand('info', 'Display information about specific world', ['i']));
-		$this->registerSubCommand(new ListSubCommand('list', 'Display list of all the world (including unloaded ones)', ['ls', 'l']));
-		$this->registerSubCommand(new LoadSubCommand('load', 'Load a world', ['ld']));
-		$this->registerSubCommand(new ManageSubCommand('manage', 'Show form for easier world management', ['mng', 'm']));
-		$this->registerSubCommand(new RenameSubCommand('rename', 'Rename world', ['rnm', 'rn']));
-		$this->registerSubCommand(new TeleportSubCommand('teleport', 'Teleport player to target world', ['tp']));
-		$this->registerSubCommand(new UnloadSubCommand('unload', 'Unload world', ['uld']));
-	}
+    /**
+     * @param array<string, mixed> $args
+     */
+    public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
+        $sender->sendMessage(LanguageManager::translateMessage($sender, 'default-usage'));
+    }
 
-	/**
-	 * @param array<string, mixed> $args
-	 */
-	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
-		$sender->sendMessage(LanguageManager::translateMessage($sender, 'default-usage'));
-	}
+    protected function prepare() : void {
+        $this->registerSubCommand(new CreateSubCommand('create', 'Generate a new world', ['new', 'c']));
+        $this->registerSubCommand(new DebugSubCommand('debug', 'Displays debug information'));
+        $this->registerSubCommand(new DeleteSubCommand('delete', 'Remove world', ['remove', 'rm', 'del']));
+        $this->registerSubCommand(new DuplicateSubCommand('duplicate', 'Duplicate a world', ['dp']));
+        $this->registerSubCommand(new HelpSubCommand('help', 'Display all the MultiWorld commands', ['?']));
+        $this->registerSubCommand(new InfoSubCommand('info', 'Display information about specific world', ['i']));
+        $this->registerSubCommand(new ListSubCommand('list', 'Display list of all the world (including unloaded ones)', ['ls', 'l']));
+        $this->registerSubCommand(new LoadSubCommand('load', 'Load a world', ['ld']));
+        $this->registerSubCommand(new ManageSubCommand('manage', 'Show form for easier world management', ['mng', 'm']));
+        $this->registerSubCommand(new RenameSubCommand('rename', 'Rename world', ['rnm', 'rn']));
+        $this->registerSubCommand(new TeleportSubCommand('teleport', 'Teleport player to target world', ['tp']));
+        $this->registerSubCommand(new UnloadSubCommand('unload', 'Unload world', ['uld']));
+    }
 }

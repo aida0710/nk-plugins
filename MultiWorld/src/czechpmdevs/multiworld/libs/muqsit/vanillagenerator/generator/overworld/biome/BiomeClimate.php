@@ -6,25 +6,25 @@ namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworl
 
 class BiomeClimate {
 
-	private float $temperature;
-	private float $humidity;
-	private bool $rainy;
+    private float $temperature;
+    private float $humidity;
+    private bool $rainy;
 
-	public function __construct(float $temperature, float $humidity, bool $rainy) {
-		$this->temperature = $temperature;
-		$this->humidity = $humidity;
-		$this->rainy = $rainy;
-	}
+    public function __construct(float $temperature, float $humidity, bool $rainy) {
+        $this->temperature = $temperature;
+        $this->humidity = $humidity;
+        $this->rainy = $rainy;
+    }
 
-	public function getTemperature() : float {
-		return $this->temperature;
-	}
+    public function getTemperature() : float {
+        return $this->temperature;
+    }
 
-	public function getHumidity() : float {
-		return $this->humidity;
-	}
+    public function getHumidity() : float {
+        return $this->humidity;
+    }
 
-	public function isRainy() : bool {
-		return $this->rainy;
-	}
+    public function isRainy() : bool {
+        return $this->rainy;
+    }
 }

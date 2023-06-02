@@ -25,11 +25,11 @@ use pocketmine\scheduler\Task;
 
 class SaveTask extends Task {
 
-	public function __construct(EconomyLand $plugin) {
-		$this->plugin = $plugin;
-	}
+    public function __construct(EconomyLand $plugin) {
+        $this->plugin = $plugin;
+    }
 
-	public function onRun() : void {
-		$this->plugin->save();
-	}
+    public function onRun() : void {
+        $this->plugin->save();
+    }
 }

@@ -12,19 +12,19 @@ use pocketmine\player\Player;
 
 class SaveTicketForm extends CustomForm {
 
-	public function __construct(Player $player) {
-		$this
-			->setTitle('Ticket')
-			->addElements(
-				new Label('データを保存します'),
-			);
-	}
+    public function __construct(Player $player) {
+        $this
+            ->setTitle('Ticket')
+            ->addElements(
+                new Label('データを保存します'),
+            );
+    }
 
-	public function handleSubmit(Player $player) : void {
-		if (TicketAPI::getInstance()->dataSave() === true) {
-			SendMessage::Send($player, 'Ticketデータをセーブしました', 'Ticket', true);
-		} else {
-			SendMessage::Send($player, 'Ticketデータのセーブに失敗しました', 'Ticket', true);
-		}
-	}
+    public function handleSubmit(Player $player) : void {
+        if (TicketAPI::getInstance()->dataSave() === true) {
+            SendMessage::Send($player, 'Ticketデータをセーブしました', 'Ticket', true);
+        } else {
+            SendMessage::Send($player, 'Ticketデータのセーブに失敗しました', 'Ticket', true);
+        }
+    }
 }

@@ -6,7 +6,7 @@ use pocketmine\block\Lantern;
 
 class SoulLantern extends Lantern {
 
-	public function getLightLevel() : int {
-		return 10;
-	}
+    public function getLightLevel() : int {
+        return 10;
+    }
 }

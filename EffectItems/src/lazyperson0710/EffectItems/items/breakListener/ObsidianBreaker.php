@@ -9,9 +9,9 @@ use pocketmine\event\block\BlockBreakEvent;
 
 class ObsidianBreaker {
 
-	public static function execution(BlockBreakEvent $event) : void {
-		if ($event->getBlock()->getId() !== BlockLegacyIds::OBSIDIAN) {
-			$event->cancel();
-		}
-	}
+    public static function execution(BlockBreakEvent $event) : void {
+        if ($event->getBlock()->getId() !== BlockLegacyIds::OBSIDIAN) {
+            $event->cancel();
+        }
+    }
 }

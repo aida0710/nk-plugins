@@ -11,37 +11,37 @@ use pocketmine\player\Player;
 
 class RedStoneOreBlock extends RedstoneOre {
 
-	protected bool $lit = false;
+    protected bool $lit = false;
 
-	public function readStateFromData(int $id, int $stateMeta) : void {
-		$this->lit = $id === $this->idInfoFlattened->getSecondId();
-	}
+    public function getLightLevel() : int {
+        return 0;
+    }
 
-	public function isLit() : bool {
-		return $this->lit;
-	}
+    public function isLit() : bool {
+        return $this->lit;
+    }
 
-	/**
-	 * @return $this
-	 */
-	public function setLit(bool $lit = true) : self {
-		return $this;
-	}
+    /**
+     * @return $this
+     */
+    public function setLit(bool $lit = true) : self {
+        return $this;
+    }
 
-	public function getLightLevel() : int {
-		return 0;
-	}
+    public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
+        return false;
+    }
 
-	public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
-		return false;
-	}
+    public function onNearbyBlockChange() : void {
+        #none
+    }
 
-	public function onNearbyBlockChange() : void {
-		#none
-	}
+    public function readStateFromData(int $id, int $stateMeta) : void {
+        $this->lit = $id === $this->idInfoFlattened->getSecondId();
+    }
 
-	public function ticksRandomly() : bool {
-		return false;
-	}
+    public function ticksRandomly() : bool {
+        return false;
+    }
 
 }

@@ -26,67 +26,67 @@ use pocketmine\player\Player;
 
 interface Provider {
 
-	public function __construct(EconomyAPI $plugin);
+    public function __construct(EconomyAPI $plugin);
 
-	public function open();
+    public function open();
 
-	/**
-	 * @param Player|string $player
-	 * @return bool
-	 */
-	public function accountExists($player);
+    /**
+     * @param Player|string $player
+     * @return bool
+     */
+    public function accountExists($player);
 
-	/**
-	 * @param Player|string $player
-	 * @param float         $defaultMoney
-	 * @return bool
-	 */
-	public function createAccount($player, $defaultMoney = 1000);
+    /**
+     * @param Player|string $player
+     * @param float         $defaultMoney
+     * @return bool
+     */
+    public function createAccount($player, $defaultMoney = 1000);
 
-	/**
-	 * @param Player|string $player
-	 * @return bool
-	 */
-	public function removeAccount($player);
+    /**
+     * @param Player|string $player
+     * @return bool
+     */
+    public function removeAccount($player);
 
-	/**
-	 * @param string $player
-	 * @return float|bool
-	 */
-	public function getMoney($player);
+    /**
+     * @param string $player
+     * @return float|bool
+     */
+    public function getMoney($player);
 
-	/**
-	 * @param Player|string $player
-	 * @param float         $amount
-	 * @return bool
-	 */
-	public function setMoney($player, $amount);
+    /**
+     * @param Player|string $player
+     * @param float         $amount
+     * @return bool
+     */
+    public function setMoney($player, $amount);
 
-	/**
-	 * @param Player|string $player
-	 * @param float         $amount
-	 * @return bool
-	 */
-	public function addMoney($player, $amount);
+    /**
+     * @param Player|string $player
+     * @param float         $amount
+     * @return bool
+     */
+    public function addMoney($player, $amount);
 
-	/**
-	 * @param Player|string $player
-	 * @param float         $amount
-	 * @return bool
-	 */
-	public function reduceMoney($player, $amount);
+    /**
+     * @param Player|string $player
+     * @param float         $amount
+     * @return bool
+     */
+    public function reduceMoney($player, $amount);
 
-	/**
-	 * @return array
-	 */
-	public function getAll();
+    /**
+     * @return array
+     */
+    public function getAll();
 
-	/**
-	 * @return string
-	 */
-	public function getName();
+    /**
+     * @return string
+     */
+    public function getName();
 
-	public function save();
+    public function save();
 
-	public function close();
+    public function close();
 }

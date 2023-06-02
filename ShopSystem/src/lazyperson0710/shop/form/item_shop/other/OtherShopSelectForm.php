@@ -20,5 +20,5 @@ class OtherShopSelectForm extends SimpleForm {
                 new SendMenuFormButton("アイテムを検索 [ID: search]\n表示されてる名前で検索が可能です(日本語)", new SearchItemForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
                 new FirstBackFormButton('ショップ選択メニューに戻る'),
             );
-	}
+    }
 }

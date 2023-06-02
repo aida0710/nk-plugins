@@ -23,54 +23,54 @@ use czechpmdevs\multiworld\libs\czechpmdevs\libpmform\Form;
 
 class CustomForm extends Form {
 
-	public function __construct(string $title, bool $ignoreInvalidResponse = false) {
-		parent::__construct(Form::FORM_TYPE_CUSTOM, $ignoreInvalidResponse);
-		$this->data['title'] = $title;
-		$this->data['content'] = [];
-	}
+    public function __construct(string $title, bool $ignoreInvalidResponse = false) {
+        parent::__construct(Form::FORM_TYPE_CUSTOM, $ignoreInvalidResponse);
+        $this->data['title'] = $title;
+        $this->data['content'] = [];
+    }
 
-	/**
-	 * Adds text input to the custom form
-	 */
-	public function addInput(string $text, ?string $defaultText = null, ?string $placeholder = null) : void {
-		$input = ['type' => 'input', 'text' => $text];
-		if ($defaultText !== null) {
-			$input['default'] = $defaultText;
-		}
-		if ($placeholder !== null) {
-			$input['placeholder'] = $placeholder;
-		}
-		$this->data['content'][] = $input;
-	}
+    /**
+     * Adds text input to the custom form
+     */
+    public function addInput(string $text, ?string $defaultText = null, ?string $placeholder = null) : void {
+        $input = ['type' => 'input', 'text' => $text];
+        if ($defaultText !== null) {
+            $input['default'] = $defaultText;
+        }
+        if ($placeholder !== null) {
+            $input['placeholder'] = $placeholder;
+        }
+        $this->data['content'][] = $input;
+    }
 
-	/**
-	 * Adds label (text) to the custom form
-	 */
-	public function addLabel(string $text) : void {
-		$this->data['content'][] = ['type' => 'label', 'text' => $text];
-	}
+    /**
+     * Adds label (text) to the custom form
+     */
+    public function addLabel(string $text) : void {
+        $this->data['content'][] = ['type' => 'label', 'text' => $text];
+    }
 
-	/**
-	 * Adds toggle (switch) to the custom form
-	 */
-	public function addToggle(string $text, ?bool $defaultValue = null) : void {
-		$toggle = ['type' => 'toggle', 'text' => $text];
-		if ($defaultValue !== null) {
-			$toggle['default'] = $defaultValue;
-		}
-		$this->data['content'][] = $toggle;
-	}
+    /**
+     * Adds toggle (switch) to the custom form
+     */
+    public function addToggle(string $text, ?bool $defaultValue = null) : void {
+        $toggle = ['type' => 'toggle', 'text' => $text];
+        if ($defaultValue !== null) {
+            $toggle['default'] = $defaultValue;
+        }
+        $this->data['content'][] = $toggle;
+    }
 
-	/**
-	 * Adds dropdown (menu with options) to the form
-	 *
-	 * @param string[] $options
-	 */
-	public function addDropdown(string $text, array $options, ?int $defaultOption = null) : void {
-		$dropdown = ['type' => 'dropdown', 'text' => $text, 'options' => $options];
-		if ($defaultOption !== null) {
-			$dropdown['default'] = $defaultOption;
-		}
-		$this->data['content'][] = $dropdown;
-	}
+    /**
+     * Adds dropdown (menu with options) to the form
+     *
+     * @param string[] $options
+     */
+    public function addDropdown(string $text, array $options, ?int $defaultOption = null) : void {
+        $dropdown = ['type' => 'dropdown', 'text' => $text, 'options' => $options];
+        if ($defaultOption !== null) {
+            $dropdown['default'] = $defaultOption;
+        }
+        $this->data['content'][] = $dropdown;
+    }
 }

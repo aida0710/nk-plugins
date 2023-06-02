@@ -40,7 +40,8 @@ class SaleForm implements Form {
 		}
 		$count = (int) floor($data[1]);
 		$this->item->getItem()->setCount($count);
-		StackStorageAPI::$instance->getCount($player->getXuid(), $this->item->getItem(), function ($count) use ($player, $data) : void {
+		StackStorageAPI::$instance->getCount($player->getXuid(), $this->item->getItem(),
+            function ($count) use ($player, $data) : void {
 			$this->item->setStorage($count);
 			$this->transaction($player, $data);
 		}, function () use ($player, $data) : void {

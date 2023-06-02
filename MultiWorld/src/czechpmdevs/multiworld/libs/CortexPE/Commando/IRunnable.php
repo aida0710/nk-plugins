@@ -41,19 +41,19 @@ use czechpmdevs\multiworld\libs\CortexPE\Commando\constraint\BaseConstraint;
  */
 interface IRunnable {
 
-	public function getName() : string;
+    public function getName() : string;
 
-	/**
-	 * @return string[]
-	 */
-	public function getAliases() : array;
+    /**
+     * @return string[]
+     */
+    public function getAliases() : array;
 
-	public function getUsageMessage() : string;
+    public function getUsageMessage() : string;
 
-	public function getPermission(); // f*ck. PM didn't declare a return type... reeee
+    public function getPermission(); // f*ck. PM didn't declare a return type... reeee
 
-	/**
-	 * @return BaseConstraint[]
-	 */
-	public function getConstraints() : array;
+    /**
+     * @return BaseConstraint[]
+     */
+    public function getConstraints() : array;
 }

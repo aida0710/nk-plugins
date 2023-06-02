@@ -15,18 +15,18 @@ use RuntimeException;
 
 class ItemShopAPI {
 
-	use SingletonTrait;
+    use SingletonTrait;
 
-	/** @var ItemShopObject[] */
-	private array $items = [];
-	/** @var array<string> */
-	private array $displayName;
-	/** @var ItemShopObject[] */
-	private array $itemByDisplayName;
-	/** @var ItemShopObject[] */
-	private array $itemByVanillaName;
+    /** @var ItemShopObject[] */
+    private array $items = [];
+    /** @var array<string> */
+    private array $displayName;
+    /** @var ItemShopObject[] */
+    private array $itemByDisplayName;
+    /** @var ItemShopObject[] */
+    private array $itemByVanillaName;
 
-	public function init() : void {
+    public function init() : void {
         $this->register(new ItemShopObject(VanillaBlocks::DIRT()->asItem(), 25, 1, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '土', true));
         $this->register(new ItemShopObject(VanillaBlocks::STONE()->asItem(), 25, 5, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '石', true));
         $this->register(new ItemShopObject(VanillaBlocks::COBBLESTONE()->asItem(), 25, 3, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '丸石', true));
@@ -131,32 +131,32 @@ class ItemShopAPI {
         $this->register(new ItemShopObject(VanillaBlocks::COBWEB()->asItem(), 50, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'クモの巣', true));
         $this->register(new ItemShopObject(VanillaBlocks::BLAST_FURNACE()->asItem(), 250, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '溶鉱炉', true));
         $this->register(new ItemShopObject(VanillaBlocks::SMOKER()->asItem(), 250, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '燻製器', true));
-		$this->register(new ItemShopObject(VanillaBlocks::LECTERN()->asItem(), 2500, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '書見台', true));
-		$this->register(new ItemShopObject(VanillaBlocks::RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'レール ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::POWERED_RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '加速レール ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::ACTIVATOR_RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '感知レール ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::DETECTOR_RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'アクティベーター レール ', false));
-		/*Shop4*/
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(444), 3500000, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_ELYTRA, 'エリトラ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::GRASS()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '草ブロック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::PODZOL()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, 'ポドゾル', true));
-		$this->register(new ItemShopObject(VanillaBlocks::MYCELIUM()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '菌糸ブロック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::MOSSY_COBBLESTONE()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '苔むした丸石', true));
-		$this->register(new ItemShopObject(VanillaBlocks::SMOOTH_STONE()->asItem(), 10, 3, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかな石', true));
-		$this->register(new ItemShopObject(VanillaBlocks::SMOOTH_QUARTZ()->asItem(), 10, 3, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかなクォーツブロック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::SMOOTH_SANDSTONE()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかな砂岩', true));
-		$this->register(new ItemShopObject(VanillaBlocks::SMOOTH_RED_SANDSTONE()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかな赤い砂岩', true));
-		$this->register(new ItemShopObject(VanillaItems::IRON_SWORD(), 300, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '鉄の剣', true));
-		$this->register(new ItemShopObject(VanillaItems::DIAMOND_SWORD(), 800, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, 'ダイヤモンドの剣', true));
-		$this->register(new ItemShopObject(VanillaItems::BOW(), 500, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '弓', true));
-		$this->register(new ItemShopObject(VanillaItems::ARROW(), 50, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '矢', true));
-		$this->register(new ItemShopObject(VanillaItems::SNOWBALL(), 15, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '雪玉', true));
-		$this->register(new ItemShopObject(VanillaItems::EGG(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '卵', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(513), 500, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '盾', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(772), 300000, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '望遠鏡', true));
-		/*Shop5*/
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(-273), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, 'ブラックストーン', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(-234), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, '玄武岩', true));
+        $this->register(new ItemShopObject(VanillaBlocks::LECTERN()->asItem(), 2500, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '書見台', true));
+        $this->register(new ItemShopObject(VanillaBlocks::RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'レール ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::POWERED_RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '加速レール ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::ACTIVATOR_RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '感知レール ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::DETECTOR_RAIL()->asItem(), 300, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'アクティベーター レール ', false));
+        /*Shop4*/
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(444), 3500000, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_ELYTRA, 'エリトラ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::GRASS()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '草ブロック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::PODZOL()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, 'ポドゾル', true));
+        $this->register(new ItemShopObject(VanillaBlocks::MYCELIUM()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '菌糸ブロック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::MOSSY_COBBLESTONE()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '苔むした丸石', true));
+        $this->register(new ItemShopObject(VanillaBlocks::SMOOTH_STONE()->asItem(), 10, 3, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかな石', true));
+        $this->register(new ItemShopObject(VanillaBlocks::SMOOTH_QUARTZ()->asItem(), 10, 3, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかなクォーツブロック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::SMOOTH_SANDSTONE()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかな砂岩', true));
+        $this->register(new ItemShopObject(VanillaBlocks::SMOOTH_RED_SANDSTONE()->asItem(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_OTHER_BLOCKS, '滑らかな赤い砂岩', true));
+        $this->register(new ItemShopObject(VanillaItems::IRON_SWORD(), 300, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '鉄の剣', true));
+        $this->register(new ItemShopObject(VanillaItems::DIAMOND_SWORD(), 800, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, 'ダイヤモンドの剣', true));
+        $this->register(new ItemShopObject(VanillaItems::BOW(), 500, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '弓', true));
+        $this->register(new ItemShopObject(VanillaItems::ARROW(), 50, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '矢', true));
+        $this->register(new ItemShopObject(VanillaItems::SNOWBALL(), 15, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '雪玉', true));
+        $this->register(new ItemShopObject(VanillaItems::EGG(), 10, 1, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '卵', true));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(513), 500, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '盾', true));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(772), 300000, 0, RestrictionShop::SHOP_4, ShopCategory::CAT_WEAPON, '望遠鏡', true));
+        /*Shop5*/
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-273), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, 'ブラックストーン', true));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-234), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, '玄武岩', true));
         $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-225), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, '真紅の幹', true));
         $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-226), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, '歪んだ幹', true));
         $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-232), 50, 0, RestrictionShop::SHOP_5, ShopCategory::CAT_BUILDING_MATERIALS, '真紅のナイリウム', true));
@@ -179,97 +179,97 @@ class ItemShopAPI {
         /*Shop6*/
         $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-265), 50, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '真紅の石', true));
         $this->register(new ItemShopObject(ItemFactory::getInstance()->get(720), 60000, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '焚き火', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(801), 60000, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '魂の焚き火', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(-268), 60, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '魂の松明', true));
-		$this->register(new ItemShopObject(VanillaBlocks::LANTERN()->asItem(), 50, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'ランタン', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(-269), 60, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '魂のランタン', true));
-		$this->register(new ItemShopObject(VanillaBlocks::SEA_PICKLE()->asItem(), 50, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'シーピクルス', true));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(758), 60, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'チェーン', true));
-		$this->register(new ItemShopObject(VanillaBlocks::BELL()->asItem(), 150000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'ベル', true));
-		$this->register(new ItemShopObject(VanillaBlocks::BEACON()->asItem(), 300000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'ビーコン ', false));
-		$this->register(new ItemShopObject(VanillaItems::PLAYER_HEAD(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'プレイヤーの頭', true));
-		$this->register(new ItemShopObject(VanillaItems::ZOMBIE_HEAD(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'ゾンビの頭', true));
-		$this->register(new ItemShopObject(VanillaItems::SKELETON_SKULL(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'スケルトンの頭蓋骨', true));
-		$this->register(new ItemShopObject(VanillaItems::CREEPER_HEAD(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'クリーパーの頭', true));
-		$this->register(new ItemShopObject(VanillaItems::WITHER_SKELETON_SKULL(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'ウィザースケルトンの頭蓋骨', true));
-		$this->register(new ItemShopObject(VanillaItems::DRAGON_HEAD(), 1200000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'エンダードラゴンの頭', true));
-		$this->register(new ItemShopObject(VanillaBlocks::DANDELION()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'タンポポ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::POPPY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ポピー', true));
-		$this->register(new ItemShopObject(VanillaBlocks::BLUE_ORCHID()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ヒスイラン', true));
-		$this->register(new ItemShopObject(VanillaBlocks::ALLIUM()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'アリウム', true));
-		$this->register(new ItemShopObject(VanillaBlocks::AZURE_BLUET()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ヒナソウ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::RED_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '赤のチューリップ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::ORANGE_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '橙のチューリップ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::WHITE_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '白のチューリップ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::PINK_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '桃色のチューリップ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::OXEYE_DAISY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'フランスギク', true));
-		$this->register(new ItemShopObject(VanillaBlocks::CORNFLOWER()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ヤグルマギク', true));
-		$this->register(new ItemShopObject(VanillaBlocks::LILY_OF_THE_VALLEY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'スズラン', true));
-		$this->register(new ItemShopObject(VanillaBlocks::LILAC()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ライラック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::ROSE_BUSH()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'バラの低木', true));
-		$this->register(new ItemShopObject(VanillaBlocks::PEONY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ボタン', true));
-		$this->register(new ItemShopObject(VanillaBlocks::FERN()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'シダ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::LARGE_FERN()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '大きなシダ', true));
-		$this->register(new ItemShopObject(VanillaBlocks::TALL_GRASS()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '草(wwww', true));
-		$this->register(new ItemShopObject(VanillaBlocks::DOUBLE_TALLGRASS()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '背の高い草', true));
-		$this->register(new ItemShopObject(VanillaBlocks::DEAD_BUSH()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '枯れ木', true));
-		$this->register(new ItemShopObject(VanillaBlocks::LILY_PAD()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'スイレンの葉', true));
-		$this->register(new ItemShopObject(VanillaBlocks::VINES()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'つた', true));
-		/*Shop7*/
-		$this->register(new ItemShopObject(VanillaBlocks::ITEM_FRAME()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '額縁', true));
-		$this->register(new ItemShopObject(VanillaBlocks::FLETCHING_TABLE()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '矢細工台 ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::COMPOUND_CREATOR()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '化合物作成機 ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::LOOM()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '織機 ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::ELEMENT_CONSTRUCTOR()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '元素構成機 ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::LAB_TABLE()->asItem(), 125000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '実験テーブル ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::MATERIAL_REDUCER()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '物質還元器 ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::BREWING_STAND()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '調合台 ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::ENCHANTING_TABLE()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, 'エンチャントテーブル ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::BARREL()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '樽ブロック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::NOTE_BLOCK()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '音符ブロック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::JUKEBOX()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, 'ジュークボックス', true));
-		$this->register(new ItemShopObject(VanillaBlocks::EMERALD()->asItem(), 15000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, 'エレベーターブロック', true));
-		$this->register(new ItemShopObject(VanillaBlocks::DAYLIGHT_SENSOR()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, '日照センサー', true));
-		$this->register(new ItemShopObject(VanillaBlocks::HOPPER()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'ホッパー', true));
-		$this->register(new ItemShopObject(VanillaBlocks::TNT()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'TNTブロック ', false));
-		$this->register(new ItemShopObject(ItemFactory::getInstance()->get(-239), 10, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'ターゲット ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::TRIPWIRE_HOOK()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'トリップワイヤーフック ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::TRAPPED_CHEST()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'トラップチェスト ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::REDSTONE_TORCH()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'レッドストーントーチ ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::REDSTONE_REPEATER()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'リピーター ', false));
-		$this->register(new ItemShopObject(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'コンパレーター ', false));
-	}
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(801), 60000, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '魂の焚き火', true));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-268), 60, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '魂の松明', true));
+        $this->register(new ItemShopObject(VanillaBlocks::LANTERN()->asItem(), 50, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'ランタン', true));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-269), 60, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, '魂のランタン', true));
+        $this->register(new ItemShopObject(VanillaBlocks::SEA_PICKLE()->asItem(), 50, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'シーピクルス', true));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(758), 60, 0, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'チェーン', true));
+        $this->register(new ItemShopObject(VanillaBlocks::BELL()->asItem(), 150000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'ベル', true));
+        $this->register(new ItemShopObject(VanillaBlocks::BEACON()->asItem(), 300000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_BUILDING_MATERIALS, 'ビーコン ', false));
+        $this->register(new ItemShopObject(VanillaItems::PLAYER_HEAD(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'プレイヤーの頭', true));
+        $this->register(new ItemShopObject(VanillaItems::ZOMBIE_HEAD(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'ゾンビの頭', true));
+        $this->register(new ItemShopObject(VanillaItems::SKELETON_SKULL(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'スケルトンの頭蓋骨', true));
+        $this->register(new ItemShopObject(VanillaItems::CREEPER_HEAD(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'クリーパーの頭', true));
+        $this->register(new ItemShopObject(VanillaItems::WITHER_SKELETON_SKULL(), 800000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'ウィザースケルトンの頭蓋骨', true));
+        $this->register(new ItemShopObject(VanillaItems::DRAGON_HEAD(), 1200000, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_HEADS, 'エンダードラゴンの頭', true));
+        $this->register(new ItemShopObject(VanillaBlocks::DANDELION()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'タンポポ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::POPPY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ポピー', true));
+        $this->register(new ItemShopObject(VanillaBlocks::BLUE_ORCHID()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ヒスイラン', true));
+        $this->register(new ItemShopObject(VanillaBlocks::ALLIUM()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'アリウム', true));
+        $this->register(new ItemShopObject(VanillaBlocks::AZURE_BLUET()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ヒナソウ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::RED_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '赤のチューリップ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::ORANGE_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '橙のチューリップ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::WHITE_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '白のチューリップ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::PINK_TULIP()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '桃色のチューリップ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::OXEYE_DAISY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'フランスギク', true));
+        $this->register(new ItemShopObject(VanillaBlocks::CORNFLOWER()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ヤグルマギク', true));
+        $this->register(new ItemShopObject(VanillaBlocks::LILY_OF_THE_VALLEY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'スズラン', true));
+        $this->register(new ItemShopObject(VanillaBlocks::LILAC()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ライラック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::ROSE_BUSH()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'バラの低木', true));
+        $this->register(new ItemShopObject(VanillaBlocks::PEONY()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'ボタン', true));
+        $this->register(new ItemShopObject(VanillaBlocks::FERN()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'シダ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::LARGE_FERN()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '大きなシダ', true));
+        $this->register(new ItemShopObject(VanillaBlocks::TALL_GRASS()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '草(wwww', true));
+        $this->register(new ItemShopObject(VanillaBlocks::DOUBLE_TALLGRASS()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '背の高い草', true));
+        $this->register(new ItemShopObject(VanillaBlocks::DEAD_BUSH()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, '枯れ木', true));
+        $this->register(new ItemShopObject(VanillaBlocks::LILY_PAD()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'スイレンの葉', true));
+        $this->register(new ItemShopObject(VanillaBlocks::VINES()->asItem(), 30, 1, RestrictionShop::SHOP_6, ShopCategory::CAT_VEGETATION, 'つた', true));
+        /*Shop7*/
+        $this->register(new ItemShopObject(VanillaBlocks::ITEM_FRAME()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '額縁', true));
+        $this->register(new ItemShopObject(VanillaBlocks::FLETCHING_TABLE()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '矢細工台 ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::COMPOUND_CREATOR()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '化合物作成機 ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::LOOM()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '織機 ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::ELEMENT_CONSTRUCTOR()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '元素構成機 ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::LAB_TABLE()->asItem(), 125000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '実験テーブル ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::MATERIAL_REDUCER()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '物質還元器 ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::BREWING_STAND()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '調合台 ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::ENCHANTING_TABLE()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, 'エンチャントテーブル ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::BARREL()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '樽ブロック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::NOTE_BLOCK()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, '音符ブロック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::JUKEBOX()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, 'ジュークボックス', true));
+        $this->register(new ItemShopObject(VanillaBlocks::EMERALD()->asItem(), 15000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_BUILDING_MATERIALS, 'エレベーターブロック', true));
+        $this->register(new ItemShopObject(VanillaBlocks::DAYLIGHT_SENSOR()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, '日照センサー', true));
+        $this->register(new ItemShopObject(VanillaBlocks::HOPPER()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'ホッパー', true));
+        $this->register(new ItemShopObject(VanillaBlocks::TNT()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'TNTブロック ', false));
+        $this->register(new ItemShopObject(ItemFactory::getInstance()->get(-239), 10, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'ターゲット ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::TRIPWIRE_HOOK()->asItem(), 25000, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'トリップワイヤーフック ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::TRAPPED_CHEST()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'トラップチェスト ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::REDSTONE_TORCH()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'レッドストーントーチ ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::REDSTONE_REPEATER()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'リピーター ', false));
+        $this->register(new ItemShopObject(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'コンパレーター ', false));
+    }
 
-	public function getItems() : array {
-		return $this->items;
-	}
+    public function getItems() : array {
+        return $this->items;
+    }
 
-	public function getDisplayName() : array {
-		return $this->displayName;
-	}
+    public function getDisplayName() : array {
+        return $this->displayName;
+    }
 
-	public function getItemByDisplayName(string $displayName) : ItemShopObject {
-		return $this->itemByDisplayName[$displayName];
-	}
+    public function getItemByDisplayName(string $displayName) : ItemShopObject {
+        return $this->itemByDisplayName[$displayName];
+    }
 
-	public function getCategory(int $shopId) : array {
-		if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
-		return $this->items[$shopId];
-	}
+    public function getCategory(int $shopId) : array {
+        if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
+        return $this->items[$shopId];
+    }
 
-	/**
-	 * @return ItemShopObject[]
-	 */
-	public function getCategoryItems(int $shopId, string $category) : array {
-		if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
-		return $this->items[$shopId][$category];
-	}
+    /**
+     * @return ItemShopObject[]
+     */
+    public function getCategoryItems(int $shopId, string $category) : array {
+        if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
+        return $this->items[$shopId][$category];
+    }
 
-	private function register(ItemShopObject $item) : void {
-		$this->items[$item->getShopId()][$item->getItemCategory()][] = $item;
-		$this->displayName[] = $item->getDisplayName();
-		$this->itemByVanillaName[] = $item;
-		$this->itemByDisplayName[$item->getDisplayName()] = $item;
-	}
+    private function register(ItemShopObject $item) : void {
+        $this->items[$item->getShopId()][$item->getItemCategory()][] = $item;
+        $this->displayName[] = $item->getDisplayName();
+        $this->itemByVanillaName[] = $item;
+        $this->itemByDisplayName[$item->getDisplayName()] = $item;
+    }
 
 }

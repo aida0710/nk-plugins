@@ -15,19 +15,19 @@ use pocketmine\player\Player;
 
 class SelectLoginBonusItemButton extends Button {
 
-	private LoginBonusItemInfo $itemInfo;
+    private LoginBonusItemInfo $itemInfo;
 
-	public function __construct(string $text, LoginBonusItemInfo $itemInfo) {
-		parent::__construct($text);
-		$this->itemInfo = $itemInfo;
-	}
+    public function __construct(string $text, LoginBonusItemInfo $itemInfo) {
+        parent::__construct($text);
+        $this->itemInfo = $itemInfo;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		if (CheckInventoryCalculation::check($player, $this->itemInfo->getCost())) {
-			SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
-		} else {
-			SendForm::Send($player, new BonusForm($player, "\n§cインベントリ内にあるログインボーナス数が足りません"));
-			SoundPacket::Send($player, 'note.bass');
-		}
-	}
+    public function handleSubmit(Player $player) : void {
+        if (CheckInventoryCalculation::check($player, $this->itemInfo->getCost())) {
+            SendForm::Send($player, (new ItemConvertConfirmationForm($this->itemInfo)));
+        } else {
+            SendForm::Send($player, new BonusForm($player, "\n§cインベントリ内にあるログインボーナス数が足りません"));
+            SoundPacket::Send($player, 'note.bass');
+        }
+    }
 }

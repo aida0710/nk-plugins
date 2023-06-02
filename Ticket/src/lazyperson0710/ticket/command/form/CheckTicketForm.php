@@ -14,36 +14,36 @@ use function is_null;
 
 class CheckTicketForm extends CustomForm {
 
-	private Dropdown $playerList;
+    private Dropdown $playerList;
 
-	public function __construct(Player $player) {
-		$names = null;
-		foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
-			$name = $playerName->getName();
-			$names[] .= $name;
-		}
-		if (is_null($names)) {
-			$names[] .= '表示可能なプレイヤーが存在しません';
-		}
-		$this->playerList = new Dropdown('Ticket数を取得したいプレイヤーを選択してください', $names);
-		$this
-			->setTitle('Ticket')
-			->addElements(
-				$this->playerList,
-			);
-	}
+    public function __construct(Player $player) {
+        $names = null;
+        foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
+            $name = $playerName->getName();
+            $names[] .= $name;
+        }
+        if (is_null($names)) {
+            $names[] .= '表示可能なプレイヤーが存在しません';
+        }
+        $this->playerList = new Dropdown('Ticket数を取得したいプレイヤーを選択してください', $names);
+        $this
+            ->setTitle('Ticket')
+            ->addElements(
+                $this->playerList,
+            );
+    }
 
-	public function handleSubmit(Player $player) : void {
-		$playerName = $this->playerList->getSelectedOption();
-		if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-			SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'Ticket', false);
-			return;
-		}
-		if (TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName)) !== false) {
-			$int = TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName));
-			SendMessage::Send($player, "{$playerName}のTicketの所持数は{$int}です", 'Ticket', true);
-		} else {
-			SendMessage::Send($player, "{$playerName}のTicketデータは存在しません", 'Ticket', false);
-		}
-	}
+    public function handleSubmit(Player $player) : void {
+        $playerName = $this->playerList->getSelectedOption();
+        if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
+            SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'Ticket', false);
+            return;
+        }
+        if (TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName)) !== false) {
+            $int = TicketAPI::getInstance()->checkData(Server::getInstance()->getPlayerByPrefix($playerName));
+            SendMessage::Send($player, "{$playerName}のTicketの所持数は{$int}です", 'Ticket', true);
+        } else {
+            SendMessage::Send($player, "{$playerName}のTicketデータは存在しません", 'Ticket', false);
+        }
+    }
 }

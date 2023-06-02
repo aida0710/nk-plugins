@@ -17,17 +17,17 @@ use pocketmine\player\GameMode;
 
 class Churu extends CookedMutton {
 
-	public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
-		$event->cancel();
-		$player = $event->getPlayer();
-		if (PlayerItemEvent::checkInterval($player) === false) return;
-		if ($player->getGamemode() !== GameMode::CREATIVE()) {
-			$player->getInventory()->removeItem($item->setCount(1));
-		}
-		$effect = new EffectInstance(VanillaEffects::HEALTH_BOOST(), 20 * 30, 1, false);
-		AddEffectPacket::Add($player, $effect, VanillaEffects::HEALTH_BOOST(), true);
-		$effect = new EffectInstance(VanillaEffects::SPEED(), 20 * 30, 2, false);
-		AddEffectPacket::Add($player, $effect, VanillaEffects::SPEED(), true);
-		SoundPacket::Send($player, 'item.trident.return');
-	}
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
+        $event->cancel();
+        $player = $event->getPlayer();
+        if (PlayerItemEvent::checkInterval($player) === false) return;
+        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+            $player->getInventory()->removeItem($item->setCount(1));
+        }
+        $effect = new EffectInstance(VanillaEffects::HEALTH_BOOST(), 20 * 30, 1, false);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::HEALTH_BOOST(), true);
+        $effect = new EffectInstance(VanillaEffects::SPEED(), 20 * 30, 2, false);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::SPEED(), true);
+        SoundPacket::Send($player, 'item.trident.return');
+    }
 }

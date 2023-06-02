@@ -30,27 +30,27 @@ use pocketmine\world\biome\BiomeRegistry;
 
 class DebugSubCommand extends BaseSubCommand {
 
-	protected function prepare() : void {
-		$this->addConstraint(new InGameRequiredConstraint($this));
-	}
+    /**
+     * @param array<string, mixed> $args
+     */
+    public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
+        if (!$sender instanceof Player) {
+            throw new AssumptionFailedError('Sender is not a player');
+        }
+        $position = $sender->getPosition()->floor();
+        $sender->sendMessage("Current position: {$position->getX()}, {$position->getY()}, {$position->getZ()}");
+        $chunkX = $position->getX() >> 4;
+        $chunkZ = $position->getZ() >> 4;
+        $sender->sendMessage("Current chunk position: $chunkX, $chunkZ");
+        $chunk = $sender->getPosition()->getWorld()->getChunk($chunkX, $chunkZ);
+        $x = $position->getX() & 0xf;
+        $z = $position->getZ() & 0xf;
+        $id = $chunk?->getBiomeId($x, $z) ?? 0;
+        $biome = BiomeRegistry::getInstance()->getBiome($id);
+        $sender->sendMessage("Current biome: [$id] {$biome->getName()}");
+    }
 
-	/**
-	 * @param array<string, mixed> $args
-	 */
-	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
-		if (!$sender instanceof Player) {
-			throw new AssumptionFailedError('Sender is not a player');
-		}
-		$position = $sender->getPosition()->floor();
-		$sender->sendMessage("Current position: {$position->getX()}, {$position->getY()}, {$position->getZ()}");
-		$chunkX = $position->getX() >> 4;
-		$chunkZ = $position->getZ() >> 4;
-		$sender->sendMessage("Current chunk position: $chunkX, $chunkZ");
-		$chunk = $sender->getPosition()->getWorld()->getChunk($chunkX, $chunkZ);
-		$x = $position->getX() & 0xf;
-		$z = $position->getZ() & 0xf;
-		$id = $chunk?->getBiomeId($x, $z) ?? 0;
-		$biome = BiomeRegistry::getInstance()->getBiome($id);
-		$sender->sendMessage("Current biome: [$id] {$biome->getName()}");
-	}
+    protected function prepare() : void {
+        $this->addConstraint(new InGameRequiredConstraint($this));
+    }
 }

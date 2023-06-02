@@ -16,43 +16,43 @@ use function is_numeric;
 
 class addTicketForm extends CustomForm {
 
-	private Dropdown $playerList;
-	private Input $int;
+    private Dropdown $playerList;
+    private Input $int;
 
-	public function __construct() {
-		$names = null;
-		foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
-			$name = $playerName->getName();
-			$names[] .= $name;
-		}
-		if (is_null($names)) {
-			$names[] .= '表示可能なプレイヤーが存在しません';
-		}
-		$this->playerList = new Dropdown('情報を操作したいプレイヤーを選択してください', $names);
-		$this->int = new Input('Ticketを追加したい数を入力', 'int');
-		$this
-			->setTitle('Ticket')
-			->addElements(
-				$this->playerList,
-				$this->int,
-			);
-	}
+    public function __construct() {
+        $names = null;
+        foreach (Server::getInstance()->getOnlinePlayers() as $playerName) {
+            $name = $playerName->getName();
+            $names[] .= $name;
+        }
+        if (is_null($names)) {
+            $names[] .= '表示可能なプレイヤーが存在しません';
+        }
+        $this->playerList = new Dropdown('情報を操作したいプレイヤーを選択してください', $names);
+        $this->int = new Input('Ticketを追加したい数を入力', 'int');
+        $this
+            ->setTitle('Ticket')
+            ->addElements(
+                $this->playerList,
+                $this->int,
+            );
+    }
 
-	public function handleSubmit(Player $player) : void {
-		$playerName = $this->playerList->getSelectedOption();
-		if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
-			SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'Ticket', false);
-			return;
-		}
-		if ($this->int->getValue() === '') {
-			SendMessage::Send($player, '増加分を入力してください', 'Ticket', false);
-			return;
-		}
-		if (is_numeric($this->int->getValue()) === false) {
-			SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
-			return;
-		}
-		$int = TicketAPI::getInstance()->addTicket(Server::getInstance()->getPlayerByPrefix($playerName), (int) $this->int->getValue());
-		SendMessage::Send($player, "{$playerName}のTicketを{$int}枚に増やしました", 'Ticket', true);
-	}
+    public function handleSubmit(Player $player) : void {
+        $playerName = $this->playerList->getSelectedOption();
+        if (!Server::getInstance()->getPlayerByPrefix($playerName)) {
+            SendMessage::Send($player, 'プレイヤーが存在しない為、正常にformを送信できませんでした', 'Ticket', false);
+            return;
+        }
+        if ($this->int->getValue() === '') {
+            SendMessage::Send($player, '増加分を入力してください', 'Ticket', false);
+            return;
+        }
+        if (is_numeric($this->int->getValue()) === false) {
+            SendMessage::Send($player, '整数のみ入力してください', 'Ticket', false);
+            return;
+        }
+        $int = TicketAPI::getInstance()->addTicket(Server::getInstance()->getPlayerByPrefix($playerName), (int) $this->int->getValue());
+        SendMessage::Send($player, "{$playerName}のTicketを{$int}枚に増やしました", 'Ticket', true);
+    }
 }

@@ -8,28 +8,28 @@ use lazyperson0710\PlayerSetting\object\Setting;
 
 class MiningToolsDestructionEnabledWorldsSetting extends Setting {
 
-	protected string $value;
+    protected string $value;
 
-	public static function getName() : string {
-		return 'MiningToolsDestructionEnabledWorlds';
-	}
+    public function getFallbackValue() : string {
+        return 'all';
+    }
 
-	/**
-	 * 入力可能な値
-	 * #all
-	 * #life
-	 * #nature
-	 * #none
-	 */
-	public function setValue(mixed $value) : void {
-		$this->value = $value;
-	}
+    public static function getName() : string {
+        return 'MiningToolsDestructionEnabledWorlds';
+    }
 
-	public function getValue() : string {
-		return $this->value ?? $this->getFallbackValue();
-	}
+    public function getValue() : string {
+        return $this->value ?? $this->getFallbackValue();
+    }
 
-	public function getFallbackValue() : string {
-		return 'all';
-	}
+    /**
+     * 入力可能な値
+     * #all
+     * #life
+     * #nature
+     * #none
+     */
+    public function setValue(mixed $value) : void {
+        $this->value = $value;
+    }
 }

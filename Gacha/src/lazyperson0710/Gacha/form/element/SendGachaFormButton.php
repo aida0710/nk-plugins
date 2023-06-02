@@ -12,14 +12,14 @@ use pocketmine\player\Player;
 
 class SendGachaFormButton extends Button {
 
-	private string $text;
+    private string $text;
 
-	public function __construct(string $text, ?ButtonImage $image = null) {
-		parent::__construct($text, $image);
-		$this->text = $text;
-	}
+    public function __construct(string $text, ?ButtonImage $image = null) {
+        parent::__construct($text, $image);
+        $this->text = $text;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		SendForm::Send($player, (new GachaForm($player, $this->text)));
-	}
+    public function handleSubmit(Player $player) : void {
+        SendForm::Send($player, (new GachaForm($player, $this->text)));
+    }
 }

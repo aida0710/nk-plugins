@@ -10,7 +10,7 @@ use ymggacha\src\yomogi_server\ymggacha\gacha\GachaRollingPlayersMap;
 
 class UnregisterRollingGachaListener implements Listener {
 
-	public function onQuit(PlayerQuitEvent $ev) : void {
-		GachaRollingPlayersMap::getInstance()->unregister($ev->getPlayer());
-	}
+    public function onQuit(PlayerQuitEvent $ev) : void {
+        GachaRollingPlayersMap::getInstance()->unregister($ev->getPlayer());
+    }
 }

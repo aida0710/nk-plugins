@@ -26,21 +26,21 @@ use onebone\economyapi\event\EconomyAPIEvent;
 
 class PayMoneyEvent extends EconomyAPIEvent {
 
-	public static $handlerList;
+    public static $handlerList;
 
-	public function __construct(EconomyAPI $plugin, private $payer, private $target, private $amount) {
-		parent::__construct($plugin, 'PayCommand');
-	}
+    public function __construct(EconomyAPI $plugin, private $payer, private $target, private $amount) {
+        parent::__construct($plugin, 'PayCommand');
+    }
 
-	public function getPayer() {
-		return $this->payer;
-	}
+    public function getPayer() {
+        return $this->payer;
+    }
 
-	public function getTarget() {
-		return $this->target;
-	}
+    public function getTarget() {
+        return $this->target;
+    }
 
-	public function getAmount() {
-		return $this->amount;
-	}
+    public function getAmount() {
+        return $this->amount;
+    }
 }

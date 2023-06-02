@@ -10,17 +10,17 @@ use pocketmine\event\Event;
 
 class BlockPlaceHandler implements BaseHandler {
 
-	public static function getTarget() : string {
-		return BlockPlaceEvent::class;
-	}
+    public static function getTarget() : string {
+        return BlockPlaceEvent::class;
+    }
 
-	public static function handleEvent(Event $ev) : void {
-		if (!$ev instanceof BlockPlaceEvent) return;
-		self::onBlockPlace($ev);
-	}
+    public static function handleEvent(Event $ev) : void {
+        if (!$ev instanceof BlockPlaceEvent) return;
+        self::onBlockPlace($ev);
+    }
 
-	protected static function onBlockPlace(BlockPlaceEvent $ev) : void {
-		$world = $ev->getBlock()->getPosition()->getWorld();
-		PlayerDataPool::onBlockPlace($ev->getPlayer(), $ev->getBlock(), $world);
-	}
+    protected static function onBlockPlace(BlockPlaceEvent $ev) : void {
+        $world = $ev->getBlock()->getPosition()->getWorld();
+        PlayerDataPool::onBlockPlace($ev->getPlayer(), $ev->getBlock(), $world);
+    }
 }

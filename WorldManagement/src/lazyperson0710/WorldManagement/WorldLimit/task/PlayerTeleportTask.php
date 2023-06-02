@@ -12,25 +12,25 @@ use pocketmine\Server;
 
 class PlayerTeleportTask extends Task {
 
-	private Player $player;
+    private Player $player;
 
-	private WorldProperty $property;
+    private WorldProperty $property;
 
-	public function __construct(Player $player, WorldProperty $property) {
-		$this->player = $player;
-		$this->property = $property;
-	}
+    public function __construct(Player $player, WorldProperty $property) {
+        $this->player = $player;
+        $this->property = $property;
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function onRun() : void {
-		if (!$this->player->isOnline()) {
-			return;
-		}
-		if (!$this->property->inSafeArea($this->player->getPosition())) {
-			Server::getInstance()->dispatchCommand($this->player, 'warp lobby');
-			SendMessage::Send($this->player, 'セーフエリアに戻らなかったため、ロビーにテレポートしました', 'WorldBorder', false);
-		}
-	}
+    /**
+     * @inheritDoc
+     */
+    public function onRun() : void {
+        if (!$this->player->isOnline()) {
+            return;
+        }
+        if (!$this->property->inSafeArea($this->player->getPosition())) {
+            Server::getInstance()->dispatchCommand($this->player, 'warp lobby');
+            SendMessage::Send($this->player, 'セーフエリアに戻らなかったため、ロビーにテレポートしました', 'WorldBorder', false);
+        }
+    }
 }

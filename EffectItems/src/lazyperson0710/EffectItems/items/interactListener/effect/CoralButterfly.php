@@ -17,20 +17,20 @@ use function mt_rand;
 
 class CoralButterfly {
 
-	public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
-		$event->cancel();
-		$player = $event->getPlayer();
-		if (PlayerItemEvent::checkInterval($player) === false) return;
-		if ($player->getGamemode() !== GameMode::CREATIVE()) {
-			$player->getInventory()->removeItem($item->setCount(1));
-		}
-		if (mt_rand(1, 2) === 1) {
-			$effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60 * 15, 50, false);
-			AddEffectPacket::Add($player, $effect, VanillaEffects::HASTE(), true);
-		} else {
-			$player->kill();
-		}
-		SoundPacket::Send($player, 'item.trident.return');
-	}
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
+        $event->cancel();
+        $player = $event->getPlayer();
+        if (PlayerItemEvent::checkInterval($player) === false) return;
+        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+            $player->getInventory()->removeItem($item->setCount(1));
+        }
+        if (mt_rand(1, 2) === 1) {
+            $effect = new EffectInstance(VanillaEffects::HASTE(), 20 * 60 * 15, 50, false);
+            AddEffectPacket::Add($player, $effect, VanillaEffects::HASTE(), true);
+        } else {
+            $player->kill();
+        }
+        SoundPacket::Send($player, 'item.trident.return');
+    }
 
 }

@@ -13,16 +13,16 @@ use pocketmine\utils\TextFormat;
 
 class YomogiGachaTicket extends Item {
 
-	protected const NAME = 'YomogiGachaTicket';
-	protected const META = 1;
+    protected const NAME = 'YomogiGachaTicket';
+    protected const META = 1;
 
-	public function __construct(string $name = self::NAME, int $meta = self::META) {
-		parent::__construct(new ItemIdentifier(ItemIds::PAPER, $meta), $name);
-	}
+    public function __construct(string $name = self::NAME, int $meta = self::META) {
+        parent::__construct(new ItemIdentifier(ItemIds::PAPER, $meta), $name);
+    }
 
-	public function init() : YomogiGachaTicket {
-		return $this->addEnchantment(new EnchantmentInstance(VanillaEnchantments::INFINITY(), 1))
-			->setCustomName(TextFormat::GREEN . 'よもぎガチャチケット')
-			->setLore(['/gachaでよもぎガチャを回せる']);
-	}
+    public function init() : YomogiGachaTicket {
+        return $this->addEnchantment(new EnchantmentInstance(VanillaEnchantments::INFINITY(), 1))
+            ->setCustomName(TextFormat::GREEN . 'よもぎガチャチケット')
+            ->setLore(['/gachaでよもぎガチャを回せる']);
+    }
 }

@@ -10,10 +10,10 @@ use pocketmine\event\Listener;
 
 class PlayerBlockPlaceEvent implements Listener {
 
-	public function onBlockPlace(BlockPlaceEvent $event) {
-		if ($event->isCancelled()) return;
-		$player = $event->getPlayer();
-		$NamedTag = $player->getInventory()->getItemInHand()->getNamedTag();
-		if ($NamedTag->getTag('ExplosionBlock') !== null) ExplosionTNT::execution($event);
-	}
+    public function onBlockPlace(BlockPlaceEvent $event) {
+        if ($event->isCancelled()) return;
+        $player = $event->getPlayer();
+        $NamedTag = $player->getInventory()->getItemInHand()->getNamedTag();
+        if ($NamedTag->getTag('ExplosionBlock') !== null) ExplosionTNT::execution($event);
+    }
 }

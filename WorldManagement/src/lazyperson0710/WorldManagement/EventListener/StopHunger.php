@@ -11,10 +11,10 @@ use function in_array;
 
 class StopHunger implements Listener {
 
-	public function onHunger(PlayerExhaustEvent $event) {
-		$WorldName = $event->getPlayer()->getWorld()->getFolderName();
-		if (in_array($WorldName, WorldCategory::PublicWorld, true) || in_array($WorldName, WorldCategory::PublicEventWorld, true)) {
-			$event->cancel();
-		}
-	}
+    public function onHunger(PlayerExhaustEvent $event) {
+        $WorldName = $event->getPlayer()->getWorld()->getFolderName();
+        if (in_array($WorldName, WorldCategory::PublicWorld, true) || in_array($WorldName, WorldCategory::PublicEventWorld, true)) {
+            $event->cancel();
+        }
+    }
 }

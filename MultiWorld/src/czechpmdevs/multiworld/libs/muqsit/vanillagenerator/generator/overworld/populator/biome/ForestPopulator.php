@@ -18,62 +18,61 @@ use function count;
 
 class ForestPopulator extends BiomePopulator {
 
-	private const BIOMES = [BiomeIds::FOREST, BiomeIds::FOREST_HILLS];
+    private const BIOMES = [BiomeIds::FOREST, BiomeIds::FOREST_HILLS];
 
-	/** @var TreeDecoration[] */
-	protected static array $TREES;
+    /** @var TreeDecoration[] */
+    protected static array $TREES;
 
-	/** @var DoublePlant[] */
-	private static array $DOUBLE_PLANTS;
+    /** @var DoublePlant[] */
+    private static array $DOUBLE_PLANTS;
+    protected int $doublePlantLoweringAmount = 3;
 
-	public static function init() : void {
-		parent::init();
-		self::$DOUBLE_PLANTS = [
-			VanillaBlocks::LILAC(),
-			VanillaBlocks::ROSE_BUSH(),
-			VanillaBlocks::PEONY(),
-		];
-	}
+    public function getBiomes() : ?array {
+        return self::BIOMES;
+    }
 
-	protected static function initTrees() : void {
-		self::$TREES = [
-			new TreeDecoration(GenericTree::class, 4),
-			new TreeDecoration(BirchTree::class, 1),
-		];
-	}
+    public static function init() : void {
+        parent::init();
+        self::$DOUBLE_PLANTS = [
+            VanillaBlocks::LILAC(),
+            VanillaBlocks::ROSE_BUSH(),
+            VanillaBlocks::PEONY(),
+        ];
+    }
 
-	protected int $doublePlantLoweringAmount = 3;
+    protected function initPopulators() : void {
+        $this->doublePlantDecorator->setAmount(0);
+        $this->treeDecorator->setAmount(10);
+        $this->treeDecorator->setTrees(...self::$TREES);
+        $this->tallGrassDecorator->setAmount(2);
+    }
 
-	protected function initPopulators() : void {
-		$this->doublePlantDecorator->setAmount(0);
-		$this->treeDecorator->setAmount(10);
-		$this->treeDecorator->setTrees(...self::$TREES);
-		$this->tallGrassDecorator->setAmount(2);
-	}
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(GenericTree::class, 4),
+            new TreeDecoration(BirchTree::class, 1),
+        ];
+    }
 
-	public function getBiomes() : ?array {
-		return self::BIOMES;
-	}
-
-	public function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
-		$sourceX = $chunkX << 4;
-		$sourceZ = $chunkZ << 4;
-		$amount = $random->nextBoundedInt(5) - $this->doublePlantLoweringAmount;
-		$i = 0;
-		while ($i < $amount) {
-			for ($j = 0; $j < 5; ++$j, ++$i) {
-				$x = $random->nextBoundedInt(16);
-				$z = $random->nextBoundedInt(16);
-				$y = $random->nextBoundedInt($chunk->getHighestBlockAt($x, $z) + 32);
-				$species = self::$DOUBLE_PLANTS[$random->nextBoundedInt(count(self::$DOUBLE_PLANTS))];
-				if ((new DoubleTallPlant($species))->generate($world, $random, $sourceX + $x, $y, $sourceZ + $z)) {
-					++$i;
-					break;
-				}
-			}
-		}
-		parent::populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
-	}
+    public function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
+        $sourceX = $chunkX << 4;
+        $sourceZ = $chunkZ << 4;
+        $amount = $random->nextBoundedInt(5) - $this->doublePlantLoweringAmount;
+        $i = 0;
+        while ($i < $amount) {
+            for ($j = 0; $j < 5; ++$j, ++$i) {
+                $x = $random->nextBoundedInt(16);
+                $z = $random->nextBoundedInt(16);
+                $y = $random->nextBoundedInt($chunk->getHighestBlockAt($x, $z) + 32);
+                $species = self::$DOUBLE_PLANTS[$random->nextBoundedInt(count(self::$DOUBLE_PLANTS))];
+                if ((new DoubleTallPlant($species))->generate($world, $random, $sourceX + $x, $y, $sourceZ + $z)) {
+                    ++$i;
+                    break;
+                }
+            }
+        }
+        parent::populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
+    }
 }
 
 ForestPopulator::init();

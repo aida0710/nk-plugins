@@ -35,47 +35,47 @@ use pocketmine\network\mcpe\protocol\types\command\CommandParameter;
 
 abstract class BaseArgument {
 
-	protected string $name;
+    protected string $name;
 
-	protected bool $optional = false;
+    protected bool $optional = false;
 
-	protected CommandParameter $parameterData;
+    protected CommandParameter $parameterData;
 
-	public function __construct(string $name, bool $optional = false) {
-		$this->name = $name;
-		$this->optional = $optional;
-		$this->parameterData = new CommandParameter();
-		$this->parameterData->paramName = $name;
-		$this->parameterData->paramType = AvailableCommandsPacket::ARG_FLAG_VALID;
-		$this->parameterData->paramType |= $this->getNetworkType();
-		$this->parameterData->isOptional = $this->isOptional();
-	}
+    public function __construct(string $name, bool $optional = false) {
+        $this->name = $name;
+        $this->optional = $optional;
+        $this->parameterData = new CommandParameter();
+        $this->parameterData->paramName = $name;
+        $this->parameterData->paramType = AvailableCommandsPacket::ARG_FLAG_VALID;
+        $this->parameterData->paramType |= $this->getNetworkType();
+        $this->parameterData->isOptional = $this->isOptional();
+    }
 
-	abstract public function getNetworkType() : int;
+    abstract public function getNetworkType() : int;
 
-	abstract public function canParse(string $testString, CommandSender $sender) : bool;
+    abstract public function canParse(string $testString, CommandSender $sender) : bool;
 
-	abstract public function parse(string $argument, CommandSender $sender) : mixed;
+    abstract public function parse(string $argument, CommandSender $sender) : mixed;
 
-	public function getName() : string {
-		return $this->name;
-	}
+    public function getName() : string {
+        return $this->name;
+    }
 
-	public function isOptional() : bool {
-		return $this->optional;
-	}
+    public function isOptional() : bool {
+        return $this->optional;
+    }
 
-	/**
-	 * Returns how much command arguments
-	 * it takes to build the full argument
-	 */
-	public function getSpanLength() : int {
-		return 1;
-	}
+    /**
+     * Returns how much command arguments
+     * it takes to build the full argument
+     */
+    public function getSpanLength() : int {
+        return 1;
+    }
 
-	abstract public function getTypeName() : string;
+    abstract public function getTypeName() : string;
 
-	public function getNetworkParameterData() : CommandParameter {
-		return $this->parameterData;
-	}
+    public function getNetworkParameterData() : CommandParameter {
+        return $this->parameterData;
+    }
 }

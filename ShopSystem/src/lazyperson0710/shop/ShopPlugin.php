@@ -14,17 +14,17 @@ use pocketmine\plugin\PluginBase;
 
 class ShopPlugin extends PluginBase {
 
-	protected function onEnable() : void {
-		ItemShopAPI::getInstance()->init();
-		EffectShopAPI::getInstance()->init();
-		EnchantShopAPI::getInstance()->init();
-		$this->getServer()->getCommandMap()->registerAll('shopSystem', [
-			new ItemShopCommand(),
-			new EnchantShopCommand(),
-			new EffectShopCommand(),
-		]);
-	}
+    protected function onDisable() : void {
+    }
 
-	protected function onDisable() : void {
-	}
+    protected function onEnable() : void {
+        ItemShopAPI::getInstance()->init();
+        EffectShopAPI::getInstance()->init();
+        EnchantShopAPI::getInstance()->init();
+        $this->getServer()->getCommandMap()->registerAll('shopSystem', [
+            new ItemShopCommand(),
+            new EnchantShopCommand(),
+            new EffectShopCommand(),
+        ]);
+    }
 }

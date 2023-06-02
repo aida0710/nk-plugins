@@ -15,21 +15,21 @@ use pocketmine\item\ToolTier;
 
 class Override {
 
-	public function init() : void {
-		BlockFactory::getInstance()->register(
-			new RedStoneOreBlock(
-				new BIDFlattened(
-					Ids::REDSTONE_ORE,
-					[Ids::LIT_REDSTONE_ORE],
-					0
-				),
-				'Redstone Ore',
-				new BreakInfo(
-					3.0,
-					ToolType::PICKAXE,
-					ToolTier::IRON()->getHarvestLevel())
-			), true);
-		BlockFactory::getInstance()->register(new VanillaSponge(), true);
-	}
+    public function init() : void {
+        BlockFactory::getInstance()->register(
+            new RedStoneOreBlock(
+                new BIDFlattened(
+                    Ids::REDSTONE_ORE,
+                    [Ids::LIT_REDSTONE_ORE],
+                    0
+                ),
+                'Redstone Ore',
+                new BreakInfo(
+                    3.0,
+                    ToolType::PICKAXE,
+                    ToolTier::IRON()->getHarvestLevel())
+            ), true);
+        BlockFactory::getInstance()->register(new VanillaSponge(), true);
+    }
 
 }

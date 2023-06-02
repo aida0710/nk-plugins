@@ -16,39 +16,39 @@ use pocketmine\world\BlockTransaction;
 
 class FloorSign extends BaseSign {//TODO: FloorSign is final in PM:(
 
-	use SignLikeRotationTrait;
+    use SignLikeRotationTrait;
 
-	public function readStateFromData(int $id, int $stateMeta) : void {
-		$this->rotation = $stateMeta;
-	}
+    public function getDrops(Item $item) : array {
+        return match ($this->getId()) {
+            CustomIds::CRIMSON_FLOOR_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::CRIMSON_SIGN)],
+            CustomIds::WARPED_FLOOR_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::WARPED_SIGN)],
+            default => throw new AssumptionFailedError("Unreachable")
+        };
+    }
 
-	protected function writeStateToMeta() : int {
-		return $this->rotation;
-	}
+    public function getStateBitmask() : int {
+        return 0b1111;
+    }
 
-	public function getStateBitmask() : int {
-		return 0b1111;
-	}
+    protected function getSupportingFace() : int {
+        return Facing::DOWN;
+    }
 
-	protected function getSupportingFace() : int {
-		return Facing::DOWN;
-	}
+    public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
+        if ($face !== Facing::UP) {
+            return false;
+        }
+        if ($player !== null) {
+            $this->rotation = self::getRotationFromYaw($player->getLocation()->getYaw());
+        }
+        return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
+    }
 
-	public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
-		if ($face !== Facing::UP) {
-			return false;
-		}
-		if ($player !== null) {
-			$this->rotation = self::getRotationFromYaw($player->getLocation()->getYaw());
-		}
-		return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
-	}
+    public function readStateFromData(int $id, int $stateMeta) : void {
+        $this->rotation = $stateMeta;
+    }
 
-	public function getDrops(Item $item) : array {
-		return match ($this->getId()) {
-			CustomIds::CRIMSON_FLOOR_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::CRIMSON_SIGN)],
-			CustomIds::WARPED_FLOOR_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::WARPED_SIGN)],
-			default => throw new AssumptionFailedError("Unreachable")
-		};
-	}
+    protected function writeStateToMeta() : int {
+        return $this->rotation;
+    }
 }

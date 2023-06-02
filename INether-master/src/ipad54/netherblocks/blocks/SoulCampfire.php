@@ -8,13 +8,13 @@ use pocketmine\item\ItemFactory;
 
 class SoulCampfire extends Campfire {
 
-	public function isSoul() : bool {
-		return true;
-	}
+    public function getDropsForCompatibleTool(Item $item) : array {
+        return [
+            ItemFactory::getInstance()->get(CustomIds::SOUL_SOIL_ITEM, 0),
+        ];
+    }
 
-	public function getDropsForCompatibleTool(Item $item) : array {
-		return [
-			ItemFactory::getInstance()->get(CustomIds::SOUL_SOIL_ITEM, 0),
-		];
-	}
+    public function isSoul() : bool {
+        return true;
+    }
 }

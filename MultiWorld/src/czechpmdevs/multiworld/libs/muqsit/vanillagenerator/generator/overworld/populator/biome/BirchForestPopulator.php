@@ -10,26 +10,26 @@ use czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworld\deco
 
 class BirchForestPopulator extends ForestPopulator {
 
-	private const BIOMES = [BiomeIds::BIRCH_FOREST, BiomeIds::BIRCH_FOREST_HILLS];
+    private const BIOMES = [BiomeIds::BIRCH_FOREST, BiomeIds::BIRCH_FOREST_HILLS];
 
-	/** @var TreeDecoration[] */
-	protected static array $TREES;
+    /** @var TreeDecoration[] */
+    protected static array $TREES;
 
-	protected static function initTrees() : void {
-		self::$TREES = [
-			new TreeDecoration(BirchTree::class, 1),
-		];
-	}
+    public function getBiomes() : ?array {
+        return self::BIOMES;
+    }
 
-	protected function initPopulators() : void {
-		$this->treeDecorator->setAmount(10);
-		$this->treeDecorator->setTrees(...self::$TREES);
-		$this->tallGrassDecorator->setAmount(2);
-	}
+    protected function initPopulators() : void {
+        $this->treeDecorator->setAmount(10);
+        $this->treeDecorator->setTrees(...self::$TREES);
+        $this->tallGrassDecorator->setAmount(2);
+    }
 
-	public function getBiomes() : ?array {
-		return self::BIOMES;
-	}
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(BirchTree::class, 1),
+        ];
+    }
 }
 
 BirchForestPopulator::init();

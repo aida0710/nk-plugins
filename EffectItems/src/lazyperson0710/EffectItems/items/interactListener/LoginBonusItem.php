@@ -12,11 +12,11 @@ use pocketmine\event\player\PlayerItemUseEvent;
 
 class LoginBonusItem {
 
-	public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event) : void {
-		$player = $event->getPlayer();
-		$event->cancel();
-		SoundPacket::Send($player, 'sign.dye.use');
-		SendForm::Send($player, new BonusForm($player));
-	}
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event) : void {
+        $player = $event->getPlayer();
+        $event->cancel();
+        SoundPacket::Send($player, 'sign.dye.use');
+        SendForm::Send($player, new BonusForm($player));
+    }
 
 }

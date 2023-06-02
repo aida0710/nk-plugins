@@ -25,13 +25,13 @@ class InvSellConfirmationForm extends SimpleForm {
     public function __construct() {
         $this
             ->setTitle('Level Shop')
-			->setText('inventory内のアイテムを一括売却します' . PHP_EOL . PHP_EOL . '売却値が0円のアイテムや解放されていないアイテム(レベル不足)は売却されません')
-			->addElements(new Button('確認画面に進む'));
-	}
+            ->setText('inventory内のアイテムを一括売却します' . PHP_EOL . PHP_EOL . '売却値が0円のアイテムや解放されていないアイテム(レベル不足)は売却されません')
+            ->addElements(new Button('確認画面に進む'));
+    }
 
-	public function handleSubmit(Player $player) : void {
-		$inventory = $player->getInventory();
-		for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
+    public function handleSubmit(Player $player) : void {
+        $inventory = $player->getInventory();
+        for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
             $item = clone $inventory->getItem($i);
             if ($item->getId() == ItemIds::AIR) continue;
             if (ItemShopAPI::getInstance()->get())
@@ -47,14 +47,14 @@ class InvSellConfirmationForm extends SimpleForm {
             $allSellMoney += $sellMoney;
             $allCount += $item->getCount();
             $allItem .= $item->getName() . " x{$count}\n";
-		}
-		if (is_null($allItem)) {
-			SendMessage::Send($player, '売却できるアイテムが存在しません', 'LevelShop', true, 'dig.chain');
-			return;
-		}
-		if (is_null($insufficientLevelAllItem)) {
-			$insufficientLevelAllItem .= "none\n";
-		}
-		SendForm::Send($player, (new InvSellResultForm($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem)));
-	}
+        }
+        if (is_null($allItem)) {
+            SendMessage::Send($player, '売却できるアイテムが存在しません', 'LevelShop', true, 'dig.chain');
+            return;
+        }
+        if (is_null($insufficientLevelAllItem)) {
+            $insufficientLevelAllItem .= "none\n";
+        }
+        SendForm::Send($player, (new InvSellResultForm($allCount, $allSellMoney, $allItem, $insufficientLevelAllCount, $insufficientLevelAllItem)));
+    }
 }

@@ -22,23 +22,23 @@ class InvSellResultForm extends SimpleForm {
 
     public function handleSubmit(Player $player) : void {
         $inventory = $player->getInventory();
-		$allCount = 0;
-		$allSellMoney = 0;
-		for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
-			$item = clone $inventory->getItem($i);
-			if ($item->getId() == ItemIds::AIR) continue;
-			if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
-			if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'failure') {
-				continue;
-			} elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'exception') continue;
-			$sellMoney = LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta());
-			$count = $item->getCount();
-			$sellMoney = $sellMoney * $count;
-			$allCount += $item->getCount();
-			$allSellMoney += $sellMoney;
-			$inventory->removeItem($item);
-		}
-		EconomyAPI::getInstance()->addMoney($player->getName(), $allSellMoney);
-		SendMessage::Send($player, "{$allSellMoney}円で{$allCount}個のアイテムが売却されました", 'LevelShop', true, 'break.amethyst_block');
-	}
+        $allCount = 0;
+        $allSellMoney = 0;
+        for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {
+            $item = clone $inventory->getItem($i);
+            if ($item->getId() == ItemIds::AIR) continue;
+            if (LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta()) == 0) continue;
+            if (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'failure') {
+                continue;
+            } elseif (LevelShopAPI::getInstance()->checkLevel($player, $item->getId(), $item->getMeta()) === 'exception') continue;
+            $sellMoney = LevelShopAPI::getInstance()->getSell($item->getId(), $item->getMeta());
+            $count = $item->getCount();
+            $sellMoney = $sellMoney * $count;
+            $allCount += $item->getCount();
+            $allSellMoney += $sellMoney;
+            $inventory->removeItem($item);
+        }
+        EconomyAPI::getInstance()->addMoney($player->getName(), $allSellMoney);
+        SendMessage::Send($player, "{$allSellMoney}円で{$allCount}個のアイテムが売却されました", 'LevelShop', true, 'break.amethyst_block');
+    }
 }

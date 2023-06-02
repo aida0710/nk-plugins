@@ -14,11 +14,11 @@ use pocketmine\world\BlockTransaction;
 
 class NetherSprouts extends Flowable {
 
-	public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
-		$down = $this->getSide(Facing::DOWN);
-		if (in_array($down->getId(), [BlockLegacyIds::FARMLAND, BlockLegacyIds::PODZOL, BlockLegacyIds::GRASS, CustomIds::NYLIUM_BLOCK, CustomIds::WARPED_NYLIUM_BLOCK, CustomIds::SOUL_SOIL_BLOCK])) {
-			return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
-		}
-		return false;
-	}
+    public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
+        $down = $this->getSide(Facing::DOWN);
+        if (in_array($down->getId(), [BlockLegacyIds::FARMLAND, BlockLegacyIds::PODZOL, BlockLegacyIds::GRASS, CustomIds::NYLIUM_BLOCK, CustomIds::WARPED_NYLIUM_BLOCK, CustomIds::SOUL_SOIL_BLOCK])) {
+            return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
+        }
+        return false;
+    }
 }

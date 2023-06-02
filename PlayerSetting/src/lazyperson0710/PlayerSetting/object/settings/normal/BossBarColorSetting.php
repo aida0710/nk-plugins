@@ -9,21 +9,21 @@ use pocketmine\network\mcpe\protocol\types\BossBarColor;
 
 class BossBarColorSetting extends Setting {
 
-	protected int $value;
+    protected int $value;
 
-	public static function getName() : string {
-		return 'BossBarColor';
-	}
+    public function getFallbackValue() : int {
+        return BossBarColor::PINK;
+    }
 
-	public function setValue(mixed $value) : void {
-		$this->value = $value;
-	}
+    public static function getName() : string {
+        return 'BossBarColor';
+    }
 
-	public function getValue() : int {
-		return $this->value ?? $this->getFallbackValue();
-	}
+    public function getValue() : int {
+        return $this->value ?? $this->getFallbackValue();
+    }
 
-	public function getFallbackValue() : int {
-		return BossBarColor::PINK;
-	}
+    public function setValue(mixed $value) : void {
+        $this->value = $value;
+    }
 }

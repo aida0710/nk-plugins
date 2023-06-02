@@ -44,6 +44,10 @@ class ItemBuyForm extends CustomForm {
         );
     }
 
+    public function handleClosed(Player $player) : void {
+        SendForm::Send($player, new SelectTypeForm($player, $this->item));
+    }
+
     public function handleSubmit(Player $player) : void {
         $count = $this->count->getValue();
         if (!is_numeric($count)) {
@@ -77,9 +81,5 @@ class ItemBuyForm extends CustomForm {
         EconomyAPI::getInstance()->reduceMoney($player, $this->item->getBuy() * $count);
         $totalPrice = $this->item->getBuy() * $count;
         SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', 'LevelShop', true, 'break.amethyst_block');
-    }
-
-    public function handleClosed(Player $player) : void {
-        SendForm::Send($player, new SelectTypeForm($player, $this->item));
     }
 }

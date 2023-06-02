@@ -15,25 +15,25 @@ use pocketmine\player\Player;
 
 class SendFormLevelCheckButton extends Button {
 
-	private Form $form;
-	private int $level;
-	private ?bool $handItemCheck;
+    private Form $form;
+    private int $level;
+    private ?bool $handItemCheck;
 
-	public function __construct(Form $form, string $text, int $level, ?bool $handItemCheck = false, ?ButtonImage $image = null) {
-		parent::__construct($text, $image);
-		$this->form = $form;
-		$this->level = $level;
-		$this->handItemCheck = $handItemCheck;
-	}
+    public function __construct(Form $form, string $text, int $level, ?bool $handItemCheck = false, ?ButtonImage $image = null) {
+        parent::__construct($text, $image);
+        $this->form = $form;
+        $this->level = $level;
+        $this->handItemCheck = $handItemCheck;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		if (MiningLevelAPI::getInstance()->getLevel($player) < $this->level) {
-			SendMessage::Send($player, 'レベル' . $this->level . '以上でないと開けません', 'MiningTool', false);
-			return;
-		}
-		if ($this->handItemCheck === true) {
-			if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
-		}
-		SendForm::Send($player, $this->form);
-	}
+    public function handleSubmit(Player $player) : void {
+        if (MiningLevelAPI::getInstance()->getLevel($player) < $this->level) {
+            SendMessage::Send($player, 'レベル' . $this->level . '以上でないと開けません', 'MiningTool', false);
+            return;
+        }
+        if ($this->handItemCheck === true) {
+            if ((new CheckPlayerData())->checkMiningToolsNBT($player) === false) return;
+        }
+        SendForm::Send($player, $this->form);
+    }
 }

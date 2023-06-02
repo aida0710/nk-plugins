@@ -17,25 +17,25 @@ use pocketmine\world\BlockTransaction;
 
 class WallSign extends BaseSign { //TODO: WallSign is final in PM:(
 
-	use NormalHorizontalFacingInMetadataTrait;
+    use NormalHorizontalFacingInMetadataTrait;
 
-	protected function getSupportingFace() : int {
-		return Facing::opposite($this->facing);
-	}
+    public function getDrops(Item $item) : array {
+        return match ($this->getId()) {
+            CustomIds::CRIMSON_WALL_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::CRIMSON_SIGN)],
+            CustomIds::WARPED_WALL_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::WARPED_SIGN)],
+            default => throw new AssumptionFailedError("Unreachable")
+        };
+    }
 
-	public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
-		if (Facing::axis($face) === Axis::Y) {
-			return false;
-		}
-		$this->facing = $face;
-		return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
-	}
+    protected function getSupportingFace() : int {
+        return Facing::opposite($this->facing);
+    }
 
-	public function getDrops(Item $item) : array {
-		return match ($this->getId()) {
-			CustomIds::CRIMSON_WALL_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::CRIMSON_SIGN)],
-			CustomIds::WARPED_WALL_SIGN_BLOCK => [ItemFactory::getInstance()->get(CustomIds::WARPED_SIGN)],
-			default => throw new AssumptionFailedError("Unreachable")
-		};
-	}
+    public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
+        if (Facing::axis($face) === Axis::Y) {
+            return false;
+        }
+        $this->facing = $face;
+        return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
+    }
 }

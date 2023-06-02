@@ -8,7 +8,7 @@ use pocketmine\scheduler\Task;
 
 class TicketTask extends Task {
 
-	public function onRun() : void {
-		TicketAPI::getInstance()->dataSave();
-	}
+    public function onRun() : void {
+        TicketAPI::getInstance()->dataSave();
+    }
 }

@@ -35,19 +35,19 @@ use function preg_match;
 
 class FloatArgument extends BaseArgument {
 
-	public function getNetworkType() : int {
-		return AvailableCommandsPacket::ARG_TYPE_FLOAT;
-	}
+    public function canParse(string $testString, CommandSender $sender) : bool {
+        return (bool) preg_match('/^-?(?:\d+|\d*\.\d+)$/', $testString);
+    }
 
-	public function getTypeName() : string {
-		return 'decimal';
-	}
+    public function getNetworkType() : int {
+        return AvailableCommandsPacket::ARG_TYPE_FLOAT;
+    }
 
-	public function canParse(string $testString, CommandSender $sender) : bool {
-		return (bool) preg_match('/^-?(?:\d+|\d*\.\d+)$/', $testString);
-	}
+    public function getTypeName() : string {
+        return 'decimal';
+    }
 
-	public function parse(string $argument, CommandSender $sender) {
-		return (float) $argument;
-	}
+    public function parse(string $argument, CommandSender $sender) {
+        return (float) $argument;
+    }
 }

@@ -9,9 +9,9 @@ use pocketmine\event\block\BlockBreakEvent;
 
 class GlowstoneBreaker {
 
-	public static function execution(BlockBreakEvent $event) : void {
-		if ($event->getBlock()->getId() !== BlockLegacyIds::GLOWSTONE) {
-			$event->cancel();
-		}
-	}
+    public static function execution(BlockBreakEvent $event) : void {
+        if ($event->getBlock()->getId() !== BlockLegacyIds::GLOWSTONE) {
+            $event->cancel();
+        }
+    }
 }

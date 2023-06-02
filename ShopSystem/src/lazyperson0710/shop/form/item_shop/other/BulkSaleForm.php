@@ -23,20 +23,20 @@ class BulkSaleForm extends CustomForm {
         $this
             ->setTitle('Item Shop')
             ->addElement(
-				new Label(
-					'仮想ストレージとインベントリ含む全ての場所から一括で売却出来ます' . PHP_EOL .
-					'売却したいアイテムのtoggleを有効にして送信を押してください'
-				),
-			);
-		foreach ($shopItems as $item) {
-			$toggleTemp = new Toggle($item->getDisplayName());
-			$this->toggles[] = $toggleTemp;
-			$this->addElement($toggleTemp);
-		}
-	}
+                new Label(
+                    '仮想ストレージとインベントリ含む全ての場所から一括で売却出来ます' . PHP_EOL .
+                    '売却したいアイテムのtoggleを有効にして送信を押してください'
+                ),
+            );
+        foreach ($shopItems as $item) {
+            $toggleTemp = new Toggle($item->getDisplayName());
+            $this->toggles[] = $toggleTemp;
+            $this->addElement($toggleTemp);
+        }
+    }
 
-	public function handleSubmit(Player $player) : void {
-		var_dump($this->toggles);
-	}
+    public function handleSubmit(Player $player) : void {
+        var_dump($this->toggles);
+    }
 
 }

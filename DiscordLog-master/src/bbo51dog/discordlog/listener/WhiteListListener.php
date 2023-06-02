@@ -13,33 +13,33 @@ use function str_replace;
 
 class WhiteListListener implements Listener {
 
-	private string $url;
+    private string $url;
 
-	public function __construct(string $url) {
-		$this->url = $url;
-	}
+    public function __construct(string $url) {
+        $this->url = $url;
+    }
 
-	/**
-	 * @return void
-	 * @priority MONITOR
-	 * @ignoreCancelled
-	 */
-	public function onCommand(CommandEvent $event) {
-		$command = $event->getCommand();
-		if ($command === 'whitelist on') {
-			$message = Main::WHITELIST_ON;
-		} elseif ($command === 'whitelist off') {
-			$message = Main::WHITELIST_OFF;
-		} else {
-			return;
-		}
-		$name = $event->getSender()->getName();
-		$time = Main::getTime();
-		$s = str_replace(['%time', '%player'], [$time, $name], $message);
-		$webhook = Webhook::create($this->url);
-		$content = new Content();
-		$content->setText($s);
-		$webhook->add($content);
-		$webhook->send();
-	}
+    /**
+     * @return void
+     * @priority MONITOR
+     * @ignoreCancelled
+     */
+    public function onCommand(CommandEvent $event) {
+        $command = $event->getCommand();
+        if ($command === 'whitelist on') {
+            $message = Main::WHITELIST_ON;
+        } elseif ($command === 'whitelist off') {
+            $message = Main::WHITELIST_OFF;
+        } else {
+            return;
+        }
+        $name = $event->getSender()->getName();
+        $time = Main::getTime();
+        $s = str_replace(['%time', '%player'], [$time, $name], $message);
+        $webhook = Webhook::create($this->url);
+        $content = new Content();
+        $content->setText($s);
+        $webhook->add($content);
+        $webhook->send();
+    }
 }

@@ -13,15 +13,15 @@ use pocketmine\player\Player;
 
 class SendFormButton extends Button {
 
-	private Form $form;
+    private Form $form;
 
-	public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
-		parent::__construct($text, $image);
-		$this->form = $form;
-	}
+    public function __construct(Form $form, string $text, ?ButtonImage $image = null) {
+        parent::__construct($text, $image);
+        $this->form = $form;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		if ((new CheckPlayerData())->checkMining4($player) === false) return;
-		SendForm::Send($player, ($this->form));
-	}
+    public function handleSubmit(Player $player) : void {
+        if ((new CheckPlayerData())->checkMining4($player) === false) return;
+        SendForm::Send($player, ($this->form));
+    }
 }

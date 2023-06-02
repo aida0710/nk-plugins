@@ -8,21 +8,21 @@ use lazyperson0710\PlayerSetting\object\Setting;
 
 class JoinItemsSetting extends Setting {
 
-	protected bool $value;
+    protected bool $value;
 
-	public static function getName() : string {
-		return 'JoinItems';
-	}
+    public function getFallbackValue() : bool {
+        return true;
+    }
 
-	public function setValue(mixed $value) : void {
-		$this->value = $value;
-	}
+    public static function getName() : string {
+        return 'JoinItems';
+    }
 
-	public function getValue() : bool {
-		return $this->value ?? $this->getFallbackValue();
-	}
+    public function getValue() : bool {
+        return $this->value ?? $this->getFallbackValue();
+    }
 
-	public function getFallbackValue() : bool {
-		return true;
-	}
+    public function setValue(mixed $value) : void {
+        $this->value = $value;
+    }
 }

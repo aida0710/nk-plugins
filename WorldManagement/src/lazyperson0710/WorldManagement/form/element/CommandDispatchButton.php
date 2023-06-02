@@ -14,22 +14,22 @@ use pocketmine\Server;
 
 class CommandDispatchButton extends Button {
 
-	private string $command;
-	private bool $permission;
+    private string $command;
+    private bool $permission;
 
-	public function __construct(string $text, string $command, bool $permission, ?ButtonImage $image = null) {
-		parent::__construct($text, $image);
-		$this->command = $command;
-		$this->permission = $permission;
-	}
+    public function __construct(string $text, string $command, bool $permission, ?ButtonImage $image = null) {
+        parent::__construct($text, $image);
+        $this->command = $command;
+        $this->permission = $permission;
+    }
 
-	public function handleSubmit(Player $player) : void {
-		if ($this->permission === true) {
-			Server::getInstance()->dispatchCommand($player, $this->command);
-		} else {
-			$error = "\n§c選択したワールドはレベルが足りないか解放されていません";
-			SoundPacket::Send($player, 'note.bass');
-			SendForm::Send($player, (new WarpForm($player, $error)));
-		}
-	}
+    public function handleSubmit(Player $player) : void {
+        if ($this->permission === true) {
+            Server::getInstance()->dispatchCommand($player, $this->command);
+        } else {
+            $error = "\n§c選択したワールドはレベルが足りないか解放されていません";
+            SoundPacket::Send($player, 'note.bass');
+            SendForm::Send($player, (new WarpForm($player, $error)));
+        }
+    }
 }

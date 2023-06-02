@@ -18,32 +18,32 @@ use pocketmine\event\Listener;
 
 class CancelEvent implements Listener {
 
-	public function onInventoryOpen(InventoryOpenEvent $event) : void {
-		$inventory = $event->getInventory();
-		$player = $event->getPlayer();
-		if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory) {
-			SendTip::Send($player, 'このブロックのインベントリは開くことが出来ません', 'Inventory', false);
-			$event->cancel();
-		}
-		if ($inventory instanceof AnvilInventory) {
-			SendTip::Send($player, 'スニークしながらタップするとアイテムの修繕が可能です', 'Repair', false);
-			$event->cancel();
-		}
-	}
+    public function onInventoryOpen(InventoryOpenEvent $event) : void {
+        $inventory = $event->getInventory();
+        $player = $event->getPlayer();
+        if ($inventory instanceof LoomInventory || $inventory instanceof EnchantInventory || $inventory instanceof BrewingStandInventory) {
+            SendTip::Send($player, 'このブロックのインベントリは開くことが出来ません', 'Inventory', false);
+            $event->cancel();
+        }
+        if ($inventory instanceof AnvilInventory) {
+            SendTip::Send($player, 'スニークしながらタップするとアイテムの修繕が可能です', 'Repair', false);
+            $event->cancel();
+        }
+    }
 
-	public function onBlockForm(BlockFormEvent $event) : void {
-		$event->cancel();
-	}
+    public function onBlockForm(BlockFormEvent $event) : void {
+        $event->cancel();
+    }
 
-	public function onBrewItem(BrewItemEvent $event) : void {
-		$event->cancel();
-	}
+    public function onBrewItem(BrewItemEvent $event) : void {
+        $event->cancel();
+    }
 
-	public function onEntityExplode(EntityExplodeEvent $event) : void {
-		$event->cancel();
-	}
+    public function onEntityExplode(EntityExplodeEvent $event) : void {
+        $event->cancel();
+    }
 
-	public function onBlockTeleport(BlockTeleportEvent $event) : void {
-		$event->cancel();
-	}
+    public function onBlockTeleport(BlockTeleportEvent $event) : void {
+        $event->cancel();
+    }
 }

@@ -9,7 +9,7 @@ use pocketmine\world\sound\Sound;
 
 class AnchorChargeSound implements Sound {
 
-	public function encode(Vector3 $pos) : array {
-		return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::RESPAWN_ANCHOR_CHARGE, $pos, false)];
-	}
+    public function encode(Vector3 $pos) : array {
+        return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::RESPAWN_ANCHOR_CHARGE, $pos, false)];
+    }
 }

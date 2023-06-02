@@ -10,20 +10,20 @@ use pocketmine\event\Listener;
 
 class ExpAssignment implements Listener {
 
-	/**
-	 * @priority Monitor
-	 * @param BlockBreakEvent $event
-	 * @return void
-	 */
-	public function onBreak(BlockBreakEvent $event) : void {
-		if ($event->isCancelled()) return;
-		if ($event->getBlock()->getName() === VanillaBlocks::MONSTER_SPAWNER()->getName()) {
-			$exp = $event->getXpDropAmount();
-			$exp += 5000;
-			$player = $event->getPlayer();
-			$player->getXpManager()->addXp($exp);
-			$event->setXpDropAmount(0);
-		}
-	}
+    /**
+     * @priority Monitor
+     * @param BlockBreakEvent $event
+     * @return void
+     */
+    public function onBreak(BlockBreakEvent $event) : void {
+        if ($event->isCancelled()) return;
+        if ($event->getBlock()->getName() === VanillaBlocks::MONSTER_SPAWNER()->getName()) {
+            $exp = $event->getXpDropAmount();
+            $exp += 5000;
+            $player = $event->getPlayer();
+            $player->getXpManager()->addXp($exp);
+            $event->setXpDropAmount(0);
+        }
+    }
 
 }

@@ -8,7 +8,7 @@ use pocketmine\event\player\PlayerCreationEvent;
 
 class EventListener implements Listener {
 
-	public function onPlayerCreation(PlayerCreationEvent $event) {
-		$event->setPlayerClass(MyPlayer::class);
-	}
+    public function onPlayerCreation(PlayerCreationEvent $event) {
+        $event->setPlayerClass(MyPlayer::class);
+    }
 }

@@ -16,16 +16,16 @@ use pocketmine\player\GameMode;
 
 class RedBull {
 
-	public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
-		$event->cancel();
-		$player = $event->getPlayer();
-		if (PlayerItemEvent::checkInterval($player) === false) return;
-		if ($player->getGamemode() !== GameMode::CREATIVE()) {
-			$player->getInventory()->removeItem($item->setCount(1));
-		}
-		$effect = new EffectInstance(VanillaEffects::LEVITATION(), 20 * 3, 30, false);
-		AddEffectPacket::Add($player, $effect, VanillaEffects::LEVITATION(), true);
-		SoundPacket::Send($player, 'item.trident.return');
-	}
+    public static function execution(PlayerItemUseEvent|PlayerInteractEvent $event, Item $item) : void {
+        $event->cancel();
+        $player = $event->getPlayer();
+        if (PlayerItemEvent::checkInterval($player) === false) return;
+        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+            $player->getInventory()->removeItem($item->setCount(1));
+        }
+        $effect = new EffectInstance(VanillaEffects::LEVITATION(), 20 * 3, 30, false);
+        AddEffectPacket::Add($player, $effect, VanillaEffects::LEVITATION(), true);
+        SoundPacket::Send($player, 'item.trident.return');
+    }
 
 }

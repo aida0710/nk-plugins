@@ -8,22 +8,22 @@ use pocketmine\utils\SingletonTrait;
 
 class Setting {
 
-	use SingletonTrait;
+    use SingletonTrait;
 
-	private string $kickMessage;
+    private string $kickMessage;
 
-	private string $defaultBanReason;
+    private string $defaultBanReason;
 
-	public function setData(array $datas) : void {
-		$this->kickMessage = $datas['messages']['kick-message'];
-		$this->defaultBanReason = $datas['messages']['default-ban-reason'];
-	}
+    public function setData(array $datas) : void {
+        $this->kickMessage = $datas['messages']['kick-message'];
+        $this->defaultBanReason = $datas['messages']['default-ban-reason'];
+    }
 
-	public function getKickMessage() : string {
-		return $this->kickMessage;
-	}
+    public function getKickMessage() : string {
+        return $this->kickMessage;
+    }
 
-	public function getDefaultBanReason() : string {
-		return $this->defaultBanReason;
-	}
+    public function getDefaultBanReason() : string {
+        return $this->defaultBanReason;
+    }
 }

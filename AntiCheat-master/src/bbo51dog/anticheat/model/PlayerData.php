@@ -10,29 +10,29 @@ use pocketmine\player\Player;
 
 class PlayerData {
 
-	private Player $player;
+    private Player $player;
 
-	/** @var Checker[] */
-	private array $checkers;
+    /** @var Checker[] */
+    private array $checkers;
 
-	public function __construct(Player $player) {
-		$this->player = $player;
-		$this->checkers = [
-			new BlockBreakChecker($this),
-		];
-	}
+    public function __construct(Player $player) {
+        $this->player = $player;
+        $this->checkers = [
+            new BlockBreakChecker($this),
+        ];
+    }
 
-	public function getPlayer() : Player {
-		return $this->player;
-	}
+    public function getPlayer() : Player {
+        return $this->player;
+    }
 
-	public function rejoin(Player $player) : void {
-		$this->player = $player;
-	}
+    public function rejoin(Player $player) : void {
+        $this->player = $player;
+    }
 
-	public function onBreakEvent() : void {
-		foreach ($this->checkers as $checker) {
-			$checker->blockBreak();
-		}
-	}
+    public function onBreakEvent() : void {
+        foreach ($this->checkers as $checker) {
+            $checker->blockBreak();
+        }
+    }
 }

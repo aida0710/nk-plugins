@@ -14,30 +14,30 @@ use ymggacha\src\yomogi_server\ymggacha\command\gacha_ticket\GachaTicketCommand;
 
 class CommandList {
 
-	use SingletonTrait;
+    use SingletonTrait;
 
-	/** @var array<BaseCommand> */
-	private array $commands = [];
+    /** @var array<BaseCommand> */
+    private array $commands = [];
 
-	public function __construct(PluginBase $plugin) {
-		$this->setup($plugin);
-	}
+    public function __construct(PluginBase $plugin) {
+        $this->setup($plugin);
+    }
 
-	/**
-	 * @throws RuntimeException
-	 */
-	public function registerToMap(CommandMap $map) : void {
-		foreach ($this->commands as $cmd) {
-			$map->register($cmd->getOwningPlugin()->getName() . $cmd->getName(), $cmd);
-		}
-	}
+    /**
+     * @throws RuntimeException
+     */
+    public function registerToMap(CommandMap $map) : void {
+        foreach ($this->commands as $cmd) {
+            $map->register($cmd->getOwningPlugin()->getName() . $cmd->getName(), $cmd);
+        }
+    }
 
-	private function registerCommand(BaseCommand $command) : void {
-		$this->commands[] = $command;
-	}
+    private function registerCommand(BaseCommand $command) : void {
+        $this->commands[] = $command;
+    }
 
-	private function setup(PluginBase $plugin) : void {
-		$this->registerCommand(new GachaCommand($plugin));
-		$this->registerCommand(new GachaTicketCommand($plugin));
-	}
+    private function setup(PluginBase $plugin) : void {
+        $this->registerCommand(new GachaCommand($plugin));
+        $this->registerCommand(new GachaTicketCommand($plugin));
+    }
 }

@@ -14,22 +14,22 @@ use ymggacha\src\yomogi_server\ymggacha\gacha\IInFormRollableGacha;
 
 class GachaEmmitListForm extends MenuFormBase {
 
-	private MenuFormBase $before;
+    private MenuFormBase $before;
 
-	public function __construct(MenuFormBase $before, IInFormRollableGacha $gacha) {
-		parent::__construct($this->createElement($gacha));
-		$this->before = $before;
-	}
+    public function __construct(MenuFormBase $before, IInFormRollableGacha $gacha) {
+        parent::__construct($this->createElement($gacha));
+        $this->before = $before;
+    }
 
-	public function createElement(IInFormRollableGacha $gacha) : MenuFormElements {
-		return new MenuFormElements(
-			'よもぎガチャ排出確率一覧表',
-			$gacha->getEmmitList(),
-			(new ButtonList())->append(new MenuFormButton('閉じる'))
-		);
-	}
+    public function createElement(IInFormRollableGacha $gacha) : MenuFormElements {
+        return new MenuFormElements(
+            'よもぎガチャ排出確率一覧表',
+            $gacha->getEmmitList(),
+            (new ButtonList())->append(new MenuFormButton('閉じる'))
+        );
+    }
 
-	protected function onSubmit(Player $player, MenuFormResponse $response) : void {
-		$this->before->send($player);
-	}
+    protected function onSubmit(Player $player, MenuFormResponse $response) : void {
+        $this->before->send($player);
+    }
 }

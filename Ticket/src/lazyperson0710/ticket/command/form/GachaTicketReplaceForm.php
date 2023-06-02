@@ -12,22 +12,22 @@ use pocketmine\player\Player;
 
 class GachaTicketReplaceForm extends CustomForm {
 
-	private Label $label;
+    private Label $label;
 
-	public function __construct(Player $player) {
-		$this->label = new Label('はずれ石をTicketに変換してもよろしいでしょうか');
-		$this
-			->setTitle('Ticket');
-		$this->addElement($this->label);
-	}
+    public function __construct(Player $player) {
+        $this->label = new Label('はずれ石をTicketに変換してもよろしいでしょうか');
+        $this
+            ->setTitle('Ticket');
+        $this->addElement($this->label);
+    }
 
-	public function handleSubmit(Player $player) : void {
-		$count = TicketAPI::getInstance()->InventoryConfirmationTicket($player);
-		if ($count >= 1) {
-			TicketAPI::getInstance()->addTicket($player, $count);
-			SendMessage::Send($player, "チケットの変換処理を実行し、{$count}枚のチケットを取得しました", 'Ticket', true);
-		} else {
-			SendMessage::Send($player, '変換するアイテムが存在しませんでした', 'Ticket', true);
-		}
-	}
+    public function handleSubmit(Player $player) : void {
+        $count = TicketAPI::getInstance()->InventoryConfirmationTicket($player);
+        if ($count >= 1) {
+            TicketAPI::getInstance()->addTicket($player, $count);
+            SendMessage::Send($player, "チケットの変換処理を実行し、{$count}枚のチケットを取得しました", 'Ticket', true);
+        } else {
+            SendMessage::Send($player, '変換するアイテムが存在しませんでした', 'Ticket', true);
+        }
+    }
 }

@@ -35,19 +35,19 @@ use const PHP_INT_MAX;
 
 class TextArgument extends RawStringArgument {
 
-	public function getNetworkType() : int {
-		return AvailableCommandsPacket::ARG_TYPE_RAWTEXT;
-	}
+    public function canParse(string $testString, CommandSender $sender) : bool {
+        return $testString !== '';
+    }
 
-	public function getTypeName() : string {
-		return 'text';
-	}
+    public function getNetworkType() : int {
+        return AvailableCommandsPacket::ARG_TYPE_RAWTEXT;
+    }
 
-	public function getSpanLength() : int {
-		return PHP_INT_MAX;
-	}
+    public function getSpanLength() : int {
+        return PHP_INT_MAX;
+    }
 
-	public function canParse(string $testString, CommandSender $sender) : bool {
-		return $testString !== '';
-	}
+    public function getTypeName() : string {
+        return 'text';
+    }
 }

@@ -31,6 +31,6 @@ class SearchResultForm extends SimpleForm {
             }
             $this->addElement(new SendMenuFormButton($content . PHP_EOL . '購入: ' . number_format($item->getBuy()) . '円 / 売却: 不可', new ItemBuyForm($player, $item), $restriction),);
         }
-		$this->addElement(new SendMenuFormButton('検索画面に戻る', new SearchItemForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP));
-	}
+        $this->addElement(new SendMenuFormButton('検索画面に戻る', new SearchItemForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP));
+    }
 }

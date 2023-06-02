@@ -8,21 +8,21 @@ use lazyperson0710\PlayerSetting\object\Setting;
 
 class GoldIngotSetting extends Setting {
 
-	protected bool $value;
+    protected bool $value;
 
-	public static function getName() : string {
-		return 'GoldIngot';
-	}
+    public function getFallbackValue() : bool {
+        return false;
+    }
 
-	public function setValue(mixed $value) : void {
-		$this->value = $value;
-	}
+    public static function getName() : string {
+        return 'GoldIngot';
+    }
 
-	public function getValue() : bool {
-		return $this->value ?? $this->getFallbackValue();
-	}
+    public function getValue() : bool {
+        return $this->value ?? $this->getFallbackValue();
+    }
 
-	public function getFallbackValue() : bool {
-		return false;
-	}
+    public function setValue(mixed $value) : void {
+        $this->value = $value;
+    }
 }

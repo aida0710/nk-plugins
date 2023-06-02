@@ -6,19 +6,19 @@ namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\overworl
 
 final class TreeDecoration {
 
-	private string $class;
-	private int $weight;
+    private string $class;
+    private int $weight;
 
-	public function __construct(string $class, int $weight) {
-		$this->class = $class;
-		$this->weight = $weight;
-	}
+    public function __construct(string $class, int $weight) {
+        $this->class = $class;
+        $this->weight = $weight;
+    }
 
-	public function getWeight() : int {
-		return $this->weight;
-	}
+    public function getWeight() : int {
+        return $this->weight;
+    }
 
-	public function getClass() : string {
-		return $this->class;
-	}
+    public function getClass() : string {
+        return $this->class;
+    }
 }

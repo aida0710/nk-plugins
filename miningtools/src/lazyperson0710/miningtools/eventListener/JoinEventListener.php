@@ -10,7 +10,7 @@ use pocketmine\event\player\PlayerJoinEvent;
 
 class JoinEventListener implements Listener {
 
-	public function onJoin(PlayerJoinEvent $event) : void {
-		Main::$flag[$event->getPlayer()->getName()] = false;
-	}
+    public function onJoin(PlayerJoinEvent $event) : void {
+        Main::$flag[$event->getPlayer()->getName()] = false;
+    }
 }

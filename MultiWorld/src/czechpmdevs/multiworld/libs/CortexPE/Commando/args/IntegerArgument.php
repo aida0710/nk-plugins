@@ -35,19 +35,19 @@ use function preg_match;
 
 class IntegerArgument extends BaseArgument {
 
-	public function getNetworkType() : int {
-		return AvailableCommandsPacket::ARG_TYPE_INT;
-	}
+    public function canParse(string $testString, CommandSender $sender) : bool {
+        return (bool) preg_match('/^-?(?:\d+)$/', $testString);
+    }
 
-	public function getTypeName() : string {
-		return 'int';
-	}
+    public function getNetworkType() : int {
+        return AvailableCommandsPacket::ARG_TYPE_INT;
+    }
 
-	public function canParse(string $testString, CommandSender $sender) : bool {
-		return (bool) preg_match('/^-?(?:\d+)$/', $testString);
-	}
+    public function getTypeName() : string {
+        return 'int';
+    }
 
-	public function parse(string $argument, CommandSender $sender) : int {
-		return (int) $argument;
-	}
+    public function parse(string $argument, CommandSender $sender) : int {
+        return (int) $argument;
+    }
 }

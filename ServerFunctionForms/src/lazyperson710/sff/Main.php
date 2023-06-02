@@ -21,34 +21,34 @@ use function stream_get_contents;
 
 class Main extends PluginBase {
 
-	private const TOS_FILE = 'tos.text';
+    private const TOS_FILE = 'tos.text';
 
-	private static string $tos;
+    private static string $tos;
 
-	public static function getTos() : string {
-		return self::$tos;
-	}
+    public static function getTos() : string {
+        return self::$tos;
+    }
 
-	public function onEnable() : void {
-		$this->loadTos();
-		$this->getServer()->getPluginManager()->registerEvents(new CmdListener(), $this);
-		$this->getServer()->getCommandMap()->registerAll('sff', [
-			new TosCommand(),
-			new LockCommand(),
-			new EnchantCommand(),
-			new RecipeCommand(),
-			new InvClearCommand(),
-			new PlayerCommand(),
-			new DonationCommand(),
-			new InformationCommand(),
-			new CmdExecutionCommand(),
-			new PoliceCommand(),
-		]);
-	}
+    public function onEnable() : void {
+        $this->loadTos();
+        $this->getServer()->getPluginManager()->registerEvents(new CmdListener(), $this);
+        $this->getServer()->getCommandMap()->registerAll('sff', [
+            new TosCommand(),
+            new LockCommand(),
+            new EnchantCommand(),
+            new RecipeCommand(),
+            new InvClearCommand(),
+            new PlayerCommand(),
+            new DonationCommand(),
+            new InformationCommand(),
+            new CmdExecutionCommand(),
+            new PoliceCommand(),
+        ]);
+    }
 
-	private function loadTos() {
-		$resource = $this->getResource(self::TOS_FILE);
-		self::$tos = stream_get_contents($resource);
-		fclose($resource);
-	}
+    private function loadTos() {
+        $resource = $this->getResource(self::TOS_FILE);
+        self::$tos = stream_get_contents($resource);
+        fclose($resource);
+    }
 }

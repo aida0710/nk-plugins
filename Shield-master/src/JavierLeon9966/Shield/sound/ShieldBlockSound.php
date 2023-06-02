@@ -11,7 +11,7 @@ use pocketmine\world\sound\Sound;
 
 class ShieldBlockSound implements Sound {
 
-	public function encode(Vector3 $pos) : array {
-		return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::ITEM_SHIELD_BLOCK, $pos, false)];
-	}
+    public function encode(Vector3 $pos) : array {
+        return [LevelSoundEventPacket::nonActorSound(LevelSoundEvent::ITEM_SHIELD_BLOCK, $pos, false)];
+    }
 }

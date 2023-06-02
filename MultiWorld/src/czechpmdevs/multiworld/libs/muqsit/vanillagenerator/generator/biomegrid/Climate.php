@@ -6,19 +6,19 @@ namespace czechpmdevs\multiworld\libs\muqsit\vanillagenerator\generator\biomegri
 
 class Climate {
 
-	public int $value;
+    public int $value;
 
-	/** @var int[] */
-	public array $crossTypes;
+    /** @var int[] */
+    public array $crossTypes;
 
-	public int $finalValue;
+    public int $finalValue;
 
-	/**
-	 * @param int[] $crossTypes
-	 */
-	public function __construct(int $value, array $crossTypes, int $finalValue) {
-		$this->value = $value;
-		$this->crossTypes = $crossTypes;
-		$this->finalValue = $finalValue;
-	}
+    /**
+     * @param int[] $crossTypes
+     */
+    public function __construct(int $value, array $crossTypes, int $finalValue) {
+        $this->value = $value;
+        $this->crossTypes = $crossTypes;
+        $this->finalValue = $finalValue;
+    }
 }

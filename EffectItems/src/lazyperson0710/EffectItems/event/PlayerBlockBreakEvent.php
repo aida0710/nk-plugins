@@ -13,13 +13,13 @@ use pocketmine\event\Listener;
 
 class PlayerBlockBreakEvent implements Listener {
 
-	public function onBreak(BlockBreakEvent $event) {
-		if ($event->isCancelled()) return;
-		$player = $event->getPlayer();
-		$NamedTag = $player->getInventory()->getItemInHand()->getNamedTag();
-		if ($NamedTag->getTag('BlastFurnacePickaxe') !== null) BlastFurnacePickaxe::execution($event);
-		if ($NamedTag->getTag('GlowstoneBreaker') !== null) GlowstoneBreaker::execution($event);
-		if ($NamedTag->getTag('ObsidianBreaker') !== null) ObsidianBreaker::execution($event);
-		if ($NamedTag->getTag('OldTools') !== null) OldTools::execution($event);
-	}
+    public function onBreak(BlockBreakEvent $event) {
+        if ($event->isCancelled()) return;
+        $player = $event->getPlayer();
+        $NamedTag = $player->getInventory()->getItemInHand()->getNamedTag();
+        if ($NamedTag->getTag('BlastFurnacePickaxe') !== null) BlastFurnacePickaxe::execution($event);
+        if ($NamedTag->getTag('GlowstoneBreaker') !== null) GlowstoneBreaker::execution($event);
+        if ($NamedTag->getTag('ObsidianBreaker') !== null) ObsidianBreaker::execution($event);
+        if ($NamedTag->getTag('OldTools') !== null) OldTools::execution($event);
+    }
 }

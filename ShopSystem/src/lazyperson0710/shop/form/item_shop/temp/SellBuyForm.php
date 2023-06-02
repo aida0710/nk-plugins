@@ -36,11 +36,13 @@ class SellBuyForm implements Form {
 			return;
 		}
 		$item = ItemFactory::getInstance()->get($this->itemId, $this->itemMeta);
-		StackStorageAPI::$instance->getCount($player->getXuid(), $item, function ($count) use ($player, $item, $data) {
-			$this->callback($player, $item, $data, $count);
-		}, function () use ($player, $item, $data) {
-			$this->callback($player, $item, $data, 0);
-		});
+		StackStorageAPI::$instance->getCount($player->getXuid(), $item,
+			function ($count) use ($player, $item, $data) {
+				$this->callback($player, $item, $data, $count);
+			}, function () use ($player, $item, $data) {
+				$this->callback($player, $item, $data, 0);
+			},
+		);
 	}
 
 	public function callback(Player $player, Item $item, bool $data, int $storage) : void {

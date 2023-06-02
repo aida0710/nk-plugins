@@ -8,13 +8,13 @@ use pocketmine\player\Player;
 
 interface IInFormRollableGacha {
 
-	public function roll(Player $player, int $count) : void;
+    public function roll(Player $player, int $count) : void;
 
-	public function getName() : string;
+    public function getName() : string;
 
-	public function getDescription() : string;
+    public function getDescription() : string;
 
-	public function getOneLineDescription() : string;
+    public function getOneLineDescription() : string;
 
-	public function getEmmitList() : string;
+    public function getEmmitList() : string;
 }

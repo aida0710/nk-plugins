@@ -10,8 +10,8 @@ use rarkhopper\gacha\IGachaItem;
 
 abstract class GachaEffect {
 
-	/**
-	 * @param array<IGachaItem> $items
-	 */
-	abstract public function play(Player $player, array $items, Closure $giveItemFn) : void;
+    /**
+     * @param array<IGachaItem> $items
+     */
+    abstract public function play(Player $player, array $items, Closure $giveItemFn) : void;
 }
