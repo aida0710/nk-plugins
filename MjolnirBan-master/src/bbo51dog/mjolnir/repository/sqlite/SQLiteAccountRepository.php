@@ -19,17 +19,11 @@ class SQLiteAccountRepository implements AccountRepository {
         $this->prepareTable();
     }
 
-    public function close() : void {
+    private function prepareTable() : void {
+        $this->db->query('CREATE TABLE IF NOT EXISTS ACCOUNTS(PLAYERNAME TEXT, IP TEXT, CID INTEGER, XUID TEXT)');
     }
 
-    public function exists(Account $account) : bool {
-        $stmt = $this->db->prepare('SELECT COUNT (*) FROM ACCOUNTS WHERE PLAYERNAME = :playerName AND IP = :ip AND CID = :cid AND XUID = :xuid');
-        $stmt->bindValue(':playerName', $account->getName());
-        $stmt->bindValue(':ip', $account->getIp());
-        $stmt->bindValue(':cid', $account->getCid());
-        $stmt->bindValue(':xuid', $account->getXuid());
-        $rows = $stmt->execute()->fetchArray();
-        return $rows[0] > 0;
+    public function close() : void {
     }
 
     public function getAccountsByCid(int $cid) : array {
@@ -77,6 +71,22 @@ class SQLiteAccountRepository implements AccountRepository {
         return $accounts;
     }
 
+    public function registerIfNotExists(Account $account) : void {
+        if (!$this->exists($account)) {
+            $this->register($account);
+        }
+    }
+
+    public function exists(Account $account) : bool {
+        $stmt = $this->db->prepare('SELECT COUNT (*) FROM ACCOUNTS WHERE PLAYERNAME = :playerName AND IP = :ip AND CID = :cid AND XUID = :xuid');
+        $stmt->bindValue(':playerName', $account->getName());
+        $stmt->bindValue(':ip', $account->getIp());
+        $stmt->bindValue(':cid', $account->getCid());
+        $stmt->bindValue(':xuid', $account->getXuid());
+        $rows = $stmt->execute()->fetchArray();
+        return $rows[0] > 0;
+    }
+
     public function register(Account $account) : void {
         $stmt = $this->db->prepare('INSERT INTO ACCOUNTS VALUES(:playerName, :ip, :cid, :xuid)');
         $stmt->bindValue(':playerName', $account->getName());
@@ -84,15 +94,5 @@ class SQLiteAccountRepository implements AccountRepository {
         $stmt->bindValue(':cid', $account->getCid());
         $stmt->bindValue(':xuid', $account->getXuid());
         $stmt->execute();
-    }
-
-    public function registerIfNotExists(Account $account) : void {
-        if (!$this->exists($account)) {
-            $this->register($account);
-        }
-    }
-
-    private function prepareTable() : void {
-        $this->db->query('CREATE TABLE IF NOT EXISTS ACCOUNTS(PLAYERNAME TEXT, IP TEXT, CID INTEGER, XUID TEXT)');
     }
 }

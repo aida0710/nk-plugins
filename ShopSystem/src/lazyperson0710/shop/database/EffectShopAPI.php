@@ -8,21 +8,16 @@ use pocketmine\entity\effect\Effect;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\lang\Translatable;
 use pocketmine\Server;
+use pocketmine\utils\SingletonTrait;
 
 class EffectShopAPI {
 
-    private static EffectShopAPI $instance;
+    use SingletonTrait;
+
     protected array $buy = [];
     protected array $levelLimit = [];
     protected array $amplifiedMoney = [];
     protected array $timeRestriction = [];
-
-    public static function getInstance() : EffectShopAPI {
-        if (!isset(self::$instance)) {
-            self::$instance = new EffectShopAPI();
-        }
-        return self::$instance;
-    }
 
     public function init() : void {
         $this->register(VanillaEffects::HASTE(), 600, 2, 800, 800);

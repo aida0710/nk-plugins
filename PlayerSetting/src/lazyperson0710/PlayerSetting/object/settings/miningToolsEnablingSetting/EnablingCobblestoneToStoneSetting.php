@@ -10,10 +10,6 @@ class EnablingCobblestoneToStoneSetting extends Setting {
 
     protected bool $value;
 
-    public function getFallbackValue() : bool {
-        return false;
-    }
-
     public static function getName() : string {
         return 'EnablingCobblestoneToStone';
     }
@@ -24,5 +20,9 @@ class EnablingCobblestoneToStoneSetting extends Setting {
 
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : bool {
+        return false;
     }
 }

@@ -37,19 +37,8 @@ final class Shield extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
-    public function setCooldown(Player $player, int $ticks) : void {
-        $player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::BLOCKING, false);
-        $this->cooldowns[$player->getUniqueId()->getBytes()] = true;
-        $this->getScheduler()->scheduleDelayedTask(new ClosureTask(fn () => $this->removeCooldown($player)), $ticks);
-    }
-
     public function hasCooldown(Player $player) : bool {
         return isset($this->cooldowns[$player->getUniqueId()->getBytes()]);
-    }
-
-    public function removeCooldown(Player $player) : void {
-        $player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::BLOCKING, $player->isSneaking());
-        unset($this->cooldowns[$player->getUniqueId()->getBytes()]);
     }
 
     /**
@@ -69,6 +58,17 @@ final class Shield extends PluginBase implements Listener {
             }
             if ($ticks > 0) $this->setCooldown($player, $ticks);
         }
+    }
+
+    public function setCooldown(Player $player, int $ticks) : void {
+        $player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::BLOCKING, false);
+        $this->cooldowns[$player->getUniqueId()->getBytes()] = true;
+        $this->getScheduler()->scheduleDelayedTask(new ClosureTask(fn () => $this->removeCooldown($player)), $ticks);
+    }
+
+    public function removeCooldown(Player $player) : void {
+        $player->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::BLOCKING, $player->isSneaking());
+        unset($this->cooldowns[$player->getUniqueId()->getBytes()]);
     }
 
     /**

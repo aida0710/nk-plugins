@@ -18,29 +18,18 @@ class TreeDecorator extends Decorator {
     /** @var TreeDecoration[] */
     private array $trees = [];
 
-    /**
-     * @param TreeDecoration[] $decorations
-     * @return ?string $genericTreeClass a GenericTree class
-     */
-    private static function getRandomTree(Random $random, array $decorations) : ?string {
-        $totalWeight = 0;
-        foreach ($decorations as $decoration) {
-            $totalWeight += $decoration->getWeight();
-        }
-        if ($totalWeight > 0) {
-            $weight = $random->nextBoundedInt($totalWeight);
-            foreach ($decorations as $decoration) {
-                $weight -= $decoration->getWeight();
-                if ($weight < 0) {
-                    return $decoration->getClass();
-                }
-            }
-        }
-        return null;
-    }
-
     final public function setTrees(TreeDecoration ...$trees) : void {
         $this->trees = $trees;
+    }
+
+    public function populate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
+        $treeAmount = $this->amount;
+        if ($random->nextBoundedInt(10) === 0) {
+            ++$treeAmount;
+        }
+        for ($i = 0; $i < $treeAmount; ++$i) {
+            $this->decorate($world, $random, $chunkX, $chunkZ, $chunk);
+        }
     }
 
     public function decorate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
@@ -62,13 +51,24 @@ class TreeDecorator extends Decorator {
         }
     }
 
-    public function populate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
-        $treeAmount = $this->amount;
-        if ($random->nextBoundedInt(10) === 0) {
-            ++$treeAmount;
+    /**
+     * @param TreeDecoration[] $decorations
+     * @return ?string $genericTreeClass a GenericTree class
+     */
+    private static function getRandomTree(Random $random, array $decorations) : ?string {
+        $totalWeight = 0;
+        foreach ($decorations as $decoration) {
+            $totalWeight += $decoration->getWeight();
         }
-        for ($i = 0; $i < $treeAmount; ++$i) {
-            $this->decorate($world, $random, $chunkX, $chunkZ, $chunk);
+        if ($totalWeight > 0) {
+            $weight = $random->nextBoundedInt($totalWeight);
+            foreach ($decorations as $decoration) {
+                $weight -= $decoration->getWeight();
+                if ($weight < 0) {
+                    return $decoration->getClass();
+                }
+            }
         }
+        return null;
     }
 }

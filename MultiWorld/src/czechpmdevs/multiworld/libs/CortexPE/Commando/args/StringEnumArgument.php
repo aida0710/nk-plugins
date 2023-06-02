@@ -46,6 +46,10 @@ abstract class StringEnumArgument extends BaseArgument {
         $this->parameterData->enum = new CommandEnum('', $this->getEnumValues());
     }
 
+    public function getEnumValues() : array {
+        return array_keys(static::VALUES);
+    }
+
     public function canParse(string $testString, CommandSender $sender) : bool {
         return (bool) preg_match(
             '/^(' . implode('|', array_map("\\strtolower", $this->getEnumValues())) . ')$/iu',
@@ -60,9 +64,5 @@ abstract class StringEnumArgument extends BaseArgument {
 
     public function getValue(string $string) {
         return static::VALUES[strtolower($string)];
-    }
-
-    public function getEnumValues() : array {
-        return array_keys(static::VALUES);
     }
 }

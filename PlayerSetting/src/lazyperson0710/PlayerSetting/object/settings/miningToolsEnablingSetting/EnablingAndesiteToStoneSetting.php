@@ -10,10 +10,6 @@ class EnablingAndesiteToStoneSetting extends Setting {
 
     protected bool $value;
 
-    public function getFallbackValue() : bool {
-        return false;
-    }
-
     public static function getName() : string {
         return 'EnablingAndesiteToStone';
     }
@@ -24,5 +20,9 @@ class EnablingAndesiteToStoneSetting extends Setting {
 
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : bool {
+        return false;
     }
 }

@@ -23,7 +23,7 @@ class HomeForm extends SimpleForm {
             match ($data) {
                 0 => new StatisticsForm($this, $player->getName()),
                 1 => new BankRankingForm,
-                2 => new MiningLevelRankinkForm
+                2 => new MiningLevelRankinkForm,
             }
             ));
         };

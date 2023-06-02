@@ -14,6 +14,13 @@ class JungleEdgePopulator extends JunglePopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(BigOakTree::class, 10),
+            new TreeDecoration(CocoaTree::class, 45),
+        ];
+    }
+
     public function getBiomes() : ?array {
         return [BiomeIds::JUNGLE_EDGE, BiomeIds::JUNGLE_EDGE_MUTATED];
     }
@@ -21,13 +28,6 @@ class JungleEdgePopulator extends JunglePopulator {
     protected function initPopulators() : void {
         $this->treeDecorator->setAmount(2);
         $this->treeDecorator->setTrees(...self::$TREES);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(BigOakTree::class, 10),
-            new TreeDecoration(CocoaTree::class, 45),
-        ];
     }
 }
 

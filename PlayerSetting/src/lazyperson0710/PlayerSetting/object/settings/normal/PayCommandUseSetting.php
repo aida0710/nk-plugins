@@ -10,10 +10,6 @@ class PayCommandUseSetting extends Setting {
 
     protected bool $value;
 
-    public function getFallbackValue() : bool {
-        return true;
-    }
-
     public static function getName() : string {
         return 'PayCommandUse';
     }
@@ -24,5 +20,9 @@ class PayCommandUseSetting extends Setting {
 
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : bool {
+        return true;
     }
 }

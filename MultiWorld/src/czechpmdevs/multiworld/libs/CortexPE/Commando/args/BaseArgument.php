@@ -53,16 +53,16 @@ abstract class BaseArgument {
 
     abstract public function getNetworkType() : int;
 
+    public function isOptional() : bool {
+        return $this->optional;
+    }
+
     abstract public function canParse(string $testString, CommandSender $sender) : bool;
 
     abstract public function parse(string $argument, CommandSender $sender) : mixed;
 
     public function getName() : string {
         return $this->name;
-    }
-
-    public function isOptional() : bool {
-        return $this->optional;
     }
 
     /**

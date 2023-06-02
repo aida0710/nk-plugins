@@ -10,10 +10,6 @@ class EnablingGraniteToStoneSetting extends Setting {
 
     protected bool $value;
 
-    public function getFallbackValue() : bool {
-        return false;
-    }
-
     public static function getName() : string {
         return 'EnablingGraniteToStone';
     }
@@ -24,5 +20,9 @@ class EnablingGraniteToStoneSetting extends Setting {
 
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : bool {
+        return false;
     }
 }

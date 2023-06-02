@@ -33,21 +33,6 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
-    public function addMoney(string $bank, string $name, int $money) : void {
-        //入金メッセージ
-        $text = $name . 'さんが' . $money . '入金しました';
-        $money += $this->getMoney($bank);
-        if (!$this->isExists($bank)) return;
-        $stmt = $this->db->prepare('UPDATE BANK SET MONEY = :money WHERE BANK = :bank');
-        $stmt->bindValue(':money', $money, SQLITE3_TEXT);
-        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
-        $stmt->execute();
-        LogHelper::getInstance()->addLog($bank, $text);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function create(string $bank, string $leader) : void {
         //作成メッセージ
         $text = $leader . 'さんによって作成されました';
@@ -61,6 +46,25 @@ class BankHelper implements IBankHelper {
         $stmt->bindValue(':money', 0, SQLITE3_NUM);
         $stmt->execute();
         LogHelper::getInstance()->addLog($bank, $text);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isExists(string $bank) : bool {
+        $stmt = $this->db->prepare('SELECT * FROM BANK WHERE BANK = :bank');
+        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
+        if ($stmt->execute()->fetchArray()) {
+            return true;
+        } else return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    static function getInstance() : BankHelper {
+        if (self::$instance === null) self::$instance = new BankHelper(BankPlugin::getInstance()->getDataFolder() . 'Bank.db');
+        return self::$instance;
     }
 
     /**
@@ -81,6 +85,19 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
+    public function isShare(string $bank, string $name) : bool {
+        if (!$this->isExists($bank)) return false;
+        $name = strtolower($name);
+        $stmt = $this->db->prepare('SELECT MEMBER FROM BANK WHERE BANK = :bank');
+        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
+        $result = $stmt->execute()->fetchArray();
+        $array = explode(',', current($result));
+        return in_array($name, $array, true);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getAllLeaderBank(string $name) : array {
         $name = strtolower($name);
         $result = [];
@@ -89,13 +106,6 @@ class BankHelper implements IBankHelper {
         $exe = $stmt->execute();
         while ($bank = $exe->fetchArray(SQLITE3_NUM)) $result[] = current($bank);
         return $result;
-    }
-
-    public function getAllShare(string $bank) : array {
-        if (!$this->isExists($bank)) return [];
-        $stmt = $this->db->prepare('SELECT MEMBER FROM BANK WHERE BANK = :bank');
-        $stmt->bindParam(':bank', $bank);
-        return explode(',', current($stmt->execute()->fetchArray()));
     }
 
     /**
@@ -108,61 +118,6 @@ class BankHelper implements IBankHelper {
             $date[] = $bank;
         }
         return $date;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    static function getInstance() : BankHelper {
-        if (self::$instance === null) self::$instance = new BankHelper(BankPlugin::getInstance()->getDataFolder() . 'Bank.db');
-        return self::$instance;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getLeader(string $bank) : string {
-        if (!$this->isExists($bank)) return '';
-        $stmt = $this->db->prepare('SELECT LEADER FROM BANK WHERE BANK = :bank');
-        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
-        $result = $stmt->execute()->fetchArray();
-        if ($result) {
-            return $result[0];
-        } else return '';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getMoney(string $bank) : int {
-        if (!$this->isExists($bank)) return 0;
-        $stmt = $this->db->prepare('SELECT MONEY FROM BANK WHERE BANK = :bank');
-        $stmt->bindParam(':bank', $bank);
-        return current($stmt->execute()->fetchArray());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isExists(string $bank) : bool {
-        $stmt = $this->db->prepare('SELECT * FROM BANK WHERE BANK = :bank');
-        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
-        if ($stmt->execute()->fetchArray()) {
-            return true;
-        } else return false;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isShare(string $bank, string $name) : bool {
-        if (!$this->isExists($bank)) return false;
-        $name = strtolower($name);
-        $stmt = $this->db->prepare('SELECT MEMBER FROM BANK WHERE BANK = :bank');
-        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
-        $result = $stmt->execute()->fetchArray();
-        $array = explode(',', current($result));
-        return in_array($name, $array, true);
     }
 
     /**
@@ -193,6 +148,16 @@ class BankHelper implements IBankHelper {
     /**
      * @inheritDoc
      */
+    public function getMoney(string $bank) : int {
+        if (!$this->isExists($bank)) return 0;
+        $stmt = $this->db->prepare('SELECT MONEY FROM BANK WHERE BANK = :bank');
+        $stmt->bindParam(':bank', $bank);
+        return current($stmt->execute()->fetchArray());
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function removeShare(string $bank, string $target, string $name) : void {
         //共有をはずすメッセージ
         $text = $name . 'さんが' . $target . 'さんから共有を外しました';
@@ -205,6 +170,26 @@ class BankHelper implements IBankHelper {
         $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
         $stmt->execute();
         LogHelper::getInstance()->addLog($bank, $text);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getLeader(string $bank) : string {
+        if (!$this->isExists($bank)) return '';
+        $stmt = $this->db->prepare('SELECT LEADER FROM BANK WHERE BANK = :bank');
+        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
+        $result = $stmt->execute()->fetchArray();
+        if ($result) {
+            return $result[0];
+        } else return '';
+    }
+
+    public function getAllShare(string $bank) : array {
+        if (!$this->isExists($bank)) return [];
+        $stmt = $this->db->prepare('SELECT MEMBER FROM BANK WHERE BANK = :bank');
+        $stmt->bindParam(':bank', $bank);
+        return explode(',', current($stmt->execute()->fetchArray()));
     }
 
     /**
@@ -240,5 +225,20 @@ class BankHelper implements IBankHelper {
         EconomyAPI::getInstance()->addMoney($target, $money);
         LogHelper::getInstance()->addLog($bank, $text);
         return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function addMoney(string $bank, string $name, int $money) : void {
+        //入金メッセージ
+        $text = $name . 'さんが' . $money . '入金しました';
+        $money += $this->getMoney($bank);
+        if (!$this->isExists($bank)) return;
+        $stmt = $this->db->prepare('UPDATE BANK SET MONEY = :money WHERE BANK = :bank');
+        $stmt->bindValue(':money', $money, SQLITE3_TEXT);
+        $stmt->bindParam(':bank', $bank, SQLITE3_TEXT);
+        $stmt->execute();
+        LogHelper::getInstance()->addLog($bank, $text);
     }
 }

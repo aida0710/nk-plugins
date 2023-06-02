@@ -9,13 +9,13 @@ class CustomConfig {
     public function __construct(private Config $config) {
     }
 
+    public function isEnableCryingObsidian() {
+        return $this->match("blocks.crying_obsidian");
+    }
+
     public function match(string $key) : bool {
         $value = $this->config->getNested($key, true);
         return boolval($value);
-    }
-
-    public function isEnableCryingObsidian() {
-        return $this->match("blocks.crying_obsidian");
     }
 
     public function isEnableNetherwart() {

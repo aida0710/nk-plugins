@@ -31,15 +31,22 @@ class TaigaPopulator extends BiomePopulator {
         parent::__construct();
     }
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::TAIGA, BiomeIds::TAIGA_HILLS, BiomeIds::TAIGA_MUTATED, BiomeIds::COLD_TAIGA, BiomeIds::COLD_TAIGA_HILLS, BiomeIds::COLD_TAIGA_MUTATED];
-    }
-
     public static function init() : void {
         parent::init();
         self::$DOUBLE_PLANTS = [
             new DoublePlantDecoration(VanillaBlocks::LARGE_FERN(), 1),
         ];
+    }
+
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(RedwoodTree::class, 2),
+            new TreeDecoration(TallRedwoodTree::class, 1),
+        ];
+    }
+
+    public function getBiomes() : ?array {
+        return [BiomeIds::TAIGA, BiomeIds::TAIGA_HILLS, BiomeIds::TAIGA_MUTATED, BiomeIds::COLD_TAIGA, BiomeIds::COLD_TAIGA_HILLS, BiomeIds::COLD_TAIGA_MUTATED];
     }
 
     protected function initPopulators() : void {
@@ -54,13 +61,6 @@ class TaigaPopulator extends BiomePopulator {
         $this->taigaBrownMushroomDecorator->setDensity(0.25);
         $this->taigaRedMushroomDecorator->setAmount(1);
         $this->taigaRedMushroomDecorator->setDensity(0.125);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(RedwoodTree::class, 2),
-            new TreeDecoration(TallRedwoodTree::class, 1),
-        ];
     }
 
     protected function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {

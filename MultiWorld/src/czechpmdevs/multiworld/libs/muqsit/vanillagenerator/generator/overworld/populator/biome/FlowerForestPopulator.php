@@ -22,10 +22,6 @@ class FlowerForestPopulator extends ForestPopulator {
     protected static array $FLOWERS;
     private OctaveGenerator $noiseGen;
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::FLOWER_FOREST];
-    }
-
     protected static function initFlowers() : void {
         self::$FLOWERS = [
             VanillaBlocks::POPPY(),
@@ -41,13 +37,8 @@ class FlowerForestPopulator extends ForestPopulator {
         ];
     }
 
-    protected function initPopulators() : void {
-        parent::initPopulators();
-        $this->treeDecorator->setAmount(6);
-        $this->flowerDecorator->setAmount(0);
-        $this->doublePlantLoweringAmount = 1;
-        $this->noiseGen = SimplexOctaveGenerator::fromRandomAndOctaves(new Random(2345), 1, 0, 0, 0);
-        $this->noiseGen->setScale(1 / 48.0);
+    public function getBiomes() : ?array {
+        return [BiomeIds::FLOWER_FOREST];
     }
 
     public function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
@@ -63,6 +54,15 @@ class FlowerForestPopulator extends ForestPopulator {
             $flower = self::$FLOWERS[(int) ($noise * count(self::$FLOWERS))];
             (new Flower($flower))->generate($world, $random, $sourceX + $x, $y, $sourceZ + $z);
         }
+    }
+
+    protected function initPopulators() : void {
+        parent::initPopulators();
+        $this->treeDecorator->setAmount(6);
+        $this->flowerDecorator->setAmount(0);
+        $this->doublePlantLoweringAmount = 1;
+        $this->noiseGen = SimplexOctaveGenerator::fromRandomAndOctaves(new Random(2345), 1, 0, 0, 0);
+        $this->noiseGen->setScale(1 / 48.0);
     }
 }
 

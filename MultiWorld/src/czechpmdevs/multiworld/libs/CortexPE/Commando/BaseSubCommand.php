@@ -75,10 +75,6 @@ abstract class BaseSubCommand implements IArgumentable, IRunnable {
         return $this->constraints;
     }
 
-    public function getName() : string {
-        return $this->name;
-    }
-
     public function getPermission() : ?string {
         return $this->permission;
     }
@@ -127,6 +123,10 @@ abstract class BaseSubCommand implements IArgumentable, IRunnable {
 
     public function sendUsage() : void {
         $this->currentSender->sendMessage("/{$this->parent->getName()} $this->usageMessage");
+    }
+
+    public function getName() : string {
+        return $this->name;
     }
 
     public function addConstraint(BaseConstraint $constraint) : void {

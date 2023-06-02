@@ -44,15 +44,15 @@ class Main extends PluginBase {
         $this->loginBonusItem = $this->registerLoginBonusItem();
     }
 
-    protected function onLoad() : void {
-        self::setInstance($this);
-    }
-
     private function registerLoginBonusItem() : Item {
         $item = ItemFactory::getInstance()->get((int) self::LoginBonusItemInfo['id'], (int) Main::LoginBonusItemInfo['meta'], (int) Main::LoginBonusItemInfo['count']);
         $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId((int) Main::LoginBonusItemInfo['enchant']), (int) Main::LoginBonusItemInfo['level']));
         $item->setCustomName('Login Bonus');
         $item->setLore(['アイテムを持ってタップすることでログインボーナスとアイテムを交換することができます',]);
         return $item;
+    }
+
+    protected function onLoad() : void {
+        self::setInstance($this);
     }
 }

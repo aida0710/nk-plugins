@@ -10,10 +10,6 @@ class MiningToolsDestructionEnabledWorldsSetting extends Setting {
 
     protected string $value;
 
-    public function getFallbackValue() : string {
-        return 'all';
-    }
-
     public static function getName() : string {
         return 'MiningToolsDestructionEnabledWorlds';
     }
@@ -31,5 +27,9 @@ class MiningToolsDestructionEnabledWorldsSetting extends Setting {
      */
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : string {
+        return 'all';
     }
 }

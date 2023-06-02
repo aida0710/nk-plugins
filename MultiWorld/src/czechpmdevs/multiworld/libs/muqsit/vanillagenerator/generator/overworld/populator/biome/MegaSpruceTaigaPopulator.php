@@ -15,20 +15,20 @@ class MegaSpruceTaigaPopulator extends MegaTaigaPopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::REDWOOD_TAIGA_MUTATED, BiomeIds::REDWOOD_TAIGA_HILLS_MUTATED];
-    }
-
-    protected function initPopulators() : void {
-        $this->treeDecorator->setTrees(...self::$TREES);
-    }
-
     protected static function initTrees() : void {
         self::$TREES = [
             new TreeDecoration(RedwoodTree::class, 44),
             new TreeDecoration(TallRedwoodTree::class, 22),
             new TreeDecoration(MegaSpruceTree::class, 33),
         ];
+    }
+
+    public function getBiomes() : ?array {
+        return [BiomeIds::REDWOOD_TAIGA_MUTATED, BiomeIds::REDWOOD_TAIGA_HILLS_MUTATED];
+    }
+
+    protected function initPopulators() : void {
+        $this->treeDecorator->setTrees(...self::$TREES);
     }
 }
 

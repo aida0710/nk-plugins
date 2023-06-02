@@ -39,18 +39,6 @@ final class PacketMonitorListener implements IPacketMonitor, Listener {
     ) {
     }
 
-    /**
-     * @template TPacket of Packet
-     * @template UPacket of TPacket
-     * @param Closure(UPacket, NetworkSession) : void $handler
-     * @param class-string<TPacket>                   $class
-     */
-    private static function getPidFromHandler(Closure $handler, string $class) : int {
-        $classes = Utils::parseClosureSignature($handler, [$class, NetworkSession::class], 'void');
-        assert(is_a($classes[0], DataPacket::class, true));
-        return $classes[0]::NETWORK_ID;
-    }
-
     public function monitorIncoming(Closure $handler) : IPacketMonitor {
         $this->incoming_handlers[self::getPidFromHandler($handler, ServerboundPacket::class)][spl_object_id($handler)] = $handler;
         if ($this->incoming_event_handler === null) {
@@ -66,6 +54,18 @@ final class PacketMonitorListener implements IPacketMonitor, Listener {
             }, EventPriority::MONITOR, $this->register, $this->handleCancelled);
         }
         return $this;
+    }
+
+    /**
+     * @template TPacket of Packet
+     * @template UPacket of TPacket
+     * @param Closure(UPacket, NetworkSession) : void $handler
+     * @param class-string<TPacket>                   $class
+     */
+    private static function getPidFromHandler(Closure $handler, string $class) : int {
+        $classes = Utils::parseClosureSignature($handler, [$class, NetworkSession::class], 'void');
+        assert(is_a($classes[0], DataPacket::class, true));
+        return $classes[0]::NETWORK_ID;
     }
 
     public function monitorOutgoing(Closure $handler) : IPacketMonitor {

@@ -48,10 +48,6 @@ class PerlinOctaveGenerator extends OctaveGenerator {
         return $result;
     }
 
-    protected static function floor(float $x) : int {
-        return $x >= 0 ? (int) $x : (int) $x - 1;
-    }
-
     public function getSizeX() : int {
         return $this->sizeX;
     }
@@ -119,5 +115,9 @@ class PerlinOctaveGenerator extends OctaveGenerator {
             $amp *= $persistence;
         }
         return $this->noise;
+    }
+
+    protected static function floor(float $x) : int {
+        return $x >= 0 ? (int) $x : (int) $x - 1;
     }
 }

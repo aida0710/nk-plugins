@@ -18,6 +18,17 @@ use ree_jp\stackstorage\api\StackStorageAPI;
 class DirectInventory implements Listener {
 
     /**
+     * @priority HIGHEST
+     */
+    public function onBreak(BlockBreakEvent $event) {
+        if ($event->isCancelled()) return;
+        $drops = $event->getDrops();
+        $player = $event->getPlayer();
+        $event->setDrops([]);
+        DirectInventory::onDrop($player, $drops);
+    }
+
+    /**
      * @param Player $player
      * @param Item[] $drops
      * @return void
@@ -40,17 +51,6 @@ class DirectInventory implements Listener {
                 }
             }
         }
-    }
-
-    /**
-     * @priority HIGHEST
-     */
-    public function onBreak(BlockBreakEvent $event) {
-        if ($event->isCancelled()) return;
-        $drops = $event->getDrops();
-        $player = $event->getPlayer();
-        $event->setDrops([]);
-        DirectInventory::onDrop($player, $drops);
     }
 
     private function notStorageItem(Player $player, Item $item) : bool {

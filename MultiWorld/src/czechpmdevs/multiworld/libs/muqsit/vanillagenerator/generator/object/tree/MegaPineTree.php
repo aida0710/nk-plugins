@@ -27,14 +27,6 @@ class MegaPineTree extends MegaRedwoodTree {
         return $generated;
     }
 
-    protected function generateDirtBelowTrunk(int $blockX, int $blockY, int $blockZ) : void {
-        // SELF, SOUTH, EAST, SOUTH EAST
-        $this->transaction->addBlockAt($blockX, $blockY - 1, $blockZ, VanillaBlocks::PODZOL());
-        $this->transaction->addBlockAt($blockX, $blockY - 1, $blockZ + 1, VanillaBlocks::PODZOL());
-        $this->transaction->addBlockAt($blockX + 1, $blockY - 1, $blockZ, VanillaBlocks::PODZOL());
-        $this->transaction->addBlockAt($blockX + 1, $blockY - 1, $blockZ + 1, VanillaBlocks::PODZOL());
-    }
-
     private function generatePodzol(int $sourceX, int $sourceY, int $sourceZ, ChunkManager $world, Random $random) : void {
         $this->generatePodzolPatch($sourceX - 1, $sourceY, $sourceZ - 1, $world);
         $this->generatePodzolPatch($sourceX + 2, $sourceY, $sourceZ - 1, $world);
@@ -69,5 +61,13 @@ class MegaPineTree extends MegaRedwoodTree {
                 }
             }
         }
+    }
+
+    protected function generateDirtBelowTrunk(int $blockX, int $blockY, int $blockZ) : void {
+        // SELF, SOUTH, EAST, SOUTH EAST
+        $this->transaction->addBlockAt($blockX, $blockY - 1, $blockZ, VanillaBlocks::PODZOL());
+        $this->transaction->addBlockAt($blockX, $blockY - 1, $blockZ + 1, VanillaBlocks::PODZOL());
+        $this->transaction->addBlockAt($blockX + 1, $blockY - 1, $blockZ, VanillaBlocks::PODZOL());
+        $this->transaction->addBlockAt($blockX + 1, $blockY - 1, $blockZ + 1, VanillaBlocks::PODZOL());
     }
 }

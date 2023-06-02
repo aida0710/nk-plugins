@@ -13,6 +13,17 @@ class gacha {
         $this->initTable();
     }
 
+    protected function getTmpTable() : array {
+        return [
+            'C' => 80,
+            'UC' => 13,
+            'R' => 5,
+            'm' => 0.001,
+            'SR' => 1.7,
+            'L' => 0.3,
+        ];
+    }
+
     public function initTable() : void {
         $this->rank = array_map(static fn ($value) => $value * 1000, $this->tmp_table);
         $this->num = (int) array_sum($this->rank);
@@ -34,17 +45,6 @@ class gacha {
             throw new RuntimeException('test');
         }
         return $result;
-    }
-
-    protected function getTmpTable() : array {
-        return [
-            'C' => 80,
-            'UC' => 13,
-            'R' => 5,
-            'm' => 0.001,
-            'SR' => 1.7,
-            'L' => 0.3,
-        ];
     }
 }
 

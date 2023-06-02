@@ -93,6 +93,29 @@ class BossBar {
         return $this;
     }
 
+    /**
+     * @param Player[] $players
+     */
+    protected function sendBossPacket(array $players) : void {
+        $pk = new BossEventPacket();
+        $pk->eventType = BossEventPacket::TYPE_SHOW;
+        foreach ($players as $player) {
+            if (!$player->isConnected()) continue;
+            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
+            $player->getNetworkSession()->sendDataPacket($this->addDefaults($player, $pk));
+        }
+    }
+
+    private function addDefaults(Player $player, BossEventPacket $pk) : BossEventPacket {
+        $pk->title = $this->getFullTitle();
+        $pk->healthPercent = $this->getPercentage();
+        $pk->darkenScreen = false;
+        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
+        $pk->color = $setting->getSetting(BossBarColorSetting::getName())?->getValue();  //Does not function anyways
+        $pk->overlay = 0;                                                                //Neither. Typical for Mojang: Copy-pasted from Java edition
+        return $pk;
+    }
+
     public function getPercentage() : float {
         return $this->getAttributeMap()->get(Attribute::HEALTH)->getValue() / 100;
     }
@@ -126,6 +149,19 @@ class BossBar {
     }
 
     /**
+     * @param Player[] $players
+     */
+    protected function sendRemoveBossPacket(array $players) : void {
+        $pk = new BossEventPacket();
+        $pk->eventType = BossEventPacket::TYPE_HIDE;
+        foreach ($players as $player) {
+            if (!$player->isConnected()) continue;
+            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
+            $player->getNetworkSession()->sendDataPacket($pk);
+        }
+    }
+
+    /**
      * Removes all players from this bar
      */
     public function removeAllPlayers() : BossBar {
@@ -156,6 +192,20 @@ class BossBar {
         return $this;
     }
 
+    /**
+     * @param Player[] $players
+     */
+    protected function sendBossTextPacket(array $players) : void {
+        $pk = new BossEventPacket();
+        $pk->eventType = BossEventPacket::TYPE_TITLE;
+        $pk->title = $this->getFullTitle();
+        foreach ($players as $player) {
+            if (!$player->isConnected()) continue;
+            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
+            $player->getNetworkSession()->sendDataPacket($pk);
+        }
+    }
+
     public function getSubTitle() : string {
         return $this->subTitle;
     }
@@ -179,6 +229,20 @@ class BossBar {
         #$this->sendAttributesPacket($this->getPlayers());
         $this->sendBossHealthPacket($this->getPlayers());
         return $this;
+    }
+
+    /**
+     * @param Player[] $players
+     */
+    protected function sendBossHealthPacket(array $players) : void {
+        $pk = new BossEventPacket();
+        $pk->eventType = BossEventPacket::TYPE_HEALTH_PERCENT;
+        $pk->healthPercent = $this->getPercentage();
+        foreach ($players as $player) {
+            if (!$player->isConnected()) continue;
+            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
+            $player->getNetworkSession()->sendDataPacket($pk);
+        }
     }
 
     /**
@@ -282,60 +346,6 @@ class BossBar {
     /**
      * @param Player[] $players
      */
-    protected function sendBossPacket(array $players) : void {
-        $pk = new BossEventPacket();
-        $pk->eventType = BossEventPacket::TYPE_SHOW;
-        foreach ($players as $player) {
-            if (!$player->isConnected()) continue;
-            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-            $player->getNetworkSession()->sendDataPacket($this->addDefaults($player, $pk));
-        }
-    }
-
-    /**
-     * @param Player[] $players
-     */
-    protected function sendRemoveBossPacket(array $players) : void {
-        $pk = new BossEventPacket();
-        $pk->eventType = BossEventPacket::TYPE_HIDE;
-        foreach ($players as $player) {
-            if (!$player->isConnected()) continue;
-            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-            $player->getNetworkSession()->sendDataPacket($pk);
-        }
-    }
-
-    /**
-     * @param Player[] $players
-     */
-    protected function sendBossTextPacket(array $players) : void {
-        $pk = new BossEventPacket();
-        $pk->eventType = BossEventPacket::TYPE_TITLE;
-        $pk->title = $this->getFullTitle();
-        foreach ($players as $player) {
-            if (!$player->isConnected()) continue;
-            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-            $player->getNetworkSession()->sendDataPacket($pk);
-        }
-    }
-
-    /**
-     * @param Player[] $players
-     */
-    protected function sendBossHealthPacket(array $players) : void {
-        $pk = new BossEventPacket();
-        $pk->eventType = BossEventPacket::TYPE_HEALTH_PERCENT;
-        $pk->healthPercent = $this->getPercentage();
-        foreach ($players as $player) {
-            if (!$player->isConnected()) continue;
-            $pk->bossActorUniqueId = $this->actorId ?? $player->getId();
-            $player->getNetworkSession()->sendDataPacket($pk);
-        }
-    }
-
-    /**
-     * @param Player[] $players
-     */
     protected function sendAttributesPacket(array $players) : void {//tod0: might not be needed anymore
         if ($this->actorId === null) return;
         $pk = new UpdateAttributesPacket();
@@ -349,16 +359,6 @@ class BossBar {
      */
     protected function getPropertyManager() : EntityMetadataCollection {
         return $this->propertyManager;
-    }
-
-    private function addDefaults(Player $player, BossEventPacket $pk) : BossEventPacket {
-        $pk->title = $this->getFullTitle();
-        $pk->healthPercent = $this->getPercentage();
-        $pk->darkenScreen = false;
-        $setting = PlayerSettingPool::getInstance()->getSettingNonNull($player);
-        $pk->color = $setting->getSetting(BossBarColorSetting::getName())?->getValue();  //Does not function anyways
-        $pk->overlay = 0;//Neither. Typical for Mojang: Copy-pasted from Java edition
-        return $pk;
     }
 
     //tod0: callable on client2server register/unregister request

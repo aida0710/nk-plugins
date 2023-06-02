@@ -72,13 +72,6 @@ class OverworldPopulator implements Populator {
         */
     }
 
-    public function populate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
-        $biome = $chunk->getBiomeId(8, 8);
-        if (array_key_exists($biome, $this->biomePopulators)) {
-            $this->biomePopulators[$biome]->populate($world, $random, $chunkX, $chunkZ, $chunk);
-        }
-    }
-
     private function registerBiomePopulator(BiomePopulator $populator) : void {
         $biomes = $populator->getBiomes();
         if ($biomes === null) {
@@ -86,6 +79,13 @@ class OverworldPopulator implements Populator {
         }
         foreach ($biomes as $biome) {
             $this->biomePopulators[$biome] = $populator;
+        }
+    }
+
+    public function populate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
+        $biome = $chunk->getBiomeId(8, 8);
+        if (array_key_exists($biome, $this->biomePopulators)) {
+            $this->biomePopulators[$biome]->populate($world, $random, $chunkX, $chunkZ, $chunk);
         }
     }
 }

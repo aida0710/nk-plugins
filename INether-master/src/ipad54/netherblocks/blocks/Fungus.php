@@ -20,28 +20,10 @@ use pocketmine\world\BlockTransaction;
 
 class Fungus extends Flowable {
 
-    public function isWarped() : bool {
-        return false;
-    }
-
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
         if ($item instanceof Fertilizer && $this->grow($player)) {
             $item->pop();
             return true;
-        }
-        return false;
-    }
-
-    public function onNearbyBlockChange() : void {
-        if (!$this->getSide(Facing::DOWN)->isSolid()) {
-            $this->position->getWorld()->useBreakOn($this->position);
-        }
-    }
-
-    public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
-        $side = $this->getSide(Facing::DOWN);
-        if (in_array($side->getId(), [ItemIds::DIRT, ItemIds::FARMLAND, ItemIds::PODZOL, ItemIds::GRASS, CustomIds::NYLIUM_BLOCK, CustomIds::WARPED_NYLIUM_BLOCK, CustomIds::SOUL_SOIL_BLOCK])) {
-            return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
         }
         return false;
     }
@@ -57,6 +39,24 @@ class Fungus extends Flowable {
         $ev->call();
         if (!$ev->isCancelled()) {
             return $transaction->apply();
+        }
+        return false;
+    }
+
+    public function isWarped() : bool {
+        return false;
+    }
+
+    public function onNearbyBlockChange() : void {
+        if (!$this->getSide(Facing::DOWN)->isSolid()) {
+            $this->position->getWorld()->useBreakOn($this->position);
+        }
+    }
+
+    public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
+        $side = $this->getSide(Facing::DOWN);
+        if (in_array($side->getId(), [ItemIds::DIRT, ItemIds::FARMLAND, ItemIds::PODZOL, ItemIds::GRASS, CustomIds::NYLIUM_BLOCK, CustomIds::WARPED_NYLIUM_BLOCK, CustomIds::SOUL_SOIL_BLOCK])) {
+            return parent::place($tx, $item, $blockReplace, $blockClicked, $face, $clickVector, $player);
         }
         return false;
     }

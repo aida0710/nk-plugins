@@ -34,10 +34,6 @@ final class GachaMap {
         return $result;
     }
 
-    protected static function register(string $name, Gacha $gacha) : void {
-        self::_registryRegister($name, $gacha);
-    }
-
     /**
      * @example self::register('fnc name', new Gacha());
      */
@@ -51,5 +47,9 @@ final class GachaMap {
             new YmgGachaTable(),
             new YmgGachaTicket()
         ));
+    }
+
+    protected static function register(string $name, Gacha $gacha) : void {
+        self::_registryRegister($name, $gacha);
     }
 }

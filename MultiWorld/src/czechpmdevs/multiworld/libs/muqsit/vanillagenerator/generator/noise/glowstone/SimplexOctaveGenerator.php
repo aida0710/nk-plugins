@@ -9,6 +9,10 @@ use function array_fill;
 
 class SimplexOctaveGenerator extends PerlinOctaveGenerator {
 
+    public static function fromRandomAndOctaves(Random $random, int $octaves, int $sizeX, int $sizeY, int $sizeZ) : self {
+        return new SimplexOctaveGenerator(self::createOctaves($random, $octaves), $sizeX, $sizeY, $sizeZ);
+    }
+
     /**
      * @return SimplexNoise[]
      */
@@ -18,10 +22,6 @@ class SimplexOctaveGenerator extends PerlinOctaveGenerator {
             $result[$i] = new SimplexNoise($rand);
         }
         return $result;
-    }
-
-    public static function fromRandomAndOctaves(Random $random, int $octaves, int $sizeX, int $sizeY, int $sizeZ) : self {
-        return new SimplexOctaveGenerator(self::createOctaves($random, $octaves), $sizeX, $sizeY, $sizeZ);
     }
 
     public function getFractalBrownianMotion(float $x, float $y, float $z, float $lacunarity, float $persistence) : array {

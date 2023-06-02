@@ -59,11 +59,11 @@ class Main extends PluginBase implements Listener {
         $this->spam[$name] = $msg;
     }
 
-    public function onJoin(PlayerJoinEvent $event) {
-        $this->spam[$event->getPlayer()->getName()] = false;
-    }
-
     public function unset(Player $player) : void {
         unset(self::$interval[$player->getName()]);
+    }
+
+    public function onJoin(PlayerJoinEvent $event) {
+        $this->spam[$event->getPlayer()->getName()] = false;
     }
 }

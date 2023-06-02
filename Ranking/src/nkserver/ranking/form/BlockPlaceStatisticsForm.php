@@ -32,7 +32,7 @@ class BlockPlaceStatisticsForm extends BackableForm {
                     0 => new BlockDetailForm($this, BlockDetailForm::TYPE_BLOCKPLACE, $receiver),
                     1 => new PlaceLevelsForm($this, $receiver),
                     2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE),
-                    3 => $this->before
+                    3 => $this->before,
                 }
                 ));
             };

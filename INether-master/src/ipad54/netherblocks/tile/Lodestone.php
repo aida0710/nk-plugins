@@ -20,12 +20,12 @@ class Lodestone extends Spawnable {
         return $this;
     }
 
-    protected function addAdditionalSpawnData(CompoundTag $nbt) : void {
-        $nbt->setInt(self::TAG_TRACKING, $this->lodestoneId);
-    }
-
     public function readSaveData(CompoundTag $nbt) : void {
         $this->lodestoneId = $nbt->getInt(self::TAG_TRACKING);
+    }
+
+    protected function addAdditionalSpawnData(CompoundTag $nbt) : void {
+        $nbt->setInt(self::TAG_TRACKING, $this->lodestoneId);
     }
 
     protected function writeSaveData(CompoundTag $nbt) : void {

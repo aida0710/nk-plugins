@@ -33,19 +33,6 @@ class JoinItemUseEvent implements Listener {
         $this->onUse($event->getPlayer());
     }
 
-    /**
-     * @priority LOWEST
-     */
-    public function onItemUse(PlayerItemUseEvent $event) : void {
-        $item = $event->getPlayer()->getInventory()->getItemInHand();
-        $rootTag = $item->getNamedTag()->getTag(JoinPlayerEvent::NBT_ROOT);
-        if (!($rootTag instanceof CompoundTag)) {
-            return;
-        }
-        $event->cancel();
-        $this->onUse($event->getPlayer());
-    }
-
     private function onUse(Player $player) {
         $item = $player->getInventory()->getItemInHand();
         $rootTag = $item->getNamedTag()->getTag(JoinPlayerEvent::NBT_ROOT);
@@ -74,5 +61,18 @@ class JoinItemUseEvent implements Listener {
                 break;
         }
         SoundPacket::Send($player, 'sign.dye.use');
+    }
+
+    /**
+     * @priority LOWEST
+     */
+    public function onItemUse(PlayerItemUseEvent $event) : void {
+        $item = $event->getPlayer()->getInventory()->getItemInHand();
+        $rootTag = $item->getNamedTag()->getTag(JoinPlayerEvent::NBT_ROOT);
+        if (!($rootTag instanceof CompoundTag)) {
+            return;
+        }
+        $event->cancel();
+        $this->onUse($event->getPlayer());
     }
 }

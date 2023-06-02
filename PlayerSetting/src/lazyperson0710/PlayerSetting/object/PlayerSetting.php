@@ -52,36 +52,6 @@ class PlayerSetting {
         $this->init();
     }
 
-    public function getXuid() : string {
-        return $this->xuid;
-    }
-
-    public function setSetting(Setting $setting) : void {
-        if (!isset($this->settings[$setting->getName()])) throw new LogicException($setting->getName() . ' is not registered');
-        $this->settings[$setting->getName()] = $setting;
-    }
-
-    public function getSetting(string $setting_name) : ?Setting {
-        return $this->settings[$setting_name] ?? null;
-    }
-
-    public function getSettingNonNull(string $setting_name) : Setting {
-        if (!isset($this->settings[$setting_name])) throw new RuntimeException($setting_name . ' is not exists');
-        return $this->settings[$setting_name];
-    }
-
-    public function getAll() : array {
-        return $this->settings;
-    }
-
-    public function toArray() : array {
-        $settings_arr = [];
-        foreach ($this->getAll() as $setting) {
-            $settings_arr[$setting::class] = $setting->getValue();
-        }
-        return $settings_arr;
-    }
-
     protected function init() : void {
         //normal
         $this->register(new CoordinateSetting());
@@ -124,5 +94,35 @@ class PlayerSetting {
     protected function register(Setting $setting) : void {
         if (isset($this->settings[$setting->getName()])) throw new LogicException($setting->getName() . ' is already registered');
         $this->settings[$setting->getName()] = $setting;
+    }
+
+    public function getXuid() : string {
+        return $this->xuid;
+    }
+
+    public function setSetting(Setting $setting) : void {
+        if (!isset($this->settings[$setting->getName()])) throw new LogicException($setting->getName() . ' is not registered');
+        $this->settings[$setting->getName()] = $setting;
+    }
+
+    public function getSetting(string $setting_name) : ?Setting {
+        return $this->settings[$setting_name] ?? null;
+    }
+
+    public function getSettingNonNull(string $setting_name) : Setting {
+        if (!isset($this->settings[$setting_name])) throw new RuntimeException($setting_name . ' is not exists');
+        return $this->settings[$setting_name];
+    }
+
+    public function toArray() : array {
+        $settings_arr = [];
+        foreach ($this->getAll() as $setting) {
+            $settings_arr[$setting::class] = $setting->getValue();
+        }
+        return $settings_arr;
+    }
+
+    public function getAll() : array {
+        return $this->settings;
     }
 }

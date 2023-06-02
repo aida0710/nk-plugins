@@ -36,33 +36,6 @@ class CocoaTree extends JungleTree {
         return true;
     }
 
-    protected function addVinesOnLeaves(int $baseX, int $baseY, int $baseZ, ChunkManager $world, Random $random) : void {
-        for ($y = $baseY - 3 + $this->height; $y <= $baseY + $this->height; ++$y) {
-            $ny = $y - ($baseY + $this->height);
-            $radius = 2 - $ny / 2;
-            for ($x = $baseX - $radius; $x <= $baseX + $radius; ++$x) {
-                $ax = (int) $x;
-                for ($z = $baseZ - $radius; $z <= $baseZ + $radius; ++$z) {
-                    $az = (int) $z;
-                    if ($world->getBlockAt($ax, $y, $az)->getId() === BlockLegacyIds::LEAVES) {
-                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax - 1, $y, $az)->getId() === BlockLegacyIds::AIR) {
-                            $this->addHangingVine($ax - 1, $y, $az, Facing::EAST, $world);
-                        }
-                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax + 1, $y, $az)->getId() === BlockLegacyIds::AIR) {
-                            $this->addHangingVine($ax + 1, $y, $az, Facing::WEST, $world);
-                        }
-                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax, $y, $az - 1)->getId() === BlockLegacyIds::AIR) {
-                            $this->addHangingVine($ax, $y, $az - 1, Facing::SOUTH, $world);
-                        }
-                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax, $y, $az + 1)->getId() === BlockLegacyIds::AIR) {
-                            $this->addHangingVine($ax, $y, $az + 1, Facing::NORTH, $world);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private function addVinesOnTrunk(int $trunkX, int $trunkY, int $trunkZ, ChunkManager $world, Random $random) : void {
         for ($y = 1; $y < $this->height; ++$y) {
             if (
@@ -88,6 +61,33 @@ class CocoaTree extends JungleTree {
                 $world->getBlockAt($trunkX, $trunkY + $y, $trunkZ + 1)->getId() === BlockLegacyIds::AIR
             ) {
                 $this->transaction->addBlockAt($trunkX, $trunkY + $y, $trunkZ + 1, VanillaBlocks::VINES()->setFace(Facing::NORTH, true));
+            }
+        }
+    }
+
+    protected function addVinesOnLeaves(int $baseX, int $baseY, int $baseZ, ChunkManager $world, Random $random) : void {
+        for ($y = $baseY - 3 + $this->height; $y <= $baseY + $this->height; ++$y) {
+            $ny = $y - ($baseY + $this->height);
+            $radius = 2 - $ny / 2;
+            for ($x = $baseX - $radius; $x <= $baseX + $radius; ++$x) {
+                $ax = (int) $x;
+                for ($z = $baseZ - $radius; $z <= $baseZ + $radius; ++$z) {
+                    $az = (int) $z;
+                    if ($world->getBlockAt($ax, $y, $az)->getId() === BlockLegacyIds::LEAVES) {
+                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax - 1, $y, $az)->getId() === BlockLegacyIds::AIR) {
+                            $this->addHangingVine($ax - 1, $y, $az, Facing::EAST, $world);
+                        }
+                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax + 1, $y, $az)->getId() === BlockLegacyIds::AIR) {
+                            $this->addHangingVine($ax + 1, $y, $az, Facing::WEST, $world);
+                        }
+                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax, $y, $az - 1)->getId() === BlockLegacyIds::AIR) {
+                            $this->addHangingVine($ax, $y, $az - 1, Facing::SOUTH, $world);
+                        }
+                        if ($random->nextBoundedInt(4) === 0 && $world->getBlockAt($ax, $y, $az + 1)->getId() === BlockLegacyIds::AIR) {
+                            $this->addHangingVine($ax, $y, $az + 1, Facing::NORTH, $world);
+                        }
+                    }
+                }
             }
         }
     }

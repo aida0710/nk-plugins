@@ -24,6 +24,13 @@ class BreakEventListener implements Listener {
         $this->giveTicket($event->getPlayer(), $random, $probability);
     }
 
+    private function giveTicket(Player $player, int $random, string $probability) : void {
+        if ($random === 500) {
+            TicketAPI::getInstance()->addTicket($player, 1);
+            SendBroadcastTip::Send("Ticketを{$probability}％の確率で{$player->getName()}がゲットしました", 'Ticket');
+        }
+    }
+
     /**
      * @priority MONITOR
      */
@@ -32,12 +39,5 @@ class BreakEventListener implements Listener {
         $probability = '0.0769';
         $random = mt_rand(1, 1300);
         $this->giveTicket($event->getPlayer(), $random, $probability);
-    }
-
-    private function giveTicket(Player $player, int $random, string $probability) : void {
-        if ($random === 500) {
-            TicketAPI::getInstance()->addTicket($player, 1);
-            SendBroadcastTip::Send("Ticketを{$probability}％の確率で{$player->getName()}がゲットしました", 'Ticket');
-        }
     }
 }

@@ -34,41 +34,6 @@ use ymggacha\src\yomogi_server\ymggacha\scheduler\ScheduledEvent;
 
 class SwitchToSuperRareEffect extends NormalEffect {
 
-    protected function switchShulkerBox(World $world, Vector3 $vec3) : void {
-        $this->addThunder($world, $vec3);
-        $this->setRedShulkerBox($world, $vec3);
-    }
-
-    protected function setRedShulkerBox(World $world, Vector3 $vec3) : void {
-        $blockPos = BlockPosition::fromVector3($vec3);
-        $world->addSound($vec3, new EndermanTeleportSound());
-        $world->broadcastPacketToViewers($vec3, UpdateBlockPacket::create(
-            $blockPos,
-            RuntimeBlockMapping::getInstance()->toRuntimeId(VanillaBlocks::DYED_SHULKER_BOX()->setColor(DyeColor::RED())->getFullId()),
-            UpdateBlockPacket::FLAG_NETWORK,
-            UpdateBlockPacket::DATA_LAYER_NORMAL,
-        ));
-    }
-
-    protected function addThunder(World $world, Vector3 $vec3) : void {
-        $eid = Entity::nextRuntimeId();
-        $actorPk = AddActorPacket::create($eid, $eid, EntityIds::LIGHTNING_BOLT, clone $vec3, null, 0, 0, 0, 0, [], [], new PropertySyncData([], []), []);
-        $world->broadcastPacketToViewers($vec3, $actorPk);
-        $world->addSound($vec3, new ExplodeSound());
-    }
-
-    protected function openShulkerBox(World $world, Vector3 $vec3) : void {
-        $world->broadcastPacketToViewers($vec3, BlockEventPacket::create(BlockPosition::fromVector3($vec3), 1, 1));
-        $world->addSound($vec3, new ShulkerBoxOpenSound());
-        $world->addParticle($vec3->add(0.5, 0.8, 0.5), new PotionSplashParticle(Color::fromRGB(0xf4f4f4)));
-        $world->addParticle($vec3->add(0.5, 0.5, 0.5), new FireworkParticle(new BurstPattern(
-            FireworkTypeEnum::SMALL_SPHERE(),
-            new FireworkColor(FireworkColorEnum::RED(), FireworkColorEnum::WHITE(), FireworkColorEnum::BLACK()),
-            new FireworkColor(FireworkColorEnum::RED(), FireworkColorEnum::WHITE(), FireworkColorEnum::WHITE()),
-            true
-        )));
-    }
-
     /**
      * @param array<IGachaItem> $items
      */
@@ -86,5 +51,40 @@ class SwitchToSuperRareEffect extends NormalEffect {
             ->register(new ScheduledEvent(fn () => $this->createFloatingTextEffect($world, clone $vec3, $items), 65))
             ->register(new ScheduledEvent(fn () => $giveItemFn(), 65))
             ->execute();
+    }
+
+    protected function switchShulkerBox(World $world, Vector3 $vec3) : void {
+        $this->addThunder($world, $vec3);
+        $this->setRedShulkerBox($world, $vec3);
+    }
+
+    protected function addThunder(World $world, Vector3 $vec3) : void {
+        $eid = Entity::nextRuntimeId();
+        $actorPk = AddActorPacket::create($eid, $eid, EntityIds::LIGHTNING_BOLT, clone $vec3, null, 0, 0, 0, 0, [], [], new PropertySyncData([], []), []);
+        $world->broadcastPacketToViewers($vec3, $actorPk);
+        $world->addSound($vec3, new ExplodeSound());
+    }
+
+    protected function setRedShulkerBox(World $world, Vector3 $vec3) : void {
+        $blockPos = BlockPosition::fromVector3($vec3);
+        $world->addSound($vec3, new EndermanTeleportSound());
+        $world->broadcastPacketToViewers($vec3, UpdateBlockPacket::create(
+            $blockPos,
+            RuntimeBlockMapping::getInstance()->toRuntimeId(VanillaBlocks::DYED_SHULKER_BOX()->setColor(DyeColor::RED())->getFullId()),
+            UpdateBlockPacket::FLAG_NETWORK,
+            UpdateBlockPacket::DATA_LAYER_NORMAL,
+        ));
+    }
+
+    protected function openShulkerBox(World $world, Vector3 $vec3) : void {
+        $world->broadcastPacketToViewers($vec3, BlockEventPacket::create(BlockPosition::fromVector3($vec3), 1, 1));
+        $world->addSound($vec3, new ShulkerBoxOpenSound());
+        $world->addParticle($vec3->add(0.5, 0.8, 0.5), new PotionSplashParticle(Color::fromRGB(0xf4f4f4)));
+        $world->addParticle($vec3->add(0.5, 0.5, 0.5), new FireworkParticle(new BurstPattern(
+            FireworkTypeEnum::SMALL_SPHERE(),
+            new FireworkColor(FireworkColorEnum::RED(), FireworkColorEnum::WHITE(), FireworkColorEnum::BLACK()),
+            new FireworkColor(FireworkColorEnum::RED(), FireworkColorEnum::WHITE(), FireworkColorEnum::WHITE()),
+            true
+        )));
     }
 }

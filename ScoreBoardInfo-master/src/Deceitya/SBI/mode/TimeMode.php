@@ -25,10 +25,6 @@ class TimeMode implements Mode {
         $this->ServerStopper = $manager->getPlugin('ServerStopper');
     }
 
-    public function getId() : int {
-        return self::TIME;
-    }
-
     public function getLines(Player $player) : ?array {
         $item = $player->getInventory()->getItemInHand();
         $date = date('Y年m月d日');
@@ -49,6 +45,10 @@ class TimeMode implements Mode {
             '',
             TextFormat::YELLOW . 'nkserver.net',
         ];
+    }
+
+    public function getId() : int {
+        return self::TIME;
     }
 
     public function getName() : string {

@@ -93,6 +93,24 @@ class Main extends PluginBase {
     private static self $instance;
     private CustomConfig $config;
 
+    protected function onEnable() : void { //credits https://github.com/cladevs/VanillaX
+        Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
+        $path = $this->getFile() . "/resources/block_id_map.json";
+        Server::getInstance()->getAsyncPool()->addWorkerStartHook(function (int $worker) use ($path) : void {
+            Server::getInstance()->getAsyncPool()->submitTaskToWorker(new class($path) extends AsyncTask {
+
+                public function __construct(
+                    private string $path,
+                ) {
+                }
+
+                public function onRun() : void {
+                    Main::initializeRuntimeIds($this->path);
+                }
+            }, $worker);
+        });
+    }
+
     public static function getInstance() : self {
         return self::$instance;
     }
@@ -114,8 +132,14 @@ class Main extends PluginBase {
         }
     }
 
-    public function getCustomConfig() : CustomConfig {
-        return $this->config;
+    protected function onLoad() : void {
+        self::$instance = $this;
+        $this->saveResource("config.yml");
+        $this->config = new CustomConfig(new Config($this->getDataFolder() . "config.yml", Config::YAML));
+        self::initializeRuntimeIds($this->getFile() . "/resources/block_id_map.json");
+        $this->initBlocks();
+        $this->initTiles();
+        $this->initItems();
     }
 
     public function initBlocks() : void {
@@ -254,6 +278,30 @@ class Main extends PluginBase {
         }
     }
 
+    public function getCustomConfig() : CustomConfig {
+        return $this->config;
+    }
+
+    private function registerBlock(Block $block, bool $registerToParser = true, bool $addToCreative = true) : void {
+        BlockFactory::getInstance()->register($block, true);
+        if ($addToCreative && !CreativeInventory::getInstance()->contains($block->asItem())) {
+            CreativeInventory::getInstance()->add($block->asItem());
+        }
+        if ($registerToParser) {
+            $name = strtolower($block->getName());
+            $name = str_replace(" ", "_", $name);
+            StringToItemParser::getInstance()->registerBlock($name, fn () => $block);
+        }
+    }
+
+    private function registerSlab(Slab $slab) : void {
+        $this->registerBlock($slab);
+        $identifierFlattened = $slab->getIdInfo();
+        if ($identifierFlattened instanceof BIDFlattened) {
+            BlockFactory::getInstance()->remap($identifierFlattened->getSecondId(), $identifierFlattened->getVariant() | 0x1, $slab->setSlabType(SlabType::DOUBLE()));
+        }
+    }
+
     public function initTiles() : void {
         $cfg = $this->getCustomConfig();
         $tf = TileFactory::getInstance();
@@ -316,46 +364,6 @@ class Main extends PluginBase {
         }
     }
 
-    protected function onEnable() : void { //credits https://github.com/cladevs/VanillaX
-        Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
-        $path = $this->getFile() . "/resources/block_id_map.json";
-        Server::getInstance()->getAsyncPool()->addWorkerStartHook(function (int $worker) use ($path) : void {
-            Server::getInstance()->getAsyncPool()->submitTaskToWorker(new class($path) extends AsyncTask {
-
-                public function __construct(
-                    private string $path,
-                ) {
-                }
-
-                public function onRun() : void {
-                    Main::initializeRuntimeIds($this->path);
-                }
-            }, $worker);
-        });
-    }
-
-    protected function onLoad() : void {
-        self::$instance = $this;
-        $this->saveResource("config.yml");
-        $this->config = new CustomConfig(new Config($this->getDataFolder() . "config.yml", Config::YAML));
-        self::initializeRuntimeIds($this->getFile() . "/resources/block_id_map.json");
-        $this->initBlocks();
-        $this->initTiles();
-        $this->initItems();
-    }
-
-    private function registerBlock(Block $block, bool $registerToParser = true, bool $addToCreative = true) : void {
-        BlockFactory::getInstance()->register($block, true);
-        if ($addToCreative && !CreativeInventory::getInstance()->contains($block->asItem())) {
-            CreativeInventory::getInstance()->add($block->asItem());
-        }
-        if ($registerToParser) {
-            $name = strtolower($block->getName());
-            $name = str_replace(" ", "_", $name);
-            StringToItemParser::getInstance()->registerBlock($name, fn () => $block);
-        }
-    }
-
     private function registerItem(Item $item, bool $registerToParser = true) : void {
         ItemFactory::getInstance()->register($item, true);
         if (!CreativeInventory::getInstance()->contains($item)) {
@@ -365,14 +373,6 @@ class Main extends PluginBase {
             $name = strtolower($item->getName());
             $name = str_replace(" ", "_", $name);
             StringToItemParser::getInstance()->register($name, fn () => $item);
-        }
-    }
-
-    private function registerSlab(Slab $slab) : void {
-        $this->registerBlock($slab);
-        $identifierFlattened = $slab->getIdInfo();
-        if ($identifierFlattened instanceof BIDFlattened) {
-            BlockFactory::getInstance()->remap($identifierFlattened->getSecondId(), $identifierFlattened->getVariant() | 0x1, $slab->setSlabType(SlabType::DOUBLE()));
         }
     }
 }

@@ -93,6 +93,10 @@ class TwistingVines extends Transparent { //credits: https://github.com/cladevs/
         return false;
     }
 
+    public function getAge() : int {
+        return $this->age;
+    }
+
     public function onNearbyBlockChange() : void {
         $block = $this->getSide(Facing::DOWN);
         if ($block instanceof Air) {
@@ -135,10 +139,6 @@ class TwistingVines extends Transparent { //credits: https://github.com/cladevs/
     }
 
     protected function writeStateToMeta() : int {
-        return $this->age;
-    }
-
-    public function getAge() : int {
         return $this->age;
     }
 }

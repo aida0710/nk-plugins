@@ -84,12 +84,8 @@ class YamlDatabase implements Database {
         $this->config = $config;
     }
 
-    public function addInviteeById($id, $name) {
-        if (isset($this->land[$id])) {
-            $this->land[$id]['invitee'][$name] = true;
-            return true;
-        }
-        return false;
+    public function getAll() {
+        return $this->land;
     }
 
     public function addLand($startX, $endX, $startZ, $endZ, $level, $price, $owner, $expires = null, $invitee = []) {
@@ -115,20 +111,6 @@ class YamlDatabase implements Database {
         return $this->landNum++;
     }
 
-    public function canTouch($x, $z, $level, Player $player) {
-        foreach ($this->land as $land) {
-            if ($level === $land['level'] && $land['startX'] <= $x && $land['endX'] >= $x && $land['startZ'] <= $z && $land['endZ'] >= $z) {
-                if ($player->getName() === $land['owner'] || isset($land['invitee'][$player->getName()]) || $player->hasPermission('economyland.land.modify.others')) { // If owner is correct
-                    return true;
-                } else { // If owner is not correct
-                    return $land;
-                }
-            }
-        }
-        //	return !in_array($level, $this->config["white-land"]) or $player->hasPermission("economyland.land.modify.whiteland");
-        return -1; // If no land found
-    }
-
     public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
         if ($level instanceof World) {
             $level = $level->getFolderName();
@@ -148,8 +130,32 @@ class YamlDatabase implements Database {
         $this->save();
     }
 
-    public function getAll() {
-        return $this->land;
+    public function save() {
+        $config = new Config($this->path, Config::YAML);
+        $config->setAll($this->land);
+        $config->save();
+    }
+
+    public function addInviteeById($id, $name) {
+        if (isset($this->land[$id])) {
+            $this->land[$id]['invitee'][$name] = true;
+            return true;
+        }
+        return false;
+    }
+
+    public function canTouch($x, $z, $level, Player $player) {
+        foreach ($this->land as $land) {
+            if ($level === $land['level'] && $land['startX'] <= $x && $land['endX'] >= $x && $land['startZ'] <= $z && $land['endZ'] >= $z) {
+                if ($player->getName() === $land['owner'] || isset($land['invitee'][$player->getName()]) || $player->hasPermission('economyland.land.modify.others')) { // If owner is correct
+                    return true;
+                } else { // If owner is not correct
+                    return $land;
+                }
+            }
+        }
+        //	return !in_array($level, $this->config["white-land"]) or $player->hasPermission("economyland.land.modify.whiteland");
+        return -1; // If no land found
     }
 
     public function getByCoord($x, $z, $level) {
@@ -215,12 +221,6 @@ class YamlDatabase implements Database {
             }
         }
         return false;
-    }
-
-    public function save() {
-        $config = new Config($this->path, Config::YAML);
-        $config->setAll($this->land);
-        $config->save();
     }
 
     public function setOwnerById($id, $owner) {

@@ -28,13 +28,6 @@ class JoinPlayerEvent implements Listener {
     public const ID_TOS = 15;
     public static array $joinMessage = [];
 
-    public static function sendJoinItem(Player $player) {
-        (new JoinPlayerEvent())->setItem($player, VanillaItems::PAPER(), self::ID_INFORMATION, 'Information', ['お知らせやサーバーの仕様などが確認できます', '公式サイト -> https://www.nkserver.net']);
-        (new JoinPlayerEvent())->setItem($player, VanillaItems::COOKIE(), self::ID_COMMAND_EXECUTION, 'CommandExecution', ['サーバーの主なコマンドが簡単に実行できます']);
-        (new JoinPlayerEvent())->setItem($player, VanillaItems::COMPASS(), self::ID_WARP, 'WarpCompass', ['サーバー上の他ワールドに移動することができます']);
-        (new JoinPlayerEvent())->setItem($player, VanillaBlocks::OAK_SAPLING()->asItem(), self::ID_SETTINGS, 'PlayerSettings', ['プレイヤーの設定を変更することができます']);
-    }
-
     /**
      * @return void
      * @priority HIGHEST
@@ -79,6 +72,13 @@ class JoinPlayerEvent implements Listener {
         if (!$player->getInventory()->contains($item) && $player->getInventory()->canAddItem($item)) {
             $player->getInventory()->addItem($item);
         }
+    }
+
+    public static function sendJoinItem(Player $player) {
+        (new JoinPlayerEvent())->setItem($player, VanillaItems::PAPER(), self::ID_INFORMATION, 'Information', ['お知らせやサーバーの仕様などが確認できます', '公式サイト -> https://www.nkserver.net']);
+        (new JoinPlayerEvent())->setItem($player, VanillaItems::COOKIE(), self::ID_COMMAND_EXECUTION, 'CommandExecution', ['サーバーの主なコマンドが簡単に実行できます']);
+        (new JoinPlayerEvent())->setItem($player, VanillaItems::COMPASS(), self::ID_WARP, 'WarpCompass', ['サーバー上の他ワールドに移動することができます']);
+        (new JoinPlayerEvent())->setItem($player, VanillaBlocks::OAK_SAPLING()->asItem(), self::ID_SETTINGS, 'PlayerSettings', ['プレイヤーの設定を変更することができます']);
     }
 
 }

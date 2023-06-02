@@ -14,6 +14,19 @@ use function explode;
 
 class JoinPlayerEvent implements Listener {
 
+    public function PlayerJoin(PlayerJoinEvent $event) : void {
+        $player = $event->getPlayer();
+        if (date('Y/m/d') !== date('Y/m/d', explode('.', $player->getLastPlayed() / 1000)[0])) {
+            //一日以上たってたら
+            self::check($player, true);
+            return;
+        }
+        //一日未満でアイテムがあった場合
+        if (Main::getInstance()->lastBonusDateConfig->exists($player->getName())) {
+            self::check($player);
+        }
+    }
+
     public static function check(Player $player, ?bool $new = false) : void {
         //一日以上経過していてもデータがある場合が存在する
         //データのみがある場合もある
@@ -40,18 +53,5 @@ class JoinPlayerEvent implements Listener {
             \lazyperson710\core\listener\JoinPlayerEvent::$joinMessage[$player->getName()][] = 'インベントリに空きがないため、ログインボーナスを受け取れませんでした。/bonusから保留になっているログインボーナスアイテムを受け取ろう';
         }
         Main::getInstance()->lastBonusDateConfig->save();
-    }
-
-    public function PlayerJoin(PlayerJoinEvent $event) : void {
-        $player = $event->getPlayer();
-        if (date('Y/m/d') !== date('Y/m/d', explode('.', $player->getLastPlayed() / 1000)[0])) {
-            //一日以上たってたら
-            self::check($player, true);
-            return;
-        }
-        //一日未満でアイテムがあった場合
-        if (Main::getInstance()->lastBonusDateConfig->exists($player->getName())) {
-            self::check($player);
-        }
     }
 }

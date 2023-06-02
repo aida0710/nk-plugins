@@ -20,10 +20,6 @@ class ResultLog {
         $this->covert($logs);
     }
 
-    static function createResult(string $bank, array $logs) : ResultLog {
-        return new ResultLog($bank, $logs);
-    }
-
     private function covert(array $logs) : void {
         foreach ($logs as $log) {
             try {
@@ -35,5 +31,9 @@ class ResultLog {
                 $this->logs[] = TextFormat::RED . '>> ' . TextFormat::RESET . '[error]' . $ex->getMessage();
             }
         }
+    }
+
+    static function createResult(string $bank, array $logs) : ResultLog {
+        return new ResultLog($bank, $logs);
     }
 }

@@ -45,11 +45,6 @@ class PlayerItemEvent implements Listener {
         $this->onItemEvents($event);
     }
 
-    public function onItemInteract(PlayerInteractEvent $event) {
-        if ($event->isCancelled()) return;
-        $this->onItemEvents($event);
-    }
-
     public function onItemEvents(PlayerItemUseEvent|PlayerInteractEvent $event) {
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
@@ -72,6 +67,11 @@ class PlayerItemEvent implements Listener {
         if ($inHand->getId() === -199) LoginBonusItem::execution($event);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 110) HasteItem::execution($event, $inHand);
         if ($inHand->getId() === 383 && $inHand->getMeta() === 35) CommandStorage::execution($event, $inHand);
+    }
+
+    public function onItemInteract(PlayerInteractEvent $event) {
+        if ($event->isCancelled()) return;
+        $this->onItemEvents($event);
     }
 
 }

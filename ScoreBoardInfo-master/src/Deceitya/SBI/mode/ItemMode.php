@@ -24,10 +24,6 @@ class ItemMode implements Mode {
         $this->ServerStopper = $manager->getPlugin('ServerStopper');
     }
 
-    public function getId() : int {
-        return self::ITEM;
-    }
-
     public function getLines(Player $player) : ?array {
         $item = $player->getInventory()->getItemInHand();
         return [
@@ -47,6 +43,10 @@ class ItemMode implements Mode {
             '',
             TextFormat::YELLOW . 'nkserver.net',
         ];
+    }
+
+    public function getId() : int {
+        return self::ITEM;
     }
 
     public function getName() : string {

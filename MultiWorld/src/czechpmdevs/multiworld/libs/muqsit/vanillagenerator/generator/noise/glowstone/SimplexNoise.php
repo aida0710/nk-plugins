@@ -45,8 +45,17 @@ class SimplexNoise extends PerlinNoise {
         ];
     }
 
-    public static function floor(float $x) : int {
-        return $x > 0 ? (int) $x : (int) $x - 1;
+    public function noise3d(float $xin, float $yin = 0.0, float $zin = 0.0) : float {
+        if ($yin === 0.0) {
+            return parent::noise3d($xin, $yin, $zin);
+        }
+        $xin += $this->offsetX;
+        $yin += $this->offsetY;
+        if ($xin === 0.0) {
+            return $this->simplex2D($xin, $yin);
+        }
+        $zin += $this->offsetZ;
+        return $this->simplex3D($xin, $yin, $zin);
     }
 
     /**
@@ -65,42 +74,6 @@ class SimplexNoise extends PerlinNoise {
         return $noise;
     }
 
-    /**
-     * @param float[] $noise
-     * @return float[]
-     */
-    protected function get3dNoise(array &$noise, float $x, float $y, float $z, int $sizeX, int $sizeY, int $sizeZ, float $scaleX, float $scaleY, float $scaleZ, float $amplitude) : array {
-        $index = -1;
-        for ($i = 0; $i < $sizeZ; ++$i) {
-            $zin = $this->offsetZ + ($z + $i) * $scaleZ;
-            for ($j = 0; $j < $sizeX; ++$j) {
-                $xin = $this->offsetX + ($x + $j) * $scaleX;
-                for ($k = 0; $k < $sizeY; ++$k) {
-                    $yin = $this->offsetY + ($y + $k) * $scaleY;
-                    $noise[++$index] += $this->simplex3D($xin, $yin, $zin) * $amplitude;
-                }
-            }
-        }
-        return $noise;
-    }
-
-    public function noise3d(float $xin, float $yin = 0.0, float $zin = 0.0) : float {
-        if ($yin === 0.0) {
-            return parent::noise3d($xin, $yin, $zin);
-        }
-        $xin += $this->offsetX;
-        $yin += $this->offsetY;
-        if ($xin === 0.0) {
-            return $this->simplex2D($xin, $yin);
-        }
-        $zin += $this->offsetZ;
-        return $this->simplex3D($xin, $yin, $zin);
-    }
-
-    protected static function dot(Grad $g, float $x, float $y, float $z = 0.0) : float {
-        return $g->x * $x + $g->y * $y + $g->z * $z;
-    }
-
     private function simplex2D(float $xin, float $yin) : float {
         // Skew the input space to determine which simplex cell we're in
         $s = ($xin + $yin) * self::F2; // Hairy factor for 2D
@@ -109,7 +82,7 @@ class SimplexNoise extends PerlinNoise {
         $t = ($i + $j) * self::G2;
         $dx0 = $i - $t; // Unskew the cell origin back to (x,y) space
         $dy0 = $j - $t;
-        $x0 = $xin - $dx0; // The x,y distances from the cell origin
+        $x0 = $xin - $dx0;          // The x,y distances from the cell origin
         $y0 = $yin - $dy0;
         // For the 2D case, the simplex shape is an equilateral triangle.
         // Determine which simplex we are in.
@@ -159,6 +132,33 @@ class SimplexNoise extends PerlinNoise {
         // Add contributions from each corner to get the final noise value.
         // The result is scaled to return values in the interval [-1,1].
         return 70.0 * ($n0 + $n1 + $n2);
+    }
+
+    public static function floor(float $x) : int {
+        return $x > 0 ? (int) $x : (int) $x - 1;
+    }
+
+    protected static function dot(Grad $g, float $x, float $y, float $z = 0.0) : float {
+        return $g->x * $x + $g->y * $y + $g->z * $z;
+    }
+
+    /**
+     * @param float[] $noise
+     * @return float[]
+     */
+    protected function get3dNoise(array &$noise, float $x, float $y, float $z, int $sizeX, int $sizeY, int $sizeZ, float $scaleX, float $scaleY, float $scaleZ, float $amplitude) : array {
+        $index = -1;
+        for ($i = 0; $i < $sizeZ; ++$i) {
+            $zin = $this->offsetZ + ($z + $i) * $scaleZ;
+            for ($j = 0; $j < $sizeX; ++$j) {
+                $xin = $this->offsetX + ($x + $j) * $scaleX;
+                for ($k = 0; $k < $sizeY; ++$k) {
+                    $yin = $this->offsetY + ($y + $k) * $scaleY;
+                    $noise[++$index] += $this->simplex3D($xin, $yin, $zin) * $amplitude;
+                }
+            }
+        }
+        return $noise;
     }
 
     private function simplex3D(float $xin, float $yin, float $zin) : float {

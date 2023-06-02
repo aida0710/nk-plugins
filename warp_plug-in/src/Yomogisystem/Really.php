@@ -141,13 +141,6 @@ class Really extends PluginBase implements Listener {
         return true;
     }
 
-    public function onEnable() : void {
-        if (!file_exists($this->getDataFolder())) {
-            mkdir($this->getDataFolder(), 0755, true);
-        }
-        $this->warp = new Config($this->getDataFolder() . 'WarpPoint.yml', Config::YAML, []);
-    }
-
     public function ad($namedate) {
         if (!$this->warp->exists($namedate)) {
             foreach ($this->warp->getAll() as $name => $date) {
@@ -160,5 +153,12 @@ class Really extends PluginBase implements Listener {
         } else {
             return $namedate;
         }
+    }
+
+    public function onEnable() : void {
+        if (!file_exists($this->getDataFolder())) {
+            mkdir($this->getDataFolder(), 0755, true);
+        }
+        $this->warp = new Config($this->getDataFolder() . 'WarpPoint.yml', Config::YAML, []);
     }
 }

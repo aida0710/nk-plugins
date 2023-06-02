@@ -43,7 +43,7 @@ class OtherStatisticsForm extends BackableForm {
                     1, 3 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKPLACE),
                     4 => new RankingForm($this, $receiver, RankingForm::TYPE_CHAT),
                     5 => new RankingForm($this, $receiver, RankingForm::TYPE_DEATH),
-                    6 => $this->before
+                    6 => $this->before,
                 }
                 ));
             };

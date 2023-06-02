@@ -42,14 +42,14 @@ class BlockDetailForm extends BackableForm {
                 } catch (Exception) {
                     $unknown += match ($type) {
                         self::TYPE_BLOCKPLACE => $data->getBlockPlaces(null, $id),
-                        self::TYPE_BLOCKBREAK => $data->getBlockBreaks(null, $id)
+                        self::TYPE_BLOCKBREAK => $data->getBlockBreaks(null, $id),
                     };
                     continue;
                 }
                 $this->label .= TextFormat::BOLD . '[' . $block->getName() . ']' . PHP_EOL . TextFormat::RED . number_format(
                         match ($type) {
                             self::TYPE_BLOCKPLACE => $data->getBlockPlaces(null, $id),
-                            self::TYPE_BLOCKBREAK => $data->getBlockBreaks(null, $id)
+                            self::TYPE_BLOCKBREAK => $data->getBlockBreaks(null, $id),
                         },
                     ) . TextFormat::RESET . '回' . PHP_EOL . PHP_EOL;
             }

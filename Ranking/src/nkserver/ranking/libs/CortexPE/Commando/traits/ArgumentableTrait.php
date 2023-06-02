@@ -87,10 +87,6 @@ trait ArgumentableTrait {
         return $this->argumentList;
     }
 
-    public function hasArguments() : bool {
-        return !empty($this->argumentList);
-    }
-
     public function parseArguments(array $rawArgs, CommandSender $sender) : array {
         $return = [
             'arguments' => [],
@@ -189,6 +185,10 @@ trait ArgumentableTrait {
             ];
         }
         return $return;
+    }
+
+    public function hasArguments() : bool {
+        return !empty($this->argumentList);
     }
 
     /**

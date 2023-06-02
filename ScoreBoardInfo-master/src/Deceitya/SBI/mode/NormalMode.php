@@ -24,10 +24,6 @@ class NormalMode implements Mode {
         $this->ServerStopper = $manager->getPlugin('ServerStopper');
     }
 
-    public function getId() : int {
-        return self::NORMAL;
-    }
-
     public function getLines(Player $player) : ?array {
         $item = $player->getInventory()->getItemInHand();
         return [
@@ -44,6 +40,10 @@ class NormalMode implements Mode {
             '',
             TextFormat::YELLOW . 'nkserver.net',
         ];
+    }
+
+    public function getId() : int {
+        return self::NORMAL;
     }
 
     public function getName() : string {

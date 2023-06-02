@@ -36,6 +36,10 @@ class OrePopulator implements Populator {
         $this->addOre(new OreType(VanillaBlocks::LAPIS_LAZULI_ORE(), 16, 16, 6), 1);
     }
 
+    protected function addOre(OreType $type, int $value) : void {
+        $this->ores[] = new OreTypeHolder($type, $value);
+    }
+
     public function populate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
         $cx = $chunkX << 4;
         $cz = $chunkZ << 4;
@@ -47,9 +51,5 @@ class OrePopulator implements Populator {
                 (new OreVein($oreTypeHolder->type))->generate($world, $random, $sourceX, $sourceY, $sourceZ);
             }
         }
-    }
-
-    protected function addOre(OreType $type, int $value) : void {
-        $this->ores[] = new OreTypeHolder($type, $value);
     }
 }

@@ -70,6 +70,30 @@ class PacketHooker implements Listener {
     }
 
     /**
+     * @priority        LOWEST
+     * @ignoreCancelled true
+     */
+    public function onPacketSend(DataPacketSendEvent $ev) : void {
+        foreach ($ev->getPackets() as $pk) {
+            if ($pk instanceof AvailableCommandsPacket) {
+                $p = $ev->getTargets()[array_keys($ev->getTargets())[0]]->getPlayer();
+                foreach ($pk->commandData as $commandName => $commandData) {
+                    $cmd = $this->map->getCommand($commandName);
+                    if ($cmd instanceof BaseCommand) {
+                        foreach ($cmd->getConstraints() as $constraint) {
+                            if (!$constraint->isVisibleTo($p)) {
+                                continue 2;
+                            }
+                        }
+                        $pk->commandData[$commandName]->overloads = self::generateOverloads($p, $cmd);
+                    }
+                }
+                $pk->softEnums = SoftEnumStore::getEnums();
+            }
+        }
+    }
+
+    /**
      * @return CommandParameter[][]
      */
     private static function generateOverloads(CommandSender $cs, BaseCommand $command) : array {
@@ -133,29 +157,5 @@ class PacketHooker implements Listener {
             }
         } while (count($combinations) !== $outputLength);
         return $combinations;
-    }
-
-    /**
-     * @priority        LOWEST
-     * @ignoreCancelled true
-     */
-    public function onPacketSend(DataPacketSendEvent $ev) : void {
-        foreach ($ev->getPackets() as $pk) {
-            if ($pk instanceof AvailableCommandsPacket) {
-                $p = $ev->getTargets()[array_keys($ev->getTargets())[0]]->getPlayer();
-                foreach ($pk->commandData as $commandName => $commandData) {
-                    $cmd = $this->map->getCommand($commandName);
-                    if ($cmd instanceof BaseCommand) {
-                        foreach ($cmd->getConstraints() as $constraint) {
-                            if (!$constraint->isVisibleTo($p)) {
-                                continue 2;
-                            }
-                        }
-                        $pk->commandData[$commandName]->overloads = self::generateOverloads($p, $cmd);
-                    }
-                }
-                $pk->softEnums = SoftEnumStore::getEnums();
-            }
-        }
     }
 }

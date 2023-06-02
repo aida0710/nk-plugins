@@ -50,6 +50,75 @@ class GenericTree extends TerrainObject {
         $this->setType(TreeType::OAK());
     }
 
+    final protected function setOverridables(int ...$overridables) : void {
+        $this->overridables = array_flip($overridables);
+    }
+
+    final protected function setHeight(int $height) : void {
+        $this->height = $height;
+    }
+
+    /**
+     * Sets the block data values for this tree's blocks.
+     */
+    final protected function setType(TreeType $type) : void {
+        $magicNumber = $type->getMagicNumber();
+        $blockFactory = BlockFactory::getInstance();
+        $this->logType = $blockFactory->get($magicNumber >= 4 ? BlockLegacyIds::LOG2 : BlockLegacyIds::LOG, $magicNumber & 0x3);
+        $this->leavesType = $blockFactory->get($magicNumber >= 4 ? BlockLegacyIds::LEAVES2 : BlockLegacyIds::LEAVES, $magicNumber & 0x3);
+    }
+
+    /**
+     * Attempts to grow this tree at its current location. If successful, the associated {@link
+     * BlockStateDelegate} is instructed to set blocks to wood and leaves.
+     *
+     * @return bool whether successfully grown
+     */
+    public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ) : bool {
+        if ($this->cannotGenerateAt($sourceX, $sourceY, $sourceZ, $world)) {
+            return false;
+        }
+        // generate the leaves
+        for ($y = $sourceY + $this->height - 3; $y <= $sourceY + $this->height; ++$y) {
+            $n = $y - ($sourceY + $this->height);
+            $radius = (int) (1 - $n / 2);
+            for ($x = $sourceX - $radius; $x <= $sourceX + $radius; ++$x) {
+                for ($z = $sourceZ - $radius; $z <= $sourceZ + $radius; ++$z) {
+                    if (abs($x - $sourceX) !== $radius
+                        || abs($z - $sourceZ) !== $radius
+                        || ($random->nextBoolean() && $n !== 0)
+                    ) {
+                        $this->replaceIfAirOrLeaves($x, $y, $z, $this->leavesType, $world);
+                    }
+                }
+            }
+        }
+        // generate the trunk
+        for ($y = 0; $y < $this->height; ++$y) {
+            $this->replaceIfAirOrLeaves($sourceX, $sourceY + $y, $sourceZ, $this->logType, $world);
+        }
+        // block below trunk is always dirt
+        $dirt = VanillaBlocks::DIRT();
+        $this->transaction->addBlockAt($sourceX, $sourceY - 1, $sourceZ, $dirt);
+        return true;
+    }
+
+    /**
+     * Returns whether any of {@link #canHeightFit(int)}, {@link #canPlace(int, int, int, World)} or
+     * {@link #canPlaceOn(BlockState)} prevent this tree from generating.
+     *
+     * @param int          $baseX the X coordinate of the base of the trunk
+     * @param int          $baseY the Y coordinate of the base of the trunk
+     * @param int          $baseZ the Z coordinate of the base of the trunk
+     * @param ChunkManager $world the world to grow in
+     * @return bool whether any of the checks prevent us from generating, false otherwise
+     */
+    protected function cannotGenerateAt(int $baseX, int $baseY, int $baseZ, ChunkManager $world) : bool {
+        return !$this->canHeightFit($baseY)
+            || !$this->canPlaceOn($world->getBlockAt($baseX, $baseY - 1, $baseZ))
+            || !$this->canPlace($baseX, $baseY, $baseZ, $world);
+    }
+
     /**
      * Checks whether this tree fits under the upper world limit.
      *
@@ -106,75 +175,6 @@ class GenericTree extends TerrainObject {
             }
         }
         return true;
-    }
-
-    /**
-     * Attempts to grow this tree at its current location. If successful, the associated {@link
-     * BlockStateDelegate} is instructed to set blocks to wood and leaves.
-     *
-     * @return bool whether successfully grown
-     */
-    public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ) : bool {
-        if ($this->cannotGenerateAt($sourceX, $sourceY, $sourceZ, $world)) {
-            return false;
-        }
-        // generate the leaves
-        for ($y = $sourceY + $this->height - 3; $y <= $sourceY + $this->height; ++$y) {
-            $n = $y - ($sourceY + $this->height);
-            $radius = (int) (1 - $n / 2);
-            for ($x = $sourceX - $radius; $x <= $sourceX + $radius; ++$x) {
-                for ($z = $sourceZ - $radius; $z <= $sourceZ + $radius; ++$z) {
-                    if (abs($x - $sourceX) !== $radius
-                        || abs($z - $sourceZ) !== $radius
-                        || ($random->nextBoolean() && $n !== 0)
-                    ) {
-                        $this->replaceIfAirOrLeaves($x, $y, $z, $this->leavesType, $world);
-                    }
-                }
-            }
-        }
-        // generate the trunk
-        for ($y = 0; $y < $this->height; ++$y) {
-            $this->replaceIfAirOrLeaves($sourceX, $sourceY + $y, $sourceZ, $this->logType, $world);
-        }
-        // block below trunk is always dirt
-        $dirt = VanillaBlocks::DIRT();
-        $this->transaction->addBlockAt($sourceX, $sourceY - 1, $sourceZ, $dirt);
-        return true;
-    }
-
-    final protected function setOverridables(int ...$overridables) : void {
-        $this->overridables = array_flip($overridables);
-    }
-
-    final protected function setHeight(int $height) : void {
-        $this->height = $height;
-    }
-
-    /**
-     * Sets the block data values for this tree's blocks.
-     */
-    final protected function setType(TreeType $type) : void {
-        $magicNumber = $type->getMagicNumber();
-        $blockFactory = BlockFactory::getInstance();
-        $this->logType = $blockFactory->get($magicNumber >= 4 ? BlockLegacyIds::LOG2 : BlockLegacyIds::LOG, $magicNumber & 0x3);
-        $this->leavesType = $blockFactory->get($magicNumber >= 4 ? BlockLegacyIds::LEAVES2 : BlockLegacyIds::LEAVES, $magicNumber & 0x3);
-    }
-
-    /**
-     * Returns whether any of {@link #canHeightFit(int)}, {@link #canPlace(int, int, int, World)} or
-     * {@link #canPlaceOn(BlockState)} prevent this tree from generating.
-     *
-     * @param int          $baseX the X coordinate of the base of the trunk
-     * @param int          $baseY the Y coordinate of the base of the trunk
-     * @param int          $baseZ the Z coordinate of the base of the trunk
-     * @param ChunkManager $world the world to grow in
-     * @return bool whether any of the checks prevent us from generating, false otherwise
-     */
-    protected function cannotGenerateAt(int $baseX, int $baseY, int $baseZ, ChunkManager $world) : bool {
-        return !$this->canHeightFit($baseY)
-            || !$this->canPlaceOn($world->getBlockAt($baseX, $baseY - 1, $baseZ))
-            || !$this->canPlace($baseX, $baseY, $baseZ, $world);
     }
 
     /**

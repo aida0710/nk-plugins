@@ -32,10 +32,6 @@ class PlainsPopulator extends BiomePopulator {
         $this->noiseGen->setScale(1 / 200.0);
     }
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::PLAINS];
-    }
-
     public static function init() : void {
         parent::init();
         self::$PLAINS_FLOWERS = [
@@ -51,9 +47,8 @@ class PlainsPopulator extends BiomePopulator {
         ];
     }
 
-    protected function initPopulators() : void {
-        $this->flowerDecorator->setAmount(0);
-        $this->tallGrassDecorator->setAmount(0);
+    public function getBiomes() : ?array {
+        return [BiomeIds::PLAINS];
     }
 
     public function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
@@ -91,6 +86,11 @@ class PlainsPopulator extends BiomePopulator {
             (new TallGrass(VanillaBlocks::TALL_GRASS()))->generate($world, $random, $sourceX + $x, $y, $sourceZ + $z);
         }
         parent::populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
+    }
+
+    protected function initPopulators() : void {
+        $this->flowerDecorator->setAmount(0);
+        $this->tallGrassDecorator->setAmount(0);
     }
 }
 

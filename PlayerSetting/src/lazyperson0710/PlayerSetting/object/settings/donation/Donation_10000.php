@@ -10,10 +10,6 @@ class Donation_10000 extends Setting {
 
     protected bool $value;
 
-    public function getFallbackValue() : bool {
-        return false;
-    }
-
     public static function getName() : string {
         return 'donation_10000';
     }
@@ -24,5 +20,9 @@ class Donation_10000 extends Setting {
 
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : bool {
+        return false;
     }
 }

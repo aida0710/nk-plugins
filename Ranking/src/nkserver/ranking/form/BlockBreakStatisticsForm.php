@@ -32,7 +32,7 @@ class BlockBreakStatisticsForm extends BackableForm {
                     0 => new BlockDetailForm($this, BlockDetailForm::TYPE_BLOCKBREAK, $receiver),
                     1 => new BreakLevelsForm($this, $receiver),
                     2 => new RankingForm($this, $receiver, RankingForm::TYPE_BLOCKBREAK),
-                    3 => $this->before
+                    3 => $this->before,
                 }
                 ));
             };

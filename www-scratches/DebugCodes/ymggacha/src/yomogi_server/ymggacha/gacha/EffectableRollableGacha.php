@@ -81,6 +81,15 @@ class EffectableRollableGacha extends Gacha implements IInFormRollableGacha {
     }
 
     /**
+     * @throws InvalidArgumentException
+     */
+    private function canAddItem(Player $player, int $count) : bool {
+        if ($count < 1) throw new InvalidArgumentException('count of 1 then more');
+        $dummyItem = VanillaItems::WOODEN_SWORD()->setCount($count);
+        return $player->getInventory()->canAddItem($dummyItem);
+    }
+
+    /**
      * @param array<IGachaItem> $items
      */
     private function giveItem(Player $player, array $items) : void {
@@ -118,14 +127,5 @@ class EffectableRollableGacha extends Gacha implements IInFormRollableGacha {
             }
         }
         return $highestRarity;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    private function canAddItem(Player $player, int $count) : bool {
-        if ($count < 1) throw new InvalidArgumentException('count of 1 then more');
-        $dummyItem = VanillaItems::WOODEN_SWORD()->setCount($count);
-        return $player->getInventory()->canAddItem($dummyItem);
     }
 }

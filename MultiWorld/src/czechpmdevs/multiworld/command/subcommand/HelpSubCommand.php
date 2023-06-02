@@ -37,11 +37,6 @@ class HelpSubCommand extends BaseSubCommand {
         $sender->sendMessage($this->getHelpMessage($sender, $page));
     }
 
-    protected function prepare() : void {
-        $this->registerArgument(0, new IntegerArgument('page', true));
-        $this->setPermission('multiworld.command.help');
-    }
-
     public function getHelpMessage(CommandSender $sender, int $page) : string {
         if ($page < 1 || $page > 3) {
             $page = 1;
@@ -51,6 +46,11 @@ class HelpSubCommand extends BaseSubCommand {
             $message .= "\n" . LanguageManager::translateMessage($sender, "help-$i");
         }
         return $message;
+    }
+
+    protected function prepare() : void {
+        $this->registerArgument(0, new IntegerArgument('page', true));
+        $this->setPermission('multiworld.command.help');
     }
 
 }

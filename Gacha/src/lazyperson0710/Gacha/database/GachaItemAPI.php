@@ -25,13 +25,6 @@ class GachaItemAPI {
     public array $rankProbability = [];
     public array $gachaItems = [];
 
-    public static function getInstance() : GachaItemAPI {
-        if (!isset(self::$instance)) {
-            self::$instance = new GachaItemAPI();
-        }
-        return self::$instance;
-    }
-
     public function init() : void {
         ## Gacha Category
         $this->categorySettingRegister('常駐ガチャ', 100, 1, 60, 23, 12.6, 3.3, 0.8, 0.3);
@@ -125,5 +118,12 @@ class GachaItemAPI {
         if (count($enchants) !== count($level)) {
             throw new Error('Gacha : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します');
         }
+    }
+
+    public static function getInstance() : GachaItemAPI {
+        if (!isset(self::$instance)) {
+            self::$instance = new GachaItemAPI();
+        }
+        return self::$instance;
     }
 }

@@ -29,6 +29,17 @@ class RankCalculation {
         $this->initTable();
     }
 
+    protected function getTmpTable() : array {
+        return [
+            'C' => $this->probability['C'],
+            'UC' => $this->probability['UC'],
+            'R' => $this->probability['R'],
+            'SR' => $this->probability['SR'],
+            'SSR' => $this->probability['SSR'],
+            'L' => $this->probability['L'],
+        ];
+    }
+
     public function initTable() : void {
         $this->rank = array_map(static fn ($value) => $value * 1000, $this->tmp_table);
         $this->num = (int) array_sum($this->rank);
@@ -76,17 +87,6 @@ class RankCalculation {
             }
         }
         return true;
-    }
-
-    protected function getTmpTable() : array {
-        return [
-            'C' => $this->probability['C'],
-            'UC' => $this->probability['UC'],
-            'R' => $this->probability['R'],
-            'SR' => $this->probability['SR'],
-            'SSR' => $this->probability['SSR'],
-            'L' => $this->probability['L'],
-        ];
     }
 
 }

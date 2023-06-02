@@ -46,6 +46,20 @@ class Main extends PluginBase {
         }
     }
 
+    private function deleteLevel(World $level) {
+        $path = $level->getProvider()->getPath();
+        $this->getServer()->getWorldManager()->unloadWorld($level, true);
+        $this->deleteDir($path);
+    }
+
+    private function deleteDir($dir) {
+        $files = array_diff(scandir($dir), ['.', '..']);
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? $this->deleteDir("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir);
+    }
+
     public function onEnable() : void {
         $this->reloadConfig();
         $this->current = $this->getConfig()->get('time', 120) * 60;
@@ -66,20 +80,6 @@ class Main extends PluginBase {
 
     public function setCurrent(int $v) {
         $this->current = $v;
-    }
-
-    private function deleteLevel(World $level) {
-        $path = $level->getProvider()->getPath();
-        $this->getServer()->getWorldManager()->unloadWorld($level, true);
-        $this->deleteDir($path);
-    }
-
-    private function deleteDir($dir) {
-        $files = array_diff(scandir($dir), ['.', '..']);
-        foreach ($files as $file) {
-            (is_dir("$dir/$file")) ? $this->deleteDir("$dir/$file") : unlink("$dir/$file");
-        }
-        return rmdir($dir);
     }
 }
 

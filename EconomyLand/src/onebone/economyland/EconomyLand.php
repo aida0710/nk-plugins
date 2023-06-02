@@ -72,10 +72,6 @@ class EconomyLand extends PluginBase implements Listener {
     private array $expire = [];
     private $placeQueue;
 
-    public static function getInstance() : EconomyLand {
-        return static::$instance;
-    }
-
     public function expireLand($landId) {
         if (!isset($this->expire[$landId])) return;
         $landId = (int) $landId;
@@ -88,17 +84,6 @@ class EconomyLand extends PluginBase implements Listener {
         $this->db->removeLandById($landId);
         unset($this->expire[$landId]);
         return;
-    }
-
-    public function save() {
-        $now = time();
-        foreach ($this->expire as $landId => $time) {
-            $this->expire[$landId][0] -= ($now - $time[1]);
-        }
-        file_put_contents($this->getDataFolder() . 'Expire.dat', serialize($this->expire));
-        if ($this->db instanceof Database) {
-            $this->db->save();
-        }
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $param) : bool {
@@ -531,54 +516,15 @@ class EconomyLand extends PluginBase implements Listener {
         return false;
     }
 
-    public function onDisable() : void {
-        $this->save();
-        if ($this->db instanceof Database) {
-            $this->db->close();
-        }
-    }
-
-    public function onEnable() : void {
-        static::$instance = $this;
-        $this->saveDefaultConfig();
-        if (!is_file($this->getDataFolder() . 'Expire.dat')) {
-            file_put_contents($this->getDataFolder() . 'Expire.dat', serialize([]));
-        }
-        $this->expire = unserialize(file_get_contents($this->getDataFolder() . 'Expire.dat'));
-        $this->createConfig();
-        if (is_numeric($interval = $this->getConfig()->get('auto-save-interval', 10))) {
-            if ($interval > 0) {
-                $interval = $interval * 1200;
-                $this->getScheduler()->scheduleDelayedRepeatingTask(new SaveTask($this), $interval, $interval);
-            }
-        }
-        $this->placeQueue = [];
-        $now = time();
-        foreach ($this->expire as $landId => &$time) {
-            $time[1] = $now;
-            $this->getScheduler()->scheduleDelayedTask(new ExpireTask($this, $landId), ($time[0] * 20));
-        }
-        switch (strtolower($this->getConfig()->get('database-type', 'yaml'))) {
-            case 'yaml':
-            case 'yml':
-                $this->db = new YamlDatabase($this->getDataFolder() . 'Land.yml', $this->getConfig(), $this->getDataFolder() . 'Land.sqlite3');
-                break;
-            case 'sqlite3':
-            case 'sqlite':
-                $this->db = new SQLiteDatabase($this->getDataFolder() . 'Land.sqlite3', $this->getConfig(), $this->getDataFolder() . 'Land.yml');
-                break;
-            default:
-                $this->db = new YamlDatabase($this->getDataFolder() . 'Land.yml', $this->getConfig(), $this->getDataFolder() . 'Land.sqlite3');
-                $this->getLogger()->alert('Specified database type is unavailable. Database type is YAML.');
-        }
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    }
-
     public function getMessage($key, $value = ['%1', '%2', '%3']) {
         if ($this->lang->exists($key)) {
             return str_replace(['%MONETARY_UNIT%', '%1', '%2', '%3', "\\n"], [EconomyAPI::getInstance()->getMonetaryUnit(), $value[0], $value[1], $value[2], "\n"], $this->lang->get($key));
         }
         return "Couldn't find message \"$key\"";
+    }
+
+    public static function getInstance() : EconomyLand {
+        return static::$instance;
     }
 
     public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
@@ -639,6 +585,104 @@ class EconomyLand extends PluginBase implements Listener {
             ];
         }
         return self::RET_SUCCESS;
+    }
+
+    public function onDisable() : void {
+        $this->save();
+        if ($this->db instanceof Database) {
+            $this->db->close();
+        }
+    }
+
+    public function save() {
+        $now = time();
+        foreach ($this->expire as $landId => $time) {
+            $this->expire[$landId][0] -= ($now - $time[1]);
+        }
+        file_put_contents($this->getDataFolder() . 'Expire.dat', serialize($this->expire));
+        if ($this->db instanceof Database) {
+            $this->db->save();
+        }
+    }
+
+    public function onEnable() : void {
+        static::$instance = $this;
+        $this->saveDefaultConfig();
+        if (!is_file($this->getDataFolder() . 'Expire.dat')) {
+            file_put_contents($this->getDataFolder() . 'Expire.dat', serialize([]));
+        }
+        $this->expire = unserialize(file_get_contents($this->getDataFolder() . 'Expire.dat'));
+        $this->createConfig();
+        if (is_numeric($interval = $this->getConfig()->get('auto-save-interval', 10))) {
+            if ($interval > 0) {
+                $interval = $interval * 1200;
+                $this->getScheduler()->scheduleDelayedRepeatingTask(new SaveTask($this), $interval, $interval);
+            }
+        }
+        $this->placeQueue = [];
+        $now = time();
+        foreach ($this->expire as $landId => &$time) {
+            $time[1] = $now;
+            $this->getScheduler()->scheduleDelayedTask(new ExpireTask($this, $landId), ($time[0] * 20));
+        }
+        switch (strtolower($this->getConfig()->get('database-type', 'yaml'))) {
+            case 'yaml':
+            case 'yml':
+                $this->db = new YamlDatabase($this->getDataFolder() . 'Land.yml', $this->getConfig(), $this->getDataFolder() . 'Land.sqlite3');
+                break;
+            case 'sqlite3':
+            case 'sqlite':
+                $this->db = new SQLiteDatabase($this->getDataFolder() . 'Land.sqlite3', $this->getConfig(), $this->getDataFolder() . 'Land.yml');
+                break;
+            default:
+                $this->db = new YamlDatabase($this->getDataFolder() . 'Land.yml', $this->getConfig(), $this->getDataFolder() . 'Land.sqlite3');
+                $this->getLogger()->alert('Specified database type is unavailable. Database type is YAML.');
+        }
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
+
+    private function createConfig() {
+        $this->lang = new Config($this->getDataFolder() . 'language.properties', Config::PROPERTIES, [
+            'sold-land' => 'The land was sold for %MONETARY_UNIT%%1',
+            'not-my-land' => 'This is not your land',
+            'no-one-owned' => 'Nobody owns this land',
+            'not-your-land' => 'Land number %1 is not your land',
+            'no-land-found' => 'There is no land number %1',
+            'land-corrupted' => '[EconomyLand] The World %2 of Land number %1 is corrupted.',
+            'no-permission-move' => 'You have no permission to move to land %1. Owner : %2',
+            'fail-moving' => 'Failed to move to land %1',
+            'success-moving' => 'Moved to land %1',
+            'land-list-top' => "Showing land list page %1 of %2\\n",
+            'land-list-format' => "#%1 Area : %2 m^2 | Owner : %3\\n",
+            'here-land' => '#%1 This land belongs to %2',
+            'land-num-must-numeric' => 'Land number must be numeric',
+            'not-invitee' => '%1 is not invited to your land',
+            'already-invitee' => 'Player %1 is already invited to this land',
+            'removed-invitee' => ' %1 has been uninvited from land %2',
+            'invalid-invitee' => '%1 is an invalid name',
+            'success-invite' => '%1 is now invited to this land',
+            'player-not-connected' => 'Player %1 is not connected',
+            'cannot-give-land-myself' => "You can't give land to yourself",
+            'gave-land' => 'Land %1 was given to %2',
+            'got-land' => '[EconomyLand] %1 gave you land %2',
+            'land-limit' => 'You have %1 lands. The limit is %2',
+            'give-land-limit' => '%1 has %2 lands. The limit is %3',
+            'set-first-position' => 'Please set the first position',
+            'set-second-position' => 'Please set the second position',
+            'not-allowed-to-buy' => 'Land cannot be bought in this world',
+            'land-around-here' => '[EconomyLand] There is ID:%2 land near here. Owner : %1',
+            'no-money-to-buy-land' => "You don't have enough money to buy this land",
+            'bought-land' => 'Land purchased for %MONETARY_UNIT%%1',
+            'first-position-saved' => 'First position saved',
+            'second-position-saved' => 'Second position saved',
+            'cant-set-position-in-different-world' => "You can't set a position in different world",
+            'confirm-buy-land' => "Price: %MONETARY_UNIT%%1\\nBuy this land with /land buy",
+            'confirm-warning' => 'WARNING: This land seems to overlap with #%1.',
+            'no-permission' => "You don't have permission to edit this land. Owner : %1",
+            'no-permission-command' => "[EconomyLand] You don't have permissions to use this command.",
+            'not-owned' => '[EconomyLand] You must buy land to build here',
+            'run-cmd-in-game' => '[EconomyLand] Please run this command in-game.',
+        ]);
     }
 
     /**
@@ -743,49 +787,5 @@ class EconomyLand extends PluginBase implements Listener {
 
     public function getLandInfo($landId) {
         return $this->db->getLandById($landId);
-    }
-
-    private function createConfig() {
-        $this->lang = new Config($this->getDataFolder() . 'language.properties', Config::PROPERTIES, [
-            'sold-land' => 'The land was sold for %MONETARY_UNIT%%1',
-            'not-my-land' => 'This is not your land',
-            'no-one-owned' => 'Nobody owns this land',
-            'not-your-land' => 'Land number %1 is not your land',
-            'no-land-found' => 'There is no land number %1',
-            'land-corrupted' => '[EconomyLand] The World %2 of Land number %1 is corrupted.',
-            'no-permission-move' => 'You have no permission to move to land %1. Owner : %2',
-            'fail-moving' => 'Failed to move to land %1',
-            'success-moving' => 'Moved to land %1',
-            'land-list-top' => "Showing land list page %1 of %2\\n",
-            'land-list-format' => "#%1 Area : %2 m^2 | Owner : %3\\n",
-            'here-land' => '#%1 This land belongs to %2',
-            'land-num-must-numeric' => 'Land number must be numeric',
-            'not-invitee' => '%1 is not invited to your land',
-            'already-invitee' => 'Player %1 is already invited to this land',
-            'removed-invitee' => ' %1 has been uninvited from land %2',
-            'invalid-invitee' => '%1 is an invalid name',
-            'success-invite' => '%1 is now invited to this land',
-            'player-not-connected' => 'Player %1 is not connected',
-            'cannot-give-land-myself' => "You can't give land to yourself",
-            'gave-land' => 'Land %1 was given to %2',
-            'got-land' => '[EconomyLand] %1 gave you land %2',
-            'land-limit' => 'You have %1 lands. The limit is %2',
-            'give-land-limit' => '%1 has %2 lands. The limit is %3',
-            'set-first-position' => 'Please set the first position',
-            'set-second-position' => 'Please set the second position',
-            'not-allowed-to-buy' => 'Land cannot be bought in this world',
-            'land-around-here' => '[EconomyLand] There is ID:%2 land near here. Owner : %1',
-            'no-money-to-buy-land' => "You don't have enough money to buy this land",
-            'bought-land' => 'Land purchased for %MONETARY_UNIT%%1',
-            'first-position-saved' => 'First position saved',
-            'second-position-saved' => 'Second position saved',
-            'cant-set-position-in-different-world' => "You can't set a position in different world",
-            'confirm-buy-land' => "Price: %MONETARY_UNIT%%1\\nBuy this land with /land buy",
-            'confirm-warning' => 'WARNING: This land seems to overlap with #%1.',
-            'no-permission' => "You don't have permission to edit this land. Owner : %1",
-            'no-permission-command' => "[EconomyLand] You don't have permissions to use this command.",
-            'not-owned' => '[EconomyLand] You must buy land to build here',
-            'run-cmd-in-game' => '[EconomyLand] Please run this command in-game.',
-        ]);
     }
 }

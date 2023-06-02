@@ -56,15 +56,6 @@ class EventListener implements Listener {
         $this->LevelCalculation($player, 1);
     }
 
-    /**
-     * @priority HIGHEST
-     */
-    public function onMiningToolsBreakEvent(MiningToolsBreakEvent $event) : void {
-        if ($event->isCancelled()) return;
-        $player = $event->getPlayer();
-        $this->LevelCalculation($player, 1);
-    }
-
     public function LevelCalculation(Player $player, int $exp) : void {
         $api = MiningLevelAPI::getInstance();
         $originalLevel = $api->getLevel($player);
@@ -91,37 +82,6 @@ class EventListener implements Listener {
         $api->setLevel($player, $level);
         $api->setExp($player, $exp);
         $api->setLevelUpExp($player, $upExp);
-    }
-
-    private function DiscordWebHook(Player $player, int $originalLevel, int $level) : void {
-        if ($level % 5 == 0) {
-            $name = $player->getName();
-            $webhook = Webhook::create('https://discord.com/api/webhooks/931209546603593791/UPL48PM8DQtUwb0ulupP3i1xgL3JmvQ4zN87Wo6Il0ynGgLRsBfGT076cPdPF9HzYS5N');
-            $embed = (new Embed())
-                ->setTitle("{$name}がLv.{$originalLevel}からLv.{$level}にレベルアップしました")
-                ->setColor(13421619)
-                ->setAuthorName('Mining Level Up')
-                ->setTime((new DateTime())->format(DateTimeInterface::ATOM));
-            $embeds = new Embeds();
-            $embeds->add($embed);
-            $webhook->add($embeds);
-            $webhook->send();
-        }
-    }
-
-    private function levelUpBonusItem(Item $item, Player $player, int $level, ?bool $give = false) : void {
-        if ($give) {
-            if ($player->getInventory()->canAddItem($item)) {
-                $player->getInventory()->addItem($item);
-            } else {
-                StackStorageAPI::$instance->add($player->getXuid(), $item);
-                SendNoSoundActionBarMessage::Send($player, 'インベントリに空きが無いため' . $item->getName() . 'が倉庫にしまわれました', 'Storage', true);
-            }
-            SendMessage::Send($player, "レベルアップボーナスとして{$item->getName()}が付与されました", 'Level', true);
-        } elseif ($level % 5 == 0) {
-            EconomyAPI::getInstance()->addMoney($player, 8000);
-            SendMessage::Send($player, 'レベルアップボーナスとして8000円が付与されました', 'Level', true);
-        }
     }
 
     private function LevelUpBonus(Player $player, int $originalLevel, int $level) : void {
@@ -270,6 +230,46 @@ class EventListener implements Listener {
         if (!is_null($msg)) {
             SendForm::Send($player, (new MiningLevelUPForm($msg)));
         }
+    }
+
+    private function levelUpBonusItem(Item $item, Player $player, int $level, ?bool $give = false) : void {
+        if ($give) {
+            if ($player->getInventory()->canAddItem($item)) {
+                $player->getInventory()->addItem($item);
+            } else {
+                StackStorageAPI::$instance->add($player->getXuid(), $item);
+                SendNoSoundActionBarMessage::Send($player, 'インベントリに空きが無いため' . $item->getName() . 'が倉庫にしまわれました', 'Storage', true);
+            }
+            SendMessage::Send($player, "レベルアップボーナスとして{$item->getName()}が付与されました", 'Level', true);
+        } elseif ($level % 5 == 0) {
+            EconomyAPI::getInstance()->addMoney($player, 8000);
+            SendMessage::Send($player, 'レベルアップボーナスとして8000円が付与されました', 'Level', true);
+        }
+    }
+
+    private function DiscordWebHook(Player $player, int $originalLevel, int $level) : void {
+        if ($level % 5 == 0) {
+            $name = $player->getName();
+            $webhook = Webhook::create('https://discord.com/api/webhooks/931209546603593791/UPL48PM8DQtUwb0ulupP3i1xgL3JmvQ4zN87Wo6Il0ynGgLRsBfGT076cPdPF9HzYS5N');
+            $embed = (new Embed())
+                ->setTitle("{$name}がLv.{$originalLevel}からLv.{$level}にレベルアップしました")
+                ->setColor(13421619)
+                ->setAuthorName('Mining Level Up')
+                ->setTime((new DateTime())->format(DateTimeInterface::ATOM));
+            $embeds = new Embeds();
+            $embeds->add($embed);
+            $webhook->add($embeds);
+            $webhook->send();
+        }
+    }
+
+    /**
+     * @priority HIGHEST
+     */
+    public function onMiningToolsBreakEvent(MiningToolsBreakEvent $event) : void {
+        if ($event->isCancelled()) return;
+        $player = $event->getPlayer();
+        $this->LevelCalculation($player, 1);
     }
 
 }

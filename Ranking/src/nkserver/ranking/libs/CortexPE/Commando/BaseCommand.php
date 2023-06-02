@@ -124,6 +124,20 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         }
     }
 
+    /**
+     * @param ArgumentableTrait $ctx
+     */
+    private function attemptArgumentParsing($ctx, array $args) : ?array {
+        $dat = $ctx->parseArguments($args, $this->currentSender);
+        if (!empty(($errors = $dat['errors']))) {
+            foreach ($errors as $error) {
+                $this->sendError($error['code'], $error['data']);
+            }
+            return null;
+        }
+        return $dat['arguments'];
+    }
+
     public function sendError(int $errorCode, array $args = []) : void {
         $str = $this->errorMessages[$errorCode];
         foreach ($args as $item => $value) {
@@ -133,6 +147,10 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         $this->sendUsage();
     }
 
+    protected function sendUsage() : void {
+        $this->currentSender->sendMessage(TextFormat::RED . 'Usage: ' . $this->getUsage());
+    }
+
     /**
      * @return BaseConstraint[]
      */
@@ -140,11 +158,11 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         return $this->constraints;
     }
 
+    abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void;
+
     public function getUsageMessage() : string {
         return $this->getUsage();
     }
-
-    abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void;
 
     public function setErrorFormats(array $errorFormats) : void {
         foreach ($errorFormats as $errorCode => $format) {
@@ -186,23 +204,5 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 
     public function setCurrentSender(CommandSender $sender) : void {
         $this->currentSender = $sender;
-    }
-
-    protected function sendUsage() : void {
-        $this->currentSender->sendMessage(TextFormat::RED . 'Usage: ' . $this->getUsage());
-    }
-
-    /**
-     * @param ArgumentableTrait $ctx
-     */
-    private function attemptArgumentParsing($ctx, array $args) : ?array {
-        $dat = $ctx->parseArguments($args, $this->currentSender);
-        if (!empty(($errors = $dat['errors']))) {
-            foreach ($errors as $error) {
-                $this->sendError($error['code'], $error['data']);
-            }
-            return null;
-        }
-        return $dat['arguments'];
     }
 }

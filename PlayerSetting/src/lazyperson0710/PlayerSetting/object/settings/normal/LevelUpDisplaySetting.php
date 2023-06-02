@@ -10,10 +10,6 @@ class LevelUpDisplaySetting extends Setting {
 
     protected string $value;
 
-    public function getFallbackValue() : string {
-        return 'title';
-    }
-
     public static function getName() : string {
         return 'LevelUpDisplay';
     }
@@ -30,5 +26,9 @@ class LevelUpDisplaySetting extends Setting {
      */
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : string {
+        return 'title';
     }
 }

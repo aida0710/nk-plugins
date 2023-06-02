@@ -27,22 +27,6 @@ class OreVein extends TerrainObject {
         $this->targetType = $oreType->getTargetType();
     }
 
-    /**
-     * The square of the percentage of the radius that is the distance between the given block's
-     * center and the center of an orthogonal ellipsoid. A block's center is inside the ellipsoid
-     * if and only if its normalizedSquaredCoordinate values add up to less than 1.
-     *
-     * @param float $origin the center of the spheroid
-     * @param float $radius the spheroid's radius on this axis
-     * @param int   $x      the raw coordinate
-     * @return float the square of the normalized coordinate
-     */
-    protected static function normalizedSquaredCoordinate(float $origin, float $radius, int $x) : float {
-        $squaredNormalizedX = ($x + 0.5 - $origin) / $radius;
-        $squaredNormalizedX *= $squaredNormalizedX;
-        return $squaredNormalizedX;
-    }
-
     public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ) : bool {
         $angle = $random->nextFloat() * M_PI;
         $dx1 = $sourceX + MathHelper::getInstance()->sin($angle) * $this->amount / 8.0;
@@ -87,5 +71,21 @@ class OreVein extends TerrainObject {
             }
         }
         return $succeeded;
+    }
+
+    /**
+     * The square of the percentage of the radius that is the distance between the given block's
+     * center and the center of an orthogonal ellipsoid. A block's center is inside the ellipsoid
+     * if and only if its normalizedSquaredCoordinate values add up to less than 1.
+     *
+     * @param float $origin the center of the spheroid
+     * @param float $radius the spheroid's radius on this axis
+     * @param int   $x      the raw coordinate
+     * @return float the square of the normalized coordinate
+     */
+    protected static function normalizedSquaredCoordinate(float $origin, float $radius, int $x) : float {
+        $squaredNormalizedX = ($x + 0.5 - $origin) / $radius;
+        $squaredNormalizedX *= $squaredNormalizedX;
+        return $squaredNormalizedX;
     }
 }

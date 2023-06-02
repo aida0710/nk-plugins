@@ -13,10 +13,6 @@ use pocketmine\world\generator\object\Tree;
 
 class NetherTree extends Tree {
 
-    protected function canOverride(Block $block) : bool {
-        return $block->canBeReplaced() || $block instanceof Fungus || $block instanceof NetherWartBlock;
-    }
-
     protected function placeCanopy(int $x, int $y, int $z, Random $random, BlockTransaction $transaction) : void {
         $blankArea = -3;
         $mid = (int) (1 - $blankArea / 2);
@@ -88,5 +84,9 @@ class NetherTree extends Tree {
                 $transaction->addBlockAt($x, $y + $yy, $z, $this->trunkBlock);
             }
         }
+    }
+
+    protected function canOverride(Block $block) : bool {
+        return $block->canBeReplaced() || $block instanceof Fungus || $block instanceof NetherWartBlock;
     }
 }

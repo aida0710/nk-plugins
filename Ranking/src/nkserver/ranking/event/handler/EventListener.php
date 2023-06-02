@@ -32,11 +32,6 @@ class EventListener implements Listener {
         self::$handlers[$handler->getTarget()] = $handler;
     }
 
-    protected static function onListen(Event $ev) : void {
-        if (!isset(self::$handlers[($class = get_class($ev))])) return;
-        self::$handlers[$class]->handleEvent($ev);
-    }
-
     /**
      * @priority HIGH
      */
@@ -45,6 +40,11 @@ class EventListener implements Listener {
             return;
         }
         self::onListen($ev);
+    }
+
+    protected static function onListen(Event $ev) : void {
+        if (!isset(self::$handlers[($class = get_class($ev))])) return;
+        self::$handlers[$class]->handleEvent($ev);
     }
 
     /**

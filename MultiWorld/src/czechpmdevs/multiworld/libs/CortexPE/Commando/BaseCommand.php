@@ -91,6 +91,10 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         $this->usageMessage = implode("\n - /" . $this->getName() . ' ', $usages);
     }
 
+    public function getUsageMessage() : string {
+        return $this->getUsage();
+    }
+
     public function getOwningPlugin() : Plugin {
         return $this->plugin;
     }
@@ -139,9 +143,18 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
     }
 
     /**
-     * @param array|array<string,mixed|array> $args
+     * @param ArgumentableTrait $ctx
      */
-    abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void;
+    private function attemptArgumentParsing($ctx, array $args) : ?array {
+        $dat = $ctx->parseArguments($args, $this->currentSender);
+        if (!empty(($errors = $dat['errors']))) {
+            foreach ($errors as $error) {
+                $this->sendError($error['code'], $error['data']);
+            }
+            return null;
+        }
+        return $dat['arguments'];
+    }
 
     public function sendError(int $errorCode, array $args = []) : void {
         $str = $this->errorMessages[$errorCode];
@@ -151,17 +164,29 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         $this->currentSender->sendMessage($str);
     }
 
-    public function setErrorFormat(int $errorCode, string $format) : void {
-        if (!isset($this->errorMessages[$errorCode])) {
-            throw new InvalidErrorCode('Invalid error code 0x' . dechex($errorCode));
-        }
-        $this->errorMessages[$errorCode] = $format;
+    /**
+     * @return BaseConstraint[]
+     */
+    public function getConstraints() : array {
+        return $this->constraints;
     }
+
+    /**
+     * @param array|array<string,mixed|array> $args
+     */
+    abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void;
 
     public function setErrorFormats(array $errorFormats) : void {
         foreach ($errorFormats as $errorCode => $format) {
             $this->setErrorFormat($errorCode, $format);
         }
+    }
+
+    public function setErrorFormat(int $errorCode, string $format) : void {
+        if (!isset($this->errorMessages[$errorCode])) {
+            throw new InvalidErrorCode('Invalid error code 0x' . dechex($errorCode));
+        }
+        $this->errorMessages[$errorCode] = $format;
     }
 
     public function registerSubCommand(BaseSubCommand $subCommand) : void {
@@ -189,32 +214,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
         $this->constraints[] = $constraint;
     }
 
-    /**
-     * @return BaseConstraint[]
-     */
-    public function getConstraints() : array {
-        return $this->constraints;
-    }
-
-    public function getUsageMessage() : string {
-        return $this->getUsage();
-    }
-
     protected function sendUsage() : void {
         $this->currentSender->sendMessage('Usage: ' . $this->getUsage());
-    }
-
-    /**
-     * @param ArgumentableTrait $ctx
-     */
-    private function attemptArgumentParsing($ctx, array $args) : ?array {
-        $dat = $ctx->parseArguments($args, $this->currentSender);
-        if (!empty(($errors = $dat['errors']))) {
-            foreach ($errors as $error) {
-                $this->sendError($error['code'], $error['data']);
-            }
-            return null;
-        }
-        return $dat['arguments'];
     }
 }

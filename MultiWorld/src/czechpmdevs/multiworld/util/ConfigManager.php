@@ -43,18 +43,6 @@ class ConfigManager {
         ConfigManager::$prefix = MultiWorld::getInstance()->getConfig()->get('prefix') . ' §a';
     }
 
-    public static function getDataFolder() : string {
-        return MultiWorld::getInstance()->getDataFolder();
-    }
-
-    public static function getDataPath() : string {
-        return MultiWorld::getInstance()->getServer()->getDataPath();
-    }
-
-    public static function getPrefix() : string {
-        return ConfigManager::$prefix ?? '[MultiWorld]';
-    }
-
     public function initConfig(bool $forceUpdate = false) : void {
         if (!is_dir(ConfigManager::getDataFolder())) {
             @mkdir(ConfigManager::getDataFolder());
@@ -112,6 +100,10 @@ class ConfigManager {
         }
     }
 
+    public static function getDataFolder() : string {
+        return MultiWorld::getInstance()->getDataFolder();
+    }
+
     public function checkConfigUpdates() : bool {
         $configuration = MultiWorld::getInstance()->getConfig()->getAll();
         $configVersion = $configuration['config-version'] ?? null;
@@ -128,5 +120,13 @@ class ConfigManager {
             return true;
         }
         return false;
+    }
+
+    public static function getDataPath() : string {
+        return MultiWorld::getInstance()->getServer()->getDataPath();
+    }
+
+    public static function getPrefix() : string {
+        return ConfigManager::$prefix ?? '[MultiWorld]';
     }
 }

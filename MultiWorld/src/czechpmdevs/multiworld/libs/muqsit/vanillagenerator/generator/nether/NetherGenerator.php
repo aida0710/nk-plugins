@@ -47,13 +47,8 @@ class NetherGenerator extends VanillaGenerator {
         $this->addPopulators(new NetherPopulator($this->getMaxY())); // This isn't faithful to original code. Was $world->getWorldHeight()
     }
 
-    /**
-     * @param int $i 0-4
-     * @param int $j 0-4
-     * @param int $k 0-32
-     */
-    private static function densityHash(int $i, int $j, int $k) : int {
-        return ($k << 6) | ($j << 3) | $i;
+    public function getMaxY() : int {
+        return 128;
     }
 
     public function getBedrockRoughness() : int {
@@ -62,62 +57,6 @@ class NetherGenerator extends VanillaGenerator {
 
     public function setBedrockRoughness(int $bedrockRoughness) : void {
         $this->bedrockRoughness = $bedrockRoughness;
-    }
-
-    public function generateTerrainColumn(ChunkManager $world, int $x, int $z, float $surfaceNoise, float $soulSandNoise, float $graveNoise) : void {
-        $soulSand = $soulSandNoise + $this->random->nextFloat() * 0.2 > 0;
-        $gravel = $graveNoise + $this->random->nextFloat() * 0.2 > 0;
-        $surfaceHeight = (int) ($surfaceNoise / 3.0 + 3.0 + $this->random->nextFloat() * 0.25);
-        $deep = -1;
-        $worldHeight = $this->getMaxY();
-        $worldHeightM1 = $worldHeight - 1;
-        $blockBedrock = VanillaBlocks::BEDROCK()->getFullId();
-        $blockAir = VanillaBlocks::AIR()->getFullId();
-        $blockNetherRack = VanillaBlocks::NETHERRACK()->getFullId();
-        $blockGravel = VanillaBlocks::GRAVEL()->getFullId();
-        $blockSoulSand = VanillaBlocks::SOUL_SAND()->getFullId();
-        $topMat = $blockNetherRack;
-        $groundMat = $blockNetherRack;
-        /** @var Chunk $chunk */
-        $chunk = $world->getChunk($x >> 4, $z >> 4);
-        $chunkBlockX = $x & 0x0f;
-        $chunkBlockZ = $z & 0x0f;
-        for ($y = $worldHeightM1; $y >= 0; --$y) {
-            if ($y <= $this->random->nextBoundedInt($this->bedrockRoughness) || $y >= $worldHeightM1 - $this->random->nextBoundedInt($this->bedrockRoughness)) {
-                $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $blockBedrock);
-                continue;
-            }
-            $mat = $chunk->getFullBlock($chunkBlockX, $y, $chunkBlockZ);
-            if ($mat === $blockAir) {
-                $deep = -1;
-            } elseif ($mat === $blockNetherRack) {
-                if ($deep === -1) {
-                    if ($surfaceHeight <= 0) {
-                        $topMat = $blockAir;
-                        $groundMat = $blockNetherRack;
-                    } elseif ($y >= 60 && $y <= 65) {
-                        $topMat = $blockNetherRack;
-                        $groundMat = $blockNetherRack;
-                        if ($gravel) {
-                            $topMat = $blockGravel;
-                        }
-                        if ($soulSand) {
-                            $topMat = $blockSoulSand;
-                            $groundMat = $blockSoulSand;
-                        }
-                    }
-                    $deep = $surfaceHeight;
-                    if ($y >= 63) {
-                        $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $topMat);
-                    } else {
-                        $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $groundMat);
-                    }
-                } elseif ($deep > 0) {
-                    --$deep;
-                    $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $groundMat);
-                }
-            }
-        }
     }
 
     protected function createWorldOctaves() : NetherWorldOctaves {
@@ -165,10 +104,6 @@ class NetherGenerator extends VanillaGenerator {
                 $this->generateTerrainColumn($world, $cx + $x, $cz + $z, $surfaceNoise[$x | $z << 4], $soulSandNoise[$x | $z << 4], $graveNoise[$x | $z << 4]);
             }
         }
-    }
-
-    public function getMaxY() : int {
-        return 128;
     }
 
     private function generateRawTerrain(ChunkManager $world, int $chunkX, int $chunkZ) : void {
@@ -267,5 +202,70 @@ class NetherGenerator extends VanillaGenerator {
             }
         }
         return $density;
+    }
+
+    /**
+     * @param int $i 0-4
+     * @param int $j 0-4
+     * @param int $k 0-32
+     */
+    private static function densityHash(int $i, int $j, int $k) : int {
+        return ($k << 6) | ($j << 3) | $i;
+    }
+
+    public function generateTerrainColumn(ChunkManager $world, int $x, int $z, float $surfaceNoise, float $soulSandNoise, float $graveNoise) : void {
+        $soulSand = $soulSandNoise + $this->random->nextFloat() * 0.2 > 0;
+        $gravel = $graveNoise + $this->random->nextFloat() * 0.2 > 0;
+        $surfaceHeight = (int) ($surfaceNoise / 3.0 + 3.0 + $this->random->nextFloat() * 0.25);
+        $deep = -1;
+        $worldHeight = $this->getMaxY();
+        $worldHeightM1 = $worldHeight - 1;
+        $blockBedrock = VanillaBlocks::BEDROCK()->getFullId();
+        $blockAir = VanillaBlocks::AIR()->getFullId();
+        $blockNetherRack = VanillaBlocks::NETHERRACK()->getFullId();
+        $blockGravel = VanillaBlocks::GRAVEL()->getFullId();
+        $blockSoulSand = VanillaBlocks::SOUL_SAND()->getFullId();
+        $topMat = $blockNetherRack;
+        $groundMat = $blockNetherRack;
+        /** @var Chunk $chunk */
+        $chunk = $world->getChunk($x >> 4, $z >> 4);
+        $chunkBlockX = $x & 0x0f;
+        $chunkBlockZ = $z & 0x0f;
+        for ($y = $worldHeightM1; $y >= 0; --$y) {
+            if ($y <= $this->random->nextBoundedInt($this->bedrockRoughness) || $y >= $worldHeightM1 - $this->random->nextBoundedInt($this->bedrockRoughness)) {
+                $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $blockBedrock);
+                continue;
+            }
+            $mat = $chunk->getFullBlock($chunkBlockX, $y, $chunkBlockZ);
+            if ($mat === $blockAir) {
+                $deep = -1;
+            } elseif ($mat === $blockNetherRack) {
+                if ($deep === -1) {
+                    if ($surfaceHeight <= 0) {
+                        $topMat = $blockAir;
+                        $groundMat = $blockNetherRack;
+                    } elseif ($y >= 60 && $y <= 65) {
+                        $topMat = $blockNetherRack;
+                        $groundMat = $blockNetherRack;
+                        if ($gravel) {
+                            $topMat = $blockGravel;
+                        }
+                        if ($soulSand) {
+                            $topMat = $blockSoulSand;
+                            $groundMat = $blockSoulSand;
+                        }
+                    }
+                    $deep = $surfaceHeight;
+                    if ($y >= 63) {
+                        $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $topMat);
+                    } else {
+                        $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $groundMat);
+                    }
+                } elseif ($deep > 0) {
+                    --$deep;
+                    $chunk->setFullBlock($chunkBlockX, $y, $chunkBlockZ, $groundMat);
+                }
+            }
+        }
     }
 }

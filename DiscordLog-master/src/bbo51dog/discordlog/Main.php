@@ -32,10 +32,6 @@ class Main extends PluginBase {
     private bool $stop;
     private string $url;
 
-    public static function getTime() : string {
-        return date(self::TIME);
-    }
-
     protected function onDisable() : void {
         if (!$this->stop) {
             return;
@@ -47,6 +43,10 @@ class Main extends PluginBase {
         $content->setText($s);
         $webhook->add($content);
         $webhook->send();
+    }
+
+    public static function getTime() : string {
+        return date(self::TIME);
     }
 
     protected function onEnable() : void {

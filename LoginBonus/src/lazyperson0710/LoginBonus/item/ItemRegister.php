@@ -40,15 +40,15 @@ class ItemRegister {
         $this->itemRegister(VanillaItems::GOLD_INGOT(), 1, 12, '道具名チェンジャー', ["道具、装備の名前を変更することが可能です\n名前を変更したいアイテムを持った状態で/itemsコマンドを実行してください"], '道具の名前を変更できるアイテム', [VanillaEnchantments::PROJECTILE_PROTECTION()], [5], ['ItemNameChangeIngot']);
     }
 
-    public function getItems() : array {
-        return $this->items;
-    }
-
     private function itemRegister(Item $item, int $quantity, int $cost, string $customName, array $lore, ?string $formExplanation, array $enchants, array $level, array $nbt) : void {
         if (count($enchants) !== count($level)) {
             throw new Error('LoginBonus : アイテム登録時にエンチャントとレベルの数が一致していない為プラグインを停止します');
         }
         $this->items[] = (new LoginBonusItemInfo($item, $quantity, $cost, $customName, $lore, $formExplanation, $enchants, $level, $nbt));
+    }
+
+    public function getItems() : array {
+        return $this->items;
     }
 
 }

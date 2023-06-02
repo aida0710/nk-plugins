@@ -21,13 +21,6 @@ class Database {
     private function __construct() {
     }
 
-    public static function getInstance() : self {
-        if (!isset(self::$instance)) {
-            self::$instance = new Database();
-        }
-        return self::$instance;
-    }
-
     public function open(MyWarpPlugin $plugin) {
         $file = $plugin->getDataFolder() . 'warp.db';
         $this->db = new SQLite3($file);
@@ -52,6 +45,13 @@ class Database {
         return Server::getInstance()->getWorldManager()->loadWorld($result['world']) ?
             new Position($result['x'], $result['y'], $result['z'], Server::getInstance()->getWorldManager()->getWorldByName($result['world'])) :
             null;
+    }
+
+    public static function getInstance() : self {
+        if (!isset(self::$instance)) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
     }
 
     public function getWarpPosition(Player $player, string $name) : array {

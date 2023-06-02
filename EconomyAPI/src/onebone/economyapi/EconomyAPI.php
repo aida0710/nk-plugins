@@ -100,6 +100,23 @@ class EconomyAPI extends PluginBase implements Listener {
         return "Language matching key \"$key\" does not exist.";
     }
 
+    private function replaceParameters($message, $params = []) {
+        $search = ['%MONETARY_UNIT%'];
+        $replace = [$this->getMonetaryUnit()];
+        for ($i = 0; $i < count($params); $i++) {
+            $search[] = '%' . ($i + 1);
+            $replace[] = $params[$i];
+        }
+        $colors = [
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'k', 'l', 'm', 'n', 'o', 'r',
+        ];
+        foreach ($colors as $code) {
+            $search[] = '&' . $code;
+            $replace[] = TextFormat::ESCAPE . $code;
+        }
+        return str_replace($search, $replace, $message);
+    }
+
     public function getMonetaryUnit() : string {
         return $this->getConfig()->get('monetary-unit');
     }
@@ -266,6 +283,13 @@ class EconomyAPI extends PluginBase implements Listener {
         }
     }
 
+    public function saveAll() {
+        if ($this->provider instanceof Provider) {
+            $this->provider->save();
+        }
+        file_put_contents($this->getDataFolder() . 'PlayerLang.dat', serialize($this->playerLang));
+    }
+
     public function onEnable() : void {
         /*
          * 디폴트 설정 파일을 먼저 생성하게 되면 데이터 폴더 파일이 자동 생성되므로
@@ -292,39 +316,6 @@ class EconomyAPI extends PluginBase implements Listener {
             $this->getScheduler()->scheduleDelayedRepeatingTask(new SaveTask($this), $this->getConfig()->get('auto-save-interval') * 1200, $this->getConfig()->get('auto-save-interval') * 1200);
         }
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    }
-
-    public function onLoad() : void {
-        self::$instance = $this;
-    }
-
-    public function saveAll() {
-        if ($this->provider instanceof Provider) {
-            $this->provider->save();
-        }
-        file_put_contents($this->getDataFolder() . 'PlayerLang.dat', serialize($this->playerLang));
-    }
-
-    public function openProvider() {
-        if ($this->provider !== null)
-            $this->provider->open();
-    }
-
-    private function replaceParameters($message, $params = []) {
-        $search = ['%MONETARY_UNIT%'];
-        $replace = [$this->getMonetaryUnit()];
-        for ($i = 0; $i < count($params); $i++) {
-            $search[] = '%' . ($i + 1);
-            $replace[] = $params[$i];
-        }
-        $colors = [
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'k', 'l', 'm', 'n', 'o', 'r',
-        ];
-        foreach ($colors as $code) {
-            $search[] = '&' . $code;
-            $replace[] = TextFormat::ESCAPE . $code;
-        }
-        return str_replace($search, $replace, $message);
     }
 
     private function initialize() {
@@ -407,5 +398,14 @@ class EconomyAPI extends PluginBase implements Listener {
         foreach ($commands as $cmd => $class) {
             $map->register('economyapi', new $class($this));
         }
+    }
+
+    public function onLoad() : void {
+        self::$instance = $this;
+    }
+
+    public function openProvider() {
+        if ($this->provider !== null)
+            $this->provider->open();
     }
 }

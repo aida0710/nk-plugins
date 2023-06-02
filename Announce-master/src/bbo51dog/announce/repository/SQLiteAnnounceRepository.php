@@ -16,6 +16,10 @@ class SQLiteAnnounceRepository implements AnnounceRepository {
         $this->createTable();
     }
 
+    private function createTable() {
+        $this->db->exec('CREATE TABLE IF NOT EXISTS ANNOUNCES (ID INTEGER PRIMARY KEY AUTOINCREMENT, CONTENT TEXT NOT NULL , TYPE INTEGER NOT NULL , TIMESTAMP INTEGER NOT NULL)');
+    }
+
     public function close() : void {
     }
 
@@ -64,9 +68,5 @@ class SQLiteAnnounceRepository implements AnnounceRepository {
         $stmt->bindValue(':timestamp', $dto->getTimestamp());
         $stmt->execute();
         return $this->db->lastInsertRowID();
-    }
-
-    private function createTable() {
-        $this->db->exec('CREATE TABLE IF NOT EXISTS ANNOUNCES (ID INTEGER PRIMARY KEY AUTOINCREMENT, CONTENT TEXT NOT NULL , TYPE INTEGER NOT NULL , TIMESTAMP INTEGER NOT NULL)');
     }
 }

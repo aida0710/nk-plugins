@@ -30,10 +30,6 @@ class InfoSystem extends PluginBase implements Listener {
     public array $data;
     private Config $config;
 
-    public static function getInstance() : InfoSystem {
-        return self::$instance;
-    }
-
     public function onEnable() : void {
         self::$instance = $this;
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -85,6 +81,10 @@ class InfoSystem extends PluginBase implements Listener {
             $player->setDisplayName('§eLv.' . $level . '§a-§e' . $tag . '§r§a-§r§f' . $name);
             $player->setNameTag('§eLv.' . $level . '§a-§e' . $tag . '§r§a-§r§f' . $name);
         }
+    }
+
+    public static function getInstance() : InfoSystem {
+        return self::$instance;
     }
 
 }

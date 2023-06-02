@@ -80,6 +80,44 @@ class EventListener implements Listener {
         $this->plugin->removeStat($player);
     }
 
+    private function lockChest(Chest $chest, Player $player) : int {
+        $c = 0;
+        $lock = function (Chest $chest) use ($player, &$c) {
+            if ($this->plugin->isChestLocked($chest->getPosition())) {
+                return;
+            }
+            $this->plugin->lockChest($chest->getPosition(), $player);
+            $c++;
+        };
+        $lock($chest);
+        $pair = $chest->getPair();
+        if ($pair instanceof Chest) {
+            $lock($pair);
+        }
+        return $c;
+    }
+
+    private function unlockChest(Chest $chest, Player $player) : int {
+        $c = 0;
+        $name = strtolower($player->getName());
+        $unlock = function (Chest $chest) use ($player, $name, &$c) {
+            $data = $this->plugin->getData($chest->getPosition());
+            if (count($data) <= 0) {
+                return;
+            }
+            if (Server::getInstance()->isOp($name) || $data['player'] === $name) {
+                $this->plugin->unlockChest($chest->getPosition());
+                $c++;
+            }
+        };
+        $unlock($chest);
+        $pair = $chest->getPair();
+        if ($pair instanceof Chest) {
+            $unlock($pair);
+        }
+        return $c;
+    }
+
     public function onBlockBreak(BlockBreakEvent $event) {
         $player = $event->getPlayer();
         $chest = $player->getPosition()->getWorld()->getTile($event->getBlock()->getPosition());
@@ -134,43 +172,5 @@ class EventListener implements Listener {
 
     public function onPlayerQuit(PlayerQuitEvent $event) {
         $this->plugin->removeStat($event->getPlayer());
-    }
-
-    private function lockChest(Chest $chest, Player $player) : int {
-        $c = 0;
-        $lock = function (Chest $chest) use ($player, &$c) {
-            if ($this->plugin->isChestLocked($chest->getPosition())) {
-                return;
-            }
-            $this->plugin->lockChest($chest->getPosition(), $player);
-            $c++;
-        };
-        $lock($chest);
-        $pair = $chest->getPair();
-        if ($pair instanceof Chest) {
-            $lock($pair);
-        }
-        return $c;
-    }
-
-    private function unlockChest(Chest $chest, Player $player) : int {
-        $c = 0;
-        $name = strtolower($player->getName());
-        $unlock = function (Chest $chest) use ($player, $name, &$c) {
-            $data = $this->plugin->getData($chest->getPosition());
-            if (count($data) <= 0) {
-                return;
-            }
-            if (Server::getInstance()->isOp($name) || $data['player'] === $name) {
-                $this->plugin->unlockChest($chest->getPosition());
-                $c++;
-            }
-        };
-        $unlock($chest);
-        $pair = $chest->getPair();
-        if ($pair instanceof Chest) {
-            $unlock($pair);
-        }
-        return $c;
     }
 }

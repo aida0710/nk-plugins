@@ -26,10 +26,6 @@ final class SimpleGeneratorPreset implements GeneratorPreset {
     ) {
     }
 
-    public static function empty() : self {
-        return new self([]);
-    }
-
     /**
      * Parses a configured preset string.
      * Example of valid strings:
@@ -58,12 +54,12 @@ final class SimpleGeneratorPreset implements GeneratorPreset {
         return new self($data);
     }
 
-    public function exists(string $property) : bool {
-        return array_key_exists($property, $this->data);
+    public static function empty() : self {
+        return new self([]);
     }
 
-    public function get(string $property) : mixed {
-        return $this->data[$property] ?? null;
+    public function exists(string $property) : bool {
+        return array_key_exists($property, $this->data);
     }
 
     public function getFloat(string $property) : float {
@@ -72,6 +68,10 @@ final class SimpleGeneratorPreset implements GeneratorPreset {
             throw new InvalidArgumentException("$property is not a float");
         }
         return $value;
+    }
+
+    public function get(string $property) : mixed {
+        return $this->data[$property] ?? null;
     }
 
     public function getInt(string $property) : int {

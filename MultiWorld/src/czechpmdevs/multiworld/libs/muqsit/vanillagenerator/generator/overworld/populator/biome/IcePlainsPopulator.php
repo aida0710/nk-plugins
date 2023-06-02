@@ -13,6 +13,12 @@ class IcePlainsPopulator extends BiomePopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(RedwoodTree::class, 1),
+        ];
+    }
+
     public function getBiomes() : ?array {
         return [BiomeIds::ICE_PLAINS, BiomeIds::ICE_MOUNTAINS];
     }
@@ -21,12 +27,6 @@ class IcePlainsPopulator extends BiomePopulator {
         $this->treeDecorator->setAmount(1);
         $this->treeDecorator->setTrees(...self::$TREES);
         $this->flowerDecorator->setAmount(0);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(RedwoodTree::class, 1),
-        ];
     }
 }
 

@@ -46,17 +46,17 @@ class RespawnAnchor extends Opaque {
         return false;
     }
 
+    private function explode() : void {
+        $explosion = new Explosion($this->position, 5, $this);
+        $explosion->explodeA();
+        $explosion->explodeB();
+    }
+
     public function readStateFromData(int $id, int $stateMeta) : void {
         $this->charges = BlockDataSerializer::readBoundedInt("charges", $stateMeta, 0, 4);
     }
 
     public function writeStateToMeta() : int {
         return $this->charges;
-    }
-
-    private function explode() : void {
-        $explosion = new Explosion($this->position, 5, $this);
-        $explosion->explodeA();
-        $explosion->explodeB();
     }
 }

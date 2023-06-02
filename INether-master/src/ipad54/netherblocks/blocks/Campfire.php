@@ -38,15 +38,6 @@ class Campfire extends Transparent {
         return $this->extinguished;
     }
 
-    public function setExtinguish(bool $extinguish) : self {
-        $this->extinguished = $extinguish;
-        return $this;
-    }
-
-    public function isSoul() : bool {
-        return false;
-    }
-
     public function getDropsForCompatibleTool(Item $item) : array {
         return [
             VanillaItems::CHARCOAL()->setCount(2),
@@ -55,6 +46,10 @@ class Campfire extends Transparent {
 
     public function getLightLevel() : int {
         return ($this->isSoul() ? (!$this->extinguished ? 10 : 0) : (!$this->extinguished ? 15 : 0));
+    }
+
+    public function isSoul() : bool {
+        return false;
     }
 
     public function getStateBitmask() : int {
@@ -83,6 +78,16 @@ class Campfire extends Transparent {
         return false;
     }
 
+    private function extinguish() : void {
+        $this->position->getWorld()->addSound($this->position, new FireExtinguishSound());
+        $this->position->getWorld()->setBlock($this->position, $this->setExtinguish(true));
+    }
+
+    public function setExtinguish(bool $extinguish) : self {
+        $this->extinguished = $extinguish;
+        return $this;
+    }
+
     public function onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool {
         if ($player !== null) {
             if ($item instanceof FlintSteel) {
@@ -107,6 +112,12 @@ class Campfire extends Transparent {
             }
         }
         return false;
+    }
+
+    private function fire() : void {
+        $this->position->getWorld()->addSound($this->position, new FlintSteelSound());
+        $this->position->getWorld()->setBlock($this->position, $this->setExtinguish(false));
+        $this->position->getWorld()->scheduleDelayedBlockUpdate($this->position, 1);
     }
 
     public function onNearbyBlockChange() : void {
@@ -159,16 +170,5 @@ class Campfire extends Transparent {
 
     public function writeStateToMeta() : int {
         return $this->facing | ($this->extinguished ? self::CAMPFIRE_FLAG_EXTINGUISHED : 0);
-    }
-
-    private function extinguish() : void {
-        $this->position->getWorld()->addSound($this->position, new FireExtinguishSound());
-        $this->position->getWorld()->setBlock($this->position, $this->setExtinguish(true));
-    }
-
-    private function fire() : void {
-        $this->position->getWorld()->addSound($this->position, new FlintSteelSound());
-        $this->position->getWorld()->setBlock($this->position, $this->setExtinguish(false));
-        $this->position->getWorld()->scheduleDelayedBlockUpdate($this->position, 1);
     }
 }

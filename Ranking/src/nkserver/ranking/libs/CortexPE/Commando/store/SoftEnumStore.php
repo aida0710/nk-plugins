@@ -38,6 +38,10 @@ class SoftEnumStore {
         self::broadcastPacket($pk);
     }
 
+    private static function broadcastPacket(ClientboundPacket $pk) : void {
+        ($sv = Server::getInstance())->broadcastPackets($sv->getOnlinePlayers(), [$pk]);
+    }
+
     public static function updateEnum(string $enumName, array $values) : void {
         if (($enum = self::getEnumByName($enumName)) === null) {
             throw new CommandoException('Unknown enum named ' . $enumName);
@@ -55,9 +59,5 @@ class SoftEnumStore {
         }
         unset(static::$enums[$enumName]);
         self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_REMOVE);
-    }
-
-    private static function broadcastPacket(ClientboundPacket $pk) : void {
-        ($sv = Server::getInstance())->broadcastPackets($sv->getOnlinePlayers(), [$pk]);
     }
 }

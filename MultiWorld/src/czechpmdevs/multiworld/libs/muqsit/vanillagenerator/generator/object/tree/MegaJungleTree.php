@@ -138,15 +138,6 @@ class MegaJungleTree extends GenericTree {
         }
     }
 
-    protected function generateDirtBelowTrunk(int $blockX, int $blockY, int $blockZ) : void {
-        // SELF, SOUTH, EAST, SOUTH EAST
-        $dirt = VanillaBlocks::DIRT();
-        $this->transaction->addBlockAt($blockX, $blockY + -1, $blockZ, $dirt);
-        $this->transaction->addBlockAt($blockX, $blockY + -1, $blockZ + 1, $dirt);
-        $this->transaction->addBlockAt($blockX + 1, $blockY + -1, $blockZ, $dirt);
-        $this->transaction->addBlockAt($blockX + 1, $blockY + -1, $blockZ + 1, $dirt);
-    }
-
     private function addVinesOnTrunk(ChunkManager $world, int $blockX, int $blockY, int $blockZ, Random $random) : void {
         for ($y = 1; $y < $this->height; ++$y) {
             $this->maybePlaceVine($world, $blockX + -1, $blockY + $y, $blockZ, Facing::EAST, $random);
@@ -167,6 +158,15 @@ class MegaJungleTree extends GenericTree {
         ) {
             $this->transaction->addBlockAt($absoluteX, $absoluteY, $absoluteZ, VanillaBlocks::VINES()->setFace($faceDirection, true));
         }
+    }
+
+    protected function generateDirtBelowTrunk(int $blockX, int $blockY, int $blockZ) : void {
+        // SELF, SOUTH, EAST, SOUTH EAST
+        $dirt = VanillaBlocks::DIRT();
+        $this->transaction->addBlockAt($blockX, $blockY + -1, $blockZ, $dirt);
+        $this->transaction->addBlockAt($blockX, $blockY + -1, $blockZ + 1, $dirt);
+        $this->transaction->addBlockAt($blockX + 1, $blockY + -1, $blockZ, $dirt);
+        $this->transaction->addBlockAt($blockX + 1, $blockY + -1, $blockZ + 1, $dirt);
     }
 
 }

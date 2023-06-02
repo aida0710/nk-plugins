@@ -23,7 +23,7 @@ class StatisticsForm extends BackableForm {
                 0 => new BlockBreakStatisticsForm($this, $receiver),
                 1 => new BlockPlaceStatisticsForm($this, $receiver),
                 2 => new OtherStatisticsForm($this, $receiver),
-                3 => $this->before
+                3 => $this->before,
             };
             if ($form === null) return;
             SendForm::Send($player, ($form));

@@ -25,15 +25,15 @@ class PlayerSettingPool {
         return $this->exists($player) ? $this->players[$player->getXuid()] : null;
     }
 
-    public function getSettingNonNull(Player $player) : PlayerSetting {
-        if (!$this->exists($player)) $this->create($player);
-        return $this->players[$player->getXuid()] ?? throw new LogicException($player->getXuid() . ' is already registered');
-    }
-
     public function exists(Player $player) : bool {
         $xuid = $player->getXuid();
         if ($xuid === '') throw new InvalidArgumentException($player->getName() . ' is not signed in xbox');
         return isset($this->players[$xuid]);
+    }
+
+    public function getSettingNonNull(Player $player) : PlayerSetting {
+        if (!$this->exists($player)) $this->create($player);
+        return $this->players[$player->getXuid()] ?? throw new LogicException($player->getXuid() . ' is already registered');
     }
 
     public function create(Player $player) : void {

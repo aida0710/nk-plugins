@@ -41,11 +41,6 @@ class PerlinNoise extends BasePerlinNoiseGenerator {
         }
     }
 
-    public static function floor(float $x) : int {
-        $floored = (int) $x;
-        return $x < $floored ? $floored - 1 : $floored;
-    }
-
     /**
      * Generates a rectangular section of this generator's noise.
      *
@@ -99,6 +94,11 @@ class PerlinNoise extends BasePerlinNoiseGenerator {
             }
         }
         return $noise;
+    }
+
+    public static function floor(float $x) : int {
+        $floored = (int) $x;
+        return $x < $floored ? $floored - 1 : $floored;
     }
 
     /**

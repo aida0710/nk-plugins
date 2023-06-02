@@ -21,6 +21,10 @@ class MegaRedwoodTree extends MegaJungleTree {
         $this->setLeavesHeight($random->nextBoundedInt(5) + ($random->nextBoolean() ? 3 : 13));
     }
 
+    protected function setLeavesHeight(int $leavesHeight) : void {
+        $this->leavesHeight = $leavesHeight;
+    }
+
     public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ) : bool {
         if ($this->cannotGenerateAt($sourceX, $sourceY, $sourceZ, $world)) {
             return false;
@@ -45,9 +49,5 @@ class MegaRedwoodTree extends MegaJungleTree {
 
     protected function generateDirtBelowTrunk(int $blockX, int $blockY, int $blockZ) : void {
         // mega redwood tree does not replaces blocks below (surely to preserves podzol)
-    }
-
-    protected function setLeavesHeight(int $leavesHeight) : void {
-        $this->leavesHeight = $leavesHeight;
     }
 }

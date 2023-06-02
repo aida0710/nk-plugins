@@ -36,18 +36,6 @@ class MySQLProvider implements Provider {
 
     /**
      * @param Player|string $player
-     */
-    public function accountExists($player) : bool {
-        if ($player instanceof Player) {
-            $player = $player->getName();
-        }
-        $player = strtolower($player);
-        $result = $this->db->query("SELECT * FROM user_money WHERE username='" . $this->db->real_escape_string($player) . "'");
-        return $result->num_rows > 0;
-    }
-
-    /**
-     * @param Player|string $player
      * @param float         $amount
      */
     public function addMoney($player, $amount) : bool {
@@ -57,6 +45,10 @@ class MySQLProvider implements Provider {
         $player = strtolower($player);
         $amount = (float) $amount;
         return $this->db->query("UPDATE user_money SET money = money + $amount WHERE username='" . $this->db->real_escape_string($player) . "'");
+    }
+
+    public function getName() : string {
+        return 'MySQL';
     }
 
     public function close() {
@@ -77,6 +69,18 @@ class MySQLProvider implements Provider {
             return true;
         }
         return false;
+    }
+
+    /**
+     * @param Player|string $player
+     */
+    public function accountExists($player) : bool {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+        $result = $this->db->query("SELECT * FROM user_money WHERE username='" . $this->db->real_escape_string($player) . "'");
+        return $result->num_rows > 0;
     }
 
     /**
@@ -104,10 +108,6 @@ class MySQLProvider implements Provider {
         $ret = $res->fetch_array()[0] ?? false;
         $res->free();
         return $ret;
-    }
-
-    public function getName() : string {
-        return 'MySQL';
     }
 
     public function open() {

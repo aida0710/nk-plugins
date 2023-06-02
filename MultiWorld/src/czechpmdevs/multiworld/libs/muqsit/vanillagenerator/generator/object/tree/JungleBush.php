@@ -22,11 +22,6 @@ class JungleBush extends GenericTree {
         $this->setType(TreeType::JUNGLE());
     }
 
-    public function canPlaceOn(Block $soil) : bool {
-        $id = $soil->getId();
-        return $id === BlockLegacyIds::GRASS || $id === BlockLegacyIds::DIRT;
-    }
-
     public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ) : bool {
         while ((($blockId = $world->getBlockAt($sourceX, $sourceY, $sourceZ)->getId()) === BlockLegacyIds::AIR || $blockId === BlockLegacyIds::LEAVES) && $sourceY > 0) {
             --$sourceY;
@@ -57,5 +52,10 @@ class JungleBush extends GenericTree {
             }
         }
         return true;
+    }
+
+    public function canPlaceOn(Block $soil) : bool {
+        $id = $soil->getId();
+        return $id === BlockLegacyIds::GRASS || $id === BlockLegacyIds::DIRT;
     }
 }

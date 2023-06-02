@@ -62,10 +62,6 @@ class HastePowder extends Food {
         $consumer->getWorld()->addSound($consumer->getLocation(), new NoteSound(NoteInstrument::BASS_DRUM(), 1));
     }
 
-    public function requiresHunger() : bool {
-        return false;
-    }
-
     protected function addHaste(Player $player, int $amplifier) : void {
         $vec3 = $player->getLocation()->asVector3();
         $soundPk = PlaySoundPacket::create('block.composter.ready', $vec3->x, $vec3->y, $vec3->z, 1.0, 1.0);
@@ -75,5 +71,9 @@ class HastePowder extends Food {
             $player->sendMessage(TextFormat::GRAY . 'くらくらする...');
             $player->getEffects()->add(new EffectInstance(VanillaEffects::NAUSEA(), 10 * 20, 1, false));
         }
+    }
+
+    public function requiresHunger() : bool {
+        return false;
     }
 }

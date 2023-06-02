@@ -49,42 +49,6 @@ class RepairForm extends CustomForm {
             );
     }
 
-    /**
-     * @throws Exception
-     */
-    public static function checkItem(Player $player) : bool {
-        $item = $player->getInventory()->getItemInHand();
-        if ($item->getId() === ItemIds::ELYTRA) {
-            if (!$item instanceof Durable) {
-                SendMessage::Send($player, '持っているアイテムは修繕することが出来ません', 'Repair', false);
-                return false;
-            }
-            if ($item->getDamage() <= 0) {
-                SendMessage::Send($player, '耐久力が減っていない為、修繕することができません', 'Repair', false);
-                return false;
-            }
-        }
-        if (!$item instanceof TieredTool) {
-            SendMessage::Send($player, '持っているアイテムは修繕することが出来ません', 'Repair', false);
-            return false;
-        }
-        if ($item->getDamage() <= 0) {
-            SendMessage::Send($player, '耐久力が減っていない為、修繕することができません', 'Repair', false);
-            return false;
-        }
-        if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
-            SendMessage::Send($player, '衝撃エンチャントが付与されている為、修繕することが出来ません', 'Repair', false);
-            return false;
-        }
-        if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
-            if ($item->getTier() === ToolTier::DIAMOND()) {
-                SendMessage::Send($player, 'ネザライトマイニングツールのみ修繕が可能です', 'Repair', false);
-                return false;
-            }
-        }
-        return true;
-    }
-
     public function handleSubmit(Player $player) : void {
         $consumption = 'error';
         if ($this->checkItem($player) === false) {
@@ -211,10 +175,40 @@ class RepairForm extends CustomForm {
         }
     }
 
-    public function itemDisappearance(Player $player) {
+    /**
+     * @throws Exception
+     */
+    public static function checkItem(Player $player) : bool {
         $item = $player->getInventory()->getItemInHand();
-        $player->getInventory()->removeItem($item);
-        $player->getWorld()->addSound($player->getPosition(), new AnvilBreakSound());
+        if ($item->getId() === ItemIds::ELYTRA) {
+            if (!$item instanceof Durable) {
+                SendMessage::Send($player, '持っているアイテムは修繕することが出来ません', 'Repair', false);
+                return false;
+            }
+            if ($item->getDamage() <= 0) {
+                SendMessage::Send($player, '耐久力が減っていない為、修繕することができません', 'Repair', false);
+                return false;
+            }
+        }
+        if (!$item instanceof TieredTool) {
+            SendMessage::Send($player, '持っているアイテムは修繕することが出来ません', 'Repair', false);
+            return false;
+        }
+        if ($item->getDamage() <= 0) {
+            SendMessage::Send($player, '耐久力が減っていない為、修繕することができません', 'Repair', false);
+            return false;
+        }
+        if ($item->hasEnchantment(VanillaEnchantments::PUNCH())) {
+            SendMessage::Send($player, '衝撃エンチャントが付与されている為、修繕することが出来ません', 'Repair', false);
+            return false;
+        }
+        if ($item->getNamedTag()->getTag('MiningTools_3') !== null) {
+            if ($item->getTier() === ToolTier::DIAMOND()) {
+                SendMessage::Send($player, 'ネザライトマイニングツールのみ修繕が可能です', 'Repair', false);
+                return false;
+            }
+        }
+        return true;
     }
 
     public function itemRepair(Player $player, $consumption) {
@@ -230,5 +224,11 @@ class RepairForm extends CustomForm {
             default:
                 throw new Error('不正な状態が保存された変数が処理されました');
         }
+    }
+
+    public function itemDisappearance(Player $player) {
+        $item = $player->getInventory()->getItemInHand();
+        $player->getInventory()->removeItem($item);
+        $player->getWorld()->addSound($player->getPosition(), new AnvilBreakSound());
     }
 }

@@ -33,14 +33,20 @@ class SwamplandPopulator extends BiomePopulator {
         parent::__construct();
     }
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::SWAMPLAND, BiomeIds::SWAMPLAND_MUTATED];
-    }
-
     protected static function initFlowers() : void {
         self::$FLOWERS = [
             new FlowerDecoration(VanillaBlocks::BLUE_ORCHID(), 1),
         ];
+    }
+
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(SwampTree::class, 1),
+        ];
+    }
+
+    public function getBiomes() : ?array {
+        return [BiomeIds::SWAMPLAND, BiomeIds::SWAMPLAND_MUTATED];
     }
 
     protected function initPopulators() : void {
@@ -56,12 +62,6 @@ class SwamplandPopulator extends BiomePopulator {
         $this->swamplandBrownMushroomDecorator->setAmount(8);
         $this->swamplandRedMushroomDecorator->setAmount(8);
         $this->waterlilyDecorator->setAmount(4);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(SwampTree::class, 1),
-        ];
     }
 
     protected function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {

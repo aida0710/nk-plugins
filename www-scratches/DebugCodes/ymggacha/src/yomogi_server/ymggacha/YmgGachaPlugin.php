@@ -30,19 +30,6 @@ class YmgGachaPlugin extends PluginBase {
         $this->registerListeners();
     }
 
-    private function registerListeners() : void {
-        foreach ((new ListenerList())->getAll() as $listener) {
-            $this->getServer()->getPluginManager()->registerEvents($listener, $this);
-        }
-    }
-
-    private function registerItems() : void {
-        $factory = ItemFactory::getInstance();
-        $factory->register(new HastePowder());
-        $factory->register(new HardHastePowder());
-        $factory->register(new YomogiGachaTicket());
-    }
-
     private function registerCommand() : void {
         try {
             PacketHooker::register($this);
@@ -54,5 +41,18 @@ class YmgGachaPlugin extends PluginBase {
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
         (new CommandList($this))->registerToMap($this->getServer()->getCommandMap());
+    }
+
+    private function registerItems() : void {
+        $factory = ItemFactory::getInstance();
+        $factory->register(new HastePowder());
+        $factory->register(new HardHastePowder());
+        $factory->register(new YomogiGachaTicket());
+    }
+
+    private function registerListeners() : void {
+        foreach ((new ListenerList())->getAll() as $listener) {
+            $this->getServer()->getPluginManager()->registerEvents($listener, $this);
+        }
     }
 }

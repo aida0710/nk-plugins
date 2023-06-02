@@ -26,6 +26,15 @@ class MegaTaigaPopulator extends TaigaPopulator {
         $this->stoneBoulderDecorator = new StoneBoulderDecorator();
     }
 
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(RedwoodTree::class, 52),
+            new TreeDecoration(TallRedwoodTree::class, 26),
+            new TreeDecoration(MegaPineTree::class, 36),
+            new TreeDecoration(MegaSpruceTree::class, 3),
+        ];
+    }
+
     public function getBiomes() : ?array {
         return [BiomeIds::MEGA_TAIGA, BiomeIds::MEGA_TAIGA_HILLS];
     }
@@ -36,15 +45,6 @@ class MegaTaigaPopulator extends TaigaPopulator {
         $this->deadBushDecorator->setAmount(0);
         $this->taigaBrownMushroomDecorator->setAmount(3);
         $this->taigaRedMushroomDecorator->setAmount(3);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(RedwoodTree::class, 52),
-            new TreeDecoration(TallRedwoodTree::class, 26),
-            new TreeDecoration(MegaPineTree::class, 36),
-            new TreeDecoration(MegaSpruceTree::class, 3),
-        ];
     }
 
     protected function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {

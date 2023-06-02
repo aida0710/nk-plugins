@@ -114,24 +114,6 @@ class WorldUtils {
         WorldUtils::lazyLoadWorld($newName);
     }
 
-    public static function duplicateWorld(string $worldName, string $duplicateName) : void {
-        if (Server::getInstance()->getWorldManager()->isWorldLoaded($worldName)) {
-            WorldUtils::getWorldByNameNonNull($worldName)->save();
-        }
-        mkdir(Server::getInstance()->getDataPath() . "/worlds/$duplicateName");
-        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(Server::getInstance()->getDataPath() . "/worlds/$worldName", FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
-        /** @var SplFileInfo $fileInfo */
-        foreach ($files as $fileInfo) {
-            if ($filePath = $fileInfo->getRealPath()) {
-                if ($fileInfo->isFile()) {
-                    @copy($filePath, str_replace($worldName, $duplicateName, $filePath));
-                } else {
-                    mkdir(str_replace($worldName, $duplicateName, $filePath));
-                }
-            }
-        }
-    }
-
     /**
      * @return bool Returns if the world was unloaded with the function.
      * If it has already been unloaded before calling this function, returns FALSE!
@@ -149,6 +131,24 @@ class WorldUtils {
      */
     public static function lazyLoadWorld(string $name) : bool {
         return !Server::getInstance()->getWorldManager()->isWorldLoaded($name) && Server::getInstance()->getWorldManager()->loadWorld($name, true);
+    }
+
+    public static function duplicateWorld(string $worldName, string $duplicateName) : void {
+        if (Server::getInstance()->getWorldManager()->isWorldLoaded($worldName)) {
+            WorldUtils::getWorldByNameNonNull($worldName)->save();
+        }
+        mkdir(Server::getInstance()->getDataPath() . "/worlds/$duplicateName");
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(Server::getInstance()->getDataPath() . "/worlds/$worldName", FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+        /** @var SplFileInfo $fileInfo */
+        foreach ($files as $fileInfo) {
+            if ($filePath = $fileInfo->getRealPath()) {
+                if ($fileInfo->isFile()) {
+                    @copy($filePath, str_replace($worldName, $duplicateName, $filePath));
+                } else {
+                    mkdir(str_replace($worldName, $duplicateName, $filePath));
+                }
+            }
+        }
     }
 
     /**

@@ -25,6 +25,14 @@ class GroundGenerator {
         $this->setGroundMaterial($groundMaterial ?? VanillaBlocks::DIRT());
     }
 
+    final protected function setTopMaterial(Block $topMaterial) : void {
+        $this->topMaterial = $topMaterial;
+    }
+
+    final protected function setGroundMaterial(Block $groundMaterial) : void {
+        $this->groundMaterial = $groundMaterial;
+    }
+
     public function getBedrockRoughness() : int {
         return $this->bedrockRoughness;
     }
@@ -102,13 +110,5 @@ class GroundGenerator {
                 }
             }
         }
-    }
-
-    final protected function setTopMaterial(Block $topMaterial) : void {
-        $this->topMaterial = $topMaterial;
-    }
-
-    final protected function setGroundMaterial(Block $groundMaterial) : void {
-        $this->groundMaterial = $groundMaterial;
     }
 }

@@ -118,15 +118,6 @@ class OverworldGenerator extends VanillaGenerator {
         return ($x << 3) | $z;
     }
 
-    /**
-     * @param int $i 0-4
-     * @param int $j 0-4
-     * @param int $k 0-32
-     */
-    private static function densityHash(int $i, int $j, int $k) : int {
-        return ($k << 6) | ($j << 3) | $i;
-    }
-
     public function getGroundGenerator() : GroundGenerator {
         return $this->groundGen;
     }
@@ -367,6 +358,15 @@ class OverworldGenerator extends VanillaGenerator {
             }
         }
         return $density;
+    }
+
+    /**
+     * @param int $i 0-4
+     * @param int $j 0-4
+     * @param int $k 0-32
+     */
+    private static function densityHash(int $i, int $j, int $k) : int {
+        return ($k << 6) | ($j << 3) | $i;
     }
 }
 

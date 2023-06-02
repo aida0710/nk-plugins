@@ -17,12 +17,10 @@ class ListenerList {
         $this->init();
     }
 
-    /**
-     * @return Listener[]
-     * 登録されている全てのリスナーを返します
-     */
-    public function getAll() : array {
-        return $this->listeners;
+    private function init() : void {
+        $this->addListener(new UnregisterRollingGachaListener());
+        $this->addListener(new AddTicketListener());
+        // and more...?
     }
 
     /**
@@ -33,9 +31,11 @@ class ListenerList {
         $this->listeners[] = $listener;
     }
 
-    private function init() : void {
-        $this->addListener(new UnregisterRollingGachaListener());
-        $this->addListener(new AddTicketListener());
-        // and more...?
+    /**
+     * @return Listener[]
+     * 登録されている全てのリスナーを返します
+     */
+    public function getAll() : array {
+        return $this->listeners;
     }
 }

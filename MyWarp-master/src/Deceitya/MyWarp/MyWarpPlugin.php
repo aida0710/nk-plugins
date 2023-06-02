@@ -18,10 +18,6 @@ class MyWarpPlugin extends PluginBase {
     public static Config $count;
     private static MyWarpPlugin $instance;
 
-    public static function getInstance() : MyWarpPlugin {
-        return self::$instance;
-    }
-
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool {
         if ($sender instanceof Player) {
             SendForm::Send($sender, (new MainForm()));
@@ -36,5 +32,9 @@ class MyWarpPlugin extends PluginBase {
         self::$cost = new Config($this->getDataFolder() . 'cost.yml');
         self::$count = new Config($this->getDataFolder() . 'count.yml');
         Database::getInstance()->open($this);
+    }
+
+    public static function getInstance() : MyWarpPlugin {
+        return self::$instance;
     }
 }

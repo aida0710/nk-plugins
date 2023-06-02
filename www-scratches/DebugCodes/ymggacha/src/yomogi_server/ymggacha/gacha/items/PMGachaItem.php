@@ -23,10 +23,6 @@ class PMGachaItem implements IGachaItem {
         $this->item = $item;
     }
 
-    public function getRarity() : IRarity {
-        return $this->rarity;
-    }
-
     public function giveItem(Player $player) : bool {
         $inventory = $player->getInventory();
         if (!$inventory->canAddItem($this->item)) return false;
@@ -40,5 +36,9 @@ class PMGachaItem implements IGachaItem {
 
     public function getPopMessage() : string {
         return '[' . $this->getRarity()->getName() . '] ' . $this->item->getName();
+    }
+
+    public function getRarity() : IRarity {
+        return $this->rarity;
     }
 }

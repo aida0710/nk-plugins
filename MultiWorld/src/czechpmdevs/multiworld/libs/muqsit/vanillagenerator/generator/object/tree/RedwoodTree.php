@@ -31,6 +31,14 @@ class RedwoodTree extends GenericTree {
         $this->setType(TreeType::SPRUCE());
     }
 
+    final protected function setLeavesHeight(int $leavesHeight) : void {
+        $this->leavesHeight = $leavesHeight;
+    }
+
+    final protected function setMaxRadius(int $maxRadius) : void {
+        $this->maxRadius = $maxRadius;
+    }
+
     public function canPlace(int $baseX, int $baseY, int $baseZ, ChunkManager $world) : bool {
         for ($y = $baseY; $y <= $baseY + 1 + $this->height; ++$y) {
             if ($y - $baseY < $this->leavesHeight) {
@@ -100,13 +108,5 @@ class RedwoodTree extends GenericTree {
         }
         $this->transaction->addBlockAt($sourceX, $sourceY - 1, $sourceZ, VanillaBlocks::DIRT());
         return true;
-    }
-
-    final protected function setMaxRadius(int $maxRadius) : void {
-        $this->maxRadius = $maxRadius;
-    }
-
-    final protected function setLeavesHeight(int $leavesHeight) : void {
-        $this->leavesHeight = $leavesHeight;
     }
 }

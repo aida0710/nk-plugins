@@ -49,6 +49,10 @@ class YamlProvider implements Provider {
         return isset($this->money['money'][$player]);
     }
 
+    public function getName() {
+        return 'Yaml';
+    }
+
     public function addMoney($player, $amount) {
         if ($player instanceof Player) {
             $player = $player->getName();
@@ -66,6 +70,11 @@ class YamlProvider implements Provider {
         $this->save();
     }
 
+    public function save() {
+        $this->config->setAll($this->money);
+        $this->config->save();
+    }
+
     public function createAccount($player, $defaultMoney = 1000) {
         if ($player instanceof Player) {
             $player = $player->getName();
@@ -76,10 +85,6 @@ class YamlProvider implements Provider {
             return true;
         }
         return false;
-    }
-
-    public function getAll() {
-        return isset($this->money['money']) ? $this->money['money'] : [];
     }
 
     public function getMoney($player) {
@@ -106,13 +111,13 @@ class YamlProvider implements Provider {
         return false;
     }
 
-    public function getName() {
-        return 'Yaml';
-    }
-
     public function open() {
         $this->config = new Config($this->plugin->getDataFolder() . 'Money.yml', Config::YAML, ['version' => 2, 'money' => []]);
         $this->money = $this->config->getAll();
+    }
+
+    public function getAll() {
+        return isset($this->money['money']) ? $this->money['money'] : [];
     }
 
     public function reduceMoney($player, $amount) {
@@ -138,10 +143,5 @@ class YamlProvider implements Provider {
             return true;
         }
         return false;
-    }
-
-    public function save() {
-        $this->config->setAll($this->money);
-        $this->config->save();
     }
 }

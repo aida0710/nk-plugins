@@ -19,15 +19,22 @@ class SavannaPopulator extends BiomePopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::SAVANNA, BiomeIds::SAVANNA_PLATEAU];
-    }
-
     public static function init() : void {
         parent::init();
         self::$DOUBLE_PLANTS = [
             new DoublePlantDecoration(VanillaBlocks::DOUBLE_TALLGRASS(), 1),
         ];
+    }
+
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(AcaciaTree::class, 4),
+            new TreeDecoration(GenericTree::class, 4),
+        ];
+    }
+
+    public function getBiomes() : ?array {
+        return [BiomeIds::SAVANNA, BiomeIds::SAVANNA_PLATEAU];
     }
 
     protected function initPopulators() : void {
@@ -37,13 +44,6 @@ class SavannaPopulator extends BiomePopulator {
         $this->treeDecorator->setTrees(...self::$TREES);
         $this->flowerDecorator->setAmount(4);
         $this->tallGrassDecorator->setAmount(20);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(AcaciaTree::class, 4),
-            new TreeDecoration(GenericTree::class, 4),
-        ];
     }
 }
 

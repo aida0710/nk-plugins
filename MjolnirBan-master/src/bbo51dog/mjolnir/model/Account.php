@@ -36,12 +36,12 @@ class Account {
         return $this->ip;
     }
 
-    public function getCid() : int {
-        return $this->cid;
-    }
-
     public function getXuid() : string {
         return $this->xuid;
+    }
+
+    public function getCid() : int {
+        return $this->cid;
     }
 
 }

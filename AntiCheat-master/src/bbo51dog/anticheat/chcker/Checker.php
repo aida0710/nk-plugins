@@ -36,6 +36,8 @@ abstract class Checker {
         $this->checkViolation();
     }
 
+    abstract public function checkViolation() : void;
+
     public function decreaseViolation(int $violation = 1) : void {
         $this->violation -= $violation;
         if ($this->violation < 0) {
@@ -43,8 +45,6 @@ abstract class Checker {
         }
         $this->checkViolation();
     }
-
-    abstract public function checkViolation() : void;
 
     public function reset() : void {
         $this->violation = 0;

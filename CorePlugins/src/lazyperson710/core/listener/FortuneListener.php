@@ -16,6 +16,24 @@ use function mt_rand;
 
 class FortuneListener implements Listener {
 
+    /**
+     * @priority LOW
+     */
+    public function onBreak(BlockBreakEvent $event) {
+        $enchant = $event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE));
+        if ($enchant === null) {
+            return;
+        }
+        if ($event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::SILK_TOUCH)) !== null) {
+            SendMessage::Send($event->getPlayer(), 'シルクタッチと幸運が同時付与されているツールは使用することができません', 'Enchant', false);
+            return;
+        }
+        if (empty($event->getDrops())) return;
+        $plus = $this->Calculation($event->getBlock(), $enchant->getLevel());
+        $item = $event->getDrops()[0];
+        $item->setCount($item->getCount() + $plus);
+    }
+
     static function Calculation(Block $block, int $level) : int {
         if (!in_array($block->getId(), [
             BlockLegacyIds::DIAMOND_ORE,
@@ -58,23 +76,5 @@ class FortuneListener implements Listener {
                 break;
         }
         return $plus;
-    }
-
-    /**
-     * @priority LOW
-     */
-    public function onBreak(BlockBreakEvent $event) {
-        $enchant = $event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::FORTUNE));
-        if ($enchant === null) {
-            return;
-        }
-        if ($event->getItem()->getEnchantment(EnchantmentIdMap::getInstance()->fromId(EnchantmentIds::SILK_TOUCH)) !== null) {
-            SendMessage::Send($event->getPlayer(), 'シルクタッチと幸運が同時付与されているツールは使用することができません', 'Enchant', false);
-            return;
-        }
-        if (empty($event->getDrops())) return;
-        $plus = $this->Calculation($event->getBlock(), $enchant->getLevel());
-        $item = $event->getDrops()[0];
-        $item->setCount($item->getCount() + $plus);
     }
 }

@@ -35,6 +35,26 @@ class Campfire extends Spawnable {
     /** @var int[] */
     private array $itemTime = [];
 
+    public function addItem(Item $item) : bool {
+        $item->setCount(1);
+        if (!$this->canAddItem($item)) {
+            return false;
+        }
+        $this->setItem($item);
+        return true;
+    }
+
+    public function canAddItem(Item $item) : bool {
+        if (count($this->items) >= 4) {
+            return false;
+        }
+        return $this->canCook($item);
+    }
+
+    public function canCook(Item $item) : bool {
+        return isset($this->recipes[$item->getId()]);
+    }
+
     public function setItem(Item $item, ?int $slot = null) : void {
         if ($slot === null) {
             $slot = count($this->items) + 1;
@@ -49,32 +69,12 @@ class Campfire extends Spawnable {
         }
     }
 
-    public function addItem(Item $item) : bool {
-        $item->setCount(1);
-        if (!$this->canAddItem($item)) {
-            return false;
-        }
-        $this->setItem($item);
-        return true;
-    }
-
-    public function canCook(Item $item) : bool {
-        return isset($this->recipes[$item->getId()]);
-    }
-
-    public function canAddItem(Item $item) : bool {
-        if (count($this->items) >= 4) {
-            return false;
-        }
-        return $this->canCook($item);
+    public function increaseSlotTime(int $slot) : void {
+        $this->setSlotTime($slot, $this->getItemTime($slot) + 1);
     }
 
     public function setSlotTime(int $slot, int $time) : void {
         $this->itemTime[$slot] = $time;
-    }
-
-    public function increaseSlotTime(int $slot) : void {
-        $this->setSlotTime($slot, $this->getItemTime($slot) + 1);
     }
 
     public function getItemTime(int $slot) : int {
@@ -86,20 +86,6 @@ class Campfire extends Spawnable {
      */
     public function getRecipes() : array {
         return $this->recipes;
-    }
-
-    /**
-     * @return Item[]
-     */
-    public function getContents() : array {
-        return $this->items;
-    }
-
-    protected function addAdditionalSpawnData(CompoundTag $nbt) : void {
-        foreach ($this->items as $slot => $item) {
-            $nbt->setTag("Item" . $slot, $item->nbtSerialize());
-            $nbt->setInt("ItemTime" . $slot, $this->getItemTime($slot));
-        }
     }
 
     public function close() : void {
@@ -126,6 +112,13 @@ class Campfire extends Spawnable {
         }
     }
 
+    protected function addAdditionalSpawnData(CompoundTag $nbt) : void {
+        foreach ($this->items as $slot => $item) {
+            $nbt->setTag("Item" . $slot, $item->nbtSerialize());
+            $nbt->setInt("ItemTime" . $slot, $this->getItemTime($slot));
+        }
+    }
+
     protected function writeSaveData(CompoundTag $nbt) : void {
         $items = [];
         foreach ($this->getContents() as $slot => $item) {
@@ -137,5 +130,12 @@ class Campfire extends Spawnable {
             $times[] = new IntTag($time);
         }
         $nbt->setTag(self::TAG_ITEM_TIME, new ListTag($times));
+    }
+
+    /**
+     * @return Item[]
+     */
+    public function getContents() : array {
+        return $this->items;
     }
 }

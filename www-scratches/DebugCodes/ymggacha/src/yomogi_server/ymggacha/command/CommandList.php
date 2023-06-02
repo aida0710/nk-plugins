@@ -23,6 +23,15 @@ class CommandList {
         $this->setup($plugin);
     }
 
+    private function setup(PluginBase $plugin) : void {
+        $this->registerCommand(new GachaCommand($plugin));
+        $this->registerCommand(new GachaTicketCommand($plugin));
+    }
+
+    private function registerCommand(BaseCommand $command) : void {
+        $this->commands[] = $command;
+    }
+
     /**
      * @throws RuntimeException
      */
@@ -30,14 +39,5 @@ class CommandList {
         foreach ($this->commands as $cmd) {
             $map->register($cmd->getOwningPlugin()->getName() . $cmd->getName(), $cmd);
         }
-    }
-
-    private function registerCommand(BaseCommand $command) : void {
-        $this->commands[] = $command;
-    }
-
-    private function setup(PluginBase $plugin) : void {
-        $this->registerCommand(new GachaCommand($plugin));
-        $this->registerCommand(new GachaTicketCommand($plugin));
     }
 }

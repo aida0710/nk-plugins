@@ -68,6 +68,11 @@ class SQLiteDatabase implements Database {
         return false;
     }
 
+    public function getInviteeById($id) {
+        $invitee = $this->land->exec("SELECT invitee FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC)['invitee'];
+        return unserialize($invitee);
+    }
+
     public function addLand($startX, $endX, $startZ, $endZ, $level, $price, $owner, $expires = null, $invitee = []) {
         if ($level instanceof World) {
             $level = $level->getFolderName();
@@ -113,11 +118,6 @@ class SQLiteDatabase implements Database {
             $level = $level->getFolderName();
         }
         return $this->land->query("SELECT * FROM land WHERE (startX <= $x AND endX >= $x) AND (startZ <= $z AND endZ >= $z) AND level = '$level'")->fetchArray(SQLITE3_ASSOC);
-    }
-
-    public function getInviteeById($id) {
-        $invitee = $this->land->exec("SELECT invitee FROM land WHERE ID = $id")->fetchArray(SQLITE3_ASSOC)['invitee'];
-        return unserialize($invitee);
     }
 
     public function getLandById($id) {

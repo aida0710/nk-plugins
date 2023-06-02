@@ -27,6 +27,15 @@ class JunglePopulator extends BiomePopulator {
         parent::__construct();
     }
 
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(BigOakTree::class, 10),
+            new TreeDecoration(JungleBush::class, 50),
+            new TreeDecoration(MegaJungleTree::class, 15),
+            new TreeDecoration(CocoaTree::class, 30),
+        ];
+    }
+
     public function getBiomes() : ?array {
         return [BiomeIds::JUNGLE, BiomeIds::JUNGLE_HILLS, BiomeIds::JUNGLE_MUTATED];
     }
@@ -38,15 +47,6 @@ class JunglePopulator extends BiomePopulator {
         $this->flowerDecorator->setFlowers(...self::$FLOWERS);
         $this->tallGrassDecorator->setAmount(25);
         $this->tallGrassDecorator->setFernDensity(0.25);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(BigOakTree::class, 10),
-            new TreeDecoration(JungleBush::class, 50),
-            new TreeDecoration(MegaJungleTree::class, 15),
-            new TreeDecoration(CocoaTree::class, 30),
-        ];
     }
 
     protected function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {

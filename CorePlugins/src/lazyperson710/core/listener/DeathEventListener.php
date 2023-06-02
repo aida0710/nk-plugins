@@ -29,13 +29,6 @@ class DeathEventListener implements Listener {
         $this->deathPenalty($event);
     }
 
-    public function Respawn(PlayerRespawnEvent $event) {
-        $player = $event->getPlayer();
-        $name = $player->getName();
-        SendBroadcastTip::Send("{$name}がリスポーンしました", 'ReSpawn');
-        SoundPacket::Send($player, 'respawn_anchor.set_spawn');
-    }
-
     private function deathMessage(PlayerDeathEvent $event) : void {
         $player = $event->getPlayer();
         $cause = $player->getLastDamageCause();
@@ -142,5 +135,12 @@ class DeathEventListener implements Listener {
         } else {
             SendMessage::Send($player, "所持金が2000円以下の{$see}円だっため死亡ペナルティーは経験値のみとなりました", 'Death', true);
         }
+    }
+
+    public function Respawn(PlayerRespawnEvent $event) {
+        $player = $event->getPlayer();
+        $name = $player->getName();
+        SendBroadcastTip::Send("{$name}がリスポーンしました", 'ReSpawn');
+        SoundPacket::Send($player, 'respawn_anchor.set_spawn');
     }
 }

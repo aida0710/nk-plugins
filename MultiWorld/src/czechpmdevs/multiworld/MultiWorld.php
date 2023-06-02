@@ -49,10 +49,6 @@ class MultiWorld extends PluginBase {
         return ConfigManager::getPrefix();
     }
 
-    public static function getInstance() : MultiWorld {
-        return MultiWorld::$instance;
-    }
-
     public function onEnable() : void {
         $this->configManager = new ConfigManager();
         $this->languageManager = new LanguageManager();
@@ -80,5 +76,9 @@ class MultiWorld extends PluginBase {
         foreach ($generators as $name => $class) {
             GeneratorManager::getInstance()->addGenerator($class, $name, fn () => null, true);
         }
+    }
+
+    public static function getInstance() : MultiWorld {
+        return MultiWorld::$instance;
     }
 }

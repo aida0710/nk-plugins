@@ -57,6 +57,8 @@ abstract class VanillaGenerator extends Generator {
         $this->generateChunkData($world, $chunkX, $chunkZ, $biomes);
     }
 
+    abstract protected function generateChunkData(ChunkManager $world, int $chunkX, int $chunkZ, VanillaBiomeGrid $biomes) : void;
+
     public function populateChunk(ChunkManager $world, int $chunkX, int $chunkZ) : void {
         /** @var Chunk $chunk */
         $chunk = $world->getChunk($chunkX, $chunkZ);
@@ -83,14 +85,12 @@ abstract class VanillaGenerator extends Generator {
     /**
      * @phpstan-return T
      */
-    abstract protected function createWorldOctaves() : WorldOctaves;
-
-    abstract protected function generateChunkData(ChunkManager $world, int $chunkX, int $chunkZ, VanillaBiomeGrid $biomes) : void;
+    final protected function getWorldOctaves() : WorldOctaves {
+        return $this->octaveCache ??= $this->createWorldOctaves();
+    }
 
     /**
      * @phpstan-return T
      */
-    final protected function getWorldOctaves() : WorldOctaves {
-        return $this->octaveCache ??= $this->createWorldOctaves();
-    }
+    abstract protected function createWorldOctaves() : WorldOctaves;
 }

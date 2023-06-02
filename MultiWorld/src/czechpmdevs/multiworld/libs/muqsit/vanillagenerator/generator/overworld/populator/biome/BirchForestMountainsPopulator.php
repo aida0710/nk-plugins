@@ -16,19 +16,19 @@ class BirchForestMountainsPopulator extends ForestPopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(BirchTree::class, 1),
+            new TreeDecoration(TallBirchTree::class, 1),
+        ];
+    }
+
     public function getBiomes() : ?array {
         return self::BIOMES;
     }
 
     protected function initPopulators() : void {
         $this->treeDecorator->setTrees(...self::$TREES);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(BirchTree::class, 1),
-            new TreeDecoration(TallBirchTree::class, 1),
-        ];
     }
 }
 

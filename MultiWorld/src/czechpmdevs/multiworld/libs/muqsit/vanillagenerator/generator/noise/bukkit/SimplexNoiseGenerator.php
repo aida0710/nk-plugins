@@ -54,10 +54,6 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
         }
     }
 
-    public static function getInstance() : SimplexNoiseGenerator {
-        return self::$instance ??= new SimplexNoiseGenerator();
-    }
-
     /**
      * Computes and returns the 3D unseeded simplex noise for the given
      * coordinates in 3D space
@@ -69,34 +65,6 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
      */
     public static function getNoise3d(float $xin, float $yin = 0.0, float $zin = 0.0) : float {
         return self::getInstance()->noise3d($xin, $yin, $zin);
-    }
-
-    /**
-     * Computes and returns the 4D simplex noise for the given coordinates in
-     * 4D space
-     *
-     * @param float $x X coordinate
-     * @param float $y Y coordinate
-     * @param float $z Z coordinate
-     * @param float $w W coordinate
-     * @return float noise at given location, from range -1 to 1
-     */
-    public static function getNoise(float $x, float $y, float $z, float $w) : float {
-        return self::getInstance()->noise($x, $y, $z, $w);
-    }
-
-    /**
-     * @param int[]|float[] $g
-     */
-    protected static function dot(array $g, float $x, float $y, float $z = 0.0, float $w = 0.0) : float {
-        $result = $g[0] * $x + $g[1] * $y;
-        if ($z !== 0.0) {
-            $result += $g[2] * $z;
-            if ($w !== 0.0) {
-                $result += $g[3] * $w;
-            }
-        }
-        return $result;
     }
 
     public function noise3d(float $xin, float $yin = 0.0, float $zin = 0.0) : float {
@@ -285,6 +253,38 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
     }
 
     /**
+     * @param int[]|float[] $g
+     */
+    protected static function dot(array $g, float $x, float $y, float $z = 0.0, float $w = 0.0) : float {
+        $result = $g[0] * $x + $g[1] * $y;
+        if ($z !== 0.0) {
+            $result += $g[2] * $z;
+            if ($w !== 0.0) {
+                $result += $g[3] * $w;
+            }
+        }
+        return $result;
+    }
+
+    public static function getInstance() : SimplexNoiseGenerator {
+        return self::$instance ??= new SimplexNoiseGenerator();
+    }
+
+    /**
+     * Computes and returns the 4D simplex noise for the given coordinates in
+     * 4D space
+     *
+     * @param float $x X coordinate
+     * @param float $y Y coordinate
+     * @param float $z Z coordinate
+     * @param float $w W coordinate
+     * @return float noise at given location, from range -1 to 1
+     */
+    public static function getNoise(float $x, float $y, float $z, float $w) : float {
+        return self::getInstance()->noise($x, $y, $z, $w);
+    }
+
+    /**
      * Computes and returns the 4D simplex noise for the given coordinates in
      * 4D space
      *
@@ -311,7 +311,7 @@ class SimplexNoiseGenerator extends BasePerlinNoiseGenerator {
         $Y0 = $j - $t;
         $Z0 = $k - $t;
         $W0 = $l - $t;
-        $x0 = $x - $X0; // The x,y,z,w distances from the cell origin
+        $x0 = $x - $X0;             // The x,y,z,w distances from the cell origin
         $y0 = $y - $Y0;
         $z0 = $z - $Z0;
         $w0 = $w - $W0;

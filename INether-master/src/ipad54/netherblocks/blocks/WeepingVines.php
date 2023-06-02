@@ -89,6 +89,10 @@ class WeepingVines extends Transparent { //credits: https://github.com/cladevs/V
         return false;
     }
 
+    public function getAge() : int {
+        return $this->age;
+    }
+
     public function onNearbyBlockChange() : void {
         $block = $this->getSide(Facing::UP);
         if ($block instanceof Air) {
@@ -131,10 +135,6 @@ class WeepingVines extends Transparent { //credits: https://github.com/cladevs/V
     }
 
     protected function writeStateToMeta() : int {
-        return $this->age;
-    }
-
-    public function getAge() : int {
         return $this->age;
     }
 }

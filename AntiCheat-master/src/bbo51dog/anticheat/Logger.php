@@ -43,6 +43,16 @@ class Logger {
         $webhook->send();
     }
 
+    private function warnToAdmin(string $message) : void {
+        foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+            if (!Server::getInstance()->isOp($player->getName())) {
+                continue;
+            }
+            SendMessage::Send($player, $message, 'Warning', false);
+        }
+        Server::getInstance()->getLogger()->warning($message);
+    }
+
     public function warnPunishment(Checker $checker) : void {
         $this->warnToAdmin($checker->getPunishmentMessage());
         if (!Main::getSetting()->isEnableDiscordLog()) {
@@ -66,15 +76,5 @@ class Logger {
         $embeds->add($embed);
         $webhook->add($embeds);
         $webhook->send();
-    }
-
-    private function warnToAdmin(string $message) : void {
-        foreach (Server::getInstance()->getOnlinePlayers() as $player) {
-            if (!Server::getInstance()->isOp($player->getName())) {
-                continue;
-            }
-            SendMessage::Send($player, $message, 'Warning', false);
-        }
-        Server::getInstance()->getLogger()->warning($message);
     }
 }

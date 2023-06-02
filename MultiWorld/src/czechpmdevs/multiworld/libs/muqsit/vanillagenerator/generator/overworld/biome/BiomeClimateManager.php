@@ -95,32 +95,32 @@ final class BiomeClimateManager {
         }
     }
 
-    public static function get(int $biome) : BiomeClimate {
-        return self::$climates[$biome] ?? self::$default;
-    }
-
     public static function getBiomeTemperature(int $biome) : float {
         return self::get($biome)->getTemperature();
     }
 
-    public static function getBiomeHumidity(int $biome) : float {
-        return self::get($biome)->getHumidity();
+    public static function get(int $biome) : BiomeClimate {
+        return self::$climates[$biome] ?? self::$default;
     }
 
     public static function isWet(int $biome) : bool {
         return self::getBiomeHumidity($biome) > 0.85;
     }
 
-    public static function isCold(int $biome, int $x, int $y, int $z) : bool {
-        return self::getVariatedTemperature($biome, $x, $y, $z) < 0.15;
+    public static function getBiomeHumidity(int $biome) : float {
+        return self::get($biome)->getHumidity();
+    }
+
+    public static function isSnowy(int $biome, int $x, int $y, int $z) : bool {
+        return self::get($biome)->isRainy() && self::isCold($biome, $x, $y, $z);
     }
 
     public static function isRainy(int $biome, int $x, int $y, int $z) : bool {
         return self::get($biome)->isRainy() && !self::isCold($biome, $x, $y, $z);
     }
 
-    public static function isSnowy(int $biome, int $x, int $y, int $z) : bool {
-        return self::get($biome)->isRainy() && self::isCold($biome, $x, $y, $z);
+    public static function isCold(int $biome, int $x, int $y, int $z) : bool {
+        return self::getVariatedTemperature($biome, $x, $y, $z) < 0.15;
     }
 
     private static function getVariatedTemperature(int $biome, int $x, int $y, int $z) : float {

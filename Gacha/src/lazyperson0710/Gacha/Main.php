@@ -15,6 +15,19 @@ class Main extends PluginBase {
     use SingletonTrait;
 
     /**
+     * @return void
+     */
+    protected function onEnable() : void {
+        GachaItemAPI::getInstance()->init();
+        $this->getServer()->getCommandMap()->registerAll('Gacha', [
+            new GachaCommand(),
+        ]);
+        if ($this->checkChance() === false) {
+            throw new Error('Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します');
+        }
+    }
+
+    /**
      * @return bool
      */
     public function checkChance() : bool {
@@ -30,19 +43,6 @@ class Main extends PluginBase {
         }
         $this->getLogger()->info('正常に確率が計算されました');
         return true;
-    }
-
-    /**
-     * @return void
-     */
-    protected function onEnable() : void {
-        GachaItemAPI::getInstance()->init();
-        $this->getServer()->getCommandMap()->registerAll('Gacha', [
-            new GachaCommand(),
-        ]);
-        if ($this->checkChance() === false) {
-            throw new Error('Gacha : 確率が100%でないガチャが存在する為、プラグインを停止します');
-        }
     }
 
 }

@@ -130,13 +130,6 @@ class PickaxeDestructionRange {
         return $dropItems;
     }
 
-    public function toolDamageProcessing(Player $player, Durable $handItem) : void {
-        if ($player->getGamemode() !== GameMode::CREATIVE()) {
-            $handItem->applyDamage(1);
-            $player->getInventory()->setItemInHand($handItem);
-        }
-    }
-
     /**
      * trueが返ってきたら破壊処理を続行する
      * falseが返ってきたら破壊処理を中断する
@@ -164,6 +157,13 @@ class PickaxeDestructionRange {
             }
         }
         return true;
+    }
+
+    public function toolDamageProcessing(Player $player, Durable $handItem) : void {
+        if ($player->getGamemode() !== GameMode::CREATIVE()) {
+            $handItem->applyDamage(1);
+            $player->getInventory()->setItemInHand($handItem);
+        }
     }
 
 }

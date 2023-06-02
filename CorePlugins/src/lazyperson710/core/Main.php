@@ -62,10 +62,6 @@ class Main extends PluginBase {
     private static Main $instance;
     public int $entityRemoveTimeLeft;
 
-    public static function getInstance() : Main {
-        return self::$instance;
-    }
-
     protected function onEnable() : void {
         self::$instance = $this;
         $this->entityRemoveTimeLeft = self::EntityRemoveTaskInterval;
@@ -108,6 +104,10 @@ class Main extends PluginBase {
         $this->getScheduler()->scheduleRepeatingTask(new ParticleTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new EntityRemoveTask(), 20);
         $this->getScheduler()->scheduleRepeatingTask(new MotdTask($this->getServer()->getMotd(), '§c>> §bナマケモノ§eサーバー'), 200);
+    }
+
+    public static function getInstance() : Main {
+        return self::$instance;
     }
 
     private function defaultItemNameChange() : void {

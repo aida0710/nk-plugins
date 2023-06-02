@@ -130,6 +130,13 @@ class Lake extends TerrainObject {
     /**
      * @param int[] $lakeMap
      */
+    private function setLakeBlock(array &$lakeMap, int $x, int $y, int $z) : void {
+        $lakeMap[($x * self::MAX_DIAMETER_INT + $z) * self::MAX_HEIGHT_INT + $y] = 1;
+    }
+
+    /**
+     * @param int[] $lakeMap
+     */
     private function canPlace(array $lakeMap, ChunkManager $world, int $sourceX, int $sourceY, int $sourceZ) : bool {
         $ice = VanillaBlocks::ICE()->getFullId();
         for ($x = 0; $x < self::MAX_DIAMETER; ++$x) {
@@ -163,13 +170,6 @@ class Lake extends TerrainObject {
      */
     private function isLakeBlock(array $lakeMap, int $x, int $y, int $z) : bool {
         return ($lakeMap[($x * self::MAX_DIAMETER_INT + $z) * self::MAX_HEIGHT_INT + $y] ?? 0) !== 0;
-    }
-
-    /**
-     * @param int[] $lakeMap
-     */
-    private function setLakeBlock(array &$lakeMap, int $x, int $y, int $z) : void {
-        $lakeMap[($x * self::MAX_DIAMETER_INT + $z) * self::MAX_HEIGHT_INT + $y] = 1;
     }
 }
 

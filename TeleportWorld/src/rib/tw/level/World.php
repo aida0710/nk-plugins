@@ -19,16 +19,16 @@ class World {
         return $this->worlds_name;
     }
 
+    private function update() : void {
+        $this->worlds_name = array_diff(scandir('./worlds'), ['.', '..']);
+    }
+
     public function teleport(Player $player, string $name) : void {
         if (!$this->loadWorld($name)) {
             throw new LevelNotFoundException($name);
         }
         $world = $this->getWorld($name);
         $player->teleport($world->getSpawnLocation());
-    }
-
-    private function update() : void {
-        $this->worlds_name = array_diff(scandir('./worlds'), ['.', '..']);
     }
 
     private function loadWorld(string $name) : bool {

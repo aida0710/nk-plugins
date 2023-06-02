@@ -52,6 +52,10 @@ class Vector3Argument extends BaseArgument {
         return false;
     }
 
+    public function isValidCoordinate(string $coordinate, bool $locatable) : bool {
+        return (bool) preg_match('/^(?:' . ($locatable ? '(?:~-|~\+)?' : '') . '-?(?:\d+|\d*\.\d+))' . ($locatable ? '|~' : '') . '$/', $coordinate);
+    }
+
     public function getNetworkType() : int {
         return AvailableCommandsPacket::ARG_TYPE_POSITION;
     }
@@ -89,9 +93,5 @@ class Vector3Argument extends BaseArgument {
             $vals[] = (float) $coord + (float) $offset;
         }
         return new Vector3(...$vals);
-    }
-
-    public function isValidCoordinate(string $coordinate, bool $locatable) : bool {
-        return (bool) preg_match('/^(?:' . ($locatable ? '(?:~-|~\+)?' : '') . '-?(?:\d+|\d*\.\d+))' . ($locatable ? '|~' : '') . '$/', $coordinate);
     }
 }

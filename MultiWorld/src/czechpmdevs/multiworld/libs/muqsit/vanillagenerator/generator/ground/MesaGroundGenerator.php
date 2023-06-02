@@ -132,21 +132,6 @@ class MesaGroundGenerator extends GroundGenerator {
         }
     }
 
-    private function setColoredGroundLayer(ChunkManager $world, int $x, int $y, int $z, int $color) : void {
-        $world->setBlockAt($x, $y, $z, $color >= 0 ? BlockFactory::getInstance()->get(BlockLegacyIds::STAINED_CLAY, $color) : VanillaBlocks::HARDENED_CLAY());
-    }
-
-    private function setRandomLayerColor(Random $random, int $minLayerCount, int $minLayerHeight, int $color) : void {
-        for ($i = 0; $i < $random->nextBoundedInt(4) + $minLayerCount; ++$i) {
-            $j = $random->nextBoundedInt(count($this->colorLayer));
-            $k = 0;
-            while ($k < $random->nextBoundedInt(3) + $minLayerHeight && $j < count($this->colorLayer)) {
-                $this->colorLayer[$j++] = $color;
-                ++$k;
-            }
-        }
-    }
-
     private function initializeColorLayers(Random $random) : void {
         foreach ($this->colorLayer as $k => $_) {
             $this->colorLayer[$k] = -1; // hard clay, other values are stained clay
@@ -173,5 +158,20 @@ class MesaGroundGenerator extends GroundGenerator {
                 $this->colorLayer[$j] = 0; // white
             }
         }
+    }
+
+    private function setRandomLayerColor(Random $random, int $minLayerCount, int $minLayerHeight, int $color) : void {
+        for ($i = 0; $i < $random->nextBoundedInt(4) + $minLayerCount; ++$i) {
+            $j = $random->nextBoundedInt(count($this->colorLayer));
+            $k = 0;
+            while ($k < $random->nextBoundedInt(3) + $minLayerHeight && $j < count($this->colorLayer)) {
+                $this->colorLayer[$j++] = $color;
+                ++$k;
+            }
+        }
+    }
+
+    private function setColoredGroundLayer(ChunkManager $world, int $x, int $y, int $z, int $color) : void {
+        $world->setBlockAt($x, $y, $z, $color >= 0 ? BlockFactory::getInstance()->get(BlockLegacyIds::STAINED_CLAY, $color) : VanillaBlocks::HARDENED_CLAY());
     }
 }

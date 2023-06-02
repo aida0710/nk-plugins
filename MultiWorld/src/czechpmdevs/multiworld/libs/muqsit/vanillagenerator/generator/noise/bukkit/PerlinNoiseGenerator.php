@@ -8,31 +8,8 @@ class PerlinNoiseGenerator extends BasePerlinNoiseGenerator {
 
     private static ?PerlinNoiseGenerator $instance;
 
-    /**
-     * Gets the singleton unseeded instance of this generator
-     */
-    public static function getInstance() : PerlinNoiseGenerator {
-        return self::$instance ??= new PerlinNoiseGenerator();
-    }
-
     public static function getNoise3d(float $x, float $y = 0.0, float $z = 0.0) : float {
         return self::getInstance()->noise3d($x, $y, $z);
-    }
-
-    /**
-     * Generates noise for the 3D coordinates using the specified number of
-     * octaves and parameters
-     *
-     * @param float $x         X-coordinate
-     * @param float $y         Y-coordinate
-     * @param float $z         Z-coordinate
-     * @param int   $octaves   Number of octaves to use
-     * @param float $frequency How much to alter the frequency by each octave
-     * @param float $amplitude How much to alter the amplitude by each octave
-     * @return float resulting noise
-     */
-    public static function getNoise(float $x, float $y, float $z, int $octaves, float $frequency, float $amplitude) : float {
-        return self::getInstance()->noise($x, $y, $z, $octaves, $frequency, $amplitude);
     }
 
     public function noise3d(float $x, float $y = 0.0, float $z = 0.0) : float {
@@ -69,6 +46,29 @@ class PerlinNoiseGenerator extends BasePerlinNoiseGenerator {
                 self::grad($this->perm[$BA + 1], $x - 1, $y, $z - 1)),
                 self::lerp($fX, self::grad($this->perm[$AB + 1], $x, $y - 1, $z - 1),
                     self::grad($this->perm[$BB + 1], $x - 1, $y - 1, $z - 1))));
+    }
+
+    /**
+     * Gets the singleton unseeded instance of this generator
+     */
+    public static function getInstance() : PerlinNoiseGenerator {
+        return self::$instance ??= new PerlinNoiseGenerator();
+    }
+
+    /**
+     * Generates noise for the 3D coordinates using the specified number of
+     * octaves and parameters
+     *
+     * @param float $x         X-coordinate
+     * @param float $y         Y-coordinate
+     * @param float $z         Z-coordinate
+     * @param int   $octaves   Number of octaves to use
+     * @param float $frequency How much to alter the frequency by each octave
+     * @param float $amplitude How much to alter the amplitude by each octave
+     * @return float resulting noise
+     */
+    public static function getNoise(float $x, float $y, float $z, int $octaves, float $frequency, float $amplitude) : float {
+        return self::getInstance()->noise($x, $y, $z, $octaves, $frequency, $amplitude);
     }
 
     /**

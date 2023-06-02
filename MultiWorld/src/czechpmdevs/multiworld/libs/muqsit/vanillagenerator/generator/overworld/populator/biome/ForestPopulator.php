@@ -27,10 +27,6 @@ class ForestPopulator extends BiomePopulator {
     private static array $DOUBLE_PLANTS;
     protected int $doublePlantLoweringAmount = 3;
 
-    public function getBiomes() : ?array {
-        return self::BIOMES;
-    }
-
     public static function init() : void {
         parent::init();
         self::$DOUBLE_PLANTS = [
@@ -40,18 +36,15 @@ class ForestPopulator extends BiomePopulator {
         ];
     }
 
-    protected function initPopulators() : void {
-        $this->doublePlantDecorator->setAmount(0);
-        $this->treeDecorator->setAmount(10);
-        $this->treeDecorator->setTrees(...self::$TREES);
-        $this->tallGrassDecorator->setAmount(2);
-    }
-
     protected static function initTrees() : void {
         self::$TREES = [
             new TreeDecoration(GenericTree::class, 4),
             new TreeDecoration(BirchTree::class, 1),
         ];
+    }
+
+    public function getBiomes() : ?array {
+        return self::BIOMES;
     }
 
     public function populateOnGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
@@ -72,6 +65,13 @@ class ForestPopulator extends BiomePopulator {
             }
         }
         parent::populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
+    }
+
+    protected function initPopulators() : void {
+        $this->doublePlantDecorator->setAmount(0);
+        $this->treeDecorator->setAmount(10);
+        $this->treeDecorator->setTrees(...self::$TREES);
+        $this->tallGrassDecorator->setAmount(2);
     }
 }
 

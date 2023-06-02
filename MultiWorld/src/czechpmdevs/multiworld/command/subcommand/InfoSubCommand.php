@@ -58,11 +58,6 @@ class InfoSubCommand extends BaseSubCommand {
         }
     }
 
-    protected function prepare() : void {
-        $this->registerArgument(0, new RawStringArgument('worldName', true));
-        $this->setPermission('multiworld.command.info');
-    }
-
     private function getInfoMessage(CommandSender $sender, World $world) : string {
         return LanguageManager::translateMessage($sender, 'info', [$world->getDisplayName()]) . "\n" .
             LanguageManager::translateMessage($sender, 'info-name', [$world->getDisplayName()]) . "\n" .
@@ -71,5 +66,10 @@ class InfoSubCommand extends BaseSubCommand {
             LanguageManager::translateMessage($sender, 'info-generator', [$world->getProvider()->getWorldData()->getGenerator()]) . "\n" .
             LanguageManager::translateMessage($sender, 'info-seed', [(string) $world->getSeed()]) . "\n" .
             LanguageManager::translateMessage($sender, 'info-time', [(string) $world->getTime()]);
+    }
+
+    protected function prepare() : void {
+        $this->registerArgument(0, new RawStringArgument('worldName', true));
+        $this->setPermission('multiworld.command.info');
     }
 }

@@ -23,14 +23,6 @@ class AddTicketListener implements Listener {
         $this->addItem($ev->getPlayer(), (new YomogiGachaTicket())->init());
     }
 
-    /**
-     * @ignoreCancelled
-     */
-    public function onBlockPlace(BlockPlaceEvent $ev) : void {
-        if (mt_rand(1, 550) !== 1) return;
-        $this->addItem($ev->getPlayer(), (new YomogiGachaTicket())->init());
-    }
-
     private function addItem(Player $player, Item $item) : void {
         $inv = $player->getInventory();
         $player->sendMessage(TextFormat::GREEN . TextFormat::BOLD . 'よもぎガチャチケットを獲得した！');
@@ -41,5 +33,13 @@ class AddTicketListener implements Listener {
         $loc = $player->getLocation();
         $loc->getWorld()->dropItem($loc, $item);
         $player->sendMessage(TextFormat::YELLOW . 'インベントリがいっぱいのため、チケットを落としてしまった！');
+    }
+
+    /**
+     * @ignoreCancelled
+     */
+    public function onBlockPlace(BlockPlaceEvent $ev) : void {
+        if (mt_rand(1, 550) !== 1) return;
+        $this->addItem($ev->getPlayer(), (new YomogiGachaTicket())->init());
     }
 }

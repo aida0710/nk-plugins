@@ -9,8 +9,6 @@ use lazyperson0710\miningtools\eventListener\BreakEventListener;
 use lazyperson0710\miningtools\eventListener\JoinEventListener;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
-use function file_get_contents;
-use function json_decode;
 
 class Main extends PluginBase implements Listener {
 
@@ -24,14 +22,6 @@ class Main extends PluginBase implements Listener {
     public array $config;
     private array $allData;
 
-    public static function getInstance() : Main {
-        return self::$instance;
-    }
-
-    public function dataAcquisition($tools) : array {
-        return $this->allData[0][$tools];
-    }
-
     protected function onEnable() : void {
         $this->saveResource('config.json');
         $this->getServer()->getPluginManager()->registerEvents(new BreakEventListener(), $this);
@@ -42,6 +32,14 @@ class Main extends PluginBase implements Listener {
         $this->allData = json_decode(file_get_contents($this->getDataFolder() . 'config.json'), true);
         self::$diamond = Main::getInstance()->dataAcquisition('diamond');
         self::$netherite = Main::getInstance()->dataAcquisition('netherite');
+    }
+
+    public function dataAcquisition($tools) : array {
+        return $this->allData[0][$tools];
+    }
+
+    public static function getInstance() : Main {
+        return self::$instance;
     }
 
     protected function onLoad() : void {

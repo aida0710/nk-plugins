@@ -15,6 +15,12 @@ class BirchForestPopulator extends ForestPopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
+    protected static function initTrees() : void {
+        self::$TREES = [
+            new TreeDecoration(BirchTree::class, 1),
+        ];
+    }
+
     public function getBiomes() : ?array {
         return self::BIOMES;
     }
@@ -23,12 +29,6 @@ class BirchForestPopulator extends ForestPopulator {
         $this->treeDecorator->setAmount(10);
         $this->treeDecorator->setTrees(...self::$TREES);
         $this->tallGrassDecorator->setAmount(2);
-    }
-
-    protected static function initTrees() : void {
-        self::$TREES = [
-            new TreeDecoration(BirchTree::class, 1),
-        ];
     }
 }
 

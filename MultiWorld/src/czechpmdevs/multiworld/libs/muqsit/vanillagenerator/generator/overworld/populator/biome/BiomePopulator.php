@@ -103,6 +103,34 @@ class BiomePopulator implements Populator {
         $this->initPopulators();
     }
 
+    protected function initPopulators() : void {
+        $this->waterLakeDecorator->setAmount(1);
+        $this->lavaLakeDecorator->setAmount(1);
+        $this->surfaceCaveDecorator->setAmount(1);
+        $this->sandPatchDecorator->setAmount(3);
+        $this->sandPatchDecorator->setRadii(7, 2);
+        $this->sandPatchDecorator->setOverridableBlocks(VanillaBlocks::DIRT(), VanillaBlocks::GRASS());
+        $this->clayPatchDecorator->setAmount(1);
+        $this->clayPatchDecorator->setRadii(4, 1);
+        $this->clayPatchDecorator->setOverridableBlocks(VanillaBlocks::DIRT());
+        $this->gravelPatchDecorator->setAmount(1);
+        $this->gravelPatchDecorator->setRadii(6, 2);
+        $this->gravelPatchDecorator->setOverridableBlocks(VanillaBlocks::DIRT(), VanillaBlocks::GRASS());
+        $this->doublePlantDecorator->setAmount(0);
+        $this->treeDecorator->setAmount(PHP_INT_MIN);
+        $this->treeDecorator->setTrees(...self::$TREES);
+        $this->flowerDecorator->setAmount(2);
+        $this->flowerDecorator->setFlowers(...self::$FLOWERS);
+        $this->tallGrassDecorator->setAmount(1);
+        $this->deadBushDecorator->setAmount(0);
+        $this->brownMushroomDecorator->setAmount(1);
+        $this->brownMushroomDecorator->setDensity(0.25);
+        $this->redMushroomDecorator->setAmount(1);
+        $this->redMushroomDecorator->setDensity(0.125);
+        $this->sugarCaneDecorator->setAmount(10);
+        $this->cactusDecorator->setAmount(0);
+    }
+
     public static function init() : void {
         static::initTrees();
         static::initFlowers();
@@ -135,34 +163,6 @@ class BiomePopulator implements Populator {
     public function populate(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {
         $this->populateInGround($world, $random, $chunkX, $chunkZ, $chunk);
         $this->populateOnGround($world, $random, $chunkX, $chunkZ, $chunk);
-    }
-
-    protected function initPopulators() : void {
-        $this->waterLakeDecorator->setAmount(1);
-        $this->lavaLakeDecorator->setAmount(1);
-        $this->surfaceCaveDecorator->setAmount(1);
-        $this->sandPatchDecorator->setAmount(3);
-        $this->sandPatchDecorator->setRadii(7, 2);
-        $this->sandPatchDecorator->setOverridableBlocks(VanillaBlocks::DIRT(), VanillaBlocks::GRASS());
-        $this->clayPatchDecorator->setAmount(1);
-        $this->clayPatchDecorator->setRadii(4, 1);
-        $this->clayPatchDecorator->setOverridableBlocks(VanillaBlocks::DIRT());
-        $this->gravelPatchDecorator->setAmount(1);
-        $this->gravelPatchDecorator->setRadii(6, 2);
-        $this->gravelPatchDecorator->setOverridableBlocks(VanillaBlocks::DIRT(), VanillaBlocks::GRASS());
-        $this->doublePlantDecorator->setAmount(0);
-        $this->treeDecorator->setAmount(PHP_INT_MIN);
-        $this->treeDecorator->setTrees(...self::$TREES);
-        $this->flowerDecorator->setAmount(2);
-        $this->flowerDecorator->setFlowers(...self::$FLOWERS);
-        $this->tallGrassDecorator->setAmount(1);
-        $this->deadBushDecorator->setAmount(0);
-        $this->brownMushroomDecorator->setAmount(1);
-        $this->brownMushroomDecorator->setDensity(0.25);
-        $this->redMushroomDecorator->setAmount(1);
-        $this->redMushroomDecorator->setDensity(0.125);
-        $this->sugarCaneDecorator->setAmount(10);
-        $this->cactusDecorator->setAmount(0);
     }
 
     protected function populateInGround(ChunkManager $world, Random $random, int $chunkX, int $chunkZ, Chunk $chunk) : void {

@@ -25,13 +25,6 @@ class MiningLevelAPI {
     private function __construct() {
     }
 
-    public static function getInstance() : MiningLevelAPI {
-        if (!isset(self::$instance)) {
-            self::$instance = new MiningLevelAPI();
-        }
-        return self::$instance;
-    }
-
     public function init(MiningLevelSystem $plugin) {
         $this->db = new SQLiteDatabase($plugin);
         $this->databasefile = $plugin->getDataFolder() . 'level.db';
@@ -49,6 +42,13 @@ class MiningLevelAPI {
         if ($this->playerDataExists($player)) {
             $this->db->setData($player, $level, $exp, $upexp);
         }
+    }
+
+    private function convert2lower(string|Player $player) : string {
+        if ($player instanceof Player) {
+            $player = $player->getName();
+        }
+        return strtolower($player);
     }
 
     /**
@@ -185,6 +185,13 @@ class MiningLevelAPI {
         return $list;
     }
 
+    public static function getInstance() : MiningLevelAPI {
+        if (!isset(self::$instance)) {
+            self::$instance = new MiningLevelAPI();
+        }
+        return self::$instance;
+    }
+
     public function writecache(?string $name = null) : void {
         $asyncexecutor = new AsyncDataWriteTask($this->cache, $this->databasefile, $name);
         Server::getInstance()->getAsyncPool()->submitTask($asyncexecutor);
@@ -193,12 +200,5 @@ class MiningLevelAPI {
     public function clearCache($player) : void {
         $player = $this->convert2lower($player);
         unset($this->cache[$player]);
-    }
-
-    private function convert2lower(string|Player $player) : string {
-        if ($player instanceof Player) {
-            $player = $player->getName();
-        }
-        return strtolower($player);
     }
 }

@@ -23,15 +23,15 @@ class ModeList {
         );
     }
 
-    public function register(Mode $mode) : self {
-        $this->modes[$mode->getId()] = $mode;
-        return $this;
-    }
-
     public function registerAll(Mode ...$modes) {
         foreach ($modes as $mode) {
             $this->register($mode);
         }
+    }
+
+    public function register(Mode $mode) : self {
+        $this->modes[$mode->getId()] = $mode;
+        return $this;
     }
 
     public function get(int $id) : Mode {

@@ -19,16 +19,6 @@ class RoofedForestPopulator extends ForestPopulator {
     /** @var TreeDecoration[] */
     protected static array $TREES;
 
-    public function getBiomes() : ?array {
-        return self::BIOMES;
-    }
-
-    protected function initPopulators() : void {
-        $this->treeDecorator->setAmount(50);
-        $this->treeDecorator->setTrees(...self::$TREES);
-        $this->tallGrassDecorator->setAmount(4);
-    }
-
     protected static function initTrees() : void {
         self::$TREES = [
             new TreeDecoration(GenericTree::class, 20),
@@ -37,6 +27,16 @@ class RoofedForestPopulator extends ForestPopulator {
             new TreeDecoration(BrownMushroomTree::class, 2),
             new TreeDecoration(DarkOakTree::class, 50),
         ];
+    }
+
+    public function getBiomes() : ?array {
+        return self::BIOMES;
+    }
+
+    protected function initPopulators() : void {
+        $this->treeDecorator->setAmount(50);
+        $this->treeDecorator->setTrees(...self::$TREES);
+        $this->tallGrassDecorator->setAmount(4);
     }
 }
 

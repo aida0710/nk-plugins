@@ -35,20 +35,6 @@ class BigOakTree extends GenericTree {
         $this->maxLeafDistance = $distance;
     }
 
-    public function canPlace(int $baseX, int $baseY, int $baseZ, ChunkManager $world) : bool {
-        $from = new Vector3($baseX, $baseY, $baseZ);
-        $to = new Vector3($baseX, $baseY + $this->height - 1, $baseZ);
-        $blocks = $this->countAvailableBlocks($from, $to, $world);
-        if ($blocks === -1) {
-            return true;
-        }
-        if ($blocks > 5) {
-            $this->height = $blocks;
-            return true;
-        }
-        return false;
-    }
-
     public function generate(ChunkManager $world, Random $random, int $sourceX, int $sourceY, int $sourceZ) : bool {
         if (!$this->canPlaceOn($world->getBlockAt($sourceX, $sourceY - 1, $sourceZ)) || !$this->canPlace($sourceX, $sourceY, $sourceZ, $world)) {
             return false;
@@ -106,6 +92,20 @@ class BigOakTree extends GenericTree {
             }
         }
         return true;
+    }
+
+    public function canPlace(int $baseX, int $baseY, int $baseZ, ChunkManager $world) : bool {
+        $from = new Vector3($baseX, $baseY, $baseZ);
+        $to = new Vector3($baseX, $baseY + $this->height - 1, $baseZ);
+        $blocks = $this->countAvailableBlocks($from, $to, $world);
+        if ($blocks === -1) {
+            return true;
+        }
+        if ($blocks > 5) {
+            $this->height = $blocks;
+            return true;
+        }
+        return false;
     }
 
     private function countAvailableBlocks(Vector3 $from, Vector3 $to, ChunkManager $world) : int {

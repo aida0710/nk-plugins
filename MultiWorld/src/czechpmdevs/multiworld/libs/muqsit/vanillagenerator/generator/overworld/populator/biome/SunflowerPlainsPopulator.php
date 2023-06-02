@@ -13,15 +13,15 @@ class SunflowerPlainsPopulator extends PlainsPopulator {
     /** @var DoublePlantDecoration[] */
     private static array $DOUBLE_PLANTS;
 
-    public function getBiomes() : ?array {
-        return [BiomeIds::SUNFLOWER_PLAINS];
-    }
-
     public static function init() : void {
         parent::init();
         self::$DOUBLE_PLANTS = [
             new DoublePlantDecoration(VanillaBlocks::SUNFLOWER(), 1),
         ];
+    }
+
+    public function getBiomes() : ?array {
+        return [BiomeIds::SUNFLOWER_PLAINS];
     }
 
     protected function initPopulators() : void {

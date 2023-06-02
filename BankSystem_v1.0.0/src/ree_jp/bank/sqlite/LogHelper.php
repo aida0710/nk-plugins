@@ -29,18 +29,6 @@ class LogHelper implements ILogHelper {
     /**
      * @inheritDoc
      */
-    public function addLog(string $bank, string $message) : void {
-        if (!$this->isExists($bank)) $this->setTable($bank);
-        $time = time();
-        $stmt = $this->db->prepare("INSERT INTO [${bank}] VALUES (:time, :message)");
-        $stmt->bindValue(':time', $time, SQLITE3_INTEGER);
-        $stmt->bindParam(':message', $message, SQLITE3_TEXT);
-        $stmt->execute();
-    }
-
-    /**
-     * @inheritDoc
-     */
     static function getInstance() : LogHelper {
         if (self::$instance === null) self::$instance = new LogHelper(BankPlugin::getInstance()->getDataFolder() . 'log.db');
         return self::$instance;
@@ -49,12 +37,13 @@ class LogHelper implements ILogHelper {
     /**
      * @inheritDoc
      */
-    public function getLog(string $bank) : ResultLog {
-        if (!$this->isExists($bank)) return null;
-        $result = $this->db->query("SELECT * FROM [${bank}]");
-        $logs = [];
-        while ($array = $result->fetchArray(SQLITE3_ASSOC)) $logs[] = $array;
-        return ResultLog::createResult($bank, $logs);
+    public function addLog(string $bank, string $message) : void {
+        if (!$this->isExists($bank)) $this->setTable($bank);
+        $time = time();
+        $stmt = $this->db->prepare("INSERT INTO [${bank}] VALUES (:time, :message)");
+        $stmt->bindValue(':time', $time, SQLITE3_INTEGER);
+        $stmt->bindParam(':message', $message, SQLITE3_TEXT);
+        $stmt->execute();
     }
 
     /**
@@ -68,5 +57,16 @@ class LogHelper implements ILogHelper {
 
     private function setTable(string $bank) : void {
         $this->db->exec("CREATE TABLE IF NOT EXISTS [${bank}] (time INTEGER NOT NULL , message TEXT NOT NULL)");
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getLog(string $bank) : ResultLog {
+        if (!$this->isExists($bank)) return null;
+        $result = $this->db->query("SELECT * FROM [${bank}]");
+        $logs = [];
+        while ($array = $result->fetchArray(SQLITE3_ASSOC)) $logs[] = $array;
+        return ResultLog::createResult($bank, $logs);
     }
 }

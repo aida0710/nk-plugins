@@ -11,10 +11,6 @@ class BossBarColorSetting extends Setting {
 
     protected int $value;
 
-    public function getFallbackValue() : int {
-        return BossBarColor::PINK;
-    }
-
     public static function getName() : string {
         return 'BossBarColor';
     }
@@ -25,5 +21,9 @@ class BossBarColorSetting extends Setting {
 
     public function setValue(mixed $value) : void {
         $this->value = $value;
+    }
+
+    public function getFallbackValue() : int {
+        return BossBarColor::PINK;
     }
 }
