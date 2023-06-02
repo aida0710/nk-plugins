@@ -15,6 +15,7 @@ use pocketmine\player\Player;
 use function in_array;
 
 class PlayerTeleportEvent implements Listener {
+    //todo バグ修正
 
 	/**
 	 * @priority HIGH
@@ -42,15 +43,20 @@ class PlayerTeleportEvent implements Listener {
 				return;
 			}
 			if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::LifeWorld, true)) {
-				SendMessage::Send($player, "建築ワールド\n§7>> §aこのワールドは建築が可能なワールドになります\n§7>> §a/landを実行して土地を購入してください\n§7>> §aまた、道路の購入は規約違反となりますのでご注意ください", '§bWorld', true);
-				if ($event->getTo()->getWorld()->getDisplayName() === '船橋市-c') {
-					SendMessage::Send($player, 'また、購入範囲が明確にわかるようにしてください', "§7>> §a船橋市は大きく景観を損なう行為を禁止させていただいております。例:露天掘りや大規模な整地など\n", true);
-				}
-				if ($event->getTo()->getWorld()->getDisplayName() === '横浜市-c') {
-					SendMessage::Send($player, '半分だけなどの購入のされ方をした場合、無断で土地を削除させていただきます', "§7>> §a横浜市は土地を買う際必ず一区画購入するようにしてください\n", true);
-				}
-				return;
-			}
+                SendMessage::Send($player,
+                    "建築ワールド\n
+                    §7>> §aこのワールドは建築が可能なワールドになります\n
+                    §7>> §a/landを実行して土地を購入してください\n
+                    §7>> §aまた、道路の購入は規約違反となりますのでご注意ください",
+                    '§bWorld', true);
+                if ($event->getTo()->getWorld()->getDisplayName() === '船橋市-c') {
+                    SendMessage::Send($player, 'また、購入範囲が明確にわかるようにしてください', "§7>> §a船橋市は大きく景観を損なう行為を禁止させていただいております。例:露天掘りや大規模な整地など\n", true);
+                }
+                if ($event->getTo()->getWorld()->getDisplayName() === '横浜市-c') {
+                    SendMessage::Send($player, '半分だけなどの購入のされ方をした場合、無断で土地を削除させていただきます', "§7>> §a横浜市は土地を買う際必ず一区画購入するようにしてください\n", true);
+                }
+                return;
+            }
 			if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::AgricultureWorld, true)) {
 				SendMessage::Send($player, "農業ワールド\n§7>> §aこのワールドは農業が可能なワールドになります\n§7>> §a/landを実行して土地を購入してください", '§bWorld', true);
 				if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::UniqueAgricultureWorld, true)) {
