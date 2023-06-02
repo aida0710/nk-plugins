@@ -12,6 +12,7 @@ use lazyperson0710\miningtools\extensions\enchant\EnchantFunctionSelectForm;
 use lazyperson0710\miningtools\extensions\range\RangeConfirmForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson710\core\packet\SendForm;
+use lazyperson710\core\packet\SendMessage\SendBroadcastMessage;
 use lazyperson710\core\packet\SoundPacket;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\block\BlockLegacyIds;
@@ -125,8 +126,9 @@ class ConfirmationSettingForm extends CustomForm {
 		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost['enchantItem'], EnchantFunctionSelectForm::CostItemId, EnchantFunctionSelectForm::CostItemNBT) === false) throw new Error('不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/111');
 		if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost['settingItem'], self::CostItemId, self::CostItemNBT) === false) throw new Error('不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/112');
 		PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting($settingName)->setValue(true);
-		SendForm::Send($player, new SelectEnablingSettings($player, "§a{$settingName}を有効化しました"));
-		SoundPacket::Send($player, 'note.harp');
+        SendForm::Send($player, new SelectEnablingSettings($player, "§a{$settingName}を有効化しました"));
+        SendBroadcastMessage::Send("§a{$player->getName()}が{$settingName}を有効化しました", 'MiningToolsSetting');
+        SoundPacket::Send($player, 'note.harp');
 	}
 
 }
