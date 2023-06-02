@@ -6,15 +6,17 @@ namespace lazyperson0710\shop\form\item_shop\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
-use lazyperson0710\shop\form\item_shop\ShopSelectForm;
-use lazyperson710\core\packet\SendForm;
+use lazyperson0710\shop\form\item_shop\CategorySelectForm;
+use lazyperson0710\shop\form\item_shop\future\LevelCheck;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
 
-class FirstBackFormButton extends Button {
+class CategoryBackFormButton extends Button {
 
     public function __construct(
         string $text,
+        private int $shopNumber,
+        private int $restrictionLevel,
         ?ButtonImage $image = null,
     ) {
         parent::__construct($text, $image);
@@ -22,6 +24,6 @@ class FirstBackFormButton extends Button {
 
     public function handleSubmit(Player $player) : void {
         SoundPacket::Send($player, 'mob.shulker.close');
-        SendForm::Send($player, (new ShopSelectForm($player)));
+        LevelCheck::sendForm($player, (new CategorySelectForm($player, $this->shopNumber)), $this->restrictionLevel);
     }
 }

@@ -6,24 +6,22 @@ namespace lazyperson0710\shop\form\item_shop\other;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
-use lazyperson0710\shop\form\item_shop\future\ShopText;
-use lazyperson0710\ShopSystem\form\levelShop\other\InvSell\LevelShopAPI;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\item\ItemIds;
 use pocketmine\player\Player;
 
-class InvSellResultForm extends SimpleForm implements ShopText {
+class InvSellResultForm extends SimpleForm {
 
-	public function __construct(int $allCount, int $allSellMoney, string $allItem, int $insufficientLevelAllCount, string $insufficientLevelAllItem) {
-		$this
-			->setTitle(self::TITLE)
-			->setText("下記のアイテムを売却しても本当によろしいでしょうか？\n\n売却合計金額 {$allSellMoney}円\n売却アイテム合計数 {$allCount}個\n\n売却アイテム一覧\n{$allItem}\nレベル不足で売却ができないアイテム合計数 {$insufficientLevelAllCount}個\nレベル不足で売却ができないアイテム一覧\n{$insufficientLevelAllItem}")
-			->addElement(new Button('はい'));
-	}
+    public function __construct(int $allCount, int $allSellMoney, string $allItem, int $insufficientLevelAllCount, string $insufficientLevelAllItem) {
+        $this
+            ->setTitle('Item Shop')
+            ->setText("下記のアイテムを売却しても本当によろしいでしょうか？\n\n売却合計金額 {$allSellMoney}円\n売却アイテム合計数 {$allCount}個\n\n売却アイテム一覧\n{$allItem}\nレベル不足で売却ができないアイテム合計数 {$insufficientLevelAllCount}個\nレベル不足で売却ができないアイテム一覧\n{$insufficientLevelAllItem}")
+            ->addElement(new Button('はい'));
+    }
 
-	public function handleSubmit(Player $player) : void {
-		$inventory = $player->getInventory();
+    public function handleSubmit(Player $player) : void {
+        $inventory = $player->getInventory();
 		$allCount = 0;
 		$allSellMoney = 0;
 		for ($i = 0, $size = $inventory->getSize(); $i < $size; ++$i) {

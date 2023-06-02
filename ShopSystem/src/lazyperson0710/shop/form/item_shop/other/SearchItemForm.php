@@ -7,7 +7,6 @@ namespace lazyperson0710\shop\form\item_shop\other;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
-use lazyperson0710\shop\form\item_shop\future\ShopText;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
@@ -15,17 +14,17 @@ use pocketmine\player\Player;
 use function preg_match;
 use function str_contains;
 
-class SearchItemForm extends CustomForm implements ShopText {
+class SearchItemForm extends CustomForm {
 
-	private Input $itemName;
+    private Input $itemName;
 
-	public function __construct(?string $msg = null) {
-		$this->itemName = new Input("{$msg}調べたいアイテムの名前を入力してください\n入力した値が含まれている名前のアイテムがすべて表示されます", '石');
-		$this
-			->setTitle(self::TITLE)
-			->addElements(
-				$this->itemName,
-			);
+    public function __construct(?string $msg = null) {
+        $this->itemName = new Input("{$msg}調べたいアイテムの名前を入力してください\n入力した値が含まれている名前のアイテムがすべて表示されます", '石');
+        $this
+            ->setTitle('Item Shop')
+            ->addElements(
+                $this->itemName,
+            );
 	}
 
 	public function handleSubmit(Player $player) : void {

@@ -6,15 +6,16 @@ namespace lazyperson0710\shop\form\item_shop\element;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\element\ButtonImage;
-use bbo51dog\bboform\form\FormBase;
+use lazyperson0710\shop\form\item_shop\CategorySelectForm;
 use lazyperson0710\shop\form\item_shop\future\LevelCheck;
+use lazyperson0710\shop\form\item_shop\other\OtherShopSelectForm;
 use pocketmine\player\Player;
 
-class SendMenuFormButton extends Button {
+class SendCategorySelectFormButton extends Button {
 
     public function __construct(
         string $text,
-        private FormBase $form,
+        private int $shopNumber,
         private int $restrictionLevel,
         ?ButtonImage $image = null,
     ) {
@@ -22,6 +23,10 @@ class SendMenuFormButton extends Button {
     }
 
     public function handleSubmit(Player $player) : void {
-        LevelCheck::sendForm($player, $this->form, $this->restrictionLevel);
+        if ($this->shopNumber === 0) {
+            LevelCheck::sendForm($player, new OtherShopSelectForm(), $this->restrictionLevel);
+            return;
+        }
+        LevelCheck::sendForm($player, new CategorySelectForm($player, $this->shopNumber), $this->restrictionLevel);
     }
 }

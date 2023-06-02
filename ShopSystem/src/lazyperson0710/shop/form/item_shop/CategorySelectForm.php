@@ -7,26 +7,26 @@ namespace lazyperson0710\shop\form\item_shop;
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\form\item_shop\element\FirstBackFormButton;
-use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
+use lazyperson0710\shop\form\item_shop\element\SendItemSelectFormButton;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\form\item_shop\future\ShopCategory;
-use lazyperson0710\shop\form\item_shop\future\ShopText;
 use pocketmine\player\Player;
 use function array_keys;
 
-class CategorySelectForm extends SimpleForm implements ShopText {
+class CategorySelectForm extends SimpleForm {
 
-	public function __construct(Player $player, int $shopNumber) {
-		$shopCategory = array_keys(ItemShopAPI::getInstance()->getCategory($shopNumber));
-		$restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($shopNumber);
-		$this
-			->setTitle(self::TITLE)
-			->setText(self::CONTENT);
-		foreach ($shopCategory as $category) {
-			$displayName = ShopCategory::getInstance()->getCategoryByDisplayName($category);
-			$this->addElement(new SendMenuFormButton($displayName, new ItemSelectForm($player, $shopNumber, $category), $restriction));
-		}
-		$this->addElement(new FirstBackFormButton('ショップ選択メニューに戻る'));
-	}
+    public function __construct(Player $player, int $shopNumber) {
+        var_dump('categorySelectForm');
+        $shopCategory = array_keys(ItemShopAPI::getInstance()->getCategory($shopNumber));
+        $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($shopNumber);
+        $this
+            ->setTitle('Item Shop')
+            ->setText('コンテンツを選択してください');
+        foreach ($shopCategory as $category) {
+            $displayName = ShopCategory::getInstance()->getCategoryByDisplayName($category);
+            $this->addElement(new SendItemSelectFormButton($displayName, $shopNumber, $category, $restriction));
+        }
+        $this->addElement(new FirstBackFormButton('ショップ選択メニューに戻る'));
+    }
 
 }
