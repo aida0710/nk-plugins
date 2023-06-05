@@ -6,11 +6,14 @@ namespace lazyperson0710\shop\form\item_shop;
 
 use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\ItemHoldingCalculation;
+use lazyperson0710\shop\form\item_shop\future\LevelCheck;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\object\ItemShopObject;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
+use pocketmine\utils\TextFormat;
 use ree_jp\stackstorage\api\StackStorageAPI;
 use function number_format;
 use const PHP_EOL;
@@ -21,7 +24,7 @@ class SelectTypeForm extends SimpleForm {
         var_dump('selectTypeForm');
         $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($item->getShopId());
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->addElements(
                 new SendMenuFormButton('購入画面に進む', new ItemBuyForm($player, $item), $restriction),
                 new SendMenuFormButton('売却画面に進む', new ItemSellForm($player, $item), $restriction),

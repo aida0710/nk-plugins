@@ -8,8 +8,9 @@ use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\form\item_shop\element\CategoryBackFormButton;
 use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
-use lazyperson0710\shop\form\item_shop\other\bulk_sale\BulkSaleForm;
+use lazyperson0710\shop\form\item_shop\other\BulkSaleForm;
 use pocketmine\player\Player;
 use function number_format;
 use const PHP_EOL;
@@ -21,7 +22,7 @@ class ItemSelectForm extends SimpleForm {
         $shopItems = ItemShopAPI::getInstance()->getCategoryItems($shopNumber, $category);
         $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($shopNumber);
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->setText('コンテンツを選択してください');
         foreach ($shopItems as $item) {
             if ($item->getSell() === 0) {

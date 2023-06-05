@@ -15,7 +15,7 @@ class OtherShopSelectForm extends SimpleForm {
 
     public function __construct(Player $player) {
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->setText('コンテンツを選択してください')
             ->addElements(
                 new SendMenuFormButton("Inventory内のアイテムを一括売却 [ID: invsell]\nツールや売却値が0円のアイテムは対象外", new InvSellConfirmationForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),

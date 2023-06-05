@@ -7,6 +7,7 @@ namespace lazyperson0710\shop\form\item_shop\other\search;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\form\item_shop\ItemBuyForm;
 use lazyperson0710\shop\object\ItemShopObject;
@@ -19,7 +20,7 @@ class SearchResultForm extends SimpleForm {
 
     public function __construct(Player $player, array $items) {
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->setText('コンテンツを選択してください');
         foreach ($items as $item) {
             if (!$item instanceof ItemShopObject) throw new RuntimeException('ShopItemの配列を渡してください');

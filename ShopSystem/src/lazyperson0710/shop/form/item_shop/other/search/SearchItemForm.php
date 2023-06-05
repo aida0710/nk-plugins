@@ -7,10 +7,12 @@ namespace lazyperson0710\shop\form\item_shop\other\search;
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\player\Player;
+use pocketmine\utils\TextFormat;
 use function preg_match;
 use function str_contains;
 
@@ -21,7 +23,7 @@ class SearchItemForm extends CustomForm {
     public function __construct(?string $msg = null) {
         $this->itemName = new Input("{$msg}調べたいアイテムの名前を入力してください\n入力した値が含まれている名前のアイテムがすべて表示されます", '石');
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->addElements(
                 $this->itemName,
             );

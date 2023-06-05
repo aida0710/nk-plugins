@@ -8,6 +8,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\ItemHoldingCalculation;
 use lazyperson0710\shop\form\item_shop\future\ItemSell;
 use lazyperson0710\shop\form\item_shop\future\LevelCheck;
@@ -18,6 +19,7 @@ use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use ree_jp\stackstorage\api\StackStorageAPI;
+use RuntimeException;
 
 class BulkSaleForm extends CustomForm {
 
@@ -38,7 +40,7 @@ class BulkSaleForm extends CustomForm {
         $this->categoryItems = ItemShopAPI::getInstance()->getCategoryItems($shopNumber, $category);
         $this->getVirtualStorageCount($player, ItemShopAPI::getInstance()->getCategoryItems($shopNumber, $category));
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->addElement(
                 new Label(
                     '仮想ストレージとインベントリ含む全ての場所から一括で売却出来ます' . PHP_EOL .

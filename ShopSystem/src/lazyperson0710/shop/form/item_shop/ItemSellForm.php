@@ -9,6 +9,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\ItemSell;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendMessage\SendMessage;
@@ -26,7 +27,7 @@ class ItemSellForm extends CustomForm {
         $this->item = $item;
         $this->count = new Input('売却する個数を入力してください', '1');
         $this->virtualStorageEnable = new Toggle('仮想ストレージを優先にして売却する', false);
-        $this->setTitle('Item Shop');
+        $this->setTitle(FormText::TITLE);
         StackStorageAPI::$instance->getCount($player->getXuid(), $item->getItem(),
             function ($virtualStorageItemCount) use ($player, $item) : void {
                 $this->addElements(

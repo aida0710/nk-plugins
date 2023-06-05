@@ -7,6 +7,7 @@ namespace lazyperson0710\shop\form\item_shop;
 use bbo51dog\bboform\form\SimpleForm;
 use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\shop\form\item_shop\element\SendCategorySelectFormButton;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use pocketmine\player\Player;
 use RuntimeException;
@@ -17,7 +18,7 @@ class ShopSelectForm extends SimpleForm {
     public function __construct(Player $player, ?string $error = null) {
         var_dump('shopSelectForm');
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->setText('コンテンツを選択してください' . PHP_EOL . '(/shop [ID]で実行すると直接formを開けます)' . $error);
         foreach (RestrictionShop::ALL_SHOP as $shopNumber) {
             switch ($shopNumber) {
