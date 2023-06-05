@@ -25,7 +25,7 @@ class ItemSellForm extends CustomForm {
         var_dump('itemSellForm');
         $this->item = $item;
         $this->count = new Input('売却する個数を入力してください', '1');
-        $this->virtualStorageEnable = new Toggle('仮想ストレージに送る', false);
+        $this->virtualStorageEnable = new Toggle('仮想ストレージを優先にして売却する', false);
         $this->setTitle('Item Shop');
         StackStorageAPI::$instance->getCount($player->getXuid(), $item->getItem(),
             function ($virtualStorageItemCount) use ($player, $item) : void {

@@ -36,10 +36,12 @@ class SelectTypeForm extends SimpleForm {
     }
 
     public static function getLabel(Player $player, ItemShopObject $item, int $virtualStorageItemCount) : string {
-        $inventoryItemCount = ItemHoldingCalculation::getInstance()->getHoldingCount($player, $item);
-        return 'アイテム名: ' . $item->getDisplayName() . PHP_EOL .
-            '購入価格: ' . number_format($item->getBuy()) . '円 / (x64' . number_format(($item->getBuy() * 64)) . '円' . PHP_EOL .
-            '売却価格: ' . number_format($item->getSell()) . '円 / (x64' . number_format(($item->getSell() * 64)) . '円' . PHP_EOL . PHP_EOL .
+        $inventoryItemCount = ItemHoldingCalculation::getHoldingCount($player, $item->getItem());
+        return
+            'アイテム販売階層: Shop' . $item->getShopId() . ' / ' . $item->getItemCategory() . ' / ' . $item->getDisplayName() . PHP_EOL . PHP_EOL .
+            'アイテム名: ' . $item->getDisplayName() . ' / ' . $item->getItem()->getVanillaName() . PHP_EOL .
+            '購入価格: ' . number_format($item->getBuy()) . '円 / (1st -> ' . number_format(($item->getBuy() * 64)) . '円' . PHP_EOL .
+            '売却価格: ' . number_format($item->getSell()) . '円 / (1st -> ' . number_format(($item->getSell() * 64)) . '円' . PHP_EOL . PHP_EOL .
             '現在の所持金: ' . number_format(EconomyAPI::getInstance()->myMoney($player)) . '円' . PHP_EOL .
             'インベントリに所有している数: ' . number_format($inventoryItemCount) . '個' . PHP_EOL .
             '仮想ストレージに所有している数: ' . number_format($virtualStorageItemCount) . '個' . PHP_EOL .
