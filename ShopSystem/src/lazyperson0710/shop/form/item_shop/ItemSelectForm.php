@@ -9,7 +9,7 @@ use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\form\item_shop\element\CategoryBackFormButton;
 use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
-use lazyperson0710\shop\form\item_shop\other\BulkSaleForm;
+use lazyperson0710\shop\form\item_shop\other\bulk_sale\BulkSaleForm;
 use pocketmine\player\Player;
 use function number_format;
 use const PHP_EOL;
