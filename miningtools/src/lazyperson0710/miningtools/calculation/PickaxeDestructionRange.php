@@ -33,6 +33,7 @@ class PickaxeDestructionRange {
         BlockLegacyIds::FLOWING_LAVA,
         BlockLegacyIds::CRAFTING_TABLE,
         BlockLegacyIds::HOPPER_BLOCK,
+        BlockLegacyIds::MONSTER_SPAWNER,
         ##sign
         BlockLegacyIds::SIGN_POST,
         BlockLegacyIds::WALL_SIGN,
