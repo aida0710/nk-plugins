@@ -253,7 +253,7 @@ class ItemShopAPI {
     private function register(ItemShopObject $item) : void {
         $this->items[$item->getShopId()][$item->getItemCategory()][] = $item;
         $this->displayName[] = $item->getDisplayName();
-        $this->itemByVanillaName[] = $item;
+        $this->itemByItemID[$item->getItem()->getId() . ':' . $item->getItem()->getMeta()] = $item;
         $this->itemByDisplayName[$item->getDisplayName()] = $item;
     }
 
@@ -271,7 +271,16 @@ class ItemShopAPI {
         return $this->items;
     }
 
-    public function getItemByDisplayName(string $displayName) : ItemShopObject {
+    /**
+     * 同名のアイテムと被る重複する可能性があります
+     *
+     * @param string $displayName
+     * @return ItemShopObject|false
+     */
+    public function getItemByDisplayName(string $displayName) : ItemShopObject|false {
+        if (!isset($this->itemByDisplayName[$displayName])) {
+            return false;
+        }
         return $this->itemByDisplayName[$displayName];
     }
 
