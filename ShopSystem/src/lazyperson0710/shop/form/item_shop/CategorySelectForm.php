@@ -8,19 +8,18 @@ use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\form\item_shop\element\FirstBackFormButton;
 use lazyperson0710\shop\form\item_shop\element\SendItemSelectFormButton;
+use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\form\item_shop\future\ShopCategory;
-use pocketmine\player\Player;
 use function array_keys;
 
 class CategorySelectForm extends SimpleForm {
 
-    public function __construct(Player $player, int $shopNumber) {
-        var_dump('categorySelectForm');
+    public function __construct(int $shopNumber) {
         $shopCategory = array_keys(ItemShopAPI::getInstance()->getCategory($shopNumber));
         $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($shopNumber);
         $this
-            ->setTitle('Item Shop')
+            ->setTitle(FormText::TITLE)
             ->setText('コンテンツを選択してください');
         foreach ($shopCategory as $category) {
             $displayName = ShopCategory::getInstance()->getCategoryByDisplayName($category);

@@ -24,9 +24,9 @@ class SendCategorySelectFormButton extends Button {
 
     public function handleSubmit(Player $player) : void {
         if ($this->shopNumber === 0) {
-            LevelCheck::sendForm($player, new OtherShopSelectForm(), $this->restrictionLevel);
+            LevelCheck::sendForm($player, new OtherShopSelectForm($player), $this->restrictionLevel);
             return;
         }
-        LevelCheck::sendForm($player, new CategorySelectForm($player, $this->shopNumber), $this->restrictionLevel);
+        LevelCheck::sendForm($player, new CategorySelectForm($this->shopNumber), $this->restrictionLevel);
     }
 }

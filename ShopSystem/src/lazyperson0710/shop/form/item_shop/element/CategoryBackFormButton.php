@@ -24,6 +24,6 @@ class CategoryBackFormButton extends Button {
 
     public function handleSubmit(Player $player) : void {
         SoundPacket::Send($player, 'mob.shulker.close');
-        LevelCheck::sendForm($player, (new CategorySelectForm($player, $this->shopNumber)), $this->restrictionLevel);
+        LevelCheck::sendForm($player, (new CategorySelectForm($this->shopNumber)), $this->restrictionLevel);
     }
 }
