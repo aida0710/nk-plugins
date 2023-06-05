@@ -26,6 +26,8 @@ class ItemShopAPI {
     /** @var ItemShopObject[] */
     private array $itemByVanillaName;
 
+    public const PREFIX = 'ItemShop';
+
     public function init() : void {
         $this->register(new ItemShopObject(VanillaBlocks::DIRT()->asItem(), 25, 1, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '土', true));
         $this->register(new ItemShopObject(VanillaBlocks::STONE()->asItem(), 25, 5, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '石', true));

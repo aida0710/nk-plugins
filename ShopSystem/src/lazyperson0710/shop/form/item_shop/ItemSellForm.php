@@ -46,11 +46,12 @@ class ItemSellForm extends CustomForm {
     public function handleSubmit(Player $player) : void {
         $sellCount = $this->count->getValue();
         if (!is_numeric($sellCount)) {
-            SendMessage::Send($player, '1以上の整数を入力してください', 'LevelShop', false, 'dig.chain');
+            SendMessage::Send($player, '1以上の整数を入力してください', ItemShopAPI::PREFIX, false, 'dig.chain');
             return;
         }
-        if ((int) $sellCount <= 0) {
-            SendMessage::Send($player, '1以上の整数を入力してください', 'LevelShop', false, 'dig.chain');
+        $sellCount = (int) $sellCount;
+        if ($sellCount <= 0) {
+            SendMessage::Send($player, '1以上の整数を入力してください', ItemShopAPI::PREFIX, false, 'dig.chain');
             return;
         }
         $item = $this->item;

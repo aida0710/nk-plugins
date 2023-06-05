@@ -8,6 +8,7 @@ use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;
@@ -51,18 +52,18 @@ class ItemBuyForm extends CustomForm {
     public function handleSubmit(Player $player) : void {
         $count = $this->count->getValue();
         if (!is_numeric($count)) {
-            SendMessage::Send($player, '1以上の整数を入力してください', 'LevelShop', false, 'dig.chain');
+            SendMessage::Send($player, '1以上の整数を入力してください', ItemShopAPI::PREFIX, false, 'dig.chain');
             return;
         }
         $count = (int) $count;
         if ($count <= 0) {
-            SendMessage::Send($player, '1以上の整数を入力してください', 'LevelShop', false, 'dig.chain');
+            SendMessage::Send($player, '1以上の整数を入力してください', ItemShopAPI::PREFIX, false, 'dig.chain');
             return;
         }
         $totalPrice = $this->item->getBuy() * $count;
         if (EconomyAPI::getInstance()->myMoney($player) < $totalPrice) {
             $insufficientAmount = $totalPrice - EconomyAPI::getInstance()->myMoney($player);
-            SendMessage::Send($player, 'お金が' . number_format($insufficientAmount) . '円足りませんでした。合計必要金額:' . number_format($totalPrice) . '円', 'LevelShop', false, 'dig.chain');
+            SendMessage::Send($player, 'お金が' . number_format($insufficientAmount) . '円足りませんでした。合計必要金額:' . number_format($totalPrice) . '円', ItemShopAPI::PREFIX, false, 'dig.chain');
             return;
         }
         $this->item->getItem()->setCount($count);
@@ -70,16 +71,16 @@ class ItemBuyForm extends CustomForm {
             EconomyAPI::getInstance()->reduceMoney($player, $this->item->getBuy() * $count);
             StackStorageAPI::$instance->add($player->getXuid(), $this->item->getItem());
             $totalPrice = $this->item->getBuy() * $count;
-            SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入し、仮想ストレージに転送しました。使用金額 : ' . number_format($totalPrice) . '円', 'LevelShop', true, 'break.amethyst_block');
+            SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入し、仮想ストレージに転送しました。使用金額 : ' . number_format($totalPrice) . '円', ItemShopAPI::PREFIX, true, 'break.amethyst_block');
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item->getItem())) {
-            SendMessage::Send($player, 'インベントリに空きはありません', 'LevelShop', false, 'dig.chain');
+            SendMessage::Send($player, 'インベントリに空きはありません', ItemShopAPI::PREFIX, false, 'dig.chain');
             return;
         }
         $player->getInventory()->addItem($this->item->getItem());
         EconomyAPI::getInstance()->reduceMoney($player, $this->item->getBuy() * $count);
         $totalPrice = $this->item->getBuy() * $count;
-        SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', 'LevelShop', true, 'break.amethyst_block');
+        SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', ItemShopAPI::PREFIX, true, 'break.amethyst_block');
     }
 }
