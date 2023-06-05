@@ -20,6 +20,8 @@ use const PHP_EOL;
 
 class SelectTypeForm extends SimpleForm {
 
+    private ItemShopObject $item;
+
     public function __construct(Player $player, ItemShopObject $item) {
         $this->item = $item;
         $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($item->getShopId());
@@ -40,6 +42,8 @@ class SelectTypeForm extends SimpleForm {
 
     public static function getLabel(Player $player, ItemShopObject $item, int $virtualStorageItemCount) : string {
         $inventoryItemCount = ItemHoldingCalculation::getHoldingCount($player, $item->getItem());
+        $notWorkingItem = null;
+        if (!$item->isWorkingItem()) $notWorkingItem = PHP_EOL . TextFormat::RED . '注意 : このアイテムはバニラの挙動を示さず設置のみ可能です。';
         return
             'アイテム販売階層: Shop' . $item->getShopId() . ' / ' . $item->getItemCategory() . ' / ' . $item->getDisplayName() . PHP_EOL . PHP_EOL .
             'アイテム名: ' . $item->getDisplayName() . ' / ' . $item->getItem()->getVanillaName() . PHP_EOL .
@@ -48,7 +52,12 @@ class SelectTypeForm extends SimpleForm {
             '現在の所持金: ' . number_format(EconomyAPI::getInstance()->myMoney($player)) . '円' . PHP_EOL .
             'インベントリに所有している数: ' . number_format($inventoryItemCount) . '個' . PHP_EOL .
             '仮想ストレージに所有している数: ' . number_format($virtualStorageItemCount) . '個' . PHP_EOL .
-            '合計所持数(インベントリ + 仮想ストレージ): ' . number_format($inventoryItemCount + $virtualStorageItemCount) . '個';
+            '合計所持数(インベントリ + 仮想ストレージ): ' . number_format($inventoryItemCount + $virtualStorageItemCount) . '個' .
+            $notWorkingItem;
+    }
+
+    public function handleClosed(Player $player) : void {
+        LevelCheck::sendForm($player, new ItemSelectForm($player, $this->item->getShopId(), $this->item->getItemCategory()), RestrictionShop::getInstance()->getRestrictionByShopNumber($this->item->getShopId()));
     }
 
 }
