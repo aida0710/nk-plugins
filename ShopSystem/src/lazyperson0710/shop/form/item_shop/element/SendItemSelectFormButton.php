@@ -14,9 +14,9 @@ class SendItemSelectFormButton extends Button {
 
     public function __construct(
         string $text,
-        private int $shopNumber,
-        private string $category,
-        private int $restrictionLevel,
+        private readonly int $shopNumber,
+        private readonly string $category,
+        private readonly int $restrictionLevel,
         ?ButtonImage $image = null,
     ) {
         parent::__construct($text, $image);

@@ -15,8 +15,8 @@ class CategoryBackFormButton extends Button {
 
     public function __construct(
         string $text,
-        private int $shopNumber,
-        private int $restrictionLevel,
+        private readonly int $shopNumber,
+        private readonly int $restrictionLevel,
         ?ButtonImage $image = null,
     ) {
         parent::__construct($text, $image);

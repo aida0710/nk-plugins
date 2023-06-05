@@ -14,8 +14,8 @@ class SendMenuFormButton extends Button {
 
     public function __construct(
         string $text,
-        private FormBase $form,
-        private int $restrictionLevel,
+        private readonly FormBase $form,
+        private readonly int $restrictionLevel,
         ?ButtonImage $image = null,
     ) {
         parent::__construct($text, $image);
