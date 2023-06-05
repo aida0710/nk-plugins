@@ -18,6 +18,10 @@ class ItemSell {
     use SingletonTrait;
 
     public function transaction(Player $player, int $sellCount, ItemShopObject $item, int $virtualStorageItemCount, bool $virtualStorageEnable) : void {
+        if (MiningLevelAPI::getInstance()->getLevel($player) < RestrictionShop::getInstance()->getRestrictionByShopNumber($item->getShopId())) {
+            SendMessage::Send($player, $item->getDisplayName() . 'を売却するには' . RestrictionShop::getInstance()->getRestrictionByShopNumber($item->getShopId()) . '以上のマイニングレベルが必要です', ItemShopAPI::PREFIX, false);
+            return;
+        }
         $item->getItem()->setCount($sellCount);
         $inventoryItemCount = ItemHoldingCalculation::getHoldingCount($player, $item->getItem());
         if ($virtualStorageEnable && $virtualStorageItemCount === 0) {
