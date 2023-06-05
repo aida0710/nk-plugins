@@ -32,6 +32,7 @@ class BulkSaleForm extends CustomForm {
     /** @var ItemShopObject[] */
     private array $categoryItems;
     private array $itemAllCount = [];
+    private bool $toggleEnable = false;
 
     public function __construct(Player $player, int $shopNumber, string $category) {
         $this->shopNumber = $shopNumber;
@@ -55,12 +56,10 @@ class BulkSaleForm extends CustomForm {
      * @return void
      */
     private function getVirtualStorageCount(Player $player, array $items) : void {
-        var_dump('getVirtualStorageCount');
         if ($items === []) return;
         StackStorageAPI::$instance->getCount($player->getXuid(), $item = array_shift($items)->getItem(),
             function ($virtualStorageItemCount) use ($player, $items, $item) : void {
                 $this->virtualStorageCount[$item->getVanillaName()] = $virtualStorageItemCount;
-                var_dump($item->getVanillaName() . ' -> ' . $virtualStorageItemCount);
                 $this->getVirtualStorageCount($player, $items);
                 if ($items === []) $this->setToggleElements($player);
             }, function () use ($player, $items, $item) : void {
@@ -72,11 +71,8 @@ class BulkSaleForm extends CustomForm {
     }
 
     private function setToggleElements(Player $player) : void {
-        var_dump('setToggleElements');
-        //var_dump($this->virtualStorageCount);
-        $haveItems = 0;
         foreach ($this->categoryItems as $item) {
-            if (!$item instanceof ItemShopObject) throw new \RuntimeException('ItemShopObjectではありません');
+            if (!$item instanceof ItemShopObject) throw new RuntimeException('ItemShopObjectではありません');
             $inventory = ItemHoldingCalculation::getHoldingCount($player, $item->getItem());
             if (!isset($this->virtualStorageCount[$item->getItem()->getVanillaName()])) {
                 $this->virtualStorageCount[$item->getItem()->getVanillaName()] = 0;
@@ -84,12 +80,13 @@ class BulkSaleForm extends CustomForm {
             $virtualStorageCount = $this->virtualStorageCount[$item->getItem()->getVanillaName()];
             $allCount = $inventory + $virtualStorageCount;
             if ($allCount === 0) continue;
+            $this->toggleEnable = true;
             $this->itemAllCount[$item->getItem()->getVanillaName()] = $allCount;
             $this->toggles[$item->getItem()->getVanillaName()] =
                 new Toggle($item->getDisplayName() . '/ 購入: ' . number_format($item->getBuy()) . '円 / 売却: ' . number_format($item->getSell()) . '円' . PHP_EOL .
                     'Inventory: ' . number_format($inventory) . '/ VStorage: ' . number_format($virtualStorageCount) . '/ Total: ' . number_format($allCount), false);
         }
-        if (isset($this->toggles)) {
+        if (!$this->toggleEnable) {
             $this->addElements(new Label(TextFormat::RED . 'アイテムカテゴリの中に所持しているアイテムが存在しない為アイテムリストは表示されませんでした'));
             return;
         }
@@ -99,17 +96,21 @@ class BulkSaleForm extends CustomForm {
     }
 
     public function handleSubmit(Player $player) : void {
-        if (isset($this->toggles)) {
+        if (!$this->toggleEnable) {
             SendMessage::Send($player, 'アイテムカテゴリに所持しているアイテムが存在しない為何も処理されませんでした', ItemShopAPI::PREFIX, false);
-            $player->sendMessage(TextFormat::RED . 'アイテムカテゴリに所持しているアイテムが存在しない為何も処理されませんでした');
             return;
         }
+        $sellEnable = false;
         foreach ($this->toggles as $name => $toggle) {
             if (!$toggle->getValue()) continue;
+            $sellEnable = true;
             foreach ($this->categoryItems as $item) {
                 if ($item->getItem()->getVanillaName() !== $name) continue;
                 ItemSell::getInstance()->transaction($player, $this->itemAllCount[$name], $item, $this->virtualStorageCount[$name], true);
             }
+        }
+        if (!$sellEnable) {
+            SendMessage::Send($player, '売却を有効化されたアイテムが存在しない為何も処理されませんでした', ItemShopAPI::PREFIX, true);
         }
     }
 
