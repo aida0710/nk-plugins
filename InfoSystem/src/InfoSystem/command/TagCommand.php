@@ -16,7 +16,7 @@ class TagCommand extends Command {
         parent::__construct('tag', '自身のtag(称号)を変更する');
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args) {
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : void {
         if (!($sender instanceof Player)) {
             $sender->sendMessage('サーバー内で実行してください');
             return;
