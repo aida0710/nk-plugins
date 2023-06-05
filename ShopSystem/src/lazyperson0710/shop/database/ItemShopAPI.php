@@ -25,7 +25,7 @@ class ItemShopAPI {
     /** @var ItemShopObject[] */
     private array $itemByDisplayName;
     /** @var ItemShopObject[] */
-    private array $itemByVanillaName;
+    private array $itemByItemID;
 
     public const PREFIX = 'ItemShop';
 
@@ -275,6 +275,24 @@ class ItemShopAPI {
         return $this->itemByDisplayName[$displayName];
     }
 
+    /**
+     * 同名のアイテムでも重複せずに表示可能です
+     * 正確に検索したい場合はこちらを使用してください
+     *
+     * @param Item $item
+     * @return ItemShopObject|false
+     */
+    public function getItemByItemID(Item $item) : ItemShopObject|false {
+        if (!isset($this->itemByItemID[$item->getId() . ':' . $item->getMeta()])) {
+            return false;
+        }
+        return $this->itemByItemID[$item->getId() . ':' . $item->getMeta()];
+    }
+
+    /**
+     * @param int $shopId
+     * @return ItemShopObject[]
+     */
     public function getCategory(int $shopId) : array {
         if (RestrictionShop::getInstance()->checkShopId($shopId)) throw new RuntimeException('存在しないショップIDが指定されました -> ' . $shopId);
         return $this->items[$shopId];
