@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace lazyperson0710\shop\form\item_shop\other;
+namespace lazyperson0710\shop\form\item_shop\other\search;
 
 use bbo51dog\bboform\element\Input;
 use bbo51dog\bboform\form\CustomForm;

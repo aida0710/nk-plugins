@@ -8,6 +8,8 @@ use bbo51dog\bboform\form\SimpleForm;
 use lazyperson0710\shop\form\item_shop\element\FirstBackFormButton;
 use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
+use lazyperson0710\shop\form\item_shop\other\invsell\InvSellConfirmationForm;
+use lazyperson0710\shop\form\item_shop\other\search\SearchItemForm;
 
 class OtherShopSelectForm extends SimpleForm {
 

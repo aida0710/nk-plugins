@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace lazyperson0710\shop\form\item_shop\other;
+namespace lazyperson0710\shop\form\item_shop\other\invsell;
 
 use bbo51dog\bboform\element\Button;
 use bbo51dog\bboform\form\SimpleForm;
@@ -49,7 +49,7 @@ class InvSellConfirmationForm extends SimpleForm {
             $allItem .= $item->getName() . " x{$count}\n";
         }
         if (is_null($allItem)) {
-            SendMessage::Send($player, '売却できるアイテムが存在しません', 'LevelShop', true, 'dig.chain');
+            SendMessage::Send($player, '売却できるアイテムが存在しません', ItemShopAPI::PREFIX, true, 'dig.chain');
             return;
         }
         if (is_null($insufficientLevelAllItem)) {
