@@ -9,13 +9,13 @@ use pocketmine\item\Item;
 class ItemShopObject {
 
     public function __construct(
-        private Item $item,
-        private int $buy,
-        private int $sell,
-        private int $shopId,
-        private string $itemCategory,
-        private string $displayName,
-        private bool $workingItem,
+        private readonly Item $item,
+        private readonly int $buy,
+        private readonly int $sell,
+        private readonly int $shopId,
+        private readonly string $itemCategory,
+        private readonly string $displayName,
+        private readonly bool $workingItem,
     ) {
     }
 
