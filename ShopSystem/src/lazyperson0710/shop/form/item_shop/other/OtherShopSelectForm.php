@@ -13,7 +13,7 @@ use lazyperson0710\shop\form\item_shop\other\search\SearchItemForm;
 
 class OtherShopSelectForm extends SimpleForm {
 
-    public function __construct() {
+    public function __construct(Player $player) {
         $this
             ->setTitle('Item Shop')
             ->setText('コンテンツを選択してください')
