@@ -65,7 +65,7 @@ class ItemSell {
 
     private function buyItemFromStackStorage(Player $player, ItemShopObject $item, int $count) : int {
         $itemClone = (clone $item->getItem())->setCount($count);
-        $storageResult = $item->getBuy() * $count;
+        $storageResult = $item->getSell() * $count;
         StackStorageAPI::$instance->remove($player->getXuid(), $itemClone);
         EconomyAPI::getInstance()->addMoney($player, $storageResult);
         return $storageResult;
@@ -73,9 +73,9 @@ class ItemSell {
 
     private function buyItemFromInventory(Player $player, ItemShopObject $item, int $count) : int {
         $itemClone = (clone $item->getItem())->setCount($count);
-        $result = $item->getBuy() * $count;
+        $result = $item->getSell() * $count;
         $player->getInventory()->removeItem($itemClone);
-        EconomyAPI::getInstance()->addMoney($player, $item->getBuy() * $count);
+        EconomyAPI::getInstance()->addMoney($player, $item->getSell() * $count);
         return $result;
     }
 
