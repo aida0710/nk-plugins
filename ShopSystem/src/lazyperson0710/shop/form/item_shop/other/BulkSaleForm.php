@@ -34,7 +34,6 @@ class BulkSaleForm extends CustomForm {
     private array $itemAllCount = [];
 
     public function __construct(Player $player, int $shopNumber, string $category) {
-        var_dump('bulkSaleForm');
         $this->shopNumber = $shopNumber;
         $this->category = $category;
         $this->categoryItems = ItemShopAPI::getInstance()->getCategoryItems($shopNumber, $category);

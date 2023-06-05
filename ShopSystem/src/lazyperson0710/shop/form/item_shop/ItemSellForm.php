@@ -23,7 +23,6 @@ class ItemSellForm extends CustomForm {
     private Toggle $virtualStorageEnable;
 
     public function __construct(Player $player, ItemShopObject $item) {
-        var_dump('itemSellForm');
         $this->item = $item;
         $this->count = new Input('売却する個数を入力してください', '1');
         $this->virtualStorageEnable = new Toggle('仮想ストレージを優先にして売却する', false);

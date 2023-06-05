@@ -18,7 +18,6 @@ use const PHP_EOL;
 class ItemSelectForm extends SimpleForm {
 
     public function __construct(Player $player, int $shopNumber, string $category) {
-        var_dump('itemSelectForm');
         $shopItems = ItemShopAPI::getInstance()->getCategoryItems($shopNumber, $category);
         $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($shopNumber);
         $this

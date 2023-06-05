@@ -21,7 +21,7 @@ use const PHP_EOL;
 class SelectTypeForm extends SimpleForm {
 
     public function __construct(Player $player, ItemShopObject $item) {
-        var_dump('selectTypeForm');
+        $this->item = $item;
         $restriction = RestrictionShop::getInstance()->getRestrictionByShopNumber($item->getShopId());
         $this
             ->setTitle(FormText::TITLE)

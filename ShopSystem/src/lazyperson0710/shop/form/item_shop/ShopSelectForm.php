@@ -16,7 +16,6 @@ use const PHP_EOL;
 class ShopSelectForm extends SimpleForm {
 
     public function __construct(Player $player, ?string $error = null) {
-        var_dump('shopSelectForm');
         $this
             ->setTitle(FormText::TITLE)
             ->setText('コンテンツを選択してください' . PHP_EOL . '(/shop [ID]で実行すると直接formを開けます)' . $error);

@@ -24,7 +24,6 @@ class ItemBuyForm extends CustomForm {
     private ItemShopObject $item;
 
     public function __construct(Player $player, ItemShopObject $item) {
-        var_dump('itemBuyForm');
         $this->count = new Input('購入する個数を入力してください', '個数');
         $this->onVirtualStorage = new Toggle('仮想ストレージに送る', false);
         $this->item = $item;
