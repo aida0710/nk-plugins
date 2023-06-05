@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace lazyperson0710\shop\form\item_shop\other\bulk_sale;
+namespace lazyperson0710\shop\form\item_shop\other;
 
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;

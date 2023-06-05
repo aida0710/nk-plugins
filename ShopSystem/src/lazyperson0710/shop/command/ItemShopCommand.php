@@ -7,7 +7,7 @@ namespace lazyperson0710\shop\command;
 use lazyperson0710\shop\form\item_shop\CategorySelectForm;
 use lazyperson0710\shop\form\item_shop\future\LevelCheck;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
-use lazyperson0710\shop\form\item_shop\other\invsell\InvSellConfirmationForm;
+use lazyperson0710\shop\form\item_shop\other\InvSellForm;
 use lazyperson0710\shop\form\item_shop\other\OtherShopSelectForm;
 use lazyperson0710\shop\form\item_shop\other\search\SearchItemForm;
 use lazyperson0710\shop\form\item_shop\ShopSelectForm;
@@ -38,9 +38,9 @@ class ItemShopCommand extends Command {
             return;
         }
         match ($args[0]) {
-            'other' => LevelCheck::sendForm($sender, new OtherShopSelectForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
+            'other' => LevelCheck::sendForm($sender, new OtherShopSelectForm($sender), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
             'search' => LevelCheck::sendForm($sender, new SearchItemForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
-            'invsell' => LevelCheck::sendForm($sender, new InvSellConfirmationForm(), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
+            'invsell' => LevelCheck::sendForm($sender, new InvSellForm($sender), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP),
             '1' => LevelCheck::sendForm($sender, new CategorySelectForm($sender, 1), RestrictionShop::RESTRICTION_LEVEL_SHOP_1),
             '2' => LevelCheck::sendForm($sender, new CategorySelectForm($sender, 2), RestrictionShop::RESTRICTION_LEVEL_SHOP_2),
             '3' => LevelCheck::sendForm($sender, new CategorySelectForm($sender, 3), RestrictionShop::RESTRICTION_LEVEL_SHOP_3),

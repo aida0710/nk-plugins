@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace lazyperson0710\shop\form\item_shop\future;
 
+use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendMessage\SendMessage;
