@@ -8,6 +8,7 @@ use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\form\item_shop\future\ShopCategory;
 use lazyperson0710\shop\object\ItemShopObject;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\VanillaItems;
 use pocketmine\utils\SingletonTrait;
@@ -28,6 +29,9 @@ class ItemShopAPI {
 
     public const PREFIX = 'ItemShop';
 
+    /**
+     * @return void
+     */
     public function init() : void {
         $this->register(new ItemShopObject(VanillaBlocks::DIRT()->asItem(), 25, 1, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '土', true));
         $this->register(new ItemShopObject(VanillaBlocks::STONE()->asItem(), 25, 5, RestrictionShop::SHOP_1, ShopCategory::CAT_NATURE_BLOCK, '石', true));
@@ -242,6 +246,10 @@ class ItemShopAPI {
         $this->register(new ItemShopObject(VanillaBlocks::REDSTONE_COMPARATOR()->asItem(), 2500, 1, RestrictionShop::SHOP_7, ShopCategory::CAT_RED_STONE, 'コンパレーター ', false));
     }
 
+    /**
+     * @param ItemShopObject $item
+     * @return void
+     */
     private function register(ItemShopObject $item) : void {
         $this->items[$item->getShopId()][$item->getItemCategory()][] = $item;
         $this->displayName[] = $item->getDisplayName();
@@ -249,10 +257,16 @@ class ItemShopAPI {
         $this->itemByDisplayName[$item->getDisplayName()] = $item;
     }
 
+    /**
+     * @return string[]
+     */
     public function getDisplayName() : array {
         return $this->displayName;
     }
 
+    /**
+     * @return ItemShopObject[]
+     */
     public function getItems() : array {
         return $this->items;
     }
@@ -267,6 +281,8 @@ class ItemShopAPI {
     }
 
     /**
+     * @param int    $shopId
+     * @param string $category
      * @return ItemShopObject[]
      */
     public function getCategoryItems(int $shopId, string $category) : array {
