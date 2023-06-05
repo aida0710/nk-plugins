@@ -25,6 +25,7 @@ class InfoSystem extends PluginBase implements Listener {
     public const owner = [
         'lazyperson710',
         'sloth0710',
+        'nama07101035',
     ];
     private static InfoSystem $instance;
     public array $data;
