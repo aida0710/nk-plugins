@@ -4,24 +4,20 @@ declare(strict_types = 1);
 
 namespace lazyperson0710\shop\form\item_shop\future;
 
-use lazyperson0710\shop\object\ItemShopObject;
+use pocketmine\item\Item;
 use pocketmine\player\Player;
-use pocketmine\utils\SingletonTrait;
 
 class ItemHoldingCalculation {
 
-    use SingletonTrait;
-
-    private int $storageCount;
-
-    public function getHoldingCount(Player $player, ItemShopObject $item) : int {
-        $count = 0;
-        foreach ($player->getInventory()->getContents() as $inventoryItem) {
-            if ($item->getItem() === $inventoryItem) {
-                $count += $inventoryItem->getCount();
+    public static function getHoldingCount(Player $player, Item $targetItem) : int {
+        $inventory = 0;
+        for ($i = 0; $i <= 35; $i++) {
+            $item = $player->getInventory()->getItem($i);
+            if ($targetItem->equals($item)) {
+                $inventory += $item->getCount();
             }
         }
-        return $count;
+        return $inventory;
     }
 
 }
