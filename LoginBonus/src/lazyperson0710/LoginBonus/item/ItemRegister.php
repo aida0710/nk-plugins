@@ -20,7 +20,6 @@ class ItemRegister {
     private array $items;
 
     public function init() : void {
-        //todo 交換するItemを追加してください
         #cost - 1
         $this->itemRegister(VanillaItems::APPLE(), 5, 1, 'りんご', [], 'ただのりんご', [], [], []);
         $this->itemRegister(VanillaItems::BAKED_POTATO(), 32, 1, 'ベイクドポテト', [], '主食にもってこいのじゃがいも！', [], [], []);
