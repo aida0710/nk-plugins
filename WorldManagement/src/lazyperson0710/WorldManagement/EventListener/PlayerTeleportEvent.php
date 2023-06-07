@@ -8,11 +8,12 @@ use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\MoveWorldMessageSetting;
 use lazyperson0710\WorldManagement\database\WorldCategory;
 use lazyperson0710\WorldManagement\database\WorldManagementAPI;
+use lazyperson710\core\packet\SendMessage\SendActionBarMessage;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\player\Player;
-use function in_array;
+use pocketmine\utils\TextFormat;
 
 class PlayerTeleportEvent implements Listener {
 
@@ -45,11 +46,10 @@ class PlayerTeleportEvent implements Listener {
             }
             if (in_array($event->getTo()->getWorld()->getDisplayName(), WorldCategory::LifeWorld, true)) {
                 SendMessage::Send($player,
-                    "建築ワールド\n
-                    §7>> §aこのワールドは建築が可能なワールドになります\n
-                    §7>> §a/landを実行して土地を購入してください\n
-                    §7>> §aまた、道路の購入は規約違反となりますのでご注意ください",
-                    '§bWorld', true);
+                    '建築ワールド' . PHP_EOL .
+                    TextFormat::GRAY . '>> §aこのワールドは建築が可能なワールドになります' . PHP_EOL .
+                    TextFormat::GRAY . '>> §a/landを実行して土地を購入してください' . PHP_EOL .
+                    TextFormat::GRAY . '>> §aまた、道路の購入は規約違反となりますのでご注意ください', '§bWorld', true);
                 if ($event->getTo()->getWorld()->getDisplayName() === '船橋市-c') {
                     SendMessage::Send($player, 'また、購入範囲が明確にわかるようにしてください', "§7>> §a船橋市は大きく景観を損なう行為を禁止させていただいております。例:露天掘りや大規模な整地など\n", true);
                 }
@@ -65,6 +65,8 @@ class PlayerTeleportEvent implements Listener {
                 }
                 return;
             }
+        } else {
+            SendActionBarMessage::Send($player, 'ワールドに関する説明が現在settingによって無効化されています', 'World', true);
         }
     }
 
