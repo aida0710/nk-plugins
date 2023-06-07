@@ -60,7 +60,6 @@ class ItemSell {
         $this->buyItemFromInventory($player, $item, $sellCount);
         $result = $item->getSell() * $sellCount;
         SendMessage::Send($player, $item->getDisplayName() . 'が' . number_format($sellCount) . '個売却され、所持金が' . number_format($result) . '円増えました', ItemShopAPI::PREFIX, true, 'break.amethyst_block');
-        //(new LevelShopSellEvent($player, $item, 'sell'))->call();
     }
 
     private function buyItemFromStackStorage(Player $player, ItemShopObject $item, int $count) : int {
