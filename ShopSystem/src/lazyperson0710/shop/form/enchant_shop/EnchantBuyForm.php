@@ -8,6 +8,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\shop\database\EnchantShopAPI;
+use lazyperson0710\shop\event\EnchantShopBuyEvent;
 use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use lazyperson710\core\packet\SoundPacket;
@@ -78,6 +79,8 @@ class EnchantBuyForm extends CustomForm {
         $item->addEnchantment(new EnchantmentInstance($this->enchantment, $this->level));
         $player->getInventory()->setItemInHand($item);
         SendMessage::Send($player, "§a{$this->enchantName}を{$this->level}レベルで付与しました", '§bEnchant', true, 'break.amethyst_block');
+        $event = new EnchantShopBuyEvent($player, $this->enchantment, $this->enchantName, $this->level, $price);
+        $event->call();
     }
 
 }

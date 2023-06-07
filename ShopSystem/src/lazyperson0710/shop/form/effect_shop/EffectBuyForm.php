@@ -7,6 +7,7 @@ namespace lazyperson0710\shop\form\effect_shop;
 use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\effectShopAPI;
+use lazyperson0710\shop\event\EffectShopBuyEvent;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\entity\effect\Effect;
@@ -45,6 +46,8 @@ class EffectBuyForm extends CustomForm {
         EconomyAPI::getInstance()->reduceMoney($player, $price);
         $player->getEffects()->add(new EffectInstance($this->effect, $this->time * 20 * 60, $this->level - 1, false));
         SendMessage::Send($player, "{$this->effectName}を{$this->level}レベルで{$this->time}分付与し、{$price}円消費しました", 'Effect', true, 'break.amethyst_block');
+        $event = new EffectShopBuyEvent($player, $this->effect, $this->effectName, $this->level, $this->time, $price);
+        $event->call();
     }
 
 }

@@ -9,6 +9,7 @@ use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
+use lazyperson0710\shop\event\ItemShopBuyEvent;
 use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendForm;
@@ -72,6 +73,8 @@ class ItemBuyForm extends CustomForm {
             StackStorageAPI::$instance->add($player->getXuid(), $this->item->getItem());
             $totalPrice = $this->item->getBuy() * $count;
             SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入し、仮想ストレージに転送しました。使用金額 : ' . number_format($totalPrice) . '円', ItemShopAPI::PREFIX, true, 'break.amethyst_block');
+            $event = new ItemShopBuyEvent($player, $this->item, $count, $totalPrice);
+            $event->call();
             return;
         }
         if (!$player->getInventory()->canAddItem($this->item->getItem())) {
@@ -82,5 +85,7 @@ class ItemBuyForm extends CustomForm {
         EconomyAPI::getInstance()->reduceMoney($player, $this->item->getBuy() * $count);
         $totalPrice = $this->item->getBuy() * $count;
         SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', ItemShopAPI::PREFIX, true, 'break.amethyst_block');
+        $event = new ItemShopBuyEvent($player, $this->item, $count, $totalPrice);
+        $event->call();
     }
 }
