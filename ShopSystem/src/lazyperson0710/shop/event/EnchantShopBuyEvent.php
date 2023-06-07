@@ -5,14 +5,14 @@ declare(strict_types = 1);
 namespace lazyperson0710\shop\event;
 
 use pocketmine\event\Event;
-use pocketmine\network\mcpe\protocol\types\Enchant;
+use pocketmine\item\enchantment\Enchantment;
 use pocketmine\player\Player;
 
 class EnchantShopBuyEvent extends Event {
 
     public function __construct(
         private readonly Player $player,
-        private readonly Enchant $enchant,
+        private readonly Enchantment $enchant,
         private readonly string $enchantName,
         private readonly int $level,
         private readonly int $price,
@@ -23,7 +23,7 @@ class EnchantShopBuyEvent extends Event {
         return $this->player;
     }
 
-    public function getEnchant() : Enchant {
+    public function getEnchant() : Enchantment {
         return $this->enchant;
     }
 
