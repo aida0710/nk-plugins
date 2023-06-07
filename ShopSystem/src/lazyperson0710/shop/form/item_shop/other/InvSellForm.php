@@ -13,6 +13,7 @@ use lazyperson0710\shop\form\item_shop\future\ItemSell;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendMessage\SendMessage;
+use pocketmine\item\Item;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use RuntimeException;
@@ -20,8 +21,8 @@ use const PHP_EOL;
 
 class InvSellForm extends SimpleForm {
 
-    /** @var ItemShopObject[] */
-    private array $sellItems = [];
+    /** @var Item[] */
+    private array $sellItems;
 
     public function __construct(Player $player) {
         $items = $this->getSellItems($player);
@@ -34,11 +35,11 @@ class InvSellForm extends SimpleForm {
         $this->sellItems = $items;
         $total = 0;
         foreach ($this->sellItems as $item) {
-            //bug 表示されるアイテム個がおかしい
-            //bug 先に検出されたアイテムの個数にそれ以降のアイテムの数量が影響される
-            if (!$item instanceof ItemShopObject) throw new RuntimeException('ItemShopObjectではありません');
-            $text .= PHP_EOL . $item->getDisplayName() . ' / 数量: ' . number_format($item->getItem()->getCount()) . ' / 売却: ' . number_format($item->getSell()) . '円 / 合計' . number_format($item->getSell() * $item->getItem()->getCount()) . '円';
-            $total += ($item->getSell() * $item->getItem()->getCount());
+            $shopItem = ItemShopAPI::getInstance()->getItemByItemID($item);
+            if (!$item instanceof Item) throw new RuntimeException('Itemではありません');
+            if (!$shopItem instanceof ItemShopObject) throw new RuntimeException('ItemShopObjectではありません');
+            $text .= PHP_EOL . $shopItem->getDisplayName() . ' / 数量: ' . number_format($item->getCount()) . ' / 売却: ' . number_format($shopItem->getSell()) . '円 / 合計' . number_format($shopItem->getSell() * $item->getCount()) . '円';
+            $total += ($shopItem->getSell() * $item->getCount());
         }
         $this
             ->setTitle(FormText::TITLE)
@@ -48,7 +49,7 @@ class InvSellForm extends SimpleForm {
 
     /**
      * @param Player $player
-     * @return ItemShopObject[]
+     * @return Item[]
      */
     private function getSellItems(Player $player) : array {
         $sellItems = [];
@@ -60,8 +61,7 @@ class InvSellForm extends SimpleForm {
             if (MiningLevelAPI::getInstance()->getLevel($player) < RestrictionShop::getInstance()->getRestrictionByShopNumber($shopItem->getShopId())) {
                 continue;
             }
-            $shopItem->getItem()->setCount($item->getCount());
-            $sellItems[] = $shopItem;
+            $sellItems[$i] = $item;
         }
         return $sellItems;
     }
@@ -71,9 +71,11 @@ class InvSellForm extends SimpleForm {
             SendMessage::Send($player, '売却できるアイテムが存在しない為処理を中断しました', ItemShopAPI::PREFIX, false);
             return;
         }
-        foreach ($this->sellItems as $shopItem) {
+        foreach ($this->sellItems as $item) {
+            if (!$item instanceof Item) throw new RuntimeException('Itemではありません');
+            $shopItem = ItemShopAPI::getInstance()->getItemByItemID($item);
             if (!$shopItem instanceof ItemShopObject) throw new RuntimeException('ItemShopObjectではありません');
-            ItemSell::getInstance()->transaction($player, $shopItem->getItem()->getCount(), $shopItem, 0, false);
+            ItemSell::getInstance()->transaction($player, $item->getCount(), $shopItem, 0, false);
         }
     }
 }
