@@ -126,7 +126,7 @@ class ConfirmationSettingForm extends CustomForm {
         if ((new CheckPlayerData())->CheckAndReduceCostItem($player, $cost['settingItem'], self::CostItemId, self::CostItemNBT) === false) throw new Error('不明の挙動によりアイテムを取得できませんでしたMiningTools/ConfirmationSettingForm/112');
         PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting($settingName)->setValue(true);
         SendForm::Send($player, new SelectEnablingSettings($player, "§a{$settingName}を有効化しました"));
-        SendBroadcastMessage::Send("§a{$player->getName()}が{$settingName}を有効化しました", 'MiningToolsSetting');
+        SendBroadcastMessage::Send("{$player->getName()}が{$settingName}を有効化しました", 'MiningToolsSetting');
         SoundPacket::Send($player, 'note.harp');
     }
 

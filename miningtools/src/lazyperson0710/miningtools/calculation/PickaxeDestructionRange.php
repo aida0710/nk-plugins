@@ -7,7 +7,7 @@ namespace lazyperson0710\miningtools\calculation;
 use lazyperson0710\miningtools\event\MiningToolsBreakEvent;
 use lazyperson0710\miningtools\Main;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
-use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsWarningSetting;
 use lazyperson710\core\packet\SendNoSoundMessage\SendNoSoundTip;
 use lazyperson710\core\packet\SoundPacket;
 use pocketmine\block\Block;
@@ -84,7 +84,7 @@ class PickaxeDestructionRange {
                     if (VanillaBlocks::AIR() === $targetBlock) continue;
                     if ($targetBlock->getPosition()->getFloorY() <= 0) continue;
                     if ($targetBlock->getPosition()->getFloorY() >= 256) continue;
-                    if (!$this->MiningToolsEnduranceWarningSetting($player, $handItem, $haveDurable, $targetBlock)) continue;
+                    if (!$this->MiningToolsWarningSetting($player, $handItem, $haveDurable, $targetBlock)) continue;
                     foreach (self::ANTI_BLOCK as $id) {
                         if ($targetBlock->getId() === $id) {
                             continue 2;
@@ -141,14 +141,14 @@ class PickaxeDestructionRange {
      * @param Block  $targetBlock
      * @return bool
      */
-    public function MiningToolsEnduranceWarningSetting(Player $player, Item $handItem, bool $haveDurable, Block $targetBlock) : bool {
+    public function MiningToolsWarningSetting(Player $player, Item $handItem, bool $haveDurable, Block $targetBlock) : bool {
         if ($handItem->getNamedTag()->getTag('MiningTools_3') !== null) {
             $toolType = $handItem->getBlockToolType();
             if ($toolType !== $targetBlock->getBreakInfo()->getToolType()) {
                 return false;
             }
         }
-        if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() === true) {
+        if (PlayerSettingPool::getInstance()->getSettingNonNull($player)->getSetting(MiningToolsWarningSetting::getName())?->getValue() === true) {
             /** @var Durable $handItem */
             $maxDurability = $haveDurable ? $handItem->getMaxDurability() : null;
             if ($haveDurable && $handItem->getDamage() >= $maxDurability - 15) {

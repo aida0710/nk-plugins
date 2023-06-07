@@ -54,7 +54,7 @@ class AxeDestructionRange {
                     $close[$hash] = null;
                     continue;
                 }
-                if (!(new PickaxeDestructionRange())->MiningToolsEnduranceWarningSetting($player, $item, $haveDurable, $targetBlock)) break 2;
+                if (!(new PickaxeDestructionRange())->MiningToolsWarningSetting($player, $item, $haveDurable, $targetBlock)) break 2;
                 if ($haveDurable) {
                     (new PickaxeDestructionRange())->toolDamageProcessing($player, $item);
                 }
