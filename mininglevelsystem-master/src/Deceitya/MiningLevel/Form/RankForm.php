@@ -13,7 +13,7 @@ class RankForm implements Form {
     public function handleResponse(Player $player, $data) : void {
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $res = '';
         $ranking = MiningLevelAPI::getInstance()->genRanking();
         foreach ($ranking as $data) {

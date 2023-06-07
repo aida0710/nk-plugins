@@ -22,7 +22,7 @@ class ModalForm extends BaseForm {
         $this->onSubmit($player, $data);
     }
 
-    final public function jsonSerialize() {
+    final public function jsonSerialize() : array {
         $json = [
             'type' => self::MODAL,
             'title' => $this->title,

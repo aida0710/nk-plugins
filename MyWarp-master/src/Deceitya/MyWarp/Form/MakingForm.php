@@ -55,7 +55,7 @@ class MakingForm implements Form {
         }
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $cost = MyWarpPlugin::$cost->get($this->player->getName(), null) ?? 1500;
         return [
             'type' => 'custom_form',

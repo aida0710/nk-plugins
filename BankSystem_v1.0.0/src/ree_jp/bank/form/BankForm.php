@@ -36,17 +36,17 @@ class BankForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
-        return [
-            'type' => 'form',
-            'title' => 'BankSystem',
-            'content' => '選択してください',
-            'buttons' => [
-                [
-                    'text' => '銀行を選択する',
-                ],
-                [
-                    'text' => '銀行を作成する',
+   public function jsonSerialize() : array {
+       return [
+           'type' => 'form',
+           'title' => 'BankSystem',
+           'content' => '選択してください',
+           'buttons' => [
+               [
+                   'text' => '銀行を選択する',
+               ],
+               [
+                   'text' => '銀行を作成する',
                 ],
                 [
                     'text' => '銀行を削除する',

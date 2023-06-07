@@ -18,7 +18,7 @@ class MainForm implements Form {
         SendForm::Send($player, (new $next[$data]($player)));
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         return [
             'type' => 'form',
             'title' => 'MyWarp',

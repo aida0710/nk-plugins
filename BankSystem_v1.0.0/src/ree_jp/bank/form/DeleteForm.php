@@ -39,7 +39,7 @@ class DeleteForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $option = [];
         foreach (BankHelper::getInstance()->getAllLeaderBank($this->p->getName()) as $bank) $option[] = $bank;
         $this->option = $option;

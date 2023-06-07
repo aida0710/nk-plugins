@@ -39,7 +39,7 @@ class ShareRemoveForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $option = [];
         foreach (BankHelper::getInstance()->getAllShare($this->bank) as $member) $option[] = $member;
         $this->option = $option;

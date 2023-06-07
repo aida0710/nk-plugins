@@ -29,7 +29,7 @@ class ModeForm implements Form {
         SendMessage::Send($player, 'チェストをタップして下さい', 'ChestLock', true);
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         return [
             'type' => 'form',
             'title' => 'ChestLock Menu',

@@ -19,7 +19,7 @@ class RankingForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $string = '';
         $rank = 1;
         foreach (BankHelper::getInstance()->getBankDate() as $bank) {

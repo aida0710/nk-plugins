@@ -28,7 +28,7 @@ class SimpleForm extends BaseForm {
         $this->onSubmit($player, $data);
     }
 
-    final public function jsonSerialize() {
+    final public function jsonSerialize() : array {
         $json = [
             'type' => self::SIMPLE,
             'title' => $this->title,

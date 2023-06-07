@@ -27,7 +27,7 @@ class LogForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $logs = '';
         $reverse_log = array_reverse(LogHelper::getInstance()->getLog($this->bank)->logs);
         foreach ($reverse_log as $log) $logs = $logs . $log . "\n";

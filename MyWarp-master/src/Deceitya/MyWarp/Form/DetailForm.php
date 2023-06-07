@@ -19,7 +19,7 @@ class DetailForm implements Form {
     public function handleResponse(Player $player, $data) : void {
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $form = [
             'type' => 'custom_form',
             'title' => 'MyWarp',

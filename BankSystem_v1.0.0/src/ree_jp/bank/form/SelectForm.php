@@ -39,7 +39,7 @@ class SelectForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $option = [];
         foreach (BankHelper::getInstance()->getAllBank($this->p->getName()) as $bank) $option[] = $bank;
         $this->option = $option;

@@ -74,7 +74,7 @@ class ActionForm implements Form {
     /**
      * @inheritDoc
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $text = "\n現在の所持金 : " . EconomyAPI::getInstance()->myMoney($this->p) . "\n銀行に入ってるお金 : " . BankHelper::getInstance()->getMoney($this->bank);
         switch ($this->type) {
             case self::BANK_PUT:

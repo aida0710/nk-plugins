@@ -26,7 +26,7 @@ class RemoveForm implements Form {
         SendForm::Send($player, (new ConfirmForm($player, $this->warps[$data])));
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $form = [
             'type' => 'form',
             'title' => 'MyWarp',

@@ -42,7 +42,7 @@ class ListForm implements Form {
         }
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $form = [
             'type' => 'form',
             'title' => 'MyWarp',

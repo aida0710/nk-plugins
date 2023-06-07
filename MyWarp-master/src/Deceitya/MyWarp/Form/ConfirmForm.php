@@ -27,7 +27,7 @@ class ConfirmForm implements Form {
         SendMessage::Send($player, 'ワープ地点を削除しました', 'MyWarp', true);
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         $warp = Database::getInstance()->getWarpPosition($this->player, $this->target);
         return [
             'type' => 'modal',
