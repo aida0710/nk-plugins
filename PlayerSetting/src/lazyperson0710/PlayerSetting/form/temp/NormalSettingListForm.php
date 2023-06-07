@@ -2,25 +2,26 @@
 
 declare(strict_types = 0);
 
-namespace lazyperson0710\PlayerSetting\form;
+namespace lazyperson0710\PlayerSetting\form\temp;
 
 use bbo51dog\bboform\element\StepSlider;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
+use lazyperson0710\PlayerSetting\form\SelectSettingForm;
 use lazyperson0710\PlayerSetting\object\PlayerSettingPool;
 use lazyperson0710\PlayerSetting\object\settings\normal\BossBarColorSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectFormSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MoveWorldMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\NormalToolsWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
@@ -57,8 +58,8 @@ class NormalSettingListForm extends CustomForm {
             $this->coordinate = new Toggle("§l> Coordinate§r\n座標を表示するか否か", $setting->getSetting(CoordinateSetting::getName())?->getValue()),
             $this->joinItems = new Toggle("§l> JoinItems§r\n参加時にアイテムを渡すか否か", $setting->getSetting(JoinItemsSetting::getName())?->getValue()),
             $this->directDropItemStorage = new Toggle("§l> DirectDropItemStorage§r\nInventoryが空でもストレージにアイテムを入れるか否か", $setting->getSetting(DirectDropItemStorageSetting::getName())?->getValue()),
-            $this->enduranceWarning = new Toggle("§l> EnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(EnduranceWarningSetting::getName())?->getValue()),
-            $this->miningToolsEnduranceWarning = new Toggle("§l> MiningToolsEnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue()),
+            $this->enduranceWarning = new Toggle("§l> EnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(NormalToolsWarningSetting::getName())?->getValue()),
+            $this->miningToolsEnduranceWarning = new Toggle("§l> MiningToolsEnduranceWarning§r\n耐久値が少なくなったときに警告を出すか否か", $setting->getSetting(MiningToolsWarningSetting::getName())?->getValue()),
             $this->destructionSound = new Toggle("§l> DestructionSound§r\n破壊時に経験値の音を鳴らすか否か", $setting->getSetting(DestructionSoundSetting::getName())?->getValue()),
             $this->diceMessage = new Toggle("§l> DiceMessage§r\nDiceのメッセージを表示するか否か", $setting->getSetting(DiceMessageSetting::getName())?->getValue()),
             $this->gachaEjectForm = new Toggle("§l> GachaEjectForm§r\nGachaの排出時に表示されるFormを表示するか否か(オフにすると実行完了時に完了をお知らせするTipメッセージが表示されます)", $setting->getSetting(GachaEjectFormSetting::getName())?->getValue()),
@@ -126,11 +127,11 @@ class NormalSettingListForm extends CustomForm {
         if ($setting->getSetting(DirectDropItemStorageSetting::getName())?->getValue() !== $this->directDropItemStorage->getValue()) {
             $setting->getSetting(DirectDropItemStorageSetting::getName())?->setValue($this->directDropItemStorage->getValue());
         }
-        if ($setting->getSetting(EnduranceWarningSetting::getName())?->getValue() !== $this->enduranceWarning->getValue()) {
-            $setting->getSetting(EnduranceWarningSetting::getName())?->setValue($this->enduranceWarning->getValue());
+        if ($setting->getSetting(NormalToolsWarningSetting::getName())?->getValue() !== $this->enduranceWarning->getValue()) {
+            $setting->getSetting(NormalToolsWarningSetting::getName())?->setValue($this->enduranceWarning->getValue());
         }
-        if ($setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() !== $this->miningToolsEnduranceWarning->getValue()) {
-            $setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->setValue($this->miningToolsEnduranceWarning->getValue());
+        if ($setting->getSetting(MiningToolsWarningSetting::getName())?->getValue() !== $this->miningToolsEnduranceWarning->getValue()) {
+            $setting->getSetting(MiningToolsWarningSetting::getName())?->setValue($this->miningToolsEnduranceWarning->getValue());
         }
         if ($setting->getSetting(DestructionSoundSetting::getName())?->getValue() !== $this->destructionSound->getValue()) {
             $setting->getSetting(DestructionSoundSetting::getName())?->setValue($this->destructionSound->getValue());

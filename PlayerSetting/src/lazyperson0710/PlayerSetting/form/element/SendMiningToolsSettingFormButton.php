@@ -25,10 +25,10 @@ class SendMiningToolsSettingFormButton extends Button {
     }
 
     public function handleSubmit(Player $player) : void {
-        if (MiningLevelAPI::getInstance()->getLevel($this->player) >= SelectSettingForm::LevelLimit) {
+        if (MiningLevelAPI::getInstance()->getLevel($this->player) >= SelectSettingForm::LEVEL_LIMIT) {
             SendForm::Send($player, $this->form);
         } else {
-            SendForm::Send($player, new SelectSettingForm($this->player, "\n§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv. " . SelectSettingForm::LevelLimit));
+            SendForm::Send($player, new SelectSettingForm($this->player, "\n§c要求されたレベルに達していない為処理が中断されました\n要求レベル -> lv. " . SelectSettingForm::LEVEL_LIMIT));
             SoundPacket::Send($player, 'note.bass');
         }
     }

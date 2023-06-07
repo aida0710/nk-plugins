@@ -6,12 +6,12 @@ namespace lazyperson0710\PlayerSetting\object\settings\normal;
 
 use lazyperson0710\PlayerSetting\object\Setting;
 
-class EnduranceWarningSetting extends Setting {
+class MiningToolsWarningSetting extends Setting {
 
     protected bool $value;
 
     public static function getName() : string {
-        return 'EnduranceWarning';
+        return 'MiningToolsWarning';
     }
 
     public function getValue() : bool {
