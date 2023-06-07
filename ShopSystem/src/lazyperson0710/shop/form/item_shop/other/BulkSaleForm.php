@@ -97,7 +97,7 @@ class BulkSaleForm extends CustomForm {
 
     public function handleSubmit(Player $player) : void {
         if (!$this->toggleEnable) {
-            SendMessage::Send($player, 'アイテムカテゴリに所持しているアイテムが存在しない為何も処理されませんでした', ItemShopAPI::PREFIX, false);
+            LevelCheck::sendForm($player, new ItemSelectForm($player, $this->shopNumber, $this->category), RestrictionShop::getInstance()->getRestrictionByShopNumber($this->shopNumber));
             return;
         }
         $sellEnable = false;
