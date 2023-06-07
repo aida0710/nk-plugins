@@ -10,9 +10,9 @@ use Deceitya\MiningLevel\MiningLevelAPI;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\ItemSell;
+use lazyperson0710\shop\form\item_shop\future\LevelCheck;
 use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\object\ItemShopObject;
-use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -68,7 +68,7 @@ class InvSellForm extends SimpleForm {
 
     public function handleSubmit(Player $player) : void {
         if ($this->sellItems === []) {
-            SendMessage::Send($player, '売却できるアイテムが存在しない為処理を中断しました', ItemShopAPI::PREFIX, false);
+            LevelCheck::sendForm($player, new OtherShopSelectForm($player), RestrictionShop::RESTRICTION_LEVEL_OTHER_SHOP);
             return;
         }
         foreach ($this->sellItems as $item) {
