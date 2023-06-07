@@ -11,6 +11,8 @@ use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\ItemSell;
+use lazyperson0710\shop\form\item_shop\future\LevelCheck;
+use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\object\ItemShopObject;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use pocketmine\player\Player;
@@ -64,6 +66,10 @@ class ItemSellForm extends CustomForm {
                 ItemSell::getInstance()->transaction($player, $sellCount, $item, 0, $virtualStorageEnable);
             },
         );
+    }
+
+    public function handleClosed(Player $player) : void {
+        LevelCheck::sendForm($player, new ItemSelectForm($player, $this->item->getShopId(), $this->item->getItemCategory()), RestrictionShop::getInstance()->getRestrictionByShopNumber($this->item->getShopId()));
     }
 
 }

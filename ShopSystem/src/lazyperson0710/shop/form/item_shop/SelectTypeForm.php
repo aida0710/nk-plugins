@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace lazyperson0710\shop\form\item_shop;
 
 use bbo51dog\bboform\form\SimpleForm;
+use lazyperson0710\shop\form\item_shop\element\ItemSelectBackFormButton;
 use lazyperson0710\shop\form\item_shop\element\SendMenuFormButton;
 use lazyperson0710\shop\form\item_shop\future\FormText;
 use lazyperson0710\shop\form\item_shop\future\ItemHoldingCalculation;
@@ -30,6 +31,7 @@ class SelectTypeForm extends SimpleForm {
             ->addElements(
                 new SendMenuFormButton('購入画面に進む', new ItemBuyForm($player, $item), $restriction),
                 new SendMenuFormButton('売却画面に進む', new ItemSellForm($player, $item), $restriction),
+                new ItemSelectBackFormButton('カテゴリアイテム選択メニューに戻る', $item),
             );
         StackStorageAPI::$instance->getCount($player->getXuid(), $item->getItem(),
             function ($virtualStorageItemCount) use ($player, $item) : void {

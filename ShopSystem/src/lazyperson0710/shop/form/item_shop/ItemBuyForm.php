@@ -11,8 +11,9 @@ use bbo51dog\bboform\form\CustomForm;
 use lazyperson0710\shop\database\ItemShopAPI;
 use lazyperson0710\shop\event\ItemShopBuyEvent;
 use lazyperson0710\shop\form\item_shop\future\FormText;
+use lazyperson0710\shop\form\item_shop\future\LevelCheck;
+use lazyperson0710\shop\form\item_shop\future\RestrictionShop;
 use lazyperson0710\shop\object\ItemShopObject;
-use lazyperson710\core\packet\SendForm;
 use lazyperson710\core\packet\SendMessage\SendMessage;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\player\Player;
@@ -44,10 +45,6 @@ class ItemBuyForm extends CustomForm {
                 );
             },
         );
-    }
-
-    public function handleClosed(Player $player) : void {
-        SendForm::Send($player, new SelectTypeForm($player, $this->item));
     }
 
     public function handleSubmit(Player $player) : void {
@@ -87,5 +84,9 @@ class ItemBuyForm extends CustomForm {
         SendMessage::Send($player, $this->item->getDisplayName() . 'を' . number_format($count) . '個購入しました。使用金額 : ' . number_format($totalPrice) . '円', ItemShopAPI::PREFIX, true, 'break.amethyst_block');
         $event = new ItemShopBuyEvent($player, $this->item, $count, $totalPrice);
         $event->call();
+    }
+
+    public function handleClosed(Player $player) : void {
+        LevelCheck::sendForm($player, new ItemSelectForm($player, $this->item->getShopId(), $this->item->getItemCategory()), RestrictionShop::getInstance()->getRestrictionByShopNumber($this->item->getShopId()));
     }
 }
