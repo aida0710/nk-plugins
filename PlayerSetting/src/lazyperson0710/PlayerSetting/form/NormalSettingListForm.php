@@ -118,60 +118,32 @@ class NormalSettingListForm extends CustomForm {
 
     public function handleSubmit(Player $player) : void {
         $setting = PlayerSettingPool::getInstance()->getSettingNonNull($this->player);
-        if ($setting->getSetting(CoordinateSetting::getName())?->getValue() !== $this->coordinate->getValue()) {
-            $setting->getSetting(CoordinateSetting::getName())?->setValue($this->coordinate->getValue());
-            CoordinatesPacket::Send($this->player, $this->coordinate->getValue());
-        }
-        if ($setting->getSetting(JoinItemsSetting::getName())?->getValue() !== $this->joinItems->getValue()) {
-            $setting->getSetting(JoinItemsSetting::getName())?->setValue($this->joinItems->getValue());
-        }
-        if ($setting->getSetting(DirectDropItemStorageSetting::getName())?->getValue() !== $this->directDropItemStorage->getValue()) {
-            $setting->getSetting(DirectDropItemStorageSetting::getName())?->setValue($this->directDropItemStorage->getValue());
-        }
-        if ($setting->getSetting(EnduranceWarningSetting::getName())?->getValue() !== $this->enduranceWarning->getValue()) {
-            $setting->getSetting(EnduranceWarningSetting::getName())?->setValue($this->enduranceWarning->getValue());
-        }
-        if ($setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->getValue() !== $this->miningToolsEnduranceWarning->getValue()) {
-            $setting->getSetting(MiningToolsEnduranceWarningSetting::getName())?->setValue($this->miningToolsEnduranceWarning->getValue());
-        }
-        if ($setting->getSetting(DestructionSoundSetting::getName())?->getValue() !== $this->destructionSound->getValue()) {
-            $setting->getSetting(DestructionSoundSetting::getName())?->setValue($this->destructionSound->getValue());
-        }
-        if ($setting->getSetting(DiceMessageSetting::getName())?->getValue() !== $this->diceMessage->getValue()) {
-            $setting->getSetting(DiceMessageSetting::getName())?->setValue($this->diceMessage->getValue());
-        }
-        if ($setting->getSetting(PayCommandUseSetting::getName())?->getValue() !== $this->payCommandUse->getValue()) {
-            $setting->getSetting(PayCommandUseSetting::getName())?->setValue($this->payCommandUse->getValue());
-        }
-        if ($setting->getSetting(GachaEjectMessageSetting::getName())?->getValue() !== $this->gachaEjectMessage->getValue()) {
-            $setting->getSetting(GachaEjectMessageSetting::getName())?->setValue($this->gachaEjectMessage->getValue());
-        }
-        if ($setting->getSetting(GachaEjectFormSetting::getName())?->getValue() !== $this->gachaEjectForm->getValue()) {
-            $setting->getSetting(GachaEjectFormSetting::getName())?->setValue($this->gachaEjectForm->getValue());
-        }
-        if ($setting->getSetting(OnlinePlayersEffectsSetting::getName())?->getValue() !== $this->onlinePlayersEffects->getValue()) {
-            $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->setValue($this->onlinePlayersEffects->getValue());
-        }
-        if ($setting->getSetting(MoveWorldMessageSetting::getName())?->getValue() !== $this->moveWorldMessage->getValue()) {
-            $setting->getSetting(MoveWorldMessageSetting::getName())?->setValue($this->moveWorldMessage->getValue());
-        }
+        $setting->getSetting(CoordinateSetting::getName())?->setValue($this->coordinate->getValue());
+        CoordinatesPacket::Send($this->player, $this->coordinate->getValue());
+        $setting->getSetting(JoinItemsSetting::getName())?->setValue($this->joinItems->getValue());
+        $setting->getSetting(DirectDropItemStorageSetting::getName())?->setValue($this->directDropItemStorage->getValue());
+        $setting->getSetting(NormalToolsWarningSetting::getName())?->setValue($this->enduranceWarning->getValue());
+        $setting->getSetting(MiningToolsWarningSetting::getName())?->setValue($this->miningToolsEnduranceWarning->getValue());
+        $setting->getSetting(DestructionSoundSetting::getName())?->setValue($this->destructionSound->getValue());
+        $setting->getSetting(DiceMessageSetting::getName())?->setValue($this->diceMessage->getValue());
+        $setting->getSetting(PayCommandUseSetting::getName())?->setValue($this->payCommandUse->getValue());
+        $setting->getSetting(GachaEjectMessageSetting::getName())?->setValue($this->gachaEjectMessage->getValue());
+        $setting->getSetting(GachaEjectFormSetting::getName())?->setValue($this->gachaEjectForm->getValue());
+        $setting->getSetting(OnlinePlayersEffectsSetting::getName())?->setValue($this->onlinePlayersEffects->getValue());
+        $setting->getSetting(MoveWorldMessageSetting::getName())?->setValue($this->moveWorldMessage->getValue());
         $levelUpTitle = match ($this->levelUpDisplay->getValue()) {
             1 => 'toast',
             2 => 'none',
             default => 'title'
         };
-        if ($setting->getSetting(LevelUpDisplaySetting::getName())?->getValue() !== $levelUpTitle) {
-            $setting->getSetting(LevelUpDisplaySetting::getName())?->setValue($levelUpTitle);
-        }
+        $setting->getSetting(LevelUpDisplaySetting::getName())?->setValue($levelUpTitle);
         $miningToolsDestructionEnabledWorlds = match ($this->miningToolsDestructionEnabledWorlds->getValue()) {
             1 => 'life',
             2 => 'nature',
             3 => 'none',
             default => 'all'
         };
-        if ($setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->getValue() !== $miningToolsDestructionEnabledWorlds) {
-            $setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
-        }
+        $setting->getSetting(MiningToolsDestructionEnabledWorldsSetting::getName())?->setValue($miningToolsDestructionEnabledWorlds);
         $bossBarColor = match ($this->bossBarColor->getValue()) {
             1 => BossBarColor::BLUE,
             2 => BossBarColor::RED,
@@ -181,9 +153,7 @@ class NormalSettingListForm extends CustomForm {
             6 => BossBarColor::WHITE,
             default => BossBarColor::PINK
         };
-        if ($setting->getSetting(BossBarColorSetting::getName())?->getValue() !== $bossBarColor) {
-            $setting->getSetting(BossBarColorSetting::getName())?->setValue($bossBarColor);
-        }
+        $setting->getSetting(BossBarColorSetting::getName())?->setValue($bossBarColor);
         SendForm::Send($player, new SelectSettingForm($this->player, "\n§a設定を保存しました"));
         SoundPacket::Send($player, 'item.spyglass.use');
     }
