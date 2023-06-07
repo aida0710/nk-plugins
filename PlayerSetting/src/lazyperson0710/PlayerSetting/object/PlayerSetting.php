@@ -28,13 +28,14 @@ use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectFormSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MoveWorldMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\NormalToolsWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use LogicException;
@@ -58,8 +59,8 @@ class PlayerSetting {
         $this->register(new JoinItemsSetting());
         $this->register(new DirectDropItemStorageSetting());
         $this->register(new LevelUpDisplaySetting());
-        $this->register(new EnduranceWarningSetting());
-        $this->register(new MiningToolsEnduranceWarningSetting());
+        $this->register(new NormalToolsWarningSetting());
+        $this->register(new MiningToolsWarningSetting());
         $this->register(new DestructionSoundSetting());
         $this->register(new DiceMessageSetting());
         $this->register(new PayCommandUseSetting());
@@ -68,6 +69,7 @@ class PlayerSetting {
         $this->register(new BossBarColorSetting());
         $this->register(new GachaEjectMessageSetting());
         $this->register(new GachaEjectFormSetting());
+        $this->register(new MoveWorldMessageSetting());
         //miningTools
         $this->register(new AndesiteToStoneSetting());
         $this->register(new CobblestoneToStoneSetting());

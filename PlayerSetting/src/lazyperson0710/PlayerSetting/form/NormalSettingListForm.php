@@ -4,6 +4,7 @@ declare(strict_types = 0);
 
 namespace lazyperson0710\PlayerSetting\form;
 
+use bbo51dog\bboform\element\Label;
 use bbo51dog\bboform\element\StepSlider;
 use bbo51dog\bboform\element\Toggle;
 use bbo51dog\bboform\form\CustomForm;
@@ -13,14 +14,14 @@ use lazyperson0710\PlayerSetting\object\settings\normal\CoordinateSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DestructionSoundSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DiceMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\DirectDropItemStorageSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\EnduranceWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectFormSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\GachaEjectMessageSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\JoinItemsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\LevelUpDisplaySetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsDestructionEnabledWorldsSetting;
-use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsEnduranceWarningSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\MiningToolsWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\MoveWorldMessageSetting;
+use lazyperson0710\PlayerSetting\object\settings\normal\NormalToolsWarningSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\OnlinePlayersEffectsSetting;
 use lazyperson0710\PlayerSetting\object\settings\normal\PayCommandUseSetting;
 use lazyperson710\core\packet\CoordinatesPacket;
