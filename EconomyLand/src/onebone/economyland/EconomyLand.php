@@ -40,23 +40,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\world\Position;
 use pocketmine\world\World;
-use function array_shift;
-use function ceil;
-use function count;
-use function file_get_contents;
-use function file_put_contents;
-use function floor;
-use function implode;
-use function in_array;
-use function is_file;
-use function is_numeric;
-use function preg_match;
-use function serialize;
-use function str_replace;
-use function strtolower;
-use function time;
-use function trim;
-use function unserialize;
 
 class EconomyLand extends PluginBase implements Listener {
 
@@ -239,6 +222,11 @@ class EconomyLand extends PluginBase implements Listener {
                             return true;
                         }
                         $prePlayer = array_shift($param);
+                        if ($prePlayer === null) {
+                            if (!$sender instanceof Player) return true;
+                            SendMessage::Send($sender, 'プレイヤー名が未入力です', 'Land', false);
+                            return true;
+                        }
                         $player = str_replace('_', ' ', $prePlayer);
                         $alike = true;
                         if (str_replace(' ', '', $player) === '') {
@@ -264,6 +252,10 @@ class EconomyLand extends PluginBase implements Listener {
                             return true;
                         }
                         $num = array_shift($param);
+                        if ($num === null) {
+                            SendMessage::Send($sender, '土地番号が未入力です', 'Land', false);
+                            return true;
+                        }
                         if (trim($num) == '') {
                             SendMessage::Send($sender, '/land move 土地番号', 'Land', true);
                             return true;
@@ -321,8 +313,16 @@ class EconomyLand extends PluginBase implements Listener {
                             return true;
                         }
                         $prePlayer = array_shift($param);
+                        if ($prePlayer === null) {
+                            SendMessage::Send($sender, '/land give プレイヤー 土地番号', 'Land', true);
+                            return true;
+                        }
                         $player = str_replace('_', ' ', $prePlayer);
                         $landnum = array_shift($param);
+                        if ($landnum === null) {
+                            SendMessage::Send($sender, '/land give プレイヤー 土地番号', 'Land', true);
+                            return true;
+                        }
                         if (trim($player) == '' || trim($landnum) == '' || !is_numeric($landnum)) {
                             SendMessage::Send($sender, '/land give プレイヤー 土地番号', 'Land', true);
                             return true;
@@ -367,7 +367,15 @@ class EconomyLand extends PluginBase implements Listener {
                             return true;
                         }
                         $landnum = array_shift($param);
+                        if ($landnum === null) {
+                            SendMessage::Send($sender, '/land invite 土地番号 プレイヤー', 'Land', true);
+                            return true;
+                        }
                         $prePlayer = array_shift($param);
+                        if ($prePlayer === null) {
+                            SendMessage::Send($sender, '/land invite 土地番号 プレイヤー', 'Land', true);
+                            return true;
+                        }
                         $player = str_replace('_', ' ', $prePlayer);
                         if (trim($player) == '' || trim($landnum) == '') {
                             SendMessage::Send($sender, '/land invite 土地番号 プレイヤー', 'Land', true);
@@ -407,7 +415,15 @@ class EconomyLand extends PluginBase implements Listener {
                             return true;
                         }
                         $landnum = array_shift($param);
+                        if ($landnum === null) {
+                            SendMessage::Send($sender, '/land kick 土地番号 プレイヤー', 'Land', true);
+                            return true;
+                        }
                         $prePlayer = array_shift($param);
+                        if ($prePlayer === null) {
+                            SendMessage::Send($sender, '/land kick 土地番号 プレイヤー', 'Land', true);
+                            return true;
+                        }
                         $player = str_replace('_', ' ', $prePlayer);
                         if (trim($player) === '') {
                             SendMessage::Send($sender, '/land kick 土地番号 プレイヤー', 'Land', true);
@@ -438,6 +454,10 @@ class EconomyLand extends PluginBase implements Listener {
                             return true;
                         }
                         $landnum = array_shift($param);
+                        if ($landnum === null) {
+                            SendMessage::Send($sender, '/land invitee 土地番号', 'LandHelp', true);
+                            return true;
+                        }
                         if (trim($landnum) == '' || !is_numeric($landnum)) {
                             SendMessage::Send($sender, '/land invitee 土地番号', 'LandHelp', true);
                             return true;
@@ -474,6 +494,10 @@ class EconomyLand extends PluginBase implements Listener {
                     return true;
                 }
                 $id = array_shift($param);
+                if ($id === null) {
+                    SendMessage::Send($sender, '/landsell 土地番号(here)', 'Land', true);
+                    return true;
+                }
                 switch ($id) {
                     case 'here':
                         $x = $sender->getPosition()->getX();
