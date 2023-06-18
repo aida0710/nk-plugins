@@ -48,6 +48,7 @@ class ShopCategory {
             self::CAT_WEAPON => '武器',
             self::CAT_OTHER_ITEMS => 'その他アイテム',
             self::CAT_HEADS => 'モブヘッド',
+            self::CAT_VEGETATION => '植物',
             self::CAT_RED_STONE => 'レッドストーン',
             default => throw new RuntimeException('Invalid category name'),
         };
