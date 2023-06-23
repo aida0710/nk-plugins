@@ -29,7 +29,7 @@ class FortuneListener implements Listener {
             return;
         }
         if (empty($event->getDrops())) return;
-        $plus = $this->Calculation($event->getBlock(), $enchant->getLevel());
+        $plus = self::Calculation($event->getBlock(), $enchant->getLevel());
         $item = $event->getDrops()[0];
         $item->setCount($item->getCount() + $plus);
     }
