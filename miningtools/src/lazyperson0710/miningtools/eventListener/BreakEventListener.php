@@ -31,10 +31,10 @@ class BreakEventListener implements Listener {
         if ($event->isCancelled()) {
             return;
         }
-        $event->cancel();
         $player = $event->getPlayer();
         $handItem = $player->getInventory()->getItemInHand();
         if (!(new CheckItem())->isMiningTools($handItem)) return;
+        $event->cancel();
         $block = $event->getBlock();
         $world_name = $event->getPlayer()->getWorld()->getDisplayName();
         $world_search = mb_substr($world_name, 0, null, 'utf-8');
