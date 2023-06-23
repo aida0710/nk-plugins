@@ -12,8 +12,7 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
 
-    public function onEnable() : void {
-        $this->getServer()->getPluginManager()->registerEvents(new CraftEvnetListener(), $this);
+    protected function onEnable(): void {
         $shape = [
             'GAG',
             'ABA',
@@ -38,8 +37,14 @@ class Main extends PluginBase {
             'B' => VanillaBlocks::DIAMOND()->asItem(),
             'C' => VanillaItems::EXPERIENCE_BOTTLE(),
         ];
+        $item = VanillaBlocks::MONSTER_SPAWNER()->asItem();
+        $item->setCustomName('レベルブロック');
+        $item->setLore([
+            '破壊するとVanillaExpが取得可能。',
+            '5000EXPがもらえます。',
+        ]);
         $output = [
-            VanillaBlocks::MONSTER_SPAWNER()->asItem(),
+            $item,
         ];
         $this->getServer()->getCraftingManager()->registerShapedRecipe(new ShapedRecipe($shape, $input, $output));//レベルブロック
         $shape = [
@@ -47,6 +52,20 @@ class Main extends PluginBase {
             'AAA',
             'AAA',
         ];
+        $input = [
+            'A' => VanillaBlocks::MONSTER_SPAWNER()->asItem(),
+        ];
+        $item = VanillaItems::PRISMARINE_SHARD();
+        $item->setCustomName('圧縮レベルアイテム');
+        $item->setLore([
+            'タップで使用可能。',
+            '使用すると50000EXP(レベルブロック10個分)が付与されます。',
+        ]);
+        $item->getNamedTag()->setInt('Compression', 1);
+        $output = [
+            $item,
+        ];
+        $this->getServer()->getCraftingManager()->registerShapedRecipe(new ShapedRecipe($shape, $input, $output));//圧縮レベルアイテム
         $input = [
             'A' => VanillaBlocks::NETHERRACK()->asItem(),
         ];
@@ -91,8 +110,13 @@ class Main extends PluginBase {
             'B' => VanillaItems::BUCKET(),
             'G' => VanillaBlocks::AIR()->asItem(),
         ];
+        $item = VanillaBlocks::WATER()->asItem();
+        $item->setCustomName('精製水');
+        $item->setLore([
+            '生活ワールドと農業ワールドで使用可能です',
+        ]);
         $output = [
-            VanillaBlocks::WATER()->asItem(),
+            $item,
         ];
         $this->getServer()->getCraftingManager()->registerShapedRecipe(new ShapedRecipe($shape, $input, $output));//精製水
         //コンクリートrecipe
