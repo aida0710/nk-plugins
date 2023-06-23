@@ -109,7 +109,6 @@ class PickaxeDestructionRange {
                     //		if (EconomyLand::getInstance()->posCheck($pos, $player) === false) continue;
                     //	}
                     //}
-                    $dropItems = array_merge($dropItems, (new ItemDrop())->getDrop($player, $targetBlock));
                     if (!$handItem instanceof Durable) throw new RuntimeException('$handItem must be instance of Durable');
                     if ($player->isSneaking()) {
                         if ($pos->getFloorY() <= $player->getPosition()->getFloorY() - 1) {
@@ -124,6 +123,7 @@ class PickaxeDestructionRange {
                         (new MiningToolsBreakEvent($player, $targetBlock))->call();
                         $targetBlock->getPosition()->getWorld()->setBlock($pos, clone VanillaBlocks::AIR());
                     }
+                    $dropItems = array_merge($dropItems, (new ItemDrop())->getDrop($player, $targetBlock));
                 }
             }
         }
