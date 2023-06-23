@@ -31,6 +31,7 @@ class BreakEventListener implements Listener {
         if ($event->isCancelled()) {
             return;
         }
+        $event->cancel();
         $player = $event->getPlayer();
         $handItem = $player->getInventory()->getItemInHand();
         if (!(new CheckItem())->isMiningTools($handItem)) return;
