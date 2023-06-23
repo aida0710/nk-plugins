@@ -75,15 +75,6 @@ class BreakEventListener implements Listener {
             Main::$flag[$player->getName()] = false;
             return;
         }
-        if ($handItem->getNamedTag()->getTag('MiningTools_Expansion_Range') !== null) {
-            if ($handItem->getNamedTag()->getInt('MiningTools_Expansion_Range') !== 3) {
-                if ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
-                    $event->cancel();
-                }
-            }
-        } elseif ($handItem->getBlockToolType() === $event->getBlock()->getBreakInfo()->getToolType()) {
-            $event->cancel();
-        }
         $dropItems = (new PickaxeDestructionRange())->PickaxeDestructionRange($player, $block, $haveDurable, $handItem);
         (new ItemDrop())->DropItem($player, $event, $dropItems);
         Main::$flag[$player->getName()] = false;
