@@ -6,6 +6,7 @@ namespace lazyperson0710\EffectItems\event;
 
 use lazyperson0710\EffectItems\items\interactListener\AirBlock;
 use lazyperson0710\EffectItems\items\interactListener\CommandStorage;
+use lazyperson0710\EffectItems\items\interactListener\CompressionLevelItem;
 use lazyperson0710\EffectItems\items\interactListener\effect\Churu;
 use lazyperson0710\EffectItems\items\interactListener\effect\CoralButterfly;
 use lazyperson0710\EffectItems\items\interactListener\effect\CreamyPotato;
@@ -40,14 +41,15 @@ class PlayerItemEvent implements Listener {
         }
     }
 
-    public function onItemUse(PlayerItemUseEvent $event) {
+    public function onItemUse(PlayerItemUseEvent $event): void {
         if ($event->isCancelled()) return;
         $this->onItemEvents($event);
     }
 
-    public function onItemEvents(PlayerItemUseEvent|PlayerInteractEvent $event) {
+    public function onItemEvents(PlayerItemUseEvent|PlayerInteractEvent $event): void {
         $player = $event->getPlayer();
         $inHand = $player->getInventory()->getItemInHand();
+        if ($inHand->getNamedTag()->getTag('Compression') !== null) CompressionLevelItem::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('AirBlock') !== null) AirBlock::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('Churu') !== null) Churu::execution($event, $inHand);
         if ($inHand->getNamedTag()->getTag('CommandStorage') !== null) CommandStorage::execution($event, $inHand);
