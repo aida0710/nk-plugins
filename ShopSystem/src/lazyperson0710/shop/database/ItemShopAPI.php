@@ -127,6 +127,7 @@ class ItemShopAPI {
         $this->register(new ItemShopObject(VanillaItems::PURPLE_DYE(), 5, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_DYES, '紫色の染料', true));
         $this->register(new ItemShopObject(VanillaItems::MAGENTA_DYE(), 5, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_DYES, '赤紫色の染料', true));
         $this->register(new ItemShopObject(VanillaItems::PINK_DYE(), 5, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_DYES, '桃色の染料', true));
+        $this->register(new ItemShopObject(VanillaBlocks::SPONGE()->asItem(), 150, 0, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'スポンジ', true));
         $this->register(new ItemShopObject(VanillaBlocks::PACKED_ICE()->asItem(), 50, 0, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '氷塊', true));
         $this->register(new ItemShopObject(VanillaBlocks::OBSIDIAN()->asItem(), 50, 5, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, '黒曜石', true));
         $this->register(new ItemShopObject(VanillaBlocks::END_ROD()->asItem(), 50, 1, RestrictionShop::SHOP_3, ShopCategory::CAT_OTHER_BLOCKS, 'エンドロッド', true));
