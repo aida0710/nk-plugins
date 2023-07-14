@@ -1,67 +1,12 @@
 {
     "name": "lazyperson0710/nk-plugins",
-    "description": "nk-plugins for pm4",
+    "description": "nk-plugins for pm5",
     "minimum-stability": "stable",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/bbo51dog/BboForm"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Rark7040/FireworkParticle.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Rark7040/Modals.git"
-        }
-    ],
     "require": {
-        "php": "8.0.*",
-        "php-64bit": "8.0.*",
-        "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "v3.13.1",
-        "ext-bcmath": "*",
-        "ext-curl": "*"
+        "php": "8.1.*",
+        "php-64bit": "8.1.*"
     },
     "require-dev": {
-        "bbo51dog/bboform": "2.*",
-        "pocketmine/pocketmine-mp": "4.*",
-        "roave/security-advisories": "dev-latest",
-        "ext-sqlite3": "*",
-        "ext-chunkutils2": "^0.3.1",
-        "ext-crypto": "^0.3.1",
-        "ext-ctype": "*",
-        "ext-date": "*",
-        "ext-gmp": "*",
-        "ext-hash": "*",
-        "ext-igbinary": "^3.0.1",
-        "ext-json": "*",
-        "ext-leveldb": "^0.2.1 || ^0.3.0",
-        "ext-mbstring": "*",
-        "ext-morton": "^0.1.0",
-        "ext-openssl": "*",
-        "ext-pcre": "*",
-        "ext-phar": "*",
-        "ext-pthreads": "^4.0",
-        "ext-reflection": "*",
-        "ext-simplexml": "*",
-        "ext-sockets": "*",
-        "ext-spl": "*",
-        "ext-yaml": ">=2.0.0",
-        "ext-zip": "*",
-        "ext-zlib": ">=1.2.11",
-        "composer-runtime-api": "^2.0",
-        "adhocore/json-comment": "^1.1",
-        "fgrosse/phpasn1": "^2.3",
-        "netresearch/jsonmapper": "^4.0",
-        "ramsey/uuid": "^4.1",
-        "symfony/filesystem": "^5.4",
-        "webmozart/path-util": "^2.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "\\": "/"
-        }
+        "pocketmine/pocketmine-mp": "5.*"
     }
 }
