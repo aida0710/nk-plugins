@@ -49,7 +49,7 @@ class MultiWorld extends PluginBase {
         return ConfigManager::getPrefix();
     }
 
-    public function onEnable() : void {
+    protected function onEnable(): void {
         $this->configManager = new ConfigManager();
         $this->languageManager = new LanguageManager();
         $this->commands = [
@@ -64,7 +64,7 @@ class MultiWorld extends PluginBase {
         }
     }
 
-    public function onLoad() : void {
+    protected function onLoad(): void {
         MultiWorld::$instance = $this;
         $generators = [
             'ender' => EnderGenerator::class,
