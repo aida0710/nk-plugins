@@ -1,7 +1,7 @@
 name: Flytra
 main: Deceitya\Flytra\Main
 version: 1.0.0
-api: 4.0.0
+api: 5.0.0
 load: POSTWORLD
 author: deceitya
 description: 飛行権限を一時的に付与

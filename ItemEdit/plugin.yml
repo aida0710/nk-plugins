@@ -2,7 +2,7 @@
 name: ItemEditor
 main: lazyperson710\edit\Main
 version: 1.0.0
-api: 4.0.0
+api: 5.0.0
 author: lazyperson710
 permissions:
   itemEditor.command.edit:

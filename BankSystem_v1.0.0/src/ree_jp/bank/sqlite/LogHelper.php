@@ -63,7 +63,7 @@ class LogHelper implements ILogHelper {
      * @inheritDoc
      */
     public function getLog(string $bank) : ResultLog {
-        if (!$this->isExists($bank)) return null;
+        if (!$this->isExists($bank)) return ResultLog::createResult($bank, []);
         $result = $this->db->query("SELECT * FROM [${bank}]");
         $logs = [];
         while ($array = $result->fetchArray(SQLITE3_ASSOC)) $logs[] = $array;

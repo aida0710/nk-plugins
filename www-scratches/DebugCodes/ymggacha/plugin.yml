@@ -1,7 +1,7 @@
 name: YmgGacha
 version: 1.0.0
 main: ymggacha\src\yomogi_server\ymggacha\YmgGachaPlugin
-api: 4.0.0
+api: 5.0.0
 author: RarkHopper
 depend:
   - WorldInv

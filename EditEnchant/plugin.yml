@@ -1,7 +1,7 @@
 name: EditEnchant
 main: deceitya\editEnchant\Main
 version: 1.0.0
-api: 4.0.0
+api: 5.0.0
 load: POSTWORLD
 author: deceitya
 description: エンチャントの削除、削減

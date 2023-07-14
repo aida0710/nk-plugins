@@ -1,6 +1,6 @@
 name: MjolnirBan
 author: bbo51dog
-api: 4.0.0
+api: 5.0.0
 main: bbo51dog\mjolnir\MjolnirPlugin
 version: 1.0.2
 permissions:

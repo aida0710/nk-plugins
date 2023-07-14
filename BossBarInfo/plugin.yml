@@ -1,7 +1,7 @@
 name: BossBarInfo
 main: deceitya\bbi\Main
 version: 1.0.0
-api: 4.0.0
+api: 5.0.0
 load: POSTWORLD
 author: deceitya
 description: ボスバーに情報を表示する

@@ -1,5 +1,5 @@
 name: AntiCheat
 author: bbo51dog
-api: 4.0.0
+api: 5.0.0
 main: bbo51dog\anticheat\Main
 version: 1.1.1
