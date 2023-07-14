@@ -276,7 +276,7 @@ class EconomyAPI extends PluginBase implements Listener {
         return false;
     }
 
-    public function onDisable() : void {
+    protected function onDisable(): void {
         $this->saveAll();
         if ($this->provider instanceof Provider) {
             $this->provider->close();
@@ -290,7 +290,7 @@ class EconomyAPI extends PluginBase implements Listener {
         file_put_contents($this->getDataFolder() . 'PlayerLang.dat', serialize($this->playerLang));
     }
 
-    public function onEnable() : void {
+    protected function onEnable(): void {
         /*
          * 디폴트 설정 파일을 먼저 생성하게 되면 데이터 폴더 파일이 자동 생성되므로
          * 'Failed to open stream: No such file or directory' 경고 메시지를 없앨 수 있습니다
